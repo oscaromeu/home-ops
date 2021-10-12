@@ -1,5 +1,5 @@
+#TODO: Split configuration in multiple files
 ---
-# Source: logstash/templates/poddisruptionbudget.yaml
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
@@ -9,46 +9,43 @@ metadata:
     app: "live-infra-elasticsearch-logstash"
     chart: "logstash"
     heritage: "live-infra"
-    release: logstash-elasticsearch-1.0.0"
+    release: "logstash-elasticsearch-1.0.0"
 spec:
   maxUnavailable: 1
   selector:
     matchLabels:
       app: "live-infra-elasticsearch-logstash"
 ---
-# Source: logstash/templates/configmap-config.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: live-infra-logstash-config
+  name: "live-infra-logstash-config"
   namespace: monitoring
   labels:
     app: "live-infra-elasticsearch-logstash"
     chart: "logstash"
     heritage: "live-infra"
-    release: logstash-elasticsearch-1.0.0"
+    release: "logstash-elasticsearch-1.0.0"
 data:
   logstash.yml: |
     http.host: 0.0.0.0
     xpack.monitoring.enabled: false
 ---
-# Source: logstash/templates/configmap-pipeline.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: live-infra-logstash-pipeline
+  name: "live-infra-logstash-pipeline"
   namespace: monitoring
   labels:
     app: "live-infra-elasticsearch-logstash"
     chart: "logstash"
     heritage: "live-infra"
-    release: logstash-elasticsearch-1.0.0"
+    release: "logstash-elasticsearch-1.0.0"
 data:
   uptime.conf: |
     input { exec { command => "uptime" interval => 30 } }
     output { elasticsearch { hosts => ["http://elasticsearch-master:9200"] index => "logstash" } }
 ---
-# Source: logstash/templates/service-headless.yaml
 kind: Service
 apiVersion: v1
 metadata:
@@ -58,7 +55,7 @@ metadata:
     app: "live-infra-elasticsearch-logstash"
     chart: "logstash"
     heritage: "live-infra"
-    release: logstash-elasticsearch-1.0.0"
+    release: "logstash-elasticsearch-1.0.0"
 spec:
   clusterIP: None
   selector:
@@ -67,7 +64,6 @@ spec:
     - name: http
       port: 9600
 ---
-# Source: logstash/templates/statefulset.yaml
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -77,13 +73,13 @@ metadata:
     app: "live-infra-elasticsearch-logstash"
     chart: "logstash"
     heritage: "live-infra"
-    release: logstash-elasticsearch-1.0.0"
+    release: "logstash-elasticsearch-1.0.0"
 spec:
   serviceName: live-infra-logstash-headless
   selector:
     matchLabels:
       app: "live-infra-elasticsearch-logstash"
-      release: logstash-elasticsearch-1.0.0"
+      release: "logstash-elasticsearch-1.0.0"
   replicas: 1
   podManagementPolicy: Parallel
   updateStrategy:
@@ -104,7 +100,7 @@ spec:
         app: "live-infra-elasticsearch-logstash"
         chart: "logstash"
         heritage: "live-infra"
-        release: logstash-elasticsearch-1.0.0"
+        release: "logstash-elasticsearch-1.0.0"
     spec:
       securityContext:
         fsGroup: 1000
@@ -121,12 +117,12 @@ spec:
             topologyKey: kubernetes.io/hostname
       terminationGracePeriodSeconds: 120
       volumes:
-        - name: logstashconfig
+        - name: "logstash-config"
           configMap:
-            name: live-infra-logstash-config
-        - name: logstashpipeline
+            name: "live-infra-logstash-config"
+        - name: "logstash-pipeline"
           configMap:
-            name: live-infra-logstash-pipeline
+            name: "live-infra-logstash-pipeline"
       containers:
       - name: "logstash"
         securityContext:
@@ -171,9 +167,9 @@ spec:
         volumeMounts:
           - name: "live-infra-logstash"
             mountPath: /usr/share/logstash/data
-          - name: logstashconfig
+          - name: "logstash-config"
             mountPath: /usr/share/logstash/config/logstash.yml
             subPath: logstash.yml
-          - name: logstashpipeline
+          - name: "logstash-pipeline"
             mountPath: /usr/share/logstash/pipeline/uptime.conf
             subPath: uptime.conf
