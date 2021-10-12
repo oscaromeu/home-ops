@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
   - sources
   - flux-system
-# - elasticsearch
-# - kibana
+  - elasticsearch
+  - kibana
