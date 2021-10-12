@@ -3,11 +3,5 @@ kind: Kustomization
 resources:
   - sources
   - flux-system
-    #- infrastructure/production
-    #- elasticsearch
+# - elasticsearch
 # - kibana
-#  - kube-prometheus-stack
-#  - prometheus
-#  - grafana
-  #- prometheus-operator
-  #- redis
