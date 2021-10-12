@@ -5,3 +5,4 @@ resources:
   - flux-system
   - elasticsearch
   - logstash
+  - kibana
