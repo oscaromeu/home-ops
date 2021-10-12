@@ -1,0 +1,189 @@
+---
+# Source: filebeat/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: filebeat
+  annotations:
+  labels:
+    app: "filebeat"
+    chart: "live-infra-filebeat"
+    heritage: "live-infra"
+    release: "live-infra-filebeat-deployment"
+---
+# Source: filebeat/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filebeat-config
+  labels:
+    app: "filebeat"
+    chart: "live-infra-filebeat"
+    heritage: "live-infra"
+    release: "live-infra-filebeat-deployment"
+data:
+  filebeat.yml: |
+    filebeat.inputs:
+      - type: log 
+        paths:
+        - /usr/share/filebeat/logs/filebeat
+    
+    output.elasticsearch:
+      host: '${NODE_NAME}'
+      hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
+---
+# Source: filebeat/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filebeat-deployment-config
+  labels:
+    app: "filebeat"
+    chart: "live-infra-filebeat"
+    heritage: "live-infra"
+    release: "live-infra-filebeat-deployment"
+data:
+  filebeat.yml: |
+    filebeat.inputs:
+    - type: tcp
+      max_message_size: 10MiB
+      host: "localhost:9000"
+    
+    output.elasticsearch:
+      host: '${NODE_NAME}'
+      hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
+---
+# Source: filebeat/templates/clusterrole.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: filebeat-cluster-role
+  labels:
+    app: "filebeat"
+    chart: "live-infra-filebeat"
+    heritage: "live-infra"
+    release: "live-infra-filebeat-deployment"
+rules: 
+  - apiGroups:
+    - ""
+    resources:
+    - namespaces
+    - nodes
+    - pods
+    verbs:
+    - get
+    - list
+    - watch
+---
+# Source: filebeat/templates/clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: filebeat-cluster-role-binding
+  labels:
+    app: "filebeat"
+    chart: "live-infra-filebeat"
+    heritage: "live-infra"
+    release: "live-infra-filebeat-deployment"
+roleRef:
+  kind: ClusterRole
+  name: filebeat-cluster-role
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: ServiceAccount
+  name: filebeat
+  namespace: default
+---
+# Source: filebeat/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: filebeat
+  labels:
+    app: "filebeat"
+    chart: "live-infra-filebeat"
+    heritage: 'Helm'
+    release: live-infra-filebeat-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "filebeat"
+      release: "live-infra-filebeat-deployment"
+  template:
+    metadata:
+      annotations:
+        
+        configChecksum: cfd3f0d306b8312941aa8242387f68f01bfde44c778ad60ba689666828eec6e
+      labels:
+        app: 'filebeat'
+        chart: 'live-infra-filebeat'
+        release: 'live-infra-filebeat-deployment'
+    spec:
+      affinity: 
+        {}
+      nodeSelector: 
+        {}
+      tolerations: 
+        []
+      serviceAccountName: filebeat
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: filebeat-config
+        configMap:
+          defaultMode: 0600
+          name: filebeat-config
+      containers:
+      - name: "filebeat"
+        image: "docker.elastic.co/beats/filebeat:8.0.0-SNAPSHOT"
+        imagePullPolicy: "IfNotPresent"
+        args:
+          - "-e"
+          - "-E"
+          - "http.enabled=true"
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - |
+              #!/usr/bin/env bash -e
+              curl --fail 127.0.0.1:5066
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - |
+              #!/usr/bin/env bash -e
+              filebeat test output
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+        resources: 
+          limits:
+            cpu: 1000m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        envFrom: 
+          []
+        securityContext: 
+          privileged: false
+          runAsUser: 0
+        volumeMounts:
+        - name: filebeat-config
+          mountPath: /usr/share/filebeat/filebeat.yml
+          readOnly: true
+          subPath: filebeat.yml

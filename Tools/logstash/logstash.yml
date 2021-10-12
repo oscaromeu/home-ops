@@ -1,0 +1,174 @@
+---
+# Source: logstash/templates/poddisruptionbudget.yaml
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: "pi-logstash"
+  labels:
+    app: "live-infra-elasticsearch-logstash"
+    chart: "logstash"
+    heritage: "live-infra"
+    release: logstash-elasticsearch-1.0.0"
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: "live-infra-elasticsearch-logstash"
+---
+# Source: logstash/templates/configmap-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: live-infra-logstash-config
+  labels:
+    app: "live-infra-elasticsearch-logstash"
+    chart: "logstash"
+    heritage: "live-infra"
+    release: logstash-elasticsearch-1.0.0"
+data:
+  logstash.yml: |
+    http.host: 0.0.0.0
+    xpack.monitoring.enabled: false
+---
+# Source: logstash/templates/configmap-pipeline.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: live-infra-logstash-pipeline
+  labels:
+    app: "live-infra-elasticsearch-logstash"
+    chart: "logstash"
+    heritage: "live-infra"
+    release: logstash-elasticsearch-1.0.0"
+data:
+  uptime.conf: |
+    input { exec { command => "uptime" interval => 30 } }
+    output { elasticsearch { hosts => ["http://elasticsearch-master:9200"] index => "logstash" } }
+---
+# Source: logstash/templates/service-headless.yaml
+kind: Service
+apiVersion: v1
+metadata:
+  name: "live-infra-logstash-headless"
+  labels:
+    app: "live-infra-elasticsearch-logstash"
+    chart: "logstash"
+    heritage: "live-infra"
+    release: logstash-elasticsearch-1.0.0"
+spec:
+  clusterIP: None
+  selector:
+    app: "live-infra-elasticsearch-logstash"
+  ports:
+    - name: http
+      port: 9600
+---
+# Source: logstash/templates/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: live-infra-logstash
+  labels:
+    app: "live-infra-elasticsearch-logstash"
+    chart: "logstash"
+    heritage: "live-infra"
+    release: logstash-elasticsearch-1.0.0"
+spec:
+  serviceName: live-infra-logstash-headless
+  selector:
+    matchLabels:
+      app: "live-infra-elasticsearch-logstash"
+      release: logstash-elasticsearch-1.0.0"
+  replicas: 1
+  podManagementPolicy: Parallel
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+  - metadata:
+      name: live-infra-logstash
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+  template:
+    metadata:
+      name: "live-infra-logstash"
+      labels:
+        app: "live-infra-elasticsearch-logstash"
+        chart: "logstash"
+        heritage: "live-infra"
+        release: logstash-elasticsearch-1.0.0"
+    spec:
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - "live-infra-logstash"
+            topologyKey: kubernetes.io/hostname
+      terminationGracePeriodSeconds: 120
+      volumes:
+        - name: logstashconfig
+          configMap:
+            name: live-infra-logstash-config
+        - name: logstashpipeline
+          configMap:
+            name: live-infra-logstash-pipeline
+      containers:
+      - name: "logstash"
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
+          runAsUser: 1000
+        image: "docker.elastic.co/logstash/logstash:7.15.0"
+        imagePullPolicy: "IfNotPresent"
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 300
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 3
+          timeoutSeconds: 5
+        ports:
+        - name: http
+          containerPort: 9600
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1536Mi
+          requests:
+            cpu: 100m
+            memory: 1536Mi
+        env:
+          - name: LS_JAVA_OPTS
+            value: "-Xmx1g -Xms1g"
+        volumeMounts:
+          - name: "live-infra-logstash"
+            mountPath: /usr/share/logstash/data
+          - name: logstashconfig
+            mountPath: /usr/share/logstash/config/logstash.yml
+            subPath: logstash.yml
+          - name: logstashpipeline
+            mountPath: /usr/share/logstash/pipeline/uptime.conf
+            subPath: uptime.conf
