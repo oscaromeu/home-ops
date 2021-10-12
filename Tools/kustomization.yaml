@@ -4,4 +4,4 @@ resources:
   - sources
   - flux-system
   - elasticsearch
-  - kibana
+  - logstash
