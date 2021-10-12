@@ -4,6 +4,7 @@ apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
   name: "pi-logstash"
+  namespace: monitoring
   labels:
     app: "live-infra-elasticsearch-logstash"
     chart: "logstash"
@@ -20,6 +21,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: live-infra-logstash-config
+  namespace: monitoring
   labels:
     app: "live-infra-elasticsearch-logstash"
     chart: "logstash"
@@ -35,6 +37,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: live-infra-logstash-pipeline
+  namespace: monitoring
   labels:
     app: "live-infra-elasticsearch-logstash"
     chart: "logstash"
@@ -50,6 +53,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: "live-infra-logstash-headless"
+  namespace: monitoring
   labels:
     app: "live-infra-elasticsearch-logstash"
     chart: "logstash"
@@ -68,6 +72,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: live-infra-logstash
+  namespace: monitoring
   labels:
     app: "live-infra-elasticsearch-logstash"
     chart: "logstash"

@@ -4,6 +4,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: filebeat
+  namespace: monitoring
   annotations:
   labels:
     app: "filebeat"
@@ -16,6 +17,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: filebeat-config
+  namespace: monitoring
   labels:
     app: "filebeat"
     chart: "live-infra-filebeat"
@@ -37,6 +39,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: filebeat-deployment-config
+  namespace: monitoring
   labels:
     app: "filebeat"
     chart: "live-infra-filebeat"
@@ -58,6 +61,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: filebeat-cluster-role
+  namespace: monitoring
   labels:
     app: "filebeat"
     chart: "live-infra-filebeat"
@@ -80,6 +84,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: filebeat-cluster-role-binding
+  namespace: monitoring
   labels:
     app: "filebeat"
     chart: "live-infra-filebeat"
@@ -99,6 +104,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: filebeat
+  namespace: monitoring
   labels:
     app: "filebeat"
     chart: "live-infra-filebeat"
@@ -113,8 +119,6 @@ spec:
   template:
     metadata:
       annotations:
-        
-        configChecksum: cfd3f0d306b8312941aa8242387f68f01bfde44c778ad60ba689666828eec6e
       labels:
         app: 'filebeat'
         chart: 'live-infra-filebeat'

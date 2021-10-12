@@ -35,6 +35,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: elasticsearch-master
+  namespace: monitoring
   labels:
     heritage: "live-infra"
     release: "pi-elasticsearch-1.0.0"
@@ -60,6 +61,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: elasticsearch-master-headless
+  namespace: monitoring
   labels:
     heritage: "live-infra"
     release: "pi-elasticsearch-1.0.0"
@@ -83,6 +85,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: elasticsearch-master
+  namespace: monitoring
   labels:
     heritage: "live-infra"
     release: "pi-elasticsearch-1.0.0"
