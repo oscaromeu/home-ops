@@ -65,7 +65,7 @@ spec:
   selector:
     matchLabels:
       app: "esp-client"
-  replicas: 3
+  replicas: 1
   podManagementPolicy: Parallel
   updateStrategy:
     type: RollingUpdate
