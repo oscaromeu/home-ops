@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - sources
   - flux-system
-  - elasticsearch
+#- elasticsearch
+  - esprod
   - logstash
   - kibana
