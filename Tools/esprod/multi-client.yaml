@@ -190,8 +190,8 @@ spec:
             cpu: 1000m
             memory: 2Gi
           requests:
-            cpu: 1000m
-            memory: 2Gi
+            cpu: 100m
+            memory: 512Mi 
         env:
           - name: node.name
             valueFrom:
