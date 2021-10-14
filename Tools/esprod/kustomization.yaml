@@ -5,4 +5,4 @@ resources:
   #- namespace.yaml
   - multi-master.yaml
   - multi-data.yaml
-    #- multi-client.yaml
+  - multi-client.yaml
