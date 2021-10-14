@@ -1,33 +1,8 @@
+
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - namespace.yaml
-  - es-discovery-svc.yaml
-  - es-svc.yaml
-  - es-master-svc.yaml
-  - es-master-stateful.yaml
-    #  - es-ingest-svc.yaml
-    #  - es-ingest.yaml
-    #  - es-data-svc.yaml
-    #  - es-data-stateful.yaml
-
-
-
-    #TODO: Needs some investigation not overriding default values
-    #apiVersion: kustomize.config.k8s.io/v1beta1
-    #kind: Kustomization
-    #resources:
-    #  - namespace.yaml
-    #  - ./elasticsearch-master
-    #    #  - ./elasticsearch-data
-    #configMapGenerator:
-    #  - name: values-elasticsearch-master
-    #    files:
-    #      - values.yaml=./values/values-elasticsearch-master.yaml
-    #    namespace: monitoring
-    #      #  - name: values-elasticsearch-data
-    #      #    files:
-    #      #      - values.yaml=./values/values-elasticsearch-data.yaml
-    #      #    namespace: monitoring
-    #configurations:
-    #  - kustomizeconfig.yaml
+  - multi-master.yaml
+  - multi-data.yaml
+  - multi-client.yaml
