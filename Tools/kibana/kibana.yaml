@@ -1,13 +1,10 @@
 ---
-# Source: kibana/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: helm-kibana-default-kibana
+  name: lpk
   labels: 
     app: kibana
-    release: "helm-kibana-default"
-    heritage: Helm
 spec:
   type: ClusterIP
   ports:
@@ -17,17 +14,13 @@ spec:
       targetPort: 5601
   selector:
     app: kibana
-    release: "helm-kibana-default"
 ---
-# Source: kibana/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: helm-kibana-default-kibana
+  name: lpk
   labels: 
     app: kibana
-    release: "helm-kibana-default"
-    heritage: Helm
 spec:
   replicas: 1
   strategy:
@@ -35,14 +28,11 @@ spec:
   selector:
     matchLabels:
       app: kibana
-      release: "helm-kibana-default"
   template:
     metadata:
       labels:
         app: kibana
-        release: "helm-kibana-default"
       annotations:
-        
     spec:
       securityContext:
         fsGroup: 1000
@@ -59,7 +49,7 @@ spec:
         imagePullPolicy: "IfNotPresent"
         env:
           - name: ELASTICSEARCH_HOSTS
-            value: "http://elasticsearch-master:9200"
+            value: "http://esp-master-headless:9200"
           - name: SERVER_HOST
             value: "0.0.0.0"
           - name: NODE_OPTIONS
@@ -106,6 +96,6 @@ spec:
             cpu: 1000m
             memory: 2Gi
           requests:
-            cpu: 1000m
-            memory: 2Gi
+            cpu: 100m
+            memory: 512Mi
         volumeMounts:
