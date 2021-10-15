@@ -5,5 +5,5 @@ resources:
   - flux-system
     #- elasticsearch
   - esprod
-    #- logstash
+  - logstash
     #- kibana

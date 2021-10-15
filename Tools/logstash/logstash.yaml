@@ -1,31 +1,12 @@
 #TODO: Split configuration in multiple files
 ---
-apiVersion: policy/v1beta1
-kind: PodDisruptionBudget
-metadata:
-  name: "pi-logstash"
-  namespace: monitoring
-  labels:
-    app: "live-infra-elasticsearch-logstash"
-    chart: "logstash"
-    heritage: "live-infra"
-    release: "logstash-elasticsearch-1.0.0"
-spec:
-  maxUnavailable: 1
-  selector:
-    matchLabels:
-      app: "live-infra-elasticsearch-logstash"
----
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: "live-infra-logstash-config"
+  name: "logp-idxr-config"
   namespace: monitoring
   labels:
-    app: "live-infra-elasticsearch-logstash"
-    chart: "logstash"
-    heritage: "live-infra"
-    release: "logstash-elasticsearch-1.0.0"
+    app: "logstash"
 data:
   logstash.yml: |
     http.host: 0.0.0.0
@@ -34,32 +15,26 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: "live-infra-logstash-pipeline"
+  name: "logp-idxr-pipeline"
   namespace: monitoring
   labels:
-    app: "live-infra-elasticsearch-logstash"
-    chart: "logstash"
-    heritage: "live-infra"
-    release: "logstash-elasticsearch-1.0.0"
+    app: "logstash"
 data:
   uptime.conf: |
     input { exec { command => "uptime" interval => 30 } }
-    output { elasticsearch { hosts => ["http://elasticsearch-master:9200"] index => "logstash" } }
+    output { elasticsearch { hosts => ["http://esp-master-headless:9200"] index => "logstash" } }
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: "live-infra-logstash-headless"
+  name: "logp-idxr-headless"
   namespace: monitoring
   labels:
-    app: "live-infra-elasticsearch-logstash"
-    chart: "logstash"
-    heritage: "live-infra"
-    release: "logstash-elasticsearch-1.0.0"
+    app: "logstash"
 spec:
   clusterIP: None
   selector:
-    app: "live-infra-elasticsearch-logstash"
+    app: "logstash"
   ports:
     - name: http
       port: 9600
@@ -67,26 +42,22 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: live-infra-logstash
+  name: logp-idxr
   namespace: monitoring
   labels:
-    app: "live-infra-elasticsearch-logstash"
-    chart: "logstash"
-    heritage: "live-infra"
-    release: "logstash-elasticsearch-1.0.0"
+    app: "logstash"
 spec:
-  serviceName: live-infra-logstash-headless
+  serviceName: logp-idxr-headless
   selector:
     matchLabels:
-      app: "live-infra-elasticsearch-logstash"
-      release: "logstash-elasticsearch-1.0.0"
+      app: "logstash"
   replicas: 1
   podManagementPolicy: Parallel
   updateStrategy:
     type: RollingUpdate
   volumeClaimTemplates:
   - metadata:
-      name: live-infra-logstash
+      name: logp-idxr
     spec:
       accessModes:
       - ReadWriteOnce
@@ -95,12 +66,9 @@ spec:
           storage: 1Gi
   template:
     metadata:
-      name: "live-infra-logstash"
+      name: "logp-idxr"
       labels:
-        app: "live-infra-elasticsearch-logstash"
-        chart: "logstash"
-        heritage: "live-infra"
-        release: "logstash-elasticsearch-1.0.0"
+        app: "logstash"
     spec:
       securityContext:
         fsGroup: 1000
@@ -113,16 +81,16 @@ spec:
               - key: app
                 operator: In
                 values:
-                - "live-infra-logstash"
+                - "logp-idxr"
             topologyKey: kubernetes.io/hostname
       terminationGracePeriodSeconds: 120
       volumes:
         - name: "logstash-config"
           configMap:
-            name: "live-infra-logstash-config"
+            name: "logp-idxr-config"
         - name: "logstash-pipeline"
           configMap:
-            name: "live-infra-logstash-pipeline"
+            name: "logp-idxr-pipeline"
       containers:
       - name: "logstash"
         securityContext:
@@ -157,15 +125,15 @@ spec:
         resources:
           limits:
             cpu: 1000m
-            memory: 1536Mi
+            memory: 1Gi
           requests:
             cpu: 100m
-            memory: 1536Mi
+            memory: 512Mi
         env:
           - name: LS_JAVA_OPTS
             value: "-Xmx1g -Xms1g"
         volumeMounts:
-          - name: "live-infra-logstash"
+          - name: "logp-idxr"
             mountPath: /usr/share/logstash/data
           - name: "logstash-config"
             mountPath: /usr/share/logstash/config/logstash.yml
