@@ -4,3 +4,4 @@ resources:
   - sources
   - flux-system
   - elasticsearch
+  - kube-prometheus
