@@ -6,4 +6,4 @@ resources:
   - esprod
   - logstash
   - kibana
-    #- kube-prometheus
+  - kube-prometheus
