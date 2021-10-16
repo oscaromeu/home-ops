@@ -1,20 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- ./manifests/setup/0namespace-namespace.yaml
-- ./manifests/setup/prometheus-operator-0alertmanagerConfigCustomResourceDefinition.yaml
-- ./manifests/setup/prometheus-operator-0alertmanagerCustomResourceDefinition.yaml
-- ./manifests/setup/prometheus-operator-0podmonitorCustomResourceDefinition.yaml
-- ./manifests/setup/prometheus-operator-0probeCustomResourceDefinition.yaml
-- ./manifests/setup/prometheus-operator-0prometheusCustomResourceDefinition.yaml
-- ./manifests/setup/prometheus-operator-0prometheusruleCustomResourceDefinition.yaml
-- ./manifests/setup/prometheus-operator-0servicemonitorCustomResourceDefinition.yaml
-- ./manifests/setup/prometheus-operator-0thanosrulerCustomResourceDefinition.yaml
-- ./manifests/setup/prometheus-operator-clusterRole.yaml
-- ./manifests/setup/prometheus-operator-clusterRoleBinding.yaml
-- ./manifests/setup/prometheus-operator-deployment.yaml
-- ./manifests/setup/prometheus-operator-service.yaml
-- ./manifests/setup/prometheus-operator-serviceAccount.yaml
 - ./manifests/alertmanager-alertmanager.yaml
 - ./manifests/alertmanager-podDisruptionBudget.yaml
 - ./manifests/alertmanager-prometheusRule.yaml
@@ -29,6 +15,7 @@ resources:
 - ./manifests/blackbox-exporter-service.yaml
 - ./manifests/blackbox-exporter-serviceAccount.yaml
 - ./manifests/blackbox-exporter-serviceMonitor.yaml
+- ./manifests/grafana-config.yaml
 - ./manifests/grafana-dashboardDatasources.yaml
 - ./manifests/grafana-dashboardDefinitions.yaml
 - ./manifests/grafana-dashboardSources.yaml
@@ -65,6 +52,7 @@ resources:
 - ./manifests/prometheus-adapter-clusterRoleServerResources.yaml
 - ./manifests/prometheus-adapter-configMap.yaml
 - ./manifests/prometheus-adapter-deployment.yaml
+- ./manifests/prometheus-adapter-podDisruptionBudget.yaml
 - ./manifests/prometheus-adapter-roleBindingAuthReader.yaml
 - ./manifests/prometheus-adapter-service.yaml
 - ./manifests/prometheus-adapter-serviceAccount.yaml
@@ -83,3 +71,17 @@ resources:
 - ./manifests/prometheus-service.yaml
 - ./manifests/prometheus-serviceAccount.yaml
 - ./manifests/prometheus-serviceMonitor.yaml
+- ./manifests/setup/0namespace-namespace.yaml
+- ./manifests/setup/prometheus-operator-0alertmanagerConfigCustomResourceDefinition.yaml
+- ./manifests/setup/prometheus-operator-0alertmanagerCustomResourceDefinition.yaml
+- ./manifests/setup/prometheus-operator-0podmonitorCustomResourceDefinition.yaml
+- ./manifests/setup/prometheus-operator-0probeCustomResourceDefinition.yaml
+- ./manifests/setup/prometheus-operator-0prometheusCustomResourceDefinition.yaml
+- ./manifests/setup/prometheus-operator-0prometheusruleCustomResourceDefinition.yaml
+- ./manifests/setup/prometheus-operator-0servicemonitorCustomResourceDefinition.yaml
+- ./manifests/setup/prometheus-operator-0thanosrulerCustomResourceDefinition.yaml
+- ./manifests/setup/prometheus-operator-clusterRole.yaml
+- ./manifests/setup/prometheus-operator-clusterRoleBinding.yaml
+- ./manifests/setup/prometheus-operator-deployment.yaml
+- ./manifests/setup/prometheus-operator-service.yaml
+- ./manifests/setup/prometheus-operator-serviceAccount.yaml
