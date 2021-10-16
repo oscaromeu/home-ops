@@ -1,0 +1,27 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: kube-prometheus 
+  namespace: monitoring
+spec:
+  interval: 30s
+  ref:
+    branch: main
+    commit: 7a3879b
+  url: https://github.com/prometheus-operator/kube-prometheus
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: kube-prometheus
+  namespace: momonitoringg
+spec:
+  interval: 1m
+  url: https://github.com/oscaromeu/live-infra
+  ref:
+    branch: master
+  include:
+    - repository:
+        name: kube-prometheus
+      fromPath: manifest/
+      toPath: Tools/kube-prometheus/
