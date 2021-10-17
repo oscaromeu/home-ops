@@ -1,7 +1,0 @@
-clusterName: "log-elasticsearch"
-replicas: 1
-nodeGroup: "data"
-roles:
-  master: "false"
-  ingest: "true"
-  data: "true"
