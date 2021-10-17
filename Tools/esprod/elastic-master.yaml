@@ -2,17 +2,17 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: esp-data
+  name: elastic-prod-master
   namespace: monitoring
   labels:
-    app: "esp-data"
+    app: "elastic-prod-master"
   annotations:
     {}
 spec:
   type: ClusterIP
   selector:
-    release: "esp-data"
-    app: "esp-data"
+    release: "elastic-prod-master"
+    app: "elastic-prod-master"
   ports:
   - name: http
     protocol: TCP
@@ -24,10 +24,10 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: esp-data-headless
+  name: elastic-prod-master-headless
   namespace: monitoring
   labels:
-    app: "esp-data"
+    app: "elastic-prod-master"
   annotations:
     service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
 spec:
@@ -35,7 +35,7 @@ spec:
   # Create endpoints also if the related pod isn't ready
   publishNotReadyAddresses: true
   selector:
-    app: "esp-data"
+    app: "elastic-prod-master"
   ports:
   - name: http
     port: 9200
@@ -45,22 +45,22 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: esp-data
+  name: elastic-prod-master
   namespace: monitoring
   labels:
-    app: "esp-data"
+    app: "elastic-prod-master"
 spec:
-  serviceName: esp-data-headless
+  serviceName: elastic-prod-master-headless
   selector:
     matchLabels:
-      app: "esp-data"
-  replicas: 2
+      app: "elastic-prod-master"
+  replicas: 1
   podManagementPolicy: Parallel
   updateStrategy:
     type: RollingUpdate
   volumeClaimTemplates:
   - metadata:
-      name: esp-data
+      name: elastic-prod-master
     spec:
       accessModes:
       - ReadWriteOnce
@@ -69,10 +69,10 @@ spec:
           storage: 5Gi
   template:
     metadata:
-      name: "esp-data"
+      name: "elastic-prod-master"
       namespace: monitoring
       labels:
-        app: "esp-data"
+        app: "elastic-prod-master"
       annotations:
     spec:
       securityContext:
@@ -87,7 +87,7 @@ spec:
               - key: app
                 operator: In
                 values:
-                - "esp-data"
+                - "elastic-prod-master"
             topologyKey: kubernetes.io/hostname
       terminationGracePeriodSeconds: 120
       volumes:
@@ -187,20 +187,47 @@ spec:
             memory: 2Gi
           requests:
             cpu: 100m
-            memory: 512Mi 
+            memory: 512Mi
         env:
           - name: node.name
             valueFrom:
               fieldRef:
                 fieldPath: metadata.name
+          - name: cluster.initial_master_nodes
+            value: "elastic-prod-master-0"
           - name: node.roles
-            value: "data,data_content,data_hot,data_warm,data_cold,data_frozen,ingest,"
+            value: "master"
           - name: discovery.seed_hosts
-            value: "esp-master-headless"
+            value: "elastic-prod-master-headless"
           - name: cluster.name
             value: "logging"
           - name: network.host
             value: "0.0.0.0"
+          # will prevent the virtual address space (on Linux distribution) to run into errors or exceptions 
+          # because this default configuration is too low. 
+          - name: "node.store.allow_mmap"
+            value: false
+          # Makes sure that Elasticsearch allocates primary and replica shards to pods running on different Kubernetes nodes 
+          # and never to pods that are scheduled onto a single Kubernetes node
+          - name: cluster.routing.allocation.awareness.attributes
+            value: "k8s_node_name"
+          # XPack - Monitoring configuration
+          - name: xpack.monitoring.enabled 
+            value: true
+          - name: xpack.monitoring.collection.cluster.stats.timeout
+            value: 10m
+          - name: xpack.monitoring.collection.index.recovery.active_only
+            value: false
+          - name: xpack.monitoring.collection.index.recovery.timeout
+            value: 10m
+          - name: xpack.monitoring.collection.index.stats.timeout
+            value: 10m
+          - name: xpack.monitoring.collection.indices
+            value: '*'
+          - name: xpack.monitoring.collection.interval
+            value: 60s
+          - name: xpack.monitoring.history.duration
+            value: 30d
         volumeMounts:
-          - name: "esp-data"
+          - name: "elastic-prod-master"
             mountPath: /usr/share/elasticsearch/data

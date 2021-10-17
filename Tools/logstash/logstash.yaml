@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: "logp-idxr-config"
+  name: "logstash-config"
   namespace: monitoring
   labels:
     app: "logstash"
@@ -15,19 +15,19 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: "logp-idxr-pipeline"
+  name: "logstash-pipeline"
   namespace: monitoring
   labels:
     app: "logstash"
 data:
   uptime.conf: |
     input { exec { command => "uptime" interval => 30 } }
-    output { elasticsearch { hosts => ["http://esp-master-headless:9200"] index => "logstash" } }
+    output { elasticsearch { hosts => ["http://elastic-prod-master-headless:9200"] index => "logstash" } }
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: "logp-idxr-headless"
+  name: "logstash-headless"
   namespace: monitoring
   labels:
     app: "logstash"
@@ -42,12 +42,12 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: logp-idxr
+  name: logstash
   namespace: monitoring
   labels:
     app: "logstash"
 spec:
-  serviceName: logp-idxr-headless
+  serviceName: logstash-headless
   selector:
     matchLabels:
       app: "logstash"
@@ -57,7 +57,7 @@ spec:
     type: RollingUpdate
   volumeClaimTemplates:
   - metadata:
-      name: logp-idxr
+      name: logstash
     spec:
       accessModes:
       - ReadWriteOnce
@@ -66,7 +66,7 @@ spec:
           storage: 1Gi
   template:
     metadata:
-      name: "logp-idxr"
+      name: "logstash"
       labels:
         app: "logstash"
     spec:
@@ -81,16 +81,16 @@ spec:
               - key: app
                 operator: In
                 values:
-                - "logp-idxr"
+                - "logstash"
             topologyKey: kubernetes.io/hostname
       terminationGracePeriodSeconds: 120
       volumes:
         - name: "logstash-config"
           configMap:
-            name: "logp-idxr-config"
+            name: "logstash-config"
         - name: "logstash-pipeline"
           configMap:
-            name: "logp-idxr-pipeline"
+            name: "logstash-pipeline"
       containers:
       - name: "logstash"
         securityContext:
@@ -133,7 +133,7 @@ spec:
           - name: LS_JAVA_OPTS
             value: "-Xmx1g -Xms1g"
         volumeMounts:
-          - name: "logp-idxr"
+          - name: "logstash"
             mountPath: /usr/share/logstash/data
           - name: "logstash-config"
             mountPath: /usr/share/logstash/config/logstash.yml
