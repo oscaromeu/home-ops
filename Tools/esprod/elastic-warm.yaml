@@ -200,7 +200,7 @@ spec:
           # will prevent the virtual address space (on Linux distribution) to run into errors or exceptions 
           # because this default configuration is too low. 
           - name: node.store.allow_mmap
-            value: false
+            value: "false"
           # Makes sure that Elasticsearch allocates primary and replica shards to pods running on different Kubernetes nodes 
           # and never to pods that are scheduled onto a single Kubernetes node
           - name: cluster.routing.allocation.awareness.attributes
@@ -213,21 +213,21 @@ spec:
             value: "0.0.0.0"
           # XPack - Monitoring configuration
           - name: xpack.monitoring.enabled 
-            value: true
+            value: "true"
           - name: xpack.monitoring.collection.cluster.stats.timeout
-            value: 10m
+            value: "10m"
           - name: xpack.monitoring.collection.index.recovery.active_only
-            value: false
+            value: "false"
           - name: xpack.monitoring.collection.index.recovery.timeout
-            value: 10m
+            value: "10m"
           - name: xpack.monitoring.collection.index.stats.timeout
-            value: 10m
+            value: "10m"
           - name: xpack.monitoring.collection.indices
-            value: '*'
+            value: "'*'"
           - name: xpack.monitoring.collection.interval
-            value: 60s
+            value: "60s"
           - name: xpack.monitoring.history.duration
-            value: 30d
+            value: "30d"
         volumeMounts:
           - name: "elastic-prod-warm"
             mountPath: /usr/share/elasticsearch/data
