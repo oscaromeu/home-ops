@@ -199,7 +199,7 @@ spec:
             value: "hot"
           # will prevent the virtual address space (on Linux distribution) to run into errors or exceptions 
           # because this default configuration is too low. 
-          - name: "node.store.allow_mmap"
+          - name: node.store.allow_mmap
             value: false
           # Makes sure that Elasticsearch allocates primary and replica shards to pods running on different Kubernetes nodes 
           # and never to pods that are scheduled onto a single Kubernetes node
