@@ -196,7 +196,9 @@ spec:
           - name: cluster.initial_master_nodes
             value: "elastic-prod-master-0"
           - name: node.roles
-            value: "master"
+            value: "master,data_hot,data_content"
+          - name: node.attr.type
+            value: "hot"
           - name: discovery.seed_hosts
             value: "elastic-prod-master-headless"
           - name: cluster.name
@@ -209,8 +211,8 @@ spec:
             value: "false"
           # Makes sure that Elasticsearch allocates primary and replica shards to pods running on different Kubernetes nodes 
           # and never to pods that are scheduled onto a single Kubernetes node
-          - name: cluster.routing.allocation.awareness.attributes
-            value: "k8s_node_name"
+          #          - name: cluster.routing.allocation.awareness.attributes
+          #            value: "k8s_node_name"
           # XPack - Monitoring configuration
           - name: xpack.monitoring.enabled 
             value: "true"

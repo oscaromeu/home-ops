@@ -4,6 +4,6 @@ kind: Kustomization
 resources:
   #- namespace.yaml
   - elastic-master.yaml
-  - elastic-hot.yaml
+    #- elastic-hot.yaml
   - elastic-warm.yaml
   - elastic-client.yaml

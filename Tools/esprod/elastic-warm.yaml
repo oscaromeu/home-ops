@@ -203,8 +203,8 @@ spec:
             value: "false"
           # Makes sure that Elasticsearch allocates primary and replica shards to pods running on different Kubernetes nodes 
           # and never to pods that are scheduled onto a single Kubernetes node
-          - name: cluster.routing.allocation.awareness.attributes
-            value: "k8s_node_name"
+          #          - name: cluster.routing.allocation.awareness.attributes
+          #            value: "k8s_node_name"
           - name: discovery.seed_hosts
             value: "elastic-prod-master-headless"
           - name: cluster.name
