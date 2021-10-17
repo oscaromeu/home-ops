@@ -4,6 +4,6 @@ resources:
   - sources
   - flux-system
   - esprod
-    #  - logstash
-    #  - kibana
+  - logstash
+  - kibana
   - kube-prometheus
