@@ -54,7 +54,7 @@ spec:
   selector:
     matchLabels:
       app: "elastic-prod-master"
-  replicas: 2
+  replicas: 1
   podManagementPolicy: Parallel
   updateStrategy:
     type: RollingUpdate
