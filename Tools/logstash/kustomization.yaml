@@ -4,14 +4,13 @@ resources:
   #- namespace.yaml
   - svc_logstash.yaml
   - set_logstash.yaml
-
 configMapGenerator:
 - name: logstash-config
   files:
-    - ./config/jvm.options
-    - ./config/pipelines.yaml
-    - ./config/logstash.yaml
+    - config/jvm.options
+    - config/pipelines.yaml
+    - config/logstash.yaml
 - name: logstash-pipelines
   files:
-    - ./pipelines/uptime/uptime_pipeline
+    - pipelines/uptime/uptime_pipeline
 
