@@ -14,7 +14,7 @@ spec:
   replicas: 1
   podManagementPolicy: Parallel
   updateStrategy:
-    type: Recreate # updated value 
+    type: RollingUpdate
   volumeClaimTemplates:
   - metadata:
       name: logstash
