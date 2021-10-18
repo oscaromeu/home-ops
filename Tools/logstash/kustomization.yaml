@@ -9,8 +9,8 @@ configMapGenerator:
 - name: logstash-config
   files:
     - ./config/jvm.options
-    - ./config/pipelines.yml
-    - ./config/logstash.yml
+    - ./config/pipelines.yaml
+    - ./config/logstash.yaml
 - name: logstash-pipelines
   files:
     - ./pipelines/uptime/uptime_pipeline
