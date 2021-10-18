@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - sources
   - flux-system
-  - esprod
+    #- esprod
     #- logstash
-  - kibana
-  - kube-prometheus
+    #- kibana
+    #- kube-prometheus
