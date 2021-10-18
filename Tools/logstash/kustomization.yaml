@@ -15,11 +15,13 @@ generatorOptions:
    namespace: monitoring
 configMapGenerator:
 - name: logstash-config
+  namespace: monitoring
   files:
     - config/jvm.options
     - config/pipelines.yaml
     - config/logstash.yaml
 - name: logstash-pipelines
+  namespace: monitoring
   files:
     - pipelines/uptime/uptime_pipeline
 
