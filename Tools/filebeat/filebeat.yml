@@ -1,5 +1,4 @@
 ---
-# Source: filebeat/templates/serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -8,11 +7,8 @@ metadata:
   annotations:
   labels:
     app: "filebeat"
-    chart: "live-infra-filebeat"
-    heritage: "live-infra"
     release: "live-infra-filebeat-deployment"
 ---
-# Source: filebeat/templates/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -20,8 +16,6 @@ metadata:
   namespace: monitoring
   labels:
     app: "filebeat"
-    chart: "live-infra-filebeat"
-    heritage: "live-infra"
     release: "live-infra-filebeat-deployment"
 data:
   filebeat.yml: |
@@ -29,12 +23,10 @@ data:
       - type: log 
         paths:
         - /usr/share/filebeat/logs/filebeat
-    
     output.elasticsearch:
       host: '${NODE_NAME}'
       hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
 ---
-# Source: filebeat/templates/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -42,8 +34,6 @@ metadata:
   namespace: monitoring
   labels:
     app: "filebeat"
-    chart: "live-infra-filebeat"
-    heritage: "live-infra"
     release: "live-infra-filebeat-deployment"
 data:
   filebeat.yml: |
@@ -51,12 +41,10 @@ data:
     - type: tcp
       max_message_size: 10MiB
       host: "localhost:9000"
-    
     output.elasticsearch:
       host: '${NODE_NAME}'
       hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
 ---
-# Source: filebeat/templates/clusterrole.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -64,8 +52,6 @@ metadata:
   namespace: monitoring
   labels:
     app: "filebeat"
-    chart: "live-infra-filebeat"
-    heritage: "live-infra"
     release: "live-infra-filebeat-deployment"
 rules: 
   - apiGroups:
@@ -79,7 +65,6 @@ rules:
     - list
     - watch
 ---
-# Source: filebeat/templates/clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -87,8 +72,6 @@ metadata:
   namespace: monitoring
   labels:
     app: "filebeat"
-    chart: "live-infra-filebeat"
-    heritage: "live-infra"
     release: "live-infra-filebeat-deployment"
 roleRef:
   kind: ClusterRole
@@ -99,7 +82,6 @@ subjects:
   name: filebeat
   namespace: default
 ---
-# Source: filebeat/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -107,8 +89,6 @@ metadata:
   namespace: monitoring
   labels:
     app: "filebeat"
-    chart: "live-infra-filebeat"
-    heritage: 'Helm'
     release: live-infra-filebeat-deployment
 spec:
   replicas: 1
@@ -121,7 +101,6 @@ spec:
       annotations:
       labels:
         app: 'filebeat'
-        chart: 'live-infra-filebeat'
         release: 'live-infra-filebeat-deployment'
     spec:
       affinity: 
@@ -139,7 +118,7 @@ spec:
           name: filebeat-config
       containers:
       - name: "filebeat"
-        image: "docker.elastic.co/beats/filebeat:8.0.0-SNAPSHOT"
+        image: "docker.elastic.co/beats/filebeat:7.15.0"
         imagePullPolicy: "IfNotPresent"
         args:
           - "-e"

@@ -1,7 +1,17 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  #TODO: Find better way to create first the required namespaces
   #- namespace.yaml
-  - logstash.yaml
+  - svc_logstash.yaml
+  - set_logstash.yaml
+
+configMapGenerator:
+- name: logstash-config
+  files:
+    - ./config/jvm.options
+    - ./config/pipelines.yml
+    - ./config/logstash.yml
+- name: logstash-pipelines
+  files:
+    - ./pipelines/uptime/uptime_pipeline
 

@@ -1,43 +1,3 @@
-#TODO: Split configuration in multiple files
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: "logstash-config"
-  namespace: monitoring
-  labels:
-    app: "logstash"
-data:
-  logstash.yml: |
-    http.host: 0.0.0.0
-    xpack.monitoring.enabled: false
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: "logstash-pipeline"
-  namespace: monitoring
-  labels:
-    app: "logstash"
-data:
-  uptime.conf: |
-    input { exec { command => "uptime" interval => 30 } }
-    output { elasticsearch { hosts => ["http://elastic-prod-master-headless:9200"] index => "logstash" } }
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: "logstash-headless"
-  namespace: monitoring
-  labels:
-    app: "logstash"
-spec:
-  clusterIP: None
-  selector:
-    app: "logstash"
-  ports:
-    - name: http
-      port: 9600
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -85,12 +45,12 @@ spec:
             topologyKey: kubernetes.io/hostname
       terminationGracePeriodSeconds: 120
       volumes:
-        - name: "logstash-config"
+        - name: "logstash-config-volume"
           configMap:
             name: "logstash-config"
-        - name: "logstash-pipeline"
+        - name: "logstash-pipelines-volume"
           configMap:
-            name: "logstash-pipeline"
+            name: "logstash-pipelines"
       containers:
       - name: "logstash"
         securityContext:
@@ -129,15 +89,16 @@ spec:
           requests:
             cpu: 100m
             memory: 512Mi
-        env:
-          - name: LS_JAVA_OPTS
-            value: "-Xmx1g -Xms1g"
         volumeMounts:
           - name: "logstash"
             mountPath: /usr/share/logstash/data
-          - name: "logstash-config"
+          - name: "logstash-config-volume"
             mountPath: /usr/share/logstash/config/logstash.yml
             subPath: logstash.yml
-          - name: "logstash-pipeline"
-            mountPath: /usr/share/logstash/pipeline/uptime.conf
-            subPath: uptime.conf
+          - name: "logstash-config-volume"
+            mountPath: /usr/share/logstash/config/jvm.options
+            subPath: jvm.options
+          - name: "logstash-config-volume"
+            mountPath: /usr/share/logstash/config/pipelines.yml
+          - name: "logstash-pipelines-volume"
+            mountPath: /usr/share/logstash/pipelines
