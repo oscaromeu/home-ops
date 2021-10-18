@@ -4,9 +4,9 @@ resources:
   #- namespace.yaml
   - svc_logstash.yaml
   - set_logstash.yaml
+configMapGenerator:
 generatorOptions:
  disableNameSuffixHash: true
-configMapGenerator:
 - name: logstash-config
   files:
     - config/jvm.options
