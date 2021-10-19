@@ -1,0 +1,67 @@
+filebeat.config.inputs:
+  enabled: true
+  path: prospectors/*.yml
+  reload.enabled: true
+  reload.period: 10s
+
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: true
+  reload.period: 10s
+
+filebeat.inputs:
+- type: container
+  paths:
+    - /var/log/containers/*.log
+  processors:
+    - add_kubernetes_metadata:
+        host: ${NODE_NAME}
+        matchers:
+        - logs_path:
+            logs_path: "/var/log/containers/"
+
+# To enable hints based autodiscover, remove `filebeat.inputs` configuration and uncomment this:
+#filebeat.autodiscover:
+#  providers:
+#    - type: kubernetes
+#      node: ${NODE_NAME}
+#      hints.enabled: true
+#      hints.default_config:
+#        type: container
+#        paths:
+#          - /var/log/containers/*${data.kubernetes.container.id}.log
+
+processors:
+  - add_cloud_metadata:
+  - add_host_metadata:
+
+cloud.id: ${ELASTIC_CLOUD_ID}
+cloud.auth: ${ELASTIC_CLOUD_AUTH}
+
+output.elasticsearch:
+  hosts: ['${ELASTICSEARCH_HOST:elasticsearch}:${ELASTICSEARCH_PORT:9200}']
+  username: ${ELASTICSEARCH_USERNAME}
+  password: ${ELASTICSEARCH_PASSWORD}
+
+
+
+    #output.redis:
+    #  hosts: ["HOST:PORT"]
+    #  key: "%{[fileset.module]:failback}"
+    #  timeout: 5
+    # ssl:
+    #   certificate: "/etc/filebeat/ssl/filebeat.pem"
+    #   key: "/etc/filebeat/ssl/filebeat.key"
+    #   supported:protocols: [ TLSv1.0, TLSv1.1, TLSv1.2,SSLv3 ]
+    #   verification_mode: none
+
+logging.level: warning
+logging.to_files: true
+logging.to_syslog: false
+logging.files:
+  path: /var/log/beats
+  name: filebeat.log
+  keepfiles: 7
+  permissions: 0644
+
+filebeat.max_procs: 1

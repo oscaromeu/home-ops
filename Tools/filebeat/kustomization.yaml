@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: filbeat 
+  namespace: monitoring
+  labels:
+    app: "filebeat"
+resources:
+  #- namespace.yaml
+  - ds_filebeat.yaml
+  - sa_filebeat.yaml
+generatorOptions:
+ disableNameSuffixHash: true
+ labels:
+   namespace: monitoring
+configMapGenerator:
+- name: filebeat-config
+  namespace: monitoring
+  files:
+    - config/filebeat.yaml
+- name: filebeat-prospectors
+  namespace: monitoring
+  files:
+    - prospectors/docker.yaml
+- name: filebeat-modules
+  namespace: monitoring
+  files:
+    - modules.d/traefik.yaml.disabled

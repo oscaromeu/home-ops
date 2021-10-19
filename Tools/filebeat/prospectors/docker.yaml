@@ -1,0 +1,14 @@
+- type: docker
+  containers.ids: "*"
+  containers.path: '/var/lib/docker/containers'
+  json.message_key: log
+  json.keys_under_root: true
+#  json.add_error_key: true
+  json.ignore_decoding_error: true
+  fields_under_root: true
+  ignore_older: 24h
+  tail_files: true
+  fields:
+   fileset.module: docker
+  processors:
+  - add_docker_metadata: ~
