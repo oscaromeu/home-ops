@@ -66,7 +66,7 @@ spec:
       - name: filebeat
         image: docker.elastic.co/beats/filebeat:7.15.1
         args: [
-          "-c", "/etc/filebeat.yml",
+#          "-c", "/etc/filebeat.yml",
           "-e",
         ]
         env:
