@@ -18,8 +18,8 @@ configMapGenerator:
   namespace: monitoring
   files:
     - config/jvm.options
-    - config/pipelines.yaml
-    - config/logstash.yaml
+    - config/pipelines.yml
+    - config/logstash.yml
 - name: logstash-pipelines
   namespace: monitoring
   files:
