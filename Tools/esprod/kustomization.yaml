@@ -6,4 +6,4 @@ resources:
   - elastic-master.yaml
     #- elastic-hot.yaml
   - elastic-warm.yaml
-  - elastic-client.yaml
+  #- elastic-client.yaml
