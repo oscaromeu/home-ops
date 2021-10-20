@@ -100,5 +100,6 @@ spec:
             subPath: "jvm.options"
           - name: logstash-config-volume
             mountPath: "/usr/share/logstash/config/pipelines.yml"
+            subPath: "pipelines.yml"
           - name: logstash-pipelines-volume
             mountPath: "/usr/share/logstash/pipelines"
