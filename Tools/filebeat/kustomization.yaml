@@ -18,11 +18,11 @@ configMapGenerator:
   namespace: monitoring
   files:
     - config/filebeat.yaml
-- name: filebeat-prospectors
+- name: filebeat-inputs
   namespace: monitoring
   files:
-    - prospectors/docker.yaml
+    - ./inputs.d/container.yaml
 - name: filebeat-modules
   namespace: monitoring
   files:
-    - modules.d/traefik.yaml.disabled
+    - modules.d/traefik.yaml.enabled

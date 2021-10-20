@@ -101,8 +101,8 @@ spec:
           mountPath: /etc/filebeat/filebeat.yaml
           readOnly: true
           subPath: filebeat.yaml
-        - name: filebeat-prospectors-volume
-          mountPath: /etc/filebeat/prospectors
+        - name: filebeat-inputs-volume
+          mountPath: /etc/filebeat/inputs
           readOnly: true
         - name: filebeat-modules-volume
           mountPath: /etc/filebeat/modules.d
@@ -120,10 +120,10 @@ spec:
         configMap:
           defaultMode: 0640
           name: filebeat-config
-      - name: filebeat-prospectors-volume
+      - name: filebeat-inputs-volume
         configMap:
           defaultMode: 0640
-          name: filebeat-prospectors
+          name: filebeat-inputs
       - name: filebeat-modules-volume
         configMap:
           defaultMode: 0640

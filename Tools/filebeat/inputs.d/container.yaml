@@ -1,6 +1,6 @@
-- type: docker
-  containers.ids: "*"
-  containers.path: '/var/lib/docker/containers'
+- type: container
+  paths:
+    - /var/log/containers/*.log
   json.message_key: log
   json.keys_under_root: true
 #  json.add_error_key: true
@@ -11,4 +11,9 @@
   fields:
    fileset.module: docker
   processors:
-  - add_docker_metadata: ~
+    - add_kubernetes_metadata:
+        host: ${NODE_NAME}
+        matchers:
+        - logs_path:
+            logs_path: "/var/log/containers/"
+

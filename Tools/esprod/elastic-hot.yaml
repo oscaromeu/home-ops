@@ -212,22 +212,22 @@ spec:
           - name: network.host
             value: "0.0.0.0"
           # XPack - Monitoring configuration
-          - name: xpack.monitoring.enabled 
-            value: "true"
-          - name: xpack.monitoring.collection.cluster.stats.timeout
-            value: "10m"
-          - name: xpack.monitoring.collection.index.recovery.active_only
-            value: "false"
-          - name: xpack.monitoring.collection.index.recovery.timeout
-            value: "10m"
-          - name: xpack.monitoring.collection.index.stats.timeout
-            value: "10m"
-          - name: xpack.monitoring.collection.indices
-            value: "'*'"
-          - name: xpack.monitoring.collection.interval
-            value: "60s"
-          - name: xpack.monitoring.history.duration
-            value: "30d"
+          # - name: xpack.monitoring.enabled 
+          #   value: "true"
+          # - name: xpack.monitoring.collection.cluster.stats.timeout
+          #   value: "10m"
+          # - name: xpack.monitoring.collection.index.recovery.active_only
+          #   value: "false"
+          # - name: xpack.monitoring.collection.index.recovery.timeout
+          #   value: "10m"
+          # - name: xpack.monitoring.collection.index.stats.timeout
+          #   value: "10m"
+          # - name: xpack.monitoring.collection.indices
+          #   value: "'*'"
+          # - name: xpack.monitoring.collection.interval
+          #   value: "60s"
+          # - name: xpack.monitoring.history.duration
+          #   value: "30d"
         volumeMounts:
           - name: "elastic-prod-hot"
             mountPath: /usr/share/elasticsearch/data
