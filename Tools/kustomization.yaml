@@ -6,6 +6,6 @@ resources:
   - sealed-secrets 
   - kube-prometheus
   - esprod
-  #  - kibana
-    #  - logstash
-    #  - filebeat
+  - kibana
+  - logstash
+  - filebeat
