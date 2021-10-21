@@ -7,4 +7,4 @@ metadata:
     app: "sealed-secrets"
 resources:
   #- namespace.yaml
-  - sealed-secrets.yaml
+  - controller.yaml
