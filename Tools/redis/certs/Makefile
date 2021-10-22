@@ -3,7 +3,7 @@ DOMAIN='*.localhost'
 ca_key:
 	openssl genrsa -out rootCA.key 4096
 ca_crt:
-	openssl req -x509 -new -nodes -key rootCA.key  -subj "/C=ES/ST=Madrid/O=Monitoring/CN=localhost" -sha256 -days 1024 -out rootCA.crt
+	openssl req -x509 -new -nodes -key rootCA.key  -subj "/C=ES/ST=Barcelona/O=Monitoring/CN=localhost" -sha256 -days 1024 -out rootCA.crt
 
 redis_key:
 	openssl genrsa -out redis.key 2048
