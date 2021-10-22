@@ -1,0 +1,29 @@
+# ---
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: TLSOption
+# metadata:
+#   name: redis-tcp-router-tls-options
+#
+# spec:
+#   minVersion: VersionTLS12
+#   maxVersion: VersionTLS13
+#   cipherSuites:
+#     - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+#     - TLS_RSA_WITH_AES_256_GCM_SHA384
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: redis-route
+spec:
+  entryPoints:
+    - itcp-logstash
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: redis-port
+          port: 6379
+  # tls:
+  #   options:
+  #     name: redis-tcp-router-tls-options

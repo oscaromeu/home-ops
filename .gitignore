@@ -1,6 +1,5 @@
 # Ignore
 Tools/infrastructure
 Tools/prometheus-operator
-Tools/redis
 Testing/elasticsearch/bkp/
 bkp
