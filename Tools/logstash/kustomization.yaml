@@ -24,4 +24,5 @@ configMapGenerator:
   namespace: monitoring
   files:
     - pipelines/uptime/uptime_pipeline
+    - pipelines/datastreams/datastreams_pipeline
 
