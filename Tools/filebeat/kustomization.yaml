@@ -21,8 +21,8 @@ configMapGenerator:
 - name: filebeat-inputs
   namespace: monitoring
   files:
-    - ./inputs.d/container.yaml
-    - ./inputs.d/docker.yaml
+    - ./inputs.d/container.yml
+    - ./inputs.d/docker.yml
 - name: filebeat-modules
   namespace: monitoring
   files:
