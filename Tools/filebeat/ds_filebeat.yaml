@@ -99,6 +99,7 @@ spec:
         volumeMounts:
         - name: filebeat-config-volume
           mountPath: /usr/share/filebeat/filebeat.yml
+          subPath: filebeat.yml
           readOnly: true
           subPath: filebeat.yaml
         - name: filebeat-inputs-volume
