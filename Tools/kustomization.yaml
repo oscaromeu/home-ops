@@ -8,4 +8,4 @@ resources:
   - esprod
   - kibana
   - logstash
-  - filebeat
+    #- filebeat
