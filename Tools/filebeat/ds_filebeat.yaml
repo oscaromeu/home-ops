@@ -102,7 +102,7 @@ spec:
           readOnly: true
           subPath: filebeat.yaml
         - name: filebeat-inputs-volume
-          mountPath: /etc/filebeat/inputs
+          mountPath: /etc/filebeat/inputs.d
           readOnly: true
         - name: filebeat-modules-volume
           mountPath: /etc/filebeat/modules.d
