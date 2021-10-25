@@ -98,7 +98,7 @@ spec:
             memory: 100Mi
         volumeMounts:
         - name: filebeat-config-volume
-          mountPath: /usr/share/filebeat/filebeat.yaml
+          mountPath: /usr/share/filebeat/filebeat.yml
           readOnly: true
           subPath: filebeat.yaml
         - name: filebeat-inputs-volume
