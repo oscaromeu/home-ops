@@ -17,7 +17,7 @@ configMapGenerator:
 - name: filebeat-config
   namespace: monitoring
   files:
-    - config/filebeat.yaml
+    - config/filebeat.yml
 - name: filebeat-inputs
   namespace: monitoring
   files:
