@@ -101,7 +101,7 @@ spec:
           mountPath: /usr/share/filebeat/filebeat.yml
           subPath: filebeat.yml
           readOnly: true
-          subPath: filebeat.yaml
+          subPath: filebeat.yml
         - name: filebeat-inputs-volume
           mountPath: /usr/share/filebeat/inputs.d
           readOnly: true
