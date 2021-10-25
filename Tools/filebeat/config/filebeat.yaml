@@ -38,7 +38,7 @@ output.elasticsearch:
     #   supported:protocols: [ TLSv1.0, TLSv1.1, TLSv1.2,SSLv3 ]
     #   verification_mode: none
 
-logging.level: warning
+logging.level: debug 
 logging.to_files: true
 logging.to_syslog: false
 logging.files:
