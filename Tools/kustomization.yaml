@@ -4,8 +4,8 @@ resources:
   - sources
   - flux-system 
   - sealed-secrets 
-  - kube-prometheus
+    #- kube-prometheus
   - esprod
-  - kibana
+    #- kibana
     #- logstash
     #- filebeat
