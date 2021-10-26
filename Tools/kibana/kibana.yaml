@@ -25,6 +25,7 @@ spec:
   replicas: 1
   strategy:
     type: Recreate
+  nodeName: k3
   selector:
     matchLabels:
       app: kibana
@@ -98,5 +99,4 @@ spec:
           requests:
             cpu: 100m
             memory: 512Mi
-        nodeName: k3
         volumeMounts:
