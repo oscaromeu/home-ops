@@ -5,7 +5,7 @@ resources:
   - flux-system 
   - sealed-secrets 
   - kube-prometheus
-    #- esprod
+  - esprod
     #- kibana
     #- logstash
-    #- filebeat
+  - filebeat
