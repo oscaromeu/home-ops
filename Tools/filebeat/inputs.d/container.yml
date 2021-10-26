@@ -8,7 +8,7 @@
   fields_under_root: true
 #  ignore_older: 0
   tail_files: true
-  scan_frequency: 5h
+#  scan_frequency: 1h
   fields:
    fileset.module: docker
   processors:
