@@ -2,12 +2,12 @@ filebeat.config.inputs:
   enabled: true
   path: ${path.config}/inputs.d/*.yml
   reload.enabled: true
-  reload.period: 10s
+  reload.period: 10m
 
 filebeat.config.modules:
   path: ${path.config}/modules.d/*.yml
   reload.enabled: true
-  reload.period: 10s
+  reload.period: 10m
 
 # To enable hints based autodiscover, remove `filebeat.inputs` configuration and uncomment this:
 #filebeat.autodiscover:
