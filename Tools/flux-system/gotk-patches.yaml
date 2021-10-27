@@ -220,7 +220,6 @@ spec:
         - "--enable-leader-election"
         - "--storage-path=/data"
         - "--storage-adv-addr=source-controller.$(RUNTIME_NAMESPACE).svc.cluster.local."
-        - "--validate=false"
         env:
         - name: RUNTIME_NAMESPACE
           valueFrom:
