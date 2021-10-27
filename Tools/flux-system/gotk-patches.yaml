@@ -319,6 +319,7 @@ spec:
         - "--log-level=debug"
         - "--log-json"
         - "--enable-leader-election"
+        - "--validate=false"
         env:
         - name: RUNTIME_NAMESPACE
           valueFrom:
