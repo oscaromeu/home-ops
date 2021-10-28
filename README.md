@@ -22,10 +22,12 @@ You will need to meet the following in order to spin up Live Infra
 
 ## Testing
 
+TODO
+
 Any change to the Kubernetes manifests or to the repository structure should be validated in CI before a pull requests is merged into themaster branch and synced on the cluster.
 
 This repository contains the following Github CI workflows:
-
+* TODO Add CI job to encypt sensitive data in the manifest files
 * the [test](./.github/workflows/test.yaml) workflow validates the Kubernetes manifests and Kustomize overlays with kubeval
 * the [e2e](./.github/workflows/e2e.yaml) workflow starts a Kubernetes cluster in CI and tests the staging setup by running Flux in Kubernetes Kind
 
