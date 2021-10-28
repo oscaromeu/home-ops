@@ -9,3 +9,4 @@ resources:
   - kibana
   - logstash
   - filebeat
+  - redis
