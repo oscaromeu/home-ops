@@ -3,10 +3,10 @@ kind: Kustomization
 resources:
   - sources
   - flux-system 
-    # - sealed-secrets 
+  - sealed-secrets 
     # - kube-prometheus
     # - esprod
     # - kibana
     # - logstash
     # - filebeat
-    # - redis
+  - redis
