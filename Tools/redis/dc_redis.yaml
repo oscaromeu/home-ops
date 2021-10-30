@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: redis
-    version: bullseye   
+    version: 6.0.4
   name: redis
   namespace: monitoring
 spec:
@@ -23,7 +23,7 @@ spec:
       labels:
         app: redis
         deployment: redis
-        version: bullseye
+        version: 6.0.4
     spec:
       volumes:
         - name: redis-ca-volume
@@ -52,8 +52,7 @@ spec:
             - name: redis-pem-volume
               mountPath: "/data/ssl/redis.pem"
               subPath: "redis.pem"
-          name: redis
-          image: redis:bullseye
+          image: redis
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
@@ -66,10 +65,10 @@ spec:
           name: redis
           resources:
             limits:
-              cpu: 1000m
+              cpu: 200m
               memory: 1Gi
             requests:
-              cpu: 100m
+              cpu: 500m
               memory: 512Mi
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File

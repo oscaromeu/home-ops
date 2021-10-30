@@ -3,8 +3,7 @@ kind: Kustomization
 metadata:
   name: redis
   namespace: monitoring
-  labels:
-    app: "redis"
+
 resources:
   - dc_redis.yaml
   - secret-redis-ca_sealed.yaml
