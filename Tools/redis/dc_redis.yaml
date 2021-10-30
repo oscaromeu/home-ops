@@ -36,12 +36,12 @@ spec:
           secret:
             secretName: redis-pem
       containers:
-        - env:
-            - name: ENVIRONMENT
-              valueFrom:
-                configMapKeyRef:
-                  key: environment
-                  name: environment-config
+        #       - env:
+        #           - name: ENVIRONMENT
+        #             valueFrom:
+        #               configMapKeyRef:
+        #                 key: environment
+        #                 name: environment-config
           volumeMounts:
             - name: redis-ca-volume
               mountPath: "/data/ssl/redis_ca.crt"

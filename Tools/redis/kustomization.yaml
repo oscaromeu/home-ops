@@ -6,9 +6,9 @@ metadata:
 
 resources:
   - dc_redis.yaml
-  - secret-redis-ca_sealed.yaml
-  - secret-redis-crt_sealed.yaml
-  - secret-redis-pem_sealed.yaml
+    #  - secret-redis-ca_sealed.yaml
+    #  - secret-redis-crt_sealed.yaml
+    #  - secret-redis-pem_sealed.yaml
   - svc_redis-port.yaml
 #  - route_redis-port.yaml
 
