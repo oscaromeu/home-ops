@@ -3,8 +3,9 @@ kind: Deployment
 metadata:
   labels:
     app: redis
-    version: bullseye
+    version: bullseye   
   name: redis
+  namespace: monitoring
 spec:
   replicas: 1
   revisionHistoryLimit: 2
@@ -51,7 +52,8 @@ spec:
             - name: redis-pem-volume
               mountPath: "/data/ssl/redis.pem"
               subPath: "redis.pem"
-          image: "redis:bullseye"
+          name: redis
+          image: redis:bullseye
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3

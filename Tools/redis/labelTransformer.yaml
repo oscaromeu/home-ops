@@ -2,6 +2,7 @@ apiVersion: builtin
 kind: LabelTransformer
 metadata:
   name: notImportantHere
+  namespace: monitoring
 labels:
   version: 6.0.4
 fieldSpecs:
