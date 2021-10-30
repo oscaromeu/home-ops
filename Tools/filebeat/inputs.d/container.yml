@@ -1,6 +1,6 @@
 - type: container
   paths:
-    - /var/log/containers/coredns*.log
+    - /var/log/containers/*.log
   exclude_files: ['\.gz$']
   json.message_key: log
   json.keys_under_root: true
@@ -10,8 +10,6 @@
 #  ignore_older: 0
   tail_files: true
 #  scan_frequency: 1h
-  fields:
-   fileset.module: docker
   processors:
     - add_kubernetes_metadata:
         host: ${NODE_NAME}
