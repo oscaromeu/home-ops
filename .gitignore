@@ -1,5 +1,8 @@
 # Ignore
 Tools/infrastructure
+Tools/filebeat/secrets
+Tools/redis/secrets
+Tools/redis/certs
 Tools/prometheus-operator
 Testing/elasticsearch/bkp/
 bkp

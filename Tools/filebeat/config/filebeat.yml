@@ -21,22 +21,22 @@ filebeat.config.modules:
 #          - /var/log/containers/*${data.kubernetes.container.id}.log
 
 
-output.elasticsearch:
-  hosts: ['${ELASTICSEARCH_HOST:elasticsearch}:${ELASTICSEARCH_PORT:9200}']
-    #  username: ${ELASTICSEARCH_USERNAME}
-    #  password: ${ELASTICSEARCH_PASSWORD}
+#output.elasticsearch:
+#  hosts: ['${ELASTICSEARCH_HOST:elasticsearch}:${ELASTICSEARCH_PORT:9200}']
+#    #  username: ${ELASTICSEARCH_USERNAME}
+#    #  password: ${ELASTICSEARCH_PASSWORD}
 
+output.redis:
+  hosts: ${REDIS_HOSTS}
+  key: '${REDIS_KEY_NAME}'
+  ssl:
+    enabled: ${REDIS_ENABLE_SSL}
+    verification_mode: ${REDIS_SSL_VERIFY}
+    certificate: "/etc/filebeat/ssl/filebeat.pem"
+    key: "/etc/filebeat/ssl/filebeat.key"
+    supported:protocols: [ TLSv1.0, TLSv1.1, TLSv1.2,SSLv3 ]
+    verification_mode: none
 
-
-    #output.redis:
-    #  hosts: ["HOST:PORT"]
-    #  key: "%{[fileset.module]:failback}"
-    #  timeout: 5
-    # ssl:
-    #   certificate: "/etc/filebeat/ssl/filebeat.pem"
-    #   key: "/etc/filebeat/ssl/filebeat.key"
-    #   supported:protocols: [ TLSv1.0, TLSv1.1, TLSv1.2,SSLv3 ]
-    #   verification_mode: none
 
 logging.level: info 
 logging.to_files: true
