@@ -38,7 +38,7 @@ output.redis:
     verification_mode: none
 
 
-logging.level: info 
+logging.level: debug 
 logging.to_files: true
 logging.to_syslog: false
 logging.files:
