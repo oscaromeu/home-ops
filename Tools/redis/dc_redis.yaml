@@ -36,48 +36,42 @@ spec:
           secret:
             secretName: redis-pem
       containers:
-      - name: redis
-        # - env:
-        #     - name: ENVIRONMENT
-        #       valueFrom:
-        #         configMapKeyRef:
-        #           key: environment
-        #           name: environment-config
-        volumeMounts:
-          - name: redis-ca-volume
-            mountPath: "/data/ssl/redis_ca.crt"
-            subPath: "redis_ca.crt"
-          - name: redis-crt-volume
-            mountPath: "/data/ssl/redis.crt"
-            subPath: "redis.crt"
-          - name: redis-pem-volume
-            mountPath: "/data/ssl/redis.pem"
-            subPath: "redis.pem"
-        image: redis
-        imagePullPolicy: IfNotPresent
-        livenessProbe:
-          failureThreshold: 3
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          successThreshold: 1
-          tcpSocket:
-            port: 6379
-          timeoutSeconds: 1
-        name: redis
-        resources:
-          limits:
-            cpu: 200m
-            memory: 1Gi
-          requests:
-            cpu: 100m
-            memory: 512Mi
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        args: ["--port","0","--tls-port","6379","--maxmemory","8GB","--maxclients","50000","--bind","0.0.0.0","--tls-auth-clients","no","--tls-cert-file","/data/ssl/redis.crt","--tls-key-file","/data/ssl/redis.pem","--tls-ca-cert-file","/data/ssl/redis_ca.crt"]
-          #      dnsPolicy: ClusterFirst
-          #      dnsConfig:
-          #        searches:
-          #          - oscaromeu.io
+        - env:
+          volumeMounts:
+            - name: redis-ca-volume
+              mountPath: "/data/ssl/redis_ca.crt"
+              subPath: "redis_ca.crt"
+            - name: redis-crt-volume
+              mountPath: "/data/ssl/redis.crt"
+              subPath: "redis.crt"
+            - name: redis-pem-volume
+              mountPath: "/data/ssl/redis.pem"
+              subPath: "redis.pem"
+          image: redis
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: 6379
+            timeoutSeconds: 1
+          name: redis
+          resources:
+            limits:
+              cpu: 200m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 512Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          args: ["--port","0","--tls-port","6379","--maxmemory","8GB","--maxclients","50000","--bind","0.0.0.0","--tls-auth-clients","no","--tls-cert-file","/data/ssl/redis.crt","--tls-key-file","/data/ssl/redis.pem","--tls-ca-cert-file","/data/ssl/redis_ca.crt"]
+            #      dnsPolicy: ClusterFirst
+            #      dnsConfig:
+            #        searches:
+            #          - oscaromeu.io
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext:
