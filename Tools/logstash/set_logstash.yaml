@@ -108,4 +108,4 @@ spec:
           - name: logstash-pipeline-volume
             mountPath: "/usr/share/logstash/pipeline"
           - name: logstash-redis-certs
-            mountPath: "/etc/logstash/ssl/"
+            mountPath: "/usr/share/logstash/ssl/"
