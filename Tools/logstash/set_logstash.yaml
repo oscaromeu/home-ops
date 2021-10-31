@@ -30,11 +30,11 @@ spec:
       labels:
         app: "logstash"
     spec:
-      securityContext:
-        fsGroup: 1000
-        runAsGroup: 1000
-        runAsUser: 1000
-        fsGroupChangePolicy: "OnRootMismatch"
+      #securityContext:
+      #  fsGroup: 1000
+      #  runAsGroup: 1000
+      #  runAsUser: 1000
+      #  fsGroupChangePolicy: "OnRootMismatch"
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -49,19 +49,21 @@ spec:
       volumes:
         - name: logstash-config-volume
           configMap:
+            defaultMode: 0640
             name: logstash-config
         - name: logstash-pipeline-volume
           configMap:
+            defaultMode: 0640
             name: logstash-pipeline
         - name: logstash-redis-certs
           secret:
             secretName: logstash-redis-certs
-            defaultMode: 256
+            defaultMode: 0640
       containers:
       - name: "logstash"
         securityContext:
           runAsUser: 0
-          privileged: true
+          #privileged: true
           #capabilities:
           #  drop:
           #  - ALL
@@ -69,6 +71,9 @@ spec:
           #runAsUser: 1000
         image: "docker.elastic.co/logstash/logstash:7.15.0"
         imagePullPolicy: "IfNotPresent"
+        env:
+        - name: LS_SETTINGS_DIR
+          value: /usr/share/logstash/config
         livenessProbe:
           failureThreshold: 3
           httpGet:
