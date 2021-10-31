@@ -104,7 +104,7 @@ spec:
         - name: BUFFER_FLUSH_EVENTS
           value: "50000"
         - name: REDIS_ENABLE_SSL
-          value: "true"
+          value: "false"
         - name: REDIS_SSL_VERIFY
           value: "none"
         - name: NODE_NAME

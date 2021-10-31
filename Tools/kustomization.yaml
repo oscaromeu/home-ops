@@ -8,5 +8,5 @@ resources:
   - esprod
   - kibana
   - logstash
-  #- filebeat
-  #- redis
+  - filebeat
+  - redis
