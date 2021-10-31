@@ -107,5 +107,5 @@ spec:
             subPath: "pipelines.yml"
           - name: logstash-pipelines-volume
             mountPath: "/usr/share/logstash/pipelines"
-        - name: logstash-redis-certs
-          mountPath: "/etc/logstash/ssl/"
+          - name: logstash-redis-certs
+            mountPath: "/etc/logstash/ssl/"
