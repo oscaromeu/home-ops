@@ -1,0 +1,8 @@
+http.host: "0.0.0.0"
+config.reload.automatic: true
+pipeline.unsafe_shutdown: false
+#path.config: /usr/share/logstash/config/pipelines.yml
+  #xpack.monitoring.enabled: true
+  #xpack.monitoring.collection.interval: 60s
+  #xpack.monitoring.elasticsearch.username: "logstash_system"
+  #xpack.monitoring.elasticsearch.password: "${LOGSTASH_SYSTEM_PASSWORD}"
