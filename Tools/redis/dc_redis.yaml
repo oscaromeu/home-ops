@@ -2,16 +2,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: redis
-  name: redis
+    app: redis-master
+  name: redis-master
   namespace: monitoring
 spec:
   replicas: 1
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: redis
-      deployment: redis
+      app: redis-master
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -20,8 +19,7 @@ spec:
   template:
     metadata:
       labels:
-        app: redis
-        deployment: redis
+        app: redis-master
     spec:
       volumes:
         - name: redis-ca-volume
