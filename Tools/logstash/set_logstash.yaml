@@ -69,8 +69,8 @@ spec:
             - ALL
           runAsNonRoot: true
           runAsUser: 1000
-        image: "docker.elastic.co/logstash/logstash:7.15.0"
-        command: ["logstash", "-f", "/usr/share/config"]
+        image: "docker.elastic.co/logstash/logstash:7.15.1"
+        command: ["logstash"]
         resources:
           {}
         imagePullPolicy: "IfNotPresent"
