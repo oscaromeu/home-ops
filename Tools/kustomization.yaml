@@ -7,6 +7,6 @@ resources:
   - kube-prometheus
   - esprod
   - kibana
-  #- logstash
+  - logstash
   #- filebeat
   - redis
