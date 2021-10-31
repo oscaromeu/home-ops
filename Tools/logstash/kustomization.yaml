@@ -25,4 +25,5 @@ configMapGenerator:
   files:
     - pipelines/uptime/uptime_pipeline
     - pipelines/datastreams/datastreams_pipeline
+    - pipelines/pi-cluster-logs/pi_cluster_pipeline
 

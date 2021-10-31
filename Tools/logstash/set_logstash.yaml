@@ -51,6 +51,10 @@ spec:
         - name: logstash-pipelines-volume
           configMap:
             name: logstash-pipelines
+      - name: logstash-redis-certs
+        secret:
+          secretName: logstash-redis-certs
+          defaultMode: 256
       containers:
       - name: "logstash"
         securityContext:
@@ -103,3 +107,5 @@ spec:
             subPath: "pipelines.yml"
           - name: logstash-pipelines-volume
             mountPath: "/usr/share/logstash/pipelines"
+        - name: logstash-redis-certs
+          mountPath: "/etc/logstash/ssl/"

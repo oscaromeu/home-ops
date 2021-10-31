@@ -1,6 +1,7 @@
 # Ignore
 Tools/infrastructure
 Tools/filebeat/secrets
+Tools/logstash/secrets
 Tools/redis/secrets
 Tools/redis/certs
 Tools/prometheus-operator
