@@ -1,5 +1,5 @@
 input {
-  exec { command => "uptime" interval => 30 }
+  exec { command => "uptime" interval => 300 }
 }
 
 filter {
