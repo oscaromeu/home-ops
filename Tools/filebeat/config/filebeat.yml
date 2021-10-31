@@ -29,13 +29,13 @@ filebeat.config.modules:
 output.redis:
   hosts: ${REDIS_HOSTS}
   key: '${REDIS_KEY_NAME}'
-  ssl:
-    enabled: ${REDIS_ENABLE_SSL}
-    verification_mode: ${REDIS_SSL_VERIFY}
-    certificate: "/etc/filebeat/ssl/filebeat.pem"
-    key: "/etc/filebeat/ssl/filebeat.key"
-    certificate_authorities: /etc/filebeat/ssl/filebeat.ca
-    supported:protocols: [ TLSv1.0, TLSv1.1, TLSv1.2,SSLv3 ]
+  #ssl:
+  #  enabled: ${REDIS_ENABLE_SSL}
+  #  verification_mode: ${REDIS_SSL_VERIFY}
+  #  certificate: "/etc/filebeat/ssl/filebeat.pem"
+  #  key: "/etc/filebeat/ssl/filebeat.key"
+  #  certificate_authorities: /etc/filebeat/ssl/filebeat.ca
+  #  supported:protocols: [ TLSv1.0, TLSv1.1, TLSv1.2,SSLv3 ]
 
 
 logging.level: debug 

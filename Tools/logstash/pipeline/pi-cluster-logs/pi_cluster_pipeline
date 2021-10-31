@@ -1,12 +1,11 @@
 input {
-    
+
   redis {
       host => "redis-master.redis.svc.cluster.local"
       type => "redis-input"
       data_type => "list"
       key => "k3s"
-      ssl => true
-      ssl_validate_hostname => false
+      ssl => false
   }
 
 }
