@@ -2,11 +2,11 @@
   paths:
     - /var/log/containers/*.log
   exclude_files: ['\.gz$']
-  json.message_key: log
-  json.keys_under_root: true
+#  json.message_key: log
+#  json.keys_under_root: true
 #  json.add_error_key: true
-  json.ignore_decoding_error: true
-  fields_under_root: true
+#  json.ignore_decoding_error: true
+#  fields_under_root: true
 #  ignore_older: 0
   tail_files: true
 #  scan_frequency: 1h
