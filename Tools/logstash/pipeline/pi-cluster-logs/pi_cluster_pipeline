@@ -12,6 +12,9 @@ input {
 }
 
 filter {
+
+    if ! [host][name] { mutate { rename { "[host]" => "%{[host][name]}" } } }
+    #mutate { replace => { "[host]" => "[host][name]" } }
 }
 
 
@@ -21,8 +24,7 @@ output {
     stdout { codec => rubydebug }
   }
 
-  if ! [host][name] { mutate { rename { "[host]" => "%{[host][name]}" } } }
-  #mutate { replace => { "[host]" => "[host][name]" } }
+
 
 
   elasticsearch {
