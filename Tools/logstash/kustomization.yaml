@@ -17,13 +17,12 @@ configMapGenerator:
 - name: logstash-config
   namespace: monitoring
   files:
-    - config/jvm.options
-    - config/pipelines.yml
-    - config/logstash.yml
+    - jvm.options
+    - pipelines.yml
+    - logstash.yml
 - name: logstash-pipeline
   namespace: monitoring
   files:
     - pipeline/uptime/uptime_pipeline.conf
-    - pipeline/datastreams/datastreams_pipeline.conf
     - pipeline/pi-cluster-logs/pi_cluster_pipeline.conf
 
