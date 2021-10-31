@@ -48,9 +48,9 @@ spec:
         - name: logstash-config-volume
           configMap:
             name: logstash-config
-        - name: logstash-pipelines-volume
+        - name: logstash-pipeline-volume
           configMap:
-            name: logstash-pipelines
+            name: logstash-pipeline
         - name: logstash-redis-certs
           secret:
             secretName: logstash-redis-certs
@@ -105,7 +105,7 @@ spec:
           - name: logstash-config-volume
             mountPath: "/usr/share/logstash/config/pipelines.yml"
             subPath: "pipelines.yml"
-          - name: logstash-pipelines-volume
-            mountPath: "/usr/share/logstash/pipelines"
+          - name: logstash-pipeline-volume
+            mountPath: "/usr/share/logstash/pipeline"
           - name: logstash-redis-certs
             mountPath: "/etc/logstash/ssl/"

@@ -20,10 +20,10 @@ configMapGenerator:
     - config/jvm.options
     - config/pipelines.yml
     - config/logstash.yml
-- name: logstash-pipelines
+- name: logstash-pipeline
   namespace: monitoring
   files:
-    - pipelines/uptime/uptime_pipeline
-    - pipelines/datastreams/datastreams_pipeline
-    - pipelines/pi-cluster-logs/pi_cluster_pipeline
+    - pipeline/uptime/uptime_pipeline.conf
+    - pipeline/datastreams/datastreams_pipeline.conf
+    - pipeline/pi-cluster-logs/pi_cluster_pipeline.conf
 
