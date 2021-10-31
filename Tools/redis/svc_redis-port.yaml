@@ -5,8 +5,11 @@ metadata:
   name: redis-port
   namespace: monitoring
 spec:
+  #ports:
+  #  - port: 6379
+  #    protocol: TCP
   ports:
-    - port: 6379
-      protocol: TCP
+  - port: 6379
+    targetPort: 6379
   selector:
     app: redis
