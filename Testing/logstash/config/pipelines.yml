@@ -1,8 +1,6 @@
 - pipeline.id: "uptime_pipeline"
-  path.config: "/usr/share/logstash/pipeline/uptime.conf"
-#- pipeline.id: "datastreams_pipeline"
-#  path.config: "/usr/share/logstash/pipeline/datastreams.conf"
+  path.config: "/usr/share/logstash/pipeline/uptime_pipeline"
 - pipeline.id: "pi_cluster_pipeline"
-  path.config: "/usr/share/logstash/pipeline/pi-cluster-logs.conf"
+  path.config: "/usr/share/logstash/pipeline/pi_cluster_pipeline"
 
 

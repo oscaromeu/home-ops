@@ -32,7 +32,9 @@ spec:
     spec:
       securityContext:
         fsGroup: 1000
+        runAsGroup: 1000
         runAsUser: 1000
+      #  fsGroupChangePolicy: "OnRootMismatch"
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -47,23 +49,40 @@ spec:
       volumes:
         - name: logstash-config-volume
           configMap:
+            defaultMode: 256
             name: logstash-config
         - name: logstash-pipeline-volume
           configMap:
+            defaultMode: 256
             name: logstash-pipeline
         - name: logstash-redis-certs
           secret:
             secretName: logstash-redis-certs
             defaultMode: 256
+#      initContainers:
+#      - name: configure-sysctl
+#        securityContext:
+#          runAsUser: 0
+#          privileged: true
+#        image: "busybox"
+#        imagePullPolicy: "IfNotPresent"
+#        command: ['sh', '-c', 'chown -R 0:10001 /usr/share/logstash']
+#        resources:
+#          {}
       containers:
       - name: "logstash"
         securityContext:
+          #runAsUser: 0
+          privileged: true
           capabilities:
             drop:
             - ALL
           runAsNonRoot: true
           runAsUser: 1000
-        image: "docker.elastic.co/logstash/logstash:7.15.0"
+        image: "docker.elastic.co/logstash/logstash:7.15.1"
+        #command: ["logstash"]
+        resources:
+          {}
         imagePullPolicy: "IfNotPresent"
         livenessProbe:
           failureThreshold: 3
@@ -108,4 +127,4 @@ spec:
           - name: logstash-pipeline-volume
             mountPath: "/usr/share/logstash/pipeline"
           - name: logstash-redis-certs
-            mountPath: "/usr/share/logstash/ssl/"
+            mountPath: "/usr/share/logstash/ssl"

@@ -2,8 +2,14 @@
 Tools/infrastructure
 Tools/filebeat/secrets
 Tools/logstash/secrets
+Tools/esprod/secrets
+Tools/esprod/certs
 Tools/redis/secrets
 Tools/redis/certs
 Tools/prometheus-operator
 Testing/elasticsearch/bkp/
 bkp
+*.bk
+*log
+*.csv
+*.zip

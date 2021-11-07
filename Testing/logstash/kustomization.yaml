@@ -23,7 +23,6 @@ configMapGenerator:
 - name: logstash-pipeline
   namespace: monitoring
   files:
-    - pipeline/uptime/uptime_pipeline.conf
-    - pipeline/datastreams/datastreams_pipeline.conf
-    - pipeline/pi-cluster-logs/pi_cluster_pipeline.conf
+    - pipeline/uptime/uptime_pipeline
+    - pipeline/pi-cluster-logs/pi_cluster_pipeline
 
