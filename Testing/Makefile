@@ -19,71 +19,42 @@ endif
 NAMESPACE=monitoring
 CLUSTER=monitoring
 CI=argocd               # Valid options are [argocd, flux]
-USER=admon              # admin username cannot be used in gitea see https://gitea.com/gitea/helm-chart/#admin-user
-PWD=admon
+USER=changeme           # admin username cannot be used in gitea see https://gitea.com/gitea/helm-chart/#admin-user
+PWD=changeme
 
 all:
 > $(MAKE) everything >log.txt
 
 create:
 > @touch log.txt
-> @k3d cluster create monitoring | tee -a log.txt 
+> @k3d cluster create monitoring | tee -a log
 .PHONY: setup 
 
 
 dependencies: 
 > @sleep 25s
-> @kubectl create namespace monitoring | tee -a log.txt
-> @arkade get $(CI) | tee log.txt
-> @arkade install gitea --namespace $(NAMESPACE) -u $(USER) -p $(PWD) | tee -a log.txt
-> @arkade install argocd --namespace $(NAMESPACE)
+> @kubectl create namespace monitoring | tee -a log
+> @arkade get $(CI) | tee -a log
+> @arkade install argocd | tee -a log
 .PHONY: dependencies
 
+deploy:
+> kustomize build | kubectl apply -f -
+.PHONY: deploy
 
-action: 
-#> kubectl wait --for=condition=Ready pods --all -n monitoring
-#> kubectl --namespace monitoring port-forward svc/gitea-http 3000:3000 >/dev/null &
-#> kubectl port-forward svc/argocd-server -n argocd 8443:443 >/dev/null &
-#> ADMON_TOKEN=`curl -XPOST -H "Content-Type: application/json" -ks -d '{"name":"batmon"}' -u admon:admon http://127.0.0.1:3000/api/v1/users/\<username\>/tokens|jq '.sha1'`
-#> PASS=$(kubectl get secret argocd-initial-admin-secret \
-#>   -n argocd \
-#>   -o jsonpath="{.data.password}" | base64 -d)
-#> echo $PASS
-> curl -X 'POST'\
->   'http://127.0.0.1:3000/api/v1/user/repos'\
->   -u admon:admon\
->   -H 'accept: application/json'\
->   -H 'Content-Type: application/json'\
->   -d '{
->   "auto_init": false,
->   "default_branch": "master",
->   "description": "TODO",
->   "name": "live-infra",
->   "private": false,
->   "template": true,
->   "trust_model": "default"
-> }'
+argocd: 
+> kubectl wait --for=condition=Ready pods --all -n argocd 
+> kubectl port-forward svc/argocd-server -n argocd 8443:443 >/dev/null &
+.PHONY: argocd 
 
-.PHONY: action
-
-mytarget:
-> { \
-  set -e ;\
-  msg="header:" ;\
-  for i in $$(seq 1 3) ; do msg="$$msg pre_$${i}_post" ; done ;\
-  msg="$$msg :footer" ;\
-  echo msg=$$msg ;\
-  }
-.PHONY: mytarget
+clean: 
+> @rm log
+.PHONY: clean
 
 destroy: clean
-> @k3d cluster delete monitoring | tee -a log.txt
+> @k3d cluster delete monitoring | tee -a log
 .PHONY: destroy 
 
 
-clean: 
-#> @rm log.txt
-> @rm -rf /tmp/live-infra
-.PHONY: clean
 
 converge: create dependencies 
