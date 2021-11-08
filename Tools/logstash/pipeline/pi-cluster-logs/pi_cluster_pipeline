@@ -14,7 +14,7 @@ input {
 filter {
 
     #if [log_type] == "k3s_cluster" {drop {}}
-    mutate { remove => { "[host]" } }
+    mutate { replace => { "[host]" => "[host][name]" } }
 }
 
 
