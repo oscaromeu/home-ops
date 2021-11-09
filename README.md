@@ -1,5 +1,7 @@
 # Live-Infra
 
+(TODO!!!)
+
 Repository of application definitions, configurations and environments in a declarative and versioned control fashion that provides a cluster monitoring stack for ARM64 platform. Live Infra uses [Flux V2](https://fluxcd.io/) to keep k3s clusters sync and updated. 
 
 Infrastructure services and applications are installed and updated automatically when changes in the repository are detected. This mechanism is done with controllers in the clusters which detects change in the source code.
@@ -21,6 +23,8 @@ You will need to meet the following in order to spin up Live Infra
 + Testing
 
 ## Bootstrap Tools
+
+(TODO!!!)
 
 Fork this repository on your personal Github account and export your Github access token, username and repo name:
 
@@ -54,12 +58,12 @@ Note that the bootstrap github command creates the Github repository if it doesn
 
 ## Testing
 
-TODO
+TODO!!!
 
 Any change to the Kubernetes manifests or to the repository structure should be validated in CI before a pull requests is merged into themaster branch and synced on the cluster.
 
 This repository contains the following Github CI workflows:
-* TODO Add CI job to encypt sensitive data in the manifest files
+* Add CI job to encypt sensitive data in the manifest files
 * the [test](./.github/workflows/test.yaml) workflow validates the Kubernetes manifests and Kustomize overlays with kubeval
 * the [e2e](./.github/workflows/e2e.yaml) workflow starts a Kubernetes cluster in CI and tests the staging setup by running Flux in Kubernetes Kind
 
