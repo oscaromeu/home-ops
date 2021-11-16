@@ -1,6 +1,8 @@
 - type: container
   paths:
     - /var/log/containers/source*.log
+    - /var/log/containers/*traefik*.log
+
   exclude_files: ['\.gz$']
 #  json.message_key: log
 #  json.keys_under_root: true
@@ -13,7 +15,7 @@
   processors:
     - add_kubernetes_metadata:
         host: ${NODE_NAME}
-          #        matchers:
-          #        - logs_path:
-          #            logs_path: "/var/log/containers/"
+        matchers:
+        - logs_path:
+            logs_path: "/var/log/containers/"
 
