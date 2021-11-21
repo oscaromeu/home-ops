@@ -5,6 +5,7 @@ resources:
   - flux-system 
     #- sealed-secrets 
   - kube-prometheus
+  - promscale
   - esprod
   - kibana
   - logstash

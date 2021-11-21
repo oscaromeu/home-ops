@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: timescaledb
+  name: timescaledb
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: timescaledb
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        service: timescaledb
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_PASSWORD
+              value: pi
+            - name: POSTGRES_USER
+              value: postgres
+          image: timescale/timescaledb:latest-pg12
+          name: timescaledb
+          ports:
+            - containerPort: 5432
+          resources: {}
+      restartPolicy: Always
+status: {}
