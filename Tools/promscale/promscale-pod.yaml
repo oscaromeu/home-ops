@@ -11,7 +11,7 @@ spec:
         - name: PROMSCALE_DB_CONNECT_RETRIES
           value: "10"
         - name: PROMSCALE_DB_URI
-          value: postgres://postgres:pi@db:5432/postgres?sslmode=allow
+          value: postgres://postgres:pi@timescaledb:5432/postgres?sslmode=allow
         - name: PROMSCALE_WEB_TELEMETRY_PATH
           value: /metrics-text
       image: timescale/promscale:latest
