@@ -8,7 +8,7 @@ resources:
   - prometheus
   - promscale
   - esprod
-  - kibana
-  - logstash
-  - filebeat
-  - redis
+  #- kibana
+  #- logstash
+  #- filebeat
+  #- redis
