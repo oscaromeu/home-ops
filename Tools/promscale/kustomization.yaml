@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: monitoring
 resources:
-  - node_exporter-service.yaml
+  - node-exporter-service.yaml
   - node-exporter-deployment.yaml
   - prometheus-claim0-persistentvolumeclaim.yaml
   - prometheus-deployment.yaml
