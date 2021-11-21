@@ -45,8 +45,8 @@ spec:
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
   version: 2.30.3
-remote_write:
-  - url: "http://promscale:9201/write"
-remote_read:
-  - url: "http://promscale:9201/read"
-    read_recent: true
+  remote_write:
+    - url: "http://promscale:9201/write"
+  remote_read:
+    - url: "http://promscale:9201/read"
+      read_recent: true
