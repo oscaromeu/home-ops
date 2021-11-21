@@ -1,5 +1,22 @@
 ---
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kibana
+  labels: 
+    app: kibana
+data:
+  kibana.yml: |
+    server.ssl:
+      enabled: true
+      key: /usr/share/kibana/config/certs/elastic-certificate.pem
+      certificate: /usr/share/kibana/config/certs/elastic-certificate.pem
+    xpack.security.encryptionKey: ${KIBANA_ENCRYPTION_KEY}
+    elasticsearch.ssl:
+      certificateAuthorities: /usr/share/kibana/config/certs/elastic-certificate.pem
+      verificationMode: certificate
+---
+apiVersion: v1
 kind: Service
 metadata:
   name: kibana
@@ -32,11 +49,17 @@ spec:
     metadata:
       labels:
         app: kibana
-      annotations:
     spec:
+      automountServiceAccountToken: true
       securityContext:
         fsGroup: 1000
       volumes:
+        - name: elastic-certificate-pem
+          secret:
+            secretName: elastic-certificate-pem
+        - name: kibanaconfig
+          configMap:
+            name: kibana
       containers:
       - name: kibana
         securityContext:
@@ -49,11 +72,21 @@ spec:
         imagePullPolicy: "IfNotPresent"
         env:
           - name: ELASTICSEARCH_HOSTS
-            value: "http://elastic-prod-master-headless:9200"
+            value: "https://elastic-prod-master-headless:9200"
           - name: SERVER_HOST
             value: "0.0.0.0"
-          - name: NODE_OPTIONS
-            value: --max-old-space-size=1800
+          - name: KIBANA_ENCRYPTION_KEY
+            valueFrom:
+              secretKeyRef:
+                key: encryptionkey
+                name: kibana
+          - name: ELASTICSEARCH_USERNAME
+            value: elastic
+          - name: ELASTICSEARCH_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: security-master-credentials
         readinessProbe:
           failureThreshold: 3
           initialDelaySeconds: 10
@@ -79,7 +112,7 @@ spec:
                       set -- "$@" -u "${ELASTICSEARCH_USERNAME}:${ELASTICSEARCH_PASSWORD}"
                     fi
 
-                    STATUS=$(curl --output /dev/null --write-out "%{http_code}" -k "$@" "http://localhost:5601${path}")
+                    STATUS=$(curl --output /dev/null --write-out "%{http_code}" -k "$@" "https://localhost:5601${path}")
                     if [[ "${STATUS}" -eq 200 ]]; then
                       exit 0
                     fi
@@ -96,6 +129,12 @@ spec:
             cpu: 1000m
             memory: 2Gi
           requests:
-            cpu: 100m
-            memory: 512Mi
+            cpu: 1000m
+            memory: 2Gi
         volumeMounts:
+          - name: elastic-certificate-pem
+            mountPath: /usr/share/kibana/config/certs
+          - name: kibanaconfig
+            mountPath: /usr/share/kibana/config/kibana.yml
+            subPath: kibana.yml
+

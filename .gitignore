@@ -8,6 +8,8 @@ Tools/redis/secrets
 Tools/redis/certs
 Tools/prometheus-operator
 Testing/elasticsearch/bkp/
+Testing/*/certs
+Testing/*/secrets
 bkp
 *.bk
 *log

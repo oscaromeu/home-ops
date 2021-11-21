@@ -91,6 +91,9 @@ spec:
             topologyKey: kubernetes.io/hostname
       terminationGracePeriodSeconds: 120
       volumes:
+        - name: elastic-certificates-volumes 
+          secret:
+            secretName: elastic-certificates 
       enableServiceLinks: true
       initContainers:
       - name: configure-sysctl
@@ -119,6 +122,13 @@ spec:
               - -c
               - |
                 #!/usr/bin/env bash -e
+
+                # Exit if ELASTIC_PASSWORD in unset
+                if [ -z "${ELASTIC_PASSWORD}" ]; then
+                  echo "ELASTIC_PASSWORD variable is missing, exiting"
+                  exit 1
+                fi
+
                 # If the node is starting up wait for the cluster to be ready (request params: "wait_for_status=green&timeout=1s" )
                 # Once it has started only check that the node itself is responding
                 START_FILE=/tmp/.es_start_file
@@ -136,11 +146,9 @@ spec:
                     set -- "$@" $args
                   fi
 
-                  if [ -n "${ELASTIC_USERNAME}" ] && [ -n "${ELASTIC_PASSWORD}" ]; then
-                    set -- "$@" -u "${ELASTIC_USERNAME}:${ELASTIC_PASSWORD}"
-                  fi
+                  set -- "$@" -u "elastic:${ELASTIC_PASSWORD}"
 
-                  curl --output /dev/null -k "$@" "http://127.0.0.1:9200${path}"
+                  curl --output /dev/null -k "$@" "https://127.0.0.1:9200${path}"
                 }
 
                 if [ -f "${START_FILE}" ]; then
@@ -148,7 +156,7 @@ spec:
                   HTTP_CODE=$(http "/" "-w %{http_code}")
                   RC=$?
                   if [[ ${RC} -ne 0 ]]; then
-                    echo "curl --output /dev/null -k -XGET -s -w '%{http_code}' \${BASIC_AUTH} http://127.0.0.1:9200/ failed with RC ${RC}"
+                    echo "curl --output /dev/null -k -XGET -s -w '%{http_code}' \${BASIC_AUTH} https://127.0.0.1:9200/ failed with RC ${RC}"
                     exit ${RC}
                   fi
                   # ready if HTTP code 200, 503 is tolerable if ES version is 6.x
@@ -157,7 +165,7 @@ spec:
                   elif [[ ${HTTP_CODE} == "503" && "8" == "6" ]]; then
                     exit 0
                   else
-                    echo "curl --output /dev/null -k -XGET -s -w '%{http_code}' \${BASIC_AUTH} http://127.0.0.1:9200/ failed with HTTP code ${HTTP_CODE}"
+                    echo "curl --output /dev/null -k -XGET -s -w '%{http_code}' \${BASIC_AUTH} https://127.0.0.1:9200/ failed with HTTP code ${HTTP_CODE}"
                     exit 1
                   fi
 
@@ -205,6 +213,11 @@ spec:
             value: "logging"
           - name: network.host
             value: "0.0.0.0"
+          - name: ELASTIC_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: security-master-credentials
+                key: password
           # will prevent the virtual address space (on Linux distribution) to run into errors or exceptions 
           # because this default configuration is too low. 
           - name: node.store.allow_mmap
@@ -213,23 +226,42 @@ spec:
           # and never to pods that are scheduled onto a single Kubernetes node
           #          - name: cluster.routing.allocation.awareness.attributes
           #            value: "k8s_node_name"
+          # XPack security configuration
+          - name: xpack.security.enabled
+            value: "true"
+          - name: xpack.security.transport.ssl.enabled
+            value: "true"
+          - name: xpack.security.transport.ssl.verification_mode
+            value: "certificate"
+          - name: xpack.security.transport.ssl.keystore.path
+            value: "/usr/share/elasticsearch/config/certs/elastic-certificates.p12"
+          - name: xpack.security.transport.ssl.truststore.path
+            value: "/usr/share/elasticsearch/config/certs/elastic-certificates.p12"
+          - name: xpack.security.http.ssl.enabled
+            value: "true"
+          - name: xpack.security.http.ssl.truststore.path
+            value: "/usr/share/elasticsearch/config/certs/elastic-certificates.p12"
+          - name: xpack.security.http.ssl.keystore.path
+            value: "/usr/share/elasticsearch/config/certs/elastic-certificates.p12"
           # XPack - Monitoring configuration
-          # - name: xpack.monitoring.enabled 
-          #   value: "true"
-          # - name: xpack.monitoring.collection.cluster.stats.timeout
-          #   value: "10m"
-          # - name: xpack.monitoring.collection.index.recovery.active_only
-          #   value: "false"
-          # - name: xpack.monitoring.collection.index.recovery.timeout
-          #   value: "10m"
-          # - name: xpack.monitoring.collection.index.stats.timeout
-          #   value: "10m"
-          # - name: xpack.monitoring.collection.indices
-          #   value: "'*'"
-          # - name: xpack.monitoring.collection.interval
-          #   value: "60s"
-          # - name: xpack.monitoring.history.duration
-          #   value: "30d"
+          - name: xpack.monitoring.enabled 
+            value: "true"
+          - name: xpack.monitoring.collection.cluster.stats.timeout
+            value: "10m"
+          - name: xpack.monitoring.collection.index.recovery.active_only
+            value: "false"
+          - name: xpack.monitoring.collection.index.recovery.timeout
+            value: "10m"
+          - name: xpack.monitoring.collection.index.stats.timeout
+            value: "10m"
+          - name: xpack.monitoring.collection.indices
+            value: "'*'"
+          - name: xpack.monitoring.collection.interval
+            value: "60s"
+          - name: xpack.monitoring.history.duration
+            value: "30d"
         volumeMounts:
           - name: "elastic-prod-master"
             mountPath: /usr/share/elasticsearch/data
+          - name: elastic-certificates-volumes
+            mountPath: "/usr/share/elasticsearch/config/certs"
