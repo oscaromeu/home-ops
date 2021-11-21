@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     service: node-exporter
-  name: node_exporter
+  name: node-exporter
   namespace: monitoring
 spec:
   ports:
