@@ -1,13 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.26.0 (40646f47)
-  creationTimestamp: null
   labels:
     service: node-exporter
   name: node-exporter
+  namespace: monitoring
 spec:
   replicas: 1
   selector:
@@ -16,16 +13,12 @@ spec:
   strategy: {}
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert
-        kompose.version: 1.26.0 (40646f47)
-      creationTimestamp: null
       labels:
         service: node-exporter
     spec:
       containers:
         - image: quay.io/prometheus/node-exporter
-          name: node_exporter
+          name: node-exporter
           ports:
             - containerPort: 9100
           resources: {}
