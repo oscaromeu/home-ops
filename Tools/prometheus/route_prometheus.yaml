@@ -1,0 +1,32 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prometheus-int-https
+spec:
+  entryPoints:
+    - int-https
+  routes:
+    - kind: Rule
+      match: Host(`prometheus-monitoring.io`)
+      services:
+        - name: prometheus
+          port: 9090
+  tls: {}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prometheus-int-http
+spec:
+  entryPoints:
+    - int-http
+  routes:
+    - kind: Rule
+      middlewares:
+        - name: redirect
+          namespace: traefik
+      match: Host(`prometheus-monitoring.io`)
+      services:
+        - name: prometheus
+          port: 9090
+

@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deploy_prometheus.yaml
+  - svc_prometheus.yaml
+
+configMapGenerator:
+- name: prometheus-config
+  files:
+    - config/prometheus.yml
+#    - config/recording_rules.yml
+#    - config/alerting_rules.yml
