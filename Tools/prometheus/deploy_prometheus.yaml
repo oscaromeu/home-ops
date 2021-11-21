@@ -35,7 +35,7 @@ spec:
             claimName: prometheus-monitoring-pro-pvc
       containers:
         - name: prometheus-server
-          image: prometheus
+          image: prom/prometheus:latest
           imagePullPolicy: "IfNotPresent"
           args:
             - --storage.tsdb.retention.time=2w
