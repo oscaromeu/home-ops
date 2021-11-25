@@ -6,10 +6,10 @@ spec:
   releaseName: kube-prometheus-stack
   chart:
     spec:
-      chart: kube-prometheus-stack
+      chart: prometheus-community
       sourceRef:
         kind: HelmRepository
-        name: prometheus-community
+        name: kube-prometheus-stack
         namespace: flux-system
       version: "11.3.4"
   interval: 1h0m0s
