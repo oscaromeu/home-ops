@@ -7,10 +7,10 @@ spec:
   targetNamespace: monitoring
   chart:
     spec:
-      chart: prometheus-community
+      chart: kube-prometheus-stack
       sourceRef:
         kind: HelmRepository
-        name: kube-prometheus-stack
+        name: prometheus-community
   interval: 10s
   install:
     remediation:
