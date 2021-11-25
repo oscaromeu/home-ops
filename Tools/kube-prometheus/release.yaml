@@ -17,6 +17,6 @@ spec:
   install:
     remediation:
       retries: 3
-        #  valuesFrom:
-        #    - kind: ConfigMap
-        #      name: kube-prometheus-values
+  valuesFrom:
+    - kind: ConfigMap
+      name: kube-prometheus-values
