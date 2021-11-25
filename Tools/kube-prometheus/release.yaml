@@ -4,18 +4,17 @@ metadata:
   name: kube-prometheus-stack 
 spec:
   releaseName: kube-prometheus-stack
+  targetNamespace: monitoring
   chart:
     spec:
       chart: prometheus-community
       sourceRef:
         kind: HelmRepository
         name: kube-prometheus-stack
-        namespace: flux-system
-      version: "11.3.4"
-  interval: 1h0m0s
+  interval: 10s
   install:
     remediation:
       retries: 3
-  valuesFrom:
-    - kind: ConfigMap
-      name: kube-prometheus-values
+        #  valuesFrom:
+        #    - kind: ConfigMap
+        #      name: kube-prometheus-values
