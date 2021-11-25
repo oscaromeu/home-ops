@@ -6,10 +6,10 @@ resources:
     #- sealed-secrets 
   - kube-prometheus
     # - prometheus
-    # - promscale
-    # - esprod
-    # - grafana
+  - promscale
+  #- grafana
+  #- esprod
   #- kibana
-  #- logstash
-  #- filebeat
   #- redis
+  #- filebeat
+  #- logstash
