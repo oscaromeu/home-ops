@@ -1,10 +1,8 @@
 ---
-prometheus:
-  prometheusSpec:
-    ## additionalRemoteRead is appended to remoteRead
-    additionalRemoteRead:
-      - url: "http://promscale:9201/read"
-        read_recent: true
-    ## additionalRemoteWrite is appended to remoteWrite
-    additionalRemoteWrite:
-       - url: "http://promscale:9201/write"
+server:
+  remoteRead:
+  - url: "http://promscale:9201/read"
+    read_recent: true
+  ## additionalRemoteWrite is appended to remoteWrite
+  remoteWrite:
+  - url: "http://promscale:9201/write"
