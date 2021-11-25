@@ -4,9 +4,9 @@ namespace: monitoring
 resources:
   - namespace.yaml
   - release.yaml
-    #configMapGenerator:
-    #  - name: kube-prometheus-values
-    #    files:
-    #      - values.yaml=values.yaml
-    #configurations:
-    #  - kustomizeconfig.yaml
+configMapGenerator:
+  - name: kube-prometheus-values
+    files:
+      - values.yaml=values.yaml
+configurations:
+  - kustomizeconfig.yaml
