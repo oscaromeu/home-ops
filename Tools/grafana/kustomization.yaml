@@ -10,7 +10,7 @@ resources:
   - rbac.yml
 
 configMapGenerator:
-  - name: grafana-dashboards
+  - name: grafana-dashboards-dev
     files:
       - dashboards.yaml
 

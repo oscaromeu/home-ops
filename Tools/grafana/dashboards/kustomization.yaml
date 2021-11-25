@@ -6,7 +6,7 @@ namespace: monitoring
 
 generatorOptions:
   labels:
-    grafana-dashboards: default
+    grafana-dashboards-dev: default
   disableNameSuffixHash: true
 
 configMapGenerator:

@@ -16,7 +16,7 @@ rules:
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: k8s-sidecar-grafana-dashboards
+  name: k8s-sidecar-grafana-dashboards-dev
 roleRef:
   kind: ClusterRole
   name: k8s-sidecar
