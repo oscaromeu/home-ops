@@ -11,6 +11,8 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
+        namespace: flux-system
+      version: "20.0.1"
   interval: 10s
   install:
     remediation:
