@@ -3,17 +3,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: grafana
-  name: grafana
+    app: grafana-dev
+  name: grafana-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: grafana
+      app: grafana-dev
   template:
     metadata:
       labels:
-        app: grafana
+        app: grafana-dev
     spec:
       containers:
         - name: dashboard-sidecar
@@ -94,22 +94,22 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: grafana
-  name: grafana
+    app: grafana-dev
+  name: grafana-dev
 spec:
   ports:
     - name: http
       port: 3000
       targetPort: http
   selector:
-    app: grafana
+    app: grafana-dev
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
-    k8s-app: grafana
-  name: grafana
+    k8s-app: grafana-dev
+  name: grafana-dev
 spec:
   endpoints:
     - interval: 30s
@@ -120,4 +120,4 @@ spec:
       - monitoring
   selector:
     matchLabels:
-      app: grafana
+      app: grafana-dev
