@@ -11,5 +11,5 @@ resources:
   - rules.yml
   - sm.yml
   - pdb.yml
-  - kube-prometheus-rules.yml
-  - kubernetes-monitoring-rules.yml
+    #  - kube-prometheus-rules.yml
+    #  - kubernetes-monitoring-rules.yml

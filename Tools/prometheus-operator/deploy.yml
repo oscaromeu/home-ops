@@ -18,7 +18,7 @@ spec:
       containers:
       - args:
         - --kubelet-service=kube-system/kubelet
-        - --prometheus-config-reloader=quay.io/coreos/prometheus-config-reloader
+        - --prometheus-config-reloader=quay.io/coreos/prometheus-config-reloader:v0.42.1-arm64
         image: ghcr.io/prometheus-operator/prometheus-operator:main
         imagePullPolicy: Always
         name: prometheus-operator
