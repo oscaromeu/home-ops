@@ -1,0 +1,68 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  labels:
+    prometheus: k8s
+  name: k8s
+spec:
+  alerting:
+    alertmanagers:
+    - name: alertmanager-main
+      port: web
+      namespace: monitoring
+  image: prom/prometheus:latest
+  nodeSelector:
+    kubernetes.io/os: linux
+  podMonitorNamespaceSelector: {}
+  podMonitorSelector: {}
+  probeNamespaceSelector: {}
+  probeSelector: {}
+  replicas: 1
+  resources:
+    requests:
+      cpu: 500m
+      memory: 400Mi
+    limits:
+      cpu: 2000m
+      memory: 2Gi
+  retention: 30d
+  ruleSelector: {}
+  ruleNamespaceSelector: {}
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+  storage:
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
+  serviceAccountName: prometheus-k8s
+  serviceMonitorNamespaceSelector: {}
+  serviceMonitorSelector: {}
+  version: v2.28.1
+  remote_write:
+  - url: "http://promscale:9201/write"
+  remote_read:
+  - url: "http://promscale:9201/read"
+    read_recent: true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    prometheus: k8s
+  name: prometheus-k8s
+spec:
+  ports:
+  - name: web
+    port: 9090
+    targetPort: web
+  selector:
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/instance: k8s
+  sessionAffinity: ClientIP

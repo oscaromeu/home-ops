@@ -14,6 +14,7 @@ generatorOptions:
   disableNameSuffixHash: true
 
 configMapGenerator:
-  - name: grafana-dashboard
+  - name: prometheus-grafana-dashboards
     files:
-      - grafana.json
+      - prometheus.json
+      - prometheus-remote-write.json
