@@ -6,9 +6,8 @@ resources:
     #- sealed-secrets 
   #- alertmanager-operated
   - kube-state-metrics
+  - prometheus
   - node-exporter
-  - prometheus-operator
-  - prometheus-operated
   - promscale
   - grafana
   #- esprod
