@@ -7,6 +7,11 @@ Tools/esprod/certs
 Tools/redis/secrets
 Tools/redis/certs
 Tools/prometheus-operator
+Tools/prometheus-operated
+Tools/alertmanager-operated
+Tools/node-exporter
+Tools/kube-state-metrics
+Tools/alertmanager
 Testing/elasticsearch/bkp/
 Testing/*/certs
 Testing/*/secrets

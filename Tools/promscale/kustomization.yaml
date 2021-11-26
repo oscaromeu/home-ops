@@ -4,8 +4,8 @@ namespace: monitoring
 resources:
   #- node-exporter-deployment.yaml
   #- node-exporter-service.yaml
-  - promscale-pod.yaml
-  - promscale-service.yaml
+  #- promscale-pod.yaml
+  #- promscale-service.yaml
   - timescaledb-deployment.yaml
   - timescaledb-service.yaml
 

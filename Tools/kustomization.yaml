@@ -4,12 +4,8 @@ resources:
   - sources
   - flux-system 
     #- sealed-secrets 
-  #- alertmanager-operated
-  - kube-state-metrics
-  - prometheus
-  - node-exporter
+  - kube-prometheus
   - promscale
-  - grafana
   #- esprod
   #- kibana
   #- redis
