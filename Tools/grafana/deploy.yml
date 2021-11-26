@@ -3,24 +3,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: grafana-dev
-  name: grafana-dev
+    app: grafana
+  name: grafana
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: grafana-dev
+      app: grafana
   template:
     metadata:
       labels:
-        app: grafana-dev
+        app: grafana
     spec:
       containers:
         - name: dashboard-sidecar
           image: kiwigrid/k8s-sidecar
           env:
             - name: LABEL
-              value: "grafana-dashboards-dev"
+              value: "grafana-dashboards"
             - name: FOLDER
               value: /tmp/dashboards
             - name: RESOURCE
@@ -69,7 +69,7 @@ spec:
             - mountPath: /etc/grafana/provisioning/datasources
               name: grafana-datasources
             - mountPath: /etc/grafana/provisioning/dashboards
-              name: grafana-dashboards-dev
+              name: grafana-dashboards
       nodeSelector:
         beta.kubernetes.io/os: linux
       securityContext:
@@ -86,30 +86,30 @@ spec:
         - name: grafana-datasources
           secret:
             secretName: grafana-datasources
-        - name: grafana-dashboards-dev
+        - name: grafana-dashboards
           configMap:
-            name: grafana-dashboards-dev
+            name: grafana-dashboards
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: grafana-dev
-  name: grafana-dev
+    app: grafana
+  name: grafana
 spec:
   ports:
     - name: http
       port: 3000
       targetPort: http
   selector:
-    app: grafana-dev
+    app: grafana
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
-    k8s-app: grafana-dev
-  name: grafana-dev
+    k8s-app: grafana
+  name: grafana
 spec:
   endpoints:
     - interval: 30s
@@ -120,4 +120,4 @@ spec:
       - monitoring
   selector:
     matchLabels:
-      app: grafana-dev
+      app: grafana
