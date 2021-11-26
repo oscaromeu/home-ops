@@ -19,7 +19,7 @@ spec:
       - args:
         - --kubelet-service=kube-system/kubelet
         - --prometheus-config-reloader=registry.sighup.io/fury/prometheus-operator/prometheus-config-reloader:v0.50.0
-        image: quay.io/prometheus-operator/prometheus-operator
+        image: ghcr.io/prometheus-operator/prometheus-operator:main
         imagePullPolicy: Always
         name: prometheus-operator
         ports:

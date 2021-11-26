@@ -13,14 +13,6 @@ resources:
   - deploy.yml
   - rbac.yml
 
-images:
-  - name: grafana/grafana
-    newName: registry.sighup.io/fury/grafana/grafana
-    newTag: 8.1.2
-  - name: kiwigrid/k8s-sidecar
-    newName: registry.sighup.io/fury/kiwigrid/k8s-sidecar
-    newTag: 1.12.3
-
 configMapGenerator:
   - name: grafana-dashboards
     files:
