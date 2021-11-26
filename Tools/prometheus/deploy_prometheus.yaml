@@ -5,7 +5,7 @@ metadata:
   labels:
     app: prometheus
   name: prometheus
-  namespace: default
+  namespace: monitoring 
 spec:
   revisionHistoryLimit: 1
   strategy:
