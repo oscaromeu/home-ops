@@ -4,8 +4,11 @@ resources:
   - sources
   - flux-system 
     #- sealed-secrets 
-  - kube-prometheus
-  - prometheus
+  - alertmanager-operated
+  - kube-state-metrics
+  - node-exporter
+  - prometheus-operator
+  - prometheus-operated
   - promscale
   - grafana
   #- esprod
