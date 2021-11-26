@@ -5,7 +5,7 @@ resources:
   - flux-system 
     #- sealed-secrets 
   - kube-prometheus
-    # - prometheus
+  - prometheus
   - promscale
   - grafana
   #- esprod
