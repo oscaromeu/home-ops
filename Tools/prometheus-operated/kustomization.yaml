@@ -8,7 +8,7 @@ resources:
   - dashboards
   - deploy.yml
   - rbac.yml
-  - rules.yml
+    #  - rules.yml
   - sm.yml
   - pdb.yml
     #  - kube-prometheus-rules.yml
