@@ -11,6 +11,7 @@ spec:
     - name: alertmanager-main
       port: web
       namespace: monitoring
+  name: prometheus
   image: prom/prometheus:latest
   nodeSelector:
     kubernetes.io/os: linux
