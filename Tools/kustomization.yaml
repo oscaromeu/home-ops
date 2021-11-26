@@ -4,7 +4,7 @@ resources:
   - sources
   - flux-system 
     #- sealed-secrets 
-  - alertmanager-operated
+  #- alertmanager-operated
   - kube-state-metrics
   - node-exporter
   - prometheus-operator
