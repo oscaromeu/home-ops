@@ -56,9 +56,6 @@ spec:
           mountPropagation: HostToContainer
           name: root
           readOnly: true
-      - args:
-        - --logtostderr
-        - --upstream=http://127.0.0.1:9100/
       hostNetwork: true
       hostPID: true
       nodeSelector:
