@@ -6,6 +6,3 @@ metadata:
 
 resources:
   - dev.yml
-
-transformers:
-  - labelTransformer.yaml
