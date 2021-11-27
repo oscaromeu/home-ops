@@ -9,6 +9,7 @@ resources:
   #- namespace.yaml
   - svc_logstash.yaml
   - set_logstash.yaml
+  - secret-logstash-redis-certs-sealed.yaml
 generatorOptions:
  disableNameSuffixHash: true
  labels:
