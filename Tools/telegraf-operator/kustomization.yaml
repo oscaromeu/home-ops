@@ -5,7 +5,7 @@ metadata:
   name: telegraf-operator 
 
 resources:
-  - dev.yaml
+  - dev.yml
 
 transformers:
   - labelTransformer.yaml
