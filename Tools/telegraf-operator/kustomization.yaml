@@ -6,3 +6,4 @@ metadata:
 
 resources:
   - dev.yml
+  - classes.yml
