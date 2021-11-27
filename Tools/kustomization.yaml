@@ -5,10 +5,10 @@ resources:
   - flux-system 
     #- sealed-secrets 
   - kube-prometheus
-  #- promscale
+  - promscale
   - telegraf-operator
-  #- esprod
-  #- kibana
-  #- redis
-  #- filebeat
-  #- logstash
+  - esprod
+  - kibana
+  - redis
+  - filebeat
+  - logstash
