@@ -8,7 +8,7 @@ filter {
 
 output {
   elasticsearch {
-      hosts => ["http://elastic-prod-master-headless:9200"]
+      hosts => ["https://es-master-headless:9200"]
       index => "uptime"
   }
 }
