@@ -18,10 +18,15 @@ You will need to meet the following in order to spin up Live Infra
 - A bunch of raspberry pi's
 
 ## Repository structure
-
-+ Tools
-+ Testing
-
+```
+Tools
+  ├── production
+  │   └── ...
+  ├── staging
+  │   └── ...
+  └── testing
+      └── ...
+```
 ## Bootstrap Tools
 
 (TODO!!!)
