@@ -1,6 +1,5 @@
 # Ignore
-Tools/infrastructure
-Tools/filebeat/secrets
+Tools/*/*/secrets
 Tools/logstash/secrets
 Tools/esprod/secrets
 Tools/esprod/certs

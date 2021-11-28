@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: timescaledb
+  name: timescaledb
+  namespace: monitoring
+spec:
+  ports:
+    - name: "5432"
+      port: 5432
+      targetPort: 5432
+  selector:
+    service: timescaledb
+status:
+  loadBalancer: {}

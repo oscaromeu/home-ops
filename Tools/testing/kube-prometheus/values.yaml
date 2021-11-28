@@ -1,0 +1,8 @@
+---
+server:
+  remoteRead:
+  - url: "http://promscale:9201/read"
+    read_recent: true
+  ## additionalRemoteWrite is appended to remoteWrite
+  remoteWrite:
+  - url: "http://promscale:9201/write"

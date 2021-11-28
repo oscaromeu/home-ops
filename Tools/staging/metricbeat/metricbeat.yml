@@ -1,0 +1,195 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: helm-metricbeat-security-metricbeat
+  namespace: monitoring
+  annotations:
+  labels:
+    app: "helm-metricbeat-security-metricbeat"
+    chart: "metricbeat-8.0.0-SNAPSHOT"
+    heritage: "Helm"
+    release: "helm-metricbeat-security"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: helm-metricbeat-security-metricbeat-deployment-config
+  namespace: monitoring
+  labels:
+    app: "helm-metricbeat-security-metricbeat"
+    chart: "metricbeat-8.0.0-SNAPSHOT"
+    heritage: "Helm"
+    release: "helm-metricbeat-security"
+data:
+  metricbeat.yml: |
+    metricbeat.modules:
+    - module: elasticsearch
+      xpack.enabled: true
+      period: 1m
+      hosts: ["https://es-master-headless:9200"] 
+      scope: cluster 
+      username: '${ELASTICSEARCH_USERNAME}'
+      password: '${ELASTICSEARCH_PASSWORD}'
+      ssl.enabled: true 
+        #ssl.verification_mode: "none"
+      ssl.certificate_authorities:
+        - /usr/share/metricbeat/config/certs/elastic-certificate.pem
+        #ssl.verfication_mode: "certificate"
+    output.elasticsearch:
+      username: '${ELASTICSEARCH_USERNAME}'
+      password: '${ELASTICSEARCH_PASSWORD}'
+      protocol: https
+      hosts: ["https://es-master-headless:9200"]
+      ssl.enabled: true 
+      ssl.certificate_authorities: ["/usr/share/metricbeat/config/certs/elastic-certificate.pem"]
+       #ssl.verfication_mode: "certificate"
+
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: helm-metricbeat-security-metricbeat-cluster-role
+  namespace: monitoring
+  labels:
+    app: "helm-metricbeat-security-metricbeat"
+    chart: "metricbeat-8.0.0-SNAPSHOT"
+    heritage: "Helm"
+    release: "helm-metricbeat-security"
+rules: 
+  - apiGroups:
+    - ""
+    resources:
+    - nodes
+    - namespaces
+    - events
+    - pods
+    verbs:
+    - get
+    - list
+    - watch
+  - apiGroups:
+    - extensions
+    resources:
+    - replicasets
+    verbs:
+    - get
+    - list
+    - watch
+  - apiGroups:
+    - apps
+    resources:
+    - statefulsets
+    - deployments
+    - replicasets
+    verbs:
+    - get
+    - list
+    - watch
+  - apiGroups:
+    - ""
+    resources:
+    - nodes/stats
+    verbs:
+    - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: helm-metricbeat-security-metricbeat-cluster-role-binding
+  namespace: monitoring
+  labels:
+    app: "helm-metricbeat-security-metricbeat"
+    chart: "metricbeat-8.0.0-SNAPSHOT"
+    heritage: "Helm"
+    release: "helm-metricbeat-security"
+roleRef:
+  kind: ClusterRole
+  name: helm-metricbeat-security-metricbeat-cluster-role
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: ServiceAccount
+  name: helm-metricbeat-security-metricbeat
+  namespace: default
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 'helm-metricbeat-security-metricbeat-metrics'
+  namespace: monitoring
+  labels:
+    app: 'helm-metricbeat-security-metricbeat-metrics'
+    chart: 'metricbeat-8.0.0-SNAPSHOT'
+    heritage: 'Helm'
+    release: 'helm-metricbeat-security'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: 'helm-metricbeat-security-metricbeat-metrics'
+      release: 'helm-metricbeat-security'
+  template:
+    metadata:
+      annotations:
+      labels:
+        app: 'helm-metricbeat-security-metricbeat-metrics'
+        chart: 'metricbeat-8.0.0-SNAPSHOT'
+        release: 'helm-metricbeat-security'
+    spec:
+      serviceAccountName: helm-metricbeat-security-metricbeat
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: elastic-certificates-volume
+        secret:
+          secretName: elastic-certificates
+      - name: elastic-certificate-crt-volume
+        secret:
+          secretName: elastic-certificate-crt
+      - name: elastic-certificate-pem-volume
+        secret:
+          secretName: elastic-certificate-pem
+      - name: metricbeat-config
+        configMap:
+          defaultMode: 0600
+          name: helm-metricbeat-security-metricbeat-deployment-config
+      containers:
+      - name: "metricbeat"
+        image: "docker.elastic.co/beats/metricbeat:7.15.0"
+        imagePullPolicy: "IfNotPresent"
+        resources: 
+          limits:
+            cpu: 1000m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        env:
+        - name: ELASTICSEARCH_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: es-master-credentials
+        - name: ELASTICSEARCH_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: es-master-credentials
+        securityContext: 
+          privileged: false
+          runAsUser: 0
+        volumeMounts:
+        - name: elastic-certificates-volume
+          mountPath: "/usr/share/metricbeat/config/certs/elastic-certificates.p12"
+          subPath: "elastic-certificate.p12"
+        - name: "elastic-certificate-crt-volume"
+          mountPath: "/usr/share/metricbeat/config/certs/elastic-certificate.crt"
+          subPath: "elastic-certificate.crt"
+        - name: elastic-certificate-pem-volume
+          mountPath: "/usr/share/metricbeat/config/certs/elastic-certificate.pem"
+          subPath: "elastic-certificate.pem"
+        - name: metricbeat-config
+          mountPath: /usr/share/metricbeat/metricbeat.yml
+          readOnly: true
+          subPath: metricbeat.yml
+      dnsPolicy: ClusterFirstWithHostNet

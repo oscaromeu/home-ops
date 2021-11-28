@@ -1,0 +1,15 @@
+input {
+  exec { command => "uptime" interval => 300 }
+}
+
+filter {
+}
+
+
+output {
+  elasticsearch {
+      hosts => ["http://es-master-headless:9200"]
+      index => "uptime"
+  }
+}
+
