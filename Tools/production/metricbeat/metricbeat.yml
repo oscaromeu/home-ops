@@ -22,7 +22,7 @@ data:
     metricbeat.modules:
     - module: elasticsearch
       xpack.enabled: true
-      period: 1m
+      period: 10m
       hosts: ["https://es-master-headless:9200"] 
       scope: cluster 
       username: '${ELASTICSEARCH_USERNAME}'
