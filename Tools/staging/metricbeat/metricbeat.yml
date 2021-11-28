@@ -2,25 +2,21 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: helm-metricbeat-security-metricbeat
+  name: metricbeat
   namespace: monitoring
   annotations:
   labels:
-    app: "helm-metricbeat-security-metricbeat"
-    chart: "metricbeat-8.0.0-SNAPSHOT"
-    heritage: "Helm"
-    release: "helm-metricbeat-security"
+    app: "metricbeat"
+
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: helm-metricbeat-security-metricbeat-deployment-config
+  name: metricbeat-deployment-config
   namespace: monitoring
   labels:
-    app: "helm-metricbeat-security-metricbeat"
-    chart: "metricbeat-8.0.0-SNAPSHOT"
-    heritage: "Helm"
-    release: "helm-metricbeat-security"
+    app: "metricbeat"
+
 data:
   metricbeat.yml: |
     metricbeat.modules:
@@ -50,13 +46,11 @@ data:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: helm-metricbeat-security-metricbeat-cluster-role
+  name: metricbeat-cluster-role
   namespace: monitoring
   labels:
-    app: "helm-metricbeat-security-metricbeat"
-    chart: "metricbeat-8.0.0-SNAPSHOT"
-    heritage: "Helm"
-    release: "helm-metricbeat-security"
+    app: "metricbeat"
+
 rules: 
   - apiGroups:
     - ""
@@ -97,47 +91,41 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: helm-metricbeat-security-metricbeat-cluster-role-binding
+  name: metricbeat-cluster-role-binding
   namespace: monitoring
   labels:
-    app: "helm-metricbeat-security-metricbeat"
-    chart: "metricbeat-8.0.0-SNAPSHOT"
-    heritage: "Helm"
-    release: "helm-metricbeat-security"
+    app: "metricbeat"
+
 roleRef:
   kind: ClusterRole
-  name: helm-metricbeat-security-metricbeat-cluster-role
+  name: metricbeat-cluster-role
   apiGroup: rbac.authorization.k8s.io
 subjects:
 - kind: ServiceAccount
-  name: helm-metricbeat-security-metricbeat
+  name: metricbeat
   namespace: default
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: 'helm-metricbeat-security-metricbeat-metrics'
+  name: 'metricbeat-metrics'
   namespace: monitoring
   labels:
-    app: 'helm-metricbeat-security-metricbeat-metrics'
-    chart: 'metricbeat-8.0.0-SNAPSHOT'
-    heritage: 'Helm'
-    release: 'helm-metricbeat-security'
+    app: 'metricbeat-metrics'
+
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: 'helm-metricbeat-security-metricbeat-metrics'
+      app: 'metricbeat-metrics'
       release: 'helm-metricbeat-security'
   template:
     metadata:
       annotations:
       labels:
-        app: 'helm-metricbeat-security-metricbeat-metrics'
-        chart: 'metricbeat-8.0.0-SNAPSHOT'
-        release: 'helm-metricbeat-security'
+        app: 'metricbeat-metrics'
     spec:
-      serviceAccountName: helm-metricbeat-security-metricbeat
+      serviceAccountName: metricbeat
       terminationGracePeriodSeconds: 30
       volumes:
       - name: elastic-certificates-volume
@@ -152,7 +140,7 @@ spec:
       - name: metricbeat-config
         configMap:
           defaultMode: 0600
-          name: helm-metricbeat-security-metricbeat-deployment-config
+          name: metricbeat-deployment-config
       containers:
       - name: "metricbeat"
         image: "docker.elastic.co/beats/metricbeat:7.15.0"
