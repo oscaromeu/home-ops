@@ -4,12 +4,15 @@ resources:
   - sources
   - flux-system 
     #- sealed-secrets 
-  - kube-prometheus
-  - promscale
-  - telegraf-operator
+# Kube prometheus operator
+#  - kube-prometheus
+# ELK Stack
   - esprod
   - kibana
   - redis
   - filebeat
   - logstash
   - metricbeat
+# Timescaledb + Telegraf operator
+#  - promscale
+#  - telegraf-operator
