@@ -18,18 +18,24 @@ You will need to meet the following in order to spin up Live Infra
 - A bunch of raspberry pi's
 
 ## Repository structure
+
+The repository is structured with three folders which maps onto a different purpose 
+
 ```
 Tools
-  ├── production
+  ├── production    => Code running in the cluster
   │   └── ...
-  ├── staging
+  ├── staging       => Same code as production but tested locally before applying changes
   │   └── ...
-  └── testing
+  └── testing       => Let's have some fun!
       └── ...
 ```
-## Bootstrap Tools
 
-(TODO!!!)
+The staging and testing area can be tested locally (TODO)
+
+## Bootstrap Live Infra
+
+(TODO)
 
 Fork this repository on your personal Github account and export your Github access token, username and repo name:
 

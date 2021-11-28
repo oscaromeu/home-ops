@@ -6,7 +6,7 @@ resources:
   - flux-system 
 #  - sealed-secrets 
 # Kube prometheus operator
-#  - kube-prometheus
+  - kube-prometheus
 # ELK Stack
   - esprod
   - kibana
