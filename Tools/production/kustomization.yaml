@@ -1,18 +1,19 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - namespace.yaml
   - sources
   - flux-system 
   - sealed-secrets 
 # Kube prometheus operator
 #  - kube-prometheus
 # ELK Stack
-#  - esprod
-#  - kibana
-#  - redis
-#  - filebeat
-#  - logstash
-#  - metricbeat
+  - esprod
+  - kibana
+  - redis
+  - filebeat
+  - logstash
+  - metricbeat
 # Timescaledb + Telegraf operator
 #  - promscale
 #  - telegraf-operator

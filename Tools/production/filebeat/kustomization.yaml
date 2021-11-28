@@ -6,10 +6,10 @@ metadata:
   labels:
     app: "filebeat"
 resources:
-  #- namespace.yaml
+  - redis-certs-sealed.yaml
   - ds_filebeat.yaml
   - sa_filebeat.yaml
-  - secret-redis-certs-sealed.yaml
+
 generatorOptions:
  disableNameSuffixHash: true
  labels:
