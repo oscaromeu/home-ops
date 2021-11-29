@@ -21,8 +21,8 @@ stringData:
     [[outputs.postgresql]]
       connection = "host=timescaledb user=postgres password=pi sslmode=disable dbname=postgres"
       tags_as_foreign_keys = true
-      table_template=[
-        '''CREATE TABLE IF NOT EXISTS {{.table}} {COLUMNS}''' 
+      create_templates = [
+        '''CREATE TABLE IF NOT EXISTS {{.table}} ({{.columns }})''', 
         '''SELECT create_hypertable({{ .table|quoteLiteral }}, 'time' ,chunk_time_interval => INTERVAL '1h' , if_not_exists => true)'''
       ]
     [[outputs.file]]
