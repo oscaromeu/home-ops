@@ -7,4 +7,4 @@ xpack.monitoring.elasticsearch.ssl.certificate_authority: /usr/share/logstash/co
 xpack.monitoring.enabled: true
 xpack.monitoring.collection.interval: 60s
 xpack.monitoring.elasticsearch.username: "${ELASTICSEARCH_USERNAME}"
-xpack.monitoring.elasticsearch.password: "${ELASTIC_PASSWORD}"
+xpack.monitoring.elasticsearch.password: "${ELASTICSEARCH_PASSWORD}"

@@ -25,10 +25,12 @@ output {
   }
 
 
-
-
   elasticsearch {
-      hosts => ["https://es-master-headless:9200"]
-      index => "k3s"
+    hosts => ["https://es-master-headless:9200"]
+    cacert => "/usr/share/logstash/config/certs/elastic-certificate.crt"
+    user => '${ELASTICSEARCH_USERNAME}'
+    password => '${ELASTICSEARCH_PASSWORD}'
+    index => "k3s"
   }
+
 }
