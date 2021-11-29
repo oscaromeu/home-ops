@@ -18,15 +18,13 @@ stringData:
     #   timeout = "5s"
     #   metric_batch_size = 10000
     #   metric_buffer_limit = 100000
-    #    [[outputs.postgresql]]
     [[outputs.postgresql]]
       connection = "host=timescaledb user=postgres password=pi sslmode=disable dbname=postgres"
       tags_as_foreign_keys = true
-      create_templates = [
-    '''CREATE TABLE {{.table}} ({{.columns}})''',
-    '''SELECT create_distributed_hypertable({{ .table|quoteLiteral }}, 'time', partitioning_column => 'tag_id', number_partitions => (SELECT count(*) FROM timescaledb_information.data_nodes)::integer, replication_factor => 2, chunk_time_interval => INTERVAL '1h')''',
-    '''ALTER TABLE {{ .table }} SET (timescaledb.compress, timescaledb.compress_segmentby = 'tag_id')''',
-    ]
+      table_template=[
+        '''CREATE TABLE IF NOT EXISTS {{.table}} {COLUMNS}''' 
+        '''SELECT create_hypertable({{ .table|quoteLiteral }}, 'time' ,chunk_time_interval => INTERVAL '1h' , if_not_exists => true)'''
+      ]
     [[outputs.file]]
       files = ["stdout"]
     [global_tags]
