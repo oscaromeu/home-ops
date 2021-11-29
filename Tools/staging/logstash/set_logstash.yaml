@@ -34,7 +34,6 @@ spec:
         fsGroup: 1000
         runAsGroup: 1000
         runAsUser: 1000
-      #  fsGroupChangePolicy: "OnRootMismatch"
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -59,20 +58,12 @@ spec:
           secret:
             secretName: logstash-redis-certs
             defaultMode: 256
-#      initContainers:
-#      - name: configure-sysctl
-#        securityContext:
-#          runAsUser: 0
-#          privileged: true
-#        image: "busybox"
-#        imagePullPolicy: "IfNotPresent"
-#        command: ['sh', '-c', 'chown -R 0:10001 /usr/share/logstash']
-#        resources:
-#          {}
+        - name: elastic-certificate-crt
+          secret:
+            secretName: elastic-certificate-crt
       containers:
       - name: "logstash"
         securityContext:
-          #runAsUser: 0
           privileged: true
           capabilities:
             drop:
@@ -80,7 +71,6 @@ spec:
           runAsNonRoot: true
           runAsUser: 1000
         image: "docker.elastic.co/logstash/logstash:7.15.1"
-        #command: ["logstash"]
         resources:
           {}
         imagePullPolicy: "IfNotPresent"
@@ -112,6 +102,17 @@ spec:
           requests:
             cpu: 100m
             memory: 512Mi
+        env:
+          - name: ELASTICSEARCH_USERNAME
+            valueFrom:
+              secretKeyRef:
+                key: username
+                name: es-master-credentials
+          - name: ELASTICSEARCH_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: es-master-credentials
         volumeMounts:
           - name: logstash
             mountPath: "/usr/share/logstash/data"
@@ -128,3 +129,7 @@ spec:
             mountPath: "/usr/share/logstash/pipeline"
           - name: logstash-redis-certs
             mountPath: "/usr/share/logstash/ssl"
+          - name: logstash-redis-certs
+            mountPath: "/usr/share/logstash/ssl"
+          - name: elastic-certificate-crt
+            mountPath: /usr/share/logstash/config/certs
