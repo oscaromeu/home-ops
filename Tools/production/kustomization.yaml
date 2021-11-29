@@ -8,12 +8,12 @@ resources:
 # Kube prometheus operator
   - kube-prometheus
 # ELK Stack
-#  - esprod
-#  - kibana
-#  - redis
-#  - filebeat
-#  - logstash
-#  - metricbeat
+  - esprod
+  - kibana
+  - redis
+  - filebeat
+  - logstash
+  - metricbeat
 # Timescaledb + Telegraf operator
-#  - promscale
-#  - telegraf-operator
+  - promscale
+  - telegraf-operator
