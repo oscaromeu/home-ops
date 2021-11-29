@@ -58,9 +58,9 @@ spec:
           secret:
             secretName: logstash-redis-certs
             defaultMode: 256
-        - name: elastic-certificate-pem-volume
+        - name: elastic-certificate-crt-volume
           secret:
-            secretName: elastic-certificate-pem
+            secretName: elastic-certificate-crt
       containers:
       - name: "logstash"
         securityContext:
@@ -129,6 +129,6 @@ spec:
             mountPath: "/usr/share/logstash/pipeline"
           - name: logstash-redis-certs
             mountPath: "/usr/share/logstash/ssl"
-          - name: elastic-certificate-pem-volume
+          - name: elastic-certificate-crt-volume
             mountPath: /usr/share/logstash/config/certs
 

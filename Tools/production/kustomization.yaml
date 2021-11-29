@@ -15,5 +15,5 @@ resources:
   - logstash
   - metricbeat
 # Timescaledb + Telegraf operator
-#  - promscale
-#  - telegraf-operator
+  - promscale
+  - telegraf-operator
