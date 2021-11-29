@@ -8,8 +8,8 @@ stringData:
   # basic classes that can be used to develop telegraf-operator ; these classes
   # report to InfluxDB v1 in same cluster as well as to stdout for convenience
   basic: |+
-    # [[outputs.influxdb]]
-    #   urls = ["http://influxdb.influxdb:8086"]
+    [[outputs.influxdb]]
+      urls = ["http://influxdb:8086"]
     # [[outputs.influxdb_v2]]
     #   urls = ["xxxxxx"]
     #   token = "xxxxxxx"
@@ -18,12 +18,12 @@ stringData:
     #   timeout = "5s"
     #   metric_batch_size = 10000
     #   metric_buffer_limit = 100000
-    [[outputs.postgresql]]
+    [outputs.postgresql]
       connection = "host=timescaledb user=postgres password=pi sslmode=disable dbname=postgres"
-      tags_as_foreign_keys = true
+      #tags_as_foreign_keys = true
       create_templates = [
-        '''CREATE TABLE IF NOT EXISTS {{.table}} ({{.columns }})''', 
-        '''SELECT create_hypertable({{ .table|quoteLiteral }}, 'time' ,chunk_time_interval => INTERVAL '1h' , if_not_exists => true)'''
+        '''CREATE TABLE {{ .table }} ({{ .allColumns }})''',
+        '''SELECT create_hypertable({{ .table|quoteLiteral }}, 'time', chunk_time_interval => INTERVAL '1d')''',
       ]
     [[outputs.file]]
       files = ["stdout"]
