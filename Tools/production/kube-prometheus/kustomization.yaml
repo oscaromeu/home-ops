@@ -29,7 +29,7 @@ resources:
 - ./manifests/blackbox-exporter-service.yaml
 - ./manifests/blackbox-exporter-serviceAccount.yaml
 - ./manifests/blackbox-exporter-serviceMonitor.yaml
-- ./manifests/grafana-config.yaml
+#- ./manifests/grafana-config.yaml
 - ./manifests/grafana-dashboardDatasources.yaml
 - ./manifests/grafana-dashboardDefinitions.yaml
 - ./manifests/grafana-dashboardSources.yaml
@@ -66,7 +66,7 @@ resources:
 - ./manifests/prometheus-adapter-clusterRoleServerResources.yaml
 - ./manifests/prometheus-adapter-configMap.yaml
 - ./manifests/prometheus-adapter-deployment.yaml
-- ./manifests/prometheus-adapter-podDisruptionBudget.yaml
+#- ./manifests/prometheus-adapter-podDisruptionBudget.yaml
 - ./manifests/prometheus-adapter-roleBindingAuthReader.yaml
 - ./manifests/prometheus-adapter-service.yaml
 - ./manifests/prometheus-adapter-serviceAccount.yaml
