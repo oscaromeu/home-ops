@@ -31,7 +31,8 @@ stringData:
       hostname = "$HOSTNAME"
       nodename = "$NODENAME"
       namespace = "$NAMESPACE"
-    [agent]      interval = "10s"
+    [agent]      
+      interval = "120s"
       round_interval = true
       metric_batch_size = 100000
       metric_buffer_limit = 100000
