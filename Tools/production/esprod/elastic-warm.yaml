@@ -54,7 +54,7 @@ spec:
   selector:
     matchLabels:
       app: "es-warm"
-  replicas: 1
+  replicas: 2
   podManagementPolicy: Parallel
   updateStrategy:
     type: RollingUpdate
