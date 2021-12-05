@@ -19,3 +19,4 @@ resources:
 # Influxdb stack
   - influxdb
   - telegraf-operator
+  - apps
