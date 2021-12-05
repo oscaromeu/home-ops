@@ -10,6 +10,6 @@ spec:
       template:
         spec:
           containers:
-          - name: meteocat
+          - name: meteocat-influx
             image: osokaru/meteocat:0.1.0
           restartPolicy: OnFailure
