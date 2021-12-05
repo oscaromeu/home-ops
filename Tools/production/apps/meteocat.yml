@@ -11,5 +11,5 @@ spec:
         spec:
           containers:
           - name: meteocat-influx
-            image: osokaru/meteocat:0.1.0-4-gf980aa2
+            image: osokaru/meteocat:0.1.0-7-g78effd6
           restartPolicy: OnFailure
