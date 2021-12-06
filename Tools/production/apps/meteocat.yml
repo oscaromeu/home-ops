@@ -4,12 +4,12 @@ metadata:
   name: meteocat
   namespace: monitoring
 spec:
-  schedule: "*/30 * * * *"
+  schedule: "00 */1 * * *"
   jobTemplate:
     spec:
       template:
         spec:
           containers:
           - name: meteocat-influx
-            image: osokaru/meteocat:0.1.1-1-gdf77a9f
+            image: osokaru/meteocat:0.1.1-2-g635c1c7
           restartPolicy: OnFailure
