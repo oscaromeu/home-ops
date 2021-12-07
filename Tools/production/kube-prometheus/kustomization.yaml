@@ -15,13 +15,13 @@ resources:
 - ./manifests/setup/prometheus-operator-deployment.yaml
 - ./manifests/setup/prometheus-operator-service.yaml
 - ./manifests/setup/prometheus-operator-serviceAccount.yaml
-- ./manifests/alertmanager-alertmanager.yaml
-- ./manifests/alertmanager-podDisruptionBudget.yaml
-- ./manifests/alertmanager-prometheusRule.yaml
-- ./manifests/alertmanager-secret.yaml
-- ./manifests/alertmanager-service.yaml
-- ./manifests/alertmanager-serviceAccount.yaml
-- ./manifests/alertmanager-serviceMonitor.yaml
+  #- ./manifests/alertmanager-alertmanager.yaml
+  #- ./manifests/alertmanager-podDisruptionBudget.yaml
+  #- ./manifests/alertmanager-prometheusRule.yaml
+  #- ./manifests/alertmanager-secret.yaml
+  #- ./manifests/alertmanager-service.yaml
+  #- ./manifests/alertmanager-serviceAccount.yaml
+  #- ./manifests/alertmanager-serviceMonitor.yaml
 - ./manifests/blackbox-exporter-clusterRole.yaml
 - ./manifests/blackbox-exporter-clusterRoleBinding.yaml
 - ./manifests/blackbox-exporter-configuration.yaml
@@ -51,13 +51,13 @@ resources:
 - ./manifests/kubernetes-serviceMonitorKubeControllerManager.yaml
 - ./manifests/kubernetes-serviceMonitorKubeScheduler.yaml
 - ./manifests/kubernetes-serviceMonitorKubelet.yaml
-- ./manifests/node-exporter-clusterRole.yaml
-- ./manifests/node-exporter-clusterRoleBinding.yaml
-- ./manifests/node-exporter-daemonset.yaml
-- ./manifests/node-exporter-prometheusRule.yaml
-- ./manifests/node-exporter-service.yaml
-- ./manifests/node-exporter-serviceAccount.yaml
-- ./manifests/node-exporter-serviceMonitor.yaml
+  #- ./manifests/node-exporter-clusterRole.yaml
+  #- ./manifests/node-exporter-clusterRoleBinding.yaml
+  #- ./manifests/node-exporter-daemonset.yaml
+  #- ./manifests/node-exporter-prometheusRule.yaml
+  #- ./manifests/node-exporter-service.yaml
+  #- ./manifests/node-exporter-serviceAccount.yaml
+  #- ./manifests/node-exporter-serviceMonitor.yaml
 - ./manifests/prometheus-adapter-apiService.yaml
 - ./manifests/prometheus-adapter-clusterRole.yaml
 - ./manifests/prometheus-adapter-clusterRoleAggregatedMetricsReader.yaml
