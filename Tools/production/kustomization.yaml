@@ -6,7 +6,7 @@ resources:
   - flux-system 
 #  - sealed-secrets 
 # Kube prometheus operator
-  - kube-prometheus
+#  - kube-prometheus
 # ELK Stack
   - esprod
   - kibana
@@ -15,8 +15,8 @@ resources:
   - logstash
   - metricbeat
 # Timescaledb + Telegraf operator
-  - promscale
+#  - promscale
 # Influxdb stack
-  - influxdb
-  - telegraf-operator
-  - apps
+#  - influxdb
+#  - telegraf-operator
+#  - apps
