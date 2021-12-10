@@ -24,7 +24,7 @@ jobs:
         run: flux install
       - name: Setup sealed-secrets 
         run: |
-          kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.17.0/controller.yaml
+          kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.16.0/controller.yaml
       - name: Setup cluster reconciliation
         run: |
           flux create source git flux-system \
