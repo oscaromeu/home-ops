@@ -1,46 +1,3 @@
-#---
-#apiVersion: v1
-#kind: ConfigMap
-#metadata:
-#  name: filebeat-config
-#  namespace: monitoring
-#  labels:
-#    k8s-app: filebeat
-#data:
-#  filebeat.yml: |-
-#    filebeat.inputs:
-#    - type: container
-#      paths:
-#        - /var/log/containers/*.log
-#      processors:
-#        - add_kubernetes_metadata:
-#            host: ${NODE_NAME}
-#            matchers:
-#            - logs_path:
-#                logs_path: "/var/log/containers/"
-#
-#    # To enable hints based autodiscover, remove `filebeat.inputs` configuration and uncomment this:
-#    #filebeat.autodiscover:
-#    #  providers:
-#    #    - type: kubernetes
-#    #      node: ${NODE_NAME}
-#    #      hints.enabled: true
-#    #      hints.default_config:
-#    #        type: container
-#    #        paths:
-#    #          - /var/log/containers/*${data.kubernetes.container.id}.log
-#
-#    processors:
-#      - add_cloud_metadata:
-#      - add_host_metadata:
-#
-#    cloud.id: ${ELASTIC_CLOUD_ID}
-#    cloud.auth: ${ELASTIC_CLOUD_AUTH}
-#
-#    output.elasticsearch:
-#      hosts: ['${ELASTICSEARCH_HOST:elastic-prod-master-headless}:${ELASTICSEARCH_PORT:9200}']
-#      username: ${ELASTICSEARCH_USERNAME}
-#      password: ${ELASTICSEARCH_PASSWORD}
 ---
 apiVersion: apps/v1
 kind: DaemonSet
@@ -94,7 +51,6 @@ spec:
           value: "/var/buffer/filebeat/filebeat_spool.dat"
         - name: BUFFER_FILE_SIZE
           value: "1024MiB"
-# tamaño de pagina del fichero de buffer alineado con 'blockdev --getbsz /dev/sdb' de los nodos de openshift
         - name: BUFFER_PAGE_SIZE
           value: "4KiB"
         - name: BUFFER_FLUSH_SIZE
@@ -113,7 +69,6 @@ spec:
               fieldPath: spec.nodeName
         securityContext:
           runAsUser: 0
-          #privileged: true
         resources:
           limits:
             cpu: 100m
@@ -126,7 +81,6 @@ spec:
           mountPath: /usr/share/filebeat/filebeat.yml
           subPath: filebeat.yml
           readOnly: true
-          subPath: filebeat.yml
         - name: filebeat-inputs-volume
           mountPath: /usr/share/filebeat/inputs.d
           readOnly: true

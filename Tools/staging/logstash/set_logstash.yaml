@@ -71,8 +71,6 @@ spec:
           runAsNonRoot: true
           runAsUser: 1000
         image: "docker.elastic.co/logstash/logstash:7.15.1"
-        resources:
-          {}
         imagePullPolicy: "IfNotPresent"
         livenessProbe:
           failureThreshold: 3

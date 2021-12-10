@@ -5,9 +5,9 @@ metadata:
   namespace: monitoring
 
 resources:
-  - ./secrets/secret-redis-ca.yaml
-  - ./secrets/secret-redis-crt.yaml
-  - ./secrets/secret-redis-pem.yaml
+  #  - ./secrets/secret-redis-ca.yaml
+  #  - ./secrets/secret-redis-crt.yaml
+  #  - ./secrets/secret-redis-pem.yaml
   - dc_redis.yaml
   - svc_redis-port.yaml
 #  - route_redis-port.yaml

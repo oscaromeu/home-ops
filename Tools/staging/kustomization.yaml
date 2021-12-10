@@ -10,6 +10,5 @@ resources:
 # - esprod
 #  - kibana
 #  - metricbeat
-  - redis-test
 #  - filebeat
 #  - logstash

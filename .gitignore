@@ -1,6 +1,7 @@
 # Ignore
 Tools/*/*/secrets
 Tools/*/*/certs
+Tools/staging/influxdb
 bkp
 *.bk
 *log*
