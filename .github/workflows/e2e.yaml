@@ -22,6 +22,9 @@ jobs:
           version: "v0.11.1"
       - name: Install Flux in Kubernetes Kind
         run: flux install
+      - name: Setup sealed-secrets 
+        run: |
+          kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.17.0/controller.yaml
       - name: Setup cluster reconciliation
         run: |
           flux create source git flux-system \
@@ -32,7 +35,7 @@ jobs:
           --path=./Tools/production
       - name: Verify cluster reconciliation
         run: |
-          kubectl -n flux-system wait kustomization/infrastructure --for=condition=ready --timeout=5m
+          kubectl -n flux-system wait kustomization --for=condition=ready --timeout=5m
 #      - name: Verify helm reconciliation
 #        run: |
 #          kubectl -n nginx wait helmrelease/nginx --for=condition=ready --timeout=5m
