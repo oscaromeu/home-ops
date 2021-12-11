@@ -2,6 +2,7 @@
 Tools/*/*/secrets
 Tools/*/*/certs
 Tools/staging/influxdb
+Tools/testing/alertmanager
 bkp
 *.bk
 *log*
