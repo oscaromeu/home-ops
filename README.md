@@ -40,15 +40,26 @@ Tools
 
 ## Components
 
-### Metrics
+<details><summary> <b>Metrics</b> </summary>
+<p>
 
-![metrics-infra](./docs/img/metrics-infrastructure.svg)
+![metrics-infra](./docs/img/metrics-infra.png)
+</p>
+</details>
 
-### Logging
+<details><summary> <b>Logging</b> </summary>
+<p>
 
-![metrics-infra](./docs/img/logging-infrastructure.svg)
 
-### Tracing
+![logging-infra](./docs/img/logging-infra.png)
+
+</p>
+</details>
+<details><summary> <b>Tracing</b> </summary>
+<p>
+
+</p>
+</details>
 
 ## Bootstrap Tools
 
@@ -81,7 +92,7 @@ flux bootstrap github \
 
 The bootstrap command commits the manifests for the Flux components in `Tools/` dir and creates a deploy key with read-only access on GitHub, so it can pull changes inside the cluster. 
 
-Flux components can be customized before or after running bootstrap in order to do edit`flux-system/gotk-patches.yaml` an example can be found in this repo under `Tools/flux-system`. For more information about the bootstrap command see [[1]](#1). 
+Flux components can be customized before or after running bootstrap in order to do edit`flux-system/gotk-patches.yaml` an example can be found in this repo under `Tools/flux-system`. For more information about the bootstrap command [see](https://fluxcd.io/docs/cmd/flux_bootstrap_github/#synopsis). 
 
 
 ## Secrets
@@ -110,12 +121,3 @@ This repository contains the following Github CI workflows:
 
 Not all of the code here is my original work, but has been collated from and inspired by some fantastic contributors. Thank you all!
 
-## References
-<a id="1">[1]</a> 
-Flux V2 Bootstrap command documentation (2021) [Flux bootstrap github](https://fluxcd.io/docs/cmd/flux_bootstrap_github/#synopsis)
-<a id="2">[2]</a> 
-Sealed secrets README (2021) [Manual key management](https://github.com/bitnami-labs/sealed-secrets#manual-key-management-advanced)
-<a id="3">[3]</a> 
-Sealed secrets Flux V2 Guide (2021) [Flux V2 Guide Sealed Secrets ](https://fluxcd.io/docs/guides/sealed-secrets/)
-<a id="4">[4]</a> 
-SOPS Flux V2 Guide (2021) [Flux V2 Guide Sealed Secrets ](https://fluxcd.io/docs/guides/mozilla-sops/)

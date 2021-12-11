@@ -5,6 +5,5 @@ Tools/staging/influxdb
 Tools/testing/alertmanager
 bkp
 *.bk
-*log*
 *.csv
 *.zip
