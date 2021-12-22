@@ -8,23 +8,6 @@ stringData:
   # basic classes that can be used to develop telegraf-operator ; these classes
   # report to InfluxDB v1 in same cluster as well as to stdout for convenience
   basic: |+
-    [[outputs.influxdb]]
-      urls = ["http://influxdb:8086"]
-    # [[outputs.influxdb_v2]]
-    #   urls = ["xxxxxx"]
-    #   token = "xxxxxxx"
-    #   organization = "xxxxxxx"
-    #   bucket = "app"
-    #   timeout = "5s"
-    #   metric_batch_size = 10000
-    #   metric_buffer_limit = 100000
-    [outputs.postgresql]
-      connection = "host=timescaledb user=postgres password=pi sslmode=disable dbname=postgres"
-      #tags_as_foreign_keys = true
-      create_templates = [
-        '''CREATE TABLE {{ .table }} ({{ .allColumns }})''',
-        '''SELECT create_hypertable({{ .table|quoteLiteral }}, 'time', chunk_time_interval => INTERVAL '1d')''',
-      ]
     [[outputs.file]]
       files = ["stdout"]
     [global_tags]
@@ -37,3 +20,47 @@ stringData:
       metric_batch_size = 100000
       metric_buffer_limit = 100000
       collection_jitter = "0s"
+  questdb: |+
+    [[outputs.socket_writer]]
+      # Write metrics to a local QuestDB instance over TCP
+      address = "tcp://questdb-headless:9009"
+      data_format = "influx"
+    [global_tags]
+      hostname = "$HOSTNAME"
+      nodename = "$NODENAME"
+      namespace = "$NAMESPACE"
+    [agent]      
+      interval = "60s"
+      round_interval = true
+      metric_batch_size = 100000
+      metric_buffer_limit = 100000
+      collection_jitter = "0s"
+  timescaledb: |+
+    [outputs.postgresql]
+      connection = "host=timescaledb user=postgres password=pi sslmode=disable dbname=postgres"
+      #tags_as_foreign_keys = true
+      create_templates = [
+        '''CREATE TABLE {{ .table }} ({{ .allColumns }})''',
+        '''SELECT create_hypertable({{ .table|quoteLiteral }}, 'time', chunk_time_interval => INTERVAL '1d')''',
+      ]
+    [global_tags]
+      hostname = "$HOSTNAME"
+      nodename = "$NODENAME"
+      namespace = "$NAMESPACE"
+    [agent]      
+      interval = "120s"
+      round_interval = true
+      metric_batch_size = 100000
+      metric_buffer_limit = 100000
+      collection_jitter = "0s"
+  influxdb: |+
+    [[outputs.influxdb]]
+      urls = ["http://influxdb:8086"]
+    # [[outputs.influxdb_v2]]
+    #   urls = ["xxxxxx"]
+    #   token = "xxxxxxx"
+    #   organization = "xxxxxxx"
+    #   bucket = "app"
+    #   timeout = "5s"
+    #   metric_batch_size = 10000
+    #   metric_buffer_limit = 100000

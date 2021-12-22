@@ -14,9 +14,10 @@ resources:
   - filebeat
   - logstash
   - metricbeat
+  - questdb
 # Timescaledb + Telegraf operator
 #  - promscale
 # Influxdb stack
 #  - influxdb
-#  - telegraf-operator
+  - telegraf-operator
 #  - apps
