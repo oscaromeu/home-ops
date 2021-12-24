@@ -43,6 +43,16 @@ Tools
 <details><summary> <b>Metrics</b> </summary>
 <p>
 
+ * [Kube-Prometheus](https://github.com/prometheus-operator/kube-prometheus#kube-prometheus) the Kubernetes monitoring stack
+    * [Prometheus](https://github.com/prometheus/prometheus) to collect metrics
+    * [AlertManager](https://github.com/prometheus/alertmanager#alertmanager-) to fire the alerts
+    * [Grafana](https://github.com/grafana/grafana) to visualize what's going on
+    * [Node-Exporter](https://github.com/prometheus/node_exporter) to export metrics from the nodes
+    * [Kube-State-Metrics](https://github.com/kubernetes/kube-state-metrics) to get metrics from kubernetes api-server
+    * [Prometheus-Operator](https://github.com/prometheus-operator/prometheus-operator#prometheus-operator) to manage the life-cycle of Prometheus and AlertManager custom resource definitions (CRDs)
+ * [Thanos](https://github.com/thanos-io/thanos) set of components that can be composed into a highly available metric system with long term storage which is added seamlessly on top of existing Promtheus deployments. 
+ * [Promlens](https://promlens.com/) tool to build and analyse promql queries with ease.
+
 ![metrics-infra](./docs/img/metrics-infra.png)
 </p>
 </details>
