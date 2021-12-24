@@ -1,0 +1,139 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "questdb-test-connection"
+  labels:
+    app.kubernetes.io/name: questdb
+    app.kubernetes.io/instance: questdb
+    app.kubernetes.io/version: "6.1.3"
+spec:
+  containers:
+    - name: curl
+      image: curlimages/curl:7.71.0
+      command: ['curl']
+      args: ['-G', 'questdb:9000', '--data-urlencode', 'query="SHOW TABLES;"']
+  restartPolicy: Never
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: questdb
+  labels:
+    app.kubernetes.io/name: questdb
+    app.kubernetes.io/instance: questdb
+    app.kubernetes.io/version: "6.1.3"
+data:
+  server.conf: |
+    shared.worker.count = 2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: questdb-headless
+  labels:
+    app.kubernetes.io/name: questdb
+    app.kubernetes.io/instance: questdb
+    app.kubernetes.io/version: "6.1.3"
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - name: postgresql
+      port: 8812
+      targetPort: postgresql
+  selector:
+    app.kubernetes.io/name: questdb
+    app.kubernetes.io/instance: questdb
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: questdb
+  labels:
+    app.kubernetes.io/name: questdb
+    app.kubernetes.io/instance: questdb
+    app.kubernetes.io/version: "6.1.3"
+spec:
+  type: ClusterIP
+  ports:
+    - port: 9000
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: questdb
+    app.kubernetes.io/instance: questdb
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: questdb
+  labels:
+    app.kubernetes.io/name: questdb
+    app.kubernetes.io/instance: questdb
+    app.kubernetes.io/version: "6.1.3"
+spec:
+  # Not horizontally scalable yet, so pinning to 1
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: questdb
+      app.kubernetes.io/instance: questdb
+  serviceName: "questdb-headless"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: questdb
+        app.kubernetes.io/instance: questdb
+    spec:
+      securityContext:
+        {}
+      volumes:
+        - name: config
+          configMap:
+            name: questdb
+      containers:
+        - name: questdb
+          securityContext:
+            {}
+          image: "questdb/questdb:6.1.3"
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+          - name: questdb
+            mountPath: /root/.questdb/db
+          - name: config
+            mountPath: /root/.questdb/conf/server.conf
+            subPath: server.conf
+          ports:
+            - name: http
+              containerPort: 9000
+              protocol: TCP
+            - name: postgresql
+              containerPort: 8812
+              protocol: TCP
+            - name: influxdb
+              containerPort: 9009
+              protocol: TCP
+          # QuestDB doesn't really expose an endpoint that works well for
+          # these probes. Hopefully soon?
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          resources:
+            {}
+  volumeClaimTemplates:
+    - metadata:
+        name: questdb
+        annotations:
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: "5Gi"
