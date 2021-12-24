@@ -50,8 +50,10 @@ Tools
     * [Node-Exporter](https://github.com/prometheus/node_exporter) to export metrics from the nodes
     * [Kube-State-Metrics](https://github.com/kubernetes/kube-state-metrics) to get metrics from kubernetes api-server
     * [Prometheus-Operator](https://github.com/prometheus-operator/prometheus-operator#prometheus-operator) to manage the life-cycle of Prometheus and AlertManager custom resource definitions (CRDs)
- * [Thanos](https://github.com/thanos-io/thanos) set of components that can be composed into a highly available metric system with long term storage which is added seamlessly on top of existing Promtheus deployments. 
+ * [Thanos](https://github.com/thanos-io/thanos) set of components that can be composed into a highly available metric system with long term storage which is added seamlessly on top of existing Prometheus deployments. 
  * [Promlens](https://promlens.com/) tool to build and analyse promql queries with ease.
+ * [QuestdB](https://questdb.com/) High-performance, open-source SQL database for applications such as IoT, DevOps and observability.
+ * [Telegraf-operator](https://questdb.com/) Monitor applications easily with telegraf running as a sidecar. 
 
 ![metrics-infra](./docs/img/metrics-infra.png)
 </p>
