@@ -40,6 +40,18 @@ Tools
 
 ## Components
 
+<details><summary> <b>Infrastructure</b> </summary>
+<p>
+
+ * [Flux](https://github.com/fluxcd/flux2) Tool for keeping Kubernetes clusters in sync with sources of configuration like git repositories, and automating updates to configuration when there is new code to deploy.
+ * [Linkerd](https://github.com/linkerd/linkerd2) Ultraweight service mesh for Kubernetes which adds critical security, observability, and realibility features. 
+ * [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) Kubernetes controller to encrypt secrets which are safe to store - even to a public repository. 
+ * [MinIO Operator](https://github.com/minio/operator)MinIO is a Kubernetes-native high performance object store with an S3-compatible API. The MinIO Kubernetes Operator supports deploying MinIO Tenants onto private and public cloud infrastructures ("Hybrid" Cloud).
+</p>
+</details>
+
+
+
 <details><summary> <b>Metrics</b> </summary>
 <p>
 
@@ -73,7 +85,7 @@ Tools
 </p>
 </details>
 
-## Bootstrap Tools
+## Bootstrap Production
 
 (TODO!!!)
 
