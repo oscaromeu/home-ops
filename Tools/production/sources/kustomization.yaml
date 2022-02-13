@@ -4,3 +4,4 @@ namespace: flux-system
 resources:
   - bitnami.yaml
   - prometheus-community.yaml
+  - pyroscope.yaml
