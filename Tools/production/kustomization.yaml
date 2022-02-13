@@ -23,7 +23,7 @@ resources:
   - questdb
 
 # Tracing
-  - parca
+  - pyroscope
 
 # APPS
 #  - apps
