@@ -16,4 +16,4 @@ spec:
   values:
     sidecar.dashboards.enabled: true
     sidecar.datasources.enabled: true
-
+    service.port: 3000
