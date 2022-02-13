@@ -5,3 +5,4 @@ resources:
   - bitnami.yaml
   - prometheus-community.yaml
   - pyroscope.yaml
+  - grafana.yaml

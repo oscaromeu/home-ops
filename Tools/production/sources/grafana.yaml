@@ -1,8 +1,10 @@
+---
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: pyroscope-io
+  name: grafana
   namespace: flux-system
 spec:
-  interval: 30m
-  url: https://pyroscope-io.github.io/helm-chart
+  interval: 1m0s
+  url: https://grafana.github.io/helm-charts
+
