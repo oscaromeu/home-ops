@@ -12,7 +12,7 @@ spec:
         kind: HelmRepository
         name: grafana
   interval: 1m0s
-  targetNamespace: grafana
+  targetNamespace: monitoring
   values:
     sidecar.dashboards.enabled: true
     sidecar.datasources.enabled: true
