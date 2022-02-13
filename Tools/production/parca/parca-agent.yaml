@@ -107,7 +107,6 @@ spec:
           name: bpffs
       hostPID: true
       nodeSelector:
-        kubernetes.io/arch: amd64
         kubernetes.io/os: linux
       serviceAccountName: parca-agent
       tolerations:
