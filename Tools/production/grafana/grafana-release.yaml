@@ -14,6 +14,13 @@ spec:
   interval: 1m0s
   targetNamespace: monitoring
   values:
-    sidecar.dashboards.enabled: true
-    sidecar.datasources.enabled: true
-    service.port: 3000
+    sidecar:
+      dashboards:
+        enabled: true    
+      datasources:
+        enabled: true
+    service:
+      enabled: true
+      port: 3000
+      targetPort: 3000
+      # targetPort: 4181 To be used with a proxy extraContainer
