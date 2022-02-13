@@ -1,7 +1,35 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
-namespace: monitoring
 kind: Kustomization
+
+commonLabels:
+  module.kfd.sighup.io/name: "monitoring"
+  module.kfd.sighup.io/version: "v1.13.0"
+  module.kfd.sighup.io/component: "grafana"
+  kfd.sighup.io/source: "kustomize"
+
+namespace: monitoring
+
 resources:
-  - ./datasources/secret-grafana-dashboardDatasources.yaml
-  - ./dashboards/cm-apiserver.yaml
-  - grafana-release.yaml
+  - dashboards
+  - deploy.yml
+  - rbac.yml
+  - grafana-config.yml
+
+images:
+  - name: grafana/grafana
+    newName: registry.sighup.io/fury/grafana/grafana
+    newTag: 8.3.3
+  - name: kiwigrid/k8s-sidecar
+    newName: registry.sighup.io/fury/kiwigrid/k8s-sidecar
+    newTag: 1.15.0
+
+configMapGenerator:
+  - name: grafana-dashboards
+    files:
+      - dashboards.yaml
+
+secretGenerator:
+  - name: grafana-datasources
+    files:
+      - prometheus.yaml=prometheus.yaml
