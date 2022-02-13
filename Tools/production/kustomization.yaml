@@ -25,5 +25,9 @@ resources:
 # Tracing
   - pyroscope
 
+# Visualization
+
+  - grafana
+
 # APPS
 #  - apps
