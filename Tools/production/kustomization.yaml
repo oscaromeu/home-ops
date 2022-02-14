@@ -9,7 +9,9 @@ resources:
 
 # Metrics
   - telegraf-operator
-  - metrics-server
+#  - metrics-server
+  - kube-state-metrics
+  - kube-proxy-metrics
 #  - kube-prometheus
 
 # Logging
