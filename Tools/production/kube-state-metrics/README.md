@@ -25,14 +25,12 @@ From kube-state-metrics
 - Kustomize = `v3.3.X`
 - [prometheus-operator](../prometheus-operator)
 
-## Image repository and tag
 
-* kube-state-metrics image: `registry.sighup.io/fury/kube-state-metrics/kube-state-metrics:v2.2.0`
 * kube-state-metrics repository: [kube-state-metrics on GH][ksm-gh]
 
 ## Configuration
 
-Fury distribution kube-state-metrics is deployed with the following configuration:
+Live Infra kube-state-metrics is deployed with the following configuration:
 - Resource limits are `100m` for CPU and `150Mi` for memory
 - Listens on port `8080`
 - Exposes kubernetes-related metrics on port `8080` and metrics about itself on
@@ -51,8 +49,6 @@ kustomize build | kubectl apply -f -
 <!-- Links -->
 
 [ksm-gh]: https://github.com/kubernetes/kube-state-metrics
-
-<!-- </KFD-DOCS> -->
 
 ## License
 
