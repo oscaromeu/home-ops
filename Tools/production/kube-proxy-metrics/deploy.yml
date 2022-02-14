@@ -31,7 +31,7 @@ spec:
       hostNetwork: true
       containers:
       - name: kube-proxy-metrics
-        image: kube-rbac-proxy
+        image: quay.io/brancz/kube-rbac-proxy:master-2021-12-28-703dc7e4
         args:
         - "--secure-listen-address=0.0.0.0:18443"
         - "--upstream=http://127.0.0.1:10249/"

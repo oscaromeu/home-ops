@@ -24,7 +24,7 @@ environment, on-premise installed by kubeadm or a managed Kubernetes Cluster.
 
 ## Configuration
 
-Fury distribution kube-proxy-metrics is deployed with the following configuration:
+Live Infra kube-proxy-metrics is deployed with the following configuration:
 
 - Resource limits are `20m` for CPU and `40Mi` for memory
 - Listens on port `18443`
