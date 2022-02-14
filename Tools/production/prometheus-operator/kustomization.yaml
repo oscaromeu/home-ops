@@ -8,13 +8,6 @@ kind: Kustomization
 
 namespace: monitoring
 
-commonLabels:
-  module.liveinfra.io/name: "monitoring"
-  module.liveinfra.io/version: ""
-  module.liveinfra.io/component: "prometheus-operator"
-  liveinfra.io/source: "kustomize"
-
-
 resources:
   - deploy.yml
   - rbac.yml

@@ -8,11 +8,7 @@ kind: Kustomization
 
 namespace: kube-system
 
-commonLabels:
-  module.liveinfra.io/name: "monitoring"
-  module.liveinfra.io/version: ""
-  module.liveinfra.io/component: "metrics-server"
-  liveinfra.io/source: "kustomize"
+
 
 resources:
   - apiservice.yml

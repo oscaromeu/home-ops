@@ -9,14 +9,10 @@ kind: Kustomization
 namespace: monitoring
 
 resources:
-  - dashboards
-  - deploy.yml
-  - rbac.yml
-  - rules.yml
-  - sm.yml
-  - pdb.yml
-  - kube-prometheus-rules.yml
-  - kubernetes-monitoring-rules.yml
-  - service-monitors
+  - thanos-compact.yaml
+  - servicemonitor.yml
 
-
+images:
+  - name: thanos
+    newName: registry.sighup.io/fury/thanos
+    newTag: v0.24.0

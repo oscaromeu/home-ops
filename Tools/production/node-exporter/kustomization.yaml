@@ -8,12 +8,6 @@ kind: Kustomization
 
 namespace: monitoring
 
-commonLabels:
-  module.liveinfra.io/name: "monitoring"
-  module.liveinfra.io/version: ""
-  module.liveinfra.io/component: "node-exporter"
-  liveinfra.io/source: "kustomize"
-
 
 resources:
   - dashboards

@@ -8,8 +8,6 @@ kind: Prometheus
 metadata:
   labels:
     prometheus: k8s
-    app.kubernetes.io/name: prometheus
-    app.kubernetes.io/instance: k8s
     app: prometheus
   name: k8s
 spec:
@@ -69,7 +67,5 @@ spec:
 #    targetPort: reloader-web
   selector:
     prometheus: k8s
-    app.kubernetes.io/name: prometheus
-    app.kubernetes.io/instance: k8s
     app: prometheus
   sessionAffinity: ClientIP
