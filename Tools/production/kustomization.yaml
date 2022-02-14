@@ -14,6 +14,7 @@ resources:
   - kube-proxy-metrics
   - node-exporter
   - prometheus-operator
+  - prometheus-operated
 #  - kube-prometheus
 
 # Logging

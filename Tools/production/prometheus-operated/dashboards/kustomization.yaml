@@ -1,0 +1,37 @@
+# Copyright (c) 2020 live-infra s.r.l All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: monitoring
+
+generatorOptions:
+  labels:
+    grafana-liveinfra-dashboard: default
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: prometheus-grafana-dashboards
+    files:
+      - prometheus.json
+      - prometheus-remote-write.json
+  - name: live-infra-containers-dashboard-definitions
+    files:
+      - dashboards/pod-total.json
+      - dashboards/workload-total.json
+  - name: live-infra-namespace-dashboard-definitions
+    files:
+      - dashboards/namespace-by-pod.json
+      - dashboards/namespace-by-workload.json
+  - name: live-infra-cluster-dashboard-definitions
+    files:
+      - dashboards/apiserver.json
+      - dashboards/kubelet.json
+      - dashboards/cluster-total.json
+      - dashboards/persistent-volumes-usage.json
+  - name: live-infra-coredns-dashboard-definition
+    files:
+      - dashboards/coredns.json
