@@ -14,11 +14,6 @@ generatorOptions:
   disableNameSuffixHash: true
 
 resources:
-  - service-monitors/coredns.yml
-  - service-monitors/apiserver.yml
-  - service-monitors/kubelet.yml
-
-configMapGenerator:
-  - name: sighup-coredns-dashboard-definition
-    files:
-      - dashboards/coredns.json
+  - coredns.yml
+  - apiserver.yml
+  - kubelet.yml
