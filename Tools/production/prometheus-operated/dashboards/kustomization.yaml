@@ -20,18 +20,18 @@ configMapGenerator:
       - prometheus-remote-write.json
   - name: live-infra-containers-dashboard-definitions
     files:
-      - dashboards/pod-total.json
-      - dashboards/workload-total.json
+      - pod-total.json
+      - workload-total.json
   - name: live-infra-namespace-dashboard-definitions
     files:
-      - dashboards/namespace-by-pod.json
-      - dashboards/namespace-by-workload.json
+      - namespace-by-pod.json
+      - namespace-by-workload.json
   - name: live-infra-cluster-dashboard-definitions
     files:
-      - dashboards/apiserver.json
-      - dashboards/kubelet.json
-      - dashboards/cluster-total.json
-      - dashboards/persistent-volumes-usage.json
+      - apiserver.json
+      - kubelet.json
+      - cluster-total.json
+      - persistent-volumes-usage.json
   - name: live-infra-coredns-dashboard-definition
     files:
-      - dashboards/coredns.json
+      - coredns.json
