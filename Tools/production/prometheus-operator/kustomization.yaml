@@ -18,7 +18,7 @@ commonLabels:
 resources:
   - deploy.yml
   - rbac.yml
-  - ns.yml
+#  - ns.yml
   - crd-rule.yml
   - crd-prometheus.yml
   - crd-alertmanager.yml
