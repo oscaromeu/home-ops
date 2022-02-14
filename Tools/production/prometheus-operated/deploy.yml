@@ -65,6 +65,7 @@ spec:
 #    port: 8080
 #    targetPort: reloader-web
   selector:
+    prometheus: k8s
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/instance: k8s
   sessionAffinity: ClientIP
