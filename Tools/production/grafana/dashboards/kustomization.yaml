@@ -13,4 +13,3 @@ configMapGenerator:
   - name: grafana-dashboard
     files:
       - grafana.json
-      - apiserver.json
