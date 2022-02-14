@@ -1,0 +1,23 @@
+# Copyright (c) 2020 SIGHUP s.r.l All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: monitoring
+
+commonLabels:
+  module.liveinfra.io/name: "monitoring"
+  module.liveinfra.io/version: ""
+  module.liveinfra.io/component: "node-exporter"
+  liveinfra.io/source: "kustomize"
+
+
+resources:
+  - dashboards
+  - deploy.yml
+  - sm.yml
+  - rbac.yml
+  - rules.yml
