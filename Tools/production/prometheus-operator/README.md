@@ -43,6 +43,7 @@ illustrated in this image from Prometheus Operator repository:
 ## Image repository and tag
 
 * Prometheus Operator image: `quay.io/prometheus-operator/prometheus-operator:v0.54.0`
+* Prometheus Operator config reloader: `quay.io/prometheus-operator/prometheus-config-reloader:v0.54.0`
 * Prometheus Operator repository: [Prometheus Operator on Github][prom-op-github]
 
 ## Configuration
