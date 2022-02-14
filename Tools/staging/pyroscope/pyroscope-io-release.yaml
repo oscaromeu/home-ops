@@ -1,0 +1,14 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: pyroscope-io
+spec:
+  interval: 5m
+  releaseName: pyroscope-io
+  chart:
+    spec:
+      chart: pyroscope-io
+      sourceRef:
+        kind: HelmRepository
+        name: pyroscope-io
+        namespace: flux-system

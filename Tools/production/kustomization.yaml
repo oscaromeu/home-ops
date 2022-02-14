@@ -9,13 +9,7 @@ resources:
 
 # Metrics
   - telegraf-operator
-#  - metrics-server
-  - kube-state-metrics
-  - kube-proxy-metrics
-  - node-exporter
-  - prometheus-operator
-  - prometheus-operated
-#  - kube-prometheus
+  - kube-prometheus
 
 # Logging
   - esprod

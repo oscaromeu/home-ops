@@ -30,13 +30,13 @@ resources:
 - ./manifests/blackbox-exporter-serviceAccount.yaml
 - ./manifests/blackbox-exporter-serviceMonitor.yaml
 #- ./manifests/grafana-config.yaml
-- ./manifests/grafana-dashboardDatasources.yaml
-- ./manifests/grafana-dashboardDefinitions.yaml
-- ./manifests/grafana-dashboardSources.yaml
-- ./manifests/grafana-deployment.yaml
-- ./manifests/grafana-service.yaml
-- ./manifests/grafana-serviceAccount.yaml
-- ./manifests/grafana-serviceMonitor.yaml
+#- ./manifests/grafana-dashboardDatasources.yaml
+#- ./manifests/grafana-dashboardDefinitions.yaml
+#- ./manifests/grafana-dashboardSources.yaml
+#- ./manifests/grafana-deployment.yaml
+#- ./manifests/grafana-service.yaml
+#- ./manifests/grafana-serviceAccount.yaml
+#- ./manifests/grafana-serviceMonitor.yaml
 - ./manifests/kube-prometheus-prometheusRule.yaml
 - ./manifests/kube-state-metrics-clusterRole.yaml
 - ./manifests/kube-state-metrics-clusterRoleBinding.yaml
@@ -51,13 +51,13 @@ resources:
 - ./manifests/kubernetes-serviceMonitorKubeControllerManager.yaml
 - ./manifests/kubernetes-serviceMonitorKubeScheduler.yaml
 - ./manifests/kubernetes-serviceMonitorKubelet.yaml
-  #- ./manifests/node-exporter-clusterRole.yaml
-  #- ./manifests/node-exporter-clusterRoleBinding.yaml
-  #- ./manifests/node-exporter-daemonset.yaml
-  #- ./manifests/node-exporter-prometheusRule.yaml
-  #- ./manifests/node-exporter-service.yaml
-  #- ./manifests/node-exporter-serviceAccount.yaml
-  #- ./manifests/node-exporter-serviceMonitor.yaml
+- ./manifests/node-exporter-clusterRole.yaml
+- ./manifests/node-exporter-clusterRoleBinding.yaml
+- ./manifests/node-exporter-daemonset.yaml
+- ./manifests/node-exporter-prometheusRule.yaml
+- ./manifests/node-exporter-service.yaml
+- ./manifests/node-exporter-serviceAccount.yaml
+- ./manifests/node-exporter-serviceMonitor.yaml
 - ./manifests/prometheus-adapter-apiService.yaml
 - ./manifests/prometheus-adapter-clusterRole.yaml
 - ./manifests/prometheus-adapter-clusterRoleAggregatedMetricsReader.yaml

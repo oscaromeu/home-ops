@@ -17,18 +17,18 @@ endif
 # GLOBAL VARIABLES
 ########################################################
 NAMESPACE=monitoring
-CLUSTER_NAME=staging
+CLUSTER_NAME=testing
 CI=argocd               # Valid options are [argocd, flux]
 USER=changeme           # admin username cannot be used in gitea see https://gitea.com/gitea/helm-chart/#admin-user
 PWD=changeme
-        
+
                         
 
 all:
 > $(MAKE) everything >log.txt
 
 create:
-> @touch log
+> @touch log.txt
 > @k3d cluster create $(CLUSTER_NAME)  | tee -a log
 .PHONY: setup 
 
@@ -56,7 +56,6 @@ clean:
 destroy:
 > @k3d cluster delete $(CLUSTER_NAME) | tee -a log
 .PHONY: destroy 
-
 
 
 converge: create dependencies 

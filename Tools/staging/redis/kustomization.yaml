@@ -5,12 +5,11 @@ metadata:
   namespace: monitoring
 
 resources:
-  #  - ./secrets/secret-redis-ca.yaml
-  #  - ./secrets/secret-redis-crt.yaml
-  #  - ./secrets/secret-redis-pem.yaml
+  - redis-ca-sealed.yaml
+  - redis-crt-sealed.yaml
+  - redis-pem-sealed.yaml
   - dc_redis.yaml
   - svc_redis-port.yaml
-#  - route_redis-port.yaml
 
 transformers:
   - labelTransformer.yaml

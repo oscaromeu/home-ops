@@ -72,7 +72,7 @@ spec:
         imagePullPolicy: "IfNotPresent"
         env:
           - name: ELASTICSEARCH_HOSTS
-            value: "https://elastic-prod-master-headless:9200"
+            value: "https://es-master-headless:9200"
           - name: SERVER_HOST
             value: "0.0.0.0"
           - name: KIBANA_ENCRYPTION_KEY
@@ -86,7 +86,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 key: password
-                name: security-master-credentials
+                name: es-master-credentials
         readinessProbe:
           failureThreshold: 3
           initialDelaySeconds: 10

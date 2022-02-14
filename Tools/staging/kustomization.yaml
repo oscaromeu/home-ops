@@ -1,14 +1,39 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  #  - sources
-  #  - flux-system 
-    #- sealed-secrets 
-#  - kube-prometheus
-  - promscale
+  - namespace.yaml
+# CD
+  - sources
+  - flux-system 
+#  - sealed-secrets 
+
+# Metrics
   - telegraf-operator
-# - esprod
-#  - kibana
-#  - metricbeat
-#  - filebeat
-#  - logstash
+#  - metrics-server
+  - kube-state-metrics
+  - kube-proxy-metrics
+  - node-exporter
+  - prometheus-operator
+  - prometheus-operated
+#  - kube-prometheus
+
+# Logging
+  - esprod
+  - kibana
+  - redis
+  - filebeat
+  - logstash
+  - metricbeat
+
+# Storage
+  - questdb
+
+# Tracing
+  - pyroscope
+
+# Visualization
+
+  - grafana
+
+# APPS
+#  - apps

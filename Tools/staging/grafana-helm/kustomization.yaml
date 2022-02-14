@@ -1,7 +1,0 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-namespace: monitoring
-kind: Kustomization
-resources:
-  - ./datasources/secret-grafana-dashboardDatasources.yaml
-  - ./dashboards/cm-apiserver.yaml
-  - grafana-release.yaml

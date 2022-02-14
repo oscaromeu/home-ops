@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: Pod
-metadata:
-  name: misbehaving-pod
-spec:
-  containers:
-  - image: httpd:235
-    name: http-server

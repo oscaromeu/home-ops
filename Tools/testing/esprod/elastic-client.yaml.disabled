@@ -200,7 +200,7 @@ spec:
           - name: node.roles
             value: ""
           - name: discovery.seed_hosts
-            value: "elastic-prod-master-headless"
+            value: "es-master-headless"
           - name: cluster.name
             value: "logging"
           - name: network.host

@@ -20,6 +20,16 @@ spec:
     metadata:
       labels:
         app: redis-master
+      annotations:
+        #        telegraf.influxdata.com/inputs: |+
+        #          [[inputs.redis]]
+        #            servers = ["tcp://localhost:6379"]
+        #        telegraf.influxdata.com/class: basic 
+        #        telegraf.influxdata.com/env-fieldref-NAMESPACE: metadata.namespace
+        #        telegraf.influxdata.com/limits-cpu: '750m'
+        #        # invalid memory limit, which will be ignored
+        #        telegraf.influxdata.com/limits-memory: '800x'
+        #        telegraf.influxdata.com/image: 'osokaru/telegraf-timescaledb:4552a531'
     spec:
       volumes:
         - name: redis-ca-volume

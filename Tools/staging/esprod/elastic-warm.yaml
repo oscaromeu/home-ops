@@ -87,7 +87,7 @@ spec:
               - key: app
                 operator: In
                 values:
-                - "es-warm"
+                - "es-master"
             topologyKey: kubernetes.io/hostname
       terminationGracePeriodSeconds: 120
       volumes:
@@ -200,7 +200,7 @@ spec:
               fieldRef:
                 fieldPath: metadata.name
           - name: node.roles
-            value: "data_warm"
+            value: "data_warm,data_content"
           - name: node.attr.type
             value: "warm"
           # will prevent the virtual address space (on Linux distribution) to run into errors or exceptions 
