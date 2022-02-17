@@ -4,7 +4,7 @@ namespace: flux-system
 resources:
 - gotk-components.yaml
 - gotk-sync.yaml
-- podmonitor.yaml
+- ./monitoring/podmonitor.yaml
 
 patchesStrategicMerge:
   - gotk-patches.yaml
