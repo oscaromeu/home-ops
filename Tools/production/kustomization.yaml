@@ -30,4 +30,5 @@ resources:
   - grafana
 
 # APPS
-#  - apps
+  - ./apps/demo-service
+  - ./apps/pod-info
