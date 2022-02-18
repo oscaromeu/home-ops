@@ -31,4 +31,4 @@ resources:
 
 # APPS
   - ./apps/demo-service
-  - ./apps/pod-info
+  - ./apps/podinfo
