@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - prometheus-operator-alertmanagerConfigCustomResourceDefinition.yaml
+  - prometheus-operator-alertmanagerCustomResourceDefinition.yaml
+  - prometheus-operator-clusterRoleBinding.yaml
+  - prometheus-operator-clusterRole.yaml
+  - prometheus-operator-deployment.yaml
+  - prometheus-operator-podmonitorCustomResourceDefinition.yaml
+  - prometheus-operator-probeCustomResourceDefinition.yaml
+  - prometheus-operator-prometheusCustomResourceDefinition.yaml
+  - prometheus-operator-prometheusruleCustomResourceDefinition.yaml
+  - prometheus-operator-serviceAccount.yaml
+  - prometheus-operator-servicemonitorCustomResourceDefinition.yaml
+  - prometheus-operator-service.yaml
+  - prometheus-operator-thanosrulerCustomResourceDefinition.yaml

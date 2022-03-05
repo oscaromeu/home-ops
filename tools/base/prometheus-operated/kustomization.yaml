@@ -1,0 +1,29 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - prometheus-adapter-apiService.yaml
+  - prometheus-adapter-clusterRoleAggregatedMetricsReader.yaml
+  - prometheus-adapter-clusterRoleBindingDelegator.yaml
+  - prometheus-adapter-clusterRoleBinding.yaml
+  - prometheus-adapter-clusterRoleServerResources.yaml
+  - prometheus-adapter-clusterRole.yaml
+  - prometheus-adapter-roleBindingAuthReader.yaml
+  - prometheus-adapter-serviceAccount.yaml
+  - prometheus-adapter-configMap.yaml
+  - prometheus-adapter-deployment.yaml
+  - prometheus-adapter-service.yaml
+  - prometheus-adapter-serviceMonitor.yaml
+  - prometheus-clusterRoleBinding.yaml
+  - prometheus-clusterRole.yaml
+  - prometheus-roleBindingConfig.yaml
+  - prometheus-roleBindingSpecificNamespaces.yaml
+  - prometheus-roleConfig.yaml
+  - prometheus-roleSpecificNamespaces.yaml
+  - prometheus-serviceAccount.yaml
+  - prometheus-prometheus.yaml
+  - prometheus-podDisruptionBudget.yaml
+  - prometheus-service.yaml
+  - prometheus-serviceMonitor.yaml
+  - prometheus-prometheusRule.yaml
+  - prometheus-operator-prometheusRule.yaml
+  - prometheus-operator-serviceMonitor.yaml

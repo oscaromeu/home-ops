@@ -1,0 +1,16 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    logs:
+      general:
+        level: INFO
+      access:
+        enabled: true
+        format: json
+    additionalArguments:
+      - "--metrics.prometheus=true"
+      - "--ping"
