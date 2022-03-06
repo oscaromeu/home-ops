@@ -16,7 +16,6 @@ metadata:
   namespace: monitoring
   labels:
     app: "metricbeat"
-
 data:
   metricbeat.yml: |
     metricbeat.modules:
@@ -40,8 +39,6 @@ data:
       ssl.enabled: true 
       ssl.certificate_authorities: ["/usr/share/metricbeat/config/certs/elastic-certificate.pem"]
        #ssl.verfication_mode: "certificate"
-
-
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -50,7 +47,6 @@ metadata:
   namespace: monitoring
   labels:
     app: "metricbeat"
-
 rules: 
   - apiGroups:
     - ""
@@ -95,7 +91,6 @@ metadata:
   namespace: monitoring
   labels:
     app: "metricbeat"
-
 roleRef:
   kind: ClusterRole
   name: metricbeat-cluster-role
@@ -112,7 +107,6 @@ metadata:
   namespace: monitoring
   labels:
     app: 'metricbeat-metrics'
-
 spec:
   replicas: 1
   selector:
