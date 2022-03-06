@@ -1,52 +1,8 @@
 ---
-kind: Service
-apiVersion: v1
-metadata:
-  name: es-warm
-  namespace: monitoring
-  labels:
-    app: "es-warm"
-  annotations:
-    {}
-spec:
-  type: ClusterIP
-  selector:
-    release: "es-warm"
-    app: "es-warm"
-  ports:
-  - name: http
-    protocol: TCP
-    port: 9200
-  - name: transport
-    protocol: TCP
-    port: 9300
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: es-warm-headless
-  namespace: monitoring
-  labels:
-    app: "es-warm"
-  annotations:
-    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
-spec:
-  clusterIP: None # This is needed for statefulset hostnames like elasticsearch-0 to resolve
-  # Create endpoints also if the related pod isn't ready
-  publishNotReadyAddresses: true
-  selector:
-    app: "es-warm"
-  ports:
-  - name: http
-    port: 9200
-  - name: transport
-    port: 9300
----
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: es-warm
-  namespace: monitoring
   labels:
     app: "es-warm"
 spec:
@@ -70,7 +26,6 @@ spec:
   template:
     metadata:
       name: "es-warm"
-      namespace: monitoring
       labels:
         app: "es-warm"
       annotations:

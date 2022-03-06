@@ -1,11 +1,15 @@
-
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: monitoring
 resources:
+  - ../../base
+  - ns.yaml
   - elastic-certificate-crt-sealed.yaml
   - elastic-certificate-pem-sealed.yaml
   - elastic-certificates-sealed.yaml
   - elastic-master-credentials-sealed.yaml
-  - elastic-master.yaml
-  - elastic-warm.yaml
+
+patchesStrategicMerge:
+  - ./patches/container-volume.yaml
+  - ./patches/container-env.yaml
+  - ./patches/container-resources.yaml

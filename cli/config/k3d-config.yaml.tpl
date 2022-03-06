@@ -12,13 +12,13 @@ volumes:
   nodeFilters:
   - all
 
-#- volume: $PROJECT_DIR/cli/config/controller.yaml:/var/lib/rancher/k3s/server/manifests/sealed-secrets-key.yaml
+#- volume: $PROJECT_DIR/cli/config/sealed-secrets-secrets.yaml:/var/lib/rancher/k3s/server/manifests/sealed-secrets-secrets.yaml
 #  nodeFilters:
 #  - server:0
-
-- volume: $PROJECT_DIR/cli/config/controller.yaml:/var/lib/rancher/k3s/server/manifests/controller.yaml
-  nodeFilters:
-  - server:0
+#
+#- volume: $PROJECT_DIR/cli/config/controller.yaml:/var/lib/rancher/k3s/server/manifests/controller.yaml
+#  nodeFilters:
+#  - server:0
 
 ports:
 - port: 80:80

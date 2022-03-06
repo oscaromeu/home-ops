@@ -19,6 +19,13 @@ function pause(){
 }
 
 # show info text and command, wait for enter, then execute and print a newline
+function info_exec() {
+  step "$1"
+  exe "$2"
+  echo ""
+}
+
+# show info text and command, wait for enter, then execute and print a newline
 function info_pause_exec() {
   step "$1"
   read -rp $'\033[1;37m#\033[0m'" Command: "$'\033[1;96m'"$2"$'\033[0m'" [Enter]"
