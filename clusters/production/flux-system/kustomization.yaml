@@ -6,8 +6,8 @@ resources:
 - gotk-sync.yaml
 - ./monitoring/podmonitor.yaml
 
-patchesStrategicMerge:
-  - gotk-patches.yaml
+#patchesStrategicMerge:
+#  - gotk-patches.yaml
 
 configMapGenerator:
   - name: flux-grafana-dashboards
