@@ -1,9 +1,0 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-namespace: monitoring
-kind: Kustomization
-resources:
-  - kibana-sealed.yaml
-  - kibana-certificate-crt-sealed.yaml
-  - kibana-certificate-pem-sealed.yaml
-  - kibana.yaml
-

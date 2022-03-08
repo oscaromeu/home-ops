@@ -1,0 +1,39 @@
+global:
+  resolve_timeout: 5m
+route:
+  group_by: ['alertname', 'cluster', 'service', 'job']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 10s
+  receiver: 'slack-notifications'
+  routes:
+  - match:
+      namespace: monitoring
+    group_wait: 30s
+    group_interval: 1m
+    repeat_interval: 1m
+    receiver: blackhole
+  - match:
+      namespace: "new-monitoring"
+    group_wait: 30s
+    group_interval: 1m
+    repeat_interval: 1m
+    receiver: blackhole
+  - match:
+      namespace: "kube-system"
+    group_wait: 30s
+    group_interval: 1m
+    repeat_interval: 1m
+    receiver: blackhole
+  - match:
+    receiver: 'slack-notifications'
+receivers:
+  - name: 'slack-notifications'
+    slack_configs:
+      - channel: infrastructure
+        api_url: 'https://hooks.slack.com/services/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'
+        send_resolved: true
+  - name: 'blackhole'
+
+#templates:
+#  - '/etc/alertmanager/config/*.tmpl'
