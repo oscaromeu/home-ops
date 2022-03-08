@@ -10,7 +10,9 @@ resources:
   - prometheus-operator-probeCustomResourceDefinition.yaml
   - prometheus-operator-prometheusCustomResourceDefinition.yaml
   - prometheus-operator-prometheusruleCustomResourceDefinition.yaml
+  - prometheus-operator-prometheusRule.yaml
   - prometheus-operator-serviceAccount.yaml
   - prometheus-operator-servicemonitorCustomResourceDefinition.yaml
+  - prometheus-operator-serviceMonitor.yaml
   - prometheus-operator-service.yaml
   - prometheus-operator-thanosrulerCustomResourceDefinition.yaml

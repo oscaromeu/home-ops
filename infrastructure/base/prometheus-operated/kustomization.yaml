@@ -1,30 +1,28 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - prometheus-adapter-apiService.yaml
-  - prometheus-adapter-clusterRole.yaml
-  - prometheus-adapter-clusterRoleAggregatedMetricsReader.yaml
-  - prometheus-adapter-clusterRoleBinding.yaml
-  - prometheus-adapter-clusterRoleBindingDelegator.yaml
-  - prometheus-adapter-clusterRoleServerResources.yaml
-  - prometheus-adapter-configMap.yaml
-  - prometheus-adapter-deployment.yaml
-  #- ./manifests/prometheus-adapter-podDisruptionBudget.yaml
-  - prometheus-adapter-roleBindingAuthReader.yaml
-  - prometheus-adapter-service.yaml
-  - prometheus-adapter-serviceAccount.yaml
-  - prometheus-adapter-serviceMonitor.yaml
-  - prometheus-clusterRole.yaml
+  - prometheusAdapter-apiService.yaml
+  - prometheusAdapter-clusterRoleAggregatedMetricsReader.yaml
+  - prometheusAdapter-clusterRoleBindingDelegator.yaml
+  - prometheusAdapter-clusterRoleBinding.yaml
+  - prometheusAdapter-clusterRoleServerResources.yaml
+  - prometheusAdapter-clusterRole.yaml
+  - prometheusAdapter-configMap.yaml
+  - prometheusAdapter-deployment.yaml
+  - prometheusAdapter-podDisruptionBudget.yaml
+  - prometheusAdapter-roleBindingAuthReader.yaml
+  - prometheusAdapter-serviceAccount.yaml
+  - prometheusAdapter-serviceMonitor.yaml
+  - prometheusAdapter-service.yaml
   - prometheus-clusterRoleBinding.yaml
-  - prometheus-operator-prometheusRule.yaml
-  - prometheus-operator-serviceMonitor.yaml
+  - prometheus-clusterRole.yaml
   - prometheus-podDisruptionBudget.yaml
-  - prometheus-prometheus.yaml
   - prometheus-prometheusRule.yaml
+  - prometheus-prometheus.yaml
   - prometheus-roleBindingConfig.yaml
   - prometheus-roleBindingSpecificNamespaces.yaml
   - prometheus-roleConfig.yaml
   - prometheus-roleSpecificNamespaces.yaml
-  - prometheus-service.yaml
   - prometheus-serviceAccount.yaml
   - prometheus-serviceMonitor.yaml
+  - prometheus-service.yaml
