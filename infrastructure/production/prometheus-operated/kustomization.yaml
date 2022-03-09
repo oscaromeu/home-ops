@@ -3,3 +3,4 @@ kind: Kustomization
 
 resources:
   - ../../base/prometheus-operated
+  - routes_prometheus.yaml

@@ -5,8 +5,8 @@ NAMESPACE=monitoring
 CURR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )";
 [ -d "$CURR_DIR" ] || { echo "FATAL: no current dir (maybe running in zsh?)";  exit 1; }
 
-tempfile=cli/config/k3d-config.yaml.tpl
-configfile=cli/config/k3d-config.yaml
+tempfile=tools/config/k3d-config.yaml.tpl
+configfile=tools/config/k3d-config.yaml
 
 export PROJECT_DIR=$PWD
 envsubst < $tempfile > $configfile
@@ -20,9 +20,9 @@ info_pause_exec "Create a cluster" "k3d cluster create --config $configfile"
 
 section "Deploy sealed secrets"
 
-info_exec "Deploy sealed secrets keys" "kubectl apply -f cli/config/sealed-secrets-secrets.yaml"
+info_exec "Deploy sealed secrets keys" "kubectl apply -f tools/config/sealed-secrets-secrets.yaml"
 
-info_exec "Deploy sealed secrets controller" "kubectl apply -f cli/config/controller.yaml"
+info_exec "Deploy sealed secrets controller" "kubectl apply -f tools/config/controller.yaml"
 
 section "Access the Cluster"
 

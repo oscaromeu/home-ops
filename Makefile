@@ -28,7 +28,7 @@ all:
 #.PHONY: setup 
 
 create:
->	@./cli/scripts/configfile.sh
+>	@./tools/scripts/configfile.sh
 
 deploy:
 > kustomize build | kubectl apply -f -

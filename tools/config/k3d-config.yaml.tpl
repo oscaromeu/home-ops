@@ -8,15 +8,15 @@ kubeAPI:
   hostPort: "6443"
 image: rancher/k3s:v1.22.2-k3s1
 volumes:
-- volume: $PROJECT_DIR/cli/config/traefik-config.yaml:/var/lib/rancher/k3s/server/manifests/traefik-config.yaml
+- volume: $PROJECT_DIR/tools/config/traefik-config.yaml:/var/lib/rancher/k3s/server/manifests/traefik-config.yaml
   nodeFilters:
   - all
 
-#- volume: $PROJECT_DIR/cli/config/sealed-secrets-secrets.yaml:/var/lib/rancher/k3s/server/manifests/sealed-secrets-secrets.yaml
+#- volume: $PROJECT_DIR/tools/config/sealed-secrets-secrets.yaml:/var/lib/rancher/k3s/server/manifests/sealed-secrets-secrets.yaml
 #  nodeFilters:
 #  - server:0
 #
-#- volume: $PROJECT_DIR/cli/config/controller.yaml:/var/lib/rancher/k3s/server/manifests/controller.yaml
+#- volume: $PROJECT_DIR/tools/config/controller.yaml:/var/lib/rancher/k3s/server/manifests/controller.yaml
 #  nodeFilters:
 #  - server:0
 
