@@ -1,0 +1,81 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traefik
+  labels:
+    app.kubernetes.io/instance: traefik
+    app.kubernetes.io/name: traefik
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: traefik
+      app.kubernetes.io/instance: traefik
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: traefik
+        app.kubernetes.io/instance: traefik
+    spec:
+      serviceAccountName: traefik-ingress-controller
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: traefik
+          image: traefik:2.5.4
+          args:
+            - "--entryPoints.web.address=:8000/tcp"
+            - "--entryPoints.websecure.address=:8443/tcp"
+            - "--entryPoints.traefik.address=:9000/tcp"
+            - "--api=true"
+            - "--api.dashboard=true"
+            - "--ping=true"
+            - "--providers.kubernetescrd"
+            - "--providers.kubernetescrd.allowCrossNamespace=true"
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: 9000
+            failureThreshold: 1
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 2
+
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 9000
+            failureThreshold: 3
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 2
+
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1000Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+
+          ports:
+            - name: web
+              containerPort: 8000
+              protocol: TCP
+
+            - name: websecure
+              containerPort: 8443
+              protocol: TCP
+
+            - name: traefik
+              containerPort: 9000
+              protocol: TCP
+
+          volumeMounts:
+            - mountPath: /data
+              name: storage-volume
+      volumes:
+        - name: storage-volume
+          emptyDir: {}

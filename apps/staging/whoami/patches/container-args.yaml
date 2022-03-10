@@ -1,0 +1,14 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: whoamiv1
+spec:
+  replicas: 4
+  template:
+    spec:
+      containers:
+        - name: whoamiv1
+          args:
+            - -ascii
+            - -name=STAGING

@@ -3,8 +3,10 @@ kind: Kustomization
 
 resources:
   #- ns.yaml
+  - cert-manager
+  - traefik
   #- prometheus-operator
-  - prometheus-operated
+  #- prometheus-operated
   #- kube-state-metrics
   #- alertmanager-operated
   #- redis

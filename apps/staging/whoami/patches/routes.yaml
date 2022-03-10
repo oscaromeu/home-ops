@@ -1,0 +1,13 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: whoami
+spec:
+  routes:
+   - kind: Rule
+     match: Host(\`whoami.t1.demo.traefiklabs.tech\`)
+     services:
+        - kind: Service
+          name: whoamiv1
+          port: 80
