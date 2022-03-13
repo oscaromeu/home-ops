@@ -13,5 +13,5 @@ spec:
         - kind: Service
           name: whoamiv1
           port: 80
-#  tls:
-#    certResolver: myresolver
+  tls:
+    certResolver: myresolver
