@@ -2,15 +2,15 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: flux-system
 resources:
-  - ingressroutetcp.yaml
-  - ingressrouteudp.yaml
-  - ingressroute.yaml
-  - middlewarestcp.yaml
-  - middlewares.yaml
-  - serverstransports.yaml
-  - tlsoptions.yaml
-  - tlsstores.yaml
-  - traefikservices.yaml
+  - ./crds/ingressroutetcp.yaml
+  - ./crds/ingressrouteudp.yaml
+  - ./crds/ingressroute.yaml
+  - ./crds/middlewarestcp.yaml
+  - ./crds/middlewares.yaml
+  - ./crds/serverstransports.yaml
+  - ./crds/tlsoptions.yaml
+  - ./crds/tlsstores.yaml
+  - ./crds/traefikservices.yaml
   - rbac_traefik.yaml
   - dp_traefik.yaml
   - svc_traefik.yaml
