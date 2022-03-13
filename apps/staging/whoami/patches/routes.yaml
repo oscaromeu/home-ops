@@ -6,7 +6,7 @@ metadata:
 spec:
   routes:
    - kind: Rule
-     match: Host(`whoami.t1.demo.traefiklabs.tech`)
+     match: Host(`whoami.t1.lv`)
      services:
         - kind: Service
           name: whoamiv1

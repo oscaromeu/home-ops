@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   #- ns.yaml
-  - cert-manager
+  #- cert-manager
   - traefik
   #- prometheus-operator
   #- prometheus-operated
