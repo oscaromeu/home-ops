@@ -4,14 +4,14 @@ metadata:
   name: traefik-crds
   namespace: flux-system
 spec:
-  interval: 30m
+  interval: 1m
   url: https://github.com/traefik/traefik-helm-chart.git
   ref:
-    tag: v10.3.0
+    tag: v10.5.0
   ignore: |
     # exclude all
     /*
-    # path to crds
+    # include crds
     !/traefik/crds/
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
