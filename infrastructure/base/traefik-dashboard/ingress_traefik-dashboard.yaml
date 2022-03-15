@@ -4,7 +4,7 @@ metadata:
   name: traefik-dashboard
   namespace: kube-system
   annotations:
-    traefik.ingress.kubernetes.io/router.middlewares: kube-system-dashboard-auth@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: kube-system-dashboard-rewrite@kubernetescrd
 spec:
   rules:
   - host: dashboard.traefik.0.0.0.0.sslip.io
