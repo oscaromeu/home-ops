@@ -3,6 +3,7 @@ Tools/*/*/secrets
 Tools/*/*/certs
 Tools/staging/influxdb
 Tools/testing/alertmanager
+tools/config/k3d-config.yaml
 bkp
 *.bk
 *.csv

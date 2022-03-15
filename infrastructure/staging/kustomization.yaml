@@ -4,7 +4,7 @@ kind: Kustomization
 
 resources:
 
-  - traefik
+  - traefik-dashboard
 
 # --- Logging -----
 #  - elastic

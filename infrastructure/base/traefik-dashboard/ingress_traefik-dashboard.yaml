@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traefik-dashboard
+  namespace: kube-system
+spec:
+  rules:
+  - host: dashboard.traefik.0.0.0.0.sslip.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: traefik-dashboard
+            port:
+              number: 9000
+        path: /
+        pathType: Prefix
