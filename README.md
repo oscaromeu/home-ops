@@ -67,7 +67,7 @@ Tools
  * [QuestdB](https://questdb.com/) High-performance, open-source SQL database for applications such as IoT, DevOps and observability.
  * [Telegraf-operator](https://questdb.com/) Monitor applications easily with telegraf running as a sidecar. 
 
-![metrics-infra](./img/metrics-infra.png)
+![metrics-infra](./.img/metrics-infra.png)
 </p>
 </details>
 
@@ -75,7 +75,7 @@ Tools
 <p>
 
 
-![logging-infra](./img/logging-infra.png)
+![logging-infra](./.img/logging-infra.png)
 
 </p>
 </details>
