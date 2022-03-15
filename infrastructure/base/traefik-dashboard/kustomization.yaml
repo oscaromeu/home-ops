@@ -4,3 +4,7 @@ kind: Kustomization
 resources:
   - svc_traefik-dashboard.yaml
   - ingress_traefik-dashboard.yaml
+  - middleware_rewrite_traefik-dashboard.yaml
+  - middleware_auth_traefik-dashboard.yaml
+  - secret_traefik-dashboard.yaml
+
