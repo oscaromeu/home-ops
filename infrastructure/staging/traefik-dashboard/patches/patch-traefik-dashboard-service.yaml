@@ -1,0 +1,10 @@
+- op: replace
+  path: /spec/routes/0/services/0
+  value:
+    kind: TraefikService
+    name: api@internal
+- op: replace
+  path: /spec/routes/1/services/0
+  value:
+    kind: TraefikService
+    name: api@internal

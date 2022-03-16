@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
 
   - traefik-dashboard
+  - cert-manager
 
 # --- Logging -----
 #  - elastic
