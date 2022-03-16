@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - ../../base/traefik-dashboard
+  - traefik-dashboard-middleware-scheme.yaml
 
 patches:
 - path: ./patches/patch-traefik-dashboard-service.yaml
