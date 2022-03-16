@@ -1,10 +1,9 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: traefik-dashboard-secure
-  namespace: kube-system
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web
+  name: traefik-dashboard-http
+  #annotations:
+  #  traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   entryPoints:
   - web
@@ -12,12 +11,7 @@ spec:
   - kind: Rule
     match: Host("dashboard.traefik.0.0.0.0.sslip.io")
     services:
-    - name: traefik-dashboard
-      port: 9000
+    - name: api@internal
+      kind: TraefikService
     middlewares:
-    - name: dashboard-rewrite
-  - kind: Rule
-    match: Host("dashboard.traefik.0.0.0.0.sslip.io") && PathPrefix("/api")
-    services:
-    - name: traefik-dashboard
-      port: 9000
+    - name: redirect-permanent

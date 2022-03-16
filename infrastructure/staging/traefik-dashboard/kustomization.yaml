@@ -4,6 +4,8 @@ kind: Kustomization
 resources:
   - ../../base/traefik-dashboard
   - traefik-dashboard-middleware-scheme.yaml
+  - cert-manager-cluster-issuer.yaml
+  - cert-manager-certificate.yaml
 
 patches:
 - path: ./patches/patch-traefik-dashboard-service.yaml
@@ -11,13 +13,13 @@ patches:
     group: traefik.containo.us
     version: v1alpha1
     kind: IngressRoute
-    name: traefik-dashboard-secure
+    name: traefik-dashboard-http
 - path: ./patches/patch-dashboard-tls.yaml
   target:
     group: traefik.containo.us
     version: v1alpha1
     kind: IngressRoute
-    name: traefik-dashboard-secure
+    name: traefik-dashboard-http
 
 
     
