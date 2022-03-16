@@ -5,7 +5,7 @@ metadata:
   namespace: kube-system
 spec:
   dnsNames:
-  - 'dashboard.traefik.10.68.0.70.sslip.io'
+  - 'dashboard.traefik.0.0.0.0.sslip.io'
   issuerRef:
     kind: ClusterIssuer
     name: selfsigned
