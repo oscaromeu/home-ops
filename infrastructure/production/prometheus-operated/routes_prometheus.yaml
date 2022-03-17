@@ -1,31 +1,18 @@
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: prometheus-int-https
-spec:
-  entryPoints:
-    - int-https
-  routes:
-    - kind: Rule
-      match: Host(`prometheus-monitoring.apps.io`)
-      services:
-        - name: prometheus-k8s
-          port: 9090
-  tls: {}
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: prometheus-int-http
+  namespace: monitoring
 spec:
   entryPoints:
-    - int-http
+    - web
   routes:
     - kind: Rule
       middlewares:
-        - name: redirect
-          namespace: traefik
-      match: Host(`prometheus-monitoring.apps.io`)
+        - name: redirect-permanent
+          namespace: monitoring
+      match: Host(`prometheus.prod.0.0.0.0.sslip.io`)
       services:
         - name: prometheus-k8s
           port: 9090

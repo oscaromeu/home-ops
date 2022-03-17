@@ -3,4 +3,15 @@ kind: Kustomization
 
 resources:
   - ../../base/prometheus-operated
+  - middleware-redirect-prometheus.yaml
+  - cert-manager-cluster-issuer.yaml
+  - cert-prometheus.yaml
   - routes_prometheus.yaml
+
+patches:
+  - path: ./patches/patch-tls-prometheus.yaml
+    target:
+      group: traefik.containo.us
+      version: v1alpha1
+      kind: IngressRoute
+      name: prometheus-int-http
