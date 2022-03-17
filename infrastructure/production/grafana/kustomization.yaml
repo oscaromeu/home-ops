@@ -5,7 +5,6 @@ namespace: monitoring
 
 resources:
   - ../../base/grafana
-  - middleware-redirect-grafana.yaml
   - cert-manager-cluster-issuer.yaml
   - cert-grafana.yaml
   - routes_grafana.yaml
