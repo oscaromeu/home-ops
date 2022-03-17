@@ -8,6 +8,7 @@ resources:
 
 # --- Logging -----
   - elastic
+  - kibana
 
 # --- Metrics ----- 
   - ns.yaml
