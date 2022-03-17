@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ../../base/kibana
-  - cert-kibana.yaml
+#  - cert-kibana.yaml
   - routes_kibana.yaml
 
 patches:

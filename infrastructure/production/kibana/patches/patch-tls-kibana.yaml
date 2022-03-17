@@ -2,7 +2,7 @@
   path: /spec/entryPoints
   value:
     - websecure
-- op: add
-  path: /spec/tls
-  value:
-    secretName: kibana-crt
+#- op: add
+#  path: /spec/tls
+#  value:
+#    secretName: kibana-crt
