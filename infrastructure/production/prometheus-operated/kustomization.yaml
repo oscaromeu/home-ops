@@ -3,7 +3,6 @@ kind: Kustomization
 
 resources:
   - ../../base/prometheus-operated
-  - cert-manager-cluster-issuer.yaml
   - cert-prometheus.yaml
   - routes_prometheus.yaml
 
