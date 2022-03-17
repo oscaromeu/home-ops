@@ -3,13 +3,16 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ../../base/elastic
-  #- ns.yaml
+#  - ns.yaml
   - elastic-certificate-crt-sealed.yaml
   - elastic-certificate-pem-sealed.yaml
   - elastic-certificates-sealed.yaml
   - elastic-master-credentials-sealed.yaml
 
 patchesStrategicMerge:
-  - ./patches/container-volume.yaml
-  - ./patches/container-env.yaml
-  - ./patches/container-resources.yaml
+  - ./patches/container-volume-master.yaml
+  - ./patches/container-env-master.yaml
+  - ./patches/container-resources-master.yaml
+  - ./patches/container-volume-warm.yaml
+  - ./patches/container-env-warm.yaml
+  - ./patches/container-resources-warm.yaml
