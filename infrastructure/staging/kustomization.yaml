@@ -11,9 +11,9 @@ resources:
 #  - elastic
 
 # --- Metrics ----- 
-#  - ns.yaml
-#  - prometheus-operator
-#  - kube-state-metrics
-#  - prometheus-operated
-#  - grafana
-#  - alertmanager-operated
+  - ns.yaml
+  - prometheus-operator
+  - kube-state-metrics
+  - prometheus-operated
+  - grafana
+  #- alertmanager-operated
