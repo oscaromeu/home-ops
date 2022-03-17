@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: dashboard
+  name: grafana-certificate
   namespace: monitoring
 spec:
   dnsNames:
@@ -9,4 +9,4 @@ spec:
   issuerRef:
     kind: ClusterIssuer
     name: selfsigned
-  secretName: dashboard-crt
+  secretName: grafana-crt
