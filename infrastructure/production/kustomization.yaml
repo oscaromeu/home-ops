@@ -9,6 +9,9 @@ resources:
 # --- Logging -----
   - elastic
   - kibana
+  - redis
+  - filebeat
+  - logstash
 
 # --- Metrics ----- 
   - ns.yaml
