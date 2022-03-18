@@ -11,7 +11,7 @@ resources:
   - elastic
 
 # --- Metrics ----- 
-#  - ns.yaml
+  - ns.yaml
 #  - prometheus-operator
 #  - kube-state-metrics
 #  - prometheus-operated
