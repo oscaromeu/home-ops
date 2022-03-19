@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: prometheus-elasticsearch-exporter-svcmon
+  namespace: monitoring
+  labels:
+    app: prometheus-elasticsearch-exporter-svcmon
+spec:
+  selector:
+    matchLabels:
+      app: prometheus-elasticsearch-exporter
+  endpoints:
+  - port: http
