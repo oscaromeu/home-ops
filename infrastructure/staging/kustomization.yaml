@@ -10,6 +10,7 @@ resources:
 
 # --- Logging -----
   - elastic
+  - elastic-exporter
 
 # --- Metrics ----- 
 
