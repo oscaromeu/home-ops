@@ -23,7 +23,7 @@ spec:
           scheme: https
       middlewares:
         - name: hulk-middleware-chain
-    - match: "Host(`kibana.hulk`)"
+    - match: "Host(`kibana.staging.0.0.0.0.sslip.io`)"
       kind: Rule
       services:
         - name: hulk-kb-http
@@ -31,7 +31,7 @@ spec:
           scheme: https
       middlewares:
         - name: hulk-middleware-chain
-    - match: "Host(`apm.hulk`)"
+    - match: "Host(`apm.staging.0.0.0.0.sslip.io`)"
       kind: Rule
       services:
         - name: hulk-apm-http
@@ -46,5 +46,5 @@ spec:
     domains:
       - sans:
           - "elastic.staging.0.0.0.0.sslip.io"
-          - "kibana.hulk"
-          - "apm.hulk"
+          - "kibana.staging.0.0.0.0.sslip.io"
+          - "apm.staging.0.0.0.0.sslip.io"

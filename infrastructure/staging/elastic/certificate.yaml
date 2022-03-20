@@ -9,8 +9,8 @@ spec:
   secretName: hulk-certs
   dnsNames:
     - "elastic.staging.0.0.0.0.sslip.io"
-    - "kibana.hulk"
-    - "apm.hulk"
+    - "kibana.staging.0.0.0.0.sslip.io"
+    - "apm.staging.0.0.0.0.sslip.io"
   isCA: true
   issuerRef:
     name: selfsigning-issuer
