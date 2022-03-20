@@ -5,17 +5,18 @@ kind: Kustomization
 resources:
 
   - ns.yaml
-  - traefik-dashboard
+#  - traefik-dashboard
   - cert-manager
 
 # --- Logging -----
   - elastic
+  - kibana
   - elastic-exporter
 
 # --- Metrics ----- 
 
-  - prometheus-operator
-  - kube-state-metrics
-  - prometheus-operated
-  - grafana
+#  - prometheus-operator
+#  - kube-state-metrics
+#  - prometheus-operated
+#  - grafana
   #- alertmanager-operated

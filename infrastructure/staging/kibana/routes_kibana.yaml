@@ -2,17 +2,16 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: kibana-int-http
+  name: kibana-int-tcp
   namespace: monitoring
 spec:
   entryPoints:
     - web
   routes:
-    - kind: Rule
+    - match: Host(`kibana.staging.0.0.0.0.sslip.io`)
       middlewares:
         - name: redirect-permanent
           namespace: monitoring
-      match: Host(`kibana.staging.0.0.0.0.sslip.io`)
       services:
         - name: kibana
           port: 5601
