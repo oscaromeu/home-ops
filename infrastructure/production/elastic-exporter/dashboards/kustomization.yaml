@@ -9,4 +9,7 @@ configMapGenerator:
   - name: elasticsearch-cluster-dashboards
     files:
       - elastic-exporter.json
+  - name: elasticsearch-cluster-dashboards
+    files:
+      - elastic-exporter-overview.json
 
