@@ -1,6 +1,6 @@
 ---
 apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRouteTCP
+kind: IngressRoute
 metadata:
   name: kibana-int-tcp
   namespace: monitoring
