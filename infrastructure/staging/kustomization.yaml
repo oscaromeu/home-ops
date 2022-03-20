@@ -11,7 +11,7 @@ resources:
 # --- Logging -----
   - elastic
   - kibana
-  - elastic-exporter
+#  - elastic-exporter
 
 # --- Metrics ----- 
 
