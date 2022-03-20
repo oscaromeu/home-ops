@@ -1,37 +1,37 @@
-#---
-#apiVersion: traefik.containo.us/v1alpha1
-#kind: IngressRoute
-#metadata:
-#  name: kibana-int-tcp
-#  namespace: monitoring
-#spec:
-#  entryPoints:
-#    - web
-#  routes:
-#    - kind: Rule
-#      match: Host(`kibana.staging.0.0.0.0.sslip.io`)
-#      middlewares:
-#        - name: redirect-permanent
-#          namespace: monitoring
-#      services:
-#        - name: kibana
-#          port: 5601
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
-  name: kibana-https
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+  name: kibana-int-tcp
+  namespace: monitoring
 spec:
-  rules:
-    - host: kibana.staging.0.0.0.0.sslip.io
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: kibana
-                port:
-                  number: 5601
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`kibana.staging.0.0.0.0.sslip.io`)
+      middlewares:
+        - name: redirect-permanent
+          namespace: monitoring
+      services:
+        - name: kibana
+          port: 5601
+#---
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: kibana-https
+#  annotations:
+#    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+#spec:
+#  rules:
+#    - host: kibana.staging.0.0.0.0.sslip.io
+#      http:
+#        paths:
+#          - path: /
+#            pathType: Prefix
+#            backend:
+#              service:
+#                name: kibana
+#                port:
+#                  number: 5601
