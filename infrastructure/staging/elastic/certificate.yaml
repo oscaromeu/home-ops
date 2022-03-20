@@ -8,7 +8,7 @@ metadata:
 spec:
   secretName: hulk-certs
   dnsNames:
-    - "elasticsearch.hulk"
+    - "elastic.staging.0.0.0.0.sslip.io"
     - "kibana.hulk"
     - "apm.hulk"
   isCA: true

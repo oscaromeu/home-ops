@@ -71,5 +71,5 @@ Access Elasticsearch.
 
 [source,sh]
 ----
-curl --resolve "elasticsearch.hulk:443:$INGRESS_HOST" -k -u "elastic:$ELASTICSEARCH_PASSWORD" -XGET 'https://elasticsearch.hulk/_cat/health?v'
+curl --resolve "elastic.staging.0.0.0.0.sslip.io:443:$INGRESS_HOST" -k -u "elastic:$ELASTICSEARCH_PASSWORD" -XGET 'https://elastic.staging.0.0.0.0.sslip.io/_cat/health?v'
 ----
