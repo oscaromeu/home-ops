@@ -12,6 +12,7 @@ resources:
   - redis
   - filebeat
   - logstash
+  - elastic-exporter
 
 # --- Metrics ----- 
   - ns.yaml
