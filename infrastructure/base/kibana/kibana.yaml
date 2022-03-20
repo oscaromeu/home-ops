@@ -76,7 +76,7 @@ spec:
           - name: SERVER_HOST
             value: "0.0.0.0"
           - name: SERVER_BASEPATH
-            value: "/"
+            value: ""
           - name: SERVER_REWRITEBASEPATH
             value: "false"
           - name: KIBANA_ENCRYPTION_KEY
