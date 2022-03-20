@@ -6,10 +6,10 @@ generatorOptions:
   disableNameSuffixHash: true
 
 configMapGenerator:
-  - name: elasticsearch-cluster-dashboards
+  - name: elastic-exporter
     files:
       - elastic-exporter.json
-  - name: elasticsearch-cluster-dashboards
+  - name: elastic-exporter-overview
     files:
       - elastic-exporter-overview.json
 
