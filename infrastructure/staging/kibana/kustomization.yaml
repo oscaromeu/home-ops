@@ -6,10 +6,10 @@ resources:
 #  - cert-kibana.yaml
   - routes_kibana.yaml
 
-#patches:
-#  - path: ./patches/patch-tls-kibana.yaml
-#    target:
-#      group: traefik.containo.us
-#      version: v1alpha1
-#      kind: IngressRoute
-#      name: kibana-int-http
+patches:
+  - path: ./patches/patch-tls-kibana.yaml
+    target:
+      group: traefik.containo.us
+      version: v1alpha1
+      kind: IngressRoute
+      name: kibana-int-http
