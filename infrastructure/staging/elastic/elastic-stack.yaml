@@ -1,0 +1,59 @@
+---
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: hulk
+  labels:
+    app: hulk
+spec:
+  version: 8.0.0
+  nodeSets:
+  - name: master
+    count: 1
+    config:
+      node.roles: ["master"]
+      node.store.allow_mmap: false
+  - name: data
+    count: 1
+    config:
+      node.roles: ["data"]
+      node.store.allow_mmap: false
+  - name: ingest
+    count: 1
+    config:
+      node.roles: ["ingest"]
+      node.store.allow_mmap: false
+  - name: coordinating
+    count: 1
+    config:
+      node.roles: []
+      node.store.allow_mmap: false
+  - name: ml
+    count: 1
+    config:
+      node.roles: ["ml"]
+      node.store.allow_mmap: false
+---
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: hulk
+  labels:
+    app: hulk
+spec:
+  version: 8.0.0
+  count: 1
+  elasticsearchRef:
+    name: hulk
+---
+apiVersion: apm.k8s.elastic.co/v1
+kind: ApmServer
+metadata:
+  name: hulk
+  labels:
+    app: hulk
+spec:
+  version: 8.0.0
+  count: 1
+  elasticsearchRef:
+    name: hulk
