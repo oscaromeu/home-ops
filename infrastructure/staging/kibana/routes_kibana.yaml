@@ -14,5 +14,5 @@ spec:
         - name: redirect-permanent
           namespace: monitoring
       services:
-        - name: kibana
+        - name: kibana-svc
           port: 5601
