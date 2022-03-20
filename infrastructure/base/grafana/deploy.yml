@@ -38,7 +38,7 @@ spec:
           volumeMounts:
             - name: grafana-shared-dashboards
               mountPath: /tmp/dashboards
-        - image: grafana/grafana
+        - image: "grafana/grafana:8.4.4"
           name: grafana
           env:
             - name: GF_AUTH_ANONYMOUS_ENABLED
@@ -51,8 +51,8 @@ spec:
               value: /var/lib/grafana/plugins
             - name: GF_INSTALL_PLUGINS
               valueFrom:
-                configMapKeyRef:
-                  name: grafana-1647715912
+                secretKeyRef:
+                  name: grafana-config
                   key: plugins
           ports:
             - containerPort: 3000
