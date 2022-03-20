@@ -7,7 +7,7 @@ spec:
   valuesContent: |-
     logs:
       general:
-        level: INFO
+        level: DEBUG
       access:
         enabled: true
         format: json
