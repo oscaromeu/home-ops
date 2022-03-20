@@ -6,13 +6,12 @@ metadata:
   namespace: monitoring
 spec:
   entryPoints:
-    - kibanatcp
+    - int-tcp-kibana
   routes:
-    - kind: Rule
+    - match: HostSNI(`kibana.prod.0.0.0.0.sslip.io`)
       middlewares:
         - name: redirect-permanent
           namespace: monitoring
-      match: Host(`kibana.prod.0.0.0.0.sslip.io`)
       services:
         - name: kibana
           port: 5601
