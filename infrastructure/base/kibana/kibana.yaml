@@ -78,7 +78,7 @@ spec:
           - name: SERVER_BASEPATH
             value: ""
           - name: SERVER_REWRITEBASEPATH
-            value: "true"
+            value: "false"
           - name: SERVER_PUBLICBASEURL
             value: "https://kibana.staging.0.0.0.0.sslip.io/"
           - name: KIBANA_ENCRYPTION_KEY
