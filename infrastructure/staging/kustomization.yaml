@@ -9,8 +9,8 @@ resources:
   - cert-manager
 
 # --- Logging -----
-  - elastic
-  - kibana
+#  - elastic
+#  - kibana
 #  - elastic-exporter
 
 # --- Metrics ----- 
