@@ -8,7 +8,8 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`kibana.staging.0.0.0.0.sslip.io`)
+    - kind: Rule
+      match: Host(`kibana.staging.0.0.0.0.sslip.io`)
       middlewares:
         - name: redirect-permanent
           namespace: monitoring
