@@ -6,7 +6,7 @@ metadata:
   namespace: monitoring
 spec:
   entryPoints:
-    - web
+    - http
   routes:
     - kind: Rule
       middlewares:
