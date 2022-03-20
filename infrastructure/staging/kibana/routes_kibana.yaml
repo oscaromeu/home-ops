@@ -20,9 +20,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: kibana-http
+  name: kibana-https
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   rules:
     - host: kibana.staging.0.0.0.0.sslip.io
