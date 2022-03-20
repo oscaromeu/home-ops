@@ -1,6 +1,6 @@
 ---
 apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+kind: IngressRouteTCP
 metadata:
   name: kibana-int-tcp
   namespace: monitoring
@@ -16,22 +16,3 @@ spec:
       services:
         - name: kibana
           port: 5601
-#---
-#apiVersion: networking.k8s.io/v1
-#kind: Ingress
-#metadata:
-#  name: kibana-https
-#  annotations:
-#    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-#spec:
-#  rules:
-#    - host: kibana.staging.0.0.0.0.sslip.io
-#      http:
-#        paths:
-#          - path: /
-#            pathType: Prefix
-#            backend:
-#              service:
-#                name: kibana
-#                port:
-#                  number: 5601
