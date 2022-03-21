@@ -13,8 +13,8 @@ spec:
         - name: hulk-elasticsearch
           port: 9200
           scheme: https
-      middlewares:
-        - name: hulk-middleware-chain
+#      middlewares:
+#        - name: hulk-middleware-chain
 #    - match: "Host(`elastic.staging.0.0.0.0.sslip.io`) && ((PathPrefix(`/_search`) && Method(`POST`)) || Method(`GET`))"
 #      kind: Rule
 #      services:
