@@ -37,8 +37,8 @@ spec:
         - name: hulk-kb-http
           port: 5601
           scheme: https
-      middlewares:
-        - name: hulk-middleware-chain
+#      middlewares:
+#        - name: hulk-middleware-chain
 #    - match: "Host(`apm.staging.0.0.0.0.sslip.io`)"
 #      kind: Rule
 #      services:
