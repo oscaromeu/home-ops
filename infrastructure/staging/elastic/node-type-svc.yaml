@@ -10,7 +10,9 @@ spec:
     - name: https
       port: 9200
       targetPort: 9200
-
+  selector:
+    # Select coordinating nodes
+    elasticsearch.k8s.elastic.co/cluster-name: "hulk"
 #---
 #apiVersion: v1
 #kind: Service
