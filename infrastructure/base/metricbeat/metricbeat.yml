@@ -35,7 +35,7 @@ data:
       username: '${ELASTICSEARCH_USERNAME}'
       password: '${ELASTICSEARCH_PASSWORD}'
       protocol: https
-      hosts: ["https://es-master-headless:9200"]
+      hosts: ["https://elk-es-master:9200"]
       ssl.enabled: true 
       ssl.certificate_authorities: ["/usr/share/metricbeat/config/certs/ca.crt"]
        #ssl.verfication_mode: "certificate"
