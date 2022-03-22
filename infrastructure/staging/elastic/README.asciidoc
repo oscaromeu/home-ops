@@ -64,7 +64,7 @@ Obtain the Elasticsearch password.
 
 [source,sh]
 ----
-ELASTICSEARCH_PASSWORD=$(kubectl get secret hulk-es-elastic-user -o=go-template='{{ .data.elastic | base64decode}}')
+ELASTICSEARCH_PASSWORD=$(kubectl get secret es-es-elastic-user -o=go-template='{{ .data.elastic | base64decode}}')
 ----
 
 Access Elasticsearch.

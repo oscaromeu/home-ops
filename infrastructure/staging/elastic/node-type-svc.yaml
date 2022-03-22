@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: hulk-elasticsearch
+  name: es-elasticsearch
   labels:
-    app: hulk
+    app: es
 spec:
   ports:
     - name: https
@@ -12,14 +12,14 @@ spec:
       targetPort: 9200
   selector:
     # Select coordinating nodes
-    elasticsearch.k8s.elastic.co/cluster-name: "hulk"
+    elasticsearch.k8s.elastic.co/cluster-name: "es"
 #---
 #apiVersion: v1
 #kind: Service
 #metadata:
-#  name: hulk-elasticsearch-read
+#  name: es-elasticsearch-read
 #  labels:
-#    app: hulk
+#    app: es
 #spec:
 #  ports:
 #    - name: https
@@ -27,7 +27,7 @@ spec:
 #      targetPort: 9200
 #  selector:
 #    # Select coordinating nodes
-#    elasticsearch.k8s.elastic.co/cluster-name: "hulk"
+#    elasticsearch.k8s.elastic.co/cluster-name: "es"
 #    elasticsearch.k8s.elastic.co/node-master: "false"
 #    elasticsearch.k8s.elastic.co/node-data: "false"
 #    elasticsearch.k8s.elastic.co/node-ingest: "false"
@@ -36,9 +36,9 @@ spec:
 #apiVersion: v1
 #kind: Service
 #metadata:
-#  name: hulk-elasticsearch-write
+#  name: es-elasticsearch-write
 #  labels:
-#    app: hulk
+#    app: es
 #spec:
 #  ports:
 #    - name: https
@@ -46,5 +46,5 @@ spec:
 #      targetPort: 9200
 #  selector:
 #    # Select ingest nodes
-#    elasticsearch.k8s.elastic.co/cluster-name: "hulk"
+#    elasticsearch.k8s.elastic.co/cluster-name: "es"
 #    elasticsearch.k8s.elastic.co/node-ingest: "true"

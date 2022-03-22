@@ -2,7 +2,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: hulk-elastic-stack
+  name: es-elastic-stack
 spec:
   entryPoints:
     - websecure
@@ -10,47 +10,47 @@ spec:
     - match: "Host(`elastic.staging.0.0.0.0.sslip.io`)"
       kind: Rule
       services:
-        - name: hulk-elasticsearch
+        - name: es-elasticsearch
           port: 9200
           scheme: https
 #      middlewares:
-#        - name: hulk-middleware-chain
+#        - name: es-middleware-chain
 #    - match: "Host(`elastic.staging.0.0.0.0.sslip.io`) && ((PathPrefix(`/_search`) && Method(`POST`)) || Method(`GET`))"
 #      kind: Rule
 #      services:
-#        - name: hulk-elasticsearch-read
+#        - name: es-elasticsearch-read
 #          port: 9200
 #          scheme: https
 #      middlewares:
-#        - name: hulk-middleware-chain
+#        - name: es-middleware-chain
 #    - match: "Host(`elastic.staging.0.0.0.0.sslip.io`) && Method(`DELETE`,`POST`,`PUT`)"
 #      kind: Rule
 #      services:
-#        - name: hulk-elasticsearch-write
+#        - name: es-elasticsearch-write
 #          port: 9200
 #          scheme: https
 #      middlewares:
-#        - name: hulk-middleware-chain
+#        - name: es-middleware-chain
     - match: "Host(`kibana.staging.0.0.0.0.sslip.io`)"
       kind: Rule
       services:
-        - name: hulk-kb-http
+        - name: es-kb-http
           port: 5601
           scheme: https
 #      middlewares:
-#        - name: hulk-middleware-chain
+#        - name: es-middleware-chain
 #    - match: "Host(`apm.staging.0.0.0.0.sslip.io`)"
 #      kind: Rule
 #      services:
-#        - name: hulk-apm-http
+#        - name: es-apm-http
 #          port: 8200
 #          scheme: https
 #      middlewares:
-#        - name: hulk-ip-whitelist
-#        - name: hulk-circuit-breaker
-#        - name: hulk-apm-ratelimit
+#        - name: es-ip-whitelist
+#        - name: es-circuit-breaker
+#        - name: es-apm-ratelimit
   tls:
-    secretName: hulk-certs
+    secretName: es-certs
     domains:
       - sans:
           - "elastic.staging.0.0.0.0.sslip.io"

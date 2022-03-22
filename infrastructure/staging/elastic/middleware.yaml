@@ -2,18 +2,18 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: hulk-middleware-chain
+  name: es-middleware-chain
 spec:
   chain:
     middlewares:
-    #- name: hulk-ip-whitelist
-    - name: hulk-limit-concurrent
-    - name: hulk-circuit-breaker
+    #- name: es-ip-whitelist
+    - name: es-limit-concurrent
+    - name: es-circuit-breaker
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: hulk-ip-whitelist
+  name: es-ip-whitelist
 spec:
   ipWhiteList:
     sourceRange:
@@ -22,7 +22,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: hulk-limit-concurrent
+  name: es-limit-concurrent
 spec:
   inFlightReq:
     amount: 10
@@ -33,7 +33,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: hulk-circuit-breaker
+  name: es-circuit-breaker
 spec:
   circuitBreaker:
     expression: "LatencyAtQuantileMS(50.0) > 500 || ResponseCodeRatio(400,600,0,600) > 0.25"
@@ -41,7 +41,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: hulk-apm-ratelimit
+  name: es-apm-ratelimit
 spec:
   rateLimit:
     average: 100
