@@ -28,7 +28,7 @@ spec:
         ]
         env:
         - name: ELASTICSEARCH_HOST
-          value: elastic-prod-master-headless
+          value: elk-es-master
         - name: ELASTICSEARCH_PORT
           value: "9200"
             #        - name: ELASTICSEARCH_USERNAME
@@ -42,9 +42,9 @@ spec:
         - name: REDIS_HOSTS
           value: "['redis-master:6379']"
         - name: LOG_TYPE
-          value: k3s_cluster
+          value: elk
         - name: CLUSTER_NAME
-          value: k3s_prod
+          value: elk
         - name: REDIS_KEY_NAME
           value: "k3s"
         - name: BUFFER_FILE

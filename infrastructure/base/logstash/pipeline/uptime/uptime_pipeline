@@ -9,8 +9,8 @@ filter {
 output {
 
   elasticsearch {
-    hosts => ["https://es-master-headless:9200"]
-    cacert => "/usr/share/logstash/config/certs/elastic-certificate.crt"
+    hosts => ["https://elk-es-master:9200"]
+    cacert => "/usr/share/logstash/config/certs/ca.crt"
     user => '${ELASTICSEARCH_USERNAME}'
     password => '${ELASTICSEARCH_PASSWORD}'
     index => "uptime"

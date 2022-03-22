@@ -9,6 +9,9 @@ resources:
 
 # --- Logging -----
   - elastic
+  - logstash
+  - filebeat
+  - metricbeat
 #  - kibana
 #  - elastic-exporter
 

@@ -68,9 +68,9 @@ spec:
           secret:
             secretName: logstash-redis-certs
             defaultMode: 256
-        - name: elastic-certificate-crt-volume
+        - name: ca-certs
           secret:
-            secretName: elastic-certificate-crt
+            secretName: elk-es-http-certs-public
       containers:
       - name: "logstash"
         securityContext:
@@ -112,15 +112,12 @@ spec:
             memory: 512Mi
         env:
           - name: ELASTICSEARCH_USERNAME
-            valueFrom:
-              secretKeyRef:
-                key: username
-                name: es-master-credentials
+            value: "elastic"
           - name: ELASTICSEARCH_PASSWORD
             valueFrom:
               secretKeyRef:
-                key: password
-                name: es-master-credentials
+                key: elastic
+                name: elk-es-elastic-user
         volumeMounts:
           - name: logstash
             mountPath: "/usr/share/logstash/data"
@@ -137,6 +134,6 @@ spec:
             mountPath: "/usr/share/logstash/pipeline"
           - name: logstash-redis-certs
             mountPath: "/usr/share/logstash/ssl"
-          - name: elastic-certificate-crt-volume
+          - name: ca-certs
             mountPath: /usr/share/logstash/config/certs
 
