@@ -7,12 +7,12 @@ resources:
   - traefik
 
 # --- Logging -----
-  - elastic
-  - kibana
-  - redis
-  - filebeat
-  - logstash
-  - elastic-exporter
+#  - elastic
+#  - kibana
+#  - redis
+#  - filebeat
+#  - logstash
+#  - elastic-exporter
 
 # --- Metrics ----- 
   - ns.yaml
