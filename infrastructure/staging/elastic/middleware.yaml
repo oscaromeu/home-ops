@@ -2,18 +2,18 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: es-middleware-chain
+  name: elk-middleware-chain
 spec:
   chain:
     middlewares:
-    #- name: es-ip-whitelist
-    - name: es-limit-concurrent
-    - name: es-circuit-breaker
+    #- name: elk-ip-whitelist
+    - name: elk-limit-concurrent
+    - name: elk-circuit-breaker
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: es-ip-whitelist
+  name: elk-ip-whitelist
 spec:
   ipWhiteList:
     sourceRange:
@@ -22,7 +22,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: es-limit-concurrent
+  name: elk-limit-concurrent
 spec:
   inFlightReq:
     amount: 10
@@ -33,7 +33,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: es-circuit-breaker
+  name: elk-circuit-breaker
 spec:
   circuitBreaker:
     expression: "LatencyAtQuantileMS(50.0) > 500 || ResponseCodeRatio(400,600,0,600) > 0.25"
@@ -41,7 +41,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: es-apm-ratelimit
+  name: elk-apm-ratelimit
 spec:
   rateLimit:
     average: 100

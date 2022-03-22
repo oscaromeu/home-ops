@@ -2,11 +2,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: es-certs
+  name: elk-certs
   labels:
-    app: es
+    app: elk
 spec:
-  secretName: es-certs
+  secretName: elk-certs
   dnsNames:
     - "elastic.staging.0.0.0.0.sslip.io"
     - "kibana.staging.0.0.0.0.sslip.io"
@@ -17,4 +17,4 @@ spec:
     kind: ClusterIssuer
   subject:
     organizations:
-      - es
+      - elk
