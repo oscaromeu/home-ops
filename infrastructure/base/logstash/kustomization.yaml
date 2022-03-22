@@ -25,5 +25,5 @@ configMapGenerator:
   namespace: monitoring
   files:
     - pipeline/uptime/uptime_pipeline
-    - pipeline/pi-cluster-logs/pi_cluster_pipeline
+    - pipeline/k3s_prod/k3s_prod_pipeline
 

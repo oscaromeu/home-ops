@@ -2,8 +2,8 @@ http.host: "0.0.0.0"
 config.reload.automatic: true
 pipeline.unsafe_shutdown: false
 log.level: "info"
-xpack.monitoring.elasticsearch.hosts: ["https://es-master-headless:9200"]
-xpack.monitoring.elasticsearch.ssl.certificate_authority: /usr/share/logstash/config/certs/elastic-certificate.crt
+xpack.monitoring.elasticsearch.hosts: ["https://elk-es-http.monitoring.svc:9200"]
+xpack.monitoring.elasticsearch.ssl.certificate_authority: /usr/share/logstash/config/certs/ca.crt
 xpack.monitoring.enabled: true
 xpack.monitoring.collection.interval: 60s
 xpack.monitoring.elasticsearch.username: "${ELASTICSEARCH_USERNAME}"

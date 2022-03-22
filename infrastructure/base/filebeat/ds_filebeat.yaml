@@ -42,11 +42,11 @@ spec:
         - name: REDIS_HOSTS
           value: "['redis-master:6379']"
         - name: LOG_TYPE
-          value: elk
+          value: k3s_cluster
         - name: CLUSTER_NAME
-          value: elk
+          value: k3s_prod
         - name: REDIS_KEY_NAME
-          value: "k3s"
+          value: "k3s_prod"
         - name: BUFFER_FILE
           value: "/var/buffer/filebeat/filebeat_spool.dat"
         - name: BUFFER_FILE_SIZE

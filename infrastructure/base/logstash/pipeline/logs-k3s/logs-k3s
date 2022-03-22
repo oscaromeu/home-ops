@@ -4,7 +4,7 @@ input {
       host => "redis-master"
       type => "redis-input"
       data_type => "list"
-      key => "k3s"
+      key => "k3s_prod"
       ssl => false
       port => 6379
   }
@@ -14,7 +14,12 @@ input {
 filter {
 
     #if [log_type] == "k3s_cluster" {drop {}}
-    mutate { replace => { "[host]" => "[host][name]" } }
+    mutate { 
+      replace => { "[host]" => "[host][name]" } 
+      copy => { "[kubernetes][namespace]" => "k3s_project_name" }
+      rename => { "message" => "log" }
+      lowercase => [ "k3s_cluster_name", "k3s_project_name" ]
+    }
 }
 
 
@@ -30,7 +35,7 @@ output {
     cacert => "/usr/share/logstash/config/certs/ca.crt"
     user => '${ELASTICSEARCH_USERNAME}'
     password => '${ELASTICSEARCH_PASSWORD}'
-    index => "k3s"
+    index => "logs-pi_prod-%{k3s_cluster_name}.%{k3s_project_name}"
   }
 
 }
