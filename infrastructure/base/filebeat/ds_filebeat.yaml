@@ -28,7 +28,7 @@ spec:
         ]
         env:
         - name: ELASTICSEARCH_HOST
-          value: elk-es-http.logging.svc
+          value: elk-es-http.monitoring.svc
         - name: ELASTICSEARCH_PORT
           value: "9200"
             #        - name: ELASTICSEARCH_USERNAME
