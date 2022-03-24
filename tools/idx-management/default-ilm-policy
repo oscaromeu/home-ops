@@ -1,0 +1,30 @@
+PUT _ilm/policy/default-ilm-policy
+{
+  "policy": {
+    "phases": {
+      "hot": {
+        "min_age": "0ms",
+        "actions": {
+          "rollover": {
+            "max_size": "2gb",
+            "max_primary_shard_size": "50gb",
+            "max_age": "7d"
+          },
+          "set_priority": {
+            "priority": 100
+          }
+        }
+      },
+      "delete": {
+        "min_age": "15d",
+        "actions": {
+          "delete": {
+            "delete_searchable_snapshot": true
+          }
+        }
+      }
+    }
+  }
+}
+
+.ds-logs-pi_prod-k3s_prod.flux-system-2022.03.23-000001

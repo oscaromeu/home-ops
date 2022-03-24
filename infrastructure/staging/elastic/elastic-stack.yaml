@@ -11,7 +11,7 @@ spec:
   - name: master
     count: 1
     config:
-      node.roles: ["master"]
+      node.roles: ["master", "remote_cluster_client"]
       node.store.allow_mmap: false
   - name: data
     count: 1

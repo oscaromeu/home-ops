@@ -1,0 +1,42 @@
+PUT _ilm/policy/pi-prod-policy
+{
+  "policy": {
+    "phases": {
+      "hot": {
+        "min_age": "0ms",
+        "actions": {
+          "rollover": {
+            "max_primary_shard_size": "10gb",
+            "max_age": "7d"
+          },
+          "set_priority": {
+            "priority": 100
+          }
+        }
+      },
+      "warm": {
+        "min_age": "5d",
+        "actions": {
+          "readonly": {},
+          "set_priority": {
+            "priority": 50
+          },
+          "shrink": {
+            "number_of_shards": 1
+          },
+          "allocate": {
+            "number_of_replicas": 1
+          }
+        }
+      },
+      "delete": {
+        "min_age": "21d",
+        "actions": {
+          "delete": {
+            "delete_searchable_snapshot": true
+          }
+        }
+      }
+    }
+  }
+}
