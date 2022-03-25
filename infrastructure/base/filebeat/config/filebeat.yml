@@ -9,23 +9,6 @@ filebeat.config.modules:
   reload.enabled: true
   reload.period: 10m
 
-# To enable hints based autodiscover, remove `filebeat.inputs` configuration and uncomment this:
-#filebeat.autodiscover:
-#  providers:
-#    - type: kubernetes
-#      node: ${NODE_NAME}
-#      hints.enabled: true
-#      hints.default_config:
-#        type: container
-#        paths:
-#          - /var/log/containers/*${data.kubernetes.container.id}.log
-
-
-#output.elasticsearch:
-#  hosts: ['${ELASTICSEARCH_HOST:elasticsearch}:${ELASTICSEARCH_PORT:9200}']
-#    #  username: ${ELASTICSEARCH_USERNAME}
-#    #  password: ${ELASTICSEARCH_PASSWORD}
-
 output.redis:
   hosts: ${REDIS_HOSTS}
   key: '${REDIS_KEY_NAME}'

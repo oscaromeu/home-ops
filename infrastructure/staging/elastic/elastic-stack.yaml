@@ -11,28 +11,40 @@ spec:
   - name: master
     count: 1
     config:
-      node.roles: ["master", "remote_cluster_client"]
+      node.roles: ["master","data_hot","data_content", "remote_cluster_client"]
+      node.attr.type: "hot"
       node.store.allow_mmap: false
+      #xpack.monitoring.enabled: "true"
+      xpack.monitoring.collection.cluster.stats.timeout: "10m"
+      xpack.monitoring.collection.index.recovery.active_only: "false"
+      xpack.monitoring.collection.index.recovery.timeout: "10m"
+      xpack.monitoring.collection.index.stats.timeout: "10m"
+      xpack.monitoring.collection.indices: "'*'"
+      xpack.monitoring.collection.interval: "60s"
+      xpack.monitoring.history.duration: "30d"
+    podTemplate:
+      spec:
+        containers:
+        - name: elasticsearch
+          env:
+          - name: READINESS_PROBE_TIMEOUT
+            value: "60"
+
   - name: data
     count: 1
     config:
-      node.roles: ["data"]
+      node.roles: ["data_warm", "data_content"]
       node.store.allow_mmap: false
-#  - name: ingest
-#    count: 1
-#    config:
-#      node.roles: ["ingest"]
-#      node.store.allow_mmap: false
-#  - name: coordinating
-#    count: 1
-#    config:
-#      node.roles: []
-#      node.store.allow_mmap: false
-#  - name: ml
-#    count: 1
-#    config:
-#      node.roles: ["ml"]
-#      node.store.allow_mmap: false
+      node.attr.type: "warm"
+      # XPack - Monitoring configuration
+      #xpack.monitoring.enabled: "true"
+      xpack.monitoring.collection.cluster.stats.timeout: "10m"
+      xpack.monitoring.collection.index.recovery.active_only: "false"
+      xpack.monitoring.collection.index.recovery.timeout: "10m"
+      xpack.monitoring.collection.index.stats.timeout: "10m"
+      xpack.monitoring.collection.indices: "'*'"
+      xpack.monitoring.collection.interval: "60s"
+      xpack.monitoring.history.duration: "30d"
 ---
 apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana

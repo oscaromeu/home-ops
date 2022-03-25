@@ -30,21 +30,18 @@ spec:
         - name: exporter
           env:
             - name: ES_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: es-master-credentials
-                  key: username
+              value: elastic
             - name: ES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: es-master-credentials
-                  key: password
+                  key: elastic
+                  name: elk-es-elastic-user
           image: "quay.io/prometheuscommunity/elasticsearch-exporter:v1.3.0"
           imagePullPolicy: IfNotPresent
           command: ["elasticsearch_exporter",
                     "--log.format=logfmt",
                     "--log.level=info",
-                    "--es.uri=https://es-master-headless:9200",
+                    "--es.uri=https://elk-es-http.monitoring.svc:9200",
                     "--es.all",
                     "--es.indices",
                     "--es.indices_settings",
@@ -53,7 +50,7 @@ spec:
                     "--es.snapshots",
                     "--es.timeout=30s",
                     "--es.ssl-skip-verify",
-                    "--es.ca=/usr/share/elasticsearch-exporter/config/certs/elastic-certificate.crt",
+                    "--es.ca=/usr/share/elasticsearch-exporter/config/certs/ca.crt",
                     "--web.listen-address=:9108",
                     "--web.telemetry-path=/metrics"]
           securityContext:
@@ -98,9 +95,9 @@ spec:
               exec:
                 command: ["/bin/bash", "-c", "sleep 20"]
           volumeMounts:
-            - name: elastic-certificates-volumes
+            - name: ca-certs
               mountPath: /usr/share/elasticsearch-exporter/config/certs
       volumes:
-        - name: elastic-certificates-volumes
+        - name: ca-certs
           secret:
-            secretName: elastic-certificate-crt
+            secretName: elk-es-http-certs-public
