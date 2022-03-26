@@ -39,7 +39,7 @@ spec:
   - name: data
     count: 1
     config:
-      node.roles: ["data_warm", "data_content"]
+      node.roles: ["data_warm", "data_content","remote_cluster_client"]
       node.store.allow_mmap: false
       node.attr.type: "warm"
       # XPack - Monitoring configuration
