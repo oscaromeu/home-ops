@@ -1,0 +1,58 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: elk-elastic-stack
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`elastic.prod.0.0.0.0.sslip.io`)"
+      kind: Rule
+      services:
+        - name: elk-elasticsearch
+          port: 9200
+          scheme: https
+#      middlewares:
+#        - name: elk-middleware-chain
+#    - match: "Host(`elastic.prod.0.0.0.0.sslip.io`) && ((PathPrefix(`/_search`) && Method(`POST`)) || Method(`GET`))"
+#      kind: Rule
+#      services:
+#        - name: elk-elasticsearch-read
+#          port: 9200
+#          scheme: https
+#      middlewares:
+#        - name: elk-middleware-chain
+#    - match: "Host(`elastic.prod.0.0.0.0.sslip.io`) && Method(`DELETE`,`POST`,`PUT`)"
+#      kind: Rule
+#      services:
+#        - name: elk-elasticsearch-write
+#          port: 9200
+#          scheme: https
+#      middlewares:
+#        - name: elk-middleware-chain
+    - match: "Host(`kibana.prod.0.0.0.0.sslip.io`)"
+      kind: Rule
+      services:
+        - name: elk-kb-http
+          port: 5601
+          scheme: https
+#      middlewares:
+#        - name: elk-middleware-chain
+#    - match: "Host(`apm.prod.0.0.0.0.sslip.io`)"
+#      kind: Rule
+#      services:
+#        - name: elk-apm-http
+#          port: 8200
+#          scheme: https
+#      middlewares:
+#        - name: elk-ip-whitelist
+#        - name: elk-circuit-breaker
+#        - name: elk-apm-ratelimit
+  tls:
+    secretName: elk-certs
+    domains:
+      - sans:
+          - "elastic.prod.0.0.0.0.sslip.io"
+          - "kibana.prod.0.0.0.0.sslip.io"
+          - "apm.prod.0.0.0.0.sslip.io"
