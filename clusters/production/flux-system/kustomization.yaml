@@ -4,17 +4,6 @@ namespace: flux-system
 resources:
 - gotk-components.yaml
 - gotk-sync.yaml
-- ./monitoring/podmonitor.yaml
 
 #patchesStrategicMerge:
 #  - gotk-patches.yaml
-
-configMapGenerator:
-  - name: flux-grafana-dashboards
-    files:
-      - ./dashboards/control-plane.json
-      - ./dashboards/cluster.json
-    options:
-      labels:
-        grafana-liveinfra-dashboard: default
-      disableNameSuffixHash: true
