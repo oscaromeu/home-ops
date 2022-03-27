@@ -3,7 +3,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prometheus-elasticsearch-exporter
-  namespace: monitoring
   labels:
     app: prometheus-elasticsearch-exporter
 spec:
@@ -41,7 +40,7 @@ spec:
           command: ["elasticsearch_exporter",
                     "--log.format=logfmt",
                     "--log.level=info",
-                    "--es.uri=https://elk-es-http.monitoring.svc:9200",
+                    "--es.uri=https://elk-es-http.logging.svc:9200",
                     "--es.all",
                     "--es.indices",
                     "--es.indices_settings",

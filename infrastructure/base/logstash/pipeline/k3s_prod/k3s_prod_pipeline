@@ -31,7 +31,7 @@ output {
 
 
   elasticsearch {
-    hosts => ["https://elk-es-http.monitoring.svc:9200"]
+    hosts => ["https://elk-es-http.logging.svc:9200"]
     cacert => "/usr/share/logstash/config/certs/ca.crt"
     user => '${ELASTICSEARCH_USERNAME}'
     password => '${ELASTICSEARCH_PASSWORD}'

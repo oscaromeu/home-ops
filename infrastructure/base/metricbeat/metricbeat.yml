@@ -22,7 +22,7 @@ data:
     - module: elasticsearch
       xpack.enabled: true
       period: 10m
-      hosts: ["https://elk-es-http.monitoring.svc:9200"] 
+      hosts: ["https://elk-es-http.logging.svc:9200"] 
       scope: cluster 
       username: '${ELASTICSEARCH_USERNAME}'
       password: '${ELASTICSEARCH_PASSWORD}'
@@ -35,7 +35,7 @@ data:
       username: '${ELASTICSEARCH_USERNAME}'
       password: '${ELASTICSEARCH_PASSWORD}'
       protocol: https
-      hosts: ["https://elk-es-http.monitoring.svc:9200"]
+      hosts: ["https://elk-es-http.logging.svc:9200"]
       ssl.enabled: true 
       ssl.certificate_authorities: ["/usr/share/metricbeat/config/certs/ca.crt"]
        #ssl.verfication_mode: "certificate"
