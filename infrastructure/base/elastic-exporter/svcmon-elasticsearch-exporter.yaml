@@ -5,6 +5,8 @@ metadata:
   labels:
     app: prometheus-elasticsearch-exporter-svcmon
 spec:
+  namespaceSelector:
+    any: true
   selector:
     matchLabels:
       app: prometheus-elasticsearch-exporter
