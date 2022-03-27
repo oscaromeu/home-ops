@@ -6,7 +6,8 @@ metadata:
     app: prometheus-elasticsearch-exporter-svcmon
 spec:
   namespaceSelector:
-    any: true
+    matchNames:
+      - logging
   selector:
     matchLabels:
       app: prometheus-elasticsearch-exporter
