@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: demo-service
-        image: osokaru/prometheus-demo-service:0.9.0 
+        image: oscaromeu/prometheus-demo-service:0.9.0 
         imagePullPolicy: IfNotPresent
         args:
         - -listen-address=:80
