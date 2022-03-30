@@ -3,3 +3,4 @@ kind: Kustomization
 namespace: apps 
 resources:
   - ../../base/demo-service
+  - demo-service-monitor.yml
