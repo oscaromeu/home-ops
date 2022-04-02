@@ -8,12 +8,12 @@ resources:
   - cert-manager
 
 # --- Logging -----
-  - elastic
-  - logstash
-  - filebeat
-  - metricbeat
-  - redis
-  - elastic-exporter
+# - elastic
+# - logstash
+# - filebeat
+# - metricbeat
+# - redis
+# - elastic-exporter
 
 # --- Metrics ----- 
 
