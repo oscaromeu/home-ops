@@ -9,12 +9,12 @@ resources:
   - traefik
 
 # --- Logging -----
-  - elastic
-  - redis
-  - filebeat
-  - logstash
-  - elastic-exporter
-  - metricbeat
+#  - elastic
+#  - redis
+#  - filebeat
+#  - logstash
+#  - elastic-exporter
+#  - metricbeat
 
 # --- Metrics ----- 
   - prometheus-operator
