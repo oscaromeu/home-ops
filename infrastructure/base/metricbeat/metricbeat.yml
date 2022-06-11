@@ -27,18 +27,13 @@ data:
       username: '${ELASTICSEARCH_USERNAME}'
       password: '${ELASTICSEARCH_PASSWORD}'
       ssl.enabled: true 
-        #ssl.verification_mode: "none"
-      ssl.certificate_authorities:
-        - /usr/share/metricbeat/config/certs/ca.crt
-        #ssl.verfication_mode: "certificate"
+      ssl.verification_mode: "none"
     output.elasticsearch:
       username: '${ELASTICSEARCH_USERNAME}'
       password: '${ELASTICSEARCH_PASSWORD}'
       protocol: https
       hosts: ["https://elk-es-http.logging.svc:9200"]
       ssl.enabled: true 
-      ssl.certificate_authorities: ["/usr/share/metricbeat/config/certs/ca.crt"]
-       #ssl.verfication_mode: "certificate"
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -121,9 +116,6 @@ spec:
       serviceAccountName: metricbeat
       terminationGracePeriodSeconds: 30
       volumes:
-      - name: ca-certs
-        secret:
-          secretName: elk-es-http-certs-public
       - name: metricbeat-config
         configMap:
           defaultMode: 0600
@@ -151,9 +143,6 @@ spec:
           privileged: false
           runAsUser: 0
         volumeMounts:
-        - name: ca-certs
-          mountPath: "/usr/share/metricbeat/config/certs/ca.crt"
-          subPath: "ca.crt"
         - name: metricbeat-config
           mountPath: /usr/share/metricbeat/metricbeat.yml
           readOnly: true

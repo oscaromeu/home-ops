@@ -15,14 +15,14 @@ spec:
       node.attr.type: "hot"
       node.store.allow_mmap: false
       xpack.monitoring.collection.enabled: true 
-      xpack.monitoring.elasticsearch.collection.enabled: false
+      xpack.monitoring.elasticsearch.collection.enabled: true
       xpack.monitoring.collection.cluster.stats.timeout: "10m"
       xpack.monitoring.collection.index.recovery.active_only: "false"
       xpack.monitoring.collection.index.recovery.timeout: "10m"
       xpack.monitoring.collection.index.stats.timeout: "10m"
       xpack.monitoring.collection.indices: "'*'"
       xpack.monitoring.collection.interval: "60s"
-      xpack.monitoring.history.duration: "30d"
+      xpack.monitoring.history.duration: "7d"
     podTemplate:
       spec:
         containers:
@@ -44,14 +44,14 @@ spec:
       node.attr.type: "warm"
       # XPack - Monitoring configuration
       xpack.monitoring.collection.enabled: true 
-      xpack.monitoring.elasticsearch.collection.enabled: false
+      xpack.monitoring.elasticsearch.collection.enabled: true
       xpack.monitoring.collection.cluster.stats.timeout: "10m"
       xpack.monitoring.collection.index.recovery.active_only: "false"
       xpack.monitoring.collection.index.recovery.timeout: "10m"
       xpack.monitoring.collection.index.stats.timeout: "10m"
       xpack.monitoring.collection.indices: "'*'"
       xpack.monitoring.collection.interval: "60s"
-      xpack.monitoring.history.duration: "30d"
+      xpack.monitoring.history.duration: "7d"
     podTemplate: 
       metadata: 
         labels: 
