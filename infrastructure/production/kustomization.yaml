@@ -14,6 +14,7 @@ resources:
   - filebeat
   - logstash
   - elastic-exporter
+  - metricbeat
 
 # --- Metrics ----- 
   - prometheus-operator
