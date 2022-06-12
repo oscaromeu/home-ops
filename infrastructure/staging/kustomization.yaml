@@ -9,10 +9,10 @@ resources:
 
 # --- Logging -----
 # - elastic
-# - logstash
-# - filebeat
+ - logstash
+ - filebeat
 # - metricbeat
-# - redis
+ - redis
 # - elastic-exporter
 
 # --- Metrics ----- 
