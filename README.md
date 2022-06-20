@@ -70,16 +70,25 @@ TODO
     * [Kube-State-Metrics](https://github.com/kubernetes/kube-state-metrics) to get metrics from kubernetes api-server
     * [Prometheus-Operator](https://github.com/prometheus-operator/prometheus-operator#prometheus-operator) to manage the life-cycle of Prometheus and AlertManager custom resource definitions (CRDs)
  * [Promlens](https://promlens.com/) tool to build and analyse promql queries with ease.
- * [QuestdB](https://questdb.com/) High-performance, open-source SQL database for applications such as IoT, DevOps and observability.
- * [Telegraf-operator](https://questdb.com/) Monitor applications easily with telegraf running as a sidecar. 
 
-![metrics-infra](./.img/metrics-infra.png)
+To provide HA and long term storage capabilities to the metrics platform two options are available:
+
+ * (TODO) [Thanos](https://thanos.io/)
+ * (TODO) [VictoriaMetrics](https://victoriametrics.com/) 
+
 </p>
 </details>
 
 <details><summary> <b>Logging</b> </summary>
 <p>
 
+* [Filebeat](https://www.elastic.co/beats/filebeat) collect logs and forward them to Redis
+* [Redis](https://redis.io/) to brokers the data flow and queue it
+* [Logstash](https://www.elastic.co/logstash/) to subscribe to Redis, process the data and ship it to Elasticsearch
+* [Elasticsearch](https://www.elastic.co/) to index and store the data
+* [Kibana](https://www.elastic.co/kibana/) to visualize and analyze the data
+* (TODO) [Metricbeat](https://www.elastic.co/beats/metricbeat)
+* (TODO) [Minio](https://min.io/)
 
 ![logging-infra](./.img/logging-infra.png)
 
@@ -92,8 +101,6 @@ TODO
 </details>
 
 ## Bootstrap Production
-
-(TODO!!!)
 
 Fork this repository on your personal Github account and export your Github access token, username and repo name:
 
@@ -116,7 +123,7 @@ flux bootstrap github \
     --owner=${GITHUB_USER} \
     --repository=${GITHUB_REPO} \
     --branch=master   
-    --path=./Tools 
+    --path=./clusters/production
     --personal
 ```
 
@@ -131,7 +138,7 @@ TODO
 
 ## Testing
 
-Any change to the Kubernetes manifests or to the repository structure should be validated in CI before a pull requests is merged into themaster branch and synced on the cluster.
+Any change to the Kubernetes manifests or to the repository structure should be validated in CI before a pull requests is merged into the master branch and synced on the cluster.
 
 This repository contains the following Github CI workflows:
 

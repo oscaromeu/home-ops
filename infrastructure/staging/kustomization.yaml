@@ -13,7 +13,7 @@ resources:
   - filebeat
 # - metricbeat
   - redis
-# - elastic-exporter
+# - elastic-exporAter
 
 # --- Metrics ----- 
 
