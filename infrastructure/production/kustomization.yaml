@@ -9,11 +9,11 @@ resources:
   - traefik
 
 # --- Logging -----
-#  - elastic
-#  - redis
-#  - filebeat
-#  - logstash
-#  - elastic-exporter
+  - elastic
+  - redis
+  - filebeat
+  - logstash
+  - elastic-exporter
 #  - metricbeat
 
 # --- Metrics ----- 
