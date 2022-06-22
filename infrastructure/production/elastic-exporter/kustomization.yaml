@@ -4,3 +4,4 @@ namespace: logging
 resources:
   - ../../base/elastic-exporter
   - dashboards
+  - rules
