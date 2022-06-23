@@ -11,7 +11,7 @@ spec:
   - name: elasticsearch-rules
     rules:
     - alert: Elastic_UP
-      expr: elasticsearch_cluster_health_up != 1
+      expr: "elasticsearch_cluster_health_up != 1"
       for: 120s
       labels:
         severity: critical
