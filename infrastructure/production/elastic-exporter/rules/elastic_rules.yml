@@ -43,13 +43,13 @@ spec:
         summary: "Instance - {{ $labels.instance }}"
         description: "Alarm - `The heap is over 95% for: 1m. ES heap usage is high`"
     - alert: ElasticNoAvailableSpace
-      expr: "elasticsearch_filesystem_data_free_bytes*100/elasticsearch_filesystem_data_size_bytes < 10"
+      expr: "elasticsearch_filesystem_data_free_bytes*100/elasticsearch_filesystem_data_size_bytes < 90"
       for: 10m
       labels:
         severity: critical
       annotations:
-        summary: "Instance - {{$labels.instance}}"
-        description: "Alarm - `Elasticsearch reports that there are only {{ $value }}% left on {{ $labels.path }} at {{$labels.instance}}. Please check it`"
+        summary: "Instance - {{$labels.name}}"
+        description: "Alarm - `Elasticsearch reports that there are only {{ $value }}% left on {{ $labels.path }} at {{$labels.name}}. Please check it`"
     - alert: NumberOfPendingTasks
       expr: elasticsearch_cluster_health_number_of_pending_tasks > 0
       for: 5m
