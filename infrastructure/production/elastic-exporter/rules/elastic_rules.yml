@@ -43,7 +43,7 @@ spec:
         summary: "Instance - {{ $labels.instance }}"
         description: "Alarm - `The heap is over 95% for: 1m. ES heap usage is high`"
     - alert: ElasticNoAvailableSpace
-      expr: elasticsearch_filesystem_data_free_bytes*100/elasticsearch_filesystem_data_size_bytes < 10
+      expr: "elasticsearch_filesystem_data_free_bytes*100/elasticsearch_filesystem_data_size_bytes < 10"
       for: 10m
       labels:
         severity: critical
