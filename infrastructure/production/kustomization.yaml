@@ -27,3 +27,7 @@ resources:
   - prometheus-operated
   - grafana
 #  - alertmanager-operated
+
+# ---- Extra ------
+
+  - extra-dashboards
