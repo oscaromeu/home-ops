@@ -4,7 +4,7 @@ kind: Secret
 metadata:
   name: grafana-config
 stringData:
-  plugins: digrich-bubblechart-panel,grafana-clock-panel,redis-datasource,marcusolsson-hexmap-panel,grafana-polystat-panel,pyroscope-panel,flant-statusmap-panel
+  plugins: digrich-bubblechart-panel,grafana-clock-panel,redis-datasource,marcusolsson-hexmap-panel,grafana-polystat-panel,pyroscope-panel,flant-statusmap-panel,grafana-k6-app
   grafana.ini: |
     [date_formats]
     default_timezone = UTC
