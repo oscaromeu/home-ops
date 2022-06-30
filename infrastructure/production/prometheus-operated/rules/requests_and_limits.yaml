@@ -57,4 +57,4 @@ spec:
       labels:
         quantile: "0.25"
     - expr: avg(rate(container_cpu_usage_seconds_total{container!="POD", container!=""}[5m]) ) by (container,pod,namespace)
-      record: container_rate:container_cpu_usage_irate
+      record: container_rate:container_cpu_usage_rate
