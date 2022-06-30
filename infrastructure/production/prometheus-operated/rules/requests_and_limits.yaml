@@ -7,41 +7,52 @@ metadata:
   namespace: monitoring
 spec:
   groups:
-  - name: percentils_memory_working_set_bytes 
-    rules:
+  - name: percentils_memory_working_set_bytes.rules
     #p99
-      - rule: container_quantile:container_memory_working_set_bytes:avg
-        expr: avg(quantile_over_time(.99,container_memory_working_set_bytes{container_name!="POD",container!=""}[5m])) by (container,pod,namespace)
-        labels:
-          evaluation: weekly
-#   - rule: p99_container_memory_working_set_bytes
-#     expr: quantile_over_time(.99,container_memory_working_set_bytes{container_name!="POD",container!=""}[7d])
-#     labels:
-#       evaluation: weekly
-#   #p95
-#   - rule: avg_p95_container_memory_working_set_bytes
-#     expr: avg(quantile_over_time(.95,container_memory_working_set_bytes{container_name!="POD",container!=""}[7d])) by (container,pod,namespace)
-#     labels:
-#       evaluation: weekly
-#   - rule: p95_container_memory_working_set_bytes
-#     expr: quantile_over_time(.95,container_memory_working_set_bytes{container_name!="POD",container!=""}[7d])
-#     labels:
-#       evaluation: weekly
+    rules:
+    - expr: avg(quantile_over_time(.99,container_memory_working_set_bytes{container_name!="POD",container!=""}[7d])) by (container,pod,namespace)
+      record: container_quantile:container_memory_working_set_bytes:avg
+      labels:
+        quantile: "0.99"
+    - expr: quantile_over_time(.99,container_memory_working_set_bytes{container_name!="POD",container!=""}[7d])
+      record: container_quantile:container_memory_working_set_bytes
+      labels:
+        quantile: "0.99"
+    #p95
+    - expr: avg(quantile_over_time(.95,container_memory_working_set_bytes{container_name!="POD",container!=""}[7d])) by (container,pod,namespace)
+      record: container_quantile:container_memory_working_set_bytes:avg
+      labels:
+        quantile: "0.95"
+    - expr: quantile_over_time(.95,container_memory_working_set_bytes{container_name!="POD",container!=""}[7d])
+      record: container_quantile:container_memory_working_set_bytes
+      labels:
+        quantile: "0.95"
 #   #p75
-#   - rule: avg_p75_container_memory_working_set_bytes
-#     expr: avg(quantile_over_time(.75,container_memory_working_set_bytes{container_name!="POD",container!=""}[7d])) by (container,pod,namespace)
-#     labels:
-#       evaluation: weekly
-#   - rule: p75_container_memory_working_set_bytes
-#     expr: quantile_over_time(.75,container_memory_working_set_bytes{container_name!="POD",container!=""}[7d])
-#     labels:
-#       evaluation: weekly
-#   #p25
-#   - rule: avg_p25_container_memory_working_set_bytes
-#     expr: avg(quantile_over_time(.25,container_memory_working_set_bytes{container_name!="POD",container!=""}[7d])) by (container,pod,namespace)
-#     labels:
-#       evaluation: weekly
-#   - rule: p25_container_memory_working_set_bytes
-#     expr: quantile_over_time(.25,container_memory_working_set_bytes{container_name!="POD",container!=""}[7d])
-#     labels:
-#       evaluation: weekly
+    - expr: avg(quantile_over_time(.75,container_memory_working_set_bytes{container_name!="POD",container!=""}[7d])) by (container,pod,namespace)
+      record: container_quantile:container_memory_working_set_bytes:avg
+      labels:
+        quantile: "0.75"
+    - expr: quantile_over_time(.75,container_memory_working_set_bytes{container_name!="POD",container!=""}[7d])
+      record: container_quantile:container_memory_working_set_bytes
+      labels:
+        quantile: "0.75"
+    # p50
+    - 
+      expr: avg(quantile_over_time(.50,container_memory_working_set_bytes{container_name!="POD",container!=""}[7d])) by (container,pod,namespace)
+      record: container_quantile:container_memory_working_set_bytes:avg
+      labels:
+        quantile: "0.50"
+    - expr: quantile_over_time(.50,container_memory_working_set_bytes{container_name!="POD",container!=""}[7d])
+      record: container_quantile:container_memory_working_set_bytes
+      labels:
+        quantile: "0.50"
+    # p25
+    - 
+      expr: avg(quantile_over_time(.25,container_memory_working_set_bytes{container_name!="POD",container!=""}[7d])) by (container,pod,namespace)
+      record: container_quantile:container_memory_working_set_bytes:avg
+      labels:
+        quantile: "0.25"
+    - expr: quantile_over_time(.25,container_memory_working_set_bytes{container_name!="POD",container!=""}[7d])
+      record: container_quantile:container_memory_working_set_bytes
+      labels:
+        quantile: "0.25"
