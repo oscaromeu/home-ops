@@ -60,3 +60,21 @@ spec:
       record: container_rate:container_cpu_usage_rate
     - expr: quantile_over_time(0.99,container_rate:container_cpu_usage_rate[1w])
       record: container_quantile:container_rate:container_cpu_usage_rate
+      labels:
+        quantile: "0.99"
+    - expr: quantile_over_time(0.95,container_rate:container_cpu_usage_rate[1w])
+      record: container_quantile:container_rate:container_cpu_usage_rate
+      labels:
+        quantile: "0.95"
+    - expr: quantile_over_time(0.75,container_rate:container_cpu_usage_rate[1w])
+      record: container_quantile:container_rate:container_cpu_usage_rate
+      labels:
+        quantile: "0.75"
+    - expr: quantile_over_time(0.50,container_rate:container_cpu_usage_rate[1w])
+      record: container_quantile:container_rate:container_cpu_usage_rate
+      labels:
+        quantile: "0.50"
+    - expr: quantile_over_time(0.25,container_rate:container_cpu_usage_rate[1w])
+      record: container_quantile:container_rate:container_cpu_usage_rate
+      labels:
+        quantile: "0.25"
