@@ -56,3 +56,49 @@ spec:
       record: container_quantile:container_memory_working_set_bytes
       labels:
         quantile: "0.25"
+    - expr: avg(quantile_over_time(.99,container_cpu_usage_seconds_total{container_name!="POD",container!=""}[7d])) by (container,pod,namespace)
+      record: container_quantile:container_cpu_usage_seconds_total:avg
+      labels:
+        quantile: "0.99"
+    - expr: quantile_over_time(.99,container_cpu_usage_seconds_total{container_name!="POD",container!=""}[7d])
+      record: container_quantile:container_cpu_usage_seconds_total
+      labels:
+        quantile: "0.99"
+    #p95
+    - expr: avg(quantile_over_time(.95,container_cpu_usage_seconds_total{container_name!="POD",container!=""}[7d])) by (container,pod,namespace)
+      record: container_quantile:container_cpu_usage_seconds_total:avg
+      labels:
+        quantile: "0.95"
+    - expr: quantile_over_time(.95,container_cpu_usage_seconds_total{container_name!="POD",container!=""}[7d])
+      record: container_quantile:container_cpu_usage_seconds_total
+      labels:
+        quantile: "0.95"
+#   #p75
+    - expr: avg(quantile_over_time(.75,container_cpu_usage_seconds_total{container_name!="POD",container!=""}[7d])) by (container,pod,namespace)
+      record: container_quantile:container_cpu_usage_seconds_total:avg
+      labels:
+        quantile: "0.75"
+    - expr: quantile_over_time(.75,container_cpu_usage_seconds_total{container_name!="POD",container!=""}[7d])
+      record: container_quantile:container_cpu_usage_seconds_total
+      labels:
+        quantile: "0.75"
+    # p50
+    - 
+      expr: avg(quantile_over_time(.50,container_cpu_usage_seconds_total{container_name!="POD",container!=""}[7d])) by (container,pod,namespace)
+      record: container_quantile:container_cpu_usage_seconds_total:avg
+      labels:
+        quantile: "0.50"
+    - expr: quantile_over_time(.50,container_cpu_usage_seconds_total{container_name!="POD",container!=""}[7d])
+      record: container_quantile:container_cpu_usage_seconds_total
+      labels:
+        quantile: "0.50"
+    # p25
+    - 
+      expr: avg(quantile_over_time(.25,container_cpu_usage_seconds_total{container_name!="POD",container!=""}[7d])) by (container,pod,namespace)
+      record: container_quantile:container_cpu_usage_seconds_total:avg
+      labels:
+        quantile: "0.25"
+    - expr: quantile_over_time(.25,container_cpu_usage_seconds_total{container_name!="POD",container!=""}[7d])
+      record: container_quantile:container_cpu_usage_seconds_total
+      labels:
+        quantile: "0.25"
