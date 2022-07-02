@@ -16,24 +16,16 @@ patches:
             - name: manager
               readinessProbe:
                 httpGet:
-                  path: /readyz
-                  port: healthz
-                initialDelaySeconds: 60 
-                periodSeconds: 6
-                failureThreshold: 5
-                timeoutSeconds: 60
-              startupProbe:
-                httpGet:
-                  path: /readyz
-                  port: healthz
+                  path: /
+                  port: http
                 initialDelaySeconds: 60 
                 periodSeconds: 6
                 failureThreshold: 5
                 timeoutSeconds: 60
               livenessProbe:
                 httpGet:
-                  path: /healthz
-                  port: healthz
+                  path: /
+                  port: http
                 initialDelaySeconds: 60 
                 periodSeconds: 6
                 failureThreshold: 5
@@ -42,3 +34,27 @@ patches:
     target:
       kind: Deployment
       labelSelector: app.kubernetes.io/part-of=flux
+  - patch: |
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --enable-leader-election=false     
+    target:
+      kind: Deployment
+      name: "(kustomize-controller|helm-controller|source-controller)"
+  - patch: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: all
+      spec:
+        template:
+          spec:
+            containers:
+              - name: manager
+                resources:
+                  limits:
+                    cpu: 2000m
+                    memory: 2Gi      
+    target:
+      kind: Deployment
+      name: "(kustomize-controller|helm-controller|source-controller)"
