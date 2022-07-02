@@ -16,16 +16,16 @@ patches:
             - name: manager
               readinessProbe:
                 httpGet:
-                  path: /
-                  port: http
+                  path: /healthz
+                  port: healthz
                 initialDelaySeconds: 60 
                 periodSeconds: 6
                 failureThreshold: 5
                 timeoutSeconds: 60
               livenessProbe:
                 httpGet:
-                  path: /
-                  port: http
+                  path: /healthz
+                  port: healthz
                 initialDelaySeconds: 60 
                 periodSeconds: 6
                 failureThreshold: 5
