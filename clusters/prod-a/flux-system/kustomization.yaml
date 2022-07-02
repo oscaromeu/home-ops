@@ -13,6 +13,7 @@ patches:
         template:
           spec:
             containers:
+            - name: manager
               readinessProbe:
                 httpGet:
                   path: /readyz
