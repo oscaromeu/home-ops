@@ -21,7 +21,7 @@ patches:
                 initialDelaySeconds: 60 
                 periodSeconds: 6
                 failureThreshold: 5
-                timeoutSeconds: 60
+                timeoutSeconds: 120
               livenessProbe:
                 httpGet:
                   path: /healthz
@@ -29,18 +29,27 @@ patches:
                 initialDelaySeconds: 60 
                 periodSeconds: 6
                 failureThreshold: 5
-                timeoutSeconds: 60
+                timeoutSeconds: 120
 
     target:
       kind: Deployment
       labelSelector: app.kubernetes.io/part-of=flux
-  - patch: |
-      - op: add
-        path: /spec/template/spec/containers/0/args/-
-        value: --enable-leader-election=false     
-    target:
-      kind: Deployment
-      name: "(kustomize-controller|helm-controller|source-controller)"
+#  - patch: |
+#      - op: add
+#        path: /spec/template/spec/containers/0/args/-
+#        value: --concurrent=5
+#      - op: add
+#        path: /spec/template/spec/containers/0/args/-
+#        value: --kube-api-qps=10
+#      - op: add
+#        path: /spec/template/spec/containers/0/args/-
+#        value: --kube-api-burst=100
+#      - op: add
+#        path: /spec/template/spec/containers/0/args/-
+#        value: --requeue-dependency=5s    
+#    target:
+#      kind: Deployment
+#      name: "(kustomize-controller|helm-controller|source-controller)"
   - patch: |
       apiVersion: apps/v1
       kind: Deployment
@@ -52,6 +61,9 @@ patches:
             containers:
               - name: manager
                 resources:
+                  requests:
+                    cpu: 100m
+                    memory: 100Mi
                   limits:
                     cpu: 2000m
                     memory: 2Gi      
