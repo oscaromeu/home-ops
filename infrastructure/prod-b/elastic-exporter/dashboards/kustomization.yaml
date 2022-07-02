@@ -1,0 +1,15 @@
+namespace: monitoring
+
+generatorOptions:
+  labels:
+    grafana-liveinfra-dashboard: default
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: elastic-exporter
+    files:
+      - elastic-exporter.json
+  - name: elastic-exporter-overview
+    files:
+      - elastic-exporter-overview.json
+
