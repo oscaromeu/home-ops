@@ -30,6 +30,14 @@ patches:
                 periodSeconds: 6
                 failureThreshold: 5
                 timeoutSeconds: 60
+              livenessProbe:
+                httpGet:
+                  path: /healthz
+                  port: healthz
+                initialDelaySeconds: 60 
+                periodSeconds: 6
+                failureThreshold: 5
+                timeoutSeconds: 60
 
     target:
       kind: Deployment
