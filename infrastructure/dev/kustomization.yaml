@@ -1,30 +1,33 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+
 resources:
-  - namespace.yaml 
 
-# Metrics
-#  - telegraf-operator
-#  - kube-prometheus
+  - ns.yaml
+  - cert-manager
+  - traefik
 
-# Logging
-#  - esprod
-#  - kibana
-#  - redis
-#  - filebeat
-#  - logstash
+# --- CI/CD -----
+#
+  - flux-system-monitor
+
+# --- Logging -----
+  - elastic
+  - redis
+  - filebeat
+  - logstash
+  - elastic-exporter
 #  - metricbeat
 
-# Storage
-#  - questdb
+# --- Metrics ----- 
+  - prometheus-operator
+  - node-exporter
+  - kube-state-metrics
+  - prometheus-operated
+  - grafana
+#  - alertmanager-operated
 
-# Tracing
-#  - pyroscope
+# ---- Extra ------
 
-# Visualization
-
-#  - grafana
-
-# APPS
-#  - ./apps/demo-service
-#  - ./apps/podinfo
+  - extra-dashboards
