@@ -27,7 +27,6 @@ spec:
         - "--events-addr=http://notification-controller/"
         - "--watch-all-namespaces=true"
         - "--log-level=info"
-        - "--log-json"
         - "--enable-leader-election"
         env:
         - name: RUNTIME_NAMESPACE
@@ -118,7 +117,6 @@ spec:
       - args:
         - "--watch-all-namespaces=true"
         - "--log-level=info"
-        - "-log-json"
         - "--enable-leader-election"
         env:
         - name: RUNTIME_NAMESPACE
@@ -216,7 +214,6 @@ spec:
         - "--events-addr=http://notification-controller/"
         - "--watch-all-namespaces=true"
         - "--log-level=info"
-        - "--log-json"
         - "--enable-leader-election"
         - "--storage-path=/data"
         - "--storage-adv-addr=source-controller.$(RUNTIME_NAMESPACE).svc.cluster.local."
@@ -317,7 +314,6 @@ spec:
         - "--events-addr=http://notification-controller/"
         - "--watch-all-namespaces=true"
         - "--log-level=info"
-        - "--log-json"
         - "--enable-leader-election"
         env:
         - name: RUNTIME_NAMESPACE
