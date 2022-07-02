@@ -12,19 +12,24 @@ patches:
       spec:
         template:
           spec:
-            readinessProbe:
-              httpGet:
-                path: /readyz
-                port: healthz
-              initialDelaySeconds: 30 
-              periodSeconds: 3
-              timeoutSeconds: 300
-            startupProbe:
-              httpGet:
-                path: /readyz
-                port: healthz
-              failureThreshold: 120
-              periodSeconds: 10 
+            containers:
+              readinessProbe:
+                httpGet:
+                  path: /readyz
+                  port: healthz
+                initialDelaySeconds: 60 
+                periodSeconds: 6
+                failureThreshold: 5
+                timeoutSeconds: 60
+              startupProbe:
+                httpGet:
+                  path: /readyz
+                  port: healthz
+                initialDelaySeconds: 60 
+                periodSeconds: 6
+                failureThreshold: 5
+                timeoutSeconds: 60
+
     target:
       kind: Deployment
       labelSelector: app.kubernetes.io/part-of=flux
