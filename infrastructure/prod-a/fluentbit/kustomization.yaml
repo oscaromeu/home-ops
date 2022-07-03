@@ -5,5 +5,4 @@ resources:
   - ../../base/fluentbit
 images:
   - name: fluent-bit
-    newName: fluent/fluent-bit
-    newTag: 1.9
+    newName: fluent/fluent-bit:1.9
