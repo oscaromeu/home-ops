@@ -4,36 +4,36 @@ resources:
   - gotk-components.yaml
   - gotk-sync.yaml
 patches:
-  - patch: |
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: all
-      spec:
-        template:
-          spec:
-            containers:
-            - name: manager
-              readinessProbe:
-                httpGet:
-                  path: /healthz
-                  port: healthz
-                initialDelaySeconds: 60 
-                periodSeconds: 6
-                failureThreshold: 5
-                timeoutSeconds: 120
-              livenessProbe:
-                httpGet:
-                  path: /healthz
-                  port: healthz
-                initialDelaySeconds: 60 
-                periodSeconds: 6
-                failureThreshold: 5
-                timeoutSeconds: 120
-
-    target:
-      kind: Deployment
-      labelSelector: app.kubernetes.io/part-of=flux
+#  - patch: |
+#      apiVersion: apps/v1
+#      kind: Deployment
+#      metadata:
+#        name: all
+#      spec:
+#        template:
+#          spec:
+#            containers:
+#            - name: manager
+#              readinessProbe:
+#                httpGet:
+#                  path: /healthz
+#                  port: healthz
+#                initialDelaySeconds: 60 
+#                periodSeconds: 6
+#                failureThreshold: 5
+#                timeoutSeconds: 120
+#              livenessProbe:
+#                httpGet:
+#                  path: /healthz
+#                  port: healthz
+#                initialDelaySeconds: 60 
+#                periodSeconds: 6
+#                failureThreshold: 5
+#                timeoutSeconds: 120
+#
+#    target:
+#      kind: Deployment
+#      labelSelector: app.kubernetes.io/part-of=flux
 #  - patch: |
 #      - op: add
 #        path: /spec/template/spec/containers/0/args/-
