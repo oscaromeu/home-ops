@@ -4,6 +4,7 @@ namespace: monitoring
 resources:
   - cm_fluentbit.yaml
   - crb_fluentbit.yaml
-  - ds_fluentbit.yaml
   - psp_fluentbit.yaml
   - sa_fluentbit.yaml
+  - ds_fluentbit.yaml
+
