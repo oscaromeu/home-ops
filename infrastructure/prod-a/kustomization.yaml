@@ -14,7 +14,7 @@ resources:
 
 # --- Logging -----
 #  - fluentbit
-#  - loki
+  - loki
 
 # --- Metrics ----- 
   - prometheus-operator
