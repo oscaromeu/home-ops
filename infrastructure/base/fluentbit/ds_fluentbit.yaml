@@ -33,8 +33,8 @@ spec:
       serviceAccountName: loki-fluent-bit-loki
       containers:
         - name: fluent-bit-loki
-          image: "grafana/fluent-bit-plugin-loki:2.1.0-amd64"
-          imagePullPolicy: IfNotPresent
+          image: fluent-bit
+          imagePullPolicy: "IfNotPresent"
           volumeMounts:
             - name: config
               mountPath: /fluent-bit/etc

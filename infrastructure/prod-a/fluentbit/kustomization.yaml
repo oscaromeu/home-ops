@@ -3,3 +3,7 @@ kind: Kustomization
 namespace: monitoring 
 resources:
   - ../../base/fluentbit
+images:
+  - name: fluent-bit
+    newName: fluent/fluent-bit
+    newTag: 1.9
