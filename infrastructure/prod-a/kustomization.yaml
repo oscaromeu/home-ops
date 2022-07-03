@@ -13,7 +13,7 @@ resources:
   - flux-system-monitor
 
 # --- Logging -----
-#  - fluentbit
+  - fluentbit
   - loki
 
 # --- Metrics ----- 

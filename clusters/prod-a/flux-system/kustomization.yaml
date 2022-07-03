@@ -70,3 +70,45 @@ patches:
     target:
       kind: Deployment
       name: "(kustomize-controller|helm-controller|source-controller)"
+  - patch: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: all
+      spec:
+        template:
+          spec:
+            containers:
+              - name: manager
+                image: ghcr.io/fluxcd/kustomize-controller:v0.25.0     
+    target:
+      kind: Deployment
+      name: "(kustomize-controller)"
+  - patch: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: all
+      spec:
+        template:
+          spec:
+            containers:
+              - name: manager
+                image: ghcr.io/fluxcd/helm-controller:v0.21.0
+    target:
+      kind: Deployment
+      name: "(helm-controller)"
+  - patch: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: all
+      spec:
+        template:
+          spec:
+            containers:
+              - name: manager
+                image: ghcr.io/fluxcd/source-controller:v0.25.0
+    target:
+      kind: Deployment
+      name: "(source-controller)"
