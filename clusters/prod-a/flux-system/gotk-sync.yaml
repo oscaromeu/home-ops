@@ -19,7 +19,12 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
+<<<<<<< HEAD
   interval: 10m0s
+=======
+  interval: 1m0s
+  serviceAccountName: kustomize-controller
+>>>>>>> 94e0563 (Add sa kustomize-controller)
   path: ./clusters/prod-a
   prune: true
   sourceRef:
