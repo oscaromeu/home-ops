@@ -5,4 +5,4 @@ resources:
   - ../../base/fluentbit
 images:
   - name: fluent-bit
-    newName: fluent/fluent-bit:1.9.5
+    newName: oscaromeu/fluent-bit-plugin-loki:1.9.5
