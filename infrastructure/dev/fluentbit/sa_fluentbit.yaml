@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: fluent-bit-loki
+    chart: fluent-bit-2.3.1
+    heritage: Helm
+    release: loki
+  name: loki-fluent-bit-loki
+  namespace: default

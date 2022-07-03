@@ -1,0 +1,77 @@
+---
+# Source: loki-stack/charts/fluent-bit/templates/daemonset.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: loki-fluent-bit-loki
+  namespace: default
+  labels:
+    app: fluent-bit-loki
+    chart: fluent-bit-2.3.1
+    release: loki
+    heritage: Helm
+  annotations:
+    {}
+spec:
+  selector:
+    matchLabels:
+      app: fluent-bit-loki
+      release: loki
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: fluent-bit-loki
+        release: loki
+      annotations:
+        checksum/config: dbd5b111f07ed517b84aa73512800d9d43c0740ad5a1bbffe1eac6728e6ea7a7
+        prometheus.io/path: /api/v1/metrics/prometheus
+        prometheus.io/port: "2020"
+        prometheus.io/scrape: "true"
+    spec:
+      serviceAccountName: loki-fluent-bit-loki
+      containers:
+        - name: fluent-bit-loki
+          image: "grafana/fluent-bit-plugin-loki:2.1.0-amd64"
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: config
+              mountPath: /fluent-bit/etc
+            - name: run
+              mountPath: /run/fluent-bit
+            - mountPath: /var/log
+              name: varlog
+            - mountPath: /var/lib/docker/containers
+              name: varlibdockercontainers
+              readOnly: true
+          ports:
+            - containerPort: 2020
+              name: http-metrics
+          resources:
+            limits:
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+      nodeSelector:
+        {}
+      affinity:
+        {}
+      tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: config
+          configMap:
+            name: loki-fluent-bit-loki
+        - name: run
+          hostPath:
+            path: /run/fluent-bit
+        - hostPath:
+            path: /var/log
+          name: varlog
+        - hostPath:
+            path: /var/lib/docker/containers
+          name: varlibdockercontainers
