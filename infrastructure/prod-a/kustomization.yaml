@@ -13,12 +13,8 @@ resources:
   - flux-system-monitor
 
 # --- Logging -----
-#  - elastic
-#  - redis
-#  - filebeat
-#  - logstash
-#  - elastic-exporter
-#  - metricbeat
+  - fluentbi
+  - loki
 
 # --- Metrics ----- 
   - prometheus-operator
