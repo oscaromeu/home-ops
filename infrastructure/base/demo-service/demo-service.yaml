@@ -1,0 +1,40 @@
+---
+# A deployment for the demo service with three replicas.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-service
+  labels:
+    app: demo-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: demo-service
+  template:
+    metadata:
+      labels:
+        app: demo-service
+    spec:
+      containers:
+      - name: demo-service
+        image: demo-service
+        imagePullPolicy: IfNotPresent
+        args:
+        - -listen-address=:80
+        ports:
+        - containerPort: 80
+---
+# A service that references the demo service deployment.
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-service
+  labels:
+    app: demo-service
+spec:
+  ports:
+  - port: 80
+    name: web
+  selector:
+    app: demo-service

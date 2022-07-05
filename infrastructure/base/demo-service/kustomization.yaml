@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: monitoring
+resources:
+  - demo-service.yaml
+  - demo-service-monitor.yaml
+
+images:
+  - name: demo-service
+    newName: julius/prometheus-demo-service:latest
