@@ -13,11 +13,11 @@ resources:
   - flux-system-monitor
 
 # --- Logging -----
-  - elastic
-  - redis
-  - filebeat
-  - logstash
-  - elastic-exporter
+#  - elastic
+#  - redis
+#  - filebeat
+#  - logstash
+#  - elastic-exporter
 #  - metricbeat
 
 # --- Metrics ----- 
@@ -30,4 +30,4 @@ resources:
 
 # ---- Extra ------
 
-  - extra-dashboards
+    #  - extra-dashboards
