@@ -10,7 +10,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./apps/logging
+  path: ./apps/prod-b
   prune: true
   wait: true
   timeout: 5m0s

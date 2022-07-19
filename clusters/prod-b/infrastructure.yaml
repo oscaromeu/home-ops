@@ -10,7 +10,7 @@ spec:
     kind: GitRepository
     name: flux-system
   serviceAccountName: kustomize-controller
-  path: ./infrastructure/logging
+  path: ./infrastructure/prod-b
   prune: true
   wait: true
   timeout: 5m
