@@ -4,13 +4,13 @@ kind: Kustomization
 
 resources:
 
-  - ns.yaml
-  - cert-manager
-  - traefik
+  #  - ns.yaml
+  #  - cert-manager
+  #  - traefik
 
 # --- CI/CD -----
 #
-  - flux-system-monitor
+#  - flux-system-monitor
 
 # --- Logging -----
 #  - elastic
@@ -21,13 +21,18 @@ resources:
 #  - metricbeat
 
 # --- Metrics ----- 
-  - prometheus-operator
-  - node-exporter
-  - kube-state-metrics
-  - prometheus-operated
-  - grafana
+#  - prometheus-operator
+#  - node-exporter
+#  - kube-state-metrics
+#  - prometheus-operated
+#  - grafana
 #  - alertmanager-operated
 
-# ---- Extra ------
+
+# --- Tracing ---
+
+  - pyroscope
+
+# --- Extra ---
 
     #  - extra-dashboards
