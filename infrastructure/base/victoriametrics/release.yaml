@@ -8,10 +8,10 @@ spec:
   releaseName: vmsingle
   chart:
     spec:
-      chart: vm/victoria-metrics-single
+      chart: vmsingle
       sourceRef:
         kind: HelmRepository
-        name: vm/victoria-metrics-single
+        name: vmsingle
         namespace: monitoring
   interval: 5m
   install:
