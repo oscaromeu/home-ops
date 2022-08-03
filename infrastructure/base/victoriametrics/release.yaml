@@ -11,7 +11,7 @@ spec:
       chart: vm/victoria-metrics-single
       sourceRef:
         kind: HelmRepository
-        name: victoria-metrics-single
+        name: vm/victoria-metrics-single
         namespace: monitoring
   interval: 5m
   install:
