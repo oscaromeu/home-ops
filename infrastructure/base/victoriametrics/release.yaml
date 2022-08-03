@@ -1,0 +1,18 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: vmsingle
+  namespace: monitoring
+spec:
+  releaseName: vmsingle
+  chart:
+    spec:
+      chart: vm/victoria-metrics-single
+      sourceRef:
+        kind: HelmRepository
+        name: victoria-metrics-single
+        namespace: monitoring
+  interval: 5m
+  install:
+    remediation:
+      retries: 3

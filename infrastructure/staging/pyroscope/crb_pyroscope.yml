@@ -14,4 +14,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: pyroscope
-    namespace: default
+    namespace: new-monitoring

@@ -4,7 +4,7 @@ kind: Kustomization
 
 resources:
 
-  #  - ns.yaml
+  - ns.yaml
   #  - cert-manager
   #  - traefik
 
@@ -31,8 +31,12 @@ resources:
 
 # --- Tracing ---
 
-  - pyroscope
+#  - pyroscope
+
+# -- HA Monitoring --
+
+- victoriametrics
 
 # --- Extra ---
 
-    #  - extra-dashboards
+#  - extra-dashboards
