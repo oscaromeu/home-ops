@@ -3,6 +3,6 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - bitnami.yaml
-  - prometheus-community.yaml
+  - victoriametrics.yaml
   - pyroscope.yaml
   - grafana.yaml
