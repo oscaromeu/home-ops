@@ -2,7 +2,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: grafana-int-http
+  name: pyroscope-int-http
   namespace: monitoring
 spec:
   entryPoints:
@@ -12,8 +12,8 @@ spec:
       middlewares:
         - name: redirect-permanent
           namespace: monitoring
-      match: Host(`grafana.prod.0.0.0.0.sslip.io`)
+      match: Host(`pyroscope.prod.0.0.0.0.sslip.io`)
       services:
-        - name: grafana
-          port: 3000
+        - name: pyroscope
+          port: 4040
 
