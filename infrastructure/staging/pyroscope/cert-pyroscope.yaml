@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: pyroscope-certificate
+  namespace: monitoring
+spec:
+  dnsNames:
+  - 'pyroscope.staging.0.0.0.0.sslip.io'
+  issuerRef:
+    kind: ClusterIssuer
+    name: selfsigned
+  secretName: pyroscope-crt
