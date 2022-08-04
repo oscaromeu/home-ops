@@ -8,32 +8,32 @@ generatorOptions:
   labels:
     grafana-liveinfra-dashboard: default
   disableNameSuffixHash: true
-
+#https://github.com/prometheus-operator/prometheus-operator/issues/535
 configMapGenerator:
   - name: default
     files:
-      - alertmanager-overview.json
-      - apiserver.json
-      - cluster-total.json
-      - controller-manager.json
-      - grafana-overview.json
-      - k8s-resources-cluster.json
+#      - alertmanager-overview.json
+#      - apiserver.json
+#      - cluster-total.json
+#      - controller-manager.json
+#      - grafana-overview.json
+#      - k8s-resources-cluster.json
       - k8s-resources-namespace.json
-      - k8s-resources-node.json
-      - k8s-resources-pod.json
-      - k8s-resources-workload.json
-      - k8s-resources-workloads-namespace.json
-      - kubelet.json
-      - kustomization.yaml
-      - namespace-by-pod.json
-      - namespace-by-workload.json
-      - node-cluster-rsrc-use.json
-      - node-rsrc-use.json
-      - nodes.json
-      - persistentvolumesusage.json
-      - pod-total.json
-      - prometheus.json
-      - prometheus-remote-write.json
-      - proxy.json
-      - scheduler.json
-      - workload-total.json
+#      - k8s-resources-node.json
+#      - k8s-resources-pod.json
+#      - k8s-resources-workload.json
+#      - k8s-resources-workloads-namespace.json
+#      - kubelet.json
+#      - kustomization.yaml
+#      - namespace-by-pod.json
+#      - namespace-by-workload.json
+#      - node-cluster-rsrc-use.json
+#      - node-rsrc-use.json
+#      - nodes.json
+#      - persistentvolumesusage.json
+#      - pod-total.json
+#      - prometheus.json
+#      - prometheus-remote-write.json
+#      - proxy.json
+#      - scheduler.json
+#      - workload-total.json
