@@ -36,6 +36,8 @@ resources:
 # -- HA Monitoring --
 
   - victoriametrics
+  - kube-prometheus-stack
+  - grafana-helm
 
 # --- Extra ---
 
