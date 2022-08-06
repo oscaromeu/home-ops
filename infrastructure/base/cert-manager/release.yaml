@@ -5,6 +5,8 @@ metadata:
   name: cert-manager
 spec:
   releaseName: cert-manager
+  targetNamespace: cert-manager
+  storageNamespace: cert-manager
   chart:
     spec:
       chart: cert-manager
