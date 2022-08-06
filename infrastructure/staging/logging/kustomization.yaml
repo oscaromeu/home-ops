@@ -11,5 +11,4 @@ resources:
   - redis
   - filebeat
   - logstash
-  - elastic-exporter
   - metricbeat
