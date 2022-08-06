@@ -5,4 +5,4 @@
 - op: add
   path: /spec/tls
   value:
-    secretName: dashboard-crt
+    secretName: prometheus-crt
