@@ -9,6 +9,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./crds/staging/monitoring
+  path: ./crds/staging
   prune: true
   wait: true
