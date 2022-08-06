@@ -4,7 +4,7 @@ namespace: monitoring
 
 
 resources:
-  - ../../base/grafana
+  - ../../../base/grafana
   - cert-grafana.yaml
   - routes_grafana.yaml
 
