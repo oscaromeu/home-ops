@@ -15,5 +15,5 @@ spec:
       match: Host(`pyroscope.staging.0.0.0.0.sslip.io`)
       services:
         - name: pyroscope
-          port: 4040
+          port: http
 

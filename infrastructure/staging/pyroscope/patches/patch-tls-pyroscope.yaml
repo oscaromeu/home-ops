@@ -5,4 +5,4 @@
 - op: add
   path: /spec/tls
   value:
-    secretName: grafana-crt
+    secretName: pyroscope-crt
