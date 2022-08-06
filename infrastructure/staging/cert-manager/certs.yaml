@@ -12,5 +12,5 @@ spec:
   path: "./cert-manager-cluster-issuer.yaml"
   prune: true
   sourceRef:
-    kind: HelmRelease
+    kind: GitRepository
     name: cert-manager
