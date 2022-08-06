@@ -12,7 +12,7 @@ spec:
       middlewares:
         - name: redirect-permanent
           namespace: monitoring
-      match: Host(`prometheus.prod.0.0.0.0.sslip.io`)
+      match: Host(`prometheus.staging.0.0.0.0.sslip.io`)
       services:
         - name: prometheus-k8s
           port: 9090

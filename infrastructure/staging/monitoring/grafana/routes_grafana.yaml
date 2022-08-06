@@ -12,7 +12,7 @@ spec:
       middlewares:
         - name: redirect-permanent
           namespace: monitoring
-      match: Host(`grafana.prod.0.0.0.0.sslip.io`)
+      match: Host(`grafana.staging.0.0.0.0.sslip.io`)
       services:
         - name: grafana
           port: 3000
