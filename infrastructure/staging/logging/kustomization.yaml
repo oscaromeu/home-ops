@@ -7,8 +7,8 @@ resources:
   - ns.yaml
 #  - cert-manager
 #  - traefik
-  - elastic
-  - redis
-  - filebeat
-  - logstash
-  - metricbeat
+#  - elastic
+#  - redis
+#  - filebeat
+#  - logstash
+#  - metricbeat
