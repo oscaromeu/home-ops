@@ -1,5 +1,33 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
-resources:
-  - ../../base/cert-manager
-  - cert-manager-cluster-issuer.yaml
+metadata:
+  name: cert-manager
+  namespace: flux-system
+spec:
+  interval: 5m
+  path: "../../base/cert-manager"
+  prune: true
+  sourceRef:
+    kind: HelmRepository
+    name: cert-manager
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: cert-manager
+      namespace: cert-manager
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: certs
+  namespace: cert-manager
+spec:
+  dependsOn:
+    - name: cert-manager
+  interval: 5m
+  path: "./cert-manager-cluster-issuer.yaml"
+  prune: true
+  sourceRef:
+    kind: HelmRepository
+    name: cert-manager
