@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: prometheus-certificate
-  namespace: monitoring
+  namespace: cert-manager
 spec:
   dnsNames:
   - 'prometheus.staging.0.0.0.0.sslip.io'
