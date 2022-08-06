@@ -15,6 +15,7 @@ resources:
   - deploy.yml
   - rbac.yml
   - grafana-config.yml
+  - certificate.yaml
 
 
 configMapGenerator:

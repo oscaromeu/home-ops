@@ -3,7 +3,6 @@ kind: Kustomization
 
 resources:
   - ../../../base/prometheus-operated
-  - cert-prometheus.yaml
   - rules
   - routes_prometheus.yaml
 
@@ -14,3 +13,6 @@ patches:
       version: v1alpha1
       kind: IngressRoute
       name: prometheus-int-http
+
+patchesStrategicMerge:
+  - certificate.yaml

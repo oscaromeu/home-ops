@@ -26,3 +26,4 @@ resources:
   - prometheus-serviceAccount.yaml
   - prometheus-serviceMonitor.yaml
   - prometheus-service.yaml
+  - certificate.yaml
