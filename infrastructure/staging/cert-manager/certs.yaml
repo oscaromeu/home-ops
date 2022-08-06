@@ -7,9 +7,10 @@ metadata:
 spec:
   dependsOn:
     - name: cert-manager
+      namespace: cert-manager
   interval: 5m
   path: "./cert-manager-cluster-issuer.yaml"
   prune: true
   sourceRef:
-    kind: GitRepository
+    kind: HelmRelease
     name: cert-manager
