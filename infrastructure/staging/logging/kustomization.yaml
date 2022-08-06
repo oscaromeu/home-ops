@@ -5,8 +5,8 @@ kind: Kustomization
 resources:
 
   - ns.yaml
-  - cert-manager
-  - traefik
+#  - cert-manager
+#  - traefik
   - elastic
   - redis
   - filebeat
