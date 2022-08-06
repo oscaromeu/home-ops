@@ -5,3 +5,4 @@ resources:
   - victoriametrics.yaml
   - prometheus-comunity.yaml
   - grafana.yaml
+  - cert-manager.yaml
