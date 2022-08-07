@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ../../base/pyroscope
-  - cert-pyroscope.yaml
+  - crt-pyroscope.yaml
   - routes_pyroscope.yaml
 
 patches:
