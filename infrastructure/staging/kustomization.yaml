@@ -23,7 +23,7 @@ resources:
 #  - node-exporter
 #  - kube-state-metrics
 #  - prometheus-operated
-#  - grafana
+  - grafana
 #  - alertmanager-operated
 
 
