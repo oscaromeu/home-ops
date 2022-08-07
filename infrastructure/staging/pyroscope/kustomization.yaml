@@ -14,4 +14,4 @@ patches:
       name: pyroscope-int-http
 
 patchesStrategicMerge:
-  - crt-pyrosocope.yaml
+  - crt-pyroscope.yaml
