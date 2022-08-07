@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: traefik-proxy
+spec:
+  chart:
+    spec:
+      chart: traefik
+      sourceRef:
+        kind: HelmRepository
+        name: traefik-charts
+        namespace: flux-system
+  valuesFrom:
+  - kind: ConfigMap
+    name: traefik-values
+    valuesKey: values.yaml
+    optional: true
+  interval: 1h
+  releaseName: traefik-proxy
+  targetNamespace: traefik-system

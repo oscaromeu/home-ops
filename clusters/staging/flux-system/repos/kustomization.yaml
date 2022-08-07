@@ -9,3 +9,4 @@ resources:
   - grafana.yaml
   - cert-manager.yaml
   - metallb-charts.yaml
+  - traefik-charts.yaml
