@@ -6,5 +6,6 @@ resources:
 - flux-system
 - crds.yaml
 - metallb
+- secrets.yaml
 - infrastructure.yaml
 - apps.yaml
