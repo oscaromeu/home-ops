@@ -16,6 +16,6 @@ spec:
     name: traefik-values
     valuesKey: values.yaml
     optional: true
-  interval: 1h
+  #interval: 1h
   releaseName: traefik
   targetNamespace: traefik-system
