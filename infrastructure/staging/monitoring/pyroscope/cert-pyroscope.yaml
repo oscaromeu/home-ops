@@ -9,4 +9,4 @@ spec:
   issuerRef:
     kind: ClusterIssuer
     name: selfsigned
-  secretName: pyroscope-crt
+  #secretName: pyroscope-crt
