@@ -3,25 +3,16 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: pyroscope-int-http
+  namespace: monitoring
 spec:
+  entryPoints:
+    - web
   routes:
-  - kind: Rule
-    match: Host("pyroscope.staging.0.0.0.0.sslip.io")
-    services:
-    - name: pyroscope
-      port: http
-    middlewares:
-    - name: redirect-scheme-permanent
-      namespace: traefik-system
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: pyroscope-int-https
-spec:
-  routes:
-  - kind: Rule
-    match: Host("pyroscope.staging.0.0.0.0.sslip.io")
-    services:
-    - name: pyroscope
-      port: http
+    - kind: Rule
+      middlewares:
+        - name: redirect-permanent
+          namespace: kube-system
+      match: Host(`pyroscope.staging.0.0.0.0.sslip.io`)
+      services:
+        - name: pyroscope
+          port: http
