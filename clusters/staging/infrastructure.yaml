@@ -7,7 +7,6 @@ metadata:
 spec:
   force: true
   dependsOn:
-  - name: sources
   - name: crds
   interval: 1m
   sourceRef:

@@ -6,7 +6,7 @@ agents: 2
 kubeAPI:
   hostIP: 0.0.0.0
   hostPort: "6443"
-image: rancher/k3s:v1.22.2-k3s1
+image: rancher/k3s:v1.24.3-k3s1
 volumes:
 - volume: $PROJECT_DIR/tools/config/traefik-config.yaml:/var/lib/rancher/k3s/server/manifests/traefik-config.yaml
   nodeFilters:
@@ -50,9 +50,9 @@ options:
     updateDefaultKubeconfig: true
     switchCurrentContext: true
   runtime:
-    gpuRequest: ""
-    serversMemory: ""
-    agentsMemory: ""
+    #gpuRequest: "all"
+    serversMemory: "1024MiB"
+    agentsMemory: "2048Mib"
     labels:
     - label: foo=bar
       nodeFilters:
