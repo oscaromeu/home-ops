@@ -5,7 +5,7 @@ resources:
 - ns.yaml
 - flux-system
 - crds.yaml
-- metallb
+#- metallb
 - secrets.yaml
 - infrastructure.yaml
 - apps.yaml

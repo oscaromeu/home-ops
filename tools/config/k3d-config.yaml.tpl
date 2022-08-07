@@ -46,10 +46,10 @@ options:
 #    - arg: --no-deploy=traefik  
 #      nodeFilters:
 #      - server:*
-    - arg: --no-deploy=servicelb 
-      nodeFilters:
-      - server:*
-    nodeLabels: []
+#    - arg: --no-deploy=servicelb 
+#      nodeFilters:
+#      - server:*
+#    nodeLabels: []
   kubeconfig:
     updateDefaultKubeconfig: true
     switchCurrentContext: true
