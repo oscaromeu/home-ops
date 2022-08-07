@@ -1,0 +1,18 @@
+---
+experimental:
+  http3:
+    enabled: true
+ports:
+  websecure:
+    tls:
+      enabled: true
+    http3: true
+providers:
+  kubernetesCRD:
+    allowCrossNamespace: true
+    allowExternalNameServices: true
+  kubernetesIngress:
+    publishedService:
+      enabled: true
+      pathOverride: traefik-system/traefik
+    allowExternalNameServices: true
