@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: pyroscope
+  namespace: monitoring
+  labels:
+    app: "pyroscope"
+resources:
+  - sa_pyroscope.yaml
+  - cr_pyroscope.yaml
+  - crb_pyroscope.yaml
+  - cm_pyroscope.yaml
+  - dp_pyroscope.yaml
+  - svc_pyroscope.yaml
+  - crt_pyroscope.yaml
+  - routes_pyroscope.yaml

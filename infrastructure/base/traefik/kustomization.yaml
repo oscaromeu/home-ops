@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: traefik-system
 resources:
   - helmrelease.yaml
+  - middleware/middleware-redirect.yaml
 configurations:
   - kustomizeconfig.yaml

@@ -5,9 +5,6 @@ namespace: traefik-system
 bases:
   - ../../base/traefik
 
-resources:
-  - middleware-redirect.yaml
-
 configMapGenerator:
   - name: traefik-values
     files:

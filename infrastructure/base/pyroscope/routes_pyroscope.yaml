@@ -1,0 +1,18 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: pyroscope-int-http
+spec:
+  entryPoints:
+  - web
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: pyroscope-int-https
+spec:
+  entryPoints:
+  - websecure
+  tls:
+    secretName: pyroscope-crt

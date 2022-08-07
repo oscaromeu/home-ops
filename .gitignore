@@ -3,3 +3,4 @@ tools/config/k3d-config.yaml
 *.bk
 *.csv
 *.zip
+*age*

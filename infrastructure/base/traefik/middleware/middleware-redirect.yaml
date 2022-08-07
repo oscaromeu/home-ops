@@ -1,0 +1,20 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-scheme-permanent
+  namespace: traefik-system
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-scheme-temporary
+  namespace: traefik-system
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: false
