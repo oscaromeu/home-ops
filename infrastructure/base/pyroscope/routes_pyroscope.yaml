@@ -15,4 +15,4 @@ spec:
   entryPoints:
   - websecure
   tls:
-    secretName: pyroscope-crt
+    secretName: pyroscope-certificate-rj4qq
