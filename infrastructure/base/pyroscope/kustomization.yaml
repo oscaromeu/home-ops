@@ -13,4 +13,3 @@ resources:
   - dp_pyroscope.yaml
   - svc_pyroscope.yaml
   - crt_pyroscope.yaml
-  - routes_pyroscope.yaml
