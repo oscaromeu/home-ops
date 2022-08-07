@@ -3,7 +3,6 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ../../base/pyroscope
-  - crt-pyroscope.yaml
   - routes_pyroscope.yaml
 
 patches:
@@ -13,3 +12,6 @@ patches:
       version: v1alpha1
       kind: IngressRoute
       name: pyroscope-int-http
+
+patchesStrategicMerge:
+  - crt-pyrosocpe.yaml
