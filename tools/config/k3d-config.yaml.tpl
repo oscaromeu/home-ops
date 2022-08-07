@@ -43,9 +43,9 @@ options:
     - arg: --tls-san=127.0.0.1
       nodeFilters:
       - server:*
-    - arg: --no-deploy=traefik  
-      nodeFilters:
-      - server:*
+#    - arg: --no-deploy=traefik  
+#      nodeFilters:
+#      - server:*
     - arg: --no-deploy=servicelb 
       nodeFilters:
       - server:*

@@ -3,7 +3,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: redirect-scheme-permanent
-  namespace: traefik-system
+  namespace: monitoring
 spec:
   redirectScheme:
     scheme: https
@@ -13,7 +13,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: redirect-scheme-temporary
-  namespace: traefik-system
+  namespace: monitoring
 spec:
   redirectScheme:
     scheme: https

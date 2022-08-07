@@ -5,10 +5,10 @@ namespace: traefik-system
 bases:
   - ../../base/traefik
 
-configMapGenerator:
-  - name: traefik-values
-    files:
-    - values.yaml=values.yaml
-
-patchesStrategicMerge:
-  - helmrelease.yaml
+#configMapGenerator:
+#  - name: traefik-values
+#    files:
+#    - values.yaml=values.yaml
+#
+#patchesStrategicMerge:
+#  - helmrelease.yaml
