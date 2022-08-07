@@ -11,4 +11,5 @@ spec:
     name: flux-system
   path: ./crds/staging
   prune: true
+  force: true
   wait: true
