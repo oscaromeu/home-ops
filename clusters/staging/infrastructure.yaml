@@ -5,12 +5,16 @@ metadata:
   name: infrastructure
   namespace: flux-system
 spec:
-  interval: 10m
+  force: true
+  dependsOn:
+  - name: sources
+  - name: crds
+  interval: 1m
   sourceRef:
     kind: GitRepository
     name: flux-system
   serviceAccountName: kustomize-controller
   path: ./infrastructure/staging
   prune: true
-  wait: true
+  wait: false
   timeout: 5m
