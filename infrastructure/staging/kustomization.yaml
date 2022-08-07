@@ -29,7 +29,7 @@ resources:
 
 # --- Tracing ---
 
-#  - pyroscope
+  - pyroscope
 
 # -- HA Monitoring --
 
