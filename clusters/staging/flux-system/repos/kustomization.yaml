@@ -8,3 +8,4 @@ resources:
   - prometheus-comunity.yaml
   - grafana.yaml
   - cert-manager.yaml
+  - metallb-charts

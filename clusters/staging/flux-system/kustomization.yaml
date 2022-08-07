@@ -4,6 +4,8 @@ namespace: flux-system
 resources:
 - gotk-components.yaml
 - gotk-sync.yaml
+- repos
+- cluster-settings.yaml
 
 #patchesStrategicMerge:
 #  - gotk-patches.yaml
