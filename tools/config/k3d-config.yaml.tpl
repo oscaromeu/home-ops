@@ -12,6 +12,10 @@ volumes:
   nodeFilters:
   - all
 
+- volume: $PROJECT_DIR/sops-keys:$HOME/sops-keys
+  nodeFilters:
+  - all
+
 #- volume: $PROJECT_DIR/tools/config/sealed-secrets-secrets.yaml:/var/lib/rancher/k3s/server/manifests/sealed-secrets-secrets.yaml
 #  nodeFilters:
 #  - server:0
@@ -59,6 +63,6 @@ options:
       - server:0
       - loadbalancer
 env:
-- envVar: bar=baz
+- envVar: SOPS_AGE_KEY_FILE=$HOME/age.agekey
   nodeFilters:
   - all
