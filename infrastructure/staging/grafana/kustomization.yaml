@@ -1,15 +1,19 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: monitoring
+
+
 resources:
-  - ../../../base/pyroscope
-  - cert-pyroscope.yaml
-  - routes_pyroscope.yaml
+  - ../../base/grafana
+  - routes_grafana.yaml
 
 patches:
-  - path: ./patches/patch-tls-pyroscope.yaml
+  - path: ./patches/patch-tls-grafana.yaml
     target:
       group: traefik.containo.us
       version: v1alpha1
       kind: IngressRoute
-      name: pyroscope-int-http
+      name: grafana-int-http
+
+patchesStrategicMerge:
+  - certificate.yaml

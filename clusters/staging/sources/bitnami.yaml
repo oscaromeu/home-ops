@@ -1,10 +1,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: elastic 
-  namespace: monitoring
+  name: bitnami-repository
 spec:
   interval: 30m
-  url: https://helm.elastic.co
-
-
+  url: https://charts.bitnami.com/bitnami
