@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pyroscope
+  namespace: monitoring
   labels:
     app.kubernetes.io/name: pyroscope
     app.kubernetes.io/instance: pyroscope
