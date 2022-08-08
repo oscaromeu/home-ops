@@ -8,8 +8,6 @@ kind: Kustomization
 #  module.liveinfra.io/component: "grafana"
 #  liveinfra.io/source: "kustomize"
 
-namespace: monitoring
-
 resources:
   - dashboards
   - deploy.yml
