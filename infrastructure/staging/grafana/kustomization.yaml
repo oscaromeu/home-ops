@@ -16,4 +16,4 @@ patches:
       name: grafana-int-http
 
 patchesStrategicMerge:
-  - certificate.yaml
+  - crt_grafana.yaml
