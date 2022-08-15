@@ -29,13 +29,13 @@ resources:
 
 # --- Tracing ---
 
-  - pyroscope
+#  - pyroscope
 
 # -- HA Monitoring --
 
 #  - victoriametrics
-#  - kube-prometheus-stack
-#  - grafana-helm
+  - kube-prometheus-stack
+  - grafana-helm
 
 # --- Extra ---
 
