@@ -15,4 +15,4 @@ spec:
       match: Host(`grafana.staging.0.0.0.0.sslip.io`)
       services:
         - name: grafana
-          port: 3000
+          port: 80
