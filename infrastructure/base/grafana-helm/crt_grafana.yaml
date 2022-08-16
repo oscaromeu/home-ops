@@ -1,0 +1,10 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: grafana-certificate
+  namespace: cert-manager
+spec:
+  issuerRef:
+    kind: ClusterIssuer
+    name: selfsigned
+  secretName: grafana-crt
