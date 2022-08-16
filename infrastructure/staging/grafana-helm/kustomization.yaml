@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ../../base/grafana-helm
+  - routes_grafana.yaml
 
 patchesStrategicMerge:
   - crt_grafana.yaml
-  - routes_grafana.yaml
