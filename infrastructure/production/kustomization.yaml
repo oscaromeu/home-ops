@@ -5,25 +5,25 @@ kind: Kustomization
 resources:
 
   - ns.yaml
-  - cert-manager
+#  - cert-manager
   - traefik
 
 # --- CI/CD -----
 #
-  - flux-system-monitor
+#  - flux-system-monitor
 
 # --- Logging -----
-  - fluentbit
-  - loki
+#  - fluentbit
+#  - loki
 
 # --- Metrics ----- 
-  - prometheus-operator
-  - node-exporter
-  - kube-state-metrics
-  - prometheus-operated
-  - grafana
+#  - prometheus-operator
+#  - node-exporter
+#  - kube-state-metrics
+#  - prometheus-operated
+#  - grafana
 #  - alertmanager-operated
 
 # ---- Extra ------
 
-  - extra-dashboards
+#  - extra-dashboards
