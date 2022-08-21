@@ -27,7 +27,7 @@ resources:
 
 # --- Traces -----
 
-  - pyroscope
+#  - pyroscope
 
 # ---- Extra ------
 
