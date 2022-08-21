@@ -11,4 +11,4 @@ resources:
   - cm_pyroscope.yaml
   - dp_pyroscope.yaml
   - svc_pyroscope.yaml
-  - crt_pyroscope.yaml
+#  - crt_pyroscope.yaml
