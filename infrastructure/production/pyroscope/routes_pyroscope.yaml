@@ -11,10 +11,12 @@ spec:
     - kind: Rule
       middlewares:
         - name: redirect-permanent
-          namespace: monitoring
+          namespace: flux-system
       match: Host(`pyroscope.prod.0.0.0.0.sslip.io`)
       services:
         - name: pyroscope
           port: http
   tls:
     secretName: pyroscope-crt
+    options:                       
+      namespace: monitoring
