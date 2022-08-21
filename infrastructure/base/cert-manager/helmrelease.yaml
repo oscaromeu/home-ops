@@ -9,7 +9,7 @@ spec:
       chart: cert-manager
       sourceRef:
         kind: HelmRepository
-        name: jetstack
+        name: jetstack-charts
         namespace: flux-system
   valuesFrom:
   - kind: ConfigMap

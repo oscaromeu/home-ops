@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
 
   - ns.yaml
-#  - cert-manager
+  - cert-manager
   - traefik
 
 # --- CI/CD -----
@@ -23,6 +23,11 @@ resources:
 #  - prometheus-operated
 #  - grafana
 #  - alertmanager-operated
+
+
+# --- Traces -----
+
+  - pyroscope
 
 # ---- Extra ------
 

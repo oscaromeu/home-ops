@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base/pyroscope
+  - routes_pyroscope.yaml
+
+patches:
+  - path: ./patches/patch-tls-pyroscope.yaml
+    target:
+      group: traefik.containo.us
+      version: v1alpha1
+      kind: IngressRoute
+      name: pyroscope-int-http
+
+patchesStrategicMerge:
+  - crt_pyroscope.yaml
