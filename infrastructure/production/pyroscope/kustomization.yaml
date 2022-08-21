@@ -4,6 +4,7 @@ namespace: monitoring
 resources:
   - ../../base/pyroscope
   - routes_pyroscope.yaml
+  - crt_pyroscope.yaml
 
 patches:
   - path: ./patches/patch-tls-pyroscope.yaml
@@ -12,6 +13,3 @@ patches:
       version: v1alpha1
       kind: IngressRoute
       name: pyroscope-int-http
-
-patchesStrategicMerge:
-  - crt_pyroscope.yaml
