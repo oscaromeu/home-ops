@@ -6,3 +6,4 @@ resources:
   - prometheus-community.yaml
   - pyroscope.yaml
   - grafana.yaml
+  - cert-manager.yaml
