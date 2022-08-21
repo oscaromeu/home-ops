@@ -4,6 +4,7 @@ namespace: monitoring
 resources:
   - ../../base/pyroscope
   - routes_pyroscope.yaml
+  - middleware-redirect-pyroscope.yaml
 
 patches:
   - path: ./patches/patch-tls-pyroscope.yaml
