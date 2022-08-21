@@ -16,5 +16,5 @@ spec:
       services:
         - name: pyroscope
           port: http
-    tls:
-      secretName: pyroscope-crt
+  tls:
+    secretName: pyroscope-crt
