@@ -10,8 +10,8 @@ spec:
   routes:
     - kind: Rule
       middlewares:
-        - name: redirect-permanent
-          namespace: flux-system
+        - name: redirect-permanent-pyroscope
+          namespace: monitoring
       match: Host(`pyroscope.prod.0.0.0.0.sslip.io`)
       services:
         - name: pyroscope
