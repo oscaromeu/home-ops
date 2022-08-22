@@ -28,6 +28,7 @@ resources:
 # --- Traces -----
 
   - pyroscope
+  - kube-prometheus-stack
 
 # ---- Extra ------
 
