@@ -8,3 +8,4 @@ resources:
   - grafana.yaml
   - cert-manager.yaml
   - traefik.yaml
+  - victoriametrics.yaml

@@ -23,6 +23,7 @@ resources:
 #  - prometheus-operated
   - grafana
   - kube-prometheus-stack
+  - victoriametrics
 #  - alertmanager-operated
 
 
