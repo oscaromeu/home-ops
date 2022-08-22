@@ -18,7 +18,7 @@ spec:
   values:
     deployment:
       kind: Deployment
-      replicas: 3
+      replicas: 1
     service:
       enabled: true
       type: LoadBalancer
@@ -42,9 +42,6 @@ spec:
     - "--providers.kubernetesingress.ingressclass=traefik"
     - "--metrics.prometheus=true"
     - "--metrics.prometheus.entryPoint=metrics"
-    additionalArguments:
-    - "--providers.kubernetesingress.allowexternalnameservices=true"
-    - "--providers.kubernetescrd.allowexternalnameservices=true"
     ports:
       traefik:
         expose: true
@@ -56,3 +53,12 @@ spec:
         port: 8082
         expose: false
         exposedPort: 8082
+    providers:
+      kubernetesCRD:
+        allowCrossNamespace: true
+        allowExternalNameServices: true
+      kubernetesIngress:
+        publishedService:
+          enabled: true
+          pathOverride: traefik-system/traefik
+        allowExternalNameServices: true
