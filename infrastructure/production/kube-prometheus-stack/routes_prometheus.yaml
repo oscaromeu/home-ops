@@ -2,7 +2,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: grafana-int-http
+  name: prometheus-int-http
   namespace: monitoring
 spec:
   entryPoints:
@@ -11,9 +11,9 @@ spec:
     - kind: Rule
       middlewares:
         - name: redirect-permanent
-          namespace: kube-system
-      match: Host(`grafana-monitoring.apps.bm.0.0.0.0.sslip.io`)
+          namespace: monitoring
+      match: Host(`prometheus.prod.0.0.0.0.sslip.io`)
       services:
-        - name: grafana
-          port: 3000
+        - name: prometheus-k8s
+          port: 9090
 

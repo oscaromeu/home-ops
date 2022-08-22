@@ -21,15 +21,16 @@ resources:
 #  - node-exporter
 #  - kube-state-metrics
 #  - prometheus-operated
-#  - grafana
+  - grafana
+  - kube-prometheus-stack
 #  - alertmanager-operated
 
 
 # --- Traces -----
 
   - pyroscope
-  - kube-prometheus-stack
-#  - grafana
+
+
 
 # ---- Extra ------
 

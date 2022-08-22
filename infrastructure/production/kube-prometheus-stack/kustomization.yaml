@@ -3,3 +3,14 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ../../base/kube-prometheus-stack
+  - cert-prometheus.yaml
+  - rules
+  - routes_prometheus.yaml
+
+patches:
+  - path: ./patches/patch-tls-prometheus.yaml
+    target:
+      group: traefik.containo.us
+      version: v1alpha1
+      kind: IngressRoute
+      name: prometheus-int-http

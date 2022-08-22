@@ -1,7 +1,6 @@
----
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: monitoring
+
 resources:
-  - release.yaml
-  - crt_grafana.yaml
+  - requests_and_limits.yaml
+  - elastic_rules.yaml
