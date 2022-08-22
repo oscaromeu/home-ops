@@ -4,4 +4,4 @@ namespace: kube-system
 
 resources:
   - ../../base/traefik
-  - middleware-redirect.yaml
+#  - middleware-redirect.yaml
