@@ -14,7 +14,8 @@ spec:
           port: http
   tls:
     secretName: pyroscope-crt
-    options:                       
+    options:
+      name: pyroscope-certificate                       
       namespace: monitoring
 ---
 apiVersion: traefik.containo.us/v1alpha1
