@@ -32,12 +32,12 @@ spec:
       enabled: false
     prometheus:
       prometheusSpec:
-#        remoteWrite:
-#          - url: http://<victoriametrics-addr>:8428/api/v1/write
-#            queue_config:
-#              max_samples_per_send: 10000
-#              capacity: 20000
-#              max_shards: 30
+        remoteWrite:
+          - url: https://victoriametrics.prod.0.0.0.0.sslip.io/api/v1/write
+            queue_config:
+              max_samples_per_send: 10000
+              capacity: 20000
+              max_shards: 30
         resources:
           requests:
             cpu: 200m
