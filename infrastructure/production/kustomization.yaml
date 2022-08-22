@@ -13,8 +13,8 @@ resources:
 #  - flux-system-monitor
 
 # --- Logging -----
-#  - fluentbit
-#  - loki
+  - fluentbit
+  - loki
 
 # --- Metrics ----- 
 #  - prometheus-operator
