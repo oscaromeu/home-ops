@@ -7,3 +7,4 @@ resources:
   - pyroscope.yaml
   - grafana.yaml
   - cert-manager.yaml
+  - traefik.yaml
