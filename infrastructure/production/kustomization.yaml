@@ -29,6 +29,7 @@ resources:
 
   - pyroscope
   - kube-prometheus-stack
+  - grafana
 
 # ---- Extra ------
 

@@ -9,11 +9,25 @@ spec:
     - web
   routes:
     - kind: Rule
-      middlewares:
-        - name: redirect-permanent
-          namespace: monitoring
-      match: Host(`grafana.prod.0.0.0.0.sslip.io`)
+      match: Host(`grafana-monitoring.apps.bm.0.0.0.0.sslip.io`)
       services:
         - name: grafana
           port: 3000
-
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana-int-https
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`grafana-monitoring.apps.bm.0.0.0.0.sslip.io`)
+      services:
+        - name: grafana
+          port: 3000
+  tls:
+    secretName: grafana-crt
+    options:                       
+      namespace: monitoring
