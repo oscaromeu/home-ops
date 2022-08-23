@@ -1,0 +1,28 @@
+
+---
+# Source: promscale/templates/svc-promscale.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: promscale
+  labels:
+    app: promscale
+    chart: promscale-0.13.0
+    release: promscale
+    heritage: Helm
+    app.kubernetes.io/name: "promscale"
+    app.kubernetes.io/version: 0.13.0
+    app.kubernetes.io/component: "connector"
+spec:
+  selector:
+    app: promscale
+  type: ClusterIP
+  ports:
+  - name: metrics-port
+    port: 9201
+    targetPort: metrics-port
+    protocol: TCP
+  - name: otel-port
+    port: 9202
+    targetPort: otel-port
+    protocol: TCP
