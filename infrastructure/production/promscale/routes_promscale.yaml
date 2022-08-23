@@ -1,0 +1,36 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: promscale-int-https
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`promscale.prod.0.0.0.0.sslip.io`)
+      services:
+        - name: promscale
+          port: metrics-port
+  tls:
+    secretName: promscale-crt
+    options:
+      name: promscale-certificate                       
+      namespace: monitoring
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: promscale-int-http
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      middlewares:
+        - name: redirect-permanent
+          namespace: kube-system
+      match: Host(`promscale.prod.0.0.0.0.sslip.io`)
+      services:
+        - name: promscale
+          port: metrics-port

@@ -3,9 +3,7 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ../../base/promscale
+  - crt_promscale.yaml 
 
-
-
-
-#patchesStrategicMerge:
-#  - 
+patchesStrategicMerge:
+  - crt_promscale.yaml
