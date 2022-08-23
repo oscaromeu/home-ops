@@ -7,6 +7,6 @@ resources:
 - ns.yaml
 - flux-system
 - crds.yaml
-- secrets.yaml
+#- secrets.yaml
 - infrastructure.yaml
 - apps.yaml
