@@ -13,7 +13,6 @@ spec:
   selector:
     matchLabels:
       app: promscale
-      release: promscale
   template:
     metadata:
       labels:
