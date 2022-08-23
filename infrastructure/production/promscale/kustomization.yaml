@@ -4,6 +4,4 @@ namespace: monitoring
 resources:
   - ../../base/promscale
   - crt_promscale.yaml 
-
-patchesStrategicMerge:
   - routes_promscale.yaml
