@@ -6,4 +6,4 @@ resources:
   - crt_promscale.yaml 
 
 patchesStrategicMerge:
-  - crt_promscale.yaml
+  - routes_promscale.yaml
