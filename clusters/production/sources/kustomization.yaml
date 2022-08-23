@@ -9,3 +9,4 @@ resources:
   - cert-manager.yaml
   - traefik.yaml
   - victoriametrics.yaml
+  - timescale.yaml
