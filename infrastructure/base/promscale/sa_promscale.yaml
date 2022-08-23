@@ -7,6 +7,3 @@ metadata:
   name: promscale
   labels:
     app: promscale
-    app.kubernetes.io/name: "promscale"
-    app.kubernetes.io/version: 0.13.0
-    app.kubernetes.io/component: "connector"

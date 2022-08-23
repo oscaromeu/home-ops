@@ -6,9 +6,6 @@ metadata:
   name: promscale
   labels:
     app: promscale
-    app.kubernetes.io/name: "promscale"
-    app.kubernetes.io/version: 0.13.0
-    app.kubernetes.io/component: "connector"
 spec:
   replicas: 1
   strategy:
@@ -21,9 +18,6 @@ spec:
     metadata:
       labels:
         app: promscale
-        app.kubernetes.io/name: "promscale"
-        app.kubernetes.io/version: 0.13.0
-        app.kubernetes.io/component: "connector"
       annotations:
         checksum/connection: ff05ff54cbc0eadd9ce97781ed753f30c19ece1aa39b35d2eb5a70ad656daf69
         checksum/config: a1171a41877cc559fe699480d7c9bc731055fde6ccbe0b47e5c9a279cfe38962

@@ -7,12 +7,6 @@ metadata:
   name: promscale
   labels:
     app: promscale
-    chart: promscale-0.13.0
-    release: promscale
-    heritage: Helm
-    app.kubernetes.io/name: "promscale"
-    app.kubernetes.io/version: 0.13.0
-    app.kubernetes.io/component: "connector"
 spec:
   selector:
     app: promscale
