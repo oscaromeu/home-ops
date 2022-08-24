@@ -34,7 +34,6 @@ spec:
       prometheusSpec:
         remoteWrite:
           - url: https://victoriametrics.prod.0.0.0.0.sslip.io/api/v1/write
-          - url: https://promscale.prod.0.0.0.0.sslip.io/write
         resources:
           requests:
             cpu: 200m
