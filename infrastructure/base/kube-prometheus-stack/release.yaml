@@ -34,10 +34,6 @@ spec:
       prometheusSpec:
         remoteWrite:
           - url: https://victoriametrics.prod.0.0.0.0.sslip.io/api/v1/write
-            queue_config:
-              max_samples_per_send: 10000
-              capacity: 20000
-              max_shards: 30
           - url: https://promscale.prod.0.0.0.0.sslip.io/write
         resources:
           requests:
