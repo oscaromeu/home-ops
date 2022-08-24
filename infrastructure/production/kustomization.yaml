@@ -22,7 +22,7 @@ resources:
 #  - kube-state-metrics
 #  - prometheus-operated
   - grafana
-#  - kube-prometheus-stack
+  - kube-prometheus-stack
   - victoriametrics
   - promscale
 #  - alertmanager-operated
