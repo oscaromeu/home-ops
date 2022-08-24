@@ -6,6 +6,7 @@ metadata:
 resources:
 - ns.yaml
 - flux-system
+- sources
 - crds.yaml
 - secrets.yaml
 - infrastructure.yaml
