@@ -10,3 +10,4 @@ resources:
   - traefik.yaml
   - victoriametrics.yaml
   - timescale.yaml
+  - elastic.yaml
