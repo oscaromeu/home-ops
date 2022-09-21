@@ -15,6 +15,7 @@ resources:
 # --- Logging -----
   - fluentbit
   - loki
+  - elastic
 
 # --- Metrics ----- 
 #  - prometheus-operator
