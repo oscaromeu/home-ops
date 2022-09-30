@@ -8,7 +8,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`pyroscope.prod.0.0.0.0.sslip.io`)
+      match: Host(`pyroscope.prod.192.168.1.41.sslip.io`)
       services:
         - name: pyroscope
           port: http
@@ -30,7 +30,7 @@ spec:
       middlewares:
         - name: redirect-permanent
           namespace: kube-system
-      match: Host(`pyroscope.prod.0.0.0.0.sslip.io`)
+      match: Host(`pyroscope.prod.192.168.1.41.sslip.io`)
       services:
         - name: pyroscope
           port: http

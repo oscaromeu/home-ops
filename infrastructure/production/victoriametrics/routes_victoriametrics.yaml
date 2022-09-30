@@ -12,7 +12,7 @@ spec:
       middlewares:
         - name: redirect-permanent
           namespace: kube-system
-      match: Host(`victoriametrics.prod.0.0.0.0.sslip.io`)
+      match: Host(`victoriametrics.prod.192.168.1.41.sslip.io`)
       services:
         - name: vmsingle-victoria-metrics-single-server
           port: 8428
