@@ -7,7 +7,6 @@ resources:
   - ns.yaml
   - cert-manager
   - traefik
-  - certificates
 
 # --- CI/CD -----
 #
