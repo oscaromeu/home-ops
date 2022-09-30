@@ -7,5 +7,5 @@ spec:
   - 'pyroscope.prod.0.0.0.0.sslip.io'
   issuerRef:
     kind: ClusterIssuer
-    name: selfsigned
+    name: self-signed
   secretName: pyroscope-crt

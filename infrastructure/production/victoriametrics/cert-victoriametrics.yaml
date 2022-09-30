@@ -8,5 +8,5 @@ spec:
   - 'victoriametrics.prod.0.0.0.0.sslip.io'
   issuerRef:
     kind: ClusterIssuer
-    name: selfsigned
+    name: self-signed
   secretName: victoriametrics-crt
