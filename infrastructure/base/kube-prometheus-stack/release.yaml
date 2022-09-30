@@ -33,9 +33,15 @@ spec:
     prometheus:
       prometheusSpec:
         remoteWrite:
-          - url: https://victoriametrics.prod.0.0.0.0.sslip.io/api/v1/write
+          - url: https://victoriametrics.prod.192.168.1.41.sslip.io/api/v1/write
         resources:
           requests:
             cpu: 200m
             memory: 200Mi
         ruleNamespaceSelector: {}
+        podMonitorNamespaceSelector: {}
+        podMonitorSelector: {}
+        serviceMonitorNamespaceSelector: {}
+        serviceMonitorSelector:
+          matchLabels:
+            monitoring: baremetal
