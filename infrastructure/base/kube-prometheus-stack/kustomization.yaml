@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - release.yaml
   - grafana-dashboards
+  - rules/elastic.yaml
