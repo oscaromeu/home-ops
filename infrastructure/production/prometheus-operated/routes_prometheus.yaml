@@ -11,8 +11,8 @@ spec:
     - kind: Rule
       middlewares:
         - name: redirect-permanent
-          namespace: monitoring
-      match: Host(`prometheus.prod.0.0.0.0.sslip.io`)
+          namespace: kube-system
+      match: Host(`prometheus.prod.192.168.1.45.sslip.io`)
       services:
         - name: prometheus-k8s
           port: 9090
