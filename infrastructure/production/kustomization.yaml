@@ -23,8 +23,8 @@ resources:
 #  - kube-state-metrics
 #  - prometheus-operated
   - grafana
-  - kube-prometheus-stack
-  - victoriametrics
+#  - kube-prometheus-stack
+#  - victoriametrics
   - elastic-exporter
   - timescale
 #  - promscale
