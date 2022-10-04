@@ -12,7 +12,7 @@ spec:
       middlewares:
         - name: redirect-permanent
           namespace: kube-system
-      match: Host(`prometheus.prod.192.168.1.41.sslip.io`)
+      match: Host(`prometheus.prod.192.168.1.45.sslip.io`)
       services:
         - name: kube-prometheus-stack-prometheus
           port: 9090

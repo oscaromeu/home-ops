@@ -12,7 +12,7 @@ spec:
       middlewares:
         - name: redirect-permanent
           namespace: kube-system
-      match: Host(`grafana-monitoring.apps.bm.192.168.1.41.sslip.io`)
+      match: Host(`grafana-monitoring.apps.bm.192.168.1.45.sslip.io`)
       services:
         - name: grafana
           port: 3000
