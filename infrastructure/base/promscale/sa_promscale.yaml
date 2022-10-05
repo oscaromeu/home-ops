@@ -1,9 +1,0 @@
----
-# Source: promscale/templates/service-account.yaml
-apiVersion: v1
-kind: ServiceAccount
-automountServiceAccountToken: false
-metadata:
-  name: promscale
-  labels:
-    app: promscale

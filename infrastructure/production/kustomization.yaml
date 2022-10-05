@@ -10,7 +10,7 @@ resources:
 
 # --- CI/CD -----
 #
-#  - flux-system-monitor
+  - flux-system-monitor
 
 # --- Logging -----
   - fluentbit
