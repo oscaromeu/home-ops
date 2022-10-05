@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - requests_and_limits.yaml
   - elastic_rules.yaml
+  - k8s-rules.yaml
