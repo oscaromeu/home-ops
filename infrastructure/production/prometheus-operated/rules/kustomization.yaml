@@ -3,6 +3,6 @@ kind: Kustomization
 
 resources:
   - requests_and_limits.yaml
-#  - elastic-rules.yaml
+  - elastic-rules.yaml
   - elastic-alerts.yaml
   - k8s-rules.yaml
