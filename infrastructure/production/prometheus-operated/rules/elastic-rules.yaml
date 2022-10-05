@@ -1,11 +1,14 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
+  labels:
+    prometheus: k8s
+    role: elastic-rules
   namespace: monitoring
-  name: elastic
+  name: elastic-rules
 spec:
   groups:
-    - name: elastic
+    - name: elastic-rules
       rules:
       - expr: sum(label_replace(elasticsearch_indices_store_size_bytes_total,"datastream","$1","index","(?:shrink-.*-.ds-|.ds-)(.*)-20[0-9].*-.*")) by (datastream)
         record: elastic_indices:cluster_store_size_bytes_total:sum

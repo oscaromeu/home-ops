@@ -8,7 +8,7 @@ metadata:
   namespace: monitoring
 spec:
   groups:
-  - name: elasticsearch-rules
+  - name: elastic-alerts
     rules:
     - alert: Elastic_UP
       expr: "elasticsearch_cluster_health_up != 1"
