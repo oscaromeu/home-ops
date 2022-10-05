@@ -12,9 +12,13 @@ spec:
       rules:
       - expr: sum(label_replace(elasticsearch_indices_store_size_bytes_total,"datastream","$1","index","(?:shrink-.*-.ds-|.ds-)(.*)-20[0-9].*-.*")) by (datastream)
         record: elastic_indices:cluster_store_size_bytes_total:sum
-      - expr: elasticsearch_indices_store_size_bytes_primary{index=~".+ingestion.+|.+apm.+|.+async.+"}
-        record: elastic_indices:cluster_store_size_bytes_primary
+      - expr: elasticsearch_indices_store_size_bytes_primary{index=~".+noprod.+",index!~".+apm.+|.+async.+"}
+        record: elastic_indices:cluster_store_size_bytes_primary:noprod
+      - expr: elasticsearch_indices_store_size_bytes_primary{index=~".+prod.+",index!~".+apm.+|.+async.+"}
+        record: elastic_indices:cluster_store_size_bytes_primary:prod
       - expr: sum(label_replace(elasticsearch_indices_store_size_bytes_total,"datastream","$1","index","(?:.ds-)(.*)-20[0-9].*-.*")) by (datastream)
         record: elastic_indices:store_size_bytes_total:sum
-      - expr: elasticsearch_indices_store_size_bytes_primary{index!~"shrink.+|.+ingestion.+|.+apm.+|.+async.+"}
-        record: elastic_indices:store_size_bytes_primary
+      - expr: elasticsearch_indices_store_size_bytes_primary{index=~".+noprod.+",index!~"shrink.+|.+apm.+|.+async.+"}
+        record: elastic_indices:store_size_bytes_primary:noprod
+      - expr: elasticsearch_indices_store_size_bytes_primary{index=~".+prod.+",index!~"shrink.+|.+apm.+|.+async.+"}
+        record: elastic_indices:store_size_bytes_primary:prod
