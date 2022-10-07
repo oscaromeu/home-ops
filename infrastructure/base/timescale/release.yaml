@@ -2,14 +2,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: timescaledb
+  name: timescaledb-single-release
   namespace: monitoring
 spec:
   interval: 5m
   chart:
     spec:
-      chart: tobs
-      version: 15.0.0
+      chart: timescaledb-single
+      version: 0.17.0
       sourceRef:
         kind: HelmRepository
         name: timescale
@@ -25,111 +25,12 @@ spec:
       retries: 5
   # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
   values:
-    # Values for configuring the deployment of TimescaleDB
-    # The charts README is at:
-    #    https://github.com/timescale/helm-charts/tree/main/charts/timescaledb-single
-    # Check out the various configuration options (administration guide) at:
-    #    https://github.com/timescale/helm-charts/blob/main/charts/timescaledb-single/docs/admin-guide.md
-    
-    # Override the deployment namespace
-    namespaceOverride: ""
-    # TimescaleDB single helm chart configuration
-    timescaledb-single:
-      nodeSelector:
-        kubernetes.io/arch: amd64
-      # disable the chart if an existing TimescaleDB instance is used
-      enabled: &dbEnabled true
-      # override default helm chart image to use one with newer promscale_extension
-      image:
-        repository: timescale/timescaledb-ha
-        tag: pg14.5-ts2.8.0-p1
-        pullPolicy: IfNotPresent
-      env:
-        - name: TSTUNE_PROFILE
-          value: promscale
-      # create only a ClusterIP service
-      loadBalancer:
-        enabled: false
-      # number or TimescaleDB pods to spawn (default is 3, 1 for no HA)
-      replicaCount: 3
-      # backup is disabled by default, enable it
-      # if you want to backup timescaleDB to s3
-      # you can provide the s3 details on tobs install
-      # in the user prompt or you can set s3 details in the
-      # env variables for the following keys:
-      # PGBACKREST_REPO1_S3_BUCKET
-      # PGBACKREST_REPO1_S3_ENDPOINT
-      # PGBACKREST_REPO1_S3_REGION
-      # PGBACKREST_REPO1_S3_KEY
-      # PGBACKREST_REPO1_S3_KEY_SECRET
-      backup:
-        enabled: false
-      # TimescaleDB PVC sizes
-      persistentVolumes:
-        data:
-          size: 15Gi
-        wal:
-          size: 5Gi
-      ## TimescaleDB resource requests
-      resources:
-        requests:
-          cpu: 100m
-          memory: 2Gi
-      # Enable Prometheus exporter for PostgreSQL server metrics.
-      # https://github.com/prometheus-community/postgres_exporter
-      prometheus:
-        enabled: true
-        image:
-          repository: quay.io/prometheuscommunity/postgres-exporter
-          tag: v0.11.1
-      # Specifies whether PodMonitor for Prometheus operator should be created
-      podMonitor:
-        enabled: true
-    # Values for configuring the deployment of the Promscale
-    # The charts README is at:
-    #   https://github.com/timescale/helm-charts/tree/main/charts/promscale
-    promscale:
-      nodeSelector:
-        kubernetes.io/arch: amd64
-      enabled: true
-      image:
-        repository: timescale/promscale
-        tag: 0.14.0
-        pullPolicy: IfNotPresent
-      # to pass extra args
-      extraArgs:
-        - "--metrics.high-availability=true"
-      extraEnv:
-        - name: "TOBS_TELEMETRY_INSTALLED_BY"
-          value: "helm"
-        - name: "TOBS_TELEMETRY_VERSION"
-          value: "{{ .Chart.Version }}"
-        - name: "TOBS_TELEMETRY_TRACING_ENABLED"
-          value: "true"
-        - name: "TOBS_TELEMETRY_TIMESCALEDB_ENABLED"
-          value: *dbEnabled
-      serviceMonitor:
-        enabled: true
-      ## Note:
-    
-      # If you are providing your own secret name, do
-      # not forget to configure at below connectionSecretName
-    
-      # if you are adding a conn string here do not forget
-      # to add the same for kube-prometheus.grafana.timescale.adminPassSecret
-      connectionSecretName: "tobs-promscale-connection"
-      # Promscale deployment resource requests
-      resources:
-        requests:
-          # By default this should be enough for a cluster
-          # with only a few pods
-          memory: 500Mi
-          cpu: 30m
-    # Enabling Kube-Prometheus will install
-    # Grafana & Prometheus into tobs as they
-    # are part of Kube-Prometheus already
-    kube-prometheus-stack:
-      enabled: false
+    nodeSelector:
+      kubernetes.io/arch: amd64
 
-      grafana:
-        enabled: false
+
+    replicaCount: 3
+
+    # To prevent very long names, we override the name, otherwise it would default to
+    # timescaledb-single (the name of the chart)
+    nameOverride: timescaledb
