@@ -25,8 +25,6 @@ spec:
       retries: 5
   # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
   values:
-    nodeSelector:
-      kubernetes.io/arch: amd64
     # Values for configuring the deployment of TimescaleDB
     # The charts README is at:
     #    https://github.com/timescale/helm-charts/tree/main/charts/timescaledb-single
@@ -37,6 +35,8 @@ spec:
     namespaceOverride: ""
     # TimescaleDB single helm chart configuration
     timescaledb-single:
+      nodeSelector:
+        kubernetes.io/arch: amd64
       # disable the chart if an existing TimescaleDB instance is used
       enabled: &dbEnabled true
       # override default helm chart image to use one with newer promscale_extension
@@ -89,6 +89,8 @@ spec:
     # The charts README is at:
     #   https://github.com/timescale/helm-charts/tree/main/charts/promscale
     promscale:
+      nodeSelector:
+        kubernetes.io/arch: amd64
       enabled: true
       image:
         repository: timescale/promscale
