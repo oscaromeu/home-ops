@@ -1,0 +1,42 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: promscale
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: promscale
+      version: 14.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: timescale
+        namespace: flux-system
+      interval: 5m
+  install:
+    createNamespace: false
+    remediation:
+      retries: 5
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: 5
+  # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+  values:
+    nodeSelector:
+      kubernetes.io/arch: amd64
+    # connection options to connect to a target db
+    connection:
+      # Database connection settings. If `uri` is not
+      # set then the specific user, pass, host, port and
+      # user used to connect to TimescaleDB
+      user: "postgres"
+      password: "hOVNEewi2rxKPNZU"
+      host: "timescaledb.{{ .Release.Namespace }}.svc.cluster.local"
+      port: 5432
+      sslMode: require
+      # database name in which to store the metrics
+      # must be created before start
+      dbName: tsdb
