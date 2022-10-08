@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: "Host(`elastic.prod.0.0.0.0.sslip.io`)"
+    - match: "Host(`elastic.prod.192.168.1.45.sslip.io`)"
       kind: Rule
       services:
         - name: elk-elasticsearch
@@ -31,7 +31,7 @@ spec:
 #          scheme: https
 #      middlewares:
 #        - name: elk-middleware-chain
-    - match: "Host(`kibana.prod.0.0.0.0.sslip.io`)"
+    - match: "Host(`kibana.prod.192.168.1.45.sslip.io`)"
       kind: Rule
       services:
         - name: elk-kb-http
@@ -53,6 +53,6 @@ spec:
     secretName: elk-certs
     domains:
       - sans:
-          - "elastic.prod.0.0.0.0.sslip.io"
-          - "kibana.prod.0.0.0.0.sslip.io"
-          - "apm.prod.0.0.0.0.sslip.io"
+          - "elastic.prod.192.168.1.45.sslip.io"
+          - "kibana.prod.192.168.1.45.sslip.io"
+          - "apm.prod.192.168.1.45.sslip.io"
