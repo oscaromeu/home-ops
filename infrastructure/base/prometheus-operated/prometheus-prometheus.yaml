@@ -47,7 +47,7 @@ spec:
   serviceMonitorSelector: {}
   version: 2.33.4
   remote_write:
-    - url: "http://promscale:9201/write"
+    - url: "http://promscale.monitoring.svc.cluster.local:9201/write"
   remote_read:
-    - url: "http://promscale:9201/read"
+    - url: "http://promscale.monitoring.svc.cluster.local:9201/read"
       read_recent: true
