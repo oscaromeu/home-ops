@@ -48,7 +48,7 @@ spec:
     patroni:
       kubernetes:
         namespace: monitoring
-        #bypass_api_service: true
+        bypass_api_service: true
         role_label: role
         scope_label: cluster-name
         use_endpoints: true
