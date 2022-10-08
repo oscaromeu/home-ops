@@ -10,4 +10,4 @@ resources:
 - crds.yaml
 - secrets.yaml
 - infrastructure.yaml
-- apps.yaml
+#- apps.yaml
