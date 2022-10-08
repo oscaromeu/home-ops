@@ -27,7 +27,7 @@ resources:
 #  - victoriametrics
   - elastic-exporter
   - timescale
-#  - promscale
+  - promscale
 #  - alertmanager-operated
 
 

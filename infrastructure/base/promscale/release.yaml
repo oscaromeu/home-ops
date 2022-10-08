@@ -28,5 +28,5 @@ spec:
     nodeSelector:
       kubernetes.io/arch: amd64
 
-    # extract from values.yaml
-    connectionSecretName: test-connection-secret
+    connection:
+      uri: postgres://postgres:x3fUXOsJqFrWut6J@timescale.monitoring.svc.cluster.local:5432/tsdb?sslmode=allow
