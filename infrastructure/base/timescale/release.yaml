@@ -52,3 +52,13 @@ spec:
         role_label: role
         scope_label: cluster-name
         use_endpoints: true
+      postgresql:
+        pg_hba:
+        - host      all             all                0.0.0.0/0          md5
+        - local     all             postgres                              peer
+        - local     all             all                                   md5
+        - hostnossl all,replication all                all                reject
+        - hostssl   all             all                127.0.0.1/32       md5
+        - hostssl   all             all                ::1/128            md5
+        - hostssl   replication     standby            all                md5
+        - hostssl   all             all                all                md5
