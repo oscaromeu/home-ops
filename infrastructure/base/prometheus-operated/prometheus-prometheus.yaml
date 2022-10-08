@@ -46,8 +46,22 @@ spec:
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
   version: 2.33.4
-  remote_write:
-    - url: "http://promscale.monitoring.svc.cluster.local:9201/write"
-  remote_read:
+  
+  # The remote_read spec configuration for Prometheus.
+  # ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#remotereadspec
+  remoteRead:
     - url: "http://promscale.monitoring.svc.cluster.local:9201/read"
-      read_recent: true
+      readRecent: false
+  # The remote_write spec configuration for Prometheus.
+  # ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#remotewritespec
+  remoteWrite:
+    - url: "http://promscale.monitoring.svc.cluster.local:9201/write"
+      remoteTimeout: 100s
+      queueConfig:
+        capacity: 100000
+        maxSamplesPerSend: 10000
+        batchSendDeadline: 30s
+        minShards: 20
+        maxShards: 20
+        minBackoff: 100ms
+        maxBackoff: 10s
