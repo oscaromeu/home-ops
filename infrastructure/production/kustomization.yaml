@@ -13,9 +13,9 @@ resources:
 #  - flux-system-monitor
 
 # --- Logging -----
-#  - fluentbit
-#  - loki
-#  - elastic
+  - fluentbit
+  - loki
+  - elastic
 
 # --- Metrics ----- 
   - prometheus-operator
