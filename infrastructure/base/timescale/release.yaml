@@ -8,8 +8,8 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: timescaledb-single
-      version: 0.17.0
+      chart: tobs
+      version: 15.0.0
       sourceRef:
         kind: HelmRepository
         name: timescale
