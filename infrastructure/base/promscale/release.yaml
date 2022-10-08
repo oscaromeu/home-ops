@@ -28,10 +28,4 @@ spec:
     nodeSelector:
       kubernetes.io/arch: amd64
 
-    connection:
-      user: postgres
-      password: ""
-      host: timescaledb.monitoring.svc.cluster.local
-      port: 5432
-      sslMode: require
-      dbName: tsdb
+    connectionSecretName: "monitoring-secrets"
