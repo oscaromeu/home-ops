@@ -44,4 +44,4 @@ spec:
     secrets:
       # Selector used to provision your own Secret containing certificate details.
       # This is mutually exclusive with `certificate` option and takes precedence over it.
-      certificateSecretName: "timescaledb-certificates"
+      certificateSecretName: "timescaledb-certificate"
