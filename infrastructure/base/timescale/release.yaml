@@ -37,7 +37,11 @@ spec:
     # To prevent very long names, we override the name, otherwise it would default to
     # timescaledb-single (the name of the chart)
     nameOverride: timescaledb
-
-    # Selector used to provision your own Secret containing certificate details.
-    # This is mutually exclusive with `certificate` option and takes precedence over it.
-    certificateSecretName: "timescaledb-certificates"
+    
+    # By default those secrets are randomly generated.
+    # To prevent misconfiguration, modifications from helm upgrade won't be applied to those secrets.
+    # As a result changing secrets cannot be done via helm and need manual intervention.
+    secrets:
+      # Selector used to provision your own Secret containing certificate details.
+      # This is mutually exclusive with `certificate` option and takes precedence over it.
+      certificateSecretName: "timescaledb-certificates"
