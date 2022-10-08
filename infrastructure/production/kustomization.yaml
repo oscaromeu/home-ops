@@ -33,7 +33,7 @@ resources:
 
 # --- Traces -----
 
-  - pyroscope
+#  - pyroscope
 
 
 
