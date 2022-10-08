@@ -29,4 +29,4 @@ spec:
       kubernetes.io/arch: amd64
 
     connection:
-      uri: postgres://postgres:x3fUXOsJqFrWut6J@timescale.monitoring.svc.cluster.local:5432/tsdb?sslmode=allow
+      uri: postgres://postgres:x3fUXOsJqFrWut6J@timescaledb.monitoring.svc.cluster.local:5432/tsdb?sslmode=allow
