@@ -23,14 +23,21 @@ spec:
     crds: CreateReplace
     remediation:
       retries: 5
+
   # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
   values:
+
+    # timescaledb stack currently not supported on arm64 nodes
     nodeSelector:
       kubernetes.io/arch: amd64
 
-
+    # HA 
     replicaCount: 3
 
     # To prevent very long names, we override the name, otherwise it would default to
     # timescaledb-single (the name of the chart)
     nameOverride: timescaledb
+
+    # Selector used to provision your own Secret containing certificate details.
+    # This is mutually exclusive with `certificate` option and takes precedence over it.
+    certificateSecretName: "timescaledb-certificates"
