@@ -3,7 +3,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: timescaledb
-  namespace: monitoring
 spec:
   interval: 5m
   chart:
@@ -47,8 +46,8 @@ spec:
     #  certificateSecretName: "timescaledb-certificate"
     patroni:
       kubernetes:
-        namespace: monitoring
-        bypass_api_service: true
+        #namespace: monitoring
+        #bypass_api_service: true
         role_label: role
         scope_label: cluster-name
         use_endpoints: true
