@@ -1,0 +1,8 @@
+- op: replace
+  path: /spec/entryPoints
+  value:
+    - websecure
+- op: add
+  path: /spec/tls
+  value:
+    secretName: pyroscope-crt

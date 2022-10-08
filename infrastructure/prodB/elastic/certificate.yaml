@@ -1,0 +1,20 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: elk-certs
+  labels:
+    app: elk
+spec:
+  secretName: elk-certs
+  dnsNames:
+    - "elastic.prod.0.0.0.0.sslip.io"
+    - "kibana.prod.0.0.0.0.sslip.io"
+    - "apm.prod.0.0.0.0.sslip.io"
+  isCA: true
+  issuerRef:
+    name: selfsigning-issuer
+    kind: ClusterIssuer
+  subject:
+    organizations:
+      - elk
