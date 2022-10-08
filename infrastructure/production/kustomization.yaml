@@ -26,7 +26,7 @@ resources:
 #  - kube-prometheus-stack
 #  - victoriametrics
   - elastic-exporter
-  - timescale
+#  - timescale
 #  - promscale
 #  - alertmanager-operated
 
