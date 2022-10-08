@@ -28,4 +28,5 @@ spec:
     nodeSelector:
       kubernetes.io/arch: amd64
 
+    # selector used to provision your own Secret containing connection details
     connectionSecretName: "monitoring-secrets"
