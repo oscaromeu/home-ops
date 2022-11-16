@@ -4,4 +4,4 @@ kind: Kustomization
 
 resources:
   - demo-service
-#  - podinfo
+  - podinfo
