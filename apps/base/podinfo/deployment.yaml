@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: podinfod
-        image: osokaru/podinfo:6.0.3
+        image: stefanprodan/podinfo:6.2.3
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
