@@ -4,6 +4,8 @@
         {
             "folder": "",
             "name": "0",
+            "editable": "true",
+            "allowUiUpdates": "true",
             "options": {
                 "path": "/grafana-dashboard-definitions/0"
             },
