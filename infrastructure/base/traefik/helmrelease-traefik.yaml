@@ -51,7 +51,7 @@ spec:
           options: "default"
       metrics:
         port: 8082
-        expose: false
+        expose: true
         exposedPort: 8082
     providers:
       kubernetesCRD:
