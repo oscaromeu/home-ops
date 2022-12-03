@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: 'Live Infra',
+  tagline: 'Bare Metal Home Lab',
   url: 'https://oscaromeu.github.io',
   baseUrl: '/live-infra/',
   organizationName: 'oscaromeu', // GitHub org/user name.
@@ -48,17 +48,17 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'My Site',
+        title: 'Live Infra',
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.svg',
         },
         items: [
-          {
+         {
             type: 'doc',
-            docId: 'intro',
+            docId: 'core_concepts',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Docs',
           },
           {
             href: 'https://github.com/facebook/docusaurus',
@@ -106,7 +106,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `WTF © ${new Date().getFullYear()}.`,
       },
       prism: {
         theme: lightCodeTheme,

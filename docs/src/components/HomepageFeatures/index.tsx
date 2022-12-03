@@ -1,6 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
+import { Redirect } from '@docusaurus/router';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 type FeatureItem = {
   title: string;
@@ -10,32 +12,31 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
+    title: 'Have fun and learn',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Build a cluster to learn and explore what can be done. As a secondary gain the skills
+        that you build can be used for work in Cloud Native.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Build and destroy',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        TODO
+
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'TODO',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        TODO
       </>
     ),
   },
@@ -57,6 +58,9 @@ function Feature({title, Svg, description}: FeatureItem) {
 
 export default function HomepageFeatures(): JSX.Element {
   return (
+
+/* original homepage */
+/**
     <section className={styles.features}>
       <div className="container">
         <div className="row">
@@ -66,5 +70,10 @@ export default function HomepageFeatures(): JSX.Element {
         </div>
       </div>
     </section>
-  );
+**/
+
+/* Add simple landing page */
+
+   <Redirect to={useBaseUrl('/docs/core_concepts')} />
+);
 }
