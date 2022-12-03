@@ -4,17 +4,14 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
-const organizationName = "oscaromeu";
-const projectName = "live-infra";
-
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'My Site',
   tagline: 'Dinosaurs are cool',
-  url: 'https://${organizationName}.github.io',
-  baseUrl: '/${projectName}/',
-  organizationName, // GitHub org/user name.
-  projectName, // Usually your repo name.
+  url: 'https://oscaromeu.github.io',
+  baseUrl: '/live-infra/',
+  organizationName: 'oscaromeu', // GitHub org/user name.
+  projectName: 'live-infra', // Usually your repo name.
   onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
@@ -38,7 +35,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/${organizationName}/${projectName}/tree/main/',
+            'https://github.com/oscaromeu/live-infra/tree/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -104,7 +101,7 @@ const config = {
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/${organizationName}/${projectName}',
+                href: 'https://github.com/oscaromeu/live-infra',
               },
             ],
           },
