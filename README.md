@@ -74,7 +74,7 @@ TODO
 To provide HA and long term storage capabilities to the metrics platform two options are available:
 
  * (TODO) [Thanos](https://thanos.io/)
- * (TODO) [VictoriaMetrics](https://victoriametrics.com/) 
+ * (TODO) [TimescaleDB](https://www.timescale.com/?utm_source=timescaledb-paid&utm_medium=google-search&utm_campaign=brand-2022&utm_content=homepage&utm_term=timescaledb&gclid=CjwKCAiAhKycBhAQEiwAgf19emj64QldDtEBbLIkdRLuK1XlG7vjx9uWtgVdO6AMjtc4aYcolmRe7RoChT4QAvD_BwE) 
 
 </p>
 </details>
