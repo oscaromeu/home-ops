@@ -55,6 +55,7 @@ jobs:
         with:
           # Upload entire repository
           path: build
+          cache-dependency-path: docs
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
