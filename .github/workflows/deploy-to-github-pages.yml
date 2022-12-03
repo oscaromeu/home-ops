@@ -33,7 +33,7 @@ jobs:
         working-directory: docs
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: https://oscaromeu.github.io/live-infra
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
