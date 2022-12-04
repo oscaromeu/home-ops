@@ -25,7 +25,7 @@ resources:
   - grafana
 #  - kube-prometheus-stack
 #  - victoriametrics
-  - elastic-exporter
+#  - elastic-exporter
   - timescale
   - promscale
 #  - alertmanager-operated
