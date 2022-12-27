@@ -1,0 +1,35 @@
+---
+apiVersion: operator.tigera.io/v1
+kind: Installation
+metadata:
+  name: default
+spec:
+  registry: quay.io
+  imagePath: calico
+  calicoNetwork:
+    # https://projectcalico.docs.tigera.io/networking/ip-autodetection
+    nodeAddressAutodetectionV4:
+      cidrs:
+        - "{{ (ansible_default_ipv4.network + '/' + ansible_default_ipv4.netmask) | ansible.utils.ipaddr('network/prefix') }}"
+      #canReach: 8.8.8.8
+      #kubernetes: NodeInternalIP
+      #interface: "eth.*"
+      #skipInterface: "cali.*"
+    # Note: The ipPools section cannot be modified post-install.
+    ipPools:
+      - blockSize: 26
+        cidr: "{{ k3s_server['cluster-cidr'] }}"
+        encapsulation: "VXLANCrossSubnet"
+        natOutgoing: Enabled
+        nodeSelector: all()
+  nodeMetricsPort: 9091
+  typhaMetricsPort: 9093
+---
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: ippool-vxlan-1
+spec:
+  cidr: 192.168.1.0/24
+  vxlanMode: Always
+  natOutgoing: true

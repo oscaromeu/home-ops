@@ -1,0 +1,60 @@
+---
+- hosts:
+    - master
+    - worker
+  gather_facts: yes
+  become: yes
+  roles:
+    - role: oscaromeu.k3s/roles/prereq
+    - role: oscaromeu.k3s/roles/download
+    - role: oscaromeu.k3s/roles/raspberrypi
+
+- hosts: master
+  become: yes
+  roles:
+    - role: oscaromeu.k3s/roles/k3s/master
+
+- hosts: worker
+  become: yes
+  roles:
+    - role: oscaromeu.k3s/roles/k3s/node
+
+- hosts:
+    - master
+    - worker
+  become: true
+  gather_facts: true
+  any_errors_fatal: true
+  pre_tasks:
+    - name: Pausing for 5 seconds...
+      ansible.builtin.pause:
+        seconds: 5
+  tasks:
+
+    - name: Get absolute path to this Git repository
+      delegate_to: localhost
+      become: false
+      run_once: true
+      check_mode: false
+      ansible.builtin.command: |-
+        git rev-parse --show-toplevel
+      register: repo_abs_path
+
+    - name: Copy kubeconfig project directory
+      run_once: true
+      ansible.builtin.fetch:
+        src: "/etc/rancher/k3s/k3s.yaml"
+        dest: "{{ repo_abs_path.stdout }}/kubeconfig"
+        flat: true
+      when:
+        - k3s_control_node is defined
+        - k3s_control_node
+
+    - name: Update kubeconfig with the correct IPv4 address
+      delegate_to: localhost
+      become: false
+      run_once: true
+      ansible.builtin.replace:
+        path: "{{ repo_abs_path.stdout }}/kubeconfig"
+        regexp: "https://127.0.0.1:6443"
+        replace: "https://{{ master_ip }}:6443"
