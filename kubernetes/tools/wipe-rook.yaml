@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: disk-wipe-fleetcom-node4
+spec:
+  restartPolicy: Never
+  nodeName: fleetcom-node4
+  containers:
+    - name: disk-wipe
+      image: busybox@sha256:05a79c7279f71f86a2a0d05eb72fcb56ea36139150f0a75cd87e80a4272e4e39
+      securityContext:
+        privileged: true
+      command:
+        [
+          "/bin/sh",
+          "-c",
+          "blkdiscard /dev/nvme0n1",
+          "dd if=/dev/zero bs=1M count=10000 oflag=direct of=/dev/nvme0n1",
+        ]
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: disk-wipe-fleetcom-node5
+spec:
+  restartPolicy: Never
+  nodeName: fleetcom-node5
+  containers:
+    - name: disk-wipe
+      image: busybox@sha256:05a79c7279f71f86a2a0d05eb72fcb56ea36139150f0a75cd87e80a4272e4e39
+      securityContext:
+        privileged: true
+      command:
+        [
+          "/bin/sh",
+          "-c",
+          "blkdiscard /dev/nvme0n1",
+          "dd if=/dev/zero bs=1M count=10000 oflag=direct of=/dev/nvme0n1",
+        ]
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: disk-wipe-fleetcom-node6
+spec:
+  restartPolicy: Never
+  nodeName: fleetcom-node6
+  containers:
+    - name: disk-wipe
+      image: busybox@sha256:05a79c7279f71f86a2a0d05eb72fcb56ea36139150f0a75cd87e80a4272e4e39
+      securityContext:
+        privileged: true
+      command:
+        [
+          "/bin/sh",
+          "-c",
+          "blkdiscard /dev/nvme0n1",
+          "dd if=/dev/zero bs=1M count=10000 oflag=direct of=/dev/nvme0n1",
+        ]

@@ -30,6 +30,7 @@ main() {
     if [[ "${verify}" == 1 ]]; then
         verify_ansible_hosts
         verify_metallb
+        verify_kubevip
         verify_addressing
         verify_age
         verify_git_repository
@@ -67,6 +68,10 @@ main() {
         envsubst < "${PROJECT_DIR}/tmpl/terraform/secret.sops.yaml" \
             > "${PROJECT_DIR}/terraform/cloudflare/secret.sops.yaml"
         sops --encrypt --in-place "${PROJECT_DIR}/terraform/cloudflare/secret.sops.yaml"
+
+        # generate ansible settings
+        envsubst < "${PROJECT_DIR}/tmpl/ansible/kube-vip.yml" \
+            > "${PROJECT_DIR}/ansible/inventory/group_vars/kubernetes/kube-vip.yml"
 
         # generate ansible hosts file and secrets
         generate_ansible_hosts
@@ -162,11 +167,21 @@ verify_addressing() {
         fi
     done
 
+    # Verify the kube-vip IP is in the same network as the metallb range
+    kubevip_subnet=$(echo "${BOOTSTRAP_KUBE_VIP_ADDR}" | cut -d. -f1,2,3)
+    if [[ "${kubevip_subnet}" != "${metallb_subnet_min}" ]]; then
+        _log "ERROR" "The subnet for kupe-vip '${BOOTSTRAP_KUBE_VIP_ADDR}' is not the same subnet as the provided metallb range '${BOOTSTRAP_METALLB_LB_RANGE}'"
+        exit 1
+    fi
+
     # Depending on the IP address, verify if it should be in the metallb range or not
     metallb_octet_min=$(echo "${BOOTSTRAP_METALLB_LB_RANGE}" | cut -d- -f1 | cut -d. -f4)
     metallb_octet_ceil=$(echo "${BOOTSTRAP_METALLB_LB_RANGE}" | cut -d- -f2 | cut -d. -f4)
     for (( octet=metallb_octet_min; octet<=metallb_octet_ceil; octet++ )); do
         addr="${metallb_subnet_min}.${octet}"
+        if [[ "${addr}" == "${BOOTSTRAP_KUBE_VIP_ADDR}" ]]; then
+            found_kube_vip="true"
+        fi
         if [[ "${addr}" == "${BOOTSTRAP_METALLB_K8S_GATEWAY_ADDR}" ]]; then
             found_k8s_gateway="true"
         fi
@@ -181,6 +196,11 @@ verify_addressing() {
             fi
         done
     done
+
+    if [[ "${found_kube_vip}" == "true" ]]; then
+        _log "ERROR" "The IP for kube-vip '${BOOTSTRAP_KUBE_VIP_ADDR}' should NOT be in the provided metallb range '${BOOTSTRAP_METALLB_LB_RANGE}'"
+        exit 1
+    fi
 
     if [[ "${found_k8s_gateway}" == "false" ]]; then
         _log "ERROR" "The IP for k8s_gateway '${BOOTSTRAP_METALLB_K8S_GATEWAY_ADDR}' should be in the provided metallb range '${BOOTSTRAP_METALLB_LB_RANGE}'"
@@ -230,14 +250,19 @@ verify_binaries() {
     _has_binary "tflint"
 
     if ! [[ "$(sops --version)" =~ 3\.[0-9]+\.[0-9]+ ]]; then
-        _log "ERROR" "Incompatible sops version, make sure you are using the latest release of v3"
+        _log "ERROR" "Incompatible sops version, make sure you are using the latest release of github.com/mozilla/sops"
         exit 1
     fi
 
     if ! [[ "$(yq --version)" =~ 4\.[0-9]+\.[0-9]+ ]]; then
-        _log "ERROR" "Incompatible yq version, make sure you are using the latest release of v4"
+        _log "ERROR" "Incompatible yq version, make sure you are using the latest release of github.com/mikefarah/yq"
         exit 1
     fi
+}
+
+verify_kubevip() {
+    _has_envar "BOOTSTRAP_KUBE_VIP_ADDR"
+    _has_valid_ip "${BOOTSTRAP_KUBE_VIP_ADDR}" "BOOTSTRAP_KUBE_VIP_ADDR"
 }
 
 verify_metallb() {

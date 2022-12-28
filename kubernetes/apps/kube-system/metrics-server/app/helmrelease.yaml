@@ -4,6 +4,8 @@ kind: HelmRelease
 metadata:
   name: metrics-server
   namespace: kube-system
+  annotations:
+    meta.helm.sh/release-name: "metrics-server"
 spec:
   interval: 15m
   chart:
@@ -29,5 +31,5 @@ spec:
       - --metric-resolution=15s
     metrics:
       enabled: true
-    serviceMonitor:
-      enabled: true
+    #serviceMonitor:
+    #  enabled: true
