@@ -1,3 +1,0 @@
-[submodule "Tools/testing/kube-prometheus"]
-	path = Tools/testing/kube-prometheus
-	url = https://github.com/prometheus-operator/kube-prometheus.git

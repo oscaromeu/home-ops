@@ -16,6 +16,7 @@ tasks:
       - sops --decrypt {{.KUBERNETES_DIR}}/flux/vars/cluster-secrets.sops.yaml | kubectl apply -f -
       - kubectl apply -f {{.KUBERNETES_DIR}}/flux/vars/cluster-settings.yaml
       - kubectl apply --kustomize {{.KUBERNETES_DIR}}/flux/config
+      - sleep 10s
       - task: reconcile
     preconditions:
       - sh: test -f {{.SOPS_AGE_KEY_FILE}}
@@ -33,8 +34,8 @@ tasks:
   hr-restart:
     desc: Restart all failed Helm Releases
     cmds:
-      - kubectl get hr --all-namespaces | grep False | awk '{print $2, $1}' | xargs -l bash -c 'flux suspend hr $0 -n $1'
-      - kubectl get hr --all-namespaces | grep False | awk '{print $2, $1}' | xargs -l bash -c 'flux resume hr $0 -n $1'
+      - kubectl get hr --all-namespaces | grep False | awk '{print $2, $1}' | xargs bash -c 'flux suspend hr $0 -n $1'
+      - kubectl get hr --all-namespaces | grep False | awk '{print $2, $1}' | xargs bash -c 'flux resume hr $0 -n $1'
 
   nodes:
     desc: List all the nodes in your cluster
