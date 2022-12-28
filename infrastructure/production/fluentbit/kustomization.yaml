@@ -1,8 +1,0 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-namespace: monitoring 
-resources:
-  - ../../base/fluentbit
-images:
-  - name: fluent-bit
-    newName: oscaromeu/fluent-bit-plugin-loki:1.9.5

@@ -1,5 +1,7 @@
 # Log Infra
 
+TODO
+
 Highly opinionated configuration for deploying and managing a logging infrastructure running in a k3s cluster.
 
 ### ⚠️ pre-commit
