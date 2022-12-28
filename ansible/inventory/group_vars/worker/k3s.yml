@@ -1,3 +1,0 @@
----
-# (bool) Specify if a host (or host group) are part of the control plane
-k3s_control_node: false
