@@ -1,8 +1,16 @@
-# Monitor Ops
+# Home Ops
+
+## 📖 Overview
+
+This is a mono repository for my home infrastructure and Kubernetes cluster. I try to adhere to Infrastructure as Code (IaC) and GitOps practices using the tools like [Ansible](https://www.ansible.com/), [Terraform](https://www.terraform.io/), [Kubernetes](https://kubernetes.io/), [Flux](https://github.com/fluxcd/flux2), [Renovate](https://github.com/renovatebot/renovate) and [GitHub Actions](https://github.com/features/actions).
+
+---
+
+## ⛵ Kubernetes
+
+There is a template over at [onedr0p/flux-cluster-template](https://github.com/onedr0p/flux-cluster-template) if you wanted to try and follow along with some of the practices I used here.
 
 TODO
-
-Highly opinionated configuration for deploying and managing a monitoring infrastructure running in a k3s cluster.
 
 ### ⚠️ pre-commit
 
