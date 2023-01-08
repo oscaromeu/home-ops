@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
+
+site_name: Oscar's Homelab
+  #copyright:
+theme:
+  name: material
+    #  palette:
+    #    primary: black
+  features:
+    - navigation.indexes
+    - navigation.sections
+    - search.highlight
+    - search.share
+
+markdown_extensions:
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - attr_list
+  - admonition
+  - pymdownx.details
+  - pymdownx.snippets:
+      check_paths: true
+  - def_list
+  - pymdownx.tasklist:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+
+nav:
+  - Home: index.md
+  - Installation:
+    - installation/index.md
+  - User Guide:
+    - user-guide/index.md
+    - Data Analytics:
+      - user-guide/data-analytics/index.md
+      - user-guide/data-analytics/elk.md
+    - Monitoring:
+      - user-guide/monitoring/index.md
+      - user-guide/monitoring/prometheus.md
+    - Observability:
+      - user-guide/observability/index.md
+      #- user-guide/observability/loki.md
+
