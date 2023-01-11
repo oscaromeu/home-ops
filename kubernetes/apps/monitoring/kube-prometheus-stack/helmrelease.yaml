@@ -29,15 +29,10 @@ spec:
   values:
     fullnameOverride: prometheus
 
-    global:
-      rbac:
-        create: false
-        pspEnabled: false
-
     prometheusOperator:
       resources: {}
       limits:
-        cpu: 200m
+        #cpu: 200m
         memory: 200Mi
       requests:
         cpu: 100m
