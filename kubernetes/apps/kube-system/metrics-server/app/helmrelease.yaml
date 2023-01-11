@@ -4,9 +4,6 @@ kind: HelmRelease
 metadata:
   name: metrics-server
   namespace: kube-system
-  annotations:
-    meta.helm.sh/release-name: "metrics-server"
-    meta.helm.sh/release-namespace: "kube-system"
 spec:
   interval: 15m
   chart:
@@ -22,6 +19,7 @@ spec:
     remediation:
       retries: 3
   upgrade:
+    force: true
     remediation:
       retries: 3
   values:
