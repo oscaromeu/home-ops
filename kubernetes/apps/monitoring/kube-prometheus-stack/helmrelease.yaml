@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: prometheus
+  name: kube-prometheus-stack
   namespace: monitoring
 spec:
   interval: 15m
@@ -14,68 +14,113 @@ spec:
         kind: HelmRepository
         name: prometheus-community
         namespace: flux-system
-      interval: 15m
+  maxHistory: 3
   install:
     createNamespace: true
     remediation:
-      retries: 5
+      retries: 3
   upgrade:
+    cleanupOnFail: true
     remediation:
-      retries: 5
+      retries: 3
+  uninstall:
+    keepHistory: false
+
   values:
     fullnameOverride: prometheus
 
-    defaultRules:
-      create: true
-      rules:
-        alertmanager: true
-        etcd: true
-        configReloaders: true
-        general: true
-        k8s: true
-        kubeApiserverAvailability: true
-        kubeApiserverBurnrate: true
-        kubeApiserverHistogram: true
-        kubeApiserverSlos: true
-        kubelet: true
-        kubeProxy: true
-        kubePrometheusGeneral: true
-        kubePrometheusNodeRecording: true
-        kubernetesApps: true
-        kubernetesResources: true
-        kubernetesStorage: true
-        kubernetesSystem: true
-        kubeScheduler: true
-        kubeStateMetrics: true
-        network: true
-        node: true
-        nodeExporterAlerting: true
-        nodeExporterRecording: true
-        prometheus: true
-        prometheusOperator: true
+    global:
+      rbac:
+        pspEnabled: false
+
+    prometheusOperator:
+      resources: {}
+      limits:
+        cpu: 200m
+        memory: 200Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
 
     alertmanager:
       fullnameOverride: alertmanager
       enabled: true
+      #config:
+      #  receivers:
+      #    - name: "null"
+      #    - name: "discord"
+      #      webhook_configs:
+      #        - url: "http://alertmanager-discord:9094"
+      #          send_resolved: true
+      #  route:
+      #    group_by: ["alertname", "job"]
+      #    group_wait: 30s
+      #    group_interval: 5m
+      #    repeat_interval: 6h
+      #    receiver: "discord"
+      #    routes:
+      #      - receiver: "null"
+      #        matchers:
+      #          - alertname =~ "InfoInhibitor|Watchdog"
+      #      - receiver: "discord"
+      #        matchers:
+      #          # - severity =~ critical|warning
+      #          - severity = critical
+      #        continue: true
+
       ingress:
-        enabled: false
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          hajimari.io/appName: "alertmanager"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "alarm-light-outline"
+        hosts:
+          - alertmanager.${SECRET_DOMAIN}
+        paths:
+          - /
+        pathType: ImplementationSpecific
+        tls:
+          - hosts:
+              - alertmanager.${SECRET_DOMAIN}
+      alertmanagerSpec:
+        #storage:
+        #  volumeClaimTemplate:
+        #    spec:
+        #      storageClassName: ceph-block
+        #      resources:
+        #        requests:
+        #          storage: 10Mi
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 60m
+            memory: 64Mi
+
+    kube-state-metrics:
+      metricLabelsAllowlist:
+        - "persistentvolumeclaims=[*]"
+      prometheus:
+        monitor:
+          enabled: true
+          relabelings:
+            - action: replace
+              regex: (.*)
+              replacement: $1
+              sourceLabels:
+                - __meta_kubernetes_pod_node_name
+              targetLabel: kubernetes_node
 
     grafana:
-      enabled: true
-      fullnameOverride: grafana
-      forceDeployDatasources: false
-      forceDeployDashboards: false
-      defaultDashboardsEnabled: true
-      defaultDashboardsTimezone: utc
-      serviceMonitor:
-        enabled: true
-      admin:
-        existingSecret: grafana-admin-credentials
-        userKey: admin-user
-        passwordKey: admin-password
-
-    kubeApiServer:
-      enabled: true
+      enabled: false
+      forceDeployDashboards: true
+      sidecar:
+        dashboards:
+          multicluster:
+            etcd:
+              enabled: true
 
     kubelet:
       enabled: true
@@ -86,121 +131,81 @@ spec:
               - node
             targetLabel: instance
 
-    kubeControllerManager:
-      enabled: true
-      endpoints: # ips of servers
-        - 10.5.0.3
-        - 10.5.0.4
-        - 10.5.0.5
-
-    coreDns:
+    nodeExporter:
       enabled: true
 
-    kubeDns:
-      enabled: false
-
-    kubeEtcd:
-      enabled: true
-      endpoints: # ips of servers
-        - 10.5.0.3
-        - 10.5.0.4
-        - 10.5.0.5
-      service:
+    prometheus:
+      ingress:
         enabled: true
+        ingressClassName: nginx
+        annotations:
+          hajimari.io/appName: "prometheus"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "chart-line"
+        hosts:
+          - prometheus.${SECRET_DOMAIN}
+        paths:
+          - /
+        pathType: ImplementationSpecific
+        tls:
+          - hosts:
+              - prometheus.${SECRET_DOMAIN}
+
+      prometheusSpec:
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+
+        #storageSpec:
+        #  volumeClaimTemplate:
+        #    spec:
+        #      storageClassName: ceph-block
+        #      resources:
+        #        requests:
+        #          storage: 30Gi
+
+        resources:
+          requests:
+            cpu: 384m
+            memory: 4000Mi
+          limits:
+            #cpu:
+            memory: 6000Mi
+
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: ${SECRET_DOMAIN}/prometheus
+                      operator: In
+                      values:
+                        - "true"
+
+    # cannot be monitored in k3s; runs on localhost
+    kubeControllerManager:
+      enabled: false
+      endpoints:
+        - ""
+    kubeScheduler:
+      enabled: false
+      endpoints:
+        - ""
+    kubeProxy:
+      enabled: false
+      endpoints:
+        - ""
+    kubeEtcd:
+      enabled: false
+      endpoints:
+        - ""
+      service:
+        enabled: false
         port: 2381
         targetPort: 2381
 
-    kubeScheduler:
-      enabled: true
-      endpoints: # ips of servers
-        - 10.5.0.3
-        - 10.5.0.4
-        - 10.5.0.5
-
-    kubeProxy:
-      enabled: true
-      endpoints: # ips of servers
-        - 10.5.0.3
-        - 10.5.0.4
-        - 10.5.0.5
-
-    kubeStateMetrics:
-      enabled: true
-
-    kube-state-metrics:
-      fullnameOverride: kube-state-metrics
-      selfMonitor:
-        enabled: true
-      prometheus:
-        monitor:
-          enabled: true
-          relabelings:
-            - action: replace
-              regex: (.*)
-              replacement: $1
-              sourceLabels:
-                - __meta_kubernetes_pod_node_name
-              targetLabel: kubernetes_node
-
-    nodeExporter:
-      enabled: true
-      serviceMonitor:
-        relabelings:
-          - action: replace
-            regex: (.*)
-            replacement: $1
-            sourceLabels:
-              - __meta_kubernetes_pod_node_name
-            targetLabel: kubernetes_node
-
-    prometheus-node-exporter:
-      fullnameOverride: node-exporter
-      podLabels:
-        jobLabel: node-exporter
-      extraArgs:
-        - --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/.+)($|/)
-        - --collector.filesystem.fs-types-exclude=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$
-      service:
-        portName: http-metrics
-      prometheus:
-        monitor:
-          enabled: true
-          relabelings:
-            - action: replace
-              regex: (.*)
-              replacement: $1
-              sourceLabels:
-                - __meta_kubernetes_pod_node_name
-              targetLabel: kubernetes_node
-      resources:
-        requests:
-          memory: 512Mi
-          cpu: 250m
-        limits:
-          memory: 2048Mi
-
-    prometheusOperator:
-      enabled: true
-      prometheusConfigReloader:
-        resources:
-          requests:
-            cpu: 200m
-            memory: 50Mi
-          limits:
-            memory: 100Mi
-
-    prometheus:
-      enabled: true
-      prometheusSpec:
-        replicas: 1
-        replicaExternalLabelName: "replica"
-        ruleSelectorNilUsesHelmValues: false
-        serviceMonitorSelectorNilUsesHelmValues: false
-        podMonitorSelectorNilUsesHelmValues: false
-        probeSelectorNilUsesHelmValues: false
-        retention: 6h
-        enableAdminAPI: true
-        walCompression: true
-
-    thanosRuler:
-      enabled: false
+    defaultRules:
+      rules:
+        etcd: false
+        kubeProxy: false
