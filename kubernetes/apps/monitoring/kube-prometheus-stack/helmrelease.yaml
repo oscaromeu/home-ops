@@ -128,7 +128,14 @@ spec:
             targetLabel: instance
 
     nodeExporter:
-      enabled: true
+      serviceMonitor:
+        relabelings:
+          - action: replace
+            regex: (.*)
+            replacement: $1
+            sourceLabels:
+              - __meta_kubernetes_pod_node_name
+            targetLabel: kubernetes_node
 
     prometheus:
       ingress:
@@ -148,48 +155,45 @@ spec:
               - prometheus.${SECRET_DOMAIN}
 
       prometheusSpec:
-        podMonitorSelectorNilUsesHelmValues: false
-        probeSelectorNilUsesHelmValues: false
-        ruleSelectorNilUsesHelmValues: false
-        serviceMonitorSelectorNilUsesHelmValues: false
+        ruleNamespaceSelector: {}
+        podMonitorNamespaceSelector: {}
+        podMonitorSelector: {}
+        serviceMonitorNamespaceSelector: {}
+        serviceMonitorSelector:
+          matchLabels:
+            monitoring: baremetal
 
-        #storageSpec:
-        #  volumeClaimTemplate:
-        #    spec:
-        #      storageClassName: ceph-block
-        #      resources:
-        #        requests:
-        #          storage: 30Gi
+      resources:
+        requests:
+          cpu: 250m
+          memory: 512Mi
+        limits:
+          memory: 2048Mi
 
-        resources:
-          requests:
-            cpu: 100m
-            memory: 400Mi
-          limits:
-            #cpu:
-            memory: 6000Mi
+      #storageSpec:
+      #  volumeClaimTemplate:
+      #    spec:
+      #      storageClassName: ceph-block
+      #      resources:
+      #        requests:
+      #          storage: 30Gi
 
     # cannot be monitored in k3s; runs on localhost
+
+    kubeApiServer:
+      enabled: true
+
     kubeControllerManager:
       enabled: false
-      endpoints:
-        - ""
+
     kubeScheduler:
       enabled: false
-      endpoints:
-        - ""
+
     kubeProxy:
       enabled: false
-      endpoints:
-        - ""
+
     kubeEtcd:
       enabled: false
-      endpoints:
-        - ""
-      service:
-        enabled: false
-        port: 2381
-        targetPort: 2381
 
     defaultRules:
       rules:
