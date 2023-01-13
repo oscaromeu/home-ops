@@ -22,7 +22,7 @@ spec:
       serviceAccountName: fluentbit
       containers:
         - name: fluentbit
-          image: fluent-bit
+          image: "fluent/fluent-bit:2.0.8"
           imagePullPolicy: "IfNotPresent"
           volumeMounts:
             - name: config
