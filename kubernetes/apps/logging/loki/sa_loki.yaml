@@ -4,9 +4,6 @@ kind: ServiceAccount
 metadata:
   labels:
     app: loki
-    chart: loki-2.12.1
-    release: loki
-    heritage: Helm
   annotations:
     {}
   name: loki

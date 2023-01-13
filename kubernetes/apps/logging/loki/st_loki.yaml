@@ -6,9 +6,6 @@ metadata:
   namespace: default
   labels:
     app: loki
-    chart: loki-2.12.1
-    release: loki
-    heritage: Helm
   annotations:
     {}
 spec:
@@ -17,7 +14,6 @@ spec:
   selector:
     matchLabels:
       app: loki
-      release: loki
   serviceName: loki-headless
   updateStrategy:
     type: RollingUpdate
@@ -26,11 +22,6 @@ spec:
       labels:
         app: loki
         name: loki
-        release: loki
-      annotations:
-        checksum/config: 6363878b8f12d90148c291ef0f2a8c29ee8b85eed977ba17903af046c076bd88
-        prometheus.io/port: http-metrics
-        prometheus.io/scrape: "true"
     spec:
       serviceAccountName: loki
       securityContext:
@@ -53,7 +44,7 @@ spec:
               mountPath: /etc/loki
             - name: storage
               mountPath: "/data"
-              subPath: 
+              subPath: ""
           ports:
             - name: http-metrics
               containerPort: 3100
@@ -78,7 +69,7 @@ spec:
             {}
           securityContext:
             readOnlyRootFilesystem: true
-          env:
+          env: []
       nodeSelector:
         {}
       affinity:

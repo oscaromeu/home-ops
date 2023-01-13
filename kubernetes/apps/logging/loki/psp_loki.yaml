@@ -6,9 +6,6 @@ metadata:
   name: loki
   labels:
     app: loki
-    chart: loki-2.12.1
-    release: loki
-    heritage: Helm
 spec:
   privileged: false
   allowPrivilegeEscalation: false

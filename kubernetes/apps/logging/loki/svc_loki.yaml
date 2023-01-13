@@ -7,9 +7,6 @@ metadata:
   namespace: default
   labels:
     app: loki
-    chart: loki-2.12.1
-    release: loki
-    heritage: Helm
     variant: headless
 spec:
   clusterIP: None
@@ -20,7 +17,6 @@ spec:
       targetPort: http-metrics
   selector:
     app: loki
-    release: loki
 ---
 # Source: loki-stack/charts/loki/templates/service-memberlist.yaml
 apiVersion: v1
@@ -30,9 +26,6 @@ metadata:
   namespace: default
   labels:
     app: loki
-    chart: loki-2.12.1
-    release: loki
-    heritage: Helm
 spec:
   type: ClusterIP
   clusterIP: None
@@ -54,9 +47,6 @@ metadata:
   namespace: default
   labels:
     app: loki
-    chart: loki-2.12.1
-    release: loki
-    heritage: Helm
   annotations:
     {}
 spec:
@@ -68,4 +58,3 @@ spec:
       targetPort: http-metrics
   selector:
     app: loki
-    release: loki

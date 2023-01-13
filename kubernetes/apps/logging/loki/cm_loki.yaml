@@ -7,9 +7,6 @@ metadata:
   namespace: default
   labels:
     app: loki-stack
-    chart: loki-stack-2.6.5
-    release: loki
-    heritage: Helm
     grafana_datasource: "1"
 data:
   loki-stack-datasource.yaml: |-
@@ -31,9 +28,6 @@ metadata:
   name: loki-loki-stack-test
   labels:
     app: loki-stack
-    chart: loki-stack-2.6.5
-    release: loki
-    heritage: Helm
 data:
   test.sh: |
     #!/usr/bin/env bash
