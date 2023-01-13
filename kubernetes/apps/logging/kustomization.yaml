@@ -4,5 +4,3 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./redis
-  - ./fluentbit
-  - ./loki
