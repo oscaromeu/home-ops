@@ -1,0 +1,57 @@
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  labels:
+    app: fluentbit
+  name: fluentbit-clusterrole
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources:
+  - namespaces
+  - pods
+  verbs: ["get", "watch", "list"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: fluentbit-clusterrolebinding
+  labels:
+    app: fluentbit
+subjects:
+  - kind: ServiceAccount
+    name: fluentbit
+    namespace: default
+roleRef:
+  kind: ClusterRole
+  name: fluentbit-clusterrole
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: fluentbit
+  namespace: default
+  labels:
+    app: fluentbit
+rules:
+- apiGroups:      ['extensions']
+  resources:      ['podsecuritypolicies']
+  verbs:          ['use']
+  resourceNames:  [fluentbit]
+---
+# Source: loki-stack/charts/fluent-bit/templates/rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: fluentbit
+  namespace: default
+  labels:
+    app: fluentbit
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: fluentbit
+subjects:
+- kind: ServiceAccount
+  name: fluentbit
