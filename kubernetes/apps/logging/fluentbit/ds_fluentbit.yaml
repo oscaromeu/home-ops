@@ -12,7 +12,6 @@ spec:
   selector:
     matchLabels:
       app: fluentbit
-      release: loki
   updateStrategy:
     type: RollingUpdate
   template:
