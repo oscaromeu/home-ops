@@ -3,6 +3,7 @@ apiVersion: elasticsearch.k8s.elastic.co/v1
 kind: Elasticsearch
 metadata:
   name: elk
+  namespace: logging
   labels:
     app: elk
 spec:
@@ -14,7 +15,7 @@ spec:
       node.roles: ["master","data_hot","data_content", "remote_cluster_client"]
       node.attr.type: "hot"
       node.store.allow_mmap: false
-      xpack.monitoring.collection.enabled: true 
+      xpack.monitoring.collection.enabled: true
       xpack.monitoring.elasticsearch.collection.enabled: true
       xpack.monitoring.collection.cluster.stats.timeout: "10m"
       xpack.monitoring.collection.index.recovery.active_only: "false"
@@ -30,10 +31,10 @@ spec:
           env:
           - name: READINESS_PROBE_TIMEOUT
             value: "10"
-      metadata: 
-        labels: 
-          stack-monitoring.elastic.co/type: es 
-        annotations: 
+      metadata:
+        labels:
+          stack-monitoring.elastic.co/type: es
+        annotations:
           co.elastic.logs/enabled: "true"
 
   - name: data
@@ -43,7 +44,7 @@ spec:
       node.store.allow_mmap: false
       node.attr.type: "warm"
       # XPack - Monitoring configuration
-      xpack.monitoring.collection.enabled: true 
+      xpack.monitoring.collection.enabled: true
       xpack.monitoring.elasticsearch.collection.enabled: true
       xpack.monitoring.collection.cluster.stats.timeout: "10m"
       xpack.monitoring.collection.index.recovery.active_only: "false"
@@ -52,11 +53,11 @@ spec:
       xpack.monitoring.collection.indices: "'*'"
       xpack.monitoring.collection.interval: "60s"
       xpack.monitoring.history.duration: "7d"
-    podTemplate: 
-      metadata: 
-        labels: 
-          stack-monitoring.elastic.co/type: es 
-        annotations: 
+    podTemplate:
+      metadata:
+        labels:
+          stack-monitoring.elastic.co/type: es
+        annotations:
           co.elastic.logs/enabled: "true"
 ---
 apiVersion: kibana.k8s.elastic.co/v1
