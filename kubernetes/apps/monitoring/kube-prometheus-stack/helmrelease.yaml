@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: kube-prometheus-stack
-      version: 43.2.1
+      version: 44.0.0
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
@@ -18,75 +18,20 @@ spec:
   maxHistory: 3
   install:
     createNamespace: false
-    remediation:
-      retries: 5
-  upgrade:
-    cleanupOnFail: false
     crds: CreateReplace
     remediation:
       retries: 5
+  upgrade:
+    cleanupOnFail: true
+    crds: CreateReplace
+    remediation:
+      retries: 5
+  uninstall:
+    keepHistory: false
   # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
   values:
     cleanPrometheusOperatorObjectNames: false
     fullnameOverride: prometheus
-
-    # Alertmanager
-    alertmanager:
-      fullnameOverride: alertmanager
-      enabled: true
-      #config:
-      #  receivers:
-      #    - name: "null"
-      #    - name: "discord"
-      #      webhook_configs:
-      #        - url: "http://alertmanager-discord:9094"
-      #          send_resolved: true
-      #  route:
-      #    group_by: ["alertname", "job"]
-      #    group_wait: 30s
-      #    group_interval: 5m
-      #    repeat_interval: 6h
-      #    receiver: "discord"
-      #    routes:
-      #      - receiver: "null"
-      #        matchers:
-      #          - alertname =~ "InfoInhibitor|Watchdog"
-      #      - receiver: "discord"
-      #        matchers:
-      #          # - severity =~ critical|warning
-      #          - severity = critical
-      #        continue: true
-
-      ingress:
-        enabled: true
-        ingressClassName: nginx
-        annotations:
-          hajimari.io/appName: "alertmanager"
-          hajimari.io/enable: "true"
-          hajimari.io/icon: "alarm-light-outline"
-        hosts:
-          - alertmanager.${SECRET_DOMAIN}
-        paths:
-          - /
-        pathType: ImplementationSpecific
-        tls:
-          - hosts:
-              - alertmanager.${SECRET_DOMAIN}
-      alertmanagerSpec:
-        #storage:
-        #  volumeClaimTemplate:
-        #    spec:
-        #      storageClassName: ceph-block
-        #      resources:
-        #        requests:
-        #          storage: 10Mi
-        resources:
-          requests:
-            cpu: 50m
-            memory: 64Mi
-          limits:
-            cpu: 60m
-            memory: 64Mi
 
     # grafana
     grafana:
@@ -129,70 +74,3 @@ spec:
 
     # Node Exporter
     nodeExporter:
-
-    # Prometheus
-    prometheus:
-
-      ingress:
-        enabled: true
-        ingressClassName: nginx
-        annotations:
-          hajimari.io/appName: "prometheus"
-          hajimari.io/enable: "true"
-          hajimari.io/icon: "chart-line"
-        hosts:
-          - prometheus.${SECRET_DOMAIN}
-        paths:
-          - /
-        pathType: ImplementationSpecific
-        tls:
-          - hosts:
-              - prometheus.${SECRET_DOMAIN}
-
-      resources:
-        requests:
-          cpu: 250m
-          memory: 512Mi
-        limits:
-          memory: 2048Mi
-
-      prometheusSpec:
-        #remoteWrite:
-        #  - url: https://victoriametrics.prod.192.168.1.41.sslip.io/api/v1/write
-
-        ruleNamespaceSelector: {}
-        podMonitorNamespaceSelector: {}
-        podMonitorSelector: {}
-        serviceMonitorNamespaceSelector: {}
-        serviceMonitorSelector:
-          matchLabels:
-            monitoring: baremetal
-
-    # Prometheus operator values
-    prometheusOperator:
-      resources:
-        requests:
-          cpu: 35m
-          memory: 273M
-        limits:
-          memory: 326M
-
-      prometheusConfigReloader:
-        # resource config for prometheusConfigReloader
-        resources:
-          requests:
-            cpu: 11m
-            memory: 32M
-          limits:
-            memory: 32M
-
-
-      serviceMonitor:
-        relabelings:
-          - action: replace
-            regex: (.*)
-            replacement: $1
-            sourceLabels:
-              - __meta_kubernetes_pod_node_name
-            targetLabel: kubernetes_node
-
