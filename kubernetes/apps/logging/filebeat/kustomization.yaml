@@ -6,25 +6,24 @@ metadata:
   labels:
     app: "filebeat"
 resources:
-  - redis-certs-sealed.yaml
+  #- redis-certs-sops.yaml TODO: add this not using SSL for now
   - ds_filebeat.yaml
   - sa_filebeat.yaml
 
 generatorOptions:
  disableNameSuffixHash: true
  labels:
-   namespace: monitoring
+   namespace: logging
+
 configMapGenerator:
 - name: filebeat-config
-  namespace: monitoring
+  namespace: logging
   files:
     - config/filebeat.yml
 - name: filebeat-inputs
-  namespace: monitoring
+  namespace: logging
   files:
     - ./inputs.d/container.yml
     - ./inputs.d/docker.yml
-- name: filebeat-modules
-  namespace: monitoring
-  files:
-    - modules.d/traefik.yaml.enabled
+
+
