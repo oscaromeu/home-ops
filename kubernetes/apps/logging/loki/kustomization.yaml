@@ -6,7 +6,7 @@ namespace: logging
 
 resources:
   - datasource
-  - deploy.yml
+  - deploy.yaml
 
 secretGenerator:
   - name: loki
