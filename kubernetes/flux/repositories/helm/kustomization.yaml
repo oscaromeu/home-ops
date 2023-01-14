@@ -16,3 +16,4 @@ resources:
   - ./stakater.yaml
   - ./weave-gitops.yaml
   - ./grafana.yaml
+  - ./pyroscope.yaml
