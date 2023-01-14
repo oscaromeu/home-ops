@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  template:
+    spec:
+      containers:
+        - name: dashboard-sidecar
+          image: kiwigrid/k8s-sidecar
+          env:
+            - name: LABEL
+              value: "grafana-homeops-dashboard"
+            - name: FOLDER
+              value: /tmp/dashboards
+            - name: RESOURCE
+              # configmap and secret
+              value: both
+            - name: NAMESPACE
+              value: "ALL"
+          resources:
+            limits:
+              memory: 100Mi
+            requests:
+              cpu: 50m
+              memory: 50Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+              - name: grafana-dashboards
+                mountPath: /tmp/dashboards

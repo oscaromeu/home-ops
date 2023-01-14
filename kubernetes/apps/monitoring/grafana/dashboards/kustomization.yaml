@@ -2,14 +2,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: logging
+namespace: monitoring
 
 generatorOptions:
   labels:
-    grafana-homeops-datasource: default
+    grafana-homeops-dashboard: default
   disableNameSuffixHash: true
 
-secretGenerator:
-  - name: grafana-datasource-loki
+configMapGenerator:
+  - name: grafana-dashboard
     files:
-      - loki.yaml
+      - grafana-overview.json

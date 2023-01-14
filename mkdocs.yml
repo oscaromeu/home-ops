@@ -43,6 +43,7 @@ nav:
     - Monitoring:
       - infrastructure/monitoring/index.md
       - infrastructure/monitoring/prometheus.md
+      - infrastructure/monitoring/grafana.md
     - Observability:
       - infrastructure/observability/index.md
       - infrastructure/observability/loki.md
