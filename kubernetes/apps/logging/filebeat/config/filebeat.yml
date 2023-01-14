@@ -21,7 +21,7 @@ output.redis:
   #  supported:protocols: [ TLSv1.0, TLSv1.1, TLSv1.2,SSLv3 ]
 
 
-logging.level: info
+logging.level: debug
 logging.to_files: true
 logging.to_syslog: false
 logging.files:
