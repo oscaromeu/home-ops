@@ -27,104 +27,10 @@ spec:
       retries: 5
   # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
   values:
+
     fullnameOverride: prometheus
 
-    grafana:
-      enabled: false
-      forceDeployDashboards: true
-
-
-    prometheus:
-
-      ingress:
-        enabled: true
-        ingressClassName: nginx
-        annotations:
-          hajimari.io/appName: "prometheus"
-          hajimari.io/enable: "true"
-          hajimari.io/icon: "chart-line"
-        hosts:
-          - prometheus.${SECRET_DOMAIN}
-        paths:
-          - /
-        pathType: ImplementationSpecific
-        tls:
-          - hosts:
-              - prometheus.${SECRET_DOMAIN}
-
-      resources:
-        requests:
-          cpu: 250m
-          memory: 512Mi
-        limits:
-          memory: 2048Mi
-
-      prometheusSpec:
-        #remoteWrite:
-        #  - url: https://victoriametrics.prod.192.168.1.41.sslip.io/api/v1/write
-
-        ruleNamespaceSelector: {}
-        podMonitorNamespaceSelector: {}
-        podMonitorSelector: {}
-        serviceMonitorNamespaceSelector: {}
-        serviceMonitorSelector:
-          matchLabels:
-            monitoring: baremetal
-
-    kubelet:
-      enabled: true
-      serviceMonitor:
-        metricRelabelings:
-          - action: replace
-            sourceLabels:
-              - node
-            targetLabel: instance
-
-    kubeApiServer:
-      enabled: true
-
-    kubeControllerManager:
-      enabled: false
-
-    kubeScheduler:
-      enabled: false
-
-    kubeProxy:
-      enabled: false
-
-    kubeEtcd:
-      enabled: false
-
-    ###
-    ### Prometheus operator values
-    ###
-    prometheusOperator:
-      resources:
-        requests:
-          cpu: 35m
-          memory: 273M
-        limits:
-          memory: 326M
-
-      prometheusConfigReloader:
-        # resource config for prometheusConfigReloader
-        resources:
-          requests:
-            cpu: 11m
-            memory: 32M
-          limits:
-            memory: 32M
-
-    nodeExporter:
-      serviceMonitor:
-        relabelings:
-          - action: replace
-            regex: (.*)
-            replacement: $1
-            sourceLabels:
-              - __meta_kubernetes_pod_node_name
-            targetLabel: kubernetes_node
-
+    # Alertmanager
     alertmanager:
       fullnameOverride: alertmanager
       enabled: true
@@ -181,3 +87,112 @@ spec:
           limits:
             cpu: 60m
             memory: 64Mi
+
+    # grafana
+    grafana:
+      enabled: false
+      forceDeployDashboards: true
+
+    # kube state metrics
+    kubeStateMetrics:
+      enabled: true
+
+    # Kubelet
+    kubelet:
+      enabled: true
+      serviceMonitor:
+        metricRelabelings:
+          - action: replace
+            sourceLabels:
+              - node
+            targetLabel: instance
+
+    # Kubernetes API Server
+    kubeApiServer:
+      enabled: true
+
+    # Kubernetes Controller Manager
+    kubeControllerManager:
+      enabled: false
+
+    # Kubernetes Scheduler
+    kubeScheduler:
+      enabled: false
+
+    # kubeProxy
+    kubeProxy:
+      enabled: false
+
+    # kubeEtcd
+    kubeEtcd:
+      enabled: false
+
+    # Node Exporter
+    nodeExporter:
+
+    # Prometheus
+    prometheus:
+
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          hajimari.io/appName: "prometheus"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "chart-line"
+        hosts:
+          - prometheus.${SECRET_DOMAIN}
+        paths:
+          - /
+        pathType: ImplementationSpecific
+        tls:
+          - hosts:
+              - prometheus.${SECRET_DOMAIN}
+
+      resources:
+        requests:
+          cpu: 250m
+          memory: 512Mi
+        limits:
+          memory: 2048Mi
+
+      prometheusSpec:
+        #remoteWrite:
+        #  - url: https://victoriametrics.prod.192.168.1.41.sslip.io/api/v1/write
+
+        ruleNamespaceSelector: {}
+        podMonitorNamespaceSelector: {}
+        podMonitorSelector: {}
+        serviceMonitorNamespaceSelector: {}
+        serviceMonitorSelector:
+          matchLabels:
+            monitoring: baremetal
+
+    # Prometheus operator values
+    prometheusOperator:
+      resources:
+        requests:
+          cpu: 35m
+          memory: 273M
+        limits:
+          memory: 326M
+
+      prometheusConfigReloader:
+        # resource config for prometheusConfigReloader
+        resources:
+          requests:
+            cpu: 11m
+            memory: 32M
+          limits:
+            memory: 32M
+
+
+      serviceMonitor:
+        relabelings:
+          - action: replace
+            regex: (.*)
+            replacement: $1
+            sourceLabels:
+              - __meta_kubernetes_pod_node_name
+            targetLabel: kubernetes_node
+
