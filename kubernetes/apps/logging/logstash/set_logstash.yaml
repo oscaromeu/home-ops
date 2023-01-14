@@ -46,17 +46,15 @@ spec:
       terminationGracePeriodSeconds: 120
       volumes:
         - name: logstash-config-volume
-          configMap:
-            defaultMode: 256
-            name: logstash-config
-        - name: logstash-pipeline-volume
-          configMap:
-            defaultMode: 256
-            name: logstash-pipeline
-        - name: logstash-redis-certs
           secret:
-            secretName: logstash-redis-certs
-            defaultMode: 256
+            secretName: logstash-config
+        - name: logstash-pipeline-volume
+          secret:
+            secretName: logstash-pipeline
+        #- name: logstash-redis-certs
+        #  secret:
+        #    secretName: logstash-redis-certs
+        #    defaultMode: 256
         - name: ca-certs
           secret:
             secretName: elk-es-http-certs-public

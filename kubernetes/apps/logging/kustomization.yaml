@@ -6,3 +6,4 @@ resources:
   - ./redis
   - ./loki
   - ./filebeat
+  - ./logstash

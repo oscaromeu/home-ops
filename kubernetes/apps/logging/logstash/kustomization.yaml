@@ -9,11 +9,14 @@ resources:
   - svc_logstash.yaml
   - set_logstash.yaml
   #- logstash-redis-certs-sops.yaml
+
 generatorOptions:
  disableNameSuffixHash: true
  labels:
    namespace: logging
-configMapGenerator:
+
+
+secretGenerator:
 - name: logstash-config
   namespace: logging
   files:
