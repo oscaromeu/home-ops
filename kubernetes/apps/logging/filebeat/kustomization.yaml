@@ -15,12 +15,13 @@ generatorOptions:
  labels:
    namespace: logging
 
-configMapGenerator:
+secretGenerator:
 - name: filebeatcfg
   namespace: logging
   files:
     - config/filebeat.yml
-- name: filebeat_inputs
+
+- name: filebeatinputs
   namespace: logging
   files:
     - ./inputs.d/container.yml

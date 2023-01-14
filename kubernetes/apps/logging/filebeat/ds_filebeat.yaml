@@ -90,13 +90,11 @@ spec:
           mountPath: "/etc/filebeat/ssl/"
       volumes:
       - name: filebeatcfg-volume
-        configMap:
-          defaultMode: 0640
-          name: filebeatcfg
+        secret:
+          secretName: filebeatcfg
       - name: filebeatinputs-volume
-        configMap:
-          defaultMode: 0640
-          name: filebeatinputs
+        secret:
+          secretName: filebeatinputs
       - name: filebeat-modules-volume
         configMap:
           defaultMode: 0640
