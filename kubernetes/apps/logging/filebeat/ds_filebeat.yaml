@@ -87,8 +87,8 @@ spec:
         - name: varlog
           mountPath: /var/log
           readOnly: true
-        - name: redis-certs
-          mountPath: "/etc/filebeat/ssl/"
+        #- name: redis-certs
+        #  mountPath: "/etc/filebeat/ssl/"
       volumes:
       - name: filebeatcfg-volume
         secret:
@@ -112,8 +112,8 @@ spec:
           # When filebeat runs as non-root user, this directory needs to be writable by group (g+w).
           path: /var/lib/filebeat-data
           type: DirectoryOrCreate
-      - name: redis-certs
-        secret:
-          secretName: redis-certs
-          defaultMode: 256
+      #- name: redis-certs
+      #  secret:
+      #    secretName: redis-certs
+      #    defaultMode: 256
 
