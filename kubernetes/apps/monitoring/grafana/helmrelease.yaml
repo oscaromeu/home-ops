@@ -133,6 +133,6 @@ spec:
         url: https://grafana.net
       auth.basic:
         disable_login_form: true
-  valuesFrom:
-  - kind: Secret
-    name: "grafana-helm-values"
+  #valuesFrom:
+  #- kind: Secret
+  #  name: "grafana-helm-values"
