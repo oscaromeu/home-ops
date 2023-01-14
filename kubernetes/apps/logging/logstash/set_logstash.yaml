@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: logstash
+  namespace: logging
   labels:
     app: "logstash"
 spec:
@@ -119,8 +120,8 @@ spec:
             subPath: "pipelines.yml"
           - name: logstash-pipeline-volume
             mountPath: "/usr/share/logstash/pipeline"
-          - name: logstash-redis-certs
-            mountPath: "/usr/share/logstash/ssl"
+          #- name: logstash-redis-certs
+          #  mountPath: "/usr/share/logstash/ssl"
           - name: ca-certs
             mountPath: /usr/share/logstash/config/certs
 

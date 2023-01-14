@@ -3,6 +3,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: "logstash-headless"
+  namespace: "logging"
   labels:
     app: "logstash"
 spec:
