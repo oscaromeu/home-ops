@@ -7,3 +7,4 @@ resources:
   - ./loki
   - ./filebeat
   - ./logstash
+  - ./elastic
