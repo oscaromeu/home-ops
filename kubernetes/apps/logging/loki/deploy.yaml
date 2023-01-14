@@ -434,27 +434,27 @@ spec:
           emptyDir: {}
 ---
 # Source: loki-stack/charts/loki/templates/servicemonitor.yaml
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: loki
-  labels:
-    app: loki
-    chart: loki-2.11.0
-    release: loki
-    heritage: Helm
-spec:
-  selector:
-    matchLabels:
-      app: loki
-      release: "loki"
-      variant: headless
-  namespaceSelector:
-    matchNames:
-      - "logging"
-  endpoints:
-  - port: http-metrics
----
+#apiVersion: monitoring.coreos.com/v1
+#kind: ServiceMonitor
+#metadata:
+#  name: loki
+#  labels:
+#    app: loki
+#    chart: loki-2.11.0
+#    release: loki
+#    heritage: Helm
+#spec:
+#  selector:
+#    matchLabels:
+#      app: loki
+#      release: "loki"
+#      variant: headless
+#  namespaceSelector:
+#    matchNames:
+#      - "logging"
+#  endpoints:
+#  - port: http-metrics
+#---
 # Source: loki-stack/templates/tests/loki-test-pod.yaml
 #apiVersion: v1
 #kind: Pod
