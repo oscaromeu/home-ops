@@ -21,13 +21,13 @@ spec:
     remediation:
       retries: 5
   upgrade:
-    cleanupOnFail: true
+    cleanupOnFail: false
     crds: CreateReplace
     remediation:
       retries: 5
   # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
   values:
-    cleanPrometheusOperatorObjectNames: true
+    cleanPrometheusOperatorObjectNames: false
     fullnameOverride: prometheus
 
     # Alertmanager
