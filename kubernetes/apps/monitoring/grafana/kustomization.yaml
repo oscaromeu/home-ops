@@ -4,24 +4,6 @@ kind: Kustomization
 
 namespace: monitoring
 
-
-patchesStrategicMerge:
-  - patches/grafana-dashboard-sidecar.yml
-  - patches/grafana-datasource-sidecar.yml
-  - patches/grafana-env.yaml
-  - patches/grafana-security-context.yml
-  - patches/grafana-volumes.yaml
-
 resources:
-  - dashboards
-  - datasources
-  - clusterRole.yaml
-  - clusterRoleBinding.yaml
-  - config.yaml
-  - dashboardSources.yaml
-  - deployment.yaml
-  - prometheusRule.yaml
-  - service.yaml
-  - serviceAccount.yaml
-  - serviceMonitor.yaml
-  - ingress.yaml
+  #- dashboards
+  - ./helmrelease.yaml
