@@ -17,3 +17,4 @@ resources:
   - ./weave-gitops.yaml
   - ./grafana.yaml
   - ./pyroscope.yaml
+  - ./timescale.yaml
