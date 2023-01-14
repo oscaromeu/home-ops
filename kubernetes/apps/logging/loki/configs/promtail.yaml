@@ -3,7 +3,7 @@ server:
   http_listen_port: 3101
 
 client:
-  url: http://loki-stack:3100/loki/api/v1/push
+  url: http://loki:3100/loki/api/v1/push
 
 
 positions:

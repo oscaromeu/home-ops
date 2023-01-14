@@ -68,31 +68,6 @@ metadata:
     app.kubernetes.io/version: "2.4.2"
     app.kubernetes.io/managed-by: Helm
 ---
-# Source: loki-stack/templates/datasources.yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: loki-loki-stack
-  namespace: logging
-  labels:
-    app: loki-stack
-    chart: loki-stack-2.6.4
-    release: loki
-    heritage: Helm
-    grafana_datasource: "1"
-data:
-  loki-stack-datasource.yaml: |-
-    apiVersion: 1
-    datasources:
-    - name: Loki
-      type: loki
-      access: proxy
-      url: http://loki:3100
-      version: 1
-      isDefault: true
-      jsonData:
-        maxLines: 1000
----
 # Source: loki-stack/templates/tests/loki-test-configmap.yaml
 apiVersion: v1
 kind: ConfigMap
