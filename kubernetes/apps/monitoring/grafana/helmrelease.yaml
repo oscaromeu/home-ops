@@ -24,12 +24,12 @@ spec:
     podAnnotations:
       #backup.velero.io/backup-volumes: storage
       configmap.reloader.stakater.com/reload: "grafana"
-    persistence:
-      enabled: true
-      storageClassName: "default"
-      size: 10Gi
-      accessModes:
-      - ReadWriteOnce
+    #persistence:
+    #  enabled: true
+    #  storageClassName: "default"
+    #  size: 10Gi
+    #  accessModes:
+    #  - ReadWriteOnce
     env:
       GF_EXPLORE_ENABLED: true
       # GF_DISABLE_SANITIZE_HTML: true
