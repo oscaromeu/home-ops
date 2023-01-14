@@ -96,10 +96,10 @@ spec:
       - name: filebeatinputs-volume
         secret:
           secretName: filebeatinputs
-      - name: filebeat-modules-volume
-        configMap:
-          defaultMode: 0640
-          name: filebeat-modules
+      #- name: filebeat-modules-volume
+      #  configMap:
+      #    defaultMode: 0640
+      #    name: filebeat-modules
       - name: varlibdockercontainers
         hostPath:
           path: /var/lib/docker/containers
