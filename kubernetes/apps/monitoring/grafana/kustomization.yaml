@@ -11,6 +11,7 @@ patchesStrategicMerge:
   - patches/grafana-env.yaml
   - patches/grafana-security-context.yml
   - patches/grafana-volumes.yaml
+  - patches/grafana-ingress.yaml
 
 resources:
   - dashboards
