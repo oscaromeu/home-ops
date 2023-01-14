@@ -1,0 +1,28 @@
+ apiVersion: networking.k8s.io/v1
+ kind: Ingress
+ metadata:
+   annotations:
+     cert-manager.io/cluster-issuer: letsencrypt-staging
+     nginx.ingress.kubernetes.io/whitelist-source-range: |
+       10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+   labels:
+     app: elk
+   name: elastic
+   namespace: logging
+ spec:
+   ingressClassName: nginx
+   rules:
+   - host: elastic.devfu.io
+     http:
+       paths:
+       - backend:
+           service:
+             name: elk-elasticsearch
+             port:
+               number: 9200
+         path: /
+         pathType: Prefix
+   tls:
+   - hosts:
+     - elastic.devfu.io
+     secretName: elastic-tls

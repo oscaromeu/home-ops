@@ -1,0 +1,42 @@
+input {
+
+  redis {
+      host => "redis-master"
+      type => "redis-input"
+      data_type => "list"
+      key => "k3s_prod"
+      ssl => false
+      port => 6379
+  }
+
+}
+
+filter {
+
+    #if [log_type] == "k3s_cluster" {drop {}}
+    mutate { 
+      rename => { "host" => "[host][name]" } 
+      copy => { "[kubernetes][namespace]" => "k3s_project_name" }
+      rename => { "message" => "log" }
+      lowercase => [ "k3s_cluster_name", "k3s_project_name" ]
+    }
+}
+
+
+output {
+
+  #if [log_type] == "k3s_cluster" {
+  #  stdout { codec => rubydebug }
+  #}
+
+
+  elasticsearch {
+    hosts => ["https://elk-es-http.logging.svc:9200"]
+    cacert => "/usr/share/logstash/config/certs/ca.crt"
+    user => '${ELASTICSEARCH_USERNAME}'
+    password => '${ELASTICSEARCH_PASSWORD}'
+    index => "logs-pi_prod-%{k3s_cluster_name}.%{k3s_project_name}"
+    action => "create"
+  }
+
+}

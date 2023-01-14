@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flog-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flog-generator
+  template:
+    metadata:
+      labels:
+        app: flog-generator
+    spec:
+      containers:
+      - name: flog-generator
+        image: mingrammer/flog
+        command: ["flog"]
+        args: ["-n", "10", "-l", "debug"]

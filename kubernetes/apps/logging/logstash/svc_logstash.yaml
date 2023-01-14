@@ -1,0 +1,14 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: "logstash-headless"
+  labels:
+    app: "logstash"
+spec:
+  clusterIP: None
+  selector:
+    app: "logstash"
+  ports:
+    - name: http
+      port: 9600

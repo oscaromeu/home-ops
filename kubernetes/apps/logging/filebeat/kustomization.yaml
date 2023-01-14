@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: filbeat
+  namespace: logging
+  labels:
+    app: "filebeat"
+resources:
+  - redis-certs-sealed.yaml
+  - ds_filebeat.yaml
+  - sa_filebeat.yaml
+
+generatorOptions:
+ disableNameSuffixHash: true
+ labels:
+   namespace: monitoring
+configMapGenerator:
+- name: filebeat-config
+  namespace: monitoring
+  files:
+    - config/filebeat.yml
+- name: filebeat-inputs
+  namespace: monitoring
+  files:
+    - ./inputs.d/container.yml
+    - ./inputs.d/docker.yml
+- name: filebeat-modules
+  namespace: monitoring
+  files:
+    - modules.d/traefik.yaml.enabled

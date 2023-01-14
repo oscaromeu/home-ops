@@ -1,0 +1,20 @@
+input {
+  exec { command => "uptime" interval => 300 }
+}
+
+filter {
+}
+
+
+output {
+
+  elasticsearch {
+    hosts => ["https://elk-es-http.logging.svc:9200"]
+    cacert => "/usr/share/logstash/config/certs/ca.crt"
+    user => '${ELASTICSEARCH_USERNAME}'
+    password => '${ELASTICSEARCH_PASSWORD}'
+    index => "uptime"
+  }
+
+}
+
