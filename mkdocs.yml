@@ -35,15 +35,15 @@ nav:
   - Home: index.md
   - Installation:
     - installation/index.md
-  - User Guide:
-    - user-guide/index.md
+  - Infrastructure:
+    - infrastructure/index.md
     - Data Analytics:
-      - user-guide/data-analytics/index.md
-      - user-guide/data-analytics/elk.md
+      - infrastructure/data-analytics/index.md
+      - infrastructure/data-analytics/elk.md
     - Monitoring:
-      - user-guide/monitoring/index.md
-      - user-guide/monitoring/prometheus.md
+      - infrastructure/monitoring/index.md
+      - infrastructure/monitoring/prometheus.md
     - Observability:
-      - user-guide/observability/index.md
-      #- user-guide/observability/loki.md
+      - infrastructure/observability/index.md
+      - infrastructure/observability/loki.md
 
