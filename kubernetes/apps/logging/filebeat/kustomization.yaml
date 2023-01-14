@@ -16,11 +16,11 @@ generatorOptions:
    namespace: logging
 
 configMapGenerator:
-- name: filebeat-config
+- name: filebeat_config
   namespace: logging
   files:
     - config/filebeat.yml
-- name: filebeat-inputs
+- name: filebeat_inputs
   namespace: logging
   files:
     - ./inputs.d/container.yml

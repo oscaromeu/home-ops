@@ -68,11 +68,11 @@ spec:
             cpu: 10m
             memory: 100Mi
         volumeMounts:
-        - name: filebeat-config-volume
+        - name: filebeat_config-volume
           mountPath: /usr/share/filebeat/filebeat.yml
           subPath: filebeat.yml
           readOnly: true
-        - name: filebeat-inputs-volume
+        - name: filebeat_inputs-volume
           mountPath: /usr/share/filebeat/inputs.d
           readOnly: true
         - name: filebeat-modules-volume
@@ -89,14 +89,14 @@ spec:
         - name: redis-certs
           mountPath: "/etc/filebeat/ssl/"
       volumes:
-      - name: filebeat-config-volume
+      - name: filebeat_config-volume
         configMap:
           defaultMode: 0640
-          name: filebeat-config
-      - name: filebeat-inputs-volume
+          name: filebeat_config
+      - name: filebeat_inputs-volume
         configMap:
           defaultMode: 0640
-          name: filebeat-inputs
+          name: filebeat_inputs
       - name: filebeat-modules-volume
         configMap:
           defaultMode: 0640
