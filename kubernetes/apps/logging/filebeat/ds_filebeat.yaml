@@ -76,9 +76,9 @@ spec:
         - name: filebeatinputs-volume
           mountPath: /usr/share/filebeat/inputs.d
           readOnly: true
-        - name: filebeat-modules-volume
-          mountPath: /usr/share/filebeat/modules.d
-          readOnly: true
+        #- name: filebeat-modules-volume
+        #  mountPath: /usr/share/filebeat/modules.d
+        #  readOnly: true
         - name: data
           mountPath: /usr/share/filebeat/data
         - name: varlibdockercontainers
