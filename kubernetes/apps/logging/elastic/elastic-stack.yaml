@@ -7,7 +7,7 @@ metadata:
   labels:
     app: elk
 spec:
-  version: 8.0.0
+  version: 8.5.0
   nodeSets:
   - name: master
     count: 1
@@ -64,10 +64,11 @@ apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
 metadata:
   name: elk
+  namespace: logging
   labels:
     app: elk
 spec:
-  version: 8.0.0
+  version: 8.5.0
   count: 1
   elasticsearchRef:
     name: elk
