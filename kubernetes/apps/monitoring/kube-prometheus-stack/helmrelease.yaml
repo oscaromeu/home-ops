@@ -208,13 +208,13 @@ spec:
         #remoteWrite:
         #  - url: https://victoriametrics.prod.192.168.1.41.sslip.io/api/v1/write
 
-        ruleNamespaceSelector: {}
-        podMonitorNamespaceSelector: {}
-        podMonitorSelector: {}
-        serviceMonitorNamespaceSelector: {}
-        serviceMonitorSelector:
-          matchLabels:
-            monitoring: baremetal
+        #ruleNamespaceSelector: {}
+        #podMonitorNamespaceSelector: {}
+        #podMonitorSelector: {}
+        #serviceMonitorNamespaceSelector: {}
+        #serviceMonitorSelector:
+        #  matchLabels:
+        #    monitoring: baremetal
 
     # Prometheus operator values
     prometheusOperator:
