@@ -31,7 +31,7 @@ spec:
   # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
   values:
     cleanPrometheusOperatorObjectNames: false
-    fullnameOverride: prometheus
+    #fullnameOverride: prometheus
 
     # Alertmanager
     alertmanager:
@@ -98,8 +98,17 @@ spec:
       forceDeployDashboards: true
 
     # kube state metrics
-    kubeStateMetrics:
-      enabled: false
+    kube-state-metrics:
+      metricLabelsAllowlist: ["persistentvolumeclaims=[*]"]
+      prometheus:
+        monitor:
+          enabled: true
+          relabelings:
+            - action: replace
+              regex: (.*)
+              replacement: $1
+              sourceLabels: ["__meta_kubernetes_pod_node_name"]
+              targetLabel: kubernetes_node
 
     # Kubelet
     kubelet:
@@ -107,8 +116,7 @@ spec:
       serviceMonitor:
         metricRelabelings:
           - action: replace
-            sourceLabels:
-              - node
+            sourceLabels: ["node"]
             targetLabel: instance
 
     # Kubernetes API Server
@@ -134,6 +142,42 @@ spec:
     # Node Exporter
     nodeExporter:
       enabled: true
+      serviceMonitor:
+        relabelings:
+          - action: replace
+            regex: (.*)
+            replacement: $1
+            sourceLabels:
+              - __meta_kubernetes_pod_node_name
+            targetLabel: kubernetes_node
+
+    prometheus-node-exporter:
+      fullnameOverride: node-exporter
+      podLabels:
+        jobLabel: node-exporter
+      extraArgs:
+        - --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/.+)($|/)
+        - --collector.filesystem.fs-types-exclude=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$
+      service:
+        portName: http-metrics
+      prometheus:
+        monitor:
+          enabled: true
+          relabelings:
+            - action: replace
+              regex: (.*)
+              replacement: $1
+              sourceLabels:
+                - __meta_kubernetes_pod_node_name
+              targetLabel: kubernetes_node
+      resources:
+        requests:
+          memory: 512Mi
+          cpu: 250m
+        limits:
+          memory: 2048Mi
+
+
 
     # Prometheus
     prometheus:
