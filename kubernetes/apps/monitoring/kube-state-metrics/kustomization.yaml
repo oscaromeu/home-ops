@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - kubePrometheus-prometheusRule.yaml
+  - kubernetesControlPlane-prometheusRule.yaml
+  - kubernetesControlPlane-serviceMonitorApiserver.yaml
+  - kubernetesControlPlane-serviceMonitorCoreDNS.yaml
+  - kubernetesControlPlane-serviceMonitorKubeControllerManager.yaml
+  - kubernetesControlPlane-serviceMonitorKubelet.yaml
+  - kubernetesControlPlane-serviceMonitorKubeScheduler.yaml
+  - kubeStateMetrics-clusterRoleBinding.yaml
+  - kubeStateMetrics-clusterRole.yaml
+  - kubeStateMetrics-deployment.yaml
+  - kubeStateMetrics-prometheusRule.yaml
+  - kubeStateMetrics-serviceAccount.yaml
+  - kubeStateMetrics-serviceMonitor.yaml
+  - kubeStateMetrics-service.yaml
