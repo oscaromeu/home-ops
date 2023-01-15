@@ -7,4 +7,4 @@ resources:
   - ./kube-state-metrics
   - ./node-exporter
   - ./grafana
-#  - ./elastic-exporter
+  - ./elastic-exporter
