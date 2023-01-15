@@ -5,16 +5,17 @@ namespace: monitoring
 
 
 resources:
-  - dashboards
-  - datasources
-  - deploy.yml
-  - rbac.yml
-  - grafana-config.yml
-  - ingress.yaml
+- ./helmrelease.yaml
+#  - dashboards
+#  - datasources
+#  - deploy.yml
+#  - rbac.yml
+#  - grafana-config.yml
+#  - ingress.yaml
 #  - crt_grafana.yaml
 
 
-configMapGenerator:
-  - name: grafana-dashboards
-    files:
-      - dashboards.yaml
+#configMapGenerator:
+#  - name: grafana-dashboards
+#    files:
+#      - dashboards.yaml

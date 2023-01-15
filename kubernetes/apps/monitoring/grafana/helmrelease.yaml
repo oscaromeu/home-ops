@@ -1,0 +1,72 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: grafana
+      version: 6.50.0
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    datasources:
+      datasources.yaml:
+        apiVersion: 1
+        datasources:
+          - name: Prometheus
+            type: prometheus
+            access: proxy
+            url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
+            isDefault: true
+    sidecar:
+      dashboards:
+        enabled: true
+        searchNamespace: ALL
+    plugins:
+      - digrich-bubblechart-panel
+      - grafana-clock-panel
+      - redis-datasource
+      - marcusolsson-hexmap-panel
+      - grafana-polystat-panel
+      - pyroscope-panel
+      - flant-statusmap-panel
+    serviceMonitor:
+      enabled: true
+    rbac:
+      pspEnabled: false
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        hajimari.io/appName: "grafana"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "alarm-light-outline"
+      hosts:
+        - grafana.devfu.io
+      paths:
+        - /
+      pathType: ImplementationSpecific
+      tls:
+        - hosts:
+            - grafana.devfu.io
+    persistence:
+      enabled: false
+      accessModes:
+        - ReadWriteOnce
+      size: 5Gi
+      # existingClaim: grafana
+      extraPvcLabels:
+        snapshot.home.arpa/enabled: "true"
