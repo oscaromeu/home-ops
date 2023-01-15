@@ -25,3 +25,47 @@ To implement the hot/warm architecture in Elasticsearch, is used
 Also the nodes that store data in the hot tier has the role of "master" and the nodes that store data in the warm tier has the "data tier".
 
 This setup can provide better performance and efficiency for the cluster, as the master nodes can focus on managing the cluster and processing requests for actively used data, while the data nodes can focus on storing and processing less frequently used data. This setup can provide better availability and fault tolerance, as the master nodes can continue to operate even if one or more data nodes fail.
+
+
+## ILM
+
+### Create new policy
+
+```
+PUT _ilm/policy/logs-home-ops
+{
+  "policy": {
+    "phases": {
+      "hot": {
+        "actions": {
+          "rollover": {
+            "max_age": "5d",
+            "max_primary_shard_size": "1gb"
+          },
+          "set_priority": {
+            "priority": 100
+          },
+          "shrink": {
+            "number_of_shards": 1
+          }
+        },
+        "min_age": "0ms"
+      },
+      "warm": {
+        "min_age": "10d",
+        "actions": {
+          "set_priority": {
+            "priority": 50
+          }
+        }
+      },
+      "delete": {
+        "min_age": "20d",
+        "actions": {
+          "delete": {}
+        }
+      }
+    }
+  }
+}
+```
