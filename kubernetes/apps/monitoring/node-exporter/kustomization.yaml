@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - nodeExporter-clusterRoleBinding.yaml
+  - nodeExporter-clusterRole.yaml
+  - nodeExporter-daemonset.yaml
+  - nodeExporter-prometheusRule.yaml
+  - nodeExporter-serviceAccount.yaml
+  - nodeExporter-serviceMonitor.yaml
+  - nodeExporter-service.yaml

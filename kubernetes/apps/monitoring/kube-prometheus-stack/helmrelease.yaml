@@ -15,54 +15,18 @@ spec:
         name: prometheus-community
         namespace: flux-system
       interval: 5m
-  maxHistory: 3
   install:
     createNamespace: false
-    crds: CreateReplace
     remediation:
       retries: 5
   upgrade:
-    cleanupOnFail: true
     crds: CreateReplace
     remediation:
       retries: 5
-  uninstall:
-    keepHistory: false
   # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
   values:
-    cleanPrometheusOperatorObjectNames: false
 
-    fullnameOverride: prometheus
-
-    defaultRules:
-      create: true
-      rules:
-        alertmanager: true
-        etcd: true
-        configReloaders: true
-        general: true
-        k8s: true
-        kubeApiserverAvailability: true
-        kubeApiserverBurnrate: true
-        kubeApiserverHistogram: true
-        kubeApiserverSlos: true
-        kubelet: true
-        kubeProxy: true
-        kubePrometheusGeneral: true
-        kubePrometheusNodeRecording: true
-        kubernetesApps: true
-        kubernetesResources: true
-        kubernetesStorage: true
-        kubernetesSystem: true
-        kubeScheduler: true
-        kubeStateMetrics: true
-        network: true
-        node: true
-        nodeExporterAlerting: true
-        nodeExporterRecording: true
-        prometheus: true
-        prometheusOperator: true
-
+    #fullnameOverride: prometheus
     alertmanager:
       fullnameOverride: alertmanager
       enabled: true
@@ -82,119 +46,12 @@ spec:
           - hosts:
               - alertmanager.devfu.io
 
-
     grafana:
       enabled: false
-      fullnameOverride: grafana
-      forceDeployDatasources: false
-      forceDeployDashboards: false
-      defaultDashboardsEnabled: true
-      defaultDashboardsTimezone: utc
-      serviceMonitor:
-        enabled: true
-      admin:
-        existingSecret: grafana-admin-credentials
-        userKey: admin-user
-        passwordKey: admin-password
-
-    kubeApiServer:
-      enabled: true
-
-    kubelet:
-      enabled: true
-      serviceMonitor:
-        metricRelabelings:
-          - action: replace
-            sourceLabels:
-              - node
-            targetLabel: instance
-
-    kubeControllerManager:
-      enabled: false
-
-    coreDns:
-      enabled: true
-
-    kubeDns:
-      enabled: false
-
-    kubeEtcd:
-      enabled: false
-
-
-    kubeScheduler:
-      enabled: false
-
-    kubeProxy:
-      enabled: false
-
-    kubeStateMetrics:
-      enabled: true
-
-    kube-state-metrics:
-      fullnameOverride: kube-state-metrics
-      selfMonitor:
-        enabled: true
-      prometheus:
-        monitor:
-          enabled: true
-          relabelings:
-            - action: replace
-              regex: (.*)
-              replacement: $1
-              sourceLabels:
-                - __meta_kubernetes_pod_node_name
-              targetLabel: kubernetes_node
-
-    nodeExporter:
-      enabled: true
-      serviceMonitor:
-        relabelings:
-          - action: replace
-            regex: (.*)
-            replacement: $1
-            sourceLabels:
-              - __meta_kubernetes_pod_node_name
-            targetLabel: kubernetes_node
-
-    prometheus-node-exporter:
-      fullnameOverride: node-exporter
-      podLabels:
-        jobLabel: node-exporter
-      extraArgs:
-        - --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/.+)($|/)
-        - --collector.filesystem.fs-types-exclude=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$
-      service:
-        portName: http-metrics
-      prometheus:
-        monitor:
-          enabled: true
-          relabelings:
-            - action: replace
-              regex: (.*)
-              replacement: $1
-              sourceLabels:
-                - __meta_kubernetes_pod_node_name
-              targetLabel: kubernetes_node
-      resources:
-        requests:
-          memory: 512Mi
-          cpu: 250m
-        limits:
-          memory: 2048Mi
-
-    prometheusOperator:
-      enabled: true
-      prometheusConfigReloader:
-        resources:
-          requests:
-            cpu: 200m
-            memory: 50Mi
-          limits:
-            memory: 100Mi
+      forceDeployDashboards: true
 
     prometheus:
-      enabled: true
+
       ingress:
         enabled: true
         ingressClassName: nginx
@@ -210,16 +67,74 @@ spec:
         tls:
           - hosts:
               - prometheus.devfu.io
-      prometheusSpec:
-        replicas: 1
-        replicaExternalLabelName: "replica"
-        ruleSelectorNilUsesHelmValues: false
-        serviceMonitorSelectorNilUsesHelmValues: false
-        podMonitorSelectorNilUsesHelmValues: false
-        probeSelectorNilUsesHelmValues: false
-        retention: 6h
-        enableAdminAPI: true
-        walCompression: true
 
-    thanosRuler:
+      resources:
+        requests:
+          cpu: 250m
+          memory: 512Mi
+        limits:
+          memory: 2048Mi
+
+      prometheusSpec:
+        #remoteWrite:
+        #  - url: ""
+
+        ruleNamespaceSelector: {}
+        podMonitorNamespaceSelector: {}
+        podMonitorSelector: {}
+        serviceMonitorNamespaceSelector: {}
+        serviceMonitorSelector: {}
+          #matchLabels:
+          #  monitoring: baremetal
+
+    kubelet:
+      enabled: true
+      serviceMonitor:
+        metricRelabelings:
+          - action: replace
+            sourceLabels:
+              - node
+            targetLabel: instance
+
+    kubeApiServer:
+      enabled: true
+
+    kubeControllerManager:
       enabled: false
+
+    kubeScheduler:
+      enabled: false
+
+    kubeProxy:
+      enabled: false
+
+    kubeEtcd:
+      enabled: false
+
+    # Prometheus operator values
+    prometheusOperator:
+      resources:
+        requests:
+          cpu: 35m
+          memory: 273M
+        limits:
+          memory: 326M
+
+      prometheusConfigReloader:
+        # resource config for prometheusConfigReloader
+        resources:
+          requests:
+            cpu: 11m
+            memory: 32M
+          limits:
+            memory: 32M
+
+    nodeExporter:
+      serviceMonitor:
+        relabelings:
+          - action: replace
+            regex: (.*)
+            replacement: $1
+            sourceLabels:
+              - __meta_kubernetes_pod_node_name
+            targetLabel: kubernetes_node
