@@ -4,13 +4,55 @@ site_name: Oscar's Homelab
   #copyright:
 theme:
   name: material
-    #  palette:
-    #    primary: black
   features:
-    - navigation.indexes
-    - navigation.sections
-    - search.highlight
-    - search.share
+      #- navigation.tabs
+      #- navigation.tabs.sticky
+      - navigation.instant
+      - navigation.sections
+      - navigation.indexes
+      - navigation.top
+      - search.highlight
+      - search.suggest
+      - search.share
+      - content.code.annotate
+      - header.autohide
+      - announce.dismiss
+      - toc.follow
+
+  icon:
+    repo: 'fontawesome/brands/github'
+
+  palette:
+
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      scheme: default
+      toggle:
+        icon: material/brightness-auto
+        name: Follow system preferences
+
+    # Toggle light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: 'black'
+      accent: 'orange'
+      toggle:
+        icon: material/brightness-7
+        name: Burn my eyes!
+
+    # Toggle dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: 'black'
+      accent: 'orange'
+      toggle:
+        icon: material/brightness-4
+        name: Love my eyes!
+
+  font:
+    text: 'Ubuntu'
+    code: 'Ubuntu Mono'
+
 
 markdown_extensions:
   - pymdownx.emoji:
