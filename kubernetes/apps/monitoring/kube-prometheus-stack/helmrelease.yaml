@@ -111,6 +111,9 @@ spec:
     kubeEtcd:
       enabled: false
 
+    kubeStateMetrics:
+      enabled: false
+
     # Prometheus operator values
     prometheusOperator:
       resources:
@@ -130,6 +133,7 @@ spec:
             memory: 32M
 
     nodeExporter:
+      enabled: false
       serviceMonitor:
         relabelings:
           - action: replace
