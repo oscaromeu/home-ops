@@ -99,7 +99,7 @@ spec:
 
     # kube state metrics
     kubeStateMetrics:
-      enabled: true
+      enabled: false
 
     # Kubelet
     kubelet:
