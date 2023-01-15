@@ -14,7 +14,7 @@ The Prometheus Operator uses servicemonitor to automate the process of configuri
 !!! info
     [Check the oficial troubleshooting guide](https://github.com/coreos/prometheus-operator/blob/master/Documentation/troubleshooting.md#troubleshooting-servicemonitor-changes)
 
-By default, Prometheus instances created with the Prometheus Operator have a label `release: <prometheus-installed-namespace>` in their `spec.serviceMonitorSelector.matchLabels` field. This means that Prometheus will only monitor services that have this label. To verify this, you can run the command `kubectl get prom -Ao yaml` and check the `spec.serviceMonitorSelector` field in the output. This means that if a servicemonitor does not have this label, Prometheus created by operator will not monitor it. Check the [values.yaml](https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml#L2778-L2791) of the kube-prometheus helm chart project.
+By default, Prometheus instances created with the Helm Kube Prometheus stack have a label `release: <prometheus-installed-namespace>` in their `spec.serviceMonitorSelector.matchLabels` field. This means that Prometheus will only monitor services that have this label. To verify this, you can run the command `kubectl get prom -Ao yaml` and check the `spec.serviceMonitorSelector` field in the output. This means that if a servicemonitor does not have this label, Prometheus created by operator will not monitor it. Check the [values.yaml](https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml#L2778-L2791) of the kube-prometheus helm chart project.
 
 You have two options to get it work without adding `release` label:
 
@@ -23,7 +23,7 @@ You have two options to get it work without adding `release` label:
     _before_
 
     ```
-    $ kubectl get prom -Ao yaml | grep -A6 -B5 serviceMonitorSelector
+    $ kubectl get prom -Ao yaml | grep -A2 -B2 serviceMonitorSelector
     serviceAccountName: kube-prometheus-stack-prometheus
     serviceMonitorNamespaceSelector: {}
     serviceMonitorSelector:
