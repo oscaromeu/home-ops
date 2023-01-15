@@ -8,3 +8,4 @@ resources:
   - ./filebeat
   - ./logstash
   - ./elastic
+  - ./elastic-exporter
