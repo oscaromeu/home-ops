@@ -18,3 +18,4 @@ resources:
   - ./grafana.yaml
   - ./pyroscope.yaml
   - ./timescale.yaml
+  - ./descheduler.yaml
