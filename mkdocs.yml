@@ -84,8 +84,11 @@ nav:
       - infrastructure/data-analytics/elk.md
     - Monitoring:
       - infrastructure/monitoring/index.md
-      - infrastructure/monitoring/prometheus.md
       - infrastructure/monitoring/grafana.md
+      - Prometheus:
+        - infrastructure/monitoring/prometheus/index.md
+        - infrastructure/monitoring/prometheus/prometheus.md
+
     - Observability:
       - infrastructure/observability/index.md
       - infrastructure/observability/loki.md

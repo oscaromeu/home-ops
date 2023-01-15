@@ -94,8 +94,7 @@ spec:
         podMonitorSelector: {}
         serviceMonitorNamespaceSelector: {}
         serviceMonitorSelector: {}
-          #matchLabels:
-          #  monitoring: baremetal
+        serviceMonitorSelectorNilUsesHelmValues: false
 
 
     # Prometheus operator values
