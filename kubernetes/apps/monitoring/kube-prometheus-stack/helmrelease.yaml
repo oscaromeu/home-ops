@@ -26,9 +26,7 @@ spec:
   # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
   values:
 
-    fullnameOverride: prometheus
     alertmanager:
-      fullnameOverride: alertmanager
       enabled: true
       ingress:
         enabled: true
@@ -49,6 +47,18 @@ spec:
     grafana:
       enabled: false
       forceDeployDashboards: true
+
+    kubeControllerManager:
+      enabled: false
+
+    kubeScheduler:
+      enabled: false
+
+    kubeProxy:
+      enabled: false
+
+    kubeEtcd:
+      enabled: false
 
     prometheus:
 
@@ -87,32 +97,6 @@ spec:
           #matchLabels:
           #  monitoring: baremetal
 
-    kubelet:
-      enabled: true
-      serviceMonitor:
-        metricRelabelings:
-          - action: replace
-            sourceLabels:
-              - node
-            targetLabel: instance
-
-    kubeApiServer:
-      enabled: true
-
-    kubeControllerManager:
-      enabled: false
-
-    kubeScheduler:
-      enabled: false
-
-    kubeProxy:
-      enabled: false
-
-    kubeEtcd:
-      enabled: false
-
-    kubeStateMetrics:
-      enabled: false
 
     # Prometheus operator values
     prometheusOperator:
@@ -132,13 +116,3 @@ spec:
           limits:
             memory: 32M
 
-    nodeExporter:
-      enabled: false
-      serviceMonitor:
-        relabelings:
-          - action: replace
-            regex: (.*)
-            replacement: $1
-            sourceLabels:
-              - __meta_kubernetes_pod_node_name
-            targetLabel: kubernetes_node
