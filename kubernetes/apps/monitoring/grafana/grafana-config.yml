@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-config
+  namespace: monitoring
+stringData:
+  plugins: digrich-bubblechart-panel,grafana-clock-panel,redis-datasource,marcusolsson-hexmap-panel,grafana-polystat-panel,pyroscope-panel,flant-statusmap-panel,grafana-k6-app
+  grafana.ini: |
+    [date_formats]
+    default_timezone = UTC
+    [paths]
+    plugins = /var/lib/grafana/plugins
+type: Opaque

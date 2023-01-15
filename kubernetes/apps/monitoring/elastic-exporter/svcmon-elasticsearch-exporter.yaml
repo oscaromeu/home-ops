@@ -4,7 +4,6 @@ metadata:
   name: prometheus-elasticsearch-exporter
   labels:
     app: prometheus-elasticsearch-exporter
-    #monitoring: baremetal
 spec:
   namespaceSelector:
     any: true

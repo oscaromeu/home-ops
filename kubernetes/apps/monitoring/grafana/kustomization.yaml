@@ -1,9 +1,19 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 namespace: monitoring
 
+
 resources:
-  #- dashboards
-  - ./helmrelease.yaml
+  - dashboards
+  - datasources
+  - deploy.yml
+  - rbac.yml
+  - grafana-config.yml
+#  - crt_grafana.yaml
+
+
+configMapGenerator:
+  - name: grafana-dashboards
+    files:
+      - dashboards.yaml
