@@ -31,35 +31,41 @@ spec:
   # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
   values:
     cleanPrometheusOperatorObjectNames: false
-    #fullnameOverride: prometheus
 
-    # Alertmanager
+    fullnameOverride: prometheus
+
+    defaultRules:
+      create: true
+      rules:
+        alertmanager: true
+        etcd: true
+        configReloaders: true
+        general: true
+        k8s: true
+        kubeApiserverAvailability: true
+        kubeApiserverBurnrate: true
+        kubeApiserverHistogram: true
+        kubeApiserverSlos: true
+        kubelet: true
+        kubeProxy: true
+        kubePrometheusGeneral: true
+        kubePrometheusNodeRecording: true
+        kubernetesApps: true
+        kubernetesResources: true
+        kubernetesStorage: true
+        kubernetesSystem: true
+        kubeScheduler: true
+        kubeStateMetrics: true
+        network: true
+        node: true
+        nodeExporterAlerting: true
+        nodeExporterRecording: true
+        prometheus: true
+        prometheusOperator: true
+
     alertmanager:
       fullnameOverride: alertmanager
       enabled: true
-      #config:
-      #  receivers:
-      #    - name: "null"
-      #    - name: "discord"
-      #      webhook_configs:
-      #        - url: "http://alertmanager-discord:9094"
-      #          send_resolved: true
-      #  route:
-      #    group_by: ["alertname", "job"]
-      #    group_wait: 30s
-      #    group_interval: 5m
-      #    repeat_interval: 6h
-      #    receiver: "discord"
-      #    routes:
-      #      - receiver: "null"
-      #        matchers:
-      #          - alertname =~ "InfoInhibitor|Watchdog"
-      #      - receiver: "discord"
-      #        matchers:
-      #          # - severity =~ critical|warning
-      #          - severity = critical
-      #        continue: true
-
       ingress:
         enabled: true
         ingressClassName: nginx
@@ -75,31 +81,60 @@ spec:
         tls:
           - hosts:
               - alertmanager.devfu.io
-      alertmanagerSpec:
-        #storage:
-        #  volumeClaimTemplate:
-        #    spec:
-        #      storageClassName: ceph-block
-        #      resources:
-        #        requests:
-        #          storage: 10Mi
-        resources:
-          requests:
-            cpu: 50m
-            memory: 64Mi
-          limits:
-            cpu: 60m
-            memory: 64Mi
 
 
-    # grafana
     grafana:
       enabled: false
-      forceDeployDashboards: true
+      fullnameOverride: grafana
+      forceDeployDatasources: false
+      forceDeployDashboards: false
+      defaultDashboardsEnabled: true
+      defaultDashboardsTimezone: utc
+      serviceMonitor:
+        enabled: true
+      admin:
+        existingSecret: grafana-admin-credentials
+        userKey: admin-user
+        passwordKey: admin-password
 
-    # kube state metrics
+    kubeApiServer:
+      enabled: true
+
+    kubelet:
+      enabled: true
+      serviceMonitor:
+        metricRelabelings:
+          - action: replace
+            sourceLabels:
+              - node
+            targetLabel: instance
+
+    kubeControllerManager:
+      enabled: false
+
+    coreDns:
+      enabled: true
+
+    kubeDns:
+      enabled: false
+
+    kubeEtcd:
+      enabled: false
+
+
+    kubeScheduler:
+      enabled: false
+
+    kubeProxy:
+      enabled: false
+
+    kubeStateMetrics:
+      enabled: true
+
     kube-state-metrics:
-      metricLabelsAllowlist: ["persistentvolumeclaims=[*]"]
+      fullnameOverride: kube-state-metrics
+      selfMonitor:
+        enabled: true
       prometheus:
         monitor:
           enabled: true
@@ -107,39 +142,10 @@ spec:
             - action: replace
               regex: (.*)
               replacement: $1
-              sourceLabels: ["__meta_kubernetes_pod_node_name"]
+              sourceLabels:
+                - __meta_kubernetes_pod_node_name
               targetLabel: kubernetes_node
 
-    # Kubelet
-    kubelet:
-      enabled: true
-      serviceMonitor:
-        metricRelabelings:
-          - action: replace
-            sourceLabels: ["node"]
-            targetLabel: instance
-
-    # Kubernetes API Server
-    kubeApiServer:
-      enabled: true
-
-    # Kubernetes Controller Manager
-    kubeControllerManager:
-      enabled: false
-
-    # Kubernetes Scheduler
-    kubeScheduler:
-      enabled: false
-
-    # kubeProxy
-    kubeProxy:
-      enabled: false
-
-    # kubeEtcd
-    kubeEtcd:
-      enabled: false
-
-    # Node Exporter
     nodeExporter:
       enabled: true
       serviceMonitor:
@@ -177,10 +183,18 @@ spec:
         limits:
           memory: 2048Mi
 
+    prometheusOperator:
+      enabled: true
+      prometheusConfigReloader:
+        resources:
+          requests:
+            cpu: 200m
+            memory: 50Mi
+          limits:
+            memory: 100Mi
 
-
-    # Prometheus
     prometheus:
+      enabled: true
       ingress:
         enabled: true
         ingressClassName: nginx
@@ -196,52 +210,16 @@ spec:
         tls:
           - hosts:
               - prometheus.devfu.io
-
-      resources:
-        requests:
-          cpu: 250m
-          memory: 512Mi
-        limits:
-          memory: 2048Mi
-
       prometheusSpec:
-        #remoteWrite:
-        #  - url: https://victoriametrics.prod.192.168.1.41.sslip.io/api/v1/write
+        replicas: 1
+        replicaExternalLabelName: "replica"
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
+        retention: 6h
+        enableAdminAPI: true
+        walCompression: true
 
-        #ruleNamespaceSelector: {}
-        #podMonitorNamespaceSelector: {}
-        #podMonitorSelector: {}
-        #serviceMonitorNamespaceSelector: {}
-        #serviceMonitorSelector:
-        #  matchLabels:
-        #    monitoring: baremetal
-
-    # Prometheus operator values
-    prometheusOperator:
-      resources:
-        requests:
-          cpu: 35m
-          memory: 273M
-        limits:
-          memory: 326M
-
-      prometheusConfigReloader:
-        # resource config for prometheusConfigReloader
-        resources:
-          requests:
-            cpu: 11m
-            memory: 32M
-          limits:
-            memory: 32M
-
-
-      serviceMonitor:
-        relabelings:
-          - action: replace
-            regex: (.*)
-            replacement: $1
-            sourceLabels:
-              - __meta_kubernetes_pod_node_name
-            targetLabel: kubernetes_node
-
-
+    thanosRuler:
+      enabled: false
