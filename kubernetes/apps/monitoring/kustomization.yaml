@@ -4,6 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./kube-prometheus-stack
-#  - ./kube-state-metrics
-#  - ./node-exporter
   - ./grafana
