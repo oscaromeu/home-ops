@@ -17,6 +17,24 @@ With Grafana Loki, you can aggregate logs from different sources, such as Kubern
 
 Please note that Grafana Loki is a relatively new tool, and it may not be as mature or feature-rich as some of the more established log aggregation systems. It is important to consider your specific use case and requirements when deciding whether to use Grafana Loki or another log aggregation system.
 
+## Loki Architecture
+
+### Write Path Components:
+
++ __Distributor:__ receives log data from various sources and routes it to the appropriate ingestor.
++ __Ingestor:__ receives log data from the distributor and processes it, preparing it for storage.
+
+### Read Path Components:
+
++ __Query frontend:__ provides a user-facing interface for querying log data.
++ __Querier:__ executes queries on the log data and returns the results to the query frontend.
++ __Ruler:__ manages and enforces rules and alerts on log data using the queries results.
+
+### Other components or features:
+
++ Different modes of operation (Monolith, simple scaling, microservices)
++ Multi-tenancy support: allows multiple teams or departments to access and manage logs simultaneously.
+
 ## Requirements
 
 + Kubernetes >= `1.21.0`
@@ -71,3 +89,8 @@ loki:
 helm template loki /tmp/loki --set grafana.enabled=false --set loki.serviceMonitor.enabled=true -n logging --values values.yaml > loki-stack-built.yaml
 ```
 
+
+## References
+
++ [Grafana Loki's Architecture](https://grafana.com/docs/loki/latest/fundamentals/architecture/)
++ [Grafana Loki's Design Documents](https://grafana.com/docs/loki/latest/design-documents/)
