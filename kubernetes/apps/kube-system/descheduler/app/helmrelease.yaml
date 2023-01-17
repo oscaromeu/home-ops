@@ -27,7 +27,7 @@ spec:
     keepHistory: false
   values:
     kind: Deployment
-    replicas: 3
+    replicas: 1
     leaderElection:
       enabled: true
       leaseDuration: 15s
@@ -35,7 +35,7 @@ spec:
       retryPeriod: 2s
       resourceLock: leases
       resourceName: descheduler
-      resourceNamescape: default
+      #resourceNamescape: default
     deschedulerPolicy:
       strategies:
         RemoveDuplicates:
@@ -55,7 +55,18 @@ spec:
           params:
             nodeFit: true
         LowNodeUtilization:
-          enabled: false
+          enabled: true
+          params:
+            nodeResourceUtilizationThresholds:
+              thresholds:
+                "cpu" : 20
+                "memory": 20
+                "pods": 20
+              targetThresholds:
+                "cpu" : 50
+                "memory": 50
+                "pods": 50
+              numberOfNodes: 1
         RemoveFailedPods:
           enabled: true
           params:
