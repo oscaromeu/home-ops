@@ -5,4 +5,4 @@ kind: Kustomization
 namespace: logging
 
 resources:
-  - deploy.yaml
+  - ./deploy.yaml

@@ -17,3 +17,9 @@ spec:
         image: mingrammer/flog
         command: ["flog"]
         args: ["-n", "10", "-l", "debug"]
+        resources:
+          limits:
+            memory: 500Mi
+          requests:
+            cpu: 100m
+            memory: 250Mi
