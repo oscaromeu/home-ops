@@ -16,7 +16,7 @@ spec:
       - name: flog-generator
         image: mingrammer/flog:0.4.3
         command: ["flog"]
-        args: ["-n", "10", "-l", "info"]
+        args: ["-n", "1", "-l", "info"]
         resources:
           limits:
             memory: 500Mi
