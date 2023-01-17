@@ -9,4 +9,4 @@ resources:
   - ./logstash
   - ./elastic
   - ./elastic-exporter
-  - ./flog
+#  - ./flog

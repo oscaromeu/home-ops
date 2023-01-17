@@ -26,9 +26,10 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    kind: CronJob
+    kind: Deployment
+    #kind: CronJob
+    #schedule: "*/30 * * * *"
     replicas: 1
-    schedule: "*/30 * * * *"
     leaderElection:
       enabled: true
       leaseDuration: 15s
