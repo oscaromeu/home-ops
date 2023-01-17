@@ -47,9 +47,11 @@ spec:
               thresholds:
                 "cpu" : 15
                 "memory": 15
+                "pods": 5
               targetThresholds:
                 "cpu" : 50
                 "memory": 50
+                "pods": 50
         RemoveFailedPods:
           enabled: true
           params:
