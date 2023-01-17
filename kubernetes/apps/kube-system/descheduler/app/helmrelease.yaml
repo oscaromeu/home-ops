@@ -26,8 +26,9 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    kind: Deployment
+    kind: CronJob
     replicas: 1
+    schedule: "*/30 * * * *"
     leaderElection:
       enabled: true
       leaseDuration: 15s
@@ -38,35 +39,16 @@ spec:
       #resourceNamescape: default
     deschedulerPolicy:
       strategies:
-        RemoveDuplicates:
-          enabled: true
-        RemovePodsViolatingNodeTaints:
-          enabled: true
-        RemovePodsViolatingNodeAffinity:
-          enabled: true
-          params:
-            nodeAffinityType: ["requiredDuringSchedulingIgnoredDuringExecution"]
-        RemovePodsViolatingTopologySpreadConstraint:
-          enabled: true
-          params:
-            includeSoftConstraints: true
-        RemovePodsViolatingInterPodAntiAffinity:
-          enabled: true
-          params:
-            nodeFit: true
         LowNodeUtilization:
           enabled: true
           params:
             nodeResourceUtilizationThresholds:
               thresholds:
-                "cpu" : 20
-                "memory": 20
-                "pods": 20
+                "cpu" : 15
+                "memory": 15
               targetThresholds:
                 "cpu" : 50
                 "memory": 50
-                "pods": 50
-              numberOfNodes: 1
         RemoveFailedPods:
           enabled: true
           params:
