@@ -10,7 +10,7 @@ spec:
   version: 8.5.0
   nodeSets:
   - name: master
-    count: 3
+    count: 1
     config:
       node.roles: ["master","data_hot","data_content", "remote_cluster_client"]
       node.attr.type: "hot"
@@ -38,7 +38,7 @@ spec:
           co.elastic.logs/enabled: "true"
 
   - name: data
-    count: 2
+    count: 1
     config:
       node.roles: ["data_warm", "data_content","remote_cluster_client"]
       node.store.allow_mmap: false
