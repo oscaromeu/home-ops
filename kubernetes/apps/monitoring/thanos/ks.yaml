@@ -6,7 +6,7 @@ metadata:
   name: cluster-apps-thanos
   namespace: flux-system
   labels:
-    substitution.flux.home.arpa/enabled: "false"
+    substitution.flux.home.arpa/enabled: "true"
 spec:
   path: ./kubernetes/apps/monitoring/thanos/app
   prune: true
