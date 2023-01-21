@@ -67,9 +67,6 @@ spec:
           - name: node2
             devices:
               - name: "/dev/disk/blablabla"
-          - name: node3
-            devices:
-              - name: "/dev/disk/blablabla"
     cephBlockPools:
       - name: ceph-blockpool
         spec:
