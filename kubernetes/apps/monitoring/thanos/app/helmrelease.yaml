@@ -156,4 +156,4 @@ spec:
         bucket: 'home-ops-thanos-bucket'
   valuesFrom:
     - kind: Secret
-      name: thanos-objstore-secret
+      name: thanos-objstore-config
