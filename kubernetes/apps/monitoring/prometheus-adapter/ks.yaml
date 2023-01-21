@@ -6,7 +6,7 @@ metadata:
   name: cluster-apps-prometheus-adapter
   namespace: flux-system
   labels:
-    substitution.flux.home.arpa/enabled: "true"
+    substitution.flux.home.arpa/enabled: "false"
 spec:
   path: ./kubernetes/apps/monitoring/prometheus-adapter/app
   prune: true
