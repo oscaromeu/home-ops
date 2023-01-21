@@ -6,3 +6,4 @@ resources:
   - ./kube-prometheus-stack
   - ./grafana
   - ./prometheus-adapter/ks.yaml
+  #- ./thanos/ks.yaml
