@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-prometheus-adapter
+  name: cluster-apps-thanos
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "false"
@@ -16,7 +16,7 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
-      name: prometheus-adapter
+      name: thanos
       namespace: monitoring
   interval: 30m
   retryInterval: 1m
