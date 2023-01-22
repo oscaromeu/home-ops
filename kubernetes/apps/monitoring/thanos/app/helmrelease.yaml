@@ -150,7 +150,4 @@ spec:
         enabled: true
     serviceMonitor:
       enabled: true
-  valuesFrom:
-    - targetPath: objstoreConfig
-      kind: Secret
-      name: thanos-objstore-config
+    existingObjstoreSecret: thanos-object-store
