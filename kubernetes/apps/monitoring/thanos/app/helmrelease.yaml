@@ -48,7 +48,7 @@ spec:
       enabled: true
       replicaCount: 1
       podAntiAffinityPreset: hard
-      replicaLabel: ["__replica__"] # must match with kube-prometheus-stack value `.prometheus.prometheusSpec.replicaExternalLabelName`
+      #replicaLabel: ["__replica__"] # must match with kube-prometheus-stack value `.prometheus.prometheusSpec.replicaExternalLabelName`
       dnsDiscovery:
         sidecarsService: kube-prometheus-stack-thanos-discovery
         sidecarsNamespace: monitoring
@@ -93,7 +93,7 @@ spec:
           - hosts:
               - *host
       persistence:
-        enabled: true
+        enabled: false
         storageClass: local-path
         size: 20Gi
     storegateway:
@@ -111,7 +111,7 @@ spec:
           - hosts:
               - *host
       persistence:
-        enabled: true
+        enabled: false
         storageClass: local-path
         size: 20Gi
     ruler:
@@ -150,6 +150,6 @@ spec:
         enabled: true
     serviceMonitor:
       enabled: true
-    existingObjstoreSecret: thanos-object-store
-    podAnnotations:
-      secret.reloader.stakater.com/reload: "thanos-object-store"
+    #existingObjstoreSecret: thanos-object-store
+    #podAnnotations:
+    #  secret.reloader.stakater.com/reload: "thanos-object-store"
