@@ -31,8 +31,8 @@ spec:
       namespace: monitoring
     - name: ingress-nginx
       namespace: networking
-    - name: rook-ceph
-      namespace: rook-ceph
+#    - name: rook-ceph
+#      namespace: rook-ceph
 
   values:
     query:
