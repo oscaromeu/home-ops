@@ -27,6 +27,7 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    fullnameOverride: rook-ceph
     crds:
       enabled: true
     pspEnable: false

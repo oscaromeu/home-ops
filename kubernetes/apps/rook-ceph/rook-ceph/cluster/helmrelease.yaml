@@ -45,15 +45,7 @@ spec:
       storage:
         useAllNodes: false
         useAllDevices: false
-        config:
-          osdsPerDevice: "1"
         nodes:
           - name: mbmwk1
             devices:
-              - name: /dev/nvme0n1p2
-    cephBlockPools:
-      - name: ceph-blockpool
-        spec:
-          failureDomain: host
-          replicated:
-            size: 3
+              - name: nvme0n1p2
