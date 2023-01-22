@@ -35,13 +35,12 @@ spec:
     recreate: true
     force: true
     cleanupOnFail: true
-  uninstall:
-    keepHistory: false
   maxHistory: 3
   values:
     image:
-      repository: thanosio/thanos
-      tag: v0.29.0
+      registry: public.ecr.aws
+      repository: bitnami/thanos
+      tag: 0.29.0
     queryFrontend:
       enabled: false
     query:
