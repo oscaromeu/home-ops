@@ -15,16 +15,20 @@ spec:
         name: prometheus-community
         namespace: flux-system
       interval: 5m
+
   install:
     createNamespace: false
     remediation:
       retries: 5
+
   upgrade:
     crds: CreateReplace
     remediation:
       retries: 5
   # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
   values:
+
+    fullnameOverride: prometheus
 
     alertmanager:
       enabled: true
@@ -85,6 +89,12 @@ spec:
         limits:
           memory: 2048Mi
 
+      thanosService:
+        enabled: true
+
+      thanosServiceMonitor:
+        enabled: true
+
       prometheusSpec:
         #remoteWrite:
         #  - url: ""
@@ -96,10 +106,11 @@ spec:
         serviceMonitorSelector: {}
         serviceMonitorSelectorNilUsesHelmValues: false
         thanos:
-          image: quay.io/thanos/thanos:v0.28.1
-          # version: v0.22.0
+          image: quay.io/thanos/thanos:v0.30.1
+          # renovate: datasource=docker depName=quay.io/thanos/thanos
+          version: "v0.30.1"
           objectStorageConfig:
-            name: thanos-object-store
+            name: thanos-objstore
             key: objstore.yml
 
 
@@ -133,5 +144,4 @@ spec:
              targetLabel: kubernetes_node
 
 
-    thanosService:
-        enabled: true
+
