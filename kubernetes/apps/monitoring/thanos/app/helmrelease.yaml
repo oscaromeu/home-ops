@@ -120,10 +120,10 @@ spec:
       podAntiAffinityPreset: hard
       dnsDiscovery:
         enabled: true
-      alertmanagers: ["http://kube-prometheus-stack-alertmanager.monitoring:9093"]
+      #alertmanagers: ["http://kube-prometheus-stack-alertmanager.monitoring:9093"]
       # Breaks any metric that has an existing "cluster" label on a metric
       # clusterName: home # must match with kube-prometheus-stack value `.prometheus.prometheusSpec.externalLabels.cluster`
-      extraFlags: ["--web.prefix-header=X-Forwarded-Prefix"]
+      #extraFlags: ["--web.prefix-header=X-Forwarded-Prefix"]
       config: |-
         groups:
           - name: "PrometheusWatcher"
@@ -150,10 +150,7 @@ spec:
         enabled: true
     serviceMonitor:
       enabled: true
-    objstoreConfig:
-      type: GCS
-      config:
-        bucket: 'home-ops-thanos-bucket'
+    existingObjstoreSecret: thanos-objstore-config
   valuesFrom:
     - kind: Secret
       name: thanos-objstore-config
