@@ -30,6 +30,6 @@ spec:
     keepHistory: false
   values:
     prometheus:
-      url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local
+      url: http://prometheus-prometheus.monitoring.svc.cluster.local
       port: 9090
 
