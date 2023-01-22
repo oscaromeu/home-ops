@@ -151,3 +151,5 @@ spec:
     serviceMonitor:
       enabled: true
     existingObjstoreSecret: thanos-object-store
+    podAnnotations:
+      secret.reloader.stakater.com/reload: "thanos-object-store"
