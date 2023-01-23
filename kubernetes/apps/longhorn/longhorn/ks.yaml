@@ -8,7 +8,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "false"
 spec:
-  path: ./kubernetes/apps/monitoring/longhorn/longhorn/app
+  path: ./kubernetes/apps/longhorn/longhorn/app
   prune: true
   sourceRef:
     kind: GitRepository
