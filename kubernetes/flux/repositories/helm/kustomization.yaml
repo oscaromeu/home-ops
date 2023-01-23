@@ -20,3 +20,4 @@ resources:
   - ./timescale.yaml
   - ./descheduler.yaml
   - ./infracloudio.yaml
+  - ./longhorn.yaml
