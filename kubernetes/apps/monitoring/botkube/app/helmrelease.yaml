@@ -37,11 +37,7 @@ spec:
     serviceMonitor:
       enabled: true
     communications:
-      slack:
-        enabled: false
-        notiftype: short
-      discord:
-        enabled: true
+      existingSecretName: botkube-communication-secret
     config:
       resources:
         - name: v1/pods

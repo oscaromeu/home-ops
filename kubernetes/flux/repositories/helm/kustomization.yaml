@@ -19,3 +19,4 @@ resources:
   - ./pyroscope.yaml
   - ./timescale.yaml
   - ./descheduler.yaml
+  - ./infracloudio.yaml
