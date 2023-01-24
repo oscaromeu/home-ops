@@ -36,6 +36,16 @@ spec:
           stack-monitoring.elastic.co/type: es
         annotations:
           co.elastic.logs/enabled: "true"
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data-hot
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: longhorn
 
   - name: data
     count: 1
@@ -59,6 +69,16 @@ spec:
           stack-monitoring.elastic.co/type: es
         annotations:
           co.elastic.logs/enabled: "true"
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data-warm
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: longhorn
 ---
 apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
