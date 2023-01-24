@@ -23,6 +23,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: quote
+  namespace: default
   labels:
     app: quote
 spec:

@@ -26,6 +26,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: meme
+  namespace: default
   labels:
     app: meme
 spec:
