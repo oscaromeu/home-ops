@@ -143,7 +143,7 @@ spec:
   valuesFrom:
     - kind: Secret
       name: botkube
-      valuesKey: slack_token
+      valuesKey: slack_api_token
       targetPath: communications.slack.token
       optional: false
     - kind: Secret
