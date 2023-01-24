@@ -7,6 +7,6 @@ resources:
   - ./loki
   - ./filebeat
   - ./logstash
-  - ./elastic
+  #- ./elastic
   - ./elastic-exporter
 #  - ./flog
