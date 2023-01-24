@@ -7,4 +7,4 @@ resources:
   - ./grafana
   - ./prometheus-adapter/ks.yaml
   - ./thanos/ks.yaml
-  - ./botkube/ks.yaml
+  #- ./botkube/ks.yaml
