@@ -46,7 +46,6 @@ spec:
             ingress:
               backendServiceValid: false
               tlsSecretValid: false
-
           resources:
             - name: v1/pods
               namespaces:
