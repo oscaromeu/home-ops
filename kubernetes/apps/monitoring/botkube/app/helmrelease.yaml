@@ -113,6 +113,7 @@ spec:
             type: short
 
     settings:
+      clustername: 'home-ops'
       upgradeNotifier: false
 
     configWatcher:
@@ -140,11 +141,6 @@ spec:
     serviceAccount:
       create: true
   valuesFrom:
-    - kind: Secret
-      name: botkube
-      valuesKey: cluster_name
-      targetPath: config.settings.clustername
-      optional: false
     - kind: Secret
       name: botkube
       valuesKey: slack_token
