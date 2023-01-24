@@ -36,164 +36,122 @@ spec:
       pullPolicy: Always
     serviceMonitor:
       enabled: true
+    sources:
+      'k8s-events':
+        kubernetes:
+          recommendations:
+            pod:
+              noLatestImageTag: false
+              labelsSet: false
+            ingress:
+              backendServiceValid: false
+              tlsSecretValid: false
+
+          resources:
+            - name: v1/pods
+              namespaces:
+                include:
+                  - ".*"
+              events:
+                - create
+                - delete
+                - error
+            - name: v1/services
+              namespaces:
+                include:
+                  - ".*"
+              events:
+                - create
+                - delete
+                - error
+
+    executors:
+      'kubectl-read-only':
+        kubectl:
+          namespaces:
+            include:
+              - ".*"
+          enabled: true
+          commands:
+            verbs: ["describe", "get", "logs"]
+            resources: ["pods","services"]
+          defaultNamespace: default
+          restrictAccess: false
+      'kubectl-admin':
+        kubectl:
+          namespaces:
+            include:
+              - ".*"
+          enabled: true
+          commands:
+            verbs: ["label", "delete"]
+            resources: ["deployments", "pods"]
+          defaultNamespace: default
+          restrictAccess: false
+
     communications:
-      existingSecretName: botkube-communication-secret
-    config:
-      resources:
-        - name: v1/pods
-          namespaces:
-            include:
-              - all
-          events:
-            - create
-            - delete
-        - name: v1/services
-          namespaces:
-            include:
-              - all
-          events:
-            - create
-            - delete
-            - error
-        - name: apps/v1/deployments
-          namespaces:
-            include:
-              - all
-          events:
-            - create
-            - update
-            - delete
-            - error
-          updateSetting:
-            includeDiff: true
-            fields:
-              - spec.template.spec.containers[*].image
-        - name: apps/v1/statefulsets
-          namespaces:
-            include:
-              - all
-          events:
-            - create
-            - update
-            - delete
-            - error
-          updateSetting:
-            includeDiff: true
-            fields:
-              - spec.template.spec.containers[*].image
-        - name: networking.k8s.io/v1beta1/ingresses
-          namespaces:
-            include:
-              - all
-          events:
-            - create
-            - delete
-            - error
-        - name: v1/nodes
-          namespaces:
-            include:
-              - all
-          events:
-            - create
-            - delete
-            - error
-        - name: v1/namespaces
-          namespaces:
-            include:
-              - all
-          events:
-            - create
-            - delete
-            - error
-        - name: v1/persistentvolumes
-          namespaces:
-            include:
-              - all
-          events:
-            - create
-            - delete
-            - error
-        - name: v1/persistentvolumeclaims
-          namespaces:
-            include:
-              - all
-          events:
-            - create
-            - delete
-            # - error
-        # - name: v1/secrets
-        #   namespaces:
-        #     include:
-        #       - all
-        #   events:
-        #     - create
-        #     - delete
-        #     - error
-        # - name: v1/configmaps
-        #   namespaces:
-        #     include:
-        #       - all
-        #   events:
-        #     - delete
-        #     - error
-        - name: apps/v1/daemonsets
-          namespaces:
-            include:
-              - all
-          events:
-            - create
-            - delete
-            - error
-            - update
-          updateSetting:
-            includeDiff: true
-            fields:
-              - spec.template.spec.containers[*].image
-        - name: batch/v1/jobs
-          namespaces:
-            include:
-              - all
-            ignore:
-              - kube-system
-          events:
-            - create
-            - update
-              - delete
-              - error
-          updateSetting:
-            includeDiff: true
-            fields:
-              - spec.template.spec.containers[*].image
-              - status.conditions[*].type
-        - name: rbac.authorization.k8s.io/v1/roles
-          namespaces:
-            include:
-              - all
-          events:
-            - create
-            - delete
-            - error
-        - name: rbac.authorization.k8s.io/v1/rolebindings
-          namespaces:
-            include:
-              - all
-          events:
-            - create
-            - delete
-            - error
-        - name: rbac.authorization.k8s.io/v1/clusterroles
-          namespaces:
-            include:
-              - all
-          events:
-            - create
-            - delete
-            - error
-        - name: rbac.authorization.k8s.io/v1/clusterrolebindings
-          namespaces:
-            include:
-              - all
-          events:
-            - create
-            - delete
-            - error
+      'default-group':
+        slack:
+          enabled: true
+          channels:
+            'team':
+              name: 'monitoring'
+              bindings:
+                executors:
+                  - kubectl-read-only
+                sources:
+                  - k8s-events
+            'admin':
+              name: 'admin'
+              bindings:
+                executors:
+                  - kubectl-read-only
+                  - kubectl-admin
+
+          #token: 'SLACK_API_TOKEN'
+          notification:
+            type: short
+
+    settings:
+      upgradeNotifier: false
+
+    configWatcher:
+      enabled: false
+
+    # -- Role Based Access for Botkube Pod.
+    # [Ref doc](https://kubernetes.io/docs/admin/authorization/rbac/).
+    rbac:
+      create: true
+      rules:
+        - apiGroups: ["*"]
+          resources: ["*"]
+          verbs: ["get", "watch", "list"]
+
+        # to be able to run `kubectl label pod`
+        - apiGroups: [""]
+          resources: ["pods"]
+          verbs: ["patch"]
+
+        # to be able to run `kubectl delete pod`
+        - apiGroups: [""]
+          resources: ["pods"]
+          verbs: ["delete"]
+
+    serviceAccount:
+      create: true
+  valuesFrom:
+    - kind: Secret
+      name: botkube
+      valuesKey: cluster_name
+      targetPath: config.settings.clustername
+      optional: false
+    - kind: Secret
+      name: botkube
+      valuesKey: slack_token
+      targetPath: communications.slack.token
+      optional: false
+    - kind: Secret
+      name: botkube
+      valuesKey: slack_channel
+      targetPath: communications.slack.channel
+      optional: false
