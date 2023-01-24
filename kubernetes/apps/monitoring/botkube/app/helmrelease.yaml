@@ -91,26 +91,20 @@ spec:
 
     communications:
       'default-group':
-        slack:
-          enabled: true
+        socketSlack:
           channels:
-            'team':
-              name: 'monitoring'
+            default:
               bindings:
                 executors:
-                  - kubectl-read-only
+                - kubectl-read-only
                 sources:
-                  - k8s-events
-            'admin':
-              name: 'admin'
-              bindings:
-                executors:
-                  - kubectl-read-only
-                  - kubectl-admin
-
-          #token: 'SLACK_API_TOKEN'
+                - k8s-err-events
+                - k8s-recommendation-events
+              name: monitoring
+          enabled: true
           notification:
             type: short
+
 
     settings:
       clustername: 'home-ops'
@@ -143,11 +137,12 @@ spec:
   valuesFrom:
     - kind: Secret
       name: botkube
-      valuesKey: slack_api_token
-      targetPath: communications.slack.token
+      valuesKey: SLACK_API_APP_TOKEN
+      targetPath: communications.default-group.socketSlack.appToken
       optional: false
     - kind: Secret
       name: botkube
-      valuesKey: slack_channel
-      targetPath: communications.slack.channel
+      valuesKey: SLACK_API_BOT_TOKEN
+      targetPath: communications.default-group.socketSlack.botToken
       optional: false
+
