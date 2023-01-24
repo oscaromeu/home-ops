@@ -7,7 +7,8 @@ metadata:
   labels:
     app: elk
 spec:
-  version: 8.5.0
+  version: 8.6.0
+  volumeClaimDeletePolicy: DeleteOnScaledownOnly
   nodeSets:
   - name: master
     count: 1
@@ -38,7 +39,7 @@ spec:
           co.elastic.logs/enabled: "true"
     volumeClaimTemplates:
     - metadata:
-        name: elasticsearch-data-hot
+        name: elasticsearch-data # this name is required for the volume to be mounted
       spec:
         accessModes:
         - ReadWriteOnce
@@ -71,7 +72,7 @@ spec:
           co.elastic.logs/enabled: "true"
     volumeClaimTemplates:
     - metadata:
-        name: elasticsearch-data-warm
+        name: elasticsearch-data # this name is required for the volume to be mounteds
       spec:
         accessModes:
         - ReadWriteOnce
