@@ -21,3 +21,4 @@ resources:
   - ./descheduler.yaml
   - ./infracloudio.yaml
   - ./longhorn.yaml
+  - ./fairwinds.yaml
