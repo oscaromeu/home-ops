@@ -139,12 +139,12 @@ spec:
       create: true
   valuesFrom:
     - kind: Secret
-      name: botkube
+      name: botkube-communication-secret
       valuesKey: SLACK_API_APP_TOKEN
       targetPath: communications.default-group.socketSlack.appToken
       optional: false
     - kind: Secret
-      name: botkube
+      name: botkube-communication-secret
       valuesKey: SLACK_API_BOT_TOKEN
       targetPath: communications.default-group.socketSlack.botToken
       optional: false
