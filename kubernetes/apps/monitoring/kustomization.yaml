@@ -8,4 +8,6 @@ resources:
   - ./prometheus-adapter/ks.yaml
   - ./thanos/ks.yaml
   - ./botkube/ks.yaml
+  - º./vpa/ks.yaml
   - ./goldilocks/ks.yaml
+

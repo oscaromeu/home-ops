@@ -110,9 +110,6 @@ spec:
             type: short
 
 
-
-
-
     configWatcher:
       enabled: false
 
