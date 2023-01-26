@@ -151,16 +151,3 @@ spec:
                - __meta_kubernetes_pod_node_name
              targetLabel: kubernetes_node
 
-
-
-  valuesFrom:
-    - kind: Secret
-      name: grafana-cloud
-      valuesKey: GRAFANA_CLOUD_USERNAME
-      targetPath: prometheus.prometheusSpec.remoteWrite[0].basicAuth.username
-      optional: false
-    - kind: Secret
-      name: grafana-cloud
-      valuesKey: GRAFANA_CLOUD_PASSWORD
-      targetPath: prometheus.prometheusSpec.remoteWrite[0].basicAuth.password
-      optional: false
