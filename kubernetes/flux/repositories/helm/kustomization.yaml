@@ -19,6 +19,6 @@ resources:
   - ./pyroscope.yaml
   - ./timescale.yaml
   - ./descheduler.yaml
-  - ./infracloudio.yaml
+  - ./botkube.yaml
   - ./longhorn.yaml
   - ./fairwinds.yaml
