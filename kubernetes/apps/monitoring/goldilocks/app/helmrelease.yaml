@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -33,7 +32,7 @@ spec:
           cpu: 15m
           memory: 145M
         limits:
-          memory: 174M
+          memory: 800M
     dashboard:
       replicaCount: 1
       ingress:
@@ -54,4 +53,4 @@ spec:
           cpu: 15m
           memory: 64M
         limits:
-          memory: 64M
+          memory: 500M
