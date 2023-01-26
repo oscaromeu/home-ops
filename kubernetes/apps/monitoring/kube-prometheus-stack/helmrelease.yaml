@@ -96,8 +96,8 @@ spec:
         enabled: true
 
       prometheusSpec:
-        #remoteWrite:
-        #  - url: ""
+        remoteWrite:
+          - url: "https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push"
 
         ruleNamespaceSelector: {}
         podMonitorNamespaceSelector: {}
@@ -145,3 +145,14 @@ spec:
 
 
 
+  valuesFrom:
+    - kind: Secret
+      name: grafana-cloud
+      valuesKey: GRAFANA_CLOUD_USERNAME
+      targetPath: prometheus.prometheusSpec.remoteWrite[0].basicAuth.username
+      optional: false
+    - kind: Secret
+      name: grafana-cloud
+      valuesKey: GRAFANA_CLOUD_PASSWORD
+      targetPath: prometheus.prometheusSpec.remoteWrite[0].basicAuth.password
+      optional: false
