@@ -150,10 +150,10 @@ spec:
     - kind: Secret
       name: grafana-cloud
       valuesKey: GRAFANA_CLOUD_USERNAME
-      targetPath: prometheus.prometheusSpec.remoteWrite[0].basicAuth.username.key
+      targetPath: prometheus.prometheusSpec.remoteWrite[0].basicAuth.username
       optional: false
     - kind: Secret
       name: grafana-cloud
       valuesKey: GRAFANA_CLOUD_PASSWORD
-      targetPath: prometheus.prometheusSpec.remoteWrite[0].basicAuth.password.key
+      targetPath: prometheus.prometheusSpec.remoteWrite[0].basicAuth.password
       optional: false
