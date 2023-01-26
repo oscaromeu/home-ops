@@ -96,6 +96,7 @@ spec:
         enabled: true
 
       prometheusSpec:
+        scrapeInterval: 60s
         remoteWrite:
           - url: "https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push"
             basicAuth:
