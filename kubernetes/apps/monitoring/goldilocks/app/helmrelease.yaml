@@ -33,7 +33,13 @@ spec:
           memory: 145M
         limits:
           memory: 800M
+
     dashboard:
+      rbac:
+        create: true
+      serviceAccount:
+        create: true
+        name: goldilocks-dashboard-sa
       replicaCount: 1
       ingress:
         enabled: true
