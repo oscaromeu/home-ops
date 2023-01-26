@@ -98,6 +98,13 @@ spec:
       prometheusSpec:
         remoteWrite:
           - url: "https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push"
+            basicAuth:
+              username:
+                name: grafana-cloud
+                key: username
+              password:
+                name: grafana-cloud
+                key: password
 
 
         ruleNamespaceSelector: {}
