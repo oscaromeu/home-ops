@@ -42,7 +42,7 @@ spec:
         annotations:
           hajimari.io/icon: mdi:align-vertical-top
         hosts:
-          - host: &host goldilocks.defbu.io
+          - host: &host goldilocks.devfu.io
             paths:
               - path: /
                 type: Prefix
