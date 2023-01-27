@@ -1,0 +1,29 @@
+---
+- hosts:
+    - master
+    - worker
+  become: true
+  gather_facts: true
+  any_errors_fatal: true
+  pre_tasks:
+    - name: Pausing for 5 seconds...
+      ansible.builtin.pause:
+        seconds: 5
+  tasks:
+
+    - name: Stop k3s service master node
+      service:
+        name: k3s.service
+        state: stopped
+      when:
+        - k3s_control_node
+
+    - name: Stop k3s service worker nodes
+      service:
+        name: k3s-node.service
+        state: stopped
+      when:
+        - not k3s_control_node
+
+    - name: Shutdown nodes
+      command: "shutdown -h now"
