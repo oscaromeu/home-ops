@@ -1,17 +1,32 @@
-namespace: monitoring
-
-generatorOptions:
-  labels:
-    grafana_dashboard: flux
-  disableNameSuffixHash: true
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: flux-system
 
 configMapGenerator:
-  - name: cluster
+
+  - name: flux-cluster
     files:
       - cluster.json
-  - name: control-plane
+    options:
+      labels:
+        grafana_dashboard: flux
+      disableNameSuffixHash: true
+
+  - name: flux-control-plane
     files:
       - control-plane.json
-  - name: logs
+    options:
+      labels:
+        grafana_dashboard: flux
+      disableNameSuffixHash: true
+
+  - name: flux-logs
     files:
       - logs.json
+    options:
+      labels:
+        grafana_dashboard: flux
+      disableNameSuffixHash: true
+
+
+

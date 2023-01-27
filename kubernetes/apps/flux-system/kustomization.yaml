@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./addons/ks.yaml
-  - ./dashboards
   - ./weave-gitops/ks.yaml
+  - ./dashboards
+  - ./monitoring
