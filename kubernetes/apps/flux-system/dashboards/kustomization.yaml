@@ -1,0 +1,17 @@
+namespace: monitoring
+
+generatorOptions:
+  labels:
+    grafana_dashboard: flux
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: cluster
+    files:
+      - cluster.json
+  - name: control-plane
+    files:
+      - control-plane.json
+  - name: logs
+    files:
+      - logs.json
