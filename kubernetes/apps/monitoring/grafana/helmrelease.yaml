@@ -22,6 +22,7 @@ spec:
     remediation:
       retries: 3
   values:
+
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -31,10 +32,12 @@ spec:
             access: proxy
             url: http://prometheus-prometheus.monitoring.svc.cluster.local:9090
             isDefault: true
+
     sidecar:
       dashboards:
         enabled: true
         searchNamespace: ALL
+
     plugins:
       - digrich-bubblechart-panel
       - grafana-clock-panel
@@ -43,10 +46,13 @@ spec:
       - grafana-polystat-panel
       - pyroscope-panel
       - flant-statusmap-panel
+
     serviceMonitor:
       enabled: true
+
     rbac:
       pspEnabled: false
+
     ingress:
       enabled: true
       ingressClassName: nginx
@@ -62,11 +68,14 @@ spec:
       tls:
         - hosts:
             - grafana.devfu.io
+
     persistence:
-      enabled: false
+      enabled: true
+      storageClassName: longhorn
       accessModes:
         - ReadWriteOnce
       size: 5Gi
       # existingClaim: grafana
+
       extraPvcLabels:
         snapshot.home.arpa/enabled: "true"
