@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./redis
-  - ./loki-legacy
+  #- ./loki-legacy
   - ./filebeat
   - ./logstash
   - ./elastic
