@@ -9,6 +9,7 @@ spec:
   interval: 15m
   chart:
     spec:
+      # renovate: registryUrl=https://helm.vector.dev
       chart: vector
       version: 0.19.0
       sourceRef:
@@ -37,17 +38,29 @@ spec:
       limits:
         memory: 256Mi
 
-    persistence:
-      config:
-        enabled: true
-        type: configMap
-        name: vector-aggregator-configmap
-        subPath: vector.yaml
+    customConfig:
+      data_dir: /vector-data-dir
+
+    extraVolumes:
+      - name: vector-config
+        configMap:
+          name: vector-aggregator-configmap
+    extraVolumeMounts:
+      - name: vector-config
         mountPath: /etc/vector/vector.yaml
+        subPath: vector.yaml
         readOnly: true
-      data:
-        enabled: true
-        type: emptyDir
-        mountPath: /vector-data-dir
+    #  data:
+    #    enabled: true
+    #    type: emptyDir
+    #    mountPath: /vector-data-dir
+
+    persistence:
+      enabled: true
+      accessModes:
+        - ReadWriteOnce
+      size: 1Gi
+      storageClass: longhorn
+
     podMonitor:
       enabled: true
