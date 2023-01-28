@@ -10,5 +10,5 @@ resources:
   - ./botkube/ks.yaml
   - ./vpa/ks.yaml
   - ./goldilocks/ks.yaml
-  - ./vector.yaml
+  - ./vector/ks.yaml
 
