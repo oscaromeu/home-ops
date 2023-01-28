@@ -29,8 +29,17 @@ spec:
       limits:
         memory: 256Mi
 
-    #customConfig:
-    #  data_dir: /vector-data-dir
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: vector-aggregator
+
+    customConfig:
+      data_dir: /vector-data-dir
+
+    api:
+      enabled: false
+
+    service:
+      enabled: true
 
     extraVolumes:
       - name: vector-config-volume
