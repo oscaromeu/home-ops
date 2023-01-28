@@ -28,7 +28,7 @@ spec:
     keepHistory: false
   values:
 
-    args: ["--config", "/etc/vector/*.yaml"]
+    args: ["--config", "/etc/vector/vector.yaml"]
 
     resources:
       requests:
