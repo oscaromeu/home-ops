@@ -29,8 +29,8 @@ spec:
       limits:
         memory: 256Mi
 
-    customConfig:
-      data_dir: /vector-data-dir
+    #customConfig:
+    #  data_dir: /vector-data-dir
 
     extraVolumes:
       - name: vector-config-volume
