@@ -1,7 +1,2 @@
 -Xms800m
 -Xmx800m
--XX:CMSInitiatingOccupancyFraction=75
--XX:+UseCMSInitiatingOccupancyOnly
--XX:+DisableExplicitGC
--Djava.awt.headless=true
--Dfile.encoding=UTF-8
