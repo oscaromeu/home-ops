@@ -128,12 +128,12 @@ spec:
     #    mountPath: /vector-data-dir
 
 
-    persistence:
-      enabled: true
-      accessModes:
-        - ReadWriteOnce
-      size: 1Gi
-      storageClass: longhorn
+    #persistence:
+    #  enabled: true
+    #  accessModes:
+    #    - ReadWriteOnce
+    #  size: 1Gi
+    #  storageClass: longhorn
 
     podMonitor:
       enabled: true
