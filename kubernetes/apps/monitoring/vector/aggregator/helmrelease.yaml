@@ -42,14 +42,13 @@ spec:
       data_dir: /vector-data-dir
 
     extraVolumes:
-      - name: vector-config
+      - name: vector-config-volume
         configMap:
           name: vector-aggregator-configmap
     extraVolumeMounts:
-      - name: vector-config
-        mountPath: /etc/vector/vector.yaml
-        subPath: vector.yaml
-        readOnly: true
+      - name: vector-config-volume
+        mountPath: "/etc/vector/vector.yaml"
+        subPath: "vector.yaml"
     #  data:
     #    enabled: true
     #    type: emptyDir
