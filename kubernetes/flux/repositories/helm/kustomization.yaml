@@ -22,3 +22,4 @@ resources:
   - ./botkube.yaml
   - ./longhorn.yaml
   - ./fairwinds.yaml
+  - ./vector.yaml

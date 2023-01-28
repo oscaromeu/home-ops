@@ -9,11 +9,11 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: app-template
-      version: 1.2.1
+      chart: vector
+      version: 0.19.0
       sourceRef:
         kind: HelmRepository
-        name: bjw-s
+        name: vector
         namespace: flux-system
   maxHistory: 3
   install:
@@ -27,34 +27,16 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    controller:
-      replicas: 3
-      strategy: RollingUpdate
-      annotations:
-        reloader.stakater.com/auto: "true"
-    image:
-      # https://github.com/vectordotdev/vector/issues/6715
-      repository: ghcr.io/onedr0p/vector
-      tag: 0.27.0-debian
-    args: ["--config", "/etc/vector/vector.yaml"]
-    service:
-      main:
-        type: LoadBalancer
-        externalIPs: ["${SVC_SYSLOG_ADDR}"]
-        externalTrafficPolicy: Local
-        ports:
-          http:
-            port: 8686
-          journald-logs:
-            enabled: true
-            port: 6000
-          kubernetes-logs:
-            enabled: true
-            port: 6010
-          opnsense-logs:
-            enabled: true
-            port: 5140
-            protocol: UDP
+
+    args: ["--config", "/etc/vector/*.yaml"]
+
+    resources:
+      requests:
+        cpu: 200m
+        memory: 256Mi
+      limits:
+        memory: 256Mi
+
     persistence:
       config:
         enabled: true
@@ -67,14 +49,5 @@ spec:
         enabled: true
         type: emptyDir
         mountPath: /vector-data-dir
-      geoip:
-        enabled: true
-        type: emptyDir
-        mountPath: /usr/share/GeoIP
-    topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: DoNotSchedule
-        labelSelector:
-          matchLabels:
-            app.kubernetes.io/name: *app
+    podMonitor:
+      enabled: true

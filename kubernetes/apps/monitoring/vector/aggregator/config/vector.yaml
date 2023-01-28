@@ -4,16 +4,7 @@ api:
   enabled: true
   address: 0.0.0.0:8686
 
-enrichment_tables:
-  geoip_table:
-    type: geoip
-    path: /usr/share/GeoIP/GeoLite2-City.mmdb
-
 sources:
-  journald_source:
-    type: vector
-    version: "2"
-    address: 0.0.0.0:6000
   kubernetes_source:
     type: vector
     version: "2"
@@ -29,20 +20,6 @@ transforms:
       .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
 
 sinks:
-  journald:
-    type: loki
-    batch:
-      max_bytes: 2049000
-    encoding:
-      codec: json
-    endpoint: http://loki-gateway.monitoring.svc.cluster.local:80
-    inputs:
-      - journald_source
-    labels:
-      hostname: '{{ host }}'
-    out_of_order_action: accept
-    remove_label_fields: true
-    remove_timestamp: true
   kubernetes:
     type: loki
     batch:
