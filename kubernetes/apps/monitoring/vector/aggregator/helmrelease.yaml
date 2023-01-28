@@ -22,6 +22,30 @@ spec:
 
     args: ["--config", "/etc/vector/vector.yaml"]
 
+    dataDir: /vector-data-dir
+    existingConfigMaps:
+      - vector-aggregator
+
+    containerPorts:
+      #- name: datadog-agent
+      #  containerPort: 8282
+      #  protocol: TCP
+      #- name: logstash
+      #  containerPort: 5044
+      #  protocol: TCP
+      #- name: statsd
+      #  containerPort: 8125
+      #  protocol: TCP
+      #- name: syslog
+      #  containerPort: 9000
+      #  protocol: TCP
+      - name: vector
+        containerPort: 6000
+        protocol: TCP
+      - name: prom-exporter
+        containerPort: 9090
+        protocol: TCP
+
     resources:
       requests:
         cpu: 200m
@@ -32,27 +56,77 @@ spec:
     podAnnotations:
       configmap.reloader.stakater.com/reload: vector-aggregator
 
-    customConfig:
-      data_dir: /vector-data-dir
-
-    api:
-      enabled: false
-
     service:
       enabled: true
+      ports:
+        #- name: datadog-agent
+        #  port: 8282
+        #  protocol: TCP
+        #- name: fluent
+        #  port: 24224
+        #  protocol: TCP
+        #- name: logstash
+        #  port: 5044
+        #  protocol: TCP
+        #- name: splunk-hec
+        #  port: 8080
+        #  protocol: TCP
+        #- name: statsd
+        #  port: 8125
+        #  protocol: TCP
+        #- name: syslog
+        #  port: 9000
+        #  protocol: TCP
+        - name: vector
+          port: 6000
+          protocol: TCP
+        - name: prom-exporter
+          port: 9090
+          protocol: TCP
 
-    extraVolumes:
-      - name: vector-config-volume
-        configMap:
-          name: vector-aggregator-configmap
-    extraVolumeMounts:
-      - name: vector-config-volume
-        mountPath: "/etc/vector/vector.yaml"
-        subPath: "vector.yaml"
-    #  data:
-    #    enabled: true
-    #    type: emptyDir
+    serviceHeadless:
+      enabled: true
+      ports:
+        #- name: datadog-agent
+        #  port: 8282
+        #  protocol: TCP
+        #- name: fluent
+        #  port: 24224
+        #  protocol: TCP
+        #- name: logstash
+        #  port: 5044
+        #  protocol: TCP
+        #- name: splunk-hec
+        #  port: 8080
+        #  protocol: TCP
+        #- name: statsd
+        #  port: 8125
+        #  protocol: TCP
+        #- name: syslog
+        #  port: 9000
+        #  protocol: TCP
+        - name: vector
+          port: 6000
+          protocol: TCP
+        - name: prom-exporter
+          port: 9090
+          protocol: TCP
+
+
+    #extraVolumes:
+    #  - name: config
+    #    configMap:
+    #      name: vector-aggregator
+    #  - name: data
+    #    emptyDir: {}
+
+    #extraVolumeMounts:
+    #  - name: vector-config-volume
+    #    mountPath: "/etc/vector/"
+    #    readOnly: true
+    #  - name: data
     #    mountPath: /vector-data-dir
+
 
     persistence:
       enabled: true
