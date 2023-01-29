@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: loki
-      version: 4.4.0
+      version: 4.4.2
       sourceRef:
         kind: HelmRepository
         name: grafana
@@ -43,26 +43,98 @@ spec:
         cluster_name: loki-logs
 
     loki:
-      auth_enabled: false
-      schemaConfig:
-        configs:
-        - from: "2022-01-11"
-          index:
-            period: 24h
-            prefix: loki_index_
-          object_store: gcs
-          schema: v12
-          store: boltdb-shipper
-      commonConfig:
-        path_prefix: /var/loki
-        replication_factor: 3
+      structuredConfig:
+        auth_enabled: false
+        server:
+          log_level: debug
+          http_listen_port: 3100
+          grpc_listen_port: 9095
+        memberlist:
+          join_members: ["loki-memberlist"]
+        limits_config:
+          retention_period: 14d
+          enforce_metric_name: false
+          reject_old_samples: true
+          reject_old_samples_max_age: 168h
+          max_cache_freshness_per_query: 10m
+          split_queries_by_interval: 15m
+          ingestion_rate_mb: 8
+          ingestion_burst_size_mb: 16
+          shard_streams:
+            enabled: true
+        schema_config:
+          configs:
+            - from: "2021-08-01"
+              store: boltdb-shipper
+              object_store: s3
+              schema: v11
+              index:
+                prefix: loki_index_
+                period: 24h
+        common:
+          path_prefix: /var/loki
+          replication_factor: 3
+          storage:
+            type: gcs
+            bucket_names:
+              chunks: home-ops-loki-bucket
+              ruler: home-ops-loki-bucket
+              admin: home-ops-loki-bucket
+          ring:
+            kvstore:
+              store: memberlist
+        ruler:
+          enable_api: true
+          enable_alertmanager_v2: true
+          alertmanager_url: http://kube-prometheus-stack-alertmanager:9093
+          storage:
+            type: local
+            local:
+              directory: /rules
+          rule_path: /tmp/scratch
+          ring:
+            kvstore:
+              store: memberlist
+        distributor:
+          ring:
+            kvstore:
+              store: memberlist
+        compactor:
+          working_directory: /var/loki/boltdb-shipper-compactor
+          shared_store: s3
+          compaction_interval: 10m
+          retention_enabled: true
+          retention_delete_delay: 2h
+          retention_delete_worker_count: 150
+        ingester:
+          max_chunk_age: 1h
+          lifecycler:
+            ring:
+              kvstore:
+                store: memberlist
+        analytics:
+          reporting_enabled: false
 
-      storage:
-        type: gcs
-        bucketNames:
-          chunks: home-ops-loki-bucket
-          ruler: home-ops-loki-bucket
-          admin: home-ops-loki-bucket
+      #auth_enabled: false
+      #schemaConfig:
+      #  configs:
+      #  - from: "2022-01-11"
+      #    index:
+      #      period: 24h
+      #      prefix: loki_index_
+      #    object_store: gcs
+      #    schema: v12
+      #    store: boltdb-shipper
+      #commonConfig:
+      #  path_prefix: /var/loki
+      #  replication_factor: 3
+
+      #storage:
+      #  type: gcs
+      #  bucketNames:
+      #    chunks: home-ops-loki-bucket
+      #    ruler: home-ops-loki-bucket
+      #    admin: home-ops-loki-bucket
 
     minio:
       enabled: false
