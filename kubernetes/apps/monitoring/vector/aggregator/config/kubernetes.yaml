@@ -7,7 +7,7 @@ api:
 sources:
   kubernetes_source:
     type: redis
-    url: redis-master.logging.svc.cluster.local:6379
+    url: "redis-master.logging.svc.cluster.local:6379"
     key:  k3s_prod
 
 
