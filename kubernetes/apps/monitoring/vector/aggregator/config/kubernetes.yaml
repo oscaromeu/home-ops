@@ -4,8 +4,8 @@
 sources:
   kubernetes_source:
     type: redis
-    url: "redis-master.logging.svc.cluster.local:6379"
-    key:  k3s_prod
+    url: redis://redis-master.logging.svc.cluster.local:6379/0
+    key: k3s_prod
 
 
 sinks:
