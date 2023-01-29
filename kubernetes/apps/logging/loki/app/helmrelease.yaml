@@ -44,6 +44,15 @@ spec:
 
     loki:
       auth_enabled: false
+      schemaConfig:
+        configs:
+          - from: 2020-10-24
+            store: boltdb-shipper
+            object_store: gcs
+            schema: v11
+            index:
+              prefix: index_
+              period: 24h
 
       commonConfig:
         path_prefix: /var/loki
