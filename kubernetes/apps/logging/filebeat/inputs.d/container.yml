@@ -1,7 +1,7 @@
 - type: container
   paths:
     - /var/log/containers/event*.log
-
+    - /var/log/containers/flog*.log
   exclude_files: ['\.gz$']
 #  json.message_key: log
 #  json.keys_under_root: true
