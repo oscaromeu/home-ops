@@ -60,6 +60,10 @@ spec:
       enabled: false
 
     write:
+      persistence:
+        enabled: true
+        size: 10Gi
+        storageClass: longhorn
 
       extraEnv:
         - name: GOOGLE_APPLICATION_CREDENTIALS
