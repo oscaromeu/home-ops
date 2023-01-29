@@ -60,6 +60,7 @@ spec:
       enabled: false
 
     write:
+      replicas: 1
       persistence:
         enabled: true
         size: 10Gi
@@ -80,6 +81,7 @@ spec:
               path: gcp_service_account.json
 
     read:
+      replicas: 1
       extraEnv:
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: "/etc/loki_secrets/gcp_service_account.json"
@@ -95,7 +97,7 @@ spec:
               path: gcp_service_account.json
 
     gateway:
-      replicas: 3
+      replicas: 1
 
       ingress:
         enabled: true
