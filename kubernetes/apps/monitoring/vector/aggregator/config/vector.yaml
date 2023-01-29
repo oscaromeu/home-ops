@@ -1,4 +1,5 @@
 ---
+data_dir: /vector-data-dir
 api:
   enabled: true
   address: 0.0.0.0:8686
