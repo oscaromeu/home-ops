@@ -30,7 +30,9 @@ spec:
 
   values:
 
-    #args: ["--config-dir", "/etc/vector"]
+    args:
+      - --config-dir
+      - "/etc/vector"
 
     dataDir: /vector-data-dir
     existingConfigMaps:
