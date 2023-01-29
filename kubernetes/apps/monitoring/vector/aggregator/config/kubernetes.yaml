@@ -1,8 +1,5 @@
 ---
-data_dir:
-api:
-  enabled: true
-  address: 0.0.0.0:8686
+
 
 sources:
   kubernetes_source:
