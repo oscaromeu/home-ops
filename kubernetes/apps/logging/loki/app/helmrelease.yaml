@@ -68,6 +68,25 @@ spec:
     minio:
       enabled: false
 
+    backend:
+      replicas: 3
+      persistence:
+        storageClass: longhorn
+        size: 10Gi
+      extraEnv:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: "/etc/loki_secrets/gcp_service_account.json"
+      extraVolumeMounts:
+        - name: loki-secrets
+          mountPath: "/etc/loki_secrets"
+      extraVolumes:
+        - name: loki-secrets
+          secret:
+            secretName: loki-secrets
+            items:
+            - key: gcp_service_account.json
+              path: gcp_service_account.json
+
     write:
       replicas: 1
       persistence:
