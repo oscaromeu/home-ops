@@ -19,6 +19,9 @@ sinks:
     type: loki
     batch:
       max_bytes: 2049000
+    labels:
+      app: vector
+      environment: production
     encoding:
       codec: json
     endpoint: http://loki.logging.svc.cluster.local:3100
