@@ -34,7 +34,9 @@ spec:
 
     dataDir: /vector-data-dir
     existingConfigMaps:
-      - vector-aggregator
+      # Config
+      - vector-default-config
+      # Pipelines
       - kubernetes-pipeline
 
     containerPorts:
