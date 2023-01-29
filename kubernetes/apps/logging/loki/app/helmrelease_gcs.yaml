@@ -26,8 +26,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    global:
-      clusterDomain: devfu.io
 
     loki:
       auth_enabled: false
