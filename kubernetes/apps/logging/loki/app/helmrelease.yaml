@@ -82,6 +82,10 @@ spec:
 
     read:
       replicas: 1
+      persistence:
+        enabled: true
+        size: 10Gi
+        storageClass: longhorn
       extraEnv:
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: "/etc/loki_secrets/gcp_service_account.json"
