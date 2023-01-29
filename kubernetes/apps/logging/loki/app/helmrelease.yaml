@@ -69,7 +69,7 @@ spec:
       enabled: false
 
     backend:
-      replicas: 3
+      replicas: 1
       persistence:
         storageClass: longhorn
         size: 10Gi
