@@ -7,9 +7,9 @@ resources:
   - ./helmrelease.yaml
 
 configMapGenerator:
-  - name: vector-default-config
+  - name: vector-aggregator
     files:
-      - default.yaml=./config/default.yaml
+      - vector.yaml=./config/vector.yaml
 
   - name: kubernetes-pipeline
     files:
