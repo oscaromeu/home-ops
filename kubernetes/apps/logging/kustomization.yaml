@@ -9,5 +9,5 @@ resources:
   - ./logstash
   - ./elastic
   - ./elastic-exporter
-  #- ./loki/ks.yaml
+  - ./loki/ks.yaml
 #  - ./flog
