@@ -30,7 +30,7 @@ spec:
 
   values:
 
-    args: ["--config", "/etc/vector/vector.yaml"]
+    args: ["--config", "/etc/vector/*.yaml"]
 
     dataDir: /vector-data-dir
     existingConfigMaps:
