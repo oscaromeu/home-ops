@@ -2,14 +2,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-kubernetes-event-exporter
+  name: cluster-apps-kubernetes-events-exporter
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
     - name: cluster-apps-vpa
-  path: ./kubernetes/apps/monitoring/kubernetes-event-exporter/app
+  path: ./kubernetes/apps/monitoring/kubernetes-events-exporter/app
   prune: true
   sourceRef:
     kind: GitRepository
