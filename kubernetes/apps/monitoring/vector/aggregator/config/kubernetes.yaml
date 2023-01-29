@@ -1,0 +1,22 @@
+---
+data_dir:
+api:
+  enabled: true
+  address: 0.0.0.0:8686
+
+sources:
+  kubernetes_source:
+    type: redis
+    url: redis-master.logging.svc.cluster.local:6379
+    key:  k3s_prod
+
+
+sinks:
+  kubernetes:
+    type: console
+    encoding:
+      codec: "text"
+    inputs:
+      - kubernetes_source
+
+

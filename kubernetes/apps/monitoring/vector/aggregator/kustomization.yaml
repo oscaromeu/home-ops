@@ -11,5 +11,9 @@ configMapGenerator:
     files:
       - vector.yaml=./config/vector.yaml
 
+  - name: kubernetes-pipeline
+    files:
+      - kubernetes.yaml=./config/kubernetes.yaml
+
 generatorOptions:
   disableNameSuffixHash: true

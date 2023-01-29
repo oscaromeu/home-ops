@@ -35,6 +35,7 @@ spec:
     dataDir: /vector-data-dir
     existingConfigMaps:
       - vector-aggregator
+      - kubernetes-pipeline
 
     containerPorts:
       #- name: datadog-agent
