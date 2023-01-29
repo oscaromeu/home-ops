@@ -8,7 +8,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  path: ./kubernetes/apps/monitoring/loki/app
+  path: ./kubernetes/apps/logging/loki/app
   prune: true
   sourceRef:
     kind: GitRepository
