@@ -4,10 +4,9 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./redis
-  #- ./loki-legacy
   - ./filebeat
   - ./logstash
   - ./elastic
   - ./elastic-exporter
-  #- ./loki/ks.yaml
+  - ./loki/ks.yaml # WIP
 #  - ./flog
