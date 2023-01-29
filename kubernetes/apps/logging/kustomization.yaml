@@ -9,4 +9,4 @@ resources:
   - ./elastic
   - ./elastic-exporter
   - ./loki/ks.yaml # WIP
-  - ./flog
+  #- ./flog
