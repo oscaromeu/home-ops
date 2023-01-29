@@ -77,8 +77,8 @@ nav:
   - Home: index.md
   - Installation:
     - installation/index.md
-  - Operations:
-    - operations/index.md
+  - Administration:
+    - administration/index.md
   - Infrastructure:
     - infrastructure/index.md
     - Data Analytics:
