@@ -13,7 +13,7 @@ configMapGenerator:
 
   - name: kubernetes-pipeline
     files:
-      - kubernetes.yaml=./config/kubernetes.yaml
+      - kubernetes.yaml=./pipelines/kubernetes.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
