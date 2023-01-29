@@ -21,7 +21,7 @@ sinks:
       max_bytes: 2049000
     encoding:
       codec: json
-    endpoint: http://loki-gateway.logging.svc.cluster.local:80
+    endpoint: http://loki.logging.svc.cluster.local:3100
     inputs:
       - kubernetes_source
     out_of_order_action: accept
