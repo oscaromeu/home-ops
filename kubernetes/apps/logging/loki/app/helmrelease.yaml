@@ -76,7 +76,7 @@ spec:
           replication_factor: 3
           storage:
             type: gcs
-            bucket_names:
+            bucketNames:
               chunks: home-ops-loki-bucket
               ruler: home-ops-loki-bucket
               admin: home-ops-loki-bucket
