@@ -46,12 +46,12 @@ spec:
       auth_enabled: false
       schemaConfig:
         configs:
-          - from: 2020-10-24
+          - from: "2020-10-24"
             store: boltdb-shipper
             object_store: gcs
             schema: v11
             index:
-              prefix: index_
+              prefix: loki_index_
               period: 24h
 
       commonConfig:
