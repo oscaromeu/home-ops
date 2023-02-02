@@ -35,9 +35,9 @@ spec:
         size: 512Mi
     metrics:
       command: "/redis_exporter"
-      enabled: true
+      enabled: disable
       serviceMonitor:
-        enabled: true
+        enabled: false
         namespace: "logging"
       extraEnvVars:
         - name: REDIS_EXPORTER_CHECK_KEYS
