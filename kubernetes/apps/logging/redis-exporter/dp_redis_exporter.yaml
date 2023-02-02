@@ -29,6 +29,8 @@ spec:
         ports:
         - containerPort: 9121
         env:
+          - name: REDIS_ADDR
+            value: "redis://redis-master.logging.svc.cluster.local:6379"
           - name: REDIS_EXPORTER_SKIP_TLS_VERIFICATION
             value: "true"
           - name: REDIS_EXPORTER_SET_CLIENT_NAME
