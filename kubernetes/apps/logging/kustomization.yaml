@@ -8,5 +8,6 @@ resources:
   - ./logstash
   - ./elastic
   - ./elastic-exporter
+  - ./redis-exporter
   - ./loki/ks.yaml # WIP
   #- ./flog
