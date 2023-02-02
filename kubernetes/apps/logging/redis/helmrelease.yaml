@@ -34,7 +34,7 @@ spec:
         enabled: true
         size: 512Mi
     metrics:
-      command: []
+      command: "/redis_exporter"
       enabled: true
       serviceMonitor:
         enabled: true
