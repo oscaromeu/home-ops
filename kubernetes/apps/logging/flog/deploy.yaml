@@ -22,7 +22,7 @@ spec:
           "-f",
           "json",
           "-t",
-          "stdout",
+          "log",
           "-d",
           "200ms",
           "-w",
