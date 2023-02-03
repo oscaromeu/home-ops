@@ -10,5 +10,6 @@ resources:
   - ./elastic-exporter
   - ./redis-exporter
   - ./loki/ks.yaml # WIP
+  - ./flog
   - ./dashboards
-  #- ./flog
+
