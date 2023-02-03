@@ -41,5 +41,14 @@ spec:
           requests:
             cpu: 100m
             memory: 250Mi
+        volumeMounts:
+        - name: flog-log
+          mountPath: /tmp/log/flog.log
+        volumes:
+        - name: flog-log
+          hostPath:
+            path: /var/log/flog.log
+            type: FileOrCreate
+
       nodeSelector:
         kubernetes.io/arch: amd64
