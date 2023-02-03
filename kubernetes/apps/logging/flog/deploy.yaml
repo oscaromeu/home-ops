@@ -17,7 +17,7 @@ spec:
       containers:
       - name: flog-generator
         image: mingrammer/flog:0.4.3
-        command: ["flog -f json -t log -d 200ms -w -l -o /tmp/log/flog.log -b 10485760 -p 10485760"]
+        command: ["flog -f json -t log -d 200ms -w -l -b 10485760 -p 10485760"]
         #args: ["-f json -t log -d 200ms -w -l -o /var/log/flog.log -b 10485760 -p 10485760"]
         resources:
           limits:
