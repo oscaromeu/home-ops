@@ -25,7 +25,7 @@ spec:
           "-d", "200ms",
           "-w",
           "-l",
-          "-o", "/var/log/flog.log",
+          "-o", "/tmp/log/flog.log",
           "-b", "10485760",
           "-p", "10485760",
         ]
