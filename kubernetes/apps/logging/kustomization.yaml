@@ -3,13 +3,13 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./namespace.yaml
-  - ./redis
-  - ./filebeat
-  - ./logstash
-  - ./elastic
-  - ./elastic-exporter
-  - ./redis-exporter
-  - ./loki/ks.yaml # WIP
+  #- ./redis
+  #- ./filebeat
+  #- ./logstash
+  #- ./elastic
+  #- ./elastic-exporter
+  #- ./redis-exporter
+  #- ./loki/ks.yaml # WIP
   #- ./flog
-  - ./dashboards
+  #- ./dashboards
 
