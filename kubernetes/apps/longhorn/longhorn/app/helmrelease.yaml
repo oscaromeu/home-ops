@@ -16,6 +16,17 @@ spec:
         name: longhorn
         namespace: flux-system
       interval: 5m
+
+  install:
+    createNamespace: false
+    remediation:
+      retries: 5
+
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: 5
+
   values:
     persistence:
       defaultClassReplicaCount: 2
