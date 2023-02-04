@@ -1,16 +1,9 @@
 - type: container
   paths:
     - /var/log/containers/event*.log
-    - /var/log/containers/flog*.log
   exclude_files: ['\.gz$']
-#  json.message_key: log
-#  json.keys_under_root: true
-#  json.add_error_key: true
-#  json.ignore_decoding_error: true
-#  fields_under_root: true
-#  ignore_older: 0
   tail_files: true
-#  scan_frequency: 1h
+
   processors:
     - add_kubernetes_metadata:
         in_cluster: true

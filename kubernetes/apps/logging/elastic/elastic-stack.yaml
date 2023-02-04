@@ -32,6 +32,17 @@ spec:
           env:
           - name: READINESS_PROBE_TIMEOUT
             value: "10"
+        affinity:
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    elasticsearch.k8s.elastic.co/cluster-name: elk
+                topologyKey: kubernetes.io/hostname
+        nodeSelector:
+          kubernetes.io/arch: amd64
       metadata:
         labels:
           stack-monitoring.elastic.co/type: es
@@ -70,6 +81,18 @@ spec:
           stack-monitoring.elastic.co/type: es
         annotations:
           co.elastic.logs/enabled: "true"
+      spec:
+        affinity:
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    elasticsearch.k8s.elastic.co/cluster-name: elk
+                topologyKey: kubernetes.io/hostname
+        nodeSelector:
+          kubernetes.io/arch: amd64
     volumeClaimTemplates:
     - metadata:
         name: elasticsearch-data # this name is required for the volume to be mounteds
@@ -93,6 +116,8 @@ spec:
   count: 1
   elasticsearchRef:
     name: elk
+  nodeSelector:
+    kubernetes.io/arch: amd64
 #---
 #apiVersion: apm.k8s.elastic.co/v1
 #kind: ApmServer
