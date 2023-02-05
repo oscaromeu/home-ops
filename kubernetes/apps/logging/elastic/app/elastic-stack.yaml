@@ -116,8 +116,8 @@ spec:
   count: 1
   elasticsearchRef:
     name: elk
-  nodeSelector:
-    kubernetes.io/arch: amd64
+  #nodeSelector:
+  #  kubernetes.io/arch: amd64
 #---
 #apiVersion: apm.k8s.elastic.co/v1
 #kind: ApmServer
