@@ -41,9 +41,6 @@ spec:
       # pipelines
       - kubernetes-pipeline
 
-    ingress:
-      enabled: true
-      ingressClassName: nginx
 
     containerPorts:
       #- name: datadog-agent
