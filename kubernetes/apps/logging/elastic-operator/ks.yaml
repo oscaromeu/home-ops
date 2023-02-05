@@ -7,7 +7,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  path: ./kubernetes/apps/logging/elastic/app
+  path: ./kubernetes/apps/logging/elastic-operator/app
   prune: true
   sourceRef:
     kind: GitRepository
