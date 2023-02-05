@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: DaemonSet
+kind: Deployment
 metadata:
   name: flog-generator
   app: flog
@@ -24,15 +24,15 @@ spec:
           "-t",
           "stdout",
           "-d",
-          "1ms",
+          "200ms",
           "-w",
           "-l",
           #"-o",
           #"/var/log/flog.log",
           "-b",
-          "104857600",
+          "10485760",
           "-p",
-          "10485760"
+          "1048576"
         ]
         #args: ["-f json -t log -d 200ms -w -l -o /var/log/flog.log -b 10485760 -p 10485760"]
         resources:
