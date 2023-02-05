@@ -1,6 +1,6 @@
 ---
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: logstash
   namespace: logging
@@ -95,7 +95,6 @@ spec:
           containerPort: 9600
         resources:
           limits:
-            cpu: 1000m
             memory: 1Gi
           requests:
             cpu: 100m
