@@ -13,6 +13,11 @@ output.redis:
   hosts: ${REDIS_HOSTS}
   key: '${REDIS_KEY_NAME}' # default: bm_hl
   #keys: '${REDIS_KEY_NAME}_%{[agent.hostname]}'
+  keys:
+    - key: "flog"   # send to info_list if `message` field contains INFO
+      when.contains:
+        app: "flog"
+
   #ssl:
   #  enabled: ${REDIS_ENABLE_SSL}
   #  verification_mode: ${REDIS_SSL_VERIFY}
