@@ -49,7 +49,7 @@ spec:
         hajimari.io/enable: "true"
         hajimari.io/icon: "alarm-light-outline"
       hosts:
-        - hosts: vector-aggregator.devfu.io
+        - hosts: vector.devfu.io
           paths:
             - path: /
               pathType: ImplementationSpecific
@@ -58,7 +58,7 @@ spec:
                 number: 8686
       tls:
         - hosts:
-            - vector-aggregator.devfu.io
+            - vector.devfu.io
 
 
     containerPorts:
