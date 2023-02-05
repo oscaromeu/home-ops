@@ -28,7 +28,7 @@ spec:
           "-w",
           "-l",
           "-o",
-          "/tmp/flog.log",
+          "/var/log/flog.log",
           "-b",
           "10485760",
           "-p",
