@@ -1,5 +1,5 @@
 ---
-k3s_version: v1.24.8+k3s1
+k3s_version: v1.26.0+k3s1
 systemd_dir: /etc/systemd/system
 #master_ip: "{{ hostvars[groups['master'][0]]['ansible_host'] | default(groups['master'][0]) }}"
 master_ip: "192.168.1.41"
