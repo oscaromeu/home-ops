@@ -35,7 +35,7 @@ spec:
             type: loki
             access: proxy
             url: http://loki.logging.svc.cluster.local:3100
-            isDefault: true
+            isDefault: false
 
     sidecar:
       dashboards:
