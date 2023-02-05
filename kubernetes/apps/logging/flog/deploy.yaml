@@ -24,15 +24,15 @@ spec:
           "-t",
           "stdout",
           "-d",
-          "10ms",
+          "200ms",
           "-w",
           "-l",
           #"-o",
           #"/var/log/flog.log",
           "-b",
-          "10485760000",
+          "10485760",
           "-p",
-          "10485760000"
+          "10485760"
         ]
         #args: ["-f json -t log -d 200ms -w -l -o /var/log/flog.log -b 10485760 -p 10485760"]
         resources:
