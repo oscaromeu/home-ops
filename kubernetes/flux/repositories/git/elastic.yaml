@@ -8,7 +8,7 @@ spec:
   interval: 5m
   url: https://github.com/elastic/cloud-on-k8s
   ref:
-    branch: '2.1'
+    branch: '2.6'
   ignore: |
     # exclude all
     /*

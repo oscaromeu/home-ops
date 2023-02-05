@@ -6,7 +6,8 @@ resources:
   - ./redis
   - ./filebeat
   - ./logstash
-  - ./elastic
+  - ./elastic-operator/ks.yaml
+  - ./elastic/ks.yaml
   - ./elastic-exporter
   - ./redis-exporter
   - ./loki/ks.yaml # WIP
