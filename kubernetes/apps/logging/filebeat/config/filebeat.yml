@@ -16,7 +16,7 @@ output.redis:
   keys:
     - key: "flog_prod"   # send to flog_prod if `app` field contains flog
       when.contains:
-        kubernetes.deployment.name: "flog-generator"
+        message: "flog-generator"
 
   #ssl:
   #  enabled: ${REDIS_ENABLE_SSL}
