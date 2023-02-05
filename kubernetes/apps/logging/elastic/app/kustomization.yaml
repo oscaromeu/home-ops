@@ -2,7 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: logging
 resources:
-  - helmrelease.yaml
   - elastic-stack.yaml
   - node-type-svc.yaml
   - elastic-ingress.yaml
