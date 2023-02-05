@@ -9,7 +9,7 @@ metadata:
 spec:
   path: ./kubernetes/apps/logging/elastic-exporter/app
   dependsOn:
-    - name: cluster-apps-elastic-operator
+    - name: cluster-apps-elastic
   prune: true
   sourceRef:
     kind: GitRepository
