@@ -44,18 +44,6 @@ spec:
     ingress:
       enabled: true
       ingressClassName: nginx
-      annotations:
-        hajimari.io/appName: "vector-aggregator"
-        hajimari.io/enable: "true"
-        hajimari.io/icon: "alarm-light-outline"
-      hosts:
-        - vector.devfu.io
-      paths:
-        - /
-      pathType: ImplementationSpecific
-      tls:
-        - hosts:
-            - vector.devfu.io
 
     containerPorts:
       #- name: datadog-agent
