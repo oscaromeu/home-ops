@@ -35,10 +35,15 @@ spec:
             type: loki
             access: proxy
             url: http://loki.logging.svc.cluster.local:3100
-            isDefault: false
 
     sidecar:
       dashboards:
+        enabled: true
+        searchNamespace: ALL
+        # folderAnnotation: grafana_folder
+        # provider:
+        #   foldersFromFilesStructure: true
+      datasources:
         enabled: true
         searchNamespace: ALL
 
