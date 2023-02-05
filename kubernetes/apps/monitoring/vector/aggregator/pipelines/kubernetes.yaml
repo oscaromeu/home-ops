@@ -15,6 +15,10 @@ transforms:
     source: |
       # Standardize 'app' index
       .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
+  kubernetes_filter:
+    type: filter
+    inputs:
+      - kubernetes_remap
     condition: '.kubernetes.deployment.name == "event-exporter"'
 
 sinks:
@@ -23,7 +27,7 @@ sinks:
     encoding:
       codec: "text"
     inputs:
-      - kubernetes_remap
+      - kubernetes_filter
   kubernetes_loki:
     type: loki
     batch:
