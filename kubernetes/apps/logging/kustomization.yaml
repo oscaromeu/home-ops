@@ -11,6 +11,6 @@ resources:
   - ./elastic-exporter/ks.yaml
   - ./redis-exporter
   - ./loki/ks.yaml # WIP
-  #- ./flog
+  - ./flog
   - ./dashboards
 
