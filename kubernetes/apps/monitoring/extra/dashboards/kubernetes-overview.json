@@ -222,13 +222,14 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "continuous-BlPu"
           },
           "custom": {
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
+            "axisSoftMax": 40,
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 9,
@@ -251,7 +252,7 @@
               "mode": "normal"
             },
             "thresholdsStyle": {
-              "mode": "off"
+              "mode": "line"
             }
           },
           "mappings": [],
@@ -264,7 +265,7 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 32
               }
             ]
           }
