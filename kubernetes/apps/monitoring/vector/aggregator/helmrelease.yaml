@@ -41,6 +41,24 @@ spec:
       # pipelines
       - kubernetes-pipeline
 
+    ingress:
+      enabled: true
+      ClassName: nginx
+      annotations:
+        hajimari.io/appName: "vector-aggregator"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "alarm-light-outline"
+      hosts:
+        - hosts: vector-aggregator.devfu.io
+          paths: /
+          pathType: ImplementationSpecific
+          port:
+            name: api
+            number: 8686
+      tls:
+        - hosts:
+            - vector-aggregator.devfu.io
+
 
     containerPorts:
       #- name: datadog-agent
@@ -75,9 +93,9 @@ spec:
     service:
       enabled: true
       ports:
-        #- name: datadog-agent
-        #  port: 8282
-        #  protocol: TCP
+        - name: api
+          port: 8686
+          protocol: TCP
         #- name: fluent
         #  port: 24224
         #  protocol: TCP
