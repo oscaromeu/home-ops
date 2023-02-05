@@ -43,7 +43,7 @@ spec:
             memory: 250Mi
         volumeMounts:
         - name: flog-log
-          mountPath: /tmp/log/flog.log
+          mountPath: /var/log/flog.log
       volumes:
       - name: flog-log
         hostPath:
