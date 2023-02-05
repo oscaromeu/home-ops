@@ -50,11 +50,12 @@ spec:
         hajimari.io/icon: "alarm-light-outline"
       hosts:
         - hosts: vector-aggregator.devfu.io
-          paths: /
-          pathType: ImplementationSpecific
-          port:
-            name: api
-            number: 8686
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+              port:
+                name: api
+                number: 8686
       tls:
         - hosts:
             - vector-aggregator.devfu.io
