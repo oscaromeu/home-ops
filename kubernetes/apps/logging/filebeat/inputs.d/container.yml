@@ -1,6 +1,7 @@
 - type: container
   paths:
-    - /var/log/containers/event*.log
+    #- /var/log/containers/event*.log
+    - /var/log/containers/flog*.log
   exclude_files: ['\.gz$']
   tail_files: true
 
