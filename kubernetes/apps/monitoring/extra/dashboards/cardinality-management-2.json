@@ -1,0 +1,465 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 8,
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "dashboard",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": false,
+      "title": "Cardinality management - overview",
+      "tooltip": "",
+      "type": "link",
+      "url": "/d/cardinality-management/?${datasource:queryparam}"
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 7,
+        "x": 0,
+        "y": 0
+      },
+      "id": 32,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "This dashboard helps you understand the cardinality of a single metric. It shows you the count of series with this metric name and how that count relates to the total number of time series in your data source. Then it helps you understand which labels associated with that metric have the greatest impact on its cardinality. \n\nEach time series is a unique combination of key-value label pairs. Therefore a label key with a lot of values can create a lot of time series for a particular metric. If you’re trying to decrease the cardinality of a metric, start by looking at the labels with the highest number of values. \n\nUse the selector at the top of the page to pick which metric you’d like to inspect. \n",
+        "mode": "markdown"
+      },
+      "pluginVersion": "9.3.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "💡Tips",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "uid": "${cardinality}"
+      },
+      "description": "The number of time series with metric name ${metric}.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "text",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": []
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 8,
+        "x": 7,
+        "y": 0
+      },
+      "id": 27,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Number of series$/",
+          "values": false
+        },
+        "text": {},
+        "textMode": "value"
+      },
+      "pluginVersion": "9.3.6",
+      "targets": [
+        {
+          "cardinalityType": "series",
+          "datasource": {
+            "uid": "${cardinality}"
+          },
+          "parameterList": [
+            "${metric}"
+          ],
+          "refId": "A",
+          "resultType": "subtotal",
+          "targetDatasource": "${datasource}"
+        }
+      ],
+      "title": "Number of series",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "uid": "${cardinality}"
+      },
+      "description": "Count all time series with metric name ${metric} and express that as a percentage of the total number of time series in this data source.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "text",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": []
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 9,
+        "x": 15,
+        "y": 0
+      },
+      "id": 28,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Percentage of total series$/",
+          "values": false
+        },
+        "text": {},
+        "textMode": "value"
+      },
+      "pluginVersion": "9.3.6",
+      "targets": [
+        {
+          "cardinalityType": "series",
+          "datasource": {
+            "uid": "${cardinality}"
+          },
+          "parameterList": [
+            "${metric}"
+          ],
+          "refId": "A",
+          "resultType": "subtotal",
+          "targetDatasource": "${datasource}"
+        }
+      ],
+      "title": "Percentage of total series",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "uid": "${cardinality}"
+      },
+      "description": "Shows the labels attached to metric ${metric}. You see both the label name and then the number of values for each label name. Label names are sorted by the number of values they have in descending order.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [
+            {
+              "title": "View drill down of label: ${__data.fields.Label}",
+              "url": "d/cardinality-management-label-detail/?var-label=${__data.fields.Label}&${datasource:queryparam}&${filter:queryparam}"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 17,
+        "x": 7,
+        "y": 2
+      },
+      "id": 10,
+      "options": {
+        "labelFields": [],
+        "tiling": "treemapSquarify"
+      },
+      "pluginVersion": "8.0.6",
+      "targets": [
+        {
+          "cardinalityType": "metrics",
+          "datasource": {
+            "uid": "${cardinality}"
+          },
+          "limit": 500,
+          "parameterList": [
+            "${metric}"
+          ],
+          "refId": "A",
+          "resultType": "details",
+          "targetDatasource": "${datasource}"
+        }
+      ],
+      "title": "Labels attached to metric ${metric}",
+      "transformations": [],
+      "type": "marcusolsson-treemap-panel"
+    },
+    {
+      "datasource": {
+        "uid": "${cardinality}"
+      },
+      "description": "Shows the labels attached to metric ${metric}. You see both the label name and then the number of values for each label name. Label names are sorted by the number of values they have in descending order.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Label"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "View detailed cardinality dashboard for label: ${__data.fields.Label}",
+                    "url": "d/cardinality-management-label-detail/?var-label=${__data.fields.Label}&${datasource:queryparam}&${filter:queryparam}&var-filter=__name__%7C%3D%7C${metric}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Number of values"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 132
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 21,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "9.3.6",
+      "targets": [
+        {
+          "cardinalityType": "metrics",
+          "datasource": {
+            "uid": "${cardinality}"
+          },
+          "exampleCount": "3",
+          "parameterList": [
+            "${metric}"
+          ],
+          "refId": "A",
+          "resultType": "details",
+          "targetDatasource": "${datasource}"
+        }
+      ],
+      "title": "Labels attached to metric ${metric}",
+      "type": "table"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [
+    "cardinality-management",
+    "grafanacloud"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "grafanacloud-devfu-cardinality-management",
+          "value": "grafanacloud-devfu-cardinality-management"
+        },
+        "description": "Datasource adapter to provide metrics cardinality",
+        "hide": 2,
+        "includeAll": false,
+        "multi": false,
+        "name": "cardinality",
+        "options": [],
+        "query": "grafana-cardinality-datasource",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "grafanacloud-devfu-prom",
+          "value": "grafanacloud-devfu-prom"
+        },
+        "description": "Choose a Prometheus data source for cardinality management",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Data source",
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 2,
+        "regex": "(?!grafanacloud-usage|grafanacloud-ml-metrics).+",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": ":node_memory_MemAvailable_bytes:sum",
+          "value": ":node_memory_MemAvailable_bytes:sum"
+        },
+        "datasource": {
+          "uid": "${cardinality}"
+        },
+        "definition": "metrics list {\"targetDatasource\":\"${datasource}\"}",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Metric",
+        "multi": false,
+        "name": "metric",
+        "options": [],
+        "query": {
+          "cardinalityType": "metrics",
+          "resultType": "list",
+          "targetDatasource": "${datasource}"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "description": "A label-value filter to be used for all cardinality queries",
+        "filters": [],
+        "hide": 0,
+        "label": "Filter",
+        "name": "filter",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": true
+  },
+  "timezone": "",
+  "title": "Cardinality management - 2 - metrics",
+  "uid": "cardinality-management-metrics-detail",
+  "version": 1,
+  "weekStart": ""
+}
