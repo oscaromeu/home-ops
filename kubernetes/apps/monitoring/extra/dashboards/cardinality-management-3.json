@@ -1,0 +1,564 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 7,
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "dashboard",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": false,
+      "title": "Cardinality management - overview",
+      "tooltip": "",
+      "type": "link",
+      "url": "/d/cardinality-management/?${datasource:queryparam}"
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 7,
+        "x": 0,
+        "y": 0
+      },
+      "id": 20,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "This dashboard helps you understand the count of time series per label. \n\nUse the selector at the top of the page to pick a label name you’d like to inspect. For the selected label name, you’ll see the label values that have the highest number of series associated with them. So if you’ve chosen “environment” as your label name, you may see that 1231 time series have value “environmentA” attached to them and 542 time series have value “environmentB” attached to them. \n\nThis can be helpful in allowing you to determine where the bulk of your time series are coming from. If the label “team=teamA” was applied to 34,222 series and the label “team=teamB” was only applied to 1,237 series, you’d know, for example, that teamA was responsible for sending the majority of the time series. \n",
+        "mode": "markdown"
+      },
+      "pluginVersion": "9.3.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "💡 Tips",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "uid": "${cardinality}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 8,
+        "x": 7,
+        "y": 0
+      },
+      "id": 22,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.3.6",
+      "targets": [
+        {
+          "cardinalityType": "labels",
+          "datasource": {
+            "uid": "${cardinality}"
+          },
+          "parameterList": [
+            "${label}"
+          ],
+          "refId": "A",
+          "resultType": "subtotal",
+          "targetDatasource": "${datasource}"
+        }
+      ],
+      "title": "Total values for label: $label",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Label",
+                "Subtotal"
+              ]
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "uid": "${cardinality}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 9,
+        "x": 15,
+        "y": 0
+      },
+      "id": 54,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.3.6",
+      "targets": [
+        {
+          "cardinalityType": "labels",
+          "datasource": {
+            "uid": "${cardinality}"
+          },
+          "parameterList": [
+            "${label}"
+          ],
+          "refId": "A",
+          "resultType": "subtotal",
+          "targetDatasource": "${datasource}"
+        }
+      ],
+      "title": "Percentage of total series with label: $label",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Label",
+                "Percent of series"
+              ]
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "uid": "${cardinality}"
+      },
+      "description": "For each value of label ${label}, shows you the number of time series that have that label value applied. Click to show drilldown link.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [
+            {
+              "title": "View overview cardinality dashboard scoped to ${label}: ${__data.fields[0]}",
+              "url": "d/cardinality-management/?${datasource:queryparam}&${filter:queryparam}&var-filter=${label}%7C%3D%7C${__data.fields[0]}"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 17,
+        "x": 7,
+        "y": 2
+      },
+      "id": 13,
+      "options": {
+        "tiling": "treemapSquarify"
+      },
+      "pluginVersion": "8.0.6",
+      "targets": [
+        {
+          "cardinalityType": "labels",
+          "datasource": {
+            "uid": "${cardinality}"
+          },
+          "limit": 500,
+          "parameterList": [
+            "${label}"
+          ],
+          "refId": "A",
+          "resultType": "details",
+          "targetDatasource": "${datasource}"
+        }
+      ],
+      "title": "Top distribution of series per label value",
+      "transformations": [],
+      "type": "marcusolsson-treemap-panel"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 38,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "",
+        "mode": "markdown"
+      },
+      "pluginVersion": "9.3.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Highest cardinality metrics for a given label value",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "uid": "${cardinality}"
+      },
+      "description": "Highest cardinality metrics with ${label} = ${labelValues}.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Metric"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "View detailed cardinality dashboard for metric: ${__data.fields.Metric}",
+                    "url": "d/cardinality-management-metrics-detail/?var-metric=${__data.fields.Metric}&${datasource:queryparam}&${filter:queryparam}&var-filter=${label}%7C%3D%7C${labelValues}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 13
+      },
+      "id": 10,
+      "maxPerRow": 2,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Percentage of total series"
+          }
+        ]
+      },
+      "pluginVersion": "9.3.6",
+      "repeat": "labelValues",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "cardinalityType": "pairs",
+          "datasource": {
+            "uid": "${cardinality}"
+          },
+          "refId": "A",
+          "resultType": "details",
+          "selector": "{${label}='${labelValues}'}",
+          "targetDatasource": "${datasource}"
+        }
+      ],
+      "title": "${label} = ${labelValues}",
+      "type": "table"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [
+    "cardinality-management",
+    "grafanacloud"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "grafanacloud-devfu-cardinality-management",
+          "value": "grafanacloud-devfu-cardinality-management"
+        },
+        "description": "Datasource adapter to provide metrics cardinality",
+        "hide": 2,
+        "includeAll": false,
+        "multi": false,
+        "name": "cardinality",
+        "options": [],
+        "query": "grafana-cardinality-datasource",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "grafanacloud-devfu-prom",
+          "value": "grafanacloud-devfu-prom"
+        },
+        "description": "Choose a Prometheus data source for cardinality management",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Data source",
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "(?!grafanacloud-usage|grafanacloud-ml-metrics).+",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "AppVersion",
+          "value": "AppVersion"
+        },
+        "datasource": {
+          "uid": "${cardinality}"
+        },
+        "definition": "labels list {\"targetDatasource\":\"${datasource}\"}",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Label",
+        "multi": false,
+        "name": "label",
+        "options": [],
+        "query": {
+          "cardinalityType": "labels",
+          "resultType": "list",
+          "targetDatasource": "${datasource}"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "uid": "${cardinality}"
+        },
+        "definition": "{\"targetDatasource\":\"${datasource}\"}",
+        "hide": 2,
+        "includeAll": true,
+        "label": "Label values",
+        "multi": true,
+        "name": "labelValues",
+        "options": [],
+        "query": {
+          "cardinalityType": "labels",
+          "limit": 16,
+          "parameterList": [
+            "${label}"
+          ],
+          "resultType": "details",
+          "targetDatasource": "${datasource}"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "description": "A label-value filter to be used for all cardinality queries",
+        "filters": [],
+        "hide": 0,
+        "label": "Filter",
+        "name": "filter",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": true
+  },
+  "timezone": "",
+  "title": "Cardinality management - 3 - labels",
+  "uid": "cardinality-management-label-detail",
+  "version": 1,
+  "weekStart": ""
+}

@@ -17,6 +17,6 @@ configMapGenerator:
       - redis.json
     options:
       labels:
-        grafana_dashboard: elastic
+        grafana_dashboard: redis
       disableNameSuffixHash: true
 
