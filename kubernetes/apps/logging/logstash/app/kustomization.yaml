@@ -8,7 +8,7 @@ metadata:
 resources:
   - svc_logstash.yaml
   - dp_logstash.yaml
-  - as_logstash_cpu.yaml
+  #- as_logstash_cpu.yaml
   #- logstash-redis-certs-sops.yaml
 
 generatorOptions:
