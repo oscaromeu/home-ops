@@ -172,3 +172,12 @@ spec:
 
     podMonitor:
       enabled: true
+
+    env:
+      - name: VECTOR_LOG
+        value: "debug"
+      # - name: MY_VARIABLE
+      #   valueFrom:
+      #     secretKeyRef:
+      #       name: vector
+      #       key: my_variable
