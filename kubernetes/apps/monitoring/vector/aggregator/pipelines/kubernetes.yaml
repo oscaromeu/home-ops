@@ -21,7 +21,8 @@ transforms:
     type: filter
     inputs:
       - kubernetes_remap
-    condition: 'exists(.container)==false'
+
+    condition: 'exists(."_source")==true'
 
 sinks:
 
