@@ -175,7 +175,7 @@ spec:
 
     env:
       - name: VECTOR_LOG
-        value: "debug"
+        value: "info"
       # - name: MY_VARIABLE
       #   valueFrom:
       #     secretKeyRef:
