@@ -21,7 +21,7 @@ transforms:
     type: filter
     inputs:
       - kubernetes_remap
-    condition: 'exists(.kubernetes)!=true'
+    condition: 'exists(.log)==true'
 
 sinks:
 
