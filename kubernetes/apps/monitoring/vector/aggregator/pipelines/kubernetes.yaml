@@ -20,9 +20,9 @@ transforms:
   kubernetes_filter:
     type: filter
     inputs:
-      - kubernetes_remap
+      - kubernetes_source
 
-    condition: 'exists(."kubernetes")==false'
+    condition: 'exists(.kubernetes.namespace)==true'
 
 sinks:
 
