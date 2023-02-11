@@ -22,18 +22,6 @@ spec:
     remediation:
       retries: 3
   values:
-    #dashboardProviders:
-    #  dashboardproviders.yaml:
-    #    apiVersion: 1
-    #    providers:
-    #      - name: "default"
-    #        orgId: 1
-    #        folder: ""
-    #        type: file
-    #        disableDeletion: false
-    #        editable: true
-    #        options:
-    #          path: /var/lib/grafana/dashboards/default
 
     datasources:
       datasources.yaml:
