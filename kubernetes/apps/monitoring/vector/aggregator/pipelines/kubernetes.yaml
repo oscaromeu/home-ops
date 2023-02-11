@@ -15,14 +15,15 @@ transforms:
       - kubernetes_source
     source: |
       # Standardize 'app' index
-      .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
+      namespace = .kubernetes.namespace
+      #.custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
 
   kubernetes_filter:
     type: filter
     inputs:
       - kubernetes_source
 
-    condition: null
+    condition: 'exists(.kubernetes)==false'
 
 sinks:
 
