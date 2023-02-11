@@ -23,7 +23,7 @@ transforms:
     inputs:
       - kubernetes_source
 
-    condition: 'get(.kubernetes.namespace)==monitoring'
+    condition: '.kubernetes.namespace==monitoring'
 
 sinks:
 
