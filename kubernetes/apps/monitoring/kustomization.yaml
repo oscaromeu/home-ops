@@ -12,5 +12,5 @@ resources:
   - ./goldilocks/ks.yaml
   - ./vector/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
-  - ./extra/dashboards
+  #- ./extra/dashboards
 

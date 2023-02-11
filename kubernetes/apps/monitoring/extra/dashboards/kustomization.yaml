@@ -20,10 +20,3 @@ configMapGenerator:
         grafana_dashboard: kubernetes-integration
       disableNameSuffixHash: true
 
-  - name: cardinality-management
-    files:
-      - cardinality-management-2.json
-    options:
-      labels:
-        grafana_dashboard: cardinality-management
-      disableNameSuffixHash: true
