@@ -102,12 +102,12 @@ spec:
             - grafana.devfu.io
 
     persistence:
-      enabled: true
+      enabled: false
       storageClassName: longhorn
       accessModes:
         - ReadWriteOnce
       size: 5Gi
-      # existingClaim: grafana
+      existingClaim: grafana
 
       extraPvcLabels:
         snapshot.home.arpa/enabled: "true"
