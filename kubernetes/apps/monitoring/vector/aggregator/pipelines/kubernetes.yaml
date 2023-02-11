@@ -22,7 +22,7 @@ transforms:
     inputs:
       - kubernetes_source
 
-    condition: 'exists(.kubernetes.namespace)==true'
+    condition: null
 
 sinks:
 
