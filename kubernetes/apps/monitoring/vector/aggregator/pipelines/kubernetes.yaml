@@ -22,7 +22,7 @@ transforms:
     inputs:
       - kubernetes_remap
 
-    condition: 'exists(."_source")==false'
+    condition: 'exists(."kubernetes")==false'
 
 sinks:
 
