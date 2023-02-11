@@ -8,6 +8,7 @@ sources:
     key: k3s_prod
 
 transforms:
+
   kubernetes_remap:
     type: remap
     inputs:
@@ -15,11 +16,12 @@ transforms:
     source: |
       # Standardize 'app' index
       .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
+
   kubernetes_filter:
     type: filter
     inputs:
       - kubernetes_remap
-    condition: '.kubernetes.deployment.name == "event-exporter"'
+    condition: 'exist(.kubernetes)'
 
 sinks:
 
