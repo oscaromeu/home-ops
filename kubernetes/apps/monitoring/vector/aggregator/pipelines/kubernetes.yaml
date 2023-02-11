@@ -22,12 +22,14 @@ transforms:
     condition: '.kubernetes.deployment.name == "event-exporter"'
 
 sinks:
+
   kubernetes:
     type: console
     encoding:
       codec: "text"
     inputs:
       - kubernetes_filter
+
   kubernetes_loki:
     type: loki
     batch:
