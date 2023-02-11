@@ -95,10 +95,10 @@ spec:
           containerPort: 9600
         resources:
           limits:
-            memory: 1Gi
+            memory: 2Gi
           requests:
             cpu: 100m
-            memory: 512Mi
+            memory: 680Mi
         env:
           - name: ELASTICSEARCH_USERNAME
             value: "elastic"
