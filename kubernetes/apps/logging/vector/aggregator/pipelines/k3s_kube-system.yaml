@@ -36,14 +36,15 @@ sinks:
       strategy: "basic"
       user: "elastic"
       password: "djd5TmQwMzlrNTVRVlREVDI2Y2IzQm03"
-    data_stream:
-      # {data_stream.type}-{data_stream.dataset}-{data_stream.namespace}
-      # https://www.elastic.co/guide/en/ecs/master/ecs-data_stream.html
-      type: logs
-      dataset: "k3s_prod"
-      namespace: kube-system
+    #data_stream:
+    #  # {data_stream.type}-{data_stream.dataset}-{data_stream.namespace}
+    #  # https://www.elastic.co/guide/en/ecs/master/ecs-data_stream.html
+    #  type: logs
+    #  dataset: "k3s_prod"
+    #  namespace: kube-system
     bulk:
       action: "create"
+      index: logs-k3s_prod-kube-system-%Y.%m.%d
     endpoints:
       - "https://elk-es-http.logging.svc.cluster.local:9200"
     tls:
