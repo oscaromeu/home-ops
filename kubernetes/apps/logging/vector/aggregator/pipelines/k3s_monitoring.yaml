@@ -6,18 +6,43 @@ sources:
     url: redis://redis-master.logging.svc.cluster.local:6379/0
     key: "k3s_prod:monitoring"
 
-#transforms:
-#
-#  kubernetes_remap:
-#    type: remap
-#    inputs:
-#      - kubernetes_source
-#    source: |
-#      # Standardize 'app' index
-#      .app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
+transforms:
+
+  kubernetes_remap:
+    type: remap
+    inputs:
+      - kubernetes_source
+    source: |
+      # Standardize 'app' index
+      .app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
+
+  filter_pod_event-exporter:
+    type: filter
+    inputs:
+      - kubernetes_remap
+    condition: |
+      starts_with!(.app_name, "event-exporter")
+
 
 
 sinks:
+
+
+  kubernetes_loki:
+    type: loki
+    batch:
+      max_bytes: 2049000
+    labels:
+      app: event-exporter
+      environment: production
+    encoding:
+      codec: json
+    endpoint: http://loki.logging.svc.cluster.local:3100
+    inputs:
+      - filter_pod_event-exporter
+    out_of_order_action: accept
+    remove_label_fields: true
+    remove_timestamp: true
 
   kubernetes:
     type: console
@@ -25,8 +50,5 @@ sinks:
       codec: "text"
     inputs:
       - k3s_monitoring_src
-
-
-
 
 
