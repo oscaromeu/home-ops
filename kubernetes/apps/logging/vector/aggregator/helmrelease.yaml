@@ -182,9 +182,9 @@ spec:
         valueFrom:
           secretKeyRef:
             key: ingestion
-            name: es-ingestion-user
+            name: elk-es-ingestion-user
 
     envFrom:
       - secretRef:
-          name: es-ingestion-user
+          name: elk-es-ingestion-user
 
