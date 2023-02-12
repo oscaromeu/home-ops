@@ -43,7 +43,7 @@ sinks:
     #  dataset: "k3s_prod"
     #  namespace: kube-system
     bulk:
-      action: "create"
+      #action: "create"
       index: logs-k3s_prod-kube-system-%Y.%m.%d
     endpoints:
       - "https://elk-es-http.logging.svc.cluster.local:9200"
