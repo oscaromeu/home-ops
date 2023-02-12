@@ -39,7 +39,7 @@ spec:
       # config
       - vector-aggregator
       # pipelines
-      - pipeline-aggregator
+      - kubernetes-pipeline-aggregator
 
     ingress:
       enabled: true
