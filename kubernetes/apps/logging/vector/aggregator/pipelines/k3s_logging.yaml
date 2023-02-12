@@ -75,7 +75,7 @@ sinks:
     auth:
       strategy: basic
       user: elastic
-      password: ${ELASTIC_PASSWORD}
+      password: "${ELASTIC_PASSWORD}"
     index: "logs-k3s_prod-logging"
 
 
