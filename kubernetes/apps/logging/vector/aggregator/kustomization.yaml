@@ -1,0 +1,19 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: logging
+resources:
+  - ./helmrelease.yaml
+
+configMapGenerator:
+  - name: vector-aggregator
+    files:
+      - vector.yaml=./config/vector.yaml
+
+  - name: kubernetes-pipeline-aggregator
+    files:
+      - kubernetes.yaml=./pipelines/kubernetes.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
