@@ -18,12 +18,12 @@ transforms:
 
 sinks:
 
-  kubernetes:
-    type: console
-    encoding:
-      codec: "text"
-    inputs:
-      - kubernetes_remap
+  #kubernetes:
+  #  type: console
+  #  encoding:
+  #    codec: "text"
+  #  inputs:
+  #    - kubernetes_remap
 
   kubernetes_loki:
     type: loki
