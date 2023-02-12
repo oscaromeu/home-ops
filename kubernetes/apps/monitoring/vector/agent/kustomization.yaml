@@ -5,10 +5,15 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./helmrelease.yaml
-  - ./rbac.yaml
+
 configMapGenerator:
-  - name: vector-agent-configmap
+  - name: vector-aggregator
     files:
       - vector.yaml=./config/vector.yaml
-configurations:
-  - ./patches/kustomizeconfig.yaml
+
+  - name: kubernetes-pipeline
+    files:
+      - kubernetes.yaml=./pipelines/kubernetes.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
