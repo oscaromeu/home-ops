@@ -183,3 +183,8 @@ spec:
           secretKeyRef:
             key: elastic
             name: elk-es-elastic-user
+
+    envFrom:
+      - secretRef:
+          name: elk-es-elastic-user
+
