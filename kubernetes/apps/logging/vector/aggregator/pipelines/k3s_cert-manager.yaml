@@ -42,7 +42,7 @@ sinks:
       namespace: cert-manager
     bulk:
       action: "create"
-    endpoint: "https://elastic.logging.svc.cluster.local:9200"
+    endpoint: "https://elk-es-http.logging.svc.cluster.local:9200"
 
 
 
