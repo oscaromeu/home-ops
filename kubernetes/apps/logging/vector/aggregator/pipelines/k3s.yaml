@@ -6,15 +6,15 @@ sources:
     url: redis://redis-master.logging.svc.cluster.local:6379/0
     key: "k3s_prod:{{ kubernetes.namespace_labels.\"kubernetes.io/metadata.name\" }}"
 
-transforms:
-
-  kubernetes_remap:
-    type: remap
-    inputs:
-      - kubernetes_source
-    source: |
-      # Standardize 'app' index
-      .app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
+#transforms:
+#
+#  kubernetes_remap:
+#    type: remap
+#    inputs:
+#      - kubernetes_source
+#    source: |
+#      # Standardize 'app' index
+#      .app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
 
 
 sinks:
@@ -22,9 +22,9 @@ sinks:
   kubernetes:
     type: console
     encoding:
-      codec: "json"
+      codec: "text"
     inputs:
-      - kubernetes_remap
+      - kubernetes_source
 
 
 
