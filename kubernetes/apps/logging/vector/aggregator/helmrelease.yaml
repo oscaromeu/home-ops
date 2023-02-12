@@ -177,14 +177,14 @@ spec:
       - name: VECTOR_LOG
         value: "info"
       - name: ELASTICSEARCH_USERNAME
-        value: "elastic"
+        value: "ingestion"
       - name: ELASTICSEARCH_PASSWORD
         valueFrom:
           secretKeyRef:
-            key: elastic
-            name: elk-es-elastic-user
+            key: ingestion
+            name: elk-es-ingestion-user
 
     envFrom:
       - secretRef:
-          name: elk-es-elastic-user
+          name: elk-es-ingestion-user
 
