@@ -21,7 +21,7 @@ transforms:
     inputs:
       - kubernetes_remap
     condition: |
-      starts_with!(.app_name, "event-exporter")
+      .app_name == "event-exporter"
 
 
 

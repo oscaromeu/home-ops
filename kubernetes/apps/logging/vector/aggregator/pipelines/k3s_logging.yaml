@@ -16,25 +16,67 @@ transforms:
       # Standardize 'app' index
       .app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
 
+  loki_filter:
+    type: filter
+    inputs:
+      - kubernetes_remap
+    condition: |
+      .pod_labels.app == "flog-generator"
+
+  blakchole_filter:
+    type: filter
+    inputs:
+      - kubernetes_remap
+    condition: |
+      .pod_labels."app.kubernetes.io/name" == "loki"
+
+  elasticsearch_filter:
+    type: filter
+    inputs:
+      - kubernetes_remap
+    condition: |
+      .pod_labels."app.kubernetes.io/name" != "loki" && .pod_labels.app != "flog-generator"
 
 sinks:
 
-  kubernetes:
+  blackhole:
+    type: blackhole
+    inputs:
+      - filter_by_loki
+
+  stdout:
     type: console
     encoding:
       codec: "text"
     inputs:
-      - kubernetes_remap
+      - filter_by_flog
 
-  #kubernetes_elasticsearch:
-  #  type: elasticsearch
-  #  inputs:
-  #    - k3s_logging_src
-  #  auth:
-  #    strategy: basic
-  #    user: elastic
-  #    password: ${ELASTIC_PASSWORD}
-  #  index: "k3s_prod-logging-%Y.%m.%d"
+  loki:
+    type: loki
+    batch:
+      max_bytes: 2049000
+    labels:
+      namespace: logging
+      environment: production
+    encoding:
+      codec: json
+    endpoint: http://loki.logging.svc.cluster.local:3100
+    inputs:
+      - loki_filter
+    out_of_order_action: accept
+    remove_label_fields: true
+    remove_timestamp: true
+
+
+  elasticsearch:
+    type: elasticsearch
+    inputs:
+      - elasticsearch_filter
+    auth:
+      strategy: basic
+      user: elastic
+      password: ${ELASTIC_PASSWORD}
+    index: "logs-k3s_prod-logging"
 
 
 
