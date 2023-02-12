@@ -176,8 +176,10 @@ spec:
     env:
       - name: VECTOR_LOG
         value: "info"
-      # - name: MY_VARIABLE
-      #   valueFrom:
-      #     secretKeyRef:
-      #       name: vector
-      #       key: my_variable
+      - name: ELASTICSEARCH_USERNAME
+        value: "elastic"
+      - name: ELASTICSEARCH_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            key: elastic
+            name: elk-es-elastic-user
