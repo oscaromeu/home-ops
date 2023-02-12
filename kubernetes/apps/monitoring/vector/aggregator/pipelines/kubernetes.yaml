@@ -1,6 +1,4 @@
 ---
-
-
 sources:
   kubernetes_source:
     type: redis

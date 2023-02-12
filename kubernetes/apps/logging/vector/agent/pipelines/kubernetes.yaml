@@ -16,6 +16,6 @@ sinks:
     inputs:
       - kubernetes_source
     url: redis://redis-master.logging.svc.cluster.local:6379/0
-    key: test_prod
+    key: "k3s_prod:{{ kubernetes.namespace_labels }}"
     encoding:
       codec: json
