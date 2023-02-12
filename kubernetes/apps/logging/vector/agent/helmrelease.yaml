@@ -39,7 +39,7 @@ spec:
     dataDir: /vector-data-dir
     existingConfigMaps:
       # config
-      - vector-aggregator
+      - vector-agent
       # pipelines
       - kubernetes-pipeline
 
@@ -47,11 +47,11 @@ spec:
       enabled: true
       ClassName: nginx
       annotations:
-        hajimari.io/appName: "vector-aggregator"
+        hajimari.io/appName: "vector-agent"
         hajimari.io/enable: "true"
         hajimari.io/icon: "alarm-light-outline"
       hosts:
-        - hosts: vector.devfu.io
+        - hosts: vector-agent.devfu.io
           paths:
             - path: /
               pathType: ImplementationSpecific
@@ -60,7 +60,7 @@ spec:
                 number: 8686
       tls:
         - hosts:
-            - vector.devfu.io
+            - vector-agent.devfu.io
 
 
     containerPorts:

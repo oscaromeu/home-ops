@@ -12,5 +12,7 @@ resources:
   - ./redis-exporter
   - ./loki/ks.yaml # WIP
   - ./flog
+  - ./vector/ks.yaml
   - ./dashboards
+
 
