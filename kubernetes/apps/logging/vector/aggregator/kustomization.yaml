@@ -13,7 +13,7 @@ configMapGenerator:
 
   - name: kubernetes-pipeline-aggregator
     files:
-      - k3s.yaml=./pipelines/k3s.yaml
+      - k3s_monitoring.yaml=./pipelines/k3s_monitoring.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
