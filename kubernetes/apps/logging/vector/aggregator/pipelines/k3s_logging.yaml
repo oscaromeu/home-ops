@@ -74,8 +74,8 @@ sinks:
       - elasticsearch_filter
     auth:
       strategy: basic
-      user: elastic
-      password: "${ELASTIC_PASSWORD}"
+      user: "${ELASTICSEARCH_USERNAME}"
+      password: "${ELASTICSEARCH_PASSWORD}"
     index: "logs-k3s_prod-logging"
 
 
