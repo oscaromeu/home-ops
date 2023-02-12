@@ -11,7 +11,7 @@ transforms:
   kubernetes_remap:
     type: remap
     inputs:
-      - kubernetes_source
+      - k3s_monitoring_src
     source: |
       # Standardize 'app' index
       .app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"

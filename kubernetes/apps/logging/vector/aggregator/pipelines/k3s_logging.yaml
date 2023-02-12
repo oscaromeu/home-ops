@@ -26,6 +26,17 @@ sinks:
     inputs:
       - k3s_logging_src
 
+  #kubernetes_elasticsearch:
+  #  type: elasticsearch
+  #  inputs:
+  #    - k3s_logging_src
+  #  auth:
+  #    strategy: basic
+  #    user: elastic
+  #    password: ${ELASTIC_PASSWORD}
+  #  index: "k3s_prod-logging-%Y.%m.%d"
+
+
 
 
 
