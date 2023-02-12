@@ -42,14 +42,14 @@ sinks:
   blackhole:
     type: blackhole
     inputs:
-      - filter_by_loki
+      - blakchole_filter
 
   stdout:
     type: console
     encoding:
       codec: "text"
     inputs:
-      - filter_by_flog
+      - loki_filter
 
   loki:
     type: loki
