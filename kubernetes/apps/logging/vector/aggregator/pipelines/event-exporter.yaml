@@ -13,7 +13,7 @@ transforms:
       - kubernetes_source
     source: |
       # Standardize 'app' index
-      #.app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
+      .app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
 
   kubernetes_event-exporter_filter:
     type: filter
