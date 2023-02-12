@@ -22,10 +22,6 @@ transforms:
     condition: |
       starts_with!(.kubernetes.pod_name, "event-")
 
-
-
-
-
 sinks:
 
   kubernetes:
@@ -59,7 +55,7 @@ sinks:
     index: "logs-k3s_prod.bm_prod.{{ kubernetes.namespace_labels.\"kubernetes.io/metadata.name\" }}"
     endpoint: http://elk-es-http.logging.svc.cluster.local:9200
     inputs:
-      - kubernetes_source
+      - kubernetes_remap
     auth:
       strategy: basic
       user: "${ELASTIC_USERNAME}"
