@@ -29,7 +29,7 @@ sinks:
     encoding:
       codec: "text"
     inputs:
-      - kubernetes_event-exporter_filter
+      - kubernetes_remap
 
   kubernetes_loki:
     type: loki
