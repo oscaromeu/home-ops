@@ -3,7 +3,7 @@ sources:
   kubernetes_source:
     type: redis
     url: redis://redis-master.logging.svc.cluster.local:6379/0
-    key: "k3s_prod:logging"
+    key: "k3s_prod:{{ kubernetes.namespace_labels.\"kubernetes.io/metadata.name\" }}"
 
 transforms:
 
@@ -24,20 +24,6 @@ sinks:
       codec: "text"
     inputs:
       - kubernetes_remap
-
-  kubernetes_elasticsearch:
-    type: elasticsearch
-    labels:
-      app: vector
-      environment: production
-    index: "logs-k3s_prod.bm_prod.{{ kubernetes.namespace_labels.\"kubernetes.io/metadata.name\" }}"
-    endpoint: http://elk-es-http.logging.svc.cluster.local:9200
-    inputs:
-      - kubernetes_remap
-    auth:
-      strategy: basic
-      user: "${ELASTIC_USERNAME}"
-      password: "${ELASTIC_PASSWORD}"
 
 
 
