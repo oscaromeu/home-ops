@@ -91,7 +91,7 @@ spec:
         memory: 256Mi
 
     podAnnotations:
-      configmap.reloader.stakater.com/reload: vector-aggregator
+      configmap.reloader.stakater.com/reload: vector-agent
 
     service:
       enabled: true
