@@ -22,7 +22,7 @@ sinks:
   kubernetes:
     type: console
     encoding:
-      codec: "text"
+      codec: "json"
     inputs:
       - kubernetes_remap
 
