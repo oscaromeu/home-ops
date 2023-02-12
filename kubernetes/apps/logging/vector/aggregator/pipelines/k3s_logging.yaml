@@ -76,7 +76,10 @@ sinks:
       strategy: basic
       user: "${ELASTICSEARCH_USERNAME}"
       password: "${ELASTICSEARCH_PASSWORD}"
-    index: "logs-k3s_prod-logging"
+    data_stream: "logs-k3s_prod-logging"
+    bulk:
+      action: "create"
+    endpoint: "https://elastic.logging.svc.cluster.local:9200"
 
 
 
