@@ -43,6 +43,9 @@ sinks:
       namespace: flux-system
     bulk:
       action: "create"
-    endpoint: "https://elk-es-http.logging.svc.cluster.local:9200"
+    endpoints:
+      - "https://elk-es-http.logging.svc.cluster.local:9200"
+    tls:
+      verify_certificate: false
 
 
