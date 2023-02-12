@@ -42,23 +42,23 @@ spec:
       - kubernetes-pipeline-aggregator
 
     ingress:
-      enabled: true
-      ClassName: nginx
-      annotations:
-        hajimari.io/appName: "vector-aggregator"
-        hajimari.io/enable: "true"
-        hajimari.io/icon: "alarm-light-outline"
-      hosts:
-        - hosts: vector.devfu.io
-          paths:
-            - path: /
-              pathType: ImplementationSpecific
-              port:
-                name: api
-                number: 8686
-      tls:
-        - hosts:
-            - vector.devfu.io
+      enabled: false
+      #ClassName: nginx
+      #annotations:
+      #  hajimari.io/appName: "vector-aggregator"
+      #  hajimari.io/enable: "true"
+      #  hajimari.io/icon: "alarm-light-outline"
+      #hosts:
+      #  - hosts: vector.devfu.io
+      #    paths:
+      #      - path: /
+      #        pathType: ImplementationSpecific
+      #        port:
+      #          name: api
+      #          number: 8686
+      #tls:
+      #  - hosts:
+      #      - vector.devfu.io
 
 
     containerPorts:
