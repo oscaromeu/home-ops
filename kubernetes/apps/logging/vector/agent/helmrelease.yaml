@@ -44,23 +44,7 @@ spec:
       - kubernetes-pipeline
 
     ingress:
-      enabled: true
-      ClassName: nginx
-      annotations:
-        hajimari.io/appName: "vector-agent"
-        hajimari.io/enable: "true"
-        hajimari.io/icon: "alarm-light-outline"
-      hosts:
-        - hosts: vector-agent.devfu.io
-          paths:
-            - path: /
-              pathType: ImplementationSpecific
-              port:
-                name: api
-                number: 8686
-      tls:
-        - hosts:
-            - vector-agent.devfu.io
+      enabled: false
 
 
     containerPorts:
