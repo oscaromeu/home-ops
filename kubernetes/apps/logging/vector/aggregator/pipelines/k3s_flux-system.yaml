@@ -43,7 +43,7 @@ sinks:
     #  namespace: flux-system
     bulk:
       #action: "create"
-      index: logs-k3s_prod-flux-system
+      index: logs-k3s_prod.flux-system
     endpoints:
       - "https://elk-es-http.logging.svc.cluster.local:9200"
     tls:
