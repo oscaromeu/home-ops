@@ -33,16 +33,17 @@ sinks:
       - k3s_flux-system_src
     auth:
       strategy: "basic"
-      user: "${ELASTICSEARCH_USERNAME}"
-      password: "${ELASTICSEARCH_PASSWORD}"
-    data_stream:
-      # {data_stream.type}-{data_stream.dataset}-{data_stream.namespace}
-      # https://www.elastic.co/guide/en/ecs/master/ecs-data_stream.html
-      type: logs
-      dataset: "k3s_prod"
-      namespace: flux-system
+      user: "ingestion"
+      password: "monitor"
+    #data_stream:
+    #  # {data_stream.type}-{data_stream.dataset}-{data_stream.namespace}
+    #  # https://www.elastic.co/guide/en/ecs/master/ecs-data_stream.html
+    #  type: logs
+    #  dataset: "k3s_prod"
+    #  namespace: flux-system
     bulk:
-      action: "create"
+      #action: "create"
+      index: logs-k3s_prod-flux-system
     endpoints:
       - "https://elk-es-http.logging.svc.cluster.local:9200"
     tls:
