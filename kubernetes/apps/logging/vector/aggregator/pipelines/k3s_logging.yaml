@@ -21,21 +21,21 @@ transforms:
     inputs:
       - kubernetes_remap
     condition: |
-      .pod_labels.app == "flog-generator"
+      ".pod_labels.app == \"flog-generator\""
 
   blakchole_filter:
     type: filter
     inputs:
       - kubernetes_remap
     condition: |
-      .pod_labels."app.kubernetes.io/name" == "loki"
+      ".pod_labels.\"app.kubernetes.io/name\" == \"loki\""
 
   elasticsearch_filter:
     type: filter
     inputs:
       - kubernetes_remap
     condition: |
-      .pod_labels."app.kubernetes.io/name" != "loki" && .pod_labels.app != "flog-generator"
+      ".pod_labels.\"app.kubernetes.io/name\" != \"loki\" && .pod_labels.app != \"flog-generator\""
 
 sinks:
 
