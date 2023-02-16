@@ -49,7 +49,7 @@ sinks:
     encoding:
       codec: "text"
     inputs:
-      - k3s_monitoring_src
+      -
 
   elasticsearch:
     type: elasticsearch
@@ -69,6 +69,6 @@ sinks:
     bulk:
       action: "create"
     endpoints:
-      - "https://elastic.devfu.io"
+      - "https://elk-es-master.logging.svc.cluster.local:9200"
     tls:
       verify_certificate: false

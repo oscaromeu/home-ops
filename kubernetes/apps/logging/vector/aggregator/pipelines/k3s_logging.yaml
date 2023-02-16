@@ -86,7 +86,7 @@ sinks:
     bulk:
       action: "create"
     endpoints:
-      - "https://elk-es-http.logging.svc.cluster.local:9200"
+      - "https://elk-es-master.logging.svc.cluster.local:9200"
     tls:
       verify_certificate: false
 
