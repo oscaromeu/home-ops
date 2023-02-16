@@ -40,6 +40,7 @@ sinks:
       type: logs
       dataset: "k3s_prod"
       namespace: cert-manager
+    mode: "data_stream"
     bulk:
       action: "create"
     endpoints:

@@ -42,6 +42,7 @@ sinks:
       type: logs
       dataset: "k3s_prod"
       namespace: kube-system
+    mode: "data_stream"
     bulk:
       action: "create"
     endpoints:

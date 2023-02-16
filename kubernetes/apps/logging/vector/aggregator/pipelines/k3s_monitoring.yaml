@@ -65,6 +65,7 @@ sinks:
       type: logs
       dataset: "k3s_prod"
       namespace: monitoring
+    mode: "data_stream"
     bulk:
       action: "create"
     endpoints:
