@@ -51,4 +51,23 @@ sinks:
     inputs:
       - filter_loki
 
-
+  elasticsearch:
+    type: elasticsearch
+    inputs:
+      - k3s_networking_src
+    auth:
+      strategy: "basic"
+      user: "ingestion"
+      password: "monitor" # local temporal user for testing
+    data_stream:
+      # {data_stream.type}-{data_stream.dataset}-{data_stream.namespace}
+      # https://www.elastic.co/guide/en/ecs/master/ecs-data_stream.html
+      type: logs
+      dataset: "k3s_prod"
+      namespace: monitoring
+    bulk:
+      action: "create"
+    endpoints:
+      - "https://elk-es-http.logging.svc.cluster.local:9200"
+    tls:
+      verify_certificate: false

@@ -30,12 +30,11 @@ sinks:
   elasticsearch:
     type: elasticsearch
     inputs:
-      - k3s_flux-system_src
+      - k3s_networking_src
     auth:
       strategy: "basic"
       user: "ingestion"
-      password: "monitor"
-    mode: data_stream
+      password: "monitor" # local temporal user for testing
     data_stream:
       # {data_stream.type}-{data_stream.dataset}-{data_stream.namespace}
       # https://www.elastic.co/guide/en/ecs/master/ecs-data_stream.html
@@ -44,7 +43,6 @@ sinks:
       namespace: flux-system
     bulk:
       action: "create"
-    #  index: logs-k3s_prod.flux-system
     endpoints:
       - "https://elk-es-http.logging.svc.cluster.local:9200"
     tls:

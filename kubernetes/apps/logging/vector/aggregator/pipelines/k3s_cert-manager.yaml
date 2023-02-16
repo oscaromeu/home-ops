@@ -29,11 +29,11 @@ sinks:
   elasticsearch:
     type: elasticsearch
     inputs:
-      - k3s_cert_manager_src
+      - k3s_networking_src
     auth:
       strategy: "basic"
-      user: "${ELASTICSEARCH_USERNAME}"
-      password: "${ELASTICSEARCH_PASSWORD}"
+      user: "ingestion"
+      password: "monitor" # local temporal user for testing
     data_stream:
       # {data_stream.type}-{data_stream.dataset}-{data_stream.namespace}
       # https://www.elastic.co/guide/en/ecs/master/ecs-data_stream.html
