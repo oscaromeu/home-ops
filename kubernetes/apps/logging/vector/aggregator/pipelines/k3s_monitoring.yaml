@@ -54,7 +54,7 @@ sinks:
   elasticsearch:
     type: elasticsearch
     inputs:
-      - kubernetes_remap
+      - k3s_monitoring_src
     auth:
       strategy: "basic"
       user: "ingestion"

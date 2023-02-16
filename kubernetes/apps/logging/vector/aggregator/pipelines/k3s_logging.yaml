@@ -71,7 +71,7 @@ sinks:
   elasticsearch:
     type: elasticsearch
     inputs:
-      - elasticsearch_filter
+      - k3s_logging_src
     auth:
       strategy: "basic"
       user: "ingestion"
