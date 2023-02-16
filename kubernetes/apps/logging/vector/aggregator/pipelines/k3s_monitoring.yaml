@@ -49,7 +49,7 @@ sinks:
     encoding:
       codec: "text"
     inputs:
-      - filter_loki
+      - k3s_monitoring_src
 
   elasticsearch:
     type: elasticsearch
