@@ -6,22 +6,22 @@ sources:
     url: redis://redis-master.logging.svc.cluster.local:6379/0
     key: "k3s_prod:monitoring"
 
-transforms:
-
-  kubernetes_remap:
-    type: remap
-    inputs:
-      - k3s_monitoring_src
-    source: |
-      # Standardize 'app' index
-      .app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
-
-  filter_loki:
-    type: filter
-    inputs:
-      - kubernetes_remap
-    condition: |
-      .app_name == "event-exporter"
+#transforms:
+#
+#  kubernetes_remap:
+#    type: remap
+#    inputs:
+#      - k3s_monitoring_src
+#    source: |
+#      # Standardize 'app' index
+#      .app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
+#
+#  filter_loki:
+#    type: filter
+#    inputs:
+#      - kubernetes_remap
+#    condition: |
+#      .app_name == "event-exporter"
 
 
 
