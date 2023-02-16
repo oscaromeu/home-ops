@@ -39,7 +39,7 @@ sinks:
       # https://www.elastic.co/guide/en/ecs/master/ecs-data_stream.html
       type: logs
       dataset: "k3s_prod"
-      namespace: cert-manager
+      namespace: cert_manager
     mode: "data_stream"
     bulk:
       action: "create"

@@ -44,12 +44,12 @@ sinks:
   #  remove_label_fields: true
   #  remove_timestamp: true
 
-  stdout:
-    type: console
-    encoding:
-      codec: "text"
-    inputs:
-      - k3s_monitoring_src
+  #stdout:
+  #  type: console
+  #  encoding:
+  #    codec: "text"
+  #  inputs:
+  #    - k3s_monitoring_src
 
   elasticsearch:
     type: elasticsearch
