@@ -23,12 +23,12 @@ transforms:
     condition: |
       ".pod_labels.app == \"flog-generator\""
 
-  blakchole_filter:
-    type: filter
-    inputs:
-      - k3s_logging_src
-    condition: |
-      ".pod_labels.\"app.kubernetes.io/name\" == \"loki\""
+  #blakchole_filter:
+  #  type: filter
+  #  inputs:
+  #    - k3s_logging_src
+  #  condition: |
+  #    ".pod_labels.\"app.kubernetes.io/name\" == \"loki\""
 
   elasticsearch_filter:
     type: filter
@@ -39,10 +39,10 @@ transforms:
 
 sinks:
 
-  blackhole:
-    type: blackhole
-    inputs:
-      - blakchole_filter
+  #blackhole:
+  #  type: blackhole
+  #  inputs:
+  #    - blakchole_filter
 
   stdout:
     type: console
