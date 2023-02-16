@@ -30,7 +30,7 @@ sinks:
   elasticsearch:
     type: elasticsearch
     inputs:
-      - k3s_networking_src
+      - k3s_flux-system_src
     auth:
       strategy: "basic"
       user: "ingestion"

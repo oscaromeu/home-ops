@@ -29,7 +29,7 @@ sinks:
   elasticsearch:
     type: elasticsearch
     inputs:
-      - k3s_networking_src
+      - k3s_cert_manager_src
     auth:
       strategy: "basic"
       user: "ingestion"
