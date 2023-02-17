@@ -22,5 +22,9 @@ configMapGenerator:
       - k3s_kube-system.yaml=./pipelines/k3s_kube-system.yaml
       - k3s_longhorn.yaml=./pipelines/k3s_longhorn.yaml
 
+  - name: kube-system-pipeline
+    files:
+      - k3s_kube-system.yaml=./pipelines/k3s_kube-system.yaml
+
 generatorOptions:
   disableNameSuffixHash: true

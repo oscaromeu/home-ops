@@ -63,7 +63,7 @@ sinks:
       # {data_stream.type}-{data_stream.dataset}-{data_stream.namespace}
       # https://www.elastic.co/guide/en/ecs/master/ecs-data_stream.html
       type: logs
-      dataset: "home_ops"
+      dataset: "k3s_prod"
       namespace: monitoring
     mode: "data_stream"
     bulk:
