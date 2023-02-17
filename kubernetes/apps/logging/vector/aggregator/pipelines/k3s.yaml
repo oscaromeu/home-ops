@@ -40,7 +40,7 @@ sinks:
       # https://www.elastic.co/guide/en/ecs/master/ecs-data_stream.html
       type: logs
       dataset: "k3s_prod"
-      namespace: {{ kubernetes.namespace_labels.\"kubernetes.io/metadata.name\" }}
+      namespace: "{{ kubernetes.namespace_labels.\"kubernetes.io/metadata.name\" }}"
     mode: "data_stream"
     bulk:
       action: "create"
