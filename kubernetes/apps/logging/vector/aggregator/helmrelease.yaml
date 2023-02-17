@@ -40,7 +40,6 @@ spec:
       - vector-aggregator
       # pipelines
       - kubernetes-pipeline-aggregator
-      - kube-system-pipeline
 
     ingress:
       enabled: false

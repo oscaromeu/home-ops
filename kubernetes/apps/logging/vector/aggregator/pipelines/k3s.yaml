@@ -1,60 +1,36 @@
 ---
 sources:
 
-  k3s_monitoring_src:
+  k3s_networking_src:
     type: redis
     url: redis://redis-master.logging.svc.cluster.local:6379/0
-    key: "k3s_prod:monitoring"
+    key: "k3s_prod"
 
 #transforms:
 #
 #  kubernetes_remap:
 #    type: remap
 #    inputs:
-#      - k3s_monitoring_src
+#      - kubernetes_source
 #    source: |
 #      # Standardize 'app' index
 #      .app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
-#
-#  filter_loki:
-#    type: filter
-#    inputs:
-#      - kubernetes_remap
-#    condition: |
-#      .app_name == "event-exporter"
-
 
 
 sinks:
 
-
-  #kubernetes_loki:
-  #  type: loki
-  #  batch:
-  #    max_bytes: 2049000
-  #  labels:
-  #    app: event-exporter
-  #    environment: production
-  #  encoding:
-  #    codec: json
-  #  endpoint: http://loki.logging.svc.cluster.local:3100
-  #  inputs:
-  #    - filter_pod_event-exporter
-  #  out_of_order_action: accept
-  #  remove_label_fields: true
-  #  remove_timestamp: true
-
-  #stdout:
+  #kubernetes:
   #  type: console
   #  encoding:
   #    codec: "text"
   #  inputs:
-  #    - k3s_monitoring_src
+  #    - k3s_networking_src
+
 
   elasticsearch:
     type: elasticsearch
     inputs:
-      - k3s_monitoring_src
+      - k3s_networking_src
     auth:
       strategy: "basic"
       user: "ingestion"
@@ -64,7 +40,7 @@ sinks:
       # https://www.elastic.co/guide/en/ecs/master/ecs-data_stream.html
       type: logs
       dataset: "k3s_prod"
-      namespace: monitoring
+      namespace: {{ kubernetes.namespace_labels.\"kubernetes.io/metadata.name\" }}
     mode: "data_stream"
     bulk:
       action: "create"

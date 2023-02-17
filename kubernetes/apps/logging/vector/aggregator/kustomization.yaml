@@ -13,18 +13,7 @@ configMapGenerator:
 
   - name: kubernetes-pipeline-aggregator
     files:
-      - k3s_monitoring.yaml=./pipelines/k3s_monitoring.yaml
-      - k3s_logging.yaml=./pipelines/k3s_logging.yaml
-      - k3s_networking.yaml=./pipelines/k3s_networking.yaml
-      - k3s_cert-manager.yaml=./pipelines/k3s_cert-manager.yaml
-      - k3s_default.yaml=./pipelines/k3s_default.yaml
-      - k3s_flux-system.yaml=./pipelines/k3s_flux-system.yaml
-      - k3s_kube-system.yaml=./pipelines/k3s_kube-system.yaml
-      - k3s_longhorn.yaml=./pipelines/k3s_longhorn.yaml
-
-  - name: kube-system-pipeline
-    files:
-      - k3s_kube-system.yaml=./pipelines/k3s_kube-system.yaml
+      - k3s.yaml=./pipelines/k3s.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
