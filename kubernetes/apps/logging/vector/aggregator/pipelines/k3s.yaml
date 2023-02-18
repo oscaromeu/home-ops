@@ -53,7 +53,7 @@ sinks:
     tls:
       verify_certificate: false
     encoding:
-      only_fields: ["custom_app_name", "kubernetes", "message", "timestamp"]
+      except_fields: ["pod_labels"]
 
 
   loki:
