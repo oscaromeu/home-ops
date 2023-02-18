@@ -175,7 +175,7 @@ spec:
 
     env:
       - name: VECTOR_LOG
-        value: "debug"
+        value: "info"
       - name: ELASTICSEARCH_USERNAME
         value: "ingestion"
       - name: ELASTICSEARCH_PASSWORD
