@@ -1,7 +1,7 @@
 ---
 sources:
 
-  k3s_networking_src:
+  k3s:
     type: redis
     url: redis://redis-master.logging.svc.cluster.local:6379/0
     key: "k3s_prod"
@@ -14,7 +14,7 @@ sources:
 transforms:
   kubernetes_remap:
     type: remap
-    inputs: ["kubernetes_source"]
+    inputs: ["k3s"]
     source: |
       # Standardize 'app' index
       .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
@@ -28,7 +28,7 @@ sinks:
   elasticsearch:
     type: elasticsearch
     inputs:
-      - k3s_prod
+      - k3s
     auth:
       strategy: "basic"
       user: "ingestion"
