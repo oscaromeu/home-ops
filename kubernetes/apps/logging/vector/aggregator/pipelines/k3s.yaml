@@ -6,31 +6,29 @@ sources:
     url: redis://redis-master.logging.svc.cluster.local:6379/0
     key: "k3s_prod"
 
-#transforms:
-#
-#  kubernetes_remap:
-#    type: remap
-#    inputs:
-#      - kubernetes_source
-#    source: |
-#      # Standardize 'app' index
-#      .app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
 
+#
+# Transforms
+#
+
+transforms:
+  kubernetes_remap:
+    type: remap
+    inputs: ["kubernetes_source"]
+    source: |
+      # Standardize 'app' index
+      .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
+
+#
+# Sinks
+#
 
 sinks:
-
-  #kubernetes:
-  #  type: console
-  #  encoding:
-  #    codec: "text"
-  #  inputs:
-  #    - k3s_networking_src
-
 
   elasticsearch:
     type: elasticsearch
     inputs:
-      - k3s_networking_src
+      - k3s_prod
     auth:
       strategy: "basic"
       user: "ingestion"
@@ -40,7 +38,7 @@ sinks:
       # https://www.elastic.co/guide/en/ecs/master/ecs-data_stream.html
       type: logs
       dataset: "k3s_prod"
-      namespace: "test"
+      namespace: "{{ kubernetes.pod_namespace }}"
     mode: "data_stream"
     bulk:
       action: "create"
@@ -48,3 +46,21 @@ sinks:
       - "https://elk-es-master.logging.svc.cluster.local:9200"
     tls:
       verify_certificate: false
+
+
+  loki:
+     type: loki
+     batch:
+       max_bytes: 2049000
+     encoding:
+       codec: json
+     endpoint: http://loki.logging.svc.cluster.local:3100
+     inputs:
+       - kubernetes_remap
+     out_of_order_action: accept
+     remove_label_fields: true
+     remove_timestamp: true
+     labels:
+       app: '{{ custom_app_name }}'
+       namespace: '{{ kubernetes.pod_namespace }}'
+       node: '{{ kubernetes.pod_node_name }}'
