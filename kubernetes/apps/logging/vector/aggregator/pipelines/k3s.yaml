@@ -25,6 +25,8 @@ transforms:
       # Standardize 'app' index
       .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
 
+      # Standardize 'message' name
+      .log = .message
 #
 # Sinks
 #
