@@ -1,6 +1,10 @@
 ---
 sources:
 
+#
+# Sources
+#
+
   k3s:
     type: redis
     url: redis://redis-master.logging.svc.cluster.local:6379/0
@@ -48,6 +52,8 @@ sinks:
       - "https://elk-es-master.logging.svc.cluster.local:9200"
     tls:
       verify_certificate: false
+    encoding:
+      only_fields: ["custom_app_name", "kubernetes", "message", "timestamp"]
 
 
   loki:
