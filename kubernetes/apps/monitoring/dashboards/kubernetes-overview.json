@@ -312,7 +312,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "6AvQOf04z"
+        "uid": "P8E80F9AEF21F6940"
       },
       "gridPos": {
         "h": 8,
@@ -335,9 +335,10 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "6AvQOf04z"
+            "uid": "P8E80F9AEF21F6940"
           },
-          "expr": "{app=\"vector\"}",
+          "editorMode": "code",
+          "expr": "{app=\"event-exporter\"}",
           "queryType": "range",
           "refId": "A"
         }
