@@ -6,7 +6,7 @@ sources:
     url: redis://redis-master.logging.svc.cluster.local:6379/0
     key: "k3s_prod"
     decoding:
-      codec: native_json
+      codec: json
 
 
 #
