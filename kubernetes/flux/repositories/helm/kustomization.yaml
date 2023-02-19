@@ -23,3 +23,4 @@ resources:
   - ./longhorn.yaml
   - ./fairwinds.yaml
   - ./vector.yaml
+  - ./external-secrets.yaml
