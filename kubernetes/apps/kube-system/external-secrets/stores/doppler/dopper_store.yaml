@@ -1,5 +1,5 @@
 apiVersion: external-secrets.io/v1beta1
-kind: ClusterSecretStore
+kind: SecretStore
 metadata:
   name: doppler-auth-api
 spec:
@@ -10,4 +10,3 @@ spec:
           dopplerToken:
             name: doppler-token-auth-api
             key: dopplerToken
-            namespace: kube-system
