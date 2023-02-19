@@ -2,8 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: flog-generator
-  app: flog
-  env: prod
+  app: flog-generator
 spec:
   replicas: 1
   selector:
