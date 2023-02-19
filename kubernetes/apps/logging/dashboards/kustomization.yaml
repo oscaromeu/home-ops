@@ -19,12 +19,3 @@ configMapGenerator:
       labels:
         grafana_dashboard: redis
       disableNameSuffixHash: true
-
-
-  - name: flog
-    files:
-      - flog.json
-    options:
-      labels:
-        grafana_dashboard: flog
-      disableNameSuffixHash: true
