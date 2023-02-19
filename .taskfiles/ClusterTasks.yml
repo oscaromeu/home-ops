@@ -89,3 +89,13 @@ tasks:
       - task: certificates
       - task: ingresses
       - task: pods
+
+  secrets:
+    desc: List all the secrets in your cluster
+    cmds:
+      - kubectl get secrets {{.CLI_ARGS | default "-A"}}
+
+  op:
+    desc: Fetch secrets from 1Password vault
+    cmds:
+      - kubectl get secrets {{.CLI_ARGS | default "-A"}}

@@ -331,6 +331,37 @@ setup_weave_gitops() {
     sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/flux-system/weave-gitops/app/secret.sops.yaml"
 }
 
+
+installManualObjects(){
+  # . "$REPO_ROOT"/setup/.env
+
+  op whoami > /dev/null 2>&1
+  OP_SIGNEDIN=$?
+  if [ $OP_SIGNEDIN != 0 ]; then
+    echo -e "1password (op CLI) is not signed-in, aborting!"
+    exit 1
+  fi
+
+  message "fetching secrets from 1Password vault"
+
+  OP_ACCESS_TOKEN=$(op read "op://home-ops/dpvdxq7wq6wlandxi7qsbdwrrm/credential")
+  OP_CREDENTIALS_JSON=$(op document get "homelab Credentials File" | tr -d '\n')
+
+  message "installing manual secrets and objects"
+
+  ##########
+  # secrets
+  ##########
+
+  kubectl -n kube-system create secret generic op-credentials --from-literal=1password-credentials.json="$(echo $OP_CREDENTIALS_JSON)" --dry-run=client -o yaml > "${PROJECT_DIR}/kubernetes/apps/kube-system/external-secrets/stores/onepassword/secret.sops.yaml"
+  kubectl -n kube-system create secret generic onepassword-token --from-literal=token="$(echo $OP_ACCESS_TOKEN)" --dry-run=client -o yaml > "${PROJECT_DIR}/kubernetes/apps/kube-system/external-secrets/stores/onepassword/secret_token.sops.yaml"
+
+  sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/kube-system/external-secrets/stores/onepassword/secret.sops.yaml"
+  sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/kube-system/external-secrets/stores/onepassword/secret_token.sops.yaml"
+
+
+}
+
 verify_cloudflare() {
     local account_zone=
     local errors=
