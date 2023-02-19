@@ -7,3 +7,4 @@ resources:
 #  - ./metrics-server/ks.yaml
   - ./reloader/ks.yaml
   - ./descheduler/ks.yaml
+  - ./external-secrets/ks.yaml
