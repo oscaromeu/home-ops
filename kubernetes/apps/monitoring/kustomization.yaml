@@ -6,7 +6,7 @@ resources:
   - ./kube-prometheus-stack/ks.yaml
   - ./grafana
   - ./prometheus-adapter/ks.yaml
-  - ./thanos/ks.yaml
+  #- ./thanos/ks.yaml
   - ./botkube/ks.yaml
   - ./vpa/ks.yaml
   - ./goldilocks/ks.yaml
