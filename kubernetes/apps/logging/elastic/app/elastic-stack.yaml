@@ -7,7 +7,7 @@ metadata:
   labels:
     app: elk
 spec:
-  version: 8.6.0
+  version: 8.6.2
   volumeClaimDeletePolicy: DeleteOnScaledownOnly
   nodeSets:
   - name: master
