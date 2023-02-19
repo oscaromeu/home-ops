@@ -36,9 +36,6 @@ spec:
         configmap.reloader.stakater.com/reload: *app
         secret.reloader.stakater.com/reload: *app
 
-    serviceMonitor:
-      enabled: true
-
     communications:
       'default-group':
         socketSlack:
@@ -54,6 +51,18 @@ spec:
           enabled: true
           notification:
             type: short
+
+    serviceMonitor:
+      enabled: true
+    executors:
+      kubectl-read-only:
+        kubectl:
+          enabled: true
+    actions:
+      'describe-created-resource':
+        enabled: false
+      'show-logs-on-error':
+        enabled: true
 
     sources:
       'crds':
@@ -73,6 +82,83 @@ spec:
             - name: notification.toolkit.fluxcd.io/v1beta1/alerts
             - name: monitoring.coreos.com/v1/podmonitors
             - name: monitoring.coreos.com/v1/servicemonitors
+    sources:
+      crds:
+        displayName: CRDS
+        kubernetes:
+          enabled: true
+          namespaces:
+            include:
+              - all
+          events:
+            - create
+            - delete
+            - error
+          resources:
+            - name: helm.toolkit.fluxcd.io/v2beta1/helmreleases
+            - name: source.toolkit.fluxcd.io/v1beta2/helmcharts
+            - name: kustomize.toolkit.fluxcd.io/v1beta2/kustomizations
+            - name: notification.toolkit.fluxcd.io/v1beta1/alerts
+            - name: monitoring.coreos.com/v1/podmonitors
+            - name: monitoring.coreos.com/v1/servicemonitors
+      k8s-recommendation-events:
+        kubernetes:
+          enabled: true
+      k8s-all-events:
+        kubernetes:
+          enabled: true
+          # event:
+          #   message:
+          #     include:
+          #       - ".*" # match all event messages...
+          #     exclude:
+          #       - ".*volsync.*" # ...except those containing 'volsync'
+          resources:
+            - type: v1/pods
+            - type: v1/services
+            - type: networking.k8s.io/v1/ingresses
+            - type: v1/nodes
+            - type: v1/namespaces
+            - type: v1/configmaps
+            - type: rbac.authorization.k8s.io/v1/roles
+            - type: rbac.authorization.k8s.io/v1/rolebindings
+            - type: rbac.authorization.k8s.io/v1/clusterrolebindings
+            - type: rbac.authorization.k8s.io/v1/clusterroles
+            - type: apps/v1/daemonsets
+            - type: apps/v1/deployments
+            - type: apps/v1/statefulsets
+      k8s-create-events:
+        kubernetes:
+          enabled: true
+          resources:
+            - type: v1/pods
+            - type: v1/services
+            - type: networking.k8s.io/v1/ingresses
+            - type: v1/nodes
+            - type: v1/namespaces
+            - type: v1/configmaps
+            - type: apps/v1/deployments
+            - type: apps/v1/statefulsets
+            - type: apps/v1/daemonsets
+      k8s-err-events:
+        kubernetes:
+          enabled: true
+          # event:
+          #   message:
+          #     include:
+          #       - ".*" # match all event messages...
+          #     exclude:
+          #       - ".*volsync.*" # ...except those containing 'volsync'
+
+      k8s-err-with-logs-events:
+        kubernetes:
+          enabled: true
+          # event:
+          #   message:
+          #     include:
+          #       - ".*" # match all event messages...
+          #     exclude:
+          #       - ".*volsync.*" # ...except those containing 'volsync'
 
   valuesFrom:
     - kind: Secret
