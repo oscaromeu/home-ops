@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: logging
 resources:
   - ./helmrelease.yaml
-  - ./secret_ingestion.sops.yaml
+  - ./secret.yaml
 
 configMapGenerator:
   - name: vector-aggregator
