@@ -64,24 +64,7 @@ spec:
       'show-logs-on-error':
         enabled: true
 
-    sources:
-      'crds':
-        displayName: "CRDS"
-        kubernetes:
-          namespaces:
-            include:
-              - all
-          events:
-            - create
-            - delete
-            - error
-          resources:
-            - name: helm.toolkit.fluxcd.io/v2beta1/helmreleases
-            - name: source.toolkit.fluxcd.io/v1beta2/helmcharts
-            - name: kustomize.toolkit.fluxcd.io/v1beta2/kustomizations
-            - name: notification.toolkit.fluxcd.io/v1beta1/alerts
-            - name: monitoring.coreos.com/v1/podmonitors
-            - name: monitoring.coreos.com/v1/servicemonitors
+
     sources:
       crds:
         displayName: CRDS
