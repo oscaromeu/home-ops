@@ -5,4 +5,4 @@ namespace: kube-system
 resources:
   - ./secret.sops.yaml
   - ./dopper_store.yaml
-  - ./test.yaml
+  #- ./test.yaml
