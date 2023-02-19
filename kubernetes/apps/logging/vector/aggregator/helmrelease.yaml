@@ -176,15 +176,9 @@ spec:
     env:
       - name: VECTOR_LOG
         value: "info"
-      - name: ELASTICSEARCH_USERNAME
-        value: "ingestion"
-      - name: ELASTICSEARCH_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            key: ingestion
-            name: elk-es-ingestion-user
+
 
     envFrom:
       - secretRef:
-          name: elk-es-ingestion-user
+          name: es-ingestion-credentials
 

@@ -39,8 +39,8 @@ sinks:
       - kubernetes_remap
     auth:
       strategy: "basic"
-      user: "ingestion"
-      password: "monitor" # local temporal user for testing
+      user: "${ELASTICSEARCH_USERNAME}"
+      password: "${ELASTICSEARCH_PASSWORD}"
     data_stream:
       # {data_stream.type}-{data_stream.dataset}-{data_stream.namespace}
       # https://www.elastic.co/guide/en/ecs/master/ecs-data_stream.html
