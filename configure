@@ -356,6 +356,8 @@ installManualObjects(){
   kubectl -n kube-system create secret generic op-credentials --from-literal=1password-credentials.json="$(echo $OP_CREDENTIALS_JSON)" --dry-run=client -o yaml > "${PROJECT_DIR}/kubernetes/apps/kube-system/external-secrets/stores/onepassword/secret.sops.yaml"
   kubectl -n kube-system create secret generic onepassword-token --from-literal=token="$(echo $OP_ACCESS_TOKEN)" --dry-run=client -o yaml > "${PROJECT_DIR}/kubernetes/apps/kube-system/external-secrets/stores/onepassword/secret_token.sops.yaml"
 
+  HISTIGNORE='*kubectl*' kubectl create secret generic doppler-token-auth-api --from-literal dopplerToken="dp.st.prd.IEo55CwxWsP7WxKK8v478ghrKCeHdXg86V4VqKh2DOI" --dry-run=client -o yaml > "${PROJECT_DIR}/kubernetes/apps/kube-system/external-secrets/stores/doppler/secret.sops.yaml"
+
   sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/kube-system/external-secrets/stores/onepassword/secret.sops.yaml"
   sops --encrypt --in-place "${PROJECT_DIR}/kubernetes/apps/kube-system/external-secrets/stores/onepassword/secret_token.sops.yaml"
 
