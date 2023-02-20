@@ -182,10 +182,10 @@ spec:
       - name: VECTOR_LOG
         value: "info"
 
-      #- name: ELASTICSEARCH_PASSWORD
-      #  valueFrom:
-      #    secretKeyRef:
-      #      key: ELASTICSEARCH_PASSWORD
-      #      name: es-ingestion-credentials
+      - name: ELASTICSEARCH_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            key: ELASTICSEARCH_PASSWORD
+            name: es-ingestion-credentials
 
 
