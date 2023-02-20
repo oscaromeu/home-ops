@@ -188,4 +188,8 @@ spec:
             key: ELASTICSEARCH_PASSWORD
             name: es-ingestion-credentials
 
-
+      - name: ELASTICSEARCH_USERNAME
+        valueFrom:
+          secretKeyRef:
+            key: ELASTICSEARCH_USERNAME
+            name: es-ingestion-credentials
