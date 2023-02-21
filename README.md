@@ -1,163 +1,57 @@
-# Home Ops
+# Home Lab
+
+Current status: _BETA_ (but pretty stable).
 
 ## 📖 Overview
 
 This is a mono repository for my homelab infrastructure. I try to adhere to Infrastructure as Code (IaC) and GitOps practices using the tools like [Ansible](https://www.ansible.com/), [Terraform](https://www.terraform.io/), [Kubernetes](https://kubernetes.io/), [Flux](https://github.com/fluxcd/flux2), [Renovate](https://github.com/renovatebot/renovate) and [GitHub Actions](https://github.com/features/actions).
 
+This projects aims to utilize industry-standard tooling and best practices in order to both perform it's functions and for learning.
 
-## ⛵ Kubernetes
+## 🔍 Features
+
+- [x] Easy to replicate GitOps
+- [x] Modularity; make it easy to add/remove components
+- [x] External DNS updates
+- [x] Automagic cert management
+- [ ] Monitoring, dashboarding and alerting 🚧
+- [ ] Observability 🚧
+- [ ] Data Analytics
+- [ ] In-Cluster Container Registry
+- [ ] Hybrid Onprem/Cloud Cluster Thinkering
+
+## ⛵ Core Components
+
++ [actions-runner-controller](https://github.com/actions/actions-runner-controller): Self-hosted Github runners
++ [cert-manager](https://cert-manager.io/docs/): Creates SSL certificates for services in my k3s cluster.
++ [external-dns](https://github.com/kubernetes-sigs/external-dns): Automatically manages DNS records from my cluster in a cloud DNS provider.
++ [external-secrets](https://github.com/external-secrets/external-secrets/): Managed Kubernetes secrets using [Doppler](https://www.doppler.com).
++ [flannel](https://github.com/flannel-io/flannel): Internal Kubernetes networking plugin.
++ [ingress-nginx](https://github.com/kubernetes/ingress-nginx/): Ingress controller to expose HTTP traffic to pods over DNS.
++ [longhorn](https://longhorn.io): Distributed block storage for persistent storage.
++ [tf-controller](https://github.com/weaveworks/tf-controller): Additional Flux component used to run Terraform from within a Kubernetes Cluster.
++ [volsync](https://github.com/backube/volsync) and [snapscheduler](https://github.com/backube/snapscheduler): Backup and recovery of persistent volume claims.
+
+
+
+## 📜 Changelog
+
+See my _awful_ commit [main history](https://github.com/oscaromeu/home-ops/commits/main) and [legacy history](https://github.com/oscaromeu/home-ops/commits/feature/legacy)
+
+## :handshake:&nbsp; Gratitude and thanks
 
 There is a template over at [onedr0p/flux-cluster-template](https://github.com/onedr0p/flux-cluster-template) if you wanted to try and follow along with some of the practices I used here.
 
-TODO
+Also, a lot of inspiration for this repo came from the following people:
 
-### ⚠️ pre-commit
-
-It is advisable to install [pre-commit](https://pre-commit.com/) and the pre-commit hooks that come with this repository.
-
-1. Enable Pre-Commit
-
-    ```sh
-    task precommit:init
-    ```
-
-2. Update Pre-Commit, though it will occasionally make mistakes, so verify its results.
-
-    ```sh
-    task precommit:update
-    ```
-
-## 📂 Repository structure
-
-The Git repository contains the following directories under `kubernetes` and are ordered below by how Flux will apply them.
-
-```sh
-📁 kubernetes      # Kubernetes cluster defined as code
-├─📁 bootstrap     # Flux installation
-├─📁 flux          # Main Flux configuration of repository
-└─📁 apps          # Apps deployed into the cluster grouped by namespace
-```
-
-## Setting up Age
-
-Here we will create a Age Private and Public key. Using SOPS with Age allows us to encrypt secrets and use them in Ansible and Flux.
-
-1. Create a Age Private / Public Key
-
-```
-age-keygen -o age.agekey
-```
-
-2. Set up the directory for the Age key and move the Age file to it
-
-```
-mkdir -p ~/.config/sops/age
-mv age.agekey ~/.config/sops/age/keys.txt
-```
-
-3. Export the `SOPS_AGE_KEY_FILE` variable in your `bashrc`, `zshrc` or `config.fish` and source it, e.g.
-
-```
-export SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt
-source ~/.bashrc
-```
-
-4. Fill out the Age public key in the `.config.env` under `BOOTSTRAP_AGE_PUBLIC_KEY`, __note__ the public key should
-start with `age` ...
+- [onedr0p/home-cluster](https://github.com/onedr0p/home-cluster)
+- [danmanners/homelab-kube-cluster](https://github.com/danmanners/homelab-kube-cluster)
+- [billimek/k8s-gitops](https://github.com/billimek/k8s-gitops)
+- [toboshii/k8s-gitops](https://github.com/toboshii/k8s-gitops)
+- [bjw-s/k8s-gitops](https://github.com/bjw-s/k8s-gitops)
+- [ricsanfre/pi-cluster](https://github.com/ricsanfre/pi-cluster)
 
 
-### 📄 Configuration
+## Community
 
-📍 The `.config.env` file contains necessary configuration that is needed by Ansible, Terraform and Flux.
-
-1. Copy the `.config.sample.env` to `.config.env` and start filling out all the environment variables.
-
-    **All are required** unless otherwise noted in the comments.
-
-    ```sh
-    cp .config.sample.env .config.env
-    ```
-
-2. Once that is done, verify the configuration is correct by running:
-
-    ```sh
-    task verify
-    ```
-
-3. If you do not encounter any errors run start having the script wire up the templated files and place them where they need to be.
-
-    ```sh
-    task configure
-    ```
-
-### ⚡ Preparing Ubuntu Server with Ansible
-
-📍 Here we will be running a Ansible Playbook to prepare Ubuntu Server for running a Kubernetes cluster.
-
-
-1. Ensure you are able to SSH into your nodes from your workstation using a private SSH key **without a passphrase**. This is how Ansible is able to connect to your remote nodes.
-
-   [How to configure SSH key-based authentication](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server)
-
-2. Install the Ansible deps
-
-    ```sh
-    task ansible:init
-    ```
-
-3. Verify Ansible can view your config
-
-    ```sh
-    task ansible:list
-    ```
-
-4. Verify Ansible can ping your nodes
-
-    ```sh
-    task ansible:ping
-    ```
-
-5. Run the Fedora Server Ansible prepare playbook
-
-    ```sh
-    task ansible:prepare
-    ```
-
-6. Reboot the nodes
-
-    ```sh
-    task ansible:reboot
-    ```
-
-### ⛵ Installing k3s with Ansible
-
-📍 Here we will be running a Ansible Playbook to install [k3s](https://k3s.io/) with [this](https://galaxy.ansible.com/xanmanning/k3s) wonderful k3s Ansible galaxy role. After completion, Ansible will drop a `kubeconfig` in `./kubeconfig` for use with interacting with your cluster with `kubectl`.
-
-☢️ If you run into problems, you can run `task ansible:nuke` to destroy the k3s cluster and start over.
-
-1. Verify Ansible can view your config
-
-    ```sh
-    task ansible:list
-    ```
-
-2. Verify Ansible can ping your nodes
-
-    ```sh
-    task ansible:ping
-    ```
-
-3. Install k3s with Ansible
-
-    ```sh
-    task ansible:install
-    ```
-
-4. Verify the nodes are online
-
-    ```sh
-    task cluster:nodes
-    # NAME           STATUS   ROLES                       AGE     VERSION
-    # k8s-0          Ready    control-plane,master      4d20h   v1.21.5+k3s1
-    # k8s-1          Ready    worker                    4d20h   v1.21.5+k3s1
-    ```
+There is a k8s@home [Discord](https://discord.gg/7PbmHRK) for this community.
