@@ -18,7 +18,7 @@ This projects aims to utilize industry-standard tooling and best practices in or
 - [ ] Observability 🚧
 - [ ] Data Analytics
 - [ ] In-Cluster Container Registry
-- [ ] Hybrid Onprem/Cloud Cluster Thinkering
+- [ ] Hybrid Onprem/Cloud Cluster
 
 ## ⛵ Core Components
 
