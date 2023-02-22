@@ -8,18 +8,6 @@ This is a mono repository for my homelab infrastructure. I try to adhere to Infr
 
 This projects aims to utilize industry-standard tooling and best practices in order to both perform it's functions and for learning.
 
-## 🔍 Features
-
-- [x] Easy to replicate GitOps
-- [x] Modularity; make it easy to add/remove components
-- [x] External DNS updates
-- [x] Automagic cert management
-- [ ] Monitoring, dashboarding and alerting 🚧
-- [ ] Observability 🚧
-- [ ] Data Analytics
-- [ ] In-Cluster Container Registry
-- [ ] Hybrid Onprem/Cloud Cluster
-
 ## ⛵ Core Components
 
 + [actions-runner-controller](https://github.com/actions/actions-runner-controller): Self-hosted Github runners
