@@ -2,7 +2,7 @@
 title: ELK
 ---
 
-# Elasticsearch - Logstash - Kibana
+## Elasticsearch - Logstash - Kibana
 
 The ELK stack (Elasticsearch, Logstash, and Kibana) is a popular open-source solution for storing, searching, and visualizing log data. Filebeat is a log shipper that can be used to send log data to the ELK stack, while Redis is an in-memory data structure store that can be used to buffer log data before it is processed by Logstash.
 
