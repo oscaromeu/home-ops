@@ -42,16 +42,20 @@ spec:
                     "--log.level=info",
                     "--es.uri=https://elk-es-http.logging.svc:9200",
                     "--es.all",
+                    "--es.cluster_settings",
                     "--es.indices",
                     "--es.indices_settings",
                     "--es.indices_mappings",
+                    "--es.aliases",
                     "--es.shards",
                     "--es.snapshots",
+                    "--es.data_streams",
                     "--es.timeout=30s",
                     "--es.ssl-skip-verify",
                     "--es.ca=/usr/share/elasticsearch-exporter/config/certs/ca.crt",
                     "--web.listen-address=:9108",
-                    "--web.telemetry-path=/metrics"]
+                    "--web.telemetry-path=/metrics"
+                    ]
           securityContext:
             capabilities:
               drop:
