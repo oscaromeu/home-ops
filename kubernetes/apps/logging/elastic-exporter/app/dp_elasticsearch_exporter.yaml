@@ -49,7 +49,7 @@ spec:
                     "--es.aliases",
                     "--es.shards",
                     "--es.snapshots",
-                    "--es.data_streams",
+                    "--es.data_stream",
                     "--es.timeout=30s",
                     "--es.ssl-skip-verify",
                     "--es.ca=/usr/share/elasticsearch-exporter/config/certs/ca.crt",
