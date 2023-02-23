@@ -88,9 +88,15 @@ PUT _ilm/policy/logs-home-ops
 
 | **Metric description**  | **Name** | **Metric type** |
 | ------------ | ----------- | ------------------- |
-| Total number of queries     | `indices.search.query_total` | Work: Throughput |
-| Total time spent on queries    | `indices.search.query_time_in_millis`  | Work: Performance               |
-| Number of queries currently in progress    | `indices.search.query_current`    | Work: Throughput |
-| Total number of fetches     | `indices.search.fetch_total`  | Work: Throughput |
-| Total time spent on fetches     | `indices.search.fetch_time_in_millis`  | Work: Performance |
-| Number of fetches currently in progress    | `indices.search.fetch_current`    | Work: Throughput |
+| Total number of queries     | `elasticsearch_indices_search_query_total` | Work: Throughput |
+| Total time spent on queries    | `elasticsearch_indices_search_query_time_seconds`  | Work: Performance               |
+| _Number of queries currently in progress_ **   | `indices.search.query_current`    | Work: Throughput |
+| Total number of fetches     | `elasticsearch_indices_search_fetch_total`  | Work: Throughput |
+| Total time spent on fetches     | `elasticsearch_indices_search_fetch_time_seconds`  | Work: Performance |
+| _Number of fetches currently in progress_  **  | `indices.search.fetch_current`    | Work: Throughput |
+
+** TBD
+
+## References
+
+[Top 10 Elasticsearch Metrics to Watch](https://sematext.com/blog/top-10-elasticsearch-metrics-to-watch/)
