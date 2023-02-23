@@ -76,7 +76,7 @@ PUT _ilm/policy/logs-home-ops
 + Cluster health and node availability
 + Resource saturation and errors
 
-### Cluster health
+### __1. Cluster health__
 
 | METRIC DESCRIPTION | ELASTICSEARCH EXPORTER METRIC NAME  |
 |----------------|--------------------------------------------|
@@ -84,13 +84,13 @@ PUT _ilm/policy/logs-home-ops
 | Number of unasigned shards | `elasticsearch_cluster_health_unassigned_shards`|
 
 
-### Search Performance
+### __2. Search Performance__
 
 | **Metric description**  | **Name** | **Metric type** |
 | ------------ | ----------- | ------------------- |
-| Total number of queries     | `indices.search.query_total`          | Work: Throughput |
-| Total time spent on queries    | `indices.search.query_time_in_millis`      | Work: Performance               |
-| Number of queries currently in progress    | `indices.search.query_current`          | Work: Throughput |
+| Total number of queries     | `indices.search.query_total` | Work: Throughput |
+| Total time spent on queries    | `indices.search.query_time_in_millis`  | Work: Performance               |
+| Number of queries currently in progress    | `indices.search.query_current`    | Work: Throughput |
 | Total number of fetches     | `indices.search.fetch_total`  | Work: Throughput |
 | Total time spent on fetches     | `indices.search.fetch_time_in_millis`  | Work: Performance |
-| Number of fetches currently in progress    | `indices.search.fetch_current`          | Work: Throughput |
+| Number of fetches currently in progress    | `indices.search.fetch_current`    | Work: Throughput |
