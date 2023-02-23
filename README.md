@@ -21,7 +21,6 @@ This projects aims to utilize industry-standard tooling and best practices in or
 + [volsync](https://github.com/backube/volsync) and [snapscheduler](https://github.com/backube/snapscheduler): Backup and recovery of persistent volume claims.
 
 
-
 ## 📜 Changelog
 
 See my _awful_ commit [main history](https://github.com/oscaromeu/home-ops/commits/main) and [legacy history](https://github.com/oscaromeu/home-ops/commits/feature/legacy)

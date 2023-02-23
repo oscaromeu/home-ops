@@ -1,12 +1,10 @@
 ---
-title: ELK
+title: Elastisearch
 ---
 
-## Elasticsearch - Logstash - Kibana
+The ELK stack (Elasticsearch, Logstash, and Kibana) is a popular open-source solution for storing, searching, and visualizing log data.
 
-The ELK stack (Elasticsearch, Logstash, and Kibana) is a popular open-source solution for storing, searching, and visualizing log data. Filebeat is a log shipper that can be used to send log data to the ELK stack, while Redis is an in-memory data structure store that can be used to buffer log data before it is processed by Logstash.
-
-
+## Architecture
 
 The hot/warm architecture is a common design pattern for storing and managing data in Elasticsearch. In this architecture, data is divided into two tiers: a hot tier for actively used data and a warm tier for less frequently used data.
 
@@ -69,3 +67,30 @@ PUT _ilm/policy/logs-home-ops
   }
 }
 ```
+
+## Monitoring
+
++ Search and indexing performance
++ Memory and garbage collection
++ Host-level system and network metrics
++ Cluster health and node availability
++ Resource saturation and errors
+
+### Cluster health
+
+| METRIC DESCRIPTION | ELASTICSEARCH EXPORTER METRIC NAME  |
+|----------------|--------------------------------------------|
+| Cluster status | `elasticsearch_cluster_health_status` |
+| Number of unasigned shards | `elasticsearch_cluster_health_unassigned_shards`|
+
+
+### Search Performance
+
+| **Metric description**  | **Name** | **Metric type** |
+| ------------ | ----------- | ------------------- |
+| Total number of queries     | `indices.search.query_total`          | Work: Throughput |
+| Total time spent on queries    | `indices.search.query_time_in_millis`      | Work: Performance               |
+| Number of queries currently in progress    | `indices.search.query_current`          | Work: Throughput |
+| Total number of fetches     | `indices.search.fetch_total`  | Work: Throughput |
+| Total time spent on fetches     | `indices.search.fetch_time_in_millis`  | Work: Performance |
+| Number of fetches currently in progress    | `indices.search.fetch_current`          | Work: Throughput |
