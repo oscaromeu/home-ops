@@ -77,8 +77,6 @@ nav:
   - Home: index.md
   - Installation:
     - installation/index.md
-  - Administration:
-    - administration/index.md
   - Infrastructure:
     - infrastructure/index.md
     - Data Analytics:
@@ -90,8 +88,10 @@ nav:
       - Prometheus:
         - infrastructure/monitoring/prometheus/index.md
         - infrastructure/monitoring/prometheus/prometheus.md
-
     - Observability:
       - infrastructure/observability/index.md
       - infrastructure/observability/loki.md
+  - Administration:
+    - administration/index.md
+    - administration/elastic.md
 

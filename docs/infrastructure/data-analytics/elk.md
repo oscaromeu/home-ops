@@ -2,6 +2,8 @@
 title: Elastisearch
 ---
 
+## Introduction
+
 The ELK stack (Elasticsearch, Logstash, and Kibana) is a popular open-source solution for storing, searching, and visualizing log data.
 
 ## Architecture
@@ -24,49 +26,32 @@ Also the nodes that store data in the hot tier has the role of "master" and the 
 
 This setup can provide better performance and efficiency for the cluster, as the master nodes can focus on managing the cluster and processing requests for actively used data, while the data nodes can focus on storing and processing less frequently used data. This setup can provide better availability and fault tolerance, as the master nodes can continue to operate even if one or more data nodes fail.
 
+## Infrastructure
 
-## ILM
++ TBD Hot and Warm nodes
 
-### Create new policy
 
-```
-PUT _ilm/policy/logs-home-ops
-{
-  "policy": {
-    "phases": {
-      "hot": {
-        "actions": {
-          "rollover": {
-            "max_age": "5d",
-            "max_primary_shard_size": "1gb"
-          },
-          "set_priority": {
-            "priority": 100
-          },
-          "shrink": {
-            "number_of_shards": 1
-          }
-        },
-        "min_age": "0ms"
-      },
-      "warm": {
-        "min_age": "10d",
-        "actions": {
-          "set_priority": {
-            "priority": 50
-          }
-        }
-      },
-      "delete": {
-        "min_age": "20d",
-        "actions": {
-          "delete": {}
-        }
-      }
-    }
-  }
-}
-```
+## Index Management
+
+[Elasticsearch ILM policies](https://www.elastic.co/guide/en/elasticsearch/reference/current/overview-index-lifecycle-management.html) are used to automatically manage the [data streams](https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams.html) according the performance, resiliency, and retention requirements.
+
+### Index Lifecycle Policy
+
+The following policies have been created.
+
+| Policy Name  | Rollover Policy | Warm Phase | Delete | Index Template |
+|--------------|-----------------|------------|--------| -------------- |
+| logs-k3s     | 1 Gb/5d     | 10d    | 15d| logs |
+
+### Index and Component templates
+
+The logs is composed by the following [Component Templates](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-templates.html):
+
++ logs-mappings
++ data-streams-mappings
++ logs-settings
+
+## Snapshot and restore
 
 ## Monitoring
 
@@ -98,5 +83,5 @@ PUT _ilm/policy/logs-home-ops
 ** TBD
 
 ## References
-
+[Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html)
 [Top 10 Elasticsearch Metrics to Watch](https://sematext.com/blog/top-10-elasticsearch-metrics-to-watch/)
