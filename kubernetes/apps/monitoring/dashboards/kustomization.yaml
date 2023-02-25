@@ -27,3 +27,11 @@ configMapGenerator:
       labels:
         grafana_dashboard: workload-status-performance
       disableNameSuffixHash: true
+
+  - name: cluster-namespace-available-resource
+    files:
+      - cluster-namespace-available-resource.json
+    options:
+      labels:
+        grafana_dashboard: cluster-namespace-available-resource
+      disableNameSuffixHash: true
