@@ -1,4 +1,4 @@
-# Home Lab
+# 🏡 🧪 Home Lab
 
 Current status: _BETA_ (but pretty stable).
 
