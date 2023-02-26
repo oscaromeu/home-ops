@@ -1,0 +1,16 @@
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: ClusterTunnel
+metadata:
+  name: cluster-tunnel
+  namespace: cloudflare-operator-system
+spec:
+  newTunnel:
+    name: homeops-cluster-tunnel
+  size: 2
+  cloudflare:
+    email: oscaromeu@gmail.com
+    domain: devfu.io
+    secret: cloudflare-operator-secret
+    accountName: "oscaromeu"
+    accountId: f50bb5898d5ba0ee9e9d325a786d8390
