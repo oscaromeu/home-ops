@@ -3,8 +3,9 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
   name: cluster-apps-cloudflare-operator
+  namespace: networking
 spec:
-  path: ./kubernetes/apps/networking/cloudflare-operator/app
+  path: ./kubernetes/apps/networking/cloudflare-operator/app/tunnels
   prune: true
   sourceRef:
     kind: GitRepository
@@ -17,6 +18,7 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
   name: cluster-apps-cloudflare-operator-tunnels
+  namespace: networking
 spec:
   dependsOn:
     - name: cluster-apps-cloudflare-operator
