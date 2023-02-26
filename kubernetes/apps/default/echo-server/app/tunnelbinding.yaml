@@ -1,0 +1,13 @@
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: echo-server-tunnel
+  namespace: default
+subjects:
+  - name: echo-server
+    spec:
+      fqdn: echo-server.devfu.io
+tunnelRef:
+  kind: ClusterTunnel
+  name: cluster-tunnel
