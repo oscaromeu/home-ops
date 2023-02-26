@@ -2,12 +2,12 @@
 apiVersion: networking.cfargotunnel.com/v1alpha1
 kind: TunnelBinding
 metadata:
-  name: elastic-tunnel
+  name: kibana-tunnel
   namespace: logging
 subjects:
-  - name: elastic
+  - name: kibana
     spec:
-      fqdn: elastic.devfu.io
+      fqdn: kibana.devfu.io
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
