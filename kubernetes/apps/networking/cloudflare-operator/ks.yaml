@@ -2,12 +2,25 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-cloudflare-operator-tunnel
-  namespace: flux-system
+  name: cluster-apps-cloudflare-operator
+spec:
+  path: ./kubernetes/apps/networking/cloudflare-operator/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: cloudflare-operator
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-apps-cloudflare-operator-tunnels
 spec:
   dependsOn:
     - name: cluster-apps-cloudflare-operator
-  path: ./kubernetes/apps/networking/cloudflare-operator/app
+  path: ./kubernetes/apps/networking/cloudflare-operator/app/tunnels
   prune: true
   sourceRef:
     kind: GitRepository
