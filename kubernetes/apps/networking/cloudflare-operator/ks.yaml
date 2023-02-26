@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-cloudflare-operator
   namespace: networking
 spec:
-  path: ./kubernetes/apps/networking/cloudflare-operator/app/tunnels
+  path: ./config/default
   prune: true
   sourceRef:
     kind: GitRepository
