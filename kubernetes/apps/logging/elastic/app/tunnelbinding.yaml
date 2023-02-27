@@ -5,7 +5,7 @@ metadata:
   name: kibana-tunnel
   namespace: logging
 subjects:
-  - name: kibana
+  - name: elk-kb-http
     spec:
       fqdn: kibana.devfu.io
 tunnelRef:
