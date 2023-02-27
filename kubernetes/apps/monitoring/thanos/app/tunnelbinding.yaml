@@ -5,7 +5,7 @@ metadata:
   name: thanos-tunnel
   namespace: logging
 subjects:
-  - name: thanos
+  - name: thanos-query
     spec:
       fqdn: thanos.devfu.io
 tunnelRef:
