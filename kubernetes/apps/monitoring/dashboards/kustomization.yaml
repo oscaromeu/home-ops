@@ -69,13 +69,13 @@ configMapGenerator:
         grafana_dashboard: k8s-views-global
       disableNameSuffixHash: true
 
-#  - name: k8s-views-namespaces
-#    files:
-#      - k8s-views-namespaces.json
-#    options:
-#      labels:
-#        grafana_dashboard: k8s-views-namespaces
-#      disableNameSuffixHash: true
+  - name: k8s-views-namespaces
+    files:
+      - k8s-views-namespaces.json
+    options:
+      labels:
+        grafana_dashboard: k8s-views-namespaces
+      disableNameSuffixHash: true
 
 #  - name: k8s-views-nodes
 #    files:
