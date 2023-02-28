@@ -93,13 +93,13 @@ configMapGenerator:
         grafana_dashboard: k8s-views-pods
       disableNameSuffixHash: true
 
-#  - name: kube-state-metrics
-#    files:
-#      - kube-state-metrics.json
-#    options:
-#      labels:
-#        grafana_dashboard: kube-state-metrics
-#      disableNameSuffixHash: true
+  - name: kube-state-metrics
+    files:
+      - kube-state-metrics.json
+    options:
+      labels:
+        grafana_dashboard: kube-state-metrics
+      disableNameSuffixHash: true
 
 #  - name: kubernetes-integration
 #    files:
