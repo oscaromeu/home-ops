@@ -53,13 +53,13 @@ configMapGenerator:
         grafana_dashboard: k8s-system-api-server
       disableNameSuffixHash: true
 
-#  - name: k8s-system-coredns
-#    files:
-#      - k8s-system-coredns.json
-#    options:
-#      labels:
-#        grafana_dashboard: k8s-system-coredns
-#      disableNameSuffixHash: true
+  - name: k8s-system-coredns
+    files:
+      - k8s-system-coredns.json
+    options:
+      labels:
+        grafana_dashboard: k8s-system-coredns
+      disableNameSuffixHash: true
 
 #  - name: k8s-views-global
 #    files:
