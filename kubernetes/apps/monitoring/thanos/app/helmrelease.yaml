@@ -60,9 +60,9 @@ spec:
 
     compactor:
       enabled: true
-      retentionResolutionRaw: 90d
+      retentionResolutionRaw: 7d
       retentionResolution5m: 180d
-      retentionResolution1h: 1y
+      retentionResolution1h: 180d
       consistencyDelay: 30m
       compact.concurrency: 6
       downsample.concurrency: 6

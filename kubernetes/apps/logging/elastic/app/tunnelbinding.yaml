@@ -6,8 +6,7 @@ metadata:
   namespace: logging
 subjects:
   - name: elk-kb-http
-    spec:
-      fqdn: kibana.devfu.io
+
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
