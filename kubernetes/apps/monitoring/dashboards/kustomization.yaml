@@ -109,22 +109,6 @@ configMapGenerator:
         grafana_dashboard: kube-state-metrics
       disableNameSuffixHash: true
 
-  - name: kubernetes-monitoring-overview
-    files:
-      - kubernetes-monitoring-overview.json
-    options:
-      labels:
-        grafana_dashboard: kubernetes-monitoring-overview
-      disableNameSuffixHash: true
-
-  - name: kubernetes-overview
-    files:
-      - kubernetes-overview.json
-    options:
-      labels:
-        grafana_dashboard: kubernetes-overview
-      disableNameSuffixHash: true
-
   - name: kubernetes-integration
     files:
       - kubernetes-integration.json
