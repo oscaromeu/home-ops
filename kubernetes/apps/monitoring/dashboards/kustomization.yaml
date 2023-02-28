@@ -45,13 +45,13 @@ configMapGenerator:
 #        grafana_dashboard: cluster-namespace-available-resource
 #      disableNameSuffixHash: true
 
-#  - name: k8s-system-api-server
-#    files:
-#      - k8s-system-api-server.json
-#    options:
-#      labels:
-#        grafana_dashboard: k8s-system-api-server
-#      disableNameSuffixHash: true
+  - name: k8s-system-api-server
+    files:
+      - k8s-system-api-server.json
+    options:
+      labels:
+        grafana_dashboard: k8s-system-api-server
+      disableNameSuffixHash: true
 
 #  - name: k8s-system-coredns
 #    files:
