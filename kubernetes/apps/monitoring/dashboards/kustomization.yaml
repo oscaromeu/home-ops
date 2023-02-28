@@ -4,6 +4,119 @@ namespace: monitoring
 
 configMapGenerator:
 
+  - name: alertmanager
+    files:
+      - alertmanager.json
+    options:
+      labels:
+        grafana_dashboard: alertmanager
+      disableNameSuffixHash: true
+
+#  - name: cardinality-management-1
+#    files:
+#      - cardinality-management-1.json
+#    options:
+#      labels:
+#        grafana_dashboard: cardinality-management-1
+#      disableNameSuffixHash: true
+
+#  - name: cardinality-management-2
+#    files:
+#      - cardinality-management-2.json
+#    options:
+#      labels:
+#        grafana_dashboard: cardinality-management-2
+#      disableNameSuffixHash: true
+
+
+#  - name: cardinality-management-3
+#    files:
+#      - cardinality-management-3.json
+#    options:
+#      labels:
+#        grafana_dashboard: cardinality-management-3
+#      disableNameSuffixHash: true
+
+  - name: cluster-namespace-available-resource
+    files:
+      - cluster-namespace-available-resource.json
+    options:
+      labels:
+        grafana_dashboard: cluster-namespace-available-resource
+      disableNameSuffixHash: true
+
+  - name: k8s-addons-starboard-operator
+    files:
+      - k8s-addons-starboard-operator.json
+    options:
+      labels:
+        grafana_dashboard: k8s-addons-starboard-operator
+      disableNameSuffixHash: true
+
+  - name: k8s-system-api-server
+    files:
+      - k8s-system-api-server.json
+    options:
+      labels:
+        grafana_dashboard: k8s-system-api-server
+      disableNameSuffixHash: true
+
+  - name: k8s-system-coredns
+    files:
+      - k8s-system-coredns.json
+    options:
+      labels:
+        grafana_dashboard: k8s-system-coredns
+      disableNameSuffixHash: true
+
+  - name: k8s-views-global
+    files:
+      - k8s-views-global.json
+    options:
+      labels:
+        grafana_dashboard: k8s-views-global
+      disableNameSuffixHash: true
+
+  - name: k8s-views-namespaces
+    files:
+      - k8s-views-namespaces.json
+    options:
+      labels:
+        grafana_dashboard: k8s-views-namespaces
+      disableNameSuffixHash: true
+
+  - name: k8s-views-nodes
+    files:
+      - k8s-views-nodes.json
+    options:
+      labels:
+        grafana_dashboard: k8s-views-nodes
+      disableNameSuffixHash: true
+
+  - name: k8s-views-pods
+    files:
+      - k8s-views-pods.json
+    options:
+      labels:
+        grafana_dashboard: k8s-views-pods
+      disableNameSuffixHash: true
+
+  - name: kube-state-metrics
+    files:
+      - kube-state-metrics.json
+    options:
+      labels:
+        grafana_dashboard: kube-state-metrics
+      disableNameSuffixHash: true
+
+  - name: kubernetes-monitoring-overview
+    files:
+      - kubernetes-monitoring-overview.json
+    options:
+      labels:
+        grafana_dashboard: kubernetes-monitoring-overview
+      disableNameSuffixHash: true
+
   - name: kubernetes-overview
     files:
       - kubernetes-overview.json
@@ -20,18 +133,27 @@ configMapGenerator:
         grafana_dashboard: kubernetes-integration
       disableNameSuffixHash: true
 
-  - name: workload-status-performance
+  - name: kubernetes-monitoring-overview
+    files:
+      - kubernetes-monitoring-overview.json
+    options:
+      labels:
+        grafana_dashboard: kubernetes-monitoring-overview
+      disableNameSuffixHash: true
+
+  - name: kubernetes-overview
+    files:
+      - kubernetes-overview.json
+    options:
+      labels:
+        grafana_dashboard: kubernetes-overview
+      disableNameSuffixHash: true
+
+  - name: workload-status-perf
     files:
       - workload-status-perf.json
     options:
       labels:
-        grafana_dashboard: workload-status-performance
+        grafana_dashboard: workload-status-perf
       disableNameSuffixHash: true
 
-  - name: cluster-namespace-available-resource
-    files:
-      - cluster-namespace-available-resource.json
-    options:
-      labels:
-        grafana_dashboard: cluster-namespace-available-resource
-      disableNameSuffixHash: true
