@@ -24,6 +24,8 @@ spec:
         - -listen-address=:80
         ports:
         - containerPort: 80
+      nodeSelector:
+        kubernetes.io/arch: arm64
 ---
 # A service that references the demo service deployment.
 apiVersion: v1
