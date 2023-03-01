@@ -16,6 +16,8 @@ spec:
       labels:
         app: demo-service
     spec:
+      nodeSelector:
+        kubernetes.io/arch: arm64
       containers:
       - name: demo-service
         image: demo-service
@@ -24,8 +26,6 @@ spec:
         - -listen-address=:80
         ports:
         - containerPort: 80
-      nodeSelector:
-        kubernetes.io/arch: arm64
 ---
 # A service that references the demo service deployment.
 apiVersion: v1
