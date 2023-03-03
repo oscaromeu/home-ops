@@ -6,6 +6,10 @@ metadata:
   namespace: logging
 subjects:
   - name: elk-kb-http
+    protocol: http
+    target: http://kibana.logging.svc.cluster.local:5601
+    caPool: kibana-tls.crt
+    noTlsVerify: false
 
 tunnelRef:
   kind: ClusterTunnel
