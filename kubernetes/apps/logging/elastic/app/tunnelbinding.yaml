@@ -8,7 +8,7 @@ subjects:
   - name: elk-kb-http
     spec:
       fqdn: kibana.devfu.io
-      target: http://kibana.logging.svc.cluster.local:5601
+      target: https://elk-kb-http.logging.svc.cluster.local:5601
 
 tunnelRef:
   kind: ClusterTunnel
