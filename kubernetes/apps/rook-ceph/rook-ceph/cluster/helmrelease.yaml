@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -67,9 +66,15 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          - name: mbmwk1
+          - name: k8s-3
             devices:
-              - name: nvme0n1p
+              - name: /dev/disk/by-id/nvme-WDC_WDS100T2B0C-00PXH0_194688900123
+          - name: k8s-4
+            devices:
+              - name: /dev/disk/by-id/nvme-WDC_WDS100T2B0C-00PXH0_2014HD454202
+          - name: k8s-5
+            devices:
+              - name: /dev/disk/by-id/nvme-WDC_WDS100T2B0C-00PXH0_2014HD455903
     cephBlockPools:
       - name: ceph-blockpool
         spec:
