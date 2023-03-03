@@ -2,11 +2,12 @@
 apiVersion: networking.cfargotunnel.com/v1alpha1
 kind: TunnelBinding
 metadata:
-  name: kibana-tunnel
+  name: kibana-binding
   namespace: logging
 subjects:
   - name: elk-kb-http
     spec:
+      fqdn: kibana.devfu.io
       target: http://kibana.logging.svc.cluster.local:5601
       caPool: kibana-tls.crt
       noTlsVerify: false
