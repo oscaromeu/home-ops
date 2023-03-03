@@ -9,7 +9,6 @@ subjects:
     spec:
       protocol: https
       fqdn: kibana.devfu.io
-      target: https://elk-kb-http.logging.svc.cluster.local:5601
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
