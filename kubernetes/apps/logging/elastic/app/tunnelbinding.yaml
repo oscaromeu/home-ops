@@ -9,8 +9,6 @@ subjects:
     spec:
       fqdn: kibana.devfu.io
       target: http://kibana.logging.svc.cluster.local:5601
-      caPool: kibana-tls.crt
-      noTlsVerify: false
 
 tunnelRef:
   kind: ClusterTunnel
