@@ -131,6 +131,10 @@ spec:
   count: 1
   elasticsearchRef:
     name: elk
+  config:
+    server:
+      publicBaseUrl: "https://kibana.devfu.io"
+
   #nodeSelector:
   #  kubernetes.io/arch: amd64
 #---
