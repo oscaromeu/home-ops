@@ -1,0 +1,13 @@
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: hajimari-binding
+  namespace: default
+subjects:
+  - name: hajimari
+    spec:
+      fqdn: hajimari.devfu.io
+tunnelRef:
+  kind: ClusterTunnel
+  name: cluster-tunnel

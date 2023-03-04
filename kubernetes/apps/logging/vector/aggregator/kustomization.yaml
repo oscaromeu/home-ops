@@ -5,6 +5,7 @@ namespace: logging
 resources:
   - ./helmrelease.yaml
   - ./secret.yaml
+  - ./tunnelbinding.yaml
 
 configMapGenerator:
   - name: vector-aggregator

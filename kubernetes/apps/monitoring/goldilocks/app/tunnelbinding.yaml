@@ -1,0 +1,13 @@
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: goldilocks-binding
+  namespace: monitoring
+subjects:
+  - name: goldilocks-dashboard
+    spec:
+      fqdn: goldilocks.devfu.io
+tunnelRef:
+  kind: ClusterTunnel
+  name: cluster-tunnel

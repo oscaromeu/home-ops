@@ -1,0 +1,13 @@
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: longhorn-binding
+  namespace: longhorn
+subjects:
+  - name: longhorn-frontend
+    spec:
+      fqdn: longhorn.devfu.io
+tunnelRef:
+  kind: ClusterTunnel
+  name: cluster-tunnel

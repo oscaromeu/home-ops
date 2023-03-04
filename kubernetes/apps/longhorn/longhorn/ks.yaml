@@ -8,6 +8,8 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "false"
 spec:
+  dependsOn:
+    - name: cluster-apps-cloudflare-operator
   path: ./kubernetes/apps/longhorn/longhorn/app
   prune: true
   sourceRef:
