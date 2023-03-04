@@ -10,6 +10,7 @@ subjects:
       protocol: https
       fqdn: kibana.devfu.io
       target: "https://elk-kb-http.logging.svc:5601"
+      noTlsVerify: true
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
