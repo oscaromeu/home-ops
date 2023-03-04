@@ -1,0 +1,13 @@
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: promlens-binding
+  namespace: monitoring
+subjects:
+  - name: promlens
+    spec:
+      fqdn: promlens.devfu.io
+tunnelRef:
+  kind: ClusterTunnel
+  name: cluster-tunnel

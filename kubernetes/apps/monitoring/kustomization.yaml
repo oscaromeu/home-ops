@@ -10,7 +10,7 @@ resources:
   - ./botkube/ks.yaml
   - ./vpa/ks.yaml
   - ./goldilocks/ks.yaml
-  #- ./vector/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
+  - ./promlens/ks.yaml
   - ./dashboards
 
