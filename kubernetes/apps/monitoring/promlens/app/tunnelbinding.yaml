@@ -8,6 +8,8 @@ subjects:
   - name: promlens
     spec:
       fqdn: promlens.devfu.io
+      target: "http://promlens.monitoring.svc:8080"
+      noTlsVerify: true
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
