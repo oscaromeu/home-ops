@@ -134,7 +134,6 @@ spec:
   config:
     server:
       publicBaseUrl: "https://kibana.devfu.io"
-      basePath: ""
 
   #nodeSelector:
   #  kubernetes.io/arch: amd64
