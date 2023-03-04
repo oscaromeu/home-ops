@@ -41,10 +41,10 @@ spec:
           httpGet:
             path: /health
             port: *port
-          initialDelaySeconds: 0
+          initialDelaySeconds: 60
           periodSeconds: 10
-          timeoutSeconds: 1
-          failureThreshold: 3
+          timeoutSeconds: 3
+          failureThreshold: 10
       readiness: *probes
       startup:
         enabled: false
