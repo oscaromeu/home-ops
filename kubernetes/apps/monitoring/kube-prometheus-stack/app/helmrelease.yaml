@@ -5,6 +5,13 @@ metadata:
   name: kube-prometheus-stack
   namespace: monitoring
 spec:
+
+  dependsOn:
+    - name: cluster-apps-cloudflare-operator
+      namespace: cloudflare-operator-system
+    - name: ingress-nginx
+      namespace: networking
+
   interval: 5m
   chart:
     spec:

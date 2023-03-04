@@ -6,3 +6,4 @@ resources:
   - ./secret.sops.yaml
   - ./grafana-secret.sops.yaml
   - ./helmrelease.yaml
+  - ./tunnelbinding.yaml

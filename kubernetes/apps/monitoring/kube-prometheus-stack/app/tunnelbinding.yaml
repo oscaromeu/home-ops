@@ -1,0 +1,13 @@
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: thanos-tunnel
+  namespace: monitoring
+subjects:
+  - name: prometheus-prometheus
+    spec:
+      fqdn: prometheus.devfu.io
+tunnelRef:
+  kind: ClusterTunnel
+  name: cluster-tunnel
