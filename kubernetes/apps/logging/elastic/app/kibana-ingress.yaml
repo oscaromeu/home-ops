@@ -21,7 +21,7 @@
              name: elk-kb-http
              port:
                number: 5601
-         path: "/login?next=%2F"
+         path: "/"
          pathType: Prefix
    tls:
    - hosts:
