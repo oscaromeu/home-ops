@@ -68,7 +68,7 @@ spec:
         resources:
           requests:
             storage: 10Gi
-        storageClassName: longhorn
+        storageClassName: local-path
 
   - name: data
     count: 1
@@ -125,7 +125,7 @@ spec:
         resources:
           requests:
             storage: 10Gi
-        storageClassName: longhorn
+        storageClassName: local-path
 ---
 apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
