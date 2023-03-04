@@ -29,15 +29,18 @@ spec:
       spec:
         containers:
         - name: elasticsearch
+          env:
+            - name: ES_JAVA_OPTS
+              value: "-Xms2g -Xmx2g"
+            - name: READINESS_PROBE_TIMEOUT
+              value: "10"
           resources:
             requests:
               memory: 2Gi
               cpu: 500m
             limits:
-              memory: 32Gi
-          env:
-          - name: READINESS_PROBE_TIMEOUT
-            value: "10"
+              memory: 4Gi
+
 
         #affinity:
         #  podAntiAffinity:
@@ -48,6 +51,7 @@ spec:
         #          matchLabels:
         #            elasticsearch.k8s.elastic.co/cluster-name: elk
         #        topologyKey: kubernetes.io/hostname
+
         nodeSelector:
           kubernetes.io/arch: amd64
       metadata:
@@ -64,7 +68,7 @@ spec:
         resources:
           requests:
             storage: 10Gi
-        storageClassName: local-path
+        storageClassName: longhorn
 
   - name: data
     count: 1
@@ -91,12 +95,16 @@ spec:
       spec:
         containers:
         - name: elasticsearch
+          env:
+            - name: ES_JAVA_OPTS
+              value: "-Xms2g -Xmx2g"
+
           resources:
             requests:
               memory: 2Gi
               cpu: 500m
             limits:
-              memory: 32Gi
+              memory: 4Gi
         #affinity:
         #  podAntiAffinity:
         #    preferredDuringSchedulingIgnoredDuringExecution:
@@ -117,7 +125,7 @@ spec:
         resources:
           requests:
             storage: 10Gi
-        storageClassName: local-path
+        storageClassName: longhorn
 ---
 apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
