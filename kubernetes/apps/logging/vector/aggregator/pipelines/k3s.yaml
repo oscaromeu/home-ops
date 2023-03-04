@@ -1,9 +1,8 @@
 ---
-sources:
-
 #
 # Sources
 #
+sources:
 
   k3s:
     type: redis
@@ -12,11 +11,9 @@ sources:
     decoding:
       codec: json
 
-
 #
 # Transforms
 #
-
 transforms:
   kubernetes_remap:
     type: remap
@@ -30,7 +27,6 @@ transforms:
 #
 # Sinks
 #
-
 sinks:
 
   elasticsearch:
