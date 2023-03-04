@@ -117,13 +117,13 @@ configMapGenerator:
         grafana_dashboard: kubernetes-monitoring-overview
       disableNameSuffixHash: true
 
-#  - name: kubernetes-overview
-#    files:
-#      - kubernetes-overview.json
-#    options:
-#      labels:
-#        grafana_dashboard: kubernetes-overview
-#      disableNameSuffixHash: true
+  - name: kubernetes-overview
+    files:
+      - kubernetes-overview.json
+    options:
+      labels:
+        grafana_dashboard: kubernetes-overview
+      disableNameSuffixHash: true
 
 #  - name: workload-status-perf
 #    files:
