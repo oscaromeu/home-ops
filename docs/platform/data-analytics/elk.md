@@ -2,13 +2,11 @@
 title: Elastisearch
 ---
 
-## Introduction
+## Overview
 
-The ELK stack (Elasticsearch, Logstash, and Kibana) is a popular open-source solution for storing, searching, and visualizing log data.
+### Architecture
 
-## Architecture
-
-The hot/warm architecture is a common design pattern for storing and managing data in Elasticsearch. In this architecture, data is divided into two tiers: a hot tier for actively used data and a warm tier for less frequently used data.
+Elasticsearch is deployed using hot/warm architecture which is a common design pattern for storing and managing data in Elasticsearch. In this architecture, data is divided into two tiers: a hot tier for actively used data and a warm tier for less frequently used data.
 
 Here's how it works:
 
@@ -26,7 +24,7 @@ Also the nodes that store data in the hot tier has the role of "master" and the 
 
 This setup can provide better performance and efficiency for the cluster, as the master nodes can focus on managing the cluster and processing requests for actively used data, while the data nodes can focus on storing and processing less frequently used data. This setup can provide better availability and fault tolerance, as the master nodes can continue to operate even if one or more data nodes fail.
 
-## Infrastructure
+### Infrastructure
 
 + TBD Hot and Warm nodes
 
@@ -41,7 +39,7 @@ The following policies have been created.
 
 | Policy Name  | Rollover Policy | Warm Phase | Delete | Index Template |
 |--------------|-----------------|------------|--------| -------------- |
-| logs-k3s     | 1 Gb/5d     | 10d    | 15d| logs |
+| logs-k3s     | 200 Mb/5d     | 10d    | 15d| logs |
 
 ### Index and Component templates
 

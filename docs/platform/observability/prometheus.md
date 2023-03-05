@@ -2,17 +2,17 @@
 title: Prometheus
 ---
 
-## Getting Started
+## Overview
 
-### Ingest Prometheus Metrics
+## Ingest Prometheus Metrics
 
-#### Service Monitors
+### Service Monitors
 
 A ServiceMonitor is a Kubernetes resource that defines how Prometheus should scrape metrics from a particular service. It specifies the target service(s) to scrape, the endpoint(s) to scrape from, and any required labels or relabelling rules. ServiceMonitors can be created and managed using the Kubernetes API, and are typically used in conjunction with Prometheus Operator, which is an add-on for Prometheus that helps to automate the management of Prometheus instances in a Kubernetes cluster.
 
 The Prometheus Operator uses servicemonitor to automate the process of configuring Prometheus to scrape metrics from specified services, and adapts the configuration according to changes in the services.
 
-##### Examples
+#### Examples
 
 ??? example "The service and service monitor are both in the `default` namespace (click to expand)"
     ```yaml
@@ -92,17 +92,17 @@ The Prometheus Operator uses servicemonitor to automate the process of configuri
         any: true
     ```
 
+### Used Exporters
+
 ## Query the Prometheus metrics
 
 ## Rule evaluation and alerting
 
-## Alert Manager
-
-## Used Exporters
-
 ## Set up horizontal pod autoscaling (HPA)
 
-## Logging and monitoring
+## Storage
+
+## Alerting and monitoring
 
 ## Troubleshooting
 
