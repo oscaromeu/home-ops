@@ -3,18 +3,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-service
+  name: demo
   labels:
-    app: demo-service
+    app: demo
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: demo-service
+      app: demo
   template:
     metadata:
       labels:
-        app: demo-service
+        app: demo
     spec:
       nodeSelector:
         kubernetes.io/arch: arm64
@@ -31,12 +31,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo-service
+  name: demo
   labels:
-    app: demo-service
+    app: demo
 spec:
   ports:
   - port: 80
     name: web
   selector:
-    app: demo-service
+    app: demo
