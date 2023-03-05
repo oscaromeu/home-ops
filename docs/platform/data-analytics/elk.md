@@ -83,5 +83,9 @@ The logs is composed by the following [Component Templates](https://www.elastic.
 ** TBD
 
 ## References
-[Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html)
-[Top 10 Elasticsearch Metrics to Watch](https://sematext.com/blog/top-10-elasticsearch-metrics-to-watch/)
+
+- [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html)
+
+- [Top 10 Elasticsearch Metrics to Watch](https://sematext.com/blog/top-10-elasticsearch-metrics-to-watch/)
+
+- [Elastic Stack Configuration policies](https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-stack-config-policy.html)

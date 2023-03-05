@@ -74,24 +74,20 @@ markdown_extensions:
       alternate_style: true
 
 nav:
+
   - Home: index.md
+
   - Installation:
     - installation/index.md
-  - Infrastructure:
-    - infrastructure/index.md
-    - Data Analytics:
-      - infrastructure/data-analytics/index.md
-      - infrastructure/data-analytics/elk.md
-    - Monitoring:
-      - infrastructure/monitoring/index.md
-      - infrastructure/monitoring/grafana.md
-      - Prometheus:
-        - infrastructure/monitoring/prometheus/index.md
-        - infrastructure/monitoring/prometheus/prometheus.md
-    - Observability:
-      - infrastructure/observability/index.md
-      - infrastructure/observability/loki.md
-  - Administration:
-    - administration/index.md
-    - administration/elastic.md
 
+  - Platform:
+    - platform/index.md
+    - Data Analytics:
+      - platform/data-analytics/index.md
+      - platform/data-analytics/elk.md
+
+    - Observability:
+      - platform/observability/index.md
+      - platform/observability/loki.md
+      - platform/observability/grafana.md
+      - platform/observability/prometheus.md
