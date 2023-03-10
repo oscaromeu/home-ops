@@ -31,9 +31,8 @@ spec:
 
     image:
       registry: docker.io
-      # docker pull clickhouse/clickhouse-server:23.2-alpine
-      repository: clickhouse/clickhouse-server
-      tag: 23.2-alpine
+      repository: bitnami/clickhouse
+      tag: 23.2.3-debian-11-r0
 
     replicasCount: 1
 
@@ -44,6 +43,9 @@ spec:
       limits:
         #cpu: 1000m
         memory: 1024Mi
+
+    nodeSelector:
+      kubernetes.io/arch: amd64
 
     ingress:
       enabled: false
