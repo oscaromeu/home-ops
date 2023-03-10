@@ -78,7 +78,7 @@ spec:
 
     auth:
       username: admin
-      existingSecret: "auth-api-clickhouse-credentials"
+      existingSecret: "clickhouse-credentials"
       existingSecretKey: "CLICKHOUSE_PASSWORD"
 
     zookeeper:
