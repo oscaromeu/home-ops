@@ -34,7 +34,7 @@ spec:
       repository: bitnami/clickhouse
       tag: 23.2.3-debian-11-r0
 
-    replicasCount: 1
+    replicaCount: 1
     shards: 1
 
     resources:
