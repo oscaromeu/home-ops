@@ -74,4 +74,7 @@ spec:
         - ReadWriteOnce
 
 
-
+    auth:
+      username: admin
+      existingSecret: "auth-api-clickhouse-credentials"
+      existingSecretKey: "CLICKHOUSE_PASSWORD"
