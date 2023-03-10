@@ -35,6 +35,8 @@ spec:
       repository: clickhouse/clickhouse-server
       tag: 23.2-alpine
 
+    replicasCount: 1
+
     resources:
       requests:
         cpu: 100m
@@ -78,3 +80,6 @@ spec:
       username: admin
       existingSecret: "auth-api-clickhouse-credentials"
       existingSecretKey: "CLICKHOUSE_PASSWORD"
+
+    zookeeper:
+      replicasCount: 1
