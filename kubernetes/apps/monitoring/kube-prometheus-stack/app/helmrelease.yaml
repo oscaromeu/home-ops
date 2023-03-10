@@ -7,10 +7,8 @@ metadata:
 spec:
 
   dependsOn:
-    - name: cluster-apps-cloudflare-operator
-      namespace: cloudflare-operator-system
-    - name: ingress-nginx
-      namespace: networking
+    - name: cluster-apps-cloudflare-operator-tunnels
+      namespace: flux-system
 
   interval: 5m
   chart:
