@@ -8,7 +8,7 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: "jupyterhub"
+      chart: jupyterhub
       version: 2.0.0
       sourceRef:
         kind: HelmRepository
@@ -24,6 +24,9 @@ spec:
   values:
 
     hub:
+      authenticatePrometheus: false
+      nodeSelector:
+        kubernetes.io/os: amd64
       db:
         storageClassName: longhorn
       resources:
@@ -44,6 +47,16 @@ spec:
           memory: 200M
 
     singleuser:
+      extraNodeAffinity:
+        required:
+          - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                  - amd64
+                  - i386
+                  - i686
+                  - x86
       storage:
         type: dynamic
         capacity: 3Gi
@@ -65,6 +78,9 @@ spec:
           memory: 200M
 
     prePuller:
+      hook:
+        nodeSelector:
+          kubernetes.io/os: amd64
       resources:
         requests:
           cpu: 1m
