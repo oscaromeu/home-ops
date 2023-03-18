@@ -1,0 +1,93 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app jupyterhub
+  namespace: data
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: jupyterhub/jupyterhub
+      version: 2.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: jupyterhub
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+
+    hub:
+      db:
+        storageClassName: longhorn
+      resources:
+        requests:
+          cpu: 0.5
+          memory: 1G
+        limits:
+          #cpu: 1
+          memory: 2G
+
+    proxy:
+      resources:
+        requests:
+          cpu: 1m
+          memory: 100M
+        limits:
+          #cpu: 1
+          memory: 200M
+
+    singleuser:
+      storage:
+        type: dynamic
+        capacity: 3Gi
+        dynamic:
+          storageClass: longhorn
+      cpu:
+        guarantee: 0.5
+      memory:
+        limit: 5G
+        guarantee: 0.5G
+
+    scheduling:
+      resources:
+        requests:
+          cpu: 1m
+          memory: 100M
+        limits:
+          #cpu: 1
+          memory: 200M
+
+    prePuller:
+      resources:
+        requests:
+          cpu: 1m
+          memory: 100M
+        limits:
+          #cpu: 1
+          memory: 200M
+
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-staging
+        #external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+        external-dns.home.arpa/enabled: "true"
+        hajimari.io/icon: video-input-antenna
+      hosts:
+        - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - *host
+          secretName: "{{ .Release.Name }}-tls"
+
