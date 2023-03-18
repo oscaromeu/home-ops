@@ -114,10 +114,14 @@ The default scrape frequency for all defult targets and scrapes is 30 seconds.
 
 #### Targets scrapped
 
-+ `cadvisor` (`job=kubelet`)
-+ `nodeexporter` (`job=node-exporter`)
-+ `kubelet` (`job=kubelet`)
-+ `kube-state-metrics` (`job=kube-state-metrics`)
+
++ `cadvisor` (`job=kubelet`) cAdvisor (short for "Container Advisor") is a tool that provides container-level metrics and resource usage statistics for Docker and other container systems. In Kubernetes, cAdvisor is usually run as a part of the kubelet on each node and collects metrics about the containers running on that node.
+
++ `nodeexporter` (`job=node-exporter`)  Prometheus exporter that collects various system-level metrics from a node in a Kubernetes cluster, including CPU usage, memory usage, disk usage, network usage, and more. It is typically run as a separate process on each node, and its metrics can be used to monitor the health and performance of the nodes themselves.
+
++ `kubelet` (`job=kubelet`) Metrics about kubelet which is the primary "node agent" in a Kubernetes cluster, responsible for managing the containers and pods that are scheduled to run on a given node. Among other things, kubelet communicates with the API server to retrieve information about which pods it should be running, and then starts and stops containers as necessary to keep the desired state of the system.
+
++ `kube-state-metrics` (`job=kube-state-metrics`) kube-state-metrics is a tool that provides detailed metrics about the state of various Kubernetes objects, such as pods, deployments, services, and more. It runs as a separate process and exposes its metrics in a Prometheus-compatible format, allowing users to monitor the state of their Kubernetes cluster and troubleshoot any issues that arise.
 
 #### Metrics collected from default targets
 
@@ -174,25 +178,35 @@ The following metrics are collected by default from each default target. All oth
 | kubelet_pleg_relist_interval_seconds_sum | The total time taken to perform all PLEG relisting operations, in seconds | Performance |
 | kubelet_pleg_relist_duration_seconds_bucket | The
 
-| Metric Name                            | Metric Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Metric Type     |
-|----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
-| node_memory_MemTotal_bytes             | Total physical memory available on the node in bytes. This metric includes all types of memory (RAM, swap, etc.)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Performance     |
-| node_cpu_seconds_total                 | Total CPU time consumed by the node in seconds. This metric represents the total amount of CPU time that the node has used since it was last rebooted.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Performance     |
-| node_memory_MemAvailable_bytes         | Memory available for new processes in bytes. This metric represents the amount of memory that is currently available for new processes to use. It takes into account the amount of memory that is being used by the kernel, as well as the amount of memory that is being used by other processes.| Performance     |
-| node_memory_Buffers_bytes              | Memory used by the kernel for buffering I/O operations in bytes. This metric represents the amount of memory that the kernel is using to buffer I/O operations. This is used to improve the performance of disk and network I/O. | Performance     |
-| node_memory_Cached_bytes               | Memory used by the kernel for caching file system data in bytes. This metric represents the amount of memory that the kernel is using to cache file system data. This is used to improve the performance of file system operations.  | Performance     |
-| node_memory_MemFree_bytes              | Total free memory available on the node in bytes. This metric represents the amount of memory that is currently not being used by the system. It takes into account the amount of memory that is being used by the kernel, as well as the amount of memory that is being used by other processes.  | Performance     |
-| node_memory_Slab_bytes                 | Memory used by the kernel to cache data structures in bytes. This metric represents the amount of memory that the kernel is using to cache data structures. This is used to improve the performance of certain kernel operations. | Performance     |
-| node_filesystem_avail_bytes            | Available disk space on the node's filesystem in bytes. This metric represents the amount of disk space that is currently available on the node's filesystem. | Performance     |
-| node_filesystem_size_bytes             | Total size of the node's filesystem in bytes. This metric represents the total amount of disk space that is available on the node's filesystem. | Performance     |
-| node_time_seconds                      | The current system time in seconds. This metric represents the current system time on the node.  | Performance     |
-| node_exporter_build_info               | Information about the Node Exporter build, including the version, revision, and build date.  | Throughput      |
-| node_load1                             | The load average over the last 1 minute. The load average represents the average number of processes that are either in a runnable or uninterruptable state. | Performance     |
-| node_vmstat_pgmajfault                | The number of major page faults that have occurred on the node. A major page fault occurs when a process requests a page that is not currently in memory and the page has to be read in from disk. | Performance     |
-| node_network_receive_bytes_total       | The total number of bytes received by the node's network interfaces.
+##### Node Exporter
 
+| Metric Name                            | Metric Description    | Metric Type  | Metric Category |
+|----------------------------------------|------------------------|--------------|----------------|
+| node_memory_MemTotal_bytes             | Total physical memory available on the node in bytes. This metric includes all types of memory (RAM, swap, etc.)  | Gauge        | Performance     |
+| node_cpu_seconds_total                 | Total CPU time consumed by the node in seconds. This metric represents the total amount of CPU time that the node has used since it was last rebooted.  | Counter      | Performance     |
+| node_memory_MemAvailable_bytes         | Memory available for new processes in bytes. | Gauge        | Performance     |
+| node_memory_Buffers_bytes              | Memory used by the kernel for buffering I/O operations in bytes. This is used to improve the performance of disk and network I/O.  | Gauge        | Performance     |
+| node_memory_Cached_bytes               | Memory used by the kernel for caching file system data in bytes.  This is used to improve the performance of file system operations. | Gauge        | Performance     |
+| node_memory_MemFree_bytes              | Total free memory available on the node in bytes.   | Gauge        | Performance     |
+| node_memory_Slab_bytes                 | Memory used by the kernel to cache data structures in bytes.  This is used to improve the performance of certain kernel operations.  | Gauge        | Performance     |
+| node_filesystem_avail_bytes            | Available disk space on the node's filesystem in bytes.  | Gauge        | Performance     |
+| node_filesystem_size_bytes             | Total size of the node's filesystem in bytes.  | Gauge        | Performance     |
+| node_time_seconds                      | The current system time in seconds.| Counter      | Performance     |
+| node_exporter_build_info               | Information about the Node Exporter build, including the version, revision, and build date. | Gauge        | Throughput      |
+| node_load1                             | The load average over the last 1 minute.  | Gauge        | Throughput      |
+| node_network_receive_bytes_total       | Total number of bytes received by the node's network interfaces.  | Counter      | Throughput      |
+| node_network_transmit_bytes_total      | Total number of bytes transmitted by the node's network interfaces.  | Counter      | Throughput      |
+| node_network_receive_drop_total        | Total number of incoming network packets that were dropped by the node.   | Counter      | Throughput      |
+| node_network_transmit_drop_total       | Total number of outgoing network packets that were dropped by the node.  | Counter      | Throughput      |
+| node_disk_io_time_seconds_total        | Total number of seconds spent doing I/Os on the disk by the node.  | Counter      | Performance     |
+| node_disk_io_time_weighted_seconds_total | Total weighted number of seconds spent doing I/Os on the disk by the node.  | Counter      | Performance     |
+| node_load5                             | Average load over the last 5 minutes. The load average represents the average number of processes that are either in a runnable or uninterruptable state. | Gauge        | Performance     |
+| node_load15                            | Average load over the last 15 minutes. The load average represents the average number of processes that are either in a runnable or uninterruptable state.| Gauge        | Performance     |
+| node_disk_read_bytes_total             | Total number of bytes read from the disk by the node.  | Counter      | Throughput      |
+| node_disk_written_bytes_total          | Total number of bytes written to the disk by the node. | Counter      | Throughput      |
+| node_uname_info                        | Information about the operating system running on the node, including the operating system name, version, and architecture.   | Gauge        | Informational   |
 
-## Troubleshooting
+# Troubleshooting
 
 ### ServiceMonitor not showing up in targets
 
