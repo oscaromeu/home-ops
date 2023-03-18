@@ -95,10 +95,10 @@ spec:
 
         resources:
           requests:
-            cpu: 125m
-            memory: 4744M
+            cpu: 100m
+            memory: 2000M
           limits:
-            memory: 9259M
+            memory: 4744M
 
         #remoteWrite:
         #  - url: "https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push"
