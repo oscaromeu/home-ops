@@ -87,12 +87,6 @@ spec:
           - hosts:
               - prometheus.devfu.io
 
-      resources:
-        requests:
-          cpu: 125m
-          memory: 4744M
-        limits:
-          memory: 9259M
 
       thanosService:
         enabled: true
@@ -102,6 +96,14 @@ spec:
 
       prometheusSpec:
         scrapeInterval: 60s
+
+        resources:
+          requests:
+            cpu: 125m
+            memory: 4744M
+          limits:
+            memory: 9259M
+
         #remoteWrite:
         #  - url: "https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push"
         #    basicAuth:
