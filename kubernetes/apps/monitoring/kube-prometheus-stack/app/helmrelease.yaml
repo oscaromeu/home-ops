@@ -89,10 +89,10 @@ spec:
 
       resources:
         requests:
-          cpu: 250m
-          memory: 512Mi
+          cpu: 125m
+          memory: 4744M
         limits:
-          memory: 2048Mi
+          memory: 9259M
 
       thanosService:
         enabled: true
