@@ -85,9 +85,9 @@ configMapGenerator:
 #        grafana_dashboard: k8s-views-nodes
 #      disableNameSuffixHash: true
 
-  - name: k8s-views-pods
+  - name: k8s-detailed-overview-pods
     files:
-      - k8s-views-pods.json
+      - k8s-detailed-overview-pods.json
     options:
       labels:
         grafana_dashboard: k8s-views-pods
