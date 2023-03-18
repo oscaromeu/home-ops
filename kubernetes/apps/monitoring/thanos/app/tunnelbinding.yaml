@@ -15,7 +15,7 @@ tunnelRef:
 apiVersion: networking.cfargotunnel.com/v1alpha1
 kind: TunnelBinding
 metadata:
-  name: thanos-tunnel
+  name: thanos-tunnel-bucketweb
   namespace: monitoring
 subjects:
   - name: thanos-bucketweb
