@@ -72,10 +72,10 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             limits:
-              memory: 128Mi
+              memory: 40Mi
             requests:
-              cpu: 10000m
-              memory: 128Mi
+              cpu: 2m
+              memory: 25Mi
           args:
             - -conf=/data/config.yaml
           volumeMounts:
