@@ -7,6 +7,11 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+
+  dependsOn:
+    - name: cluster-apps-cloudflare-operator-tunnels
+      namespace: flux-system
+
   path: ./kubernetes/apps/monitoring/kube-prometheus-stack/app
   prune: true
   sourceRef:
