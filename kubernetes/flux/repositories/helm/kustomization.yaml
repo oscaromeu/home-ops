@@ -26,3 +26,4 @@ resources:
   - ./external-secrets.yaml
   - ./1password.yaml
   - ./jupyter.yaml
+  - ./kyverno.yaml
