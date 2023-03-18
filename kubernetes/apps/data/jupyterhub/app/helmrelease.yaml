@@ -57,6 +57,7 @@ spec:
                   - i386
                   - i686
                   - x86
+
       storage:
         type: dynamic
         capacity: 3Gi
