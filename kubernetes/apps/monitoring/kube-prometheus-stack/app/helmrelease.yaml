@@ -167,3 +167,11 @@ spec:
                - __meta_kubernetes_pod_node_name
              targetLabel: kubernetes_node
 
+    prometheus-node-exporter:
+      prometheus:
+        monitor:
+          metricRelabelings:
+            - action: keep
+              regex: 'node_memory_MemTotal_bytes|node_cpu_seconds_total|node_memory_MemAvailable_bytes|node_memory_Buffers_bytes|node_memory_Cached_bytes|node_memory_MemFree_bytes|node_memory_Slab_bytes|node_filesystem_avail_bytes|node_filesystem_size_bytes|node_time_seconds|node_exporter_build_info|node_load1|node_vmstat_pgmajfault|node_network_receive_bytes_total|node_network_transmit_bytes_total|node_network_receive_drop_total|node_network_transmit_drop_total|node_disk_io_time_seconds_total|node_disk_io_time_weighted_seconds_total|node_load5|node_load15|node_disk_read_bytes_total|node_disk_written_bytes_total|node_uname_info'
+              sourceLabels: [__name__]
+
