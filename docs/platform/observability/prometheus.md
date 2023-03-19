@@ -112,8 +112,7 @@ This entry list the default targets, dashboards, and recording rules available w
 
 The default scrape frequency for all defult targets and scrapes is 30 seconds.
 
-#### Targets scrapped
-
+#### Default targets scrapped
 
 + `cadvisor` (`job=kubelet`) cAdvisor (short for "Container Advisor") is a tool that provides container-level metrics and resource usage statistics for Docker and other container systems. In Kubernetes, cAdvisor is usually run as a part of the kubelet on each node and collects metrics about the containers running on that node.
 
@@ -123,88 +122,158 @@ The default scrape frequency for all defult targets and scrapes is 30 seconds.
 
 + `kube-state-metrics` (`job=kube-state-metrics`) kube-state-metrics is a tool that provides detailed metrics about the state of various Kubernetes objects, such as pods, deployments, services, and more. It runs as a separate process and exposes its metrics in a Prometheus-compatible format, allowing users to monitor the state of their Kubernetes cluster and troubleshoot any issues that arise.
 
+
 #### Metrics collected from default targets
 
 The following metrics are collected by default from each default target. All other metrics are dropped through relabeling rules.
 
-##### cadvisor
+??? cAdvisor List of metrics
 
-| Name                                        | Metric Description                          | Metric Type   |
-|---------------------------------------------|---------------------------------------------|---------------|
-| container_memory_rss                  | Measures the amount of memory a container is currently using in RAM.   | Performance   |
-| container_network_receive_bytes_total     | Measures the total number of bytes received over the network by a container        | Throughput    |
-| container_network_transmit_bytes_total    | Measures the total number of bytes transmitted over the network by a container     | Throughput    |
-| container_network_receive_packets_total   | Measures the total number of network packets received by a container               | Throughput    |
-| container_network_transmit_packets_total  | Measures the total number of network packets transmitted by a container            | Throughput    |
-| container_network_receive_packets_dropped_total | Measures the total number of network packets dropped while being received by a container  | Throughput    |
-| container_network_transmit_packets_dropped_total | Measures the total number of network packets dropped while being transmitted by a container | Throughput    |
-| container_fs_reads_total                  | Measures the total number of filesystem reads performed by a container            | Throughput    |
-| container_fs_writes_total                 | Measures the total number of filesystem writes performed by a container           | Throughput    |
-| container_fs_reads_bytes_total            | Measures the total number of bytes read from the filesystem by a container        | Throughput    |
-| container_fs_writes_bytes_total           | Measures the total number of bytes written to the filesystem by a container       | Throughput    |
-| container_cpu_usage_seconds_total         | Measures the cumulative CPU time consumed by a container in seconds               | Performance   |
+    + `container_cpu_cfs_periods_total`
+    + `container_cpu_cfs_throttled_periods_total`
+    + `container_cpu_cfs_throttled_seconds_total`
+    + `container_cpu_usage_seconds_total`
+    + `container_memory_rss`
+    + `container_memory_usage_bytes`
+    + `container_memory_working_set_bytes`
+    + `container_network_receive_bytes_total`
+    + `container_network_transmit_bytes_total`
+    + `container_network_receive_packets_total`
+    + `container_network_transmit_packets_total`
+    + `container_network_receive_packets_dropped_total`
+    + `container_network_transmit_packets_dropped_total`
+    + `container_oom_events_total`
+    + `container_fs_reads_total`
+    + `container_fs_writes_total`
+    + `container_fs_reads_bytes_total`
+    + `container_fs_writes_bytes_total`
 
-##### kubelet
 
-| Metric Name | Metric Description | Metric Type |
-|-------------|--------------------|-------------|
-| kubelet_node_name | The name of the Kubernetes node that the kubelet is running on | None |
-| kubelet_running_pods | The number of pods that are currently running on the node | Performance |
-| kubelet_running_pod_count | The number of running pods on the node | Performance |
-| kubelet_running_sum_containers | The total number of containers that are currently running on the node | Performance |
-| kubelet_running_container_count | The number of running containers on the node | Performance |
-| volume_manager_total_volumes | The total number of volumes managed by the kubelet's volume manager | Performance |
-| kubelet_node_config_error | The number of times the kubelet failed to load node configuration due to errors | Throughput |
-| kubelet_runtime_operations_total | The total number of runtime operations performed by the kubelet | Performance |
-| kubelet_runtime_operations_errors_total | The total number of runtime operation errors encountered by the kubelet | Performance |
-| kubelet_runtime_operations_duration_seconds_bucket | The bucketed histogram of durations for runtime operations performed by the kubelet | Performance |
-| kubelet_runtime_operations_duration_seconds_sum | The total time taken to perform all runtime operations, in seconds | Performance |
-| kubelet_runtime_operations_duration_seconds_count | The total number of runtime operations performed by the kubelet, summed across all buckets | Performance |
-| kubelet_pod_start_duration_seconds_bucket | The bucketed histogram of durations for pod start operations performed by the kubelet | Performance |
-| kubelet_pod_start_duration_seconds_sum | The total time taken to start all pods, in seconds | Performance |
-| kubelet_pod_start_duration_seconds_count | The total number of pod start operations performed by the kubelet, summed across all buckets | Performance |
-| kubelet_pod_worker_duration_seconds_bucket | The bucketed histogram of durations for pod worker operations performed by the kubelet | Performance |
-| kubelet_pod_worker_duration_seconds_sum | The total time taken to perform all pod worker operations, in seconds | Performance |
-| kubelet_pod_worker_duration_seconds_count | The total number of pod worker operations performed by the kubelet, summed across all buckets | Performance |
-| storage_operation_duration_seconds_bucket | The bucketed histogram of durations for storage operations performed by the kubelet | Performance |
-| storage_operation_duration_seconds_sum | The total time taken to perform all storage operations, in seconds | Performance |
-| storage_operation_duration_seconds_count | The total number of storage operations performed by the kubelet, summed across all buckets | Performance |
-| storage_operation_errors_total | The total number of errors encountered during storage operations performed by the kubelet | Performance |
-| kubelet_cgroup_manager_duration_seconds_bucket | The bucketed histogram of durations for cgroup manager operations performed by the kubelet | Performance |
-| kubelet_cgroup_manager_duration_seconds_sum | The total time taken to perform all cgroup manager operations, in seconds | Performance |
-| kubelet_cgroup_manager_duration_seconds_count | The total number of cgroup manager operations performed by the kubelet, summed across all buckets | Performance |
-| kubelet_pleg_relist_interval_seconds_bucket | The bucketed histogram of intervals at which kubelet pod lifecycle event generator (PLEG) performs relisting operations | Performance |
-| kubelet_pleg_relist_interval_seconds_count | The total number of PLEG relisting operations performed by the kubelet, summed across all buckets | Performance |
-| kubelet_pleg_relist_interval_seconds_sum | The total time taken to perform all PLEG relisting operations, in seconds | Performance |
-| kubelet_pleg_relist_duration_seconds_bucket | The
+    Check the following table in the [cAdvisor documentation](https://github.com/google/cadvisor/blob/master/docs/storage/prometheus.md) in case there is any doubt regards the type of the metric, what it is his purpose or the units
 
-##### Node Exporter
+??? kubelet List of metrics
 
-| Metric Name                            | Metric Description    | Metric Type  | Metric Category |
-|----------------------------------------|------------------------|--------------|----------------|
-| node_memory_MemTotal_bytes             | Total physical memory available on the node in bytes. This metric includes all types of memory (RAM, swap, etc.)  | Gauge        | Performance     |
-| node_cpu_seconds_total                 | Total CPU time consumed by the node in seconds. This metric represents the total amount of CPU time that the node has used since it was last rebooted.  | Counter      | Performance     |
-| node_memory_MemAvailable_bytes         | Memory available for new processes in bytes. | Gauge        | Performance     |
-| node_memory_Buffers_bytes              | Memory used by the kernel for buffering I/O operations in bytes. This is used to improve the performance of disk and network I/O.  | Gauge        | Performance     |
-| node_memory_Cached_bytes               | Memory used by the kernel for caching file system data in bytes.  This is used to improve the performance of file system operations. | Gauge        | Performance     |
-| node_memory_MemFree_bytes              | Total free memory available on the node in bytes.   | Gauge        | Performance     |
-| node_memory_Slab_bytes                 | Memory used by the kernel to cache data structures in bytes.  This is used to improve the performance of certain kernel operations.  | Gauge        | Performance     |
-| node_filesystem_avail_bytes            | Available disk space on the node's filesystem in bytes.  | Gauge        | Performance     |
-| node_filesystem_size_bytes             | Total size of the node's filesystem in bytes.  | Gauge        | Performance     |
-| node_time_seconds                      | The current system time in seconds.| Counter      | Performance     |
-| node_exporter_build_info               | Information about the Node Exporter build, including the version, revision, and build date. | Gauge        | Throughput      |
-| node_load1                             | The load average over the last 1 minute.  | Gauge        | Throughput      |
-| node_network_receive_bytes_total       | Total number of bytes received by the node's network interfaces.  | Counter      | Throughput      |
-| node_network_transmit_bytes_total      | Total number of bytes transmitted by the node's network interfaces.  | Counter      | Throughput      |
-| node_network_receive_drop_total        | Total number of incoming network packets that were dropped by the node.   | Counter      | Throughput      |
-| node_network_transmit_drop_total       | Total number of outgoing network packets that were dropped by the node.  | Counter      | Throughput      |
-| node_disk_io_time_seconds_total        | Total number of seconds spent doing I/Os on the disk by the node.  | Counter      | Performance     |
-| node_disk_io_time_weighted_seconds_total | Total weighted number of seconds spent doing I/Os on the disk by the node.  | Counter      | Performance     |
-| node_load5                             | Average load over the last 5 minutes. The load average represents the average number of processes that are either in a runnable or uninterruptable state. | Gauge        | Performance     |
-| node_load15                            | Average load over the last 15 minutes. The load average represents the average number of processes that are either in a runnable or uninterruptable state.| Gauge        | Performance     |
-| node_disk_read_bytes_total             | Total number of bytes read from the disk by the node.  | Counter      | Throughput      |
-| node_disk_written_bytes_total          | Total number of bytes written to the disk by the node. | Counter      | Throughput      |
-| node_uname_info                        | Information about the operating system running on the node, including the operating system name, version, and architecture.   | Gauge        | Informational   |
+    + `kubelet_node_name`
+    + `kubelet_running_pods`
+    + `kubelet_running_pod_count`
+    + `kubelet_running_sum_containers`
+    + `kubelet_running_container_count`
+    + `volume_manager_total_volumes`
+    + `kubelet_node_config_error`
+    + `kubelet_runtime_operations_total`
+    + `kubelet_runtime_operations_errors_total`
+    + `kubelet_runtime_operations_duration_seconds_bucket`
+    + `kubelet_runtime_operations_duration_seconds_sum`
+    + `kubelet_runtime_operations_duration_seconds_count`
+    + `kubelet_pod_start_duration_seconds_bucket`
+    + `kubelet_pod_start_duration_seconds_sum`
+    + `kubelet_pod_start_duration_seconds_count`
+    + `kubelet_pod_worker_duration_seconds_bucket`
+    + `kubelet_pod_worker_duration_seconds_sum`
+    + `kubelet_pod_worker_duration_seconds_count`
+    + `storage_operation_duration_seconds_bucket`
+    + `storage_operation_duration_seconds_sum`
+    + `storage_operation_duration_seconds_count`
+    + `storage_operation_errors_total`
+    + `kubelet_cgroup_manager_duration_seconds_bucket`
+    + `kubelet_cgroup_manager_duration_seconds_sum`
+    + `kubelet_cgroup_manager_duration_seconds_count`
+    + `kubelet_pleg_relist_interval_seconds_bucket`
+    + `kubelet_pleg_relist_interval_seconds_count`
+    + `kubelet_pleg_relist_interval_seconds_sum`
+    + `kubelet_pleg_relist_duration_seconds_bucket`
+    + `kubelet_pleg_relist_duration_seconds_count`
+    + `kubelet_pleg_relist_duration_seconds_sum`
+    + `rest_client_requests_total`
+    + `rest_client_request_duration_seconds_bucket`
+    + `rest_client_request_duration_seconds_sum`
+    + `rest_client_request_duration_seconds_count`
+    + `process_resident_memory_bytes`
+    + `process_cpu_seconds_total`
+    + `go_goroutines`
+    + `kubernetes_build_info`
+
+
+
+??? "node-exporter"
+
+    + `node_memory_MemTotal_bytes`
+    + `node_cpu_seconds_total`
+    + `node_memory_MemAvailable_bytes`
+    + `node_memory_Buffers_bytes`
+    + `node_memory_Cached_bytes`
+    + `node_memory_MemFree_bytes`
+    + `node_memory_Slab_bytes`
+    + `node_filesystem_avail_bytes`
+    + `node_filesystem_size_bytes`
+    + `node_time_seconds`
+    + `node_exporter_build_info`
+    + `node_load1`
+    + `node_vmstat_pgmajfault`
+    + `node_network_receive_bytes_total`
+    + `node_network_transmit_bytes_total`
+    + `node_network_receive_drop_total`
+    + `node_network_transmit_drop_total`
+    + `node_disk_io_time_seconds_total`
+    + `node_disk_io_time_weighted_seconds_total`
+    + `node_load5`
+    + `node_load15`
+    + `node_disk_read_bytes_total`
+    + `node_disk_written_bytes_total`
+    + `node_uname_info`
+
+
+    Check the following documentation of [prometheus node exporter in splunk](https://docs.splunk.com/Observability/gdi/prometheus-node/prometheus-node.html#metrics)
+
+??? "kube-state-metrics"
+
+    + `kube_pod_owner`
+    + `kube_pod_container_resource_requests`
+    + `kube_pod_status_phase`
+    + `kube_pod_container_resource_limits`
+    + `kube_pod_info`
+    + `kube_pod_labels`
+    + `kube_pod_container_info`
+    + `kube_pod_container_status_waiting`
+    + `kube_pod_container_status_waiting_reason`
+    + `kube_pod_container_status_running`
+    + `kube_pod_container_status_terminated`
+    + `kube_pod_container_status_terminated_reason`
+    + `kube_pod_container_status_restarts_total`
+    + `kube_replicaset_owner`
+    + `kube_resourcequota`
+    + `kube_namespace_status_phase`
+    + `kube_node_spec_unschedulable`
+    + `kube_node_status_allocatable`
+    + `kube_node_status_capacity`
+    + `kube_node_info`
+    + `kube_node_status_condition`
+    + `kube_node_spec_taint`
+    + `kube_daemonset_created`
+    + `kube_daemonset_status_current_number_scheduled`
+    + `kube_daemonset_status_desired_number_scheduled`
+    + `kube_daemonset_status_number_available`
+    + `kube_daemonset_status_number_ready`
+    + `kube_daemonset_status_number_unavailable`
+    + `kube_daemonset_labels`
+    + `kube_deployment_labels`
+    + `kube_deployment_spec_replicas`
+    + `kube_deployment_status_replicas_available`
+    + `kube_deployment_status_replicas_unavailable`
+    + `kube_deployment_status_replicas_updated`
+    + `kube_statefulset_labels`
+    + `kube_statefulset_status_replicas_available`
+    + `kube_statefulset_status_replicas`
+    + `kube_statefulset_status_replicas_current`
+    + `kube_job_status_start_time`
+    + `kube_job_status_active`
+    + `kube_job_failed`
+    + `kube_horizontalpodautoscaler_status_desired_replicas`
+    + `kube_horizontalpodautoscaler_status_current_replicas`
+    + `kube_horizontalpodautoscaler_spec_min_replicas`
+    + `kube_horizontalpodautoscaler_spec_max_replicas`
+    + `kubernetes_build_info`
+
 
 # Troubleshooting
 
