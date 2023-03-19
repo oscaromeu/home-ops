@@ -2,16 +2,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-elastic
+  name: cluster-apps-redis-exporter
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-cloudflare-operator-tunnels
-    - name: cluster-apps-elastic-operator
-  path: ./kubernetes/apps/logging/elastic/app
+    - name: cluster-apps-redis
+  path: ./kubernetes/apps/logging/redis-exporter/app
   prune: true
   sourceRef:
     kind: GitRepository
