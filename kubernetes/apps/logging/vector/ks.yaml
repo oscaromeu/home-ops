@@ -32,8 +32,9 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-loki
+    - name: cluster-apps-external-secrets-stores
     - name: cluster-apps-cloudflare-operator
+    - name: cluster-apps-redis
   path: ./kubernetes/apps/logging/vector/aggregator
   prune: true
   sourceRef:

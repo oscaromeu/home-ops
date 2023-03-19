@@ -8,8 +8,8 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-kube-prometheus
     - name: cluster-apps-cloudflare-operator
+    - name: cluster-apps-kube-prometheus
   path: ./kubernetes/apps/monitoring/thanos/app
   prune: true
   sourceRef:
