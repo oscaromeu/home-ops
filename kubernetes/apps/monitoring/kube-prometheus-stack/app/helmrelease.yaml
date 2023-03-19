@@ -71,13 +71,16 @@ spec:
 
 
     kubeControllerManager:
-      enabled: false
+      enabled: true
+      endpoints: ["192.168.1.49"]
 
     kubeScheduler:
-      enabled: false
+      enabled: true
+      endpoints: ["192.168.1.49"]
 
     kubeProxy:
-      enabled: false
+      enabled: true
+      endpoints: ["192.168.1.49"]
 
     kube-state-metrics:
       prometheus:
@@ -112,6 +115,7 @@ spec:
               - prometheus.devfu.io
 
 
+
       thanosService:
         enabled: true
 
@@ -120,6 +124,10 @@ spec:
 
       prometheusSpec:
         scrapeInterval: 60s
+
+        #externalLabels:
+        #  cluster: homelab
+
 
         resources:
           requests:
