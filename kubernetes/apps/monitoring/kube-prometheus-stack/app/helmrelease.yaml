@@ -57,6 +57,13 @@ spec:
     #kubeApiServer:
 
     kubelet:
+      enabled: true
+      serviceMonitor:
+        metricRelabelings:
+          - action: replace
+            sourceLabels: ["node"]
+            targetLabel: instance
+
       cAdvisorMetricRelabelings:
         - sourceLabels: [__name__]
           action: keep
