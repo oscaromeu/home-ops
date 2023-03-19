@@ -81,9 +81,9 @@ spec:
             memory: 200M
 
     prePuller:
-      hook:
-        nodeSelector:
-          kubernetes.io/os: amd64
+      #hook:
+      #  nodeSelector:
+      #    kubernetes.io/os: amd64
       resources:
         requests:
           cpu: 1m
