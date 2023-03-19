@@ -51,7 +51,8 @@ spec:
 
     grafana:
       enabled: false
-      forceDeployDashboards: true
+      forceDeployDashboards: false
+      defaultDashboardsEnabled: false
 
     kubeControllerManager:
       enabled: false
@@ -61,6 +62,17 @@ spec:
 
     kubeProxy:
       enabled: false
+
+    kube-state-metrics:
+      prometheus:
+        monitor:
+          metricRelabelings:
+          # - action: keep
+          #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
+          #   sourceLabels: [__name__]
+            - action: keep
+              regex: 'kube_node_status_allocatable'
+              sourceLabels: [__name__]
 
     kubeEtcd:
       enabled: false
