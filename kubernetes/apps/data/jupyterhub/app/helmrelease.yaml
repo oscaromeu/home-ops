@@ -30,7 +30,8 @@ spec:
       nodeSelector:
         kubernetes.io/os: amd64
       db:
-        storageClassName: longhorn
+        pvc:
+          storageClassName: longhorn
       resources:
         requests:
           cpu: 0.5
@@ -39,14 +40,9 @@ spec:
           #cpu: 1
           memory: 2G
 
-    proxy:
-      resources:
-        requests:
-          cpu: 1m
-          memory: 100M
-        limits:
-          #cpu: 1
-          memory: 200M
+    #proxy:
+
+
 
     singleuser:
       extraNodeAffinity:
@@ -72,13 +68,17 @@ spec:
         guarantee: 0.5G
 
     scheduling:
-      resources:
-        requests:
-          cpu: 1m
-          memory: 100M
-        limits:
-          #cpu: 1
-          memory: 200M
+      userScheduler:
+        enabled: true
+        nodeSelector:
+          kubernetes.io/os: amd64
+        resources:
+          requests:
+            cpu: 1m
+            memory: 100M
+          limits:
+            #cpu: 1
+            memory: 200M
 
     prePuller:
       hook:
