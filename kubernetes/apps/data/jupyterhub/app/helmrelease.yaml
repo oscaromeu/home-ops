@@ -15,10 +15,12 @@ spec:
         name: jupyterhub
         namespace: flux-system
   install:
+    disableWait: true
     createNamespace: true
     remediation:
       retries: 3
   upgrade:
+    disableWait: true
     remediation:
       retries: 3
   values:
