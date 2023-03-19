@@ -122,6 +122,35 @@ The default scrape frequency for all defult targets and scrapes is 30 seconds.
 
 + `kube-state-metrics` (`job=kube-state-metrics`) kube-state-metrics is a tool that provides detailed metrics about the state of various Kubernetes objects, such as pods, deployments, services, and more. It runs as a separate process and exposes its metrics in a Prometheus-compatible format, allowing users to monitor the state of their Kubernetes cluster and troubleshoot any issues that arise.
 
+By default k3s exposes all metrics combined (apiserver, kubelet, kube-proxy, kube-scheduler, kube-controller). The kube-prometheus stack has two jobs that
+pulls this metrics, to avoid duplicates the following configuration is set
+
+```
+    kubeApiServer:
+      metricRelabelings:
+        # remove duplicates
+        - action: drop
+          sourceLabels: ["__name__"]
+          regex: '(aggregator_|apiextensions_|etcd_|scheduler_|workqueue).*'
+```
+
+And in order to have standard names the following is applied
+
+```
+kubelet:
+  serviceMonitor:
+    metricRelabelings:
+      # k3s exposes all metrics on all endpoints, relabel jobs that belong to other components
+      - sourceLabels: [__name__]
+        regex: "scheduler_(.+)"
+        targetLabel: "job"
+        replacement: "kube-scheduler"
+      - sourceLabels: [__name__]
+        regex: "kubeproxy_(.+)"
+        targetLabel: "job"
+        replacement: "kube-proxy"
+```
+
 
 #### Metrics collected from default targets
 
