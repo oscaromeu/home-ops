@@ -20,7 +20,8 @@ spec:
     remediation:
       retries: 3
   upgrade:
-    disableWait: true
+    #disableWait: true
+    timeout: 10m
     remediation:
       retries: 3
   values:
