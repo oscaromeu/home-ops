@@ -27,8 +27,8 @@ spec:
 
     hub:
       authenticatePrometheus: false
-      nodeSelector:
-        kubernetes.io/os: amd64
+      #nodeSelector:
+      #  kubernetes.io/os: amd64
       db:
         pvc:
           storageClassName: longhorn
@@ -45,16 +45,16 @@ spec:
 
 
     singleuser:
-      extraNodeAffinity:
-        required:
-          - matchExpressions:
-              - key: kubernetes.io/arch
-                operator: In
-                values:
-                  - amd64
-                  - i386
-                  - i686
-                  - x86
+      #extraNodeAffinity:
+      #  required:
+      #    - matchExpressions:
+      #        - key: kubernetes.io/arch
+      #          operator: In
+      #          values:
+      #            - amd64
+      #            - i386
+      #            - i686
+      #            - x86
 
       storage:
         type: dynamic
@@ -70,8 +70,8 @@ spec:
     scheduling:
       userScheduler:
         enabled: true
-        nodeSelector:
-          kubernetes.io/os: amd64
+        #nodeSelector:
+        #  kubernetes.io/os: amd64
         resources:
           requests:
             cpu: 1m
