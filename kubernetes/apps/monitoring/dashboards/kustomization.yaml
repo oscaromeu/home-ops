@@ -96,13 +96,13 @@ configMapGenerator:
       disableNameSuffixHash: true
 
 
-  - name: k8s-detailed-overview-nodes
-    files:
-      - k8s-detailed-overview-nodes.json
-    options:
-      labels:
-        grafana_dashboard: k8s-detailed-overview-nodes
-      disableNameSuffixHash: true
+  #- name: k8s-detailed-overview-nodes
+  #  files:
+  #    - k8s-detailed-overview-nodes.json
+  #  options:
+  #    labels:
+  #      grafana_dashboard: k8s-detailed-overview-nodes
+  #    disableNameSuffixHash: true
 
 
 
