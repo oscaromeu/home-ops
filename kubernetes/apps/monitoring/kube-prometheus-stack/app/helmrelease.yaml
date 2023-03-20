@@ -79,10 +79,10 @@ spec:
             sourceLabels: ["node"]
             targetLabel: instance
 
-      cAdvisorMetricRelabelings:
-        - sourceLabels: [__name__]
-          action: keep
-          regex: 'container_cpu_cfs_periods_total|container_cpu_cfs_throttled_periods_total|container_cpu_cfs_throttled_seconds_total|container_cpu_usage_seconds_total|container_memory_rss|container_memory_usage_bytes|container_memory_working_set_bytes|container_network_receive_bytes_total|container_network_transmit_bytes_total|container_network_receive_packets_total|container_network_transmit_packets_total|container_network_receive_packets_dropped_total|container_network_transmit_packets_dropped_total|container_oom_events_total|container_fs_reads_total|container_fs_writes_total|container_fs_reads_bytes_total|container_fs_writes_bytes_total'
+        cAdvisorMetricRelabelings:
+          - sourceLabels: [__name__]
+            action: keep
+            regex: 'container_cpu_cfs_periods_total|container_cpu_cfs_throttled_periods_total|container_cpu_cfs_throttled_seconds_total|container_cpu_usage_seconds_total|container_memory_rss|container_memory_usage_bytes|container_memory_working_set_bytes|container_network_receive_bytes_total|container_network_transmit_bytes_total|container_network_receive_packets_total|container_network_transmit_packets_total|container_network_receive_packets_dropped_total|container_network_transmit_packets_dropped_total|container_oom_events_total|container_fs_reads_total|container_fs_writes_total|container_fs_reads_bytes_total|container_fs_writes_bytes_total'
 
 
     #kubeControllerManager:
