@@ -94,17 +94,25 @@ The Prometheus Operator uses servicemonitor to automate the process of configuri
 
 ### Used Exporters
 
++ redis-exporter
++ elasticsearch-exporter
++ prometheus-events-exporter
 
 
 ## Rule evaluation and alerting
 
-## Set up horizontal pod autoscaling (HPA)
+Default
+
 
 ## Storage
 
 ## Alerting and monitoring
 
 ### Default Prometheus metrics configuration
+
+```
+curl localhost:10249/metrics
+```
 
 This entry list the default targets, dashboards, and recording rules available when deploying the cluster.
 
@@ -114,34 +122,7 @@ The default scrape frequency for all defult targets and scrapes is 30 seconds.
 
 #### Targets scrapped
 
-```
-{job="apiserver"}
-{job="botkube"}
-{job="coredns"}
-{job="demo"}
-{job="external-secrets-cert-controller-metrics"}
-{job="external-secrets-metrics"}
-{job="external-secrets-webhook-metrics"}
-{job="grafana"}
-{job="kube-controller-manager"}
-{job="kube-proxy"}
-{job="kube-scheduler"}
-{job="kube-state-metrics"}
-{job="kubelet"}
-{job="logging/loki"}
-{job="logging/loki-canary"}
-{job="node-exporter"}
-{job="prometheus-alertmanager"}
-{job="prometheus-elasticsearch-exporter"}
-{job="prometheus-operator"}
-{job="prometheus-prometheus"}
-{job="prometheus-thanos-discovery"}
-{job="redis-exporter"}
-{job="thanos-bucketweb"}
-{job="thanos-compactor"}
-{job="thanos-query"}
-{job="thanos-storegateway"}
-```
+
 
 ##### Default
 
@@ -335,7 +316,7 @@ The following metrics are collected by default from each default target. All oth
     + `kubernetes_build_info`
 
 
-# Troubleshooting
+## Troubleshooting
 
 ### ServiceMonitor not showing up in targets
 
@@ -411,3 +392,9 @@ prometheus:
 + [kube-prometheus-runbooks](https://runbooks.prometheus-operator.dev)
 
 + [Amazon Managed Prometheus](https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-onboard-amg.html)
+
++ [Kubernetes API server metrics](https://docs.datadoghq.com/integrations/kube_apiserver_metrics/)
+
++ [Kubernetes Metrics reference](https://kubernetes.io/docs/reference/instrumentation/metrics/)
+
++ [PromQL Queries for Exploring Your Metrics](https://promlabs.com/blog/2020/12/17/promql-queries-for-exploring-your-metrics/)
