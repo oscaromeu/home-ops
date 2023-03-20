@@ -2062,8 +2062,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Kubernetes / Views / Global",
-  "uid": "k8s_views_global",
+  "title": "Kubernetes Detailed Overview by Cluster",
+  "uid": "k8s_detailed_overview_cluster",
   "version": 22,
   "weekStart": ""
 }

@@ -1846,7 +1846,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Kubernetes Detailed Overview Pods",
+  "title": "Kubernetes Detailed Overview by Pods",
   "uid": "k8s_detailed_overview_pods",
   "version": 1,
   "weekStart": ""
