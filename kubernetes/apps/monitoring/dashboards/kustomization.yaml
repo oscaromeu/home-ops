@@ -80,7 +80,7 @@ configMapGenerator:
 
   - name: k8s-detailed-overview-namespaces
     files:
-      - k8s-views-namespaces.json
+      - k8s-detailed-overview-namespaces.json
     options:
       labels:
         grafana_dashboard: k8s-detailed-overview-namespaces
