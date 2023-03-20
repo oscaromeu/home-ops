@@ -7,9 +7,10 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-
   dependsOn:
+    - name: cluster-apps-ingress-nginx
     - name: cluster-apps-cloudflare-operator-tunnels
+    - name: cluster-apps-longhorn
   path: ./kubernetes/apps/monitoring/kube-prometheus-stack/app
   prune: true
   sourceRef:
