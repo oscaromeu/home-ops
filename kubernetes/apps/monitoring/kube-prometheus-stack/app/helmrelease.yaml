@@ -139,8 +139,8 @@ spec:
       prometheusSpec:
         scrapeInterval: 60s
 
-        #externalLabels:
-        #  cluster: homelab
+        externalLabels:
+          cluster: homelab
 
 
         resources:
