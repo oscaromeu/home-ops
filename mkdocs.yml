@@ -80,6 +80,12 @@ nav:
   - Installation:
     - installation/index.md
 
+  - Administration:
+    - administration/fluxcd.md
+
+  - Concepts:
+    - concepts/semantic-git-messages.md
+
   - Observability:
     - observability/index.md
     - Analytics:
