@@ -68,7 +68,7 @@ spec:
       - flant-statusmap-panel
 
     serviceMonitor:
-      enabled: true
+      enabled: false
 
     rbac:
       pspEnabled: false

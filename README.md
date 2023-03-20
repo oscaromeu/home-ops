@@ -1,6 +1,6 @@
 # 🏡 🧪 Home Lab
 
-Current status: _BETA_ (but pretty stable).
+Project status: _BETA_ (but pretty stable).
 
 ## 📖 Overview
 
@@ -20,6 +20,24 @@ This projects aims to utilize industry-standard tooling and best practices in or
 + [tf-controller](https://github.com/weaveworks/tf-controller): Additional Flux component used to run Terraform from within a Kubernetes Cluster.
 + [volsync](https://github.com/backube/volsync) and [snapscheduler](https://github.com/backube/snapscheduler): Backup and recovery of persistent volume claims.
 
+### Hardware
+
+- 2 × MinisForum `um350`:
+    - CPU: `AMD Ryzen 5 3550H`
+    - RAM: `32GB`
+    - SSD: `512GB`
+- 1 x Raspberry pi
+    - CPU: `ARM Cortex-A72 processor`
+    - RAM: `8GB`
+    - NVME: `1TB`
+- 3 x Raspberry pi
+    - CPU: `ARM Cortex-A72 processor`
+    - RAM: `4GB`
+    - SD: `64GB`
+
+### Features
+
+TBD
 
 ## 📜 Changelog
 
@@ -34,7 +52,7 @@ Also, a lot of inspiration for this repo came from the following people:
 - [onedr0p/home-cluster](https://github.com/onedr0p/home-cluster)
 - [danmanners/homelab-kube-cluster](https://github.com/danmanners/homelab-kube-cluster)
 - [billimek/k8s-gitops](https://github.com/billimek/k8s-gitops)
-- [toboshii/k8s-gitops](https://github.com/toboshii/k8s-gitops)
+- [khuedoan/homelab](https://github.com/khuedoan/homelab)
 - [bjw-s/k8s-gitops](https://github.com/bjw-s/k8s-gitops)
 - [ricsanfre/pi-cluster](https://github.com/ricsanfre/pi-cluster)
 

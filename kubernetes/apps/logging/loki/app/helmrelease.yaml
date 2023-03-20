@@ -23,3 +23,15 @@ spec:
         replication_factor: 1
       storage:
         type: "filesystem"
+
+    monitoring:
+
+      dashboards:
+        enabled: false
+
+      rules:
+        enabled: false
+        alerting: false
+
+      serviceMonitor:
+        enabled: false

@@ -85,6 +85,6 @@ spec:
         secret.reloader.stakater.com/reload: *secret
 
     metrics:
-      enabled: true
+      enabled: false
       serviceMonitor:
-        enabled: true
+        enabled: false

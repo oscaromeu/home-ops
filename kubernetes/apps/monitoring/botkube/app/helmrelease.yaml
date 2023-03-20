@@ -53,7 +53,7 @@ spec:
             type: short
 
     serviceMonitor:
-      enabled: true
+      enabled: false
     executors:
       kubectl-read-only:
         kubectl:

@@ -4,6 +4,6 @@ kind: Kustomization
 resources:
   - ./secret.sops.yaml
   - ./helmrelease.yaml
-  - ./dashboards
+  #- ./dashboards
   - ./tunnelbinding.yaml
 

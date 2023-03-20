@@ -94,7 +94,7 @@ The Prometheus Operator uses servicemonitor to automate the process of configuri
 
 ### Used Exporters
 
-## Query the Prometheus metrics
+
 
 ## Rule evaluation and alerting
 
@@ -112,7 +112,38 @@ This entry list the default targets, dashboards, and recording rules available w
 
 The default scrape frequency for all defult targets and scrapes is 30 seconds.
 
-#### Default targets scrapped
+#### Targets scrapped
+
+```
+{job="apiserver"}
+{job="botkube"}
+{job="coredns"}
+{job="demo"}
+{job="external-secrets-cert-controller-metrics"}
+{job="external-secrets-metrics"}
+{job="external-secrets-webhook-metrics"}
+{job="grafana"}
+{job="kube-controller-manager"}
+{job="kube-proxy"}
+{job="kube-scheduler"}
+{job="kube-state-metrics"}
+{job="kubelet"}
+{job="logging/loki"}
+{job="logging/loki-canary"}
+{job="node-exporter"}
+{job="prometheus-alertmanager"}
+{job="prometheus-elasticsearch-exporter"}
+{job="prometheus-operator"}
+{job="prometheus-prometheus"}
+{job="prometheus-thanos-discovery"}
+{job="redis-exporter"}
+{job="thanos-bucketweb"}
+{job="thanos-compactor"}
+{job="thanos-query"}
+{job="thanos-storegateway"}
+```
+
+##### Default
 
 + `cadvisor` (`job=kubelet`) cAdvisor (short for "Container Advisor") is a tool that provides container-level metrics and resource usage statistics for Docker and other container systems. In Kubernetes, cAdvisor is usually run as a part of the kubelet on each node and collects metrics about the containers running on that node.
 

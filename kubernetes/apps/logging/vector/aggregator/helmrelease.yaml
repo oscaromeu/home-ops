@@ -176,7 +176,7 @@ spec:
     #  storageClass: longhorn
 
     podMonitor:
-      enabled: true
+      enabled: false
 
     env:
       - name: VECTOR_LOG
