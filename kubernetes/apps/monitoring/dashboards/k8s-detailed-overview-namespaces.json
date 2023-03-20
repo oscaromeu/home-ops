@@ -1580,7 +1580,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Kubernetes Detailed Overview by NameSpace",
+  "title": "Kubernetes Detailed Overview by Namespace",
   "uid": "k8s_detailed_overivew_ns",
   "version": 15,
   "weekStart": ""
