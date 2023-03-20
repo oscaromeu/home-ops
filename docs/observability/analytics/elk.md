@@ -2,6 +2,8 @@
 title: Elastisearch
 ---
 
+WIP
+
 ## Overview
 
 ### Architecture
@@ -59,7 +61,7 @@ The logs is composed by the following [Component Templates](https://www.elastic.
 + Cluster health and node availability
 + Resource saturation and errors
 
-### __1. Cluster health__
+### Cluster health
 
 | METRIC DESCRIPTION | ELASTICSEARCH EXPORTER METRIC NAME  |
 |----------------|--------------------------------------------|
@@ -67,7 +69,7 @@ The logs is composed by the following [Component Templates](https://www.elastic.
 | Number of unasigned shards | `elasticsearch_cluster_health_unassigned_shards`|
 
 
-### __2. Search Performance__
+### Search Performance
 
 | **Metric description**  | **Name** | **Metric type** |
 | ------------ | ----------- | ------------------- |
@@ -78,7 +80,7 @@ The logs is composed by the following [Component Templates](https://www.elastic.
 | Total time spent on fetches     | `elasticsearch_indices_search_fetch_time_seconds`  | Work: Performance |
 | _Number of fetches currently in progress_  **  | `indices.search.fetch_current`    | Work: Throughput |
 
-** TBD
+
 
 ## References
 

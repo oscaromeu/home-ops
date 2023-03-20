@@ -1,6 +1,6 @@
 # Installation
 
-### ⚠️ pre-commit
+## pre-commit
 
 It is advisable to install [pre-commit](https://pre-commit.com/) and the pre-commit hooks that come with this repository.
 
@@ -16,7 +16,7 @@ It is advisable to install [pre-commit](https://pre-commit.com/) and the pre-com
     task precommit:update
     ```
 
-## 📂 Repository structure
+## Repository structure
 
 The Git repository contains the following directories under `kubernetes` and are ordered below by how Flux will apply them.
 
@@ -55,9 +55,9 @@ source ~/.bashrc
 start with `age` ...
 
 
-## 📄 Configuration
+## Configuration
 
-📍 The `.config.env` file contains necessary configuration that is needed by Ansible, Terraform and Flux.
+The `.config.env` file contains necessary configuration that is needed by Ansible, Terraform and Flux.
 
 1. Copy the `.config.sample.env` to `.config.env` and start filling out all the environment variables.
 
@@ -79,10 +79,9 @@ start with `age` ...
     task configure
     ```
 
-## ⚡ Preparing Ubuntu Server with Ansible
+## Preparing Ubuntu Server with Ansible
 
-📍 Here we will be running a Ansible Playbook to prepare Ubuntu Server for running a Kubernetes cluster.
-
+Here we will be running a Ansible Playbook to prepare Ubuntu Server for running a Kubernetes cluster.
 
 1. Ensure you are able to SSH into your nodes from your workstation using a private SSH key **without a passphrase**. This is how Ansible is able to connect to your remote nodes.
 
@@ -118,11 +117,11 @@ start with `age` ...
     task ansible:reboot
     ```
 
-## ⛵ Installing k3s with Ansible
+## Installing k3s with Ansible
 
-📍 Here we will be running a Ansible Playbook to install [k3s](https://k3s.io/) with [this](https://galaxy.ansible.com/xanmanning/k3s) wonderful k3s Ansible galaxy role. After completion, Ansible will drop a `kubeconfig` in `./kubeconfig` for use with interacting with your cluster with `kubectl`.
+Here we will be running a Ansible Playbook to install [k3s](https://k3s.io/) with [this](https://galaxy.ansible.com/oscaromeu/k3s) wonderful k3s Ansible galaxy role. After completion, Ansible will drop a `kubeconfig` in `./kubeconfig` for use with interacting with your cluster with `kubectl`.
 
-☢️ If you run into problems, you can run `task ansible:nuke` to destroy the k3s cluster and start over.
+If you run into problems, you can run `task ansible:nuke` to destroy the k3s cluster and start over.
 
 1. Verify Ansible can view your config
 

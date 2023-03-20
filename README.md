@@ -35,9 +35,19 @@ This projects aims to utilize industry-standard tooling and best practices in or
     - RAM: `4GB`
     - SD: `64GB`
 
-### Features
+### 🚧 Features
 
-TBD
+- [x] Automated Kubernetes installation and management
+- [x] Installing and managing applications using GitOps
+- [x] Automatic rolling upgrade for OS and Kubernetes
+- [x] Automatically update apps (with approval)
+- [x] Modular architecture, easy to add or remove features/components
+- [x] Automated certificate management
+- [x] Automatically update DNS records for exposed services
+- [x] Expose services to the internet securely with [Cloudflare Tunnel](https://www.cloudflare.com/products/tunnel/)
+- [x] Distributed storage
+- [x] Datascience jupyterhub environments
+- [x] Monitoring and alerting 🚧
 
 ## 📜 Changelog
 

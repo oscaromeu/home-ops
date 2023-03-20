@@ -80,14 +80,12 @@ nav:
   - Installation:
     - installation/index.md
 
-  - Platform:
-    - platform/index.md
-    - Data Analytics:
-      - platform/data-analytics/index.md
-      - platform/data-analytics/elk.md
+  - Observability:
+    - observability/index.md
+    - Analytics:
+      #- observability/analytics/index.md
+      - observability/analytics/elk.md
 
-    - Observability:
-      - platform/observability/index.md
-      - platform/observability/loki.md
-      - platform/observability/grafana.md
-      - platform/observability/prometheus.md
+    - Data Platform:
+      #- observability/data-platform/index.md
+      - observability/data-platform/prometheus.md
