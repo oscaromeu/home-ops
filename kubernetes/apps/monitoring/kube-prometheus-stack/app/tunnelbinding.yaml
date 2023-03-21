@@ -2,7 +2,7 @@
 apiVersion: networking.cfargotunnel.com/v1alpha1
 kind: TunnelBinding
 metadata:
-  name: thanos-tunnel
+  name: prometheus-tunnel
   namespace: monitoring
 subjects:
   - name: prometheus-prometheus
