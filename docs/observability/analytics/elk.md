@@ -6,7 +6,7 @@ WIP
 
 ## Overview
 
-### Architecture
+## Architecture
 
 Elasticsearch is deployed using hot/warm architecture which is a common design pattern for storing and managing data in Elasticsearch. In this architecture, data is divided into two tiers: a hot tier for actively used data and a warm tier for less frequently used data.
 
@@ -26,9 +26,11 @@ Also the nodes that store data in the hot tier has the role of "master" and the 
 
 This setup can provide better performance and efficiency for the cluster, as the master nodes can focus on managing the cluster and processing requests for actively used data, while the data nodes can focus on storing and processing less frequently used data. This setup can provide better availability and fault tolerance, as the master nodes can continue to operate even if one or more data nodes fail.
 
-### Infrastructure
+## Infrastructure
 
 + TBD Hot and Warm nodes
+
+## Administration
 
 ### Users
 
@@ -40,7 +42,7 @@ POST /_security/user/ingestion
 }
 ```
 
-## Index Management
+### Index Management
 
 [Elasticsearch ILM policies](https://www.elastic.co/guide/en/elasticsearch/reference/current/overview-index-lifecycle-management.html) are used to automatically manage the [data streams](https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams.html) according the performance, resiliency, and retention requirements.
 
@@ -55,7 +57,7 @@ The following policies have been created.
 
 #### Configure a lifecycle policy
 
-##### Create lifecycle policy
+#### Create lifecycle policy
 
 ```json
 PUT _ilm/policy/logs-k3s
@@ -96,7 +98,7 @@ PUT _ilm/policy/logs-k3s
 }
 ```
 
-##### Apply lifecycle policy with an index template
+#### Apply lifecycle policy with an index template
 
 
 ```json
@@ -140,7 +142,7 @@ The logs is composed by the following [Component Templates](https://www.elastic.
 
 
 
-## Snapshot and restore
+### Snapshot and restore
 
 ## Monitoring
 
