@@ -30,6 +30,15 @@ This setup can provide better performance and efficiency for the cluster, as the
 
 + TBD Hot and Warm nodes
 
+### Users
+
+```json
+POST /_security/user/ingestion
+{
+  "password" : "something",
+  "roles" : [ "superuser" ],
+}
+```
 
 ## Index Management
 
@@ -43,6 +52,84 @@ The following policies have been created.
 |--------------|-----------------|------------|--------| -------------- |
 | logs-k3s     | 200 Mb/5d     | 10d    | 15d| logs |
 
+
+#### Configure a lifecycle policy
+
+##### Create lifecycle policy
+
+```json
+PUT _ilm/policy/logs-k3s
+{
+  "policy": {
+    "phases": {
+      "hot": {
+        "actions": {
+          "rollover": {
+            "max_age": "5d",
+            "max_primary_shard_size": "200mb"
+          },
+          "set_priority": {
+            "priority": 100
+          },
+          "shrink": {
+            "number_of_shards": 1
+          }
+        },
+        "min_age": "0ms"
+      },
+      "warm": {
+        "min_age": "10d",
+        "actions": {
+          "set_priority": {
+            "priority": 50
+          }
+        }
+      },
+      "delete": {
+        "min_age": "20d",
+        "actions": {
+          "delete": {}
+        }
+      }
+    }
+  }
+}
+```
+
+##### Apply lifecycle policy with an index template
+
+
+```json
+PUT _index_template/logs-k3s
+{
+  "priority": 101,
+  "template": {
+    "settings": {
+      "index": {
+        "lifecycle": {
+          "name": "logs-k3s"
+        },
+        "number_of_shards": "1",
+        "number_of_replicas": "0"
+      }
+    }
+  },
+  "index_patterns": [
+    "logs-k3s_*"
+  ],
+  "data_stream": {},
+  "composed_of": [
+    "logs-mappings",
+    "data-streams-mappings",
+    "logs-settings"
+  ]
+}
+```
+
+1. Use this template for all new indices whose names begin with `logs-k3s_*"`
+1. Apply `logs-k3s` to new indices created with this template
+
+
 ### Index and Component templates
 
 The logs is composed by the following [Component Templates](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-templates.html):
@@ -50,6 +137,8 @@ The logs is composed by the following [Component Templates](https://www.elastic.
 + logs-mappings
 + data-streams-mappings
 + logs-settings
+
+
 
 ## Snapshot and restore
 
@@ -89,3 +178,7 @@ The logs is composed by the following [Component Templates](https://www.elastic.
 - [Top 10 Elasticsearch Metrics to Watch](https://sematext.com/blog/top-10-elasticsearch-metrics-to-watch/)
 
 - [Elastic Stack Configuration policies](https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-stack-config-policy.html)
+
+- [Elastic Init containers](https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-init-containers-plugin-downloads.html)
+
+- [Init container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
