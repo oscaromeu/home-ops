@@ -4,6 +4,13 @@ draft: true
 
 # Helpful Commands
 
+## Get kubeconfig cluster configuration
+
+```
+kubectl config view --minify --raw
+```
+
+
 ## Delete all evicted pods
 
 ```cli

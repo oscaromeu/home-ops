@@ -85,8 +85,12 @@ nav:
 
   - Guides:
     - guides/fluxcd.md
-    - guides/k3s.md
-    - guides/semantic-git-messages.md
+    - guides/helpful_commands.md
+    - guides/loki.md
+    - guides/secret_management.md
+    - guides/semantic_git_messages.md
+    - guides/troubleshooting.md
+
 
   - Observability:
     - observability/index.md
