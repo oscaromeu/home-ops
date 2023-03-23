@@ -283,6 +283,7 @@ The following metrics are collected by default from each default target. All oth
     + `kube_pod_container_status_restarts_total`
     + `kube_replicaset_owner`
     + `kube_resourcequota`
+    + `kube_namespace_created`
     + `kube_namespace_status_phase`
     + `kube_node_spec_unschedulable`
     + `kube_node_status_allocatable`
