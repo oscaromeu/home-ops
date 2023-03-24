@@ -6,58 +6,156 @@ title: Secret Management
 
 This guide demonstrates how to manage secrets in Kubernetes using External Secrets and Doppler. External Secrets allows you to sync secrets from external secret management systems into Kubernetes, while Doppler is a secure and easy-to-use secrets management service.
 
++ [Doppler Secret Provider](https://external-secrets.io/main/provider/doppler/)
++ [Doppler Secrets Operator](https://docs.doppler.com/docs/kubernetes-operator)
+
 ## Prerequisites
 
-1. A Kubernetes cluster
-2. `kubectl` command-line tool installed and configured
+1. A Kubernetes cluster, fluxcd, kubectl
+2. External Secrets operator
 3. Doppler CLI installed and configured
 
-## Step 1: Set Up Doppler
+## Overview
+
+## Set Up Doppler
 
 1. Sign up for a Doppler account at https://dashboard.doppler.com/signup
+2. Follow the documentation for the [doppler provider](https://external-secrets.io/main/provider/doppler/) until "Use Cases".
+
+The Service Token is located under the `kube-system/external-secrets/stores/doppler`
+
+
++ `doppler_store.yaml`: Defines a `SecretStore`. A SecretStore is a custom resource provided by the External Secrets Manager that defines the connection and authentication information needed to access an external secret management system. This resource acts as a centralized reference for other resources within the Kubernetes cluster when they need to access the secrets stored in the external system.
+
+    ```yaml
+    apiVersion: external-secrets.io/v1beta1
+    kind: SecretStore
+    metadata:
+      name: doppler-auth-api
+    spec:
+      provider:
+        doppler:
+          auth:
+            secretRef:
+              dopplerToken:
+                name: doppler-token-auth-api
+                key: dopplerToken
+    ```
+
++ `secret.sops.yaml`: The authentication credentials in plain yaml. The contents of the file are similar to :
+
+    ```yaml
+    apiVersion: v1
+    data:
+        dopplerToken: aG91c2Uud29ybGR4eHp3NkZBRzQ2Q3RIN1dXQUlKbTlJZTZOa05Jd1BzV1lqZjNzZ0JKc3oK
+    kind: Secret
+    metadata:
+        name: doppler-token-auth-api
+    ```
+
++ `test.yaml`: Secret to test that the configuration has been done correctly.
+
+
 2. Create a new project and configure your secrets
 
-## Step 2: Install Doppler CLI
 
-Follow the installation instructions for your operating system at https://docs.doppler.com/docs/enclave-installation
+## Secret Configuration
 
-## Step 3: Install External Secrets in Your Kubernetes Cluster
+### ClusterSecretStore vs SecretStore
 
-Once the doppler account is configured and the secrets are in place we can proceed. The next step will be installing the external secrets resource in our cluster. This is done using fluxcd same as other applications. Note that before the kustomization `cluster-apps`
+There are two types of secret stores provided by the External Secrets Manager:
 
-## Doppler Store
++ `ClusterSecretStore:` A cluster-wide secret store that can be referenced by ExternalSecret resources across all namespaces in the cluster.
++ `SecretStore:` A namespace-scoped secret store that can only be referenced by ExternalSecret resources within the same namespace.
 
-### Example
+### ClusterSecretStore
 
-```
-apiVersion: v1
-data:
-    dopplerToken: aG91c2Uud29ybGR4eHp3NkZBRzQ2Q3RIN1dXQUlKbTlJZTZOa05Jd1BzV1lqZjNzZ0JKc3oK
-kind: Secret
-metadata:
-    name: doppler-token-auth-api
-```
+A ClusterSecretStore is suitable for scenarios where a single external secret provider (such as Doppler) is used by multiple applications or services in different namespaces. It provides centralized configuration, consistency, reduced duplication, and access control.
 
-Define a `DB_URL` variable in your doppler project to test if everything is working using the following. Note that
+#### Example
 
 ```yaml
 apiVersion: external-secrets.io/v1beta1
+kind: ClusterSecretStore
+metadata:
+  name: doppler-cluster-wide-secret-store
+spec:
+  provider:
+    doppler:
+      auth:
+        secretRef:
+          dopplerToken:
+            name: doppler-token
+            key: dopplerToken
+            namespace: kube-system
+```
+
+### SecretStore
+
+A `SecretStore` is suitable for scenarios where different namespaces need to use different external secret providers or configurations. It provides more granular control over secret provider configurations within each namespace.
+
+#### Example
+
+```yaml
+apiVersion: external-secrets.io/v1beta1
+kind: SecretStore
+metadata:
+  name: doppler-namespace-scoped-secret-store
+  namespace: my-namespace
+spec:
+  provider:
+    doppler:
+      auth:
+        secretRef:
+          dopplerToken:
+            name: doppler-token
+            key: dopplerToken
+```
+
+
+### Secret Example
+
+```yaml
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ClusterSecretStore
+metadata:
+  name: vector-aggregator-elastic
+spec:
+  provider:
+    doppler:
+      auth:
+        secretRef:
+          dopplerToken:
+            name: doppler-token-auth-api
+            key: dopplerToken
+            namespace: kube-system
+---
+apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: auth-api-db-url
+  name: auth-api-elasticsearch-ingestion-credentials
 spec:
   secretStoreRef:
-    kind: SecretStore
-    name: doppler-auth-api
+    kind: ClusterSecretStore
+    name: vector-aggregator-elastic
 
   target:
-    name: home-ops-db-url
+    name: es-ingestion-credentials
 
   data:
-    - secretKey: DB_URL
+    - secretKey: ELASTICSEARCH_PASSWORD
       remoteRef:
-        key: DB_URL
+        key: ELASTICSEARCH_PASSWORD
+
+    - secretKey: ELASTICSEARCH_USERNAME
+      remoteRef:
+        key: ELASTICSEARCH_USERNAME
 ```
+
+## Extra: Install Doppler CLI
+
+Follow the installation instructions for your operating system at https://docs.doppler.com/docs/enclave-installation
 
 ## List of secrets
 
