@@ -4,5 +4,5 @@ kind: Kustomization
 namespace: logging
 resources:
   #- ./configmap.yaml
-  - ./secret_loki.sops.yaml
+  #- ./secret_loki.sops.yaml
   - ./helmrelease.yaml
