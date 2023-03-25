@@ -112,8 +112,15 @@ spec:
             action: keep
 
     kubeProxy:
-      enabled: true
+      enabled: false
       endpoints: ["192.168.1.49"]
+      serviceMonitor:
+        metricRelabelings:
+          # Remove duplicate metrics
+          - sourceLabels: ["__name__"]
+            regex: "kubeproxy_(.+)"
+            action: keep
+
 
 
     kube-state-metrics:
