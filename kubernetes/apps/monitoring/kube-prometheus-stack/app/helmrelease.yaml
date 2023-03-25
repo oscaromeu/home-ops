@@ -78,24 +78,43 @@ spec:
           - action: replace
             sourceLabels: ["node"]
             targetLabel: instance
+          # remove duplicates
+          - sourceLabels: ["__name__"]
+            regex: "(apiserver_audit|apiserver_client|apiserver_delegated|apiserver_envelope|apiserver_storage|apiserver_webhooks|authentication_token|csi_operations|disabled_metric|get_token|go|hidden_metric|kubelet_certificate|kubelet_cgroup|kubelet_container|kubelet_containers|kubelet_cpu|kubelet_device|kubelet_graceful|kubelet_http|kubelet_lifecycle|kubelet_managed|kubelet_node|kubelet_pleg|kubelet_pod|kubelet_run|kubelet_running|kubelet_runtime|kubelet_server|kubelet_started|kubelet_volume|kubernetes_build|kubernetes_feature|machine_cpu|machine_memory|machine_nvm|machine_scrape|node_namespace|plugin_manager|prober_probe|process_cpu|process_max|process_open|process_resident|process_start|process_virtual|registered_metric|rest_client|scrape_duration|scrape_samples|scrape_series|storage_operation|volume_manager|volume_operation|workqueue)_(.+)"
+            action: keep
 
+        # remove duplicates
+        # https://github.com/google/cadvisor/blob/master/docs/storage/prometheus.md#prometheus-container-metrics
         cAdvisorMetricRelabelings:
           - sourceLabels: [__name__]
             action: keep
-            regex: 'container_cpu_cfs_periods_total|container_cpu_cfs_throttled_periods_total|container_cpu_cfs_throttled_seconds_total|container_cpu_usage_seconds_total|container_memory_rss|container_memory_usage_bytes|container_memory_working_set_bytes|container_network_receive_bytes_total|container_network_transmit_bytes_total|container_network_receive_packets_total|container_network_transmit_packets_total|container_network_receive_packets_dropped_total|container_network_transmit_packets_dropped_total|container_oom_events_total|container_fs_reads_total|container_fs_writes_total|container_fs_reads_bytes_total|container_fs_writes_bytes_total'
+            regex: "cadvisor_version|container_blkio|container_cpu_cfs_periods_total|container_cpu_cfs_throttled_periods_total|container_cpu_cfs_throttled_seconds_total|container_cpu_usage_seconds_total|container_memory_rss|container_memory_usage_bytes|container_memory_working_set_bytes|container_network_receive_bytes_total|container_network_transmit_bytes_total|container_network_receive_packets_total|container_network_transmit_packets_total|container_network_receive_packets_dropped_total|container_network_transmit_packets_dropped_total|container_oom_events_total|container_fs_reads_total|container_fs_writes_total|container_fs_reads_bytes_total|container_fs_writes_bytes_total"
 
 
-    #kubeControllerManager:
-    #  enabled: true
-    #  endpoints: ["192.168.1.49"]
+    kubeControllerManager:
+      enabled: true
+      endpoints: ["192.168.1.49"]
+      serviceMonitor:
+        metricRelabelings:
+          # Remove duplicate metrics
+          - sourceLabels: ["__name__"]
+            regex: "(apiserver_audit|apiserver_client|apiserver_delegated|apiserver_envelope|apiserver_storage|apiserver_webhooks|attachdetach_controller|authenticated_user|authentication|cronjob_controller|disabled_metric|endpoint_slice|ephemeral_volume|garbagecollector_controller|get_token|go|hidden_metric|job_controller|kubernetes_build|kubernetes_feature|leader_election|node_collector|node_ipam|process_cpu|process_max|process_open|process_resident|process_start|process_virtual|pv_collector|registered_metric|replicaset_controller|rest_client|retroactive_storageclass|root_ca|running_managed|scrape_duration|scrape_samples|scrape_series|service_controller|storage_count|storage_operation|ttl_after|volume_operation|workqueue)_(.+)"
+            action: keep
 
-    #kubeScheduler:
-    #  enabled: true
-    #  endpoints: ["192.168.1.49"]
+    kubeScheduler:
+      enabled: true
+      endpoints: ["192.168.1.49"]
+      serviceMonitor:
+        metricRelabelings:
+          # Remove duplicate metrics
+          - sourceLabels: ["__name__"]
+            regex: "(apiserver_audit|apiserver_client|apiserver_delegated|apiserver_envelope|apiserver_storage|apiserver_webhooks|authenticated_user|authentication|disabled_metric|go|hidden_metric|kubernetes_build|kubernetes_feature|leader_election|process_cpu|process_max|process_open|process_resident|process_start|process_virtual|registered_metric|rest_client|scheduler|scrape_duration|scrape_samples|scrape_series|workqueue)_(.+)"
+            action: keep
 
-    #kubeProxy:
-    #  enabled: true
-    #  endpoints: ["192.168.1.49"]
+    kubeProxy:
+      enabled: true
+      endpoints: ["192.168.1.49"]
+
 
     kube-state-metrics:
       prometheus:
@@ -109,7 +128,8 @@ spec:
               sourceLabels: [__name__]
 
     kubeEtcd:
-      enabled: false
+      enabled: true
+      endpoints: ["192.168.1.49"]
 
     prometheus:
 

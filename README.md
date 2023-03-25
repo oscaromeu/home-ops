@@ -17,6 +17,7 @@ This project aims to achieve its goals while adhering to industry-standard pract
 + [flannel](https://github.com/flannel-io/flannel): Internal Kubernetes networking plugin.
 + [ingress-nginx](https://github.com/kubernetes/ingress-nginx/): Ingress controller to expose HTTP traffic to pods over DNS.
 + [longhorn](https://longhorn.io): Distributed block storage for persistent storage.
++ [sops](https://github.com/mozilla/sops)
 + [tf-controller](https://github.com/weaveworks/tf-controller): Additional Flux component used to run Terraform from within a Kubernetes Cluster.
 + [volsync](https://github.com/backube/volsync) and [snapscheduler](https://github.com/backube/snapscheduler): Backup and recovery of persistent volume claims.
 
