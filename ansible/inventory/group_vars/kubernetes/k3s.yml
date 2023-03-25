@@ -3,6 +3,6 @@ k3s_version: v1.26.0+k3s1
 systemd_dir: /etc/systemd/system
 master_ip: "{{ hostvars[groups['master'][0]]['ansible_host'] | default(groups['master'][0]) }}"
 #master_ip: "192.168.1.49"
-extra_server_args: "--disable servicelb --disable traefik"
+extra_server_args: "--disable servicelb --disable traefik --etcd-expose-metrics=true --kube-controller-manager-arg=bind-address=0.0.0.0 --kube-proxy-arg=metrics-bind-address=0.0.0.0 --kube-scheduler-arg=bind-address=0.0.0.0"
 extra_agent_args: ""
 become: true
