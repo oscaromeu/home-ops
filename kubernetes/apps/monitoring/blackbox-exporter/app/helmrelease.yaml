@@ -36,7 +36,7 @@ spec:
       annotations:
         hajimari.io/enable: "false"
       hosts:
-        - host: &host blackbox.devfu.io
+        - host: &host blackbox.oscaromeu.io
           paths:
             - path: /
               pathType: Prefix

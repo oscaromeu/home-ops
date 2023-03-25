@@ -13,7 +13,7 @@
  spec:
    ingressClassName: nginx
    rules:
-   - host: elastic.devfu.io
+   - host: elastic.oscaromeu.io
      http:
        paths:
        - backend:
@@ -25,5 +25,5 @@
          pathType: Prefix
    tls:
    - hosts:
-     - elastic.devfu.io
+     - elastic.oscaromeu.io
      secretName: elastic-tls

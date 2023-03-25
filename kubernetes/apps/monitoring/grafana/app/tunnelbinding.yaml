@@ -7,7 +7,7 @@ metadata:
 subjects:
   - name: grafana
     spec:
-      fqdn: grafana.devfu.io
+      fqdn: grafana.oscaromeu.io
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel

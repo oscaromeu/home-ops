@@ -7,7 +7,7 @@ metadata:
 subjects:
   - name: thanos-query
     spec:
-      fqdn: thanos.devfu.io
+      fqdn: thanos.oscaromeu.io
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
@@ -20,7 +20,7 @@ metadata:
 subjects:
   - name: thanos-bucketweb
     spec:
-      fqdn: thanos-bucketweb.devfu.io
+      fqdn: thanos-bucketweb.oscaromeu.io
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel

@@ -541,8 +541,8 @@
       {
         "current": {
           "selected": false,
-          "text": "grafanacloud-devfu-cardinality-management",
-          "value": "grafanacloud-devfu-cardinality-management"
+          "text": "grafanacloud-oscaromeu-cardinality-management",
+          "value": "grafanacloud-oscaromeu-cardinality-management"
         },
         "description": "Datasource adapter to provide metrics cardinality",
         "hide": 2,
@@ -559,8 +559,8 @@
       {
         "current": {
           "selected": false,
-          "text": "grafanacloud-devfu-prom",
-          "value": "grafanacloud-devfu-prom"
+          "text": "grafanacloud-oscaromeu-prom",
+          "value": "grafanacloud-oscaromeu-prom"
         },
         "description": "Choose a Prometheus data source for cardinality management",
         "hide": 0,

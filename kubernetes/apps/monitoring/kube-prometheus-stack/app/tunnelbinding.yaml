@@ -7,7 +7,7 @@ metadata:
 subjects:
   - name: prometheus-prometheus
     spec:
-      fqdn: prometheus.devfu.io
+      fqdn: prometheus.oscaromeu.io
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel

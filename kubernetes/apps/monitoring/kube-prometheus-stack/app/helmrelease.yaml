@@ -41,13 +41,13 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "alarm-light-outline"
         hosts:
-          - alertmanager.devfu.io
+          - alertmanager.oscaromeu.io
         paths:
           - /
         pathType: ImplementationSpecific
         tls:
           - hosts:
-              - alertmanager.devfu.io
+              - alertmanager.oscaromeu.io
 
     grafana:
       enabled: false
@@ -141,13 +141,13 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "chart-line"
         hosts:
-          - prometheus.devfu.io
+          - prometheus.oscaromeu.io
         paths:
           - /
         pathType: ImplementationSpecific
         tls:
           - hosts:
-              - prometheus.devfu.io
+              - prometheus.oscaromeu.io
 
 
       thanosService:

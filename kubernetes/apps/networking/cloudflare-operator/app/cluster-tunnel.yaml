@@ -10,7 +10,7 @@ spec:
   size: 2
   cloudflare:
     email: oscaromeu@gmail.com
-    domain: devfu.io
+    domain: oscaromeu.io
     secret: cloudflare-operator-secret
     accountName: "oscaromeu"
     accountId: f50bb5898d5ba0ee9e9d325a786d8390

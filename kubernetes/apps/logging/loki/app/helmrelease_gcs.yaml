@@ -121,7 +121,7 @@ spec:
         annotations:
           hajimari.io/enable: "false"
         hosts:
-          - host: &host loki.devfu.io
+          - host: &host loki.oscaromeu.io
             paths:
               - path: /
                 pathType: Prefix

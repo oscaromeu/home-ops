@@ -57,7 +57,7 @@ spec:
         hajimari.io/enable: "true"
         hajimari.io/icon: "alarm-light-outline"
       hosts:
-        - host: clickhouse.devfu.io
+        - host: clickhouse.oscaromeu.io
           paths:
             - path: /play
               pathType: Prefix
@@ -68,7 +68,7 @@ spec:
                     number: 8123
       tls:
         - hosts:
-            - clickhouse.devfu.io
+            - clickhouse.oscaromeu.io
           secretName: clickhouse-tls
 
 

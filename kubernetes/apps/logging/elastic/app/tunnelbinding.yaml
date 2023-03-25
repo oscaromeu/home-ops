@@ -8,7 +8,7 @@ subjects:
   - name: elk-kb-http
     spec:
       protocol: https
-      fqdn: kibana.devfu.io
+      fqdn: kibana.oscaromeu.io
       target: "https://elk-kb-http.logging.svc:5601"
       noTlsVerify: true
 tunnelRef:
@@ -24,7 +24,7 @@ subjects:
   - name: elk-es-http
     spec:
       protocol: https
-      fqdn: elastic.devfu.io
+      fqdn: elastic.oscaromeu.io
       target: "https://elk-es-http.logging.svc:9200"
       noTlsVerify: true
 tunnelRef:

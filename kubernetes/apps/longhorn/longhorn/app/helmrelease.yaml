@@ -37,4 +37,4 @@ spec:
       enabled: true
       ingressClassName: "nginx"
       tls: true
-      host: "longhorn.devfu.io"
+      host: "longhorn.oscaromeu.io"
