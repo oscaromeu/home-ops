@@ -137,7 +137,7 @@ spec:
         metricRelabelings:
           # Remove duplicate metrics
           - sourceLabels: ["__name__"]
-            regex: "kubeproxy_(.+)"
+            regex: "(kubeproxy)_(.+)"
             action: keep
 
 
