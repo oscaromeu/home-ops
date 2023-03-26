@@ -34,13 +34,18 @@ This setup can provide better performance and efficiency for the cluster, as the
 
 ### Users
 
+If you're using Kibana Dev Tools to create a user in Elasticsearch, you can use the Elasticsearch Security API directly within the Kibana Console. Here's an example of how to create a user using the PUT method with the `/_security/user` endpoint. Here is a link to the [create or update users API](https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html#security-api-put-user) documentation.
+
+
+
 ```json
-POST /_security/user/ingestion
+PUT /_security/user/ingestion
 {
   "password" : "something",
-  "roles" : [ "superuser" ],
+  "roles" : [ "superuser" ]
 }
 ```
+
 
 ### Index Management
 

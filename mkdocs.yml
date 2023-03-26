@@ -84,13 +84,13 @@ nav:
   #  - administration/fluxcd.md
 
   - Guides:
-    - guides/fluxcd.md
-    - guides/helpful_commands.md
-    - guides/loki.md
+    #- guides/fluxcd.md
+    #- guides/helpful_commands.md
+    #- guides/loki.md
     - guides/networking.md
     - guides/secret_management.md
-    - guides/semantic_git_messages.md
-    - guides/troubleshooting.md
+    #- guides/semantic_git_messages.md
+    #- guides/troubleshooting.md
 
 
 

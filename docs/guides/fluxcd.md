@@ -66,3 +66,6 @@ Namespace/monitoring configured
   Normal  ReconciliationSucceeded  15m  kustomize-controller  Reconciliation finished in 2.449433766s, next run in 30m0s
 ➜  home-ops git:(main) ✗ kubectl describe -n flux-system kustomization cluster-apps
 ```
+
+
+[FluxCD Multi Tenancy on AKS with GitOps](https://medium.com/@jmasengesho/kubernetes-multi-tenancy-on-aks-with-gitops-fluxcd-v2-part-1-introduction-to-gitops-and-fluxcd-2bde2984bf3e)

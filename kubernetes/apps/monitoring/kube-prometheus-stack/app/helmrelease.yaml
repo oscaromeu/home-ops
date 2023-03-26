@@ -96,6 +96,23 @@ spec:
             regex: rest_client_request_duration_seconds_bucket
             action: drop
 
+        #####
+        # If you are using k3s, you can use the following to relabel metrics to match the kubernetes-mixin
+        ## Example
+        #kubelet:
+        #  serviceMonitor:
+        #    metricRelabelings:
+        #      # k3s exposes all metrics on all endpoints, relabel jobs that belong to other components
+        #      - sourceLabels: [__name__]
+        #        regex: "scheduler_(.+)"
+        #        targetLabel: "job"
+        #        replacement: "kube-scheduler"
+        #      - sourceLabels: [__name__]
+        #        regex: "kubeproxy_(.+)"
+        #        targetLabel: "job"
+        #        replacement: "kube-proxy"
+        #####
+
         # remove duplicates
         # https://github.com/google/cadvisor/blob/master/docs/storage/prometheus.md#prometheus-container-metrics
         cAdvisorMetricRelabelings:

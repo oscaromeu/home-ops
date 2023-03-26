@@ -1,17 +1,9 @@
 !!! tip
 
-    Read the original documentation
-
-## DNS
-
-### Incomming traffic from external sourcess
-
-Across the wide area network (WAN), I utilize Cloudflare tunnels to avoid directly exposing my local cluster. The Cloudflare Operator is employed to establish these tunnels and create Cloudflare DNS entries for services I want to make publicly accessible.
-
-Cloudflare serves as a proxy to conceal my home's WAN IP address and functions as a firewall. When I am not connected to my home network, all incoming traffic to my cluster is routed through a Cloudflare tunnel.
+    If you have any doubts, please refer to the [template's documentation](https://github.com/onedr0p/flux-cluster-template). Some sections may have been replicated
 
 
-### Global Cloudflare API Key
+## Global Cloudflare API Key
 
 In order to use Terraform and `cert-manager` with the Cloudflare DNS challenge you will need to create a API key.
 
@@ -23,7 +15,7 @@ In order to use Terraform and `cert-manager` with the Cloudflare DNS challenge y
 
 You may wish to update this later on to a Cloudflare **API Token** which can be scoped to certain resources. I do not recommend using a Cloudflare **API Key**, however for the purposes of this template it is easier getting started without having to define which scopes and resources are needed. For more information see the [Cloudflare docs on API Keys and Tokens](https://developers.cloudflare.com/api/).
 
-### Configuring Cloudflare DNS with Terraform
+## Configuring Cloudflare DNS with Terraform
 
 Review the Terraform scripts under `./terraform/cloudflare/` and make sure you understand what it's doing (no really review it).
 
@@ -51,8 +43,7 @@ If Terraform was ran successfully you can log into Cloudflare and validate the D
 
 The cluster application [external-dns](https://github.com/kubernetes-sigs/external-dns) will be managing the rest of the DNS records you will need.
 
-
-### DNS
+## DNS
 
 The [external-dns](https://github.com/kubernetes-sigs/external-dns) application created in the `networking` namespace will handle creating public DNS records. By default, `echo-server` and the `flux-webhook` are the only public domain exposed on your Cloudflare domain. In order to make additional applications public you must set an ingress annotation (`external-dns.alpha.kubernetes.io/target`) like done in the `HelmRelease` for `echo-server`. You do not need to use Terraform to create additional DNS records unless you need a record outside the purposes of your Kubernetes cluster (e.g. setting up MX records).
 
@@ -64,4 +55,48 @@ If your router (or Pi-Hole, Adguard Home or whatever) supports conditional DNS f
 
 To access services from the outside world port forwarded `80` and `443` in your router to the `${BOOTSTRAP_METALLB_INGRESS_ADDR}` IP, in a few moments head over to your browser and you _should_ be able to access `https://echo-server.${BOOTSTRAP_CLOUDFLARE_DOMAIN}` from a device outside your LAN.
 
-Now if nothing is working, that is expected. This is DNS after all!
+To avoid directly exposing the local cluster, Cloudflare tunnels can be used across the wide area network (WAN). The Cloudflare Operator is employed to establish these tunnels and create Cloudflare DNS entries for services you want to make publicly accessible. Cloudflare serves as a proxy to conceal your home's WAN IP address and functions as a firewall. When you are not connected to your home network, all incoming traffic to your cluster is routed through a Cloudflare tunnel.
+
+
+!!! warning
+
+    If you want to follow the cloudflare tunnel approach disable `external-dns` and `cloudflare-ddns` components in the kustomization file in the networking namespace.
+
+### Cloudflare Operator
+
+Follow the [getting started guide](https://github.com/adyanth/cloudflare-operator/blob/main/docs/getting-started.md) to use cloudflare operator.
+
+
+!!! warning
+
+    Notice that ExternalSecrets will try to pull the following secrets from Doppler.
+
+    ```yaml
+    # kubernetes/apps/networking/cloudflare-operator/app/externalsecrets.yaml
+    apiVersion: external-secrets.io/v1beta1
+    kind: ExternalSecret
+    metadata:
+      name: cloudflare-operator
+      namespace: cloudflare-operator-system
+    spec:
+      secretStoreRef:
+        kind: ClusterSecretStore
+        name: cloudflare-operator-cluster-secret-store
+      target:
+        name: cloudflare-operator-secret
+        creationPolicy: Owner
+        template:
+          engineVersion: v2
+          data:
+            CLOUDFLARE_API_TOKEN: "{{ .CLOUDFLARE_TOKEN }}"
+            CLOUDFLARE_API_KEY: "{{ .CLOUDFLARE_APIKEY }}"
+
+      data:
+        - secretKey: CLOUDFLARE_TOKEN
+          remoteRef:
+            key: CLOUDFLARE_TOKEN
+
+      - secretKey: CLOUDFLARE_APIKEY
+        remoteRef:
+          key: CLOUDFLARE_APIKEY
+    ```
