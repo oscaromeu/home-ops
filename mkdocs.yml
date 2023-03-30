@@ -77,29 +77,29 @@ nav:
 
   - Home: index.md
 
-  - Installation:
-    - installation/index.md
+  - Getting Started:
+    - 00-getting-started/about.md
 
   #- Administration:
   #  - administration/fluxcd.md
 
-  - Guides:
+  - How-to guides:
     #- guides/fluxcd.md
     #- guides/helpful_commands.md
     #- guides/loki.md
-    - guides/networking.md
-    - guides/secret_management.md
+    - 01-how-to-guides/networking.md
+    - 01-how-to-guides/secret_management.md
     #- guides/semantic_git_messages.md
     #- guides/troubleshooting.md
 
 
 
-  - Observability:
-    - observability/index.md
-    - Analytics:
-      #- observability/analytics/index.md
-      - observability/analytics/elk.md
+  - Explanation:
+    - 02-explanation/index.md
+    #- Analytics:
+    #  #- observability/analytics/index.md
+    #  - observability/analytics/elk.md
 
     - Data Platform:
       #- observability/data-platform/index.md
-      - observability/data-platform/prometheus.md
+      - 02-explanation/data-platform/prometheus.md
