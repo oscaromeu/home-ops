@@ -214,6 +214,16 @@ spec:
           limits:
             memory: 4744M
 
+        retention: 2d
+        retentionSize: 15GB
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: "longhorn"
+              resources:
+                requests:
+                  storage: 20Gi
+
         #remoteWrite:
         #  - url: "https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push"
         #    basicAuth:
