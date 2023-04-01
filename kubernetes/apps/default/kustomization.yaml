@@ -8,5 +8,6 @@ resources:
   - ./demo-service/ks.yaml
   #- ./knative-operator/ks.yaml
   - ./redis/ks.yaml
+  - ./glauth/ks.yaml
   #- ./clickhouse/ks.yaml
   #- ./jupyterhub/ks.yaml
