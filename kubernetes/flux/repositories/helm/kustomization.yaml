@@ -30,3 +30,4 @@ resources:
   - ./actions-runner-controller.yaml
   - ./calico.yaml
   - ./cloudnative-pg.yaml
+  - ./istio.yaml
