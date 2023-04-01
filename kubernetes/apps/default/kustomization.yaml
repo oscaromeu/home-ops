@@ -7,6 +7,6 @@ resources:
   - ./hajimari/ks.yaml
   - ./demo-service/ks.yaml
   #- ./knative-operator/ks.yaml
-  - ./redis/ks.yaml
+  #- ./redis/ks.yaml
   #- ./clickhouse/ks.yaml
   #- ./jupyterhub/ks.yaml
