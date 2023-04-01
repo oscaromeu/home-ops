@@ -30,7 +30,7 @@ spec:
       replicas: 3
       strategy: RollingUpdate
     image:
-      repository: public.ecr.aws/docker/library/haproxy
+      repository: haproxy
       tag: 2.7.2-alpine
     service:
       main:
