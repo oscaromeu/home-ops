@@ -14,7 +14,6 @@ spec:
       port: 9091
       targetPort: 9091
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/servicemonitor_v1.json
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
