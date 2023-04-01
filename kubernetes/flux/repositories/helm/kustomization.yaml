@@ -27,3 +27,6 @@ resources:
   - ./1password.yaml
   - ./jupyter.yaml
   - ./kyverno.yaml
+  - ./actions-runner-controller.yaml
+  - ./calico.yaml
+  - ./cloudnative-pg.yaml
