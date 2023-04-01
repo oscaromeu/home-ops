@@ -9,5 +9,6 @@ resources:
   #- ./knative-operator/ks.yaml
   - ./redis/ks.yaml
   - ./glauth/ks.yaml
+  - ./excalidraw/ks.yaml
   #- ./clickhouse/ks.yaml
   #- ./jupyterhub/ks.yaml
