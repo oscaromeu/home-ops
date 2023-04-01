@@ -6,7 +6,7 @@ resources:
   - ./echo-server/ks.yaml
   - ./hajimari/ks.yaml
   - ./demo-service/ks.yaml
-  - ./knative-operator/ks.yaml
+  #- ./knative-operator/ks.yaml
   - ./redis/ks.yaml
   #- ./clickhouse/ks.yaml
   #- ./jupyterhub/ks.yaml
