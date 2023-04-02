@@ -13,8 +13,8 @@ metadata:
     app.kubernetes.io/instance: *app
 spec:
   type: LoadBalancer
-  externalTrafficPolicy: Local
-  externalIPs: ["${SVC_POSTGRES_ADDR}"]
+  #externalTrafficPolicy: Local
+  #externalIPs: ["${SVC_POSTGRES_ADDR}"]
   ports:
     - name: postgres
       port: 5432
