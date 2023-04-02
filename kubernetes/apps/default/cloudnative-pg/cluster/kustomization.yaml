@@ -5,5 +5,5 @@ kind: Kustomization
 namespace: default
 resources:
   - ./cluster.yaml
-  - ./scheduledbackup.yaml
+  #- ./scheduledbackup.yaml
   - ./service.yaml
