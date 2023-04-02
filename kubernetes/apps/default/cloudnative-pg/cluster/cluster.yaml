@@ -15,9 +15,9 @@ spec:
     storageClass: longhorn
   superuserSecret:
     name: cloudnative-pg-secret
-  bootstrap:
-    recovery:
-      source: &active-cluster postgres-v2
+  #bootstrap:
+  #  recovery:
+  #    source: &active-cluster postgres-v2
   postgresql:
     parameters:
       max_connections: "300"
