@@ -31,7 +31,7 @@ spec:
       strategy: RollingUpdate
     image:
       repository: haproxy
-      tag: 2.7.2-alpine
+      tag: 2.7.6-alpine
     service:
       main:
         type: LoadBalancer
