@@ -10,5 +10,6 @@ resources:
   - ./redis/ks.yaml
   - ./excalidraw/ks.yaml
   - ./cloudnative-pg/ks.yaml
+  - ./appflowly/ks.yaml
   #- ./clickhouse/ks.yaml
   #- ./jupyterhub/ks.yaml
