@@ -73,7 +73,7 @@ spec:
         type: hostPath
         mountPath: /root/.Xauthority
         hostPath: /root/.Xauthority
-        hostPathType: File
+        hostPathType: Directory
       x11-unix:
         enabled: true
         type: hostPath
