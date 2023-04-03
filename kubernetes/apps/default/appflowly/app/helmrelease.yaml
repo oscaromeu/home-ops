@@ -66,24 +66,32 @@ spec:
           matchLabels:
             app.kubernetes.io/name: *app
 
-
+    # required for X11 forwarding. Also, required that X11 is enabled on the host.
     persistence:
       xauthority:
         enabled: true
         type: hostPath
         mountPath: /root/.Xauthority
+        hostPath: /root/.Xauthority
+        hostPathType: File
       x11-unix:
         enabled: true
         type: hostPath
         mountPath: /tmp/.X11-unix
+        hostPath: /tmp/.X11-unix
+        hostPathType: Directory
       dri:
         enabled: true
         type: hostPath
         mountPath: /dev/dri
+        hostPath: /dev/dri
+        hostPathType: Directory
       dbus:
         enabled: true
         type: hostPath
         mountPath: /var/run/dbus/system_bus_socket
+        hostPath: /var/run/dbus/system_bus_socket
+        hostPathType: Socket
       appflowy-data:
         enabled: true
         type: pvc
