@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-longhorn
-  path: ./kubernetes/apps/data/jupyterhub/app
+  path: ./kubernetes/apps/default/jupyterhub/app
   prune: true
   sourceRef:
     kind: GitRepository
