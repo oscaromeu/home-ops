@@ -68,12 +68,12 @@ spec:
 
     # required for X11 forwarding. Also, required that X11 is enabled on the host.
     persistence:
-      xauthority:
-        enabled: true
-        type: hostPath
-        mountPath: /root/.Xauthority
-        hostPath: /root/.Xauthority
-        hostPathType: Directory
+      #xauthority:
+      #  enabled: true
+      #  type: hostPath
+      #  mountPath: /root/.Xauthority
+      #  hostPath: /root/.Xauthority
+      #  hostPathType: Directory
       x11-unix:
         enabled: true
         type: hostPath
