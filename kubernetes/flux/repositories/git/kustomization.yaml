@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - ./elastic.yaml
   - ./cloudflare_operator.yaml
+  - ./helloworld.yaml
