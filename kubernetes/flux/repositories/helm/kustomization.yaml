@@ -31,3 +31,4 @@ resources:
   - ./calico.yaml
   - ./cloudnative-pg.yaml
   - ./istio.yaml
+  - ./tf-controller.yaml
