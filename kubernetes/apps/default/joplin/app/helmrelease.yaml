@@ -35,6 +35,7 @@ spec:
       APP_BASE_URL: https://joplin.oscaromeu.io
       APP_PORT: &port 8080
       DB_CLIENT: pg
+      # ¿?¿
       POSTGRES_HOST: "postgres-rw.default.svc.cluster.local"
       POSTGRES_PORT: 5432
       POSTGRES_USER: joplin
