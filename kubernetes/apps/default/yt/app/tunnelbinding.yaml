@@ -1,0 +1,13 @@
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: yt-tunnelbinding
+  namespace: default
+subjects:
+  - name: yt
+    spec:
+      fqdn: yt.oscaromeu.io
+tunnelRef:
+  kind: ClusterTunnel
+  name: cluster-tunnel
