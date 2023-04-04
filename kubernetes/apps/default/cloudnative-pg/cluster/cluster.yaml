@@ -23,7 +23,7 @@ spec:
       max_connections: "300"
       shared_buffers: 512MB
     pg_hba:
-      - host all all 10.42.0.0/16 password
+      - host all all all trust
 
   monitoring:
     enablePodMonitor: false
