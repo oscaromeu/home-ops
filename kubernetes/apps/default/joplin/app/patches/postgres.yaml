@@ -28,4 +28,4 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: postgres-db-joplin-credentials
-                key: POSTGRES_PASSWORD
+                key: POSTGRES_PASS
