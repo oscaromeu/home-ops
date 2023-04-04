@@ -37,6 +37,8 @@ spec:
       DB_CLIENT: pg
       POSTGRES_HOST: ${POSTGRES_RW_SERVICE_HOST}
       POSTGRES_PORT: ${POSTGRES_RW_SERVICE_PORT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DATABASE: joplin
       MAILER_ENABLED: 0
       #MAILER_HOST: smtp-relay.default.svc.cluster.local.
@@ -69,6 +71,17 @@ spec:
         tls:
           - hosts:
               - *host
+
+    nodeSelector:
+      kubernetes.io/arch: amd64
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: *app
+
     resources:
       requests:
         cpu: 50m
