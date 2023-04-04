@@ -11,7 +11,7 @@ spec:
         image: ghcr.io/onedr0p/postgres-initdb:14.7
         env:
           - name: POSTGRES_HOST
-            value: ${POSTGRES_RW_SERVICE_HOST}
+            value: postgres.default.svc.cluster.local
           - name: POSTGRES_DB
             value: joplin
           - name: POSTGRES_SUPER_PASS
