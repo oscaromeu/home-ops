@@ -32,7 +32,7 @@ spec:
       repository: joplin/server
       tag: 2.10.10-beta
     env:
-      APP_BASE_URL: https://joplin.${SECRET_CLUSTER_DOMAIN}
+      APP_BASE_URL: https://joplin.oscaromeu.io
       APP_PORT: &port 8080
       DB_CLIENT: pg
       POSTGRES_HOST: ${POSTGRES_RW_SERVICE_HOST}
@@ -62,7 +62,7 @@ spec:
           external-dns.home.arpa/enabled: "true"
           hajimari.io/icon: mdi:text
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_CLUSTER_DOMAIN}"
+          - host: &host "{{ .Release.Name }}.oscaromeu.io"
             paths:
               - path: /
                 pathType: Prefix
