@@ -22,10 +22,10 @@ spec:
           - name: POSTGRES_USER
             valueFrom:
               secretKeyRef:
-                name: postgres-db-joplin-credentials
+                name: joplin
                 key: POSTGRES_USER
           - name: POSTGRES_PASS
             valueFrom:
               secretKeyRef:
-                name: postgres-db-joplin-credentials
+                name: joplin
                 key: POSTGRES_PASSWORD
