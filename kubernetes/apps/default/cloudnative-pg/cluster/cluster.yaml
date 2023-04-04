@@ -22,7 +22,6 @@ spec:
     parameters:
       max_connections: "300"
       shared_buffers: 512MB
-      listen_addresses: '*'
     pg_hba:
       - local all all 0.0.0.0/0 password
       - host all all 0.0.0.0/0 password
