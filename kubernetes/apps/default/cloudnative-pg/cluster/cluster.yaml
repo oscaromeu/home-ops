@@ -22,6 +22,10 @@ spec:
     parameters:
       max_connections: "300"
       shared_buffers: 512MB
+    pg_hba:
+      - local all all password
+      - host all all password
+
   monitoring:
     enablePodMonitor: false
   #backup:
