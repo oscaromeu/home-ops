@@ -36,7 +36,7 @@ spec:
       APP_PORT: &port 8080
       DB_CLIENT: pg
       POSTGRES_HOST: "postgres-rw.default.svc.cluster.local"
-      POSTGRES_PORT: ${POSTGRES_RW_SERVICE_PORT}
+      POSTGRES_PORT: 5432
       POSTGRES_USER: joplin
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DATABASE: joplin
