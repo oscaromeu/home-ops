@@ -5,9 +5,9 @@ metadata:
   name: jopplin-tunnelbinding
   namespace: default
 subjects:
-  - name: jopplin
+  - name: joplin
     spec:
-      fqdn: jopplin.oscaromeu.io
+      fqdn: joplin.oscaromeu.io
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
