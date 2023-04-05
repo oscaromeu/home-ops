@@ -35,7 +35,7 @@ spec:
       persistence:
         enabled: false
     replica:
-      replicaCount: 3
+      replicaCount: 2
       persistence:
         enabled: false
     sentinel:
