@@ -51,7 +51,7 @@ spec:
       #SIGNUPS_DOMAINS_WHITELIST:
       #  valueFrom:
       #    secretKeyRef:
-      #      name: vaullt-env
+      #      name: vault-env
       #      key: SIGNUPS_DOMAINS_WHITELIST
 
       ORG_CREATION_USERS:
@@ -95,43 +95,43 @@ spec:
       #INVITATION_ORG_NAME:
       #  valueFrom:
       #    secretKeyRef:
-      #      name: vaullt-env
+      #      name: vault-env
       #      key: INVITATION_ORG_NAME
 
       # Not used
       #SMTP_HOST:
       #  valueFrom:
       #    secretKeyRef:
-      #      name: vaullt-env
+      #      name: vault-env
       #      key: SMTP_HOST
 
       #SMTP_FROM:
       #  valueFrom:
       #    secretKeyRef:
-      #      name: vaullt-env
+      #      name: vault-env
       #      key: SMTP_FROM
 
       #SMTP_FROM_NAME:
       #  valueFrom:
       #    secretKeyRef:
-      #      name: vaullt-env
+      #      name: vault-env
       #      key: SMTP_FROM
 
       #SMTP_USERNAME:
       #  valueFrom:
       #    secretKeyRef:
-      #      name: vaullt-env
+      #      name: vault-env
       #      key: SMTP_USERNAME
 
       #SMTP_PASSWORD:
       #  valueFrom:
       #    secretKeyRef:
-      #      name: vaullt-env
+      #      name: vault-env
       #      key: SMTP_PASSWORD
 
     envFrom:
       - secretRef:
-          name: vaullt-env
+          name: vault-env
 
     service:
       main:
