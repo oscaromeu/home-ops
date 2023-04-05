@@ -172,7 +172,7 @@ spec:
         - hosts:
           - *host
       admin:
-        enabled: false
+        enabled: true
         ingressClassName: "nginx"
         annotations:
           hajimari.io/enable: "true"
@@ -191,8 +191,8 @@ spec:
 
     persistence:
       config:
-        enabled: false
-        existingClaim: vaultwarden-config-v1
+        enabled: true
+        existingClaim: vaultwarden-config-pvc
 
     resources:
       requests:
