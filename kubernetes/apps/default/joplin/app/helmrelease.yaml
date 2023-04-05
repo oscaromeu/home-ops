@@ -4,6 +4,8 @@ kind: HelmRelease
 metadata:
   name: &app joplin
   namespace: default
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
 spec:
   interval: 15m
   chart:
@@ -32,7 +34,7 @@ spec:
       repository: joplin/server
       tag: 2.10.10-beta
     env:
-      APP_BASE_URL: https://joplin.oscaromeu.io
+      APP_BASE_URL: "https://joplin.${SECRET_DOMAIN}"
       APP_PORT: &port 8080
       DB_CLIENT: pg
       # ¿?¿
@@ -57,6 +59,7 @@ spec:
         ports:
           http:
             port: *port
+
     ingress:
       main:
         enabled: true
@@ -65,7 +68,7 @@ spec:
           external-dns.home.arpa/enabled: "true"
           hajimari.io/icon: mdi:text
         hosts:
-          - host: &host "{{ .Release.Name }}.oscaromeu.io"
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -87,3 +90,5 @@ spec:
       requests:
         cpu: 50m
         memory: 256Mi
+      limits:
+        memory: 512Mi
