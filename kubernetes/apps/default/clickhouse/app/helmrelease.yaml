@@ -3,7 +3,9 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: clickhouse
-  namespace: databases
+  namespace: default
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
 spec:
   interval: 15m
   chart:
@@ -56,8 +58,9 @@ spec:
         hajimari.io/appName: "clickhouse"
         hajimari.io/enable: "true"
         hajimari.io/icon: "alarm-light-outline"
+
       hosts:
-        - host: clickhouse.oscaromeu.io
+        - host: "clickhouse.${SECRET_DOMAIN}"
           paths:
             - path: /play
               pathType: Prefix
@@ -68,14 +71,14 @@ spec:
                     number: 8123
       tls:
         - hosts:
-            - clickhouse.oscaromeu.io
+            - "clickhouse.${SECRET_DOMAIN}"
           secretName: clickhouse-tls
 
 
     persistence:
       enabled: true
-      size: 10Gi
-      storageClass: "local-path"
+      size: 2Gi
+      storageClass: "longhorn"
       accessModes:
         - ReadWriteOnce
 
