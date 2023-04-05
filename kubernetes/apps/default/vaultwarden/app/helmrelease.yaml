@@ -57,37 +57,37 @@ spec:
       ORG_CREATION_USERS:
         valueFrom:
           secretKeyRef:
-            name: vaullt-env
+            name: vault-env
             key: ORG_CREATION_USERS
 
       POSTGRES_DB:
         valueFrom:
           secretKeyRef:
-            name: vaullt-env
+            name: vault-env
             key: POSTGRES_DB
 
       POSTGRES_HOST:
         valueFrom:
           secretKeyRef:
-            name: vaullt-env
+            name: vault-env
             key: POSTGRES_HOST
 
       POSTGRES_PORT:
         valueFrom:
           secretKeyRef:
-            name: vaullt-env
+            name: vault-env
             key: POSTGRES_PORT
 
       POSTGRES_USER:
         valueFrom:
           secretKeyRef:
-            name: vaullt-env
+            name: vault-env
             key: POSTGRES_USER
 
       POSTGRES_PASS:
         valueFrom:
           secretKeyRef:
-            name: vaullt-env
+            name: vault-env
             key: POSTGRES_PASS
 
 
