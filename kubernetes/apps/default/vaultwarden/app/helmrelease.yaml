@@ -167,7 +167,7 @@ spec:
 
     persistence:
       config:
-        enabled: true
+        enabled: false
         existingClaim: vaultwarden-config-v1
 
     resources:
