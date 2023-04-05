@@ -44,7 +44,7 @@ spec:
       PASSWORD_HINTS_ALLOWED: false
       ROCKET_PORT: 8080
       # 'DATABASE_URL=postgresql://user_name:user_password@db_host:5432/vaultwarden'
-      DATABASE_URL: "postgresql://$${POSTGRES_USER}:$${POSTGRES_PASS}@$${POSTGRES_DB}:$${POSTGRES_PORT}/$${POSTGRES_DB}"
+      DATABASE_URL: postgresql://$${POSTGRES_USER}:$${POSTGRES_PASS}@$${POSTGRES_DB}:$${POSTGRES_PORT}/$${POSTGRES_DB}
       #SMTP_SSL: true
       #SMTP_PORT: 587
 
