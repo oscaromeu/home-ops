@@ -4,8 +4,6 @@ kind: HelmRelease
 metadata:
   name: vaultwarden
   namespace: default
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   interval: 15m
   chart:
@@ -28,7 +26,7 @@ spec:
 
     env:
       TZ: "${TIMEZONE}"
-      DOMAIN: https://vault.${SECRET_DOMAIN}
+      DOMAIN: "https://vault.${SECRET_DOMAIN}"
       DATA_FOLDER: "config"
       ICON_CACHE_FOLDER: "config/icon_cache"
       ATTACHMENTS_FOLDER: "config/attachments"

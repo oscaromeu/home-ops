@@ -4,8 +4,6 @@ kind: HelmRelease
 metadata:
   name: &app joplin
   namespace: default
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   interval: 15m
   chart:
