@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: vaultwarden-config-pvc
-  namespace: security
+  namespace: default
 spec:
   accessModes:
     - ReadWriteOnce
