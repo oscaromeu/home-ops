@@ -28,6 +28,7 @@ spec:
       TZ: "${TIMEZONE}"
       DOMAIN: "https://vault.${SECRET_DOMAIN}"
       DATA_FOLDER: "config"
+      LOG_LEVEL: "debug"
       ICON_CACHE_FOLDER: "config/icon_cache"
       ATTACHMENTS_FOLDER: "config/attachments"
       SENDS_FOLDER: "config/sends"
@@ -44,7 +45,7 @@ spec:
       PASSWORD_HINTS_ALLOWED: false
       ROCKET_PORT: 8080
       # 'DATABASE_URL=postgresql://user_name:user_password@db_host:5432/vaultwarden'
-      DATABASE_URL: postgresql://$(POSTGRES_USER):$(POSTGRES_PASS)@$(POSTGRES_DB):$(POSTGRES_PORT)/$(POSTGRES_DB)
+      DATABASE_URL: "postgresql://$(POSTGRES_USER):$(POSTGRES_PASS)@$(POSTGRES_DB):$(POSTGRES_PORT)/$(POSTGRES_DB)"
       #SMTP_SSL: true
       #SMTP_PORT: 587
 
