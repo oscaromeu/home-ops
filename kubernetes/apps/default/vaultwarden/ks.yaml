@@ -28,3 +28,4 @@ spec:
     substituteFrom:
       - kind: Secret
         name: vault-env
+        optional: true
