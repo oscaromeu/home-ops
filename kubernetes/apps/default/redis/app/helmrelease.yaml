@@ -35,15 +35,15 @@ spec:
       persistence:
         enabled: false
     replica:
-      replicaCount: 2
+      replicaCount: 3
       persistence:
         enabled: false
     sentinel:
       enabled: true
       masterSet: redis-default
-      getMasterTimeout: 10
+      getMasterTimeout: 30
       startupProbe:
-        failureThreshold: 2
+        failureThreshold: 10
       persistence:
         enabled: false
     metrics:
