@@ -99,8 +99,8 @@ spec:
       valuesKey: dbUser
     - targetPath: gitea.database.HOST
       kind: Secret
-      name: cloudnative-pg-secret
-      valuesKey: POSTGRES_HOST_PORT
+      name: gitea-config
+      valuesKey: host
 
 
 
