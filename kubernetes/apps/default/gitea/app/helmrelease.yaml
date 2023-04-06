@@ -26,89 +26,35 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    image:
-      repository: gitea/gitea
-      tag: 1.18.0
-      rootless: true
-    containerSecurityContext:
-      capabilities:
-        add: ["SYS_CHROOT"]
+
+    controller:
+      replicas: 0
+      strategy: RollingUpdate
+      annotations:
+        reloader.stakater.com/auto: "true"
+
     gitea:
       admin:
         username: "gitea"
       config:
         APP_NAME: "Gitea Homelab"
-        cron.resync_all_sshkeys:
-          ENABLED: true
-          RUN_AT_START: true
+
         database:
           DB_TYPE: postgres
           HOST: "${POSTGRES_HOST}:${POSTGRES_PORT}"
           NAME: gitea
           SCHEMA: public
           SSL_MODE: disable
-        server:
-          SSH_PORT: 22
-          SSH_LISTEN_PORT: 30322
-          SSH_DOMAIN: gitea.${SECRET_DOMAIN}
-          ROOT_URL: https://gitea.${CLUSTER_DOMAIN}
-        respository:
-          DEFAULT_BRANCH: main
-          DEFAULT_PRIVATE: true
-        admin:
-          DISABLE_REGULAR_ORG_CREATION: true
-        security:
-          PASSWORD_COMPLEXITY: "lower,upper"
-          MIN_PASSWORD_LENGTH: 12
-        service:
-          DISABLE_REGISTRATION: true
-          REQUIRE_SIGNIN_VIEW: true
-        cron:
-          ENABLED: true
-        #attachment:
-        #  STORAGE_TYPE: minio
-        #  MINIO_ENDPOINT: minio.${SECRET_DOMAIN}:51515
-        #  MINIO_BUCKET: gitea
-        #  MINIO_USE_SSL: true
-        #storage:
-        #  STORAGE_TYPE: minio
-        #  MINIO_ENDPOINT: minio.${SECRET_DOMAIN}:51515
-        #  MINIO_BUCKET: gitea
-        #  MINIO_USE_SSL: true
-        #mailer:
-        #  ENABLED: false
-        #  MAILER_TYPE: smtp
-        #  SMTP_ADDR: smtp-relay.default
-        #  SMTP_PORT: 2525
-        #  FROM: "Gitea <gitea@${SECRET_DOMAIN}>"
-        #webhook:
-        #  ALLOWED_HOST_LIST: drone.default.svc
-      #   openid:
-      #     ENABLE_OPENID_SIGNIN: false
-      #     ENABLE_OPENID_SIGNUP: true
-      #     WHITELISTED_URIS: "auth.${CLUSTER_DOMAIN}"
-      # oauth:
-      #   - name: authelia
-      #     provider: openidConnect
-      #     key: gitea
-      #     secret: "${SECRET_GITEA_OAUTH_CLIENT_SECRET}"
-      #     autoDiscoverUrl: "https://auth.${CLUSTER_DOMAIN}/.well-known/openid-configuration"
-      #     groupClaimName: groups
-      #     adminGroup: admins
-      #     restrictedGroup: people
-      metrics:
-        enabled: false
-        serviceMonitor:
-          enabled: false
-      podAnnotations:
-        secret.reloader.stakater.com/reload: gitea-config
+
     postgresql:
       enabled: false
     memcached:
       enabled: true
+
     persistence:
       enabled: true
       existingClaim: "gitea-config"
+
     #service:
       #ssh:
       #  type: LoadBalancer
@@ -116,6 +62,7 @@ spec:
       #  port: 1337
       #  annotations:
       #    metallb.universe.tf/allow-shared-ip: "nginx-internal"
+
     ingress:
       enabled: true
       className: nginx
@@ -129,12 +76,14 @@ spec:
       tls:
         - hosts:
             - "gitea.${CLUSTER_DOMAIN}"
+
     resources:
       requests:
         cpu: 15m
         memory: 226M
       limits:
         memory: 1Gi
+
   valuesFrom:
     - targetPath: gitea.admin.email
       kind: Secret
@@ -152,6 +101,7 @@ spec:
       kind: Secret
       name: gitea-config
       valuesKey: dbUser
+
     #- targetPath: gitea.config.attachment.MINIO_ACCESS_KEY_ID
     #  kind: Secret
     #  name: gitea-config
@@ -168,7 +118,6 @@ spec:
     #  kind: Secret
     #  name: gitea-config
     #  valuesKey: minioSecretAccessKey
-
 
   postRenderers:
     - kustomize:
