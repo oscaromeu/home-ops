@@ -1,0 +1,205 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: gitea
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: gitea
+      version: 8.0.2
+      sourceRef:
+        kind: HelmRepository
+        name: gitea
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    image:
+      repository: gitea/gitea
+      tag: 1.18.0
+      rootless: true
+    containerSecurityContext:
+      capabilities:
+        add: ["SYS_CHROOT"]
+    gitea:
+      admin:
+        username: ${gitea_username}
+      config:
+        APP_NAME: "Gitea Homelab"
+        cron.resync_all_sshkeys:
+          ENABLED: true
+          RUN_AT_START: true
+        database:
+          DB_TYPE: postgres
+          HOST: ${POSTGRES_HOST}:${POSTGRES_PORT}
+          NAME: gitea
+          SCHEMA: public
+          SSL_MODE: disable
+        server:
+          SSH_PORT: 22
+          SSH_LISTEN_PORT: 30322
+          SSH_DOMAIN: gitea.${SECRET_DOMAIN}
+          ROOT_URL: https://gitea.${CLUSTER_DOMAIN}
+        respository:
+          DEFAULT_BRANCH: main
+          DEFAULT_PRIVATE: true
+        admin:
+          DISABLE_REGULAR_ORG_CREATION: true
+        security:
+          PASSWORD_COMPLEXITY: "lower,upper"
+          MIN_PASSWORD_LENGTH: 12
+        service:
+          DISABLE_REGISTRATION: true
+          REQUIRE_SIGNIN_VIEW: true
+        cron:
+          ENABLED: true
+        #attachment:
+        #  STORAGE_TYPE: minio
+        #  MINIO_ENDPOINT: minio.${SECRET_DOMAIN}:51515
+        #  MINIO_BUCKET: gitea
+        #  MINIO_USE_SSL: true
+        #storage:
+        #  STORAGE_TYPE: minio
+        #  MINIO_ENDPOINT: minio.${SECRET_DOMAIN}:51515
+        #  MINIO_BUCKET: gitea
+        #  MINIO_USE_SSL: true
+        mailer:
+          ENABLED: false
+          MAILER_TYPE: smtp
+          SMTP_ADDR: smtp-relay.default
+          SMTP_PORT: 2525
+          FROM: "Gitea <gitea@${SECRET_DOMAIN}>"
+        #webhook:
+        #  ALLOWED_HOST_LIST: drone.default.svc
+      #   openid:
+      #     ENABLE_OPENID_SIGNIN: false
+      #     ENABLE_OPENID_SIGNUP: true
+      #     WHITELISTED_URIS: "auth.${CLUSTER_DOMAIN}"
+      # oauth:
+      #   - name: authelia
+      #     provider: openidConnect
+      #     key: gitea
+      #     secret: "${SECRET_GITEA_OAUTH_CLIENT_SECRET}"
+      #     autoDiscoverUrl: "https://auth.${CLUSTER_DOMAIN}/.well-known/openid-configuration"
+      #     groupClaimName: groups
+      #     adminGroup: admins
+      #     restrictedGroup: people
+      metrics:
+        enabled: false
+        serviceMonitor:
+          enabled: false
+      podAnnotations:
+        secret.reloader.stakater.com/reload: gitea-config
+    postgresql:
+      enabled: false
+    memcached:
+      enabled: true
+    persistence:
+      enabled: true
+      existingClaim: "gitea-config"
+    service:
+      #ssh:
+      #  type: LoadBalancer
+      #  loadBalancerIP: 192.168.1.49
+      #  port: 1337
+      #  annotations:
+      #    metallb.universe.tf/allow-shared-ip: "nginx-internal"
+    ingress:
+      enabled: true
+      className: nginx
+      annotations:
+        hajimari.io/icon: mdi:code-json
+      hosts:
+        - host: "gitea.${CLUSTER_DOMAIN}"
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - "gitea.${CLUSTER_DOMAIN}"
+    resources:
+      requests:
+        cpu: 15m
+        memory: 226M
+      limits:
+        memory: 1Gi
+  valuesFrom:
+    - targetPath: gitea.admin.email
+      kind: Secret
+      name: gitea-config
+      valuesKey: adminEmail
+    - targetPath: gitea.admin.password
+      kind: Secret
+      name: gitea-config
+      valuesKey: adminPassword
+    - targetPath: gitea.config.database.PASSWD
+      kind: Secret
+      name: gitea-config
+      valuesKey: dbPassword
+    - targetPath: gitea.config.database.USER
+      kind: Secret
+      name: gitea-config
+      valuesKey: dbUser
+    #- targetPath: gitea.config.attachment.MINIO_ACCESS_KEY_ID
+    #  kind: Secret
+    #  name: gitea-config
+    #  valuesKey: minioAccessKeyId
+    #- targetPath: gitea.config.attachment.MINIO_SECRET_ACCESS_KEY
+    #  kind: Secret
+    #  name: gitea-config
+    #  valuesKey: minioSecretAccessKey
+    #- targetPath: gitea.config.storage.MINIO_ACCESS_KEY_ID
+    #  kind: Secret
+    #  name: gitea-config
+    #  valuesKey: minioAccessKeyId
+    #- targetPath: gitea.config.storage.MINIO_SECRET_ACCESS_KEY
+    #  kind: Secret
+    #  name: gitea-config
+    #  valuesKey: minioSecretAccessKey
+
+
+  postRenderers:
+    - kustomize:
+        patchesStrategicMerge:
+          - kind: StatefulSet
+            apiVersion: apps/v1
+            metadata:
+              name: gitea
+            spec:
+              template:
+                spec:
+                  initContainers:
+                    - name: init-db
+                      image: ghcr.io/onedr0p/postgres-initdb:14.7
+                      env:
+                        - name: POSTGRES_HOST
+                          value: ${POSTGRES_HOST}
+                        - name: POSTGRES_DB
+                          value: gitea
+                        - name: POSTGRES_SUPER_PASS
+                          valueFrom:
+                            secretKeyRef:
+                              name: postgres-superuser
+                              key: password
+                        - name: POSTGRES_USER
+                          valueFrom:
+                            secretKeyRef:
+                              name: gitea-config
+                              key: dbUser
+                        - name: POSTGRES_PASS
+                          valueFrom:
+                            secretKeyRef:
+                              name: gitea-config
+                              key: dbPassword
