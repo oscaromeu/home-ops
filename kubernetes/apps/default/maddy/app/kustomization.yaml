@@ -4,13 +4,13 @@ kind: Kustomization
 namespace: default
 resources:
   - externalsecret.yaml
-  - helmrelease.yaml
-
-configMapGenerator:
-  - name: maddy
-    files:
-      - maddy.conf
-generatorOptions:
-  disableNameSuffixHash: true
-  annotations:
-    kustomize.toolkit.fluxcd.io/substitute: disabled
+#  - helmrelease.yaml
+#
+#configMapGenerator:
+#  - name: maddy
+#    files:
+#      - maddy.conf
+#generatorOptions:
+#  disableNameSuffixHash: true
+#  annotations:
+#    kustomize.toolkit.fluxcd.io/substitute: disabled
