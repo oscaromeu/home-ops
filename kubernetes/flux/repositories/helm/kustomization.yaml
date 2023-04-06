@@ -32,3 +32,4 @@ resources:
   - ./cloudnative-pg.yaml
   - ./istio.yaml
   - ./tf-controller.yaml
+  - ./gitea.yaml
