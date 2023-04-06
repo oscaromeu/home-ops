@@ -67,7 +67,7 @@ spec:
       enabled: true
       className: nginx
       annotations:
-        hajimari.io/icon: mdi:code-json
+        hajimari.io/icon: "mdi:code-json"
       hosts:
         - host: "gitea.${CLUSTER_DOMAIN}"
           paths:
