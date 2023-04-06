@@ -17,5 +17,5 @@ resources:
   - ./linkding/ks.yaml
   - ./glauth/ks.yaml
   - ./authelia/ks.yaml
-  #- ./maddy/ks.yaml
+  - ./maddy/ks.yaml
   #- ./gitea/ks.yaml
