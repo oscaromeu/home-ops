@@ -48,8 +48,36 @@ spec:
     gitea:
       admin:
         username: 'gitea'
+      config:
+        APP_NAME: Tea, Git, Hot
+        server:
+          DISABLE_SSH: false
+          DOMAIN: "gitea.${SECRET_DOMAIN}"
+          ROOT_URL: "https://gitea.${SECRET_DOMAIN}"
+          ENABLE_GZIP: true
+          LANDING_PAGE: login
+          LFS_START_SERVER: true
+        admin:
+          DISABLE_REGULAR_ORG_CREATION: true
+        database:
+          DB_TYPE: postgres
+          NAME: gitea
+          SCHEMA: public
+          SSL_MODE: disable
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+      podAnnotations:
+        secret.reloader.stakater.com/reload: gitea-config
+
+    postgresql:
+      enabled: false
 
     persistence:
+      enabled: true
+      accessModes: ["ReadWriteOnce"]
+      size: 10Gi
       storageClass: longhorn
 
   valuesFrom:
@@ -69,7 +97,10 @@ spec:
       kind: Secret
       name: gitea-config
       valuesKey: dbUser
-
+    - targetPath: gitea.database.HOST
+      kind: Secret
+      name: cloudnative-pg-secret
+      valuesKey: POSTGRES_HOST_PORT
 
 
 
