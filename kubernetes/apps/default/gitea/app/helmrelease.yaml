@@ -38,9 +38,9 @@ spec:
         username: "gitea"
       config:
         APP_NAME: "Gitea Homelab"
-        #cron.resync_all_sshkeys:
-        #  ENABLED: true
-        #  RUN_AT_START: true
+        cron.resync_all_sshkeys:
+          ENABLED: true
+          RUN_AT_START: true
         database:
           DB_TYPE: postgres
           HOST: "${POSTGRES_HOST}:${POSTGRES_PORT}"
@@ -109,7 +109,7 @@ spec:
     persistence:
       enabled: true
       existingClaim: "gitea-config"
-    service:
+    #service:
       #ssh:
       #  type: LoadBalancer
       #  loadBalancerIP: 192.168.1.49
