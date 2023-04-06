@@ -35,7 +35,7 @@ spec:
         add: ["SYS_CHROOT"]
     gitea:
       admin:
-        username: ${gitea_username}
+        username: "gitea"
       config:
         APP_NAME: "Gitea Homelab"
         cron.resync_all_sshkeys:
