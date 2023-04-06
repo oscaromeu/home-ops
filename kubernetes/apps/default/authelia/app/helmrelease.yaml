@@ -25,13 +25,13 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  dependsOn:
-    - name: cnpg
-      namespace: dbms
-    - name: glauth
-      namespace: security
-    - name: redis
-      namespace: dbms
+  #dependsOn:
+  #  - name: cnpg
+  #    namespace: dbms
+  #  - name: glauth
+  #    namespace: default
+  #  - name: redis
+  #    namespace: default
   values:
     initContainers:
       init-db:
