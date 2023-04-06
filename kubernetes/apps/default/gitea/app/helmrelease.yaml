@@ -75,12 +75,12 @@ spec:
         #  MINIO_ENDPOINT: minio.${SECRET_DOMAIN}:51515
         #  MINIO_BUCKET: gitea
         #  MINIO_USE_SSL: true
-        mailer:
-          ENABLED: false
-          MAILER_TYPE: smtp
-          SMTP_ADDR: smtp-relay.default
-          SMTP_PORT: 2525
-          FROM: "Gitea <gitea@${SECRET_DOMAIN}>"
+        #mailer:
+        #  ENABLED: false
+        #  MAILER_TYPE: smtp
+        #  SMTP_ADDR: smtp-relay.default
+        #  SMTP_PORT: 2525
+        #  FROM: "Gitea <gitea@${SECRET_DOMAIN}>"
         #webhook:
         #  ALLOWED_HOST_LIST: drone.default.svc
       #   openid:
