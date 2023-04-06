@@ -36,7 +36,7 @@ spec:
       className: nginx
       annotations:
         # TODO Add to hajimari
-        hajimari.io/enable: "false"
+        hajimari.io/icon: pajamas:gitea
       hosts:
         - host: &host "git.${SECRET_DOMAIN}"
           paths:
