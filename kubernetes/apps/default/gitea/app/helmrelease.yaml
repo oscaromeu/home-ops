@@ -26,63 +26,31 @@ spec:
   uninstall:
     keepHistory: false
   values:
-
     controller:
       replicas: 0
       strategy: RollingUpdate
       annotations:
         reloader.stakater.com/auto: "true"
-
-    gitea:
-      admin:
-        username: "gitea"
-      config:
-        APP_NAME: "Gitea Homelab"
-
-        database:
-          DB_TYPE: postgres
-          HOST: "${POSTGRES_HOST}:${POSTGRES_PORT}"
-          NAME: gitea
-          SCHEMA: public
-          SSL_MODE: disable
-
-    postgresql:
-      enabled: false
-    memcached:
-      enabled: true
-
-    persistence:
-      enabled: true
-      existingClaim: "gitea-config"
-
-    #service:
-      #ssh:
-      #  type: LoadBalancer
-      #  loadBalancerIP: 192.168.1.49
-      #  port: 1337
-      #  annotations:
-      #    metallb.universe.tf/allow-shared-ip: "nginx-internal"
-
     ingress:
       enabled: true
       className: nginx
       annotations:
-        hajimari.io/icon: "mdi:code-json"
+        # TODO Add to hajimari
+        hajimari.io/enable: "false"
       hosts:
-        - host: "gitea.${CLUSTER_DOMAIN}"
+        - host: &host "git.${SECRET_DOMAIN}"
           paths:
             - path: /
               pathType: Prefix
       tls:
         - hosts:
-            - "gitea.${CLUSTER_DOMAIN}"
+            - *host
+    gitea:
+      admin:
+        username: 'gitea'
 
-    resources:
-      requests:
-        cpu: 15m
-        memory: 226M
-      limits:
-        memory: 1Gi
+    persistence:
+      storageClass: longhorn
 
   valuesFrom:
     - targetPath: gitea.admin.email
@@ -102,53 +70,7 @@ spec:
       name: gitea-config
       valuesKey: dbUser
 
-    #- targetPath: gitea.config.attachment.MINIO_ACCESS_KEY_ID
-    #  kind: Secret
-    #  name: gitea-config
-    #  valuesKey: minioAccessKeyId
-    #- targetPath: gitea.config.attachment.MINIO_SECRET_ACCESS_KEY
-    #  kind: Secret
-    #  name: gitea-config
-    #  valuesKey: minioSecretAccessKey
-    #- targetPath: gitea.config.storage.MINIO_ACCESS_KEY_ID
-    #  kind: Secret
-    #  name: gitea-config
-    #  valuesKey: minioAccessKeyId
-    #- targetPath: gitea.config.storage.MINIO_SECRET_ACCESS_KEY
-    #  kind: Secret
-    #  name: gitea-config
-    #  valuesKey: minioSecretAccessKey
 
-  postRenderers:
-    - kustomize:
-        patchesStrategicMerge:
-          - kind: StatefulSet
-            apiVersion: apps/v1
-            metadata:
-              name: gitea
-            spec:
-              template:
-                spec:
-                  initContainers:
-                    - name: init-db
-                      image: ghcr.io/onedr0p/postgres-initdb:14.7
-                      env:
-                        - name: POSTGRES_HOST
-                          value: ${POSTGRES_HOST}
-                        - name: POSTGRES_DB
-                          value: gitea
-                        - name: POSTGRES_SUPER_PASS
-                          valueFrom:
-                            secretKeyRef:
-                              name: postgres-superuser
-                              key: password
-                        - name: POSTGRES_USER
-                          valueFrom:
-                            secretKeyRef:
-                              name: gitea-config
-                              key: dbUser
-                        - name: POSTGRES_PASS
-                          valueFrom:
-                            secretKeyRef:
-                              name: gitea-config
-                              key: dbPassword
+
+
+
