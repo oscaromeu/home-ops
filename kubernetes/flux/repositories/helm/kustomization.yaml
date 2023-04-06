@@ -24,7 +24,7 @@ resources:
   - ./fairwinds.yaml
   - ./vector.yaml
   - ./external-secrets.yaml
-  - ./1password.yaml
+  - ./harbor.yaml
   - ./jupyter.yaml
   - ./kyverno.yaml
   - ./actions-runner-controller.yaml
