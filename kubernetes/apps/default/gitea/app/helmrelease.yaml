@@ -97,7 +97,7 @@ spec:
       kind: Secret
       name: gitea-config
       valuesKey: dbUser
-    - targetPath: gitea.database.HOST
+    - targetPath: gitea.config.database.HOST
       kind: Secret
       name: gitea-config
       valuesKey: host
