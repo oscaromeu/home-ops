@@ -6,11 +6,11 @@ resources:
   - externalsecret.yaml
   - helmrelease.yaml
 #
-#configMapGenerator:
-#  - name: maddy
-#    files:
-#      - maddy.conf
-#generatorOptions:
-#  disableNameSuffixHash: true
-#  annotations:
-#    kustomize.toolkit.fluxcd.io/substitute: disabled
+configMapGenerator:
+  - name: maddy
+    files:
+      - maddy.conf
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
