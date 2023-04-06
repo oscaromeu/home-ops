@@ -33,3 +33,4 @@ resources:
   - ./istio.yaml
   - ./tf-controller.yaml
   - ./gitea.yaml
+  - ./woodpecker.yaml
