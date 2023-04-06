@@ -118,6 +118,10 @@ spec:
                       image: ghcr.io/onedr0p/postgres-initdb:14.7
                       env:
                         - name: POSTGRES_HOST
+                          valueFrom:
+                            secretKeyRef:
+                              name: gitea-config
+                              key: host
                           value: ${POSTGRES_HOST}
                         - name: POSTGRES_DB
                           value: gitea
