@@ -102,7 +102,7 @@ spec:
         external-dns.home.arpa/enabled: "true"
         hajimari.io/icon: carbon:logo-jupyter
       hosts:
-        - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        - host: &host "jupyter.${SECRET_DOMAIN}"
           paths:
             - path: /
               pathType: Prefix
