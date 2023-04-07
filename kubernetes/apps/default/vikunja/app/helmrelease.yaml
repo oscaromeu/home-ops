@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -92,15 +91,18 @@ spec:
         image: vikunja/api:0.20.4
         imagePullPolicy: IfNotPresent
         env:
-          - name: VIKUNJA_SERVICE_JWTSECRET
-            valueFrom:
-              secretKeyRef:
-                name: vikunja
-                key: VIKUNJA_SERVICE_JWTSECRET
+          #- name: VIKUNJA_SERVICE_JWTSECRET
+          #  valueFrom:
+          #    secretKeyRef:
+          #      name: vikunja
+          #      key: VIKUNJA_SERVICE_JWTSECRET
           - name: VIKUNJA_DATABASE_TYPE
             value: postgres
           - name: VIKUNJA_DATABASE_HOST
-            value: ${POSTGRES_HOST}
+            valueFrom:
+              secretKeyRef:
+                name: postgres-superuser
+                key: host
           - name: VIKUNJA_DATABASE_DATABASE
             value: vikunja
           - name: VIKUNJA_DATABASE_USER

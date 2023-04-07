@@ -1,18 +1,17 @@
 ---
-# yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: default
 resources:
   #- ./backups
-  - ./helmrelease.yaml
-  - ./secret.sops.yaml
-  - ./volume.yaml
-patchesStrategicMerge:
-  - ./patches/postgres.yaml
-configMapGenerator:
-  - name: vikunja
-    files:
-      - ./config/Caddyfile
-generatorOptions:
-  disableNameSuffixHash: true
+  #- ./helmrelease.yaml
+  - ./externalsecret.yaml
+  #- ./volume.yaml
+#patchesStrategicMerge:
+#  - ./patches/postgres.yaml
+#configMapGenerator:
+#  - name: vikunja
+#    files:
+#      - ./config/Caddyfile
+#generatorOptions:
+#  disableNameSuffixHash: true

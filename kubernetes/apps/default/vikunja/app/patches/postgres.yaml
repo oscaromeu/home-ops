@@ -11,7 +11,10 @@ spec:
         image: ghcr.io/onedr0p/postgres-initdb:14.7
         env:
           - name: POSTGRES_HOST
-            value: ${POSTGRES_HOST}
+            valueFrom:
+              secretKeyRef:
+                name: postgres-superuser
+                key: host
           - name: POSTGRES_DB
             value: vikunja
           - name: POSTGRES_SUPER_PASS
