@@ -94,7 +94,7 @@ spec:
           memory: 200M
 
     ingress:
-      enabled: true
+      enabled: false
       ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-staging
