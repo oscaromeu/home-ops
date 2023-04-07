@@ -2,12 +2,25 @@
 apiVersion: networking.cfargotunnel.com/v1alpha1
 kind: TunnelBinding
 metadata:
-  name: escalidraw-tunnelbinding
+  name: gitea-http-tunnelbinding
   namespace: default
 subjects:
-  - name: excalidraw
+  - name: gitea-http
     spec:
-      fqdn: "draw.${PUBLIC_DOMAIN}"
+      fqdn: "git.${CLUSTER_DOMAIN}"
+tunnelRef:
+  kind: ClusterTunnel
+  name: cluster-tunnel
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: gitea-ssh-tunnelbinding
+  namespace: default
+subjects:
+  - name: gitea-ssh
+    spec:
+      fqdn: "git.${CLUSTER_DOMAIN}"
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
