@@ -4,14 +4,14 @@ kind: Kustomization
 namespace: default
 resources:
   #- ./backups
-  #- ./helmrelease.yaml
+  - ./helmrelease.yaml
   - ./externalsecret.yaml
-  #- ./volume.yaml
-#patchesStrategicMerge:
-#  - ./patches/postgres.yaml
-#configMapGenerator:
-#  - name: vikunja
-#    files:
-#      - ./config/Caddyfile
-#generatorOptions:
-#  disableNameSuffixHash: true
+  - ./volume.yaml
+patchesStrategicMerge:
+  - ./patches/postgres.yaml
+configMapGenerator:
+  - name: vikunja
+    files:
+      - ./config/Caddyfile
+generatorOptions:
+  disableNameSuffixHash: true
