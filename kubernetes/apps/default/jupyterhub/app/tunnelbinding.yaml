@@ -5,9 +5,10 @@ metadata:
   name: jupyterhub-tunnelbinding
   namespace: data
 subjects:
-  - name: jupyterhub
+  - name: hub
     spec:
-      fqdn: jupyterhub.oscaromeu.io
+      fqdn: "jupyter.${SECRET_DOMAIN}"
+      target: "http://hub.default.svc.cluster.local:8081"
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
