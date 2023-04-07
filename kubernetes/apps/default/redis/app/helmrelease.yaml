@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: redis
-      version: 17.6.0
+      version: 17.9.3
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -26,8 +26,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    #global:
-    #  imageRegistry:
     auth:
       enabled: false
       sentinel: false
@@ -35,7 +33,6 @@ spec:
       persistence:
         enabled: false
     replica:
-      replicaCount: 2
       persistence:
         enabled: false
     sentinel:
@@ -50,3 +47,4 @@ spec:
       enabled: false
       serviceMonitor:
         enabled: false
+        interval: 1m
