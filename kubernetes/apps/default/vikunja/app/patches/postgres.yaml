@@ -13,8 +13,8 @@ spec:
           - name: POSTGRES_HOST
             valueFrom:
               secretKeyRef:
-                name: postgres-superuser
-                key: host
+                name: cloudnative-pg-secret
+                key: POSTGRES_HOST
           - name: POSTGRES_DB
             value: vikunja
           - name: POSTGRES_SUPER_PASS
