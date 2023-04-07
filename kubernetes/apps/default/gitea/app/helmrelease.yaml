@@ -52,8 +52,8 @@ spec:
         APP_NAME: Tea, Git, Hot
         server:
           DISABLE_SSH: false
-          DOMAIN: "gitea.${SECRET_DOMAIN}"
-          ROOT_URL: "https://gitea.${SECRET_DOMAIN}"
+          DOMAIN: "git.${SECRET_DOMAIN}"
+          ROOT_URL: "https://git.${SECRET_DOMAIN}"
           ENABLE_GZIP: true
           LANDING_PAGE: login
           LFS_START_SERVER: true
