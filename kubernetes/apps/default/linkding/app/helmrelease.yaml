@@ -61,7 +61,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: link
         hosts:
-          - host: &host "link.${PUBLIC_DOMAIN}"
+          - host: &host "link.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
