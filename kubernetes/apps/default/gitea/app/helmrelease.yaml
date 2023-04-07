@@ -122,7 +122,6 @@ spec:
                             secretKeyRef:
                               name: gitea-config
                               key: host
-                          value: ${POSTGRES_HOST}
                         - name: POSTGRES_DB
                           value: gitea
                         - name: POSTGRES_SUPER_PASS
