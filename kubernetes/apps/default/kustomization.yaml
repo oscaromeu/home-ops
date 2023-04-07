@@ -20,5 +20,5 @@ resources:
   - ./maddy/ks.yaml
   - ./gitea/ks.yaml
   - ./vikunja/ks.yaml
-  - ./woodpecker/ks.yaml
+  #- ./woodpecker/ks.yaml
   - ./harbor/ks.yaml
