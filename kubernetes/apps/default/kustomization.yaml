@@ -21,3 +21,4 @@ resources:
   - ./gitea/ks.yaml
   - ./vikunja/ks.yaml
   - ./woodpecker/ks.yaml
+  - ./harbor/ks.yaml
