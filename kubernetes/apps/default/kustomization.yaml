@@ -16,7 +16,7 @@ resources:
   - ./vaultwarden/ks.yaml
   - ./linkding/ks.yaml
   - ./glauth/ks.yaml
-  #- ./authelia/ks.yaml
+  - ./authelia/ks.yaml
   - ./maddy/ks.yaml
   - ./gitea/ks.yaml
   - ./vikunja/ks.yaml
