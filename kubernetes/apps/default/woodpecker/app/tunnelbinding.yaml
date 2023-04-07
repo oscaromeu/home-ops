@@ -7,7 +7,7 @@ metadata:
 subjects:
   - name: linkding
     spec:
-      fqdn: "linkding.${CLUSTER_DOMAIN}"
+      fqdn: "linkding.${SECRET_DOMAIN}"
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel

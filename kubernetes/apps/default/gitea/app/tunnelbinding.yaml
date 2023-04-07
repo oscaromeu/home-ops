@@ -7,7 +7,7 @@ metadata:
 subjects:
   - name: gitea-http
     spec:
-      fqdn: "git.${CLUSTER_DOMAIN}"
+      fqdn: "git.${SECRET_DOMAIN}"
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
@@ -20,7 +20,7 @@ metadata:
 subjects:
   - name: gitea-ssh
     spec:
-      fqdn: "git.${CLUSTER_DOMAIN}"
+      fqdn: "git.${SECRET_DOMAIN}"
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel

@@ -26,7 +26,7 @@ spec:
 
     env:
       WOODPECKER_ADMIN: "woodpecker,admin"
-      WOODPECKER_HOST: "https://ci.${CLUSTER_DOMAIN}"
+      WOODPECKER_HOST: "https://ci.${SECRET_DOMAIN}"
 
     persistentVolume:
       enabled: true
@@ -44,7 +44,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: simple-icons:drone
         hosts:
-          - host: &host "ci.${CLUSTER_DOMAIN}"
+          - host: &host "ci.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix

@@ -16,7 +16,7 @@ access_control:
       networks: ["10.42.0.0/24", "192.168.0.0/24"]
 
   rules:
-    - domain: ["grafana.${CLUSTER_DOMAIN}"]
+    - domain: ["grafana.${SECRET_DOMAIN}"]
       policy: bypass
 
 
@@ -33,5 +33,5 @@ identity_providers:
         authorization_policy: two_factor
         pre_configured_consent_duration: 1y
         scopes: ["openid", "profile", "groups", "email"]
-        redirect_uris: ["https://grafana.${CLUSTER_DOMAIN}/login/generic_oauth"]
+        redirect_uris: ["https://grafana.${SECRET_DOMAIN}/login/generic_oauth"]
         userinfo_signing_algorithm: none
