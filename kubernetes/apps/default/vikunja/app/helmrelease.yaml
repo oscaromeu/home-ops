@@ -98,28 +98,35 @@ spec:
           #      key: VIKUNJA_SERVICE_JWTSECRET
           - name: VIKUNJA_DATABASE_TYPE
             value: postgres
+
           - name: VIKUNJA_DATABASE_HOST
             valueFrom:
               secretKeyRef:
-                name: postgres-superuser
-                key: host
+                name: cloudnative-pg-secret
+                key: POSTGRES_HOST
+
           - name: VIKUNJA_DATABASE_DATABASE
             value: vikunja
+
           - name: VIKUNJA_DATABASE_USER
             valueFrom:
               secretKeyRef:
                 name: vikunja
                 key: VIKUNJA_DATABASE_USER
+
           - name: VIKUNJA_DATABASE_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: vikunja
                 key: VIKUNJA_DATABASE_PASSWORD
+
         volumeMounts:
           - name: vikunja-config
             mountPath: /etc/vikunja/config.yml
             subPath: Vikunja.yaml
+
       frontend:
         name: frontend
         image: vikunja/frontend:0.20.5
+
     imagePullPolicy: IfNotPresent
