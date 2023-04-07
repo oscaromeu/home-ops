@@ -8,8 +8,8 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: woodpecker
-      version: 0.1.0
+      chart: woodpecker-server
+      version: 0.15.6
       sourceRef:
         kind: HelmRepository
         name: woodpecker
