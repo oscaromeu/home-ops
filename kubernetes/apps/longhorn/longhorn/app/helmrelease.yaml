@@ -37,4 +37,7 @@ spec:
       enabled: true
       ingressClassName: "nginx"
       tls: true
-      host: "longhorn.oscaromeu.io"
+      host: "longhorn.${SECRET_DOMAIN}"
+      annotations:
+        external-dns.home.arpa/enabled: "true"
+        hajimari.io/icon: iconoir:database-backup

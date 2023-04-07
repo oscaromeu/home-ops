@@ -79,15 +79,15 @@ spec:
       annotations:
         hajimari.io/appName: "grafana"
         hajimari.io/enable: "true"
-        hajimari.io/icon: "alarm-light-outline"
+        hajimari.io/icon: "logos:grafana"
       hosts:
-        - grafana.oscaromeu.io
+        - "grafana.${SECRET_DOMAIN}"
       paths:
         - /
       pathType: ImplementationSpecific
       tls:
         - hosts:
-            - grafana.oscaromeu.io
+            - "grafana.${SECRET_DOMAIN}"
 
     persistence:
       enabled: false

@@ -7,7 +7,7 @@ metadata:
 subjects:
   - name: longhorn-frontend
     spec:
-      fqdn: longhorn.oscaromeu.io
+      fqdn: "longhorn.${SECRET_DOMAIN}"
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel

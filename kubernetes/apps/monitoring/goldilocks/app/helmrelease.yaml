@@ -46,9 +46,10 @@ spec:
         enabled: true
         ingressClassName: nginx
         annotations:
+          hajimari.io/enable: "true"
           hajimari.io/icon: mdi:align-vertical-top
         hosts:
-          - host: &host goldilocks.oscaromeu.io
+          - host: &host "goldilocks.${SECRET_DOMAIN}"
             paths:
               - path: /
                 type: Prefix

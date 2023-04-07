@@ -39,15 +39,15 @@ spec:
         annotations:
           hajimari.io/appName: "alertmanager"
           hajimari.io/enable: "true"
-          hajimari.io/icon: "alarm-light-outline"
+          hajimari.io/icon: "simple-icons:prometheus"
         hosts:
-          - alertmanager.oscaromeu.io
+          - "alertmanager.${SECRET_DOMAIN}"
         paths:
           - /
         pathType: ImplementationSpecific
         tls:
           - hosts:
-              - alertmanager.oscaromeu.io
+              - "alertmanager.${SECRET_DOMAIN}"
 
     grafana:
       enabled: false
@@ -183,15 +183,15 @@ spec:
         annotations:
           hajimari.io/appName: "prometheus"
           hajimari.io/enable: "true"
-          hajimari.io/icon: "chart-line"
+          hajimari.io/icon: "simple-icons:prometheus"
         hosts:
-          - prometheus.oscaromeu.io
+          - "prometheus.${SECRET_DOMAIN}"
         paths:
           - /
         pathType: ImplementationSpecific
         tls:
           - hosts:
-              - prometheus.oscaromeu.io
+              - "prometheus.${SECRET_DOMAIN}"
 
 
       thanosService:

@@ -13,7 +13,7 @@
  spec:
    ingressClassName: nginx
    rules:
-   - host: elastic.oscaromeu.io
+   - host: "elastic.${SECRET_DOMAIN}"
      http:
        paths:
        - backend:
@@ -25,5 +25,5 @@
          pathType: Prefix
    tls:
    - hosts:
-     - elastic.oscaromeu.io
+     - "elastic.${SECRET_DOMAIN}"
      secretName: elastic-tls

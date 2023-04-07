@@ -7,7 +7,7 @@ metadata:
 subjects:
   - name: grafana
     spec:
-      fqdn: grafana.oscaromeu.io
+      fqdn: "grafana.${SECRET_DOMAIN}"
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel

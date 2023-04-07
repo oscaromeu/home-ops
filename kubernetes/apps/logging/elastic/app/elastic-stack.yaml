@@ -141,7 +141,7 @@ spec:
     name: elk
   config:
     server:
-      publicBaseUrl: "https://kibana.oscaromeu.io"
+      publicBaseUrl: "https://kibana.${SECRET_DOMAIN}"
 
   #nodeSelector:
   #  kubernetes.io/arch: amd64
