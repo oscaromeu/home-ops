@@ -8,6 +8,7 @@ subjects:
   - name: vaultwarden
     spec:
       fqdn: "vault.${SECRET_DOMAIN}"
+      target: "http://vaultwarden.default.svc.cluster.local:8080"
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
