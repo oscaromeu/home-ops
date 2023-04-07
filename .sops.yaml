@@ -13,7 +13,7 @@ creation_rules:
     key_groups:
       - age:
           - age10j3aacph2g5jjn392pckqt4ta8nj4gk66wutye4mngszynfwavqq3c8pz8
-  - path_regex: kubernetes/.*-tunnel\.ya?ml
+  - path_regex: kubernetes/.*\.sops\.ya?ml
     encrypted_regex: "^(cloudflare)$"
     key_groups:
       - age:
