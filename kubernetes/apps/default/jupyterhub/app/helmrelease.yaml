@@ -109,5 +109,4 @@ spec:
       tls:
         - hosts:
             - *host
-          secretName: "jupyterhub-tls"
 
