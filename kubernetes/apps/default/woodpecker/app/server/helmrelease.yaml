@@ -30,6 +30,7 @@ spec:
       WOODPECKER_GITHUB: false
       WOODPECKER_GITEA: true
       WOODPECKER_GITEA_SKIP_VERIFY: "true"
+      WOODPECKER_OPEN: true
       #WOODPECKER_GITEA_URL:
       #  valueFrom:
       #    secretKeyRef:

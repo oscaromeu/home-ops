@@ -25,7 +25,7 @@ spec:
   values:
 
     env:
-      WOODPECKER_SERVER: "woodpecker-woodpecker-server.default.svc.cluster.local:80"
+      WOODPECKER_SERVER: "https://ci.${SECRET_DOMAIN}"
 
 
     extraSecretNamesForEnvFrom:
