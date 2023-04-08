@@ -8,6 +8,7 @@ subjects:
   - name: woodpecker-woodpecker-server
     spec:
       fqdn: "ci.${SECRET_DOMAIN}"
+      target: "http://woodpecker-woodpecker-server.default.svc.cluster.local:80"
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
