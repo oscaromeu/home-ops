@@ -66,7 +66,7 @@ spec:
           memory: 500Mi
     # <namespace>/<service-name>:<target-port>
     tcp:
-      22: "default/gitea-ssh:22"
+      "22": "default/gitea-ssh:22"
     defaultBackend:
       enabled: true
       image:
