@@ -21,18 +21,7 @@ spec:
   upgrade:
     remediation:
       retries: 5
-  #postRenderers:
-  #  - kustomize:
-  #      patchesJson6902:
-  #        - target:
-  #            kind: Service
-  #            name: harbor
-  #          patch:
-  #            - op: add
-  #              path: /spec/externalIPs
-  #              value: ["${SECRET_EXTERNAL_IP}"]
-  #            - op: remove
-  #              path: /spec/loadBalancerIP
+
   values:
     expose:
       ingress:
@@ -68,6 +57,10 @@ spec:
     #harborAdminPassword: "${HARBOR_ADMIN_PASSWORD}"
     # The secret key used for encryption. Must be a string of 16 chars.
     #secretKey: "${HARBOR_ENCRPYTION_KEY}"
+
+    database:
+      nodeSelector:
+        kubernetes.io/arch: amd64
 
     notary:
       enabled: true
