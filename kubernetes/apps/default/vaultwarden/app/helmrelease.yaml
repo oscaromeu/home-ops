@@ -46,96 +46,16 @@ spec:
       ROCKET_PORT: 8080
       # 'DATABASE_URL=postgresql://user_name:user_password@db_host:5432/vaultwarden'
       DATABASE_URL: "postgresql://$(POSTGRES_USER):$(POSTGRES_PASS)@$(POSTGRES_HOST):$(POSTGRES_PORT)/$(POSTGRES_DB)"
-      SMTP_HOST: "smtp.gmail.com"
-      #SMTP_SSL: true
-      #SMTP_PORT: 587
+      SMTP_FROM_NAME: Vault
+      SMTP_FROM: vault@${SECRET_DOMAIN}
+      SMTP_PORT: 587
+      SMTP_SSL: "true"
 
       #SIGNUPS_DOMAINS_WHITELIST:
       #  valueFrom:
       #    secretKeyRef:
       #      name: vault-env
       #      key: SIGNUPS_DOMAINS_WHITELIST
-
-      ADMIN_TOKEN:
-        valueFrom:
-          secretKeyRef:
-            name: vault-env
-            key: ADMIN_TOKEN
-
-      ORG_CREATION_USERS:
-        valueFrom:
-          secretKeyRef:
-            name: vault-env
-            key: ORG_CREATION_USERS
-
-      POSTGRES_DB:
-        valueFrom:
-          secretKeyRef:
-            name: vault-env
-            key: POSTGRES_DB
-
-      POSTGRES_HOST:
-        valueFrom:
-          secretKeyRef:
-            name: vault-env
-            key: POSTGRES_HOST
-
-      POSTGRES_PORT:
-        valueFrom:
-          secretKeyRef:
-            name: vault-env
-            key: POSTGRES_PORT
-
-      POSTGRES_USER:
-        valueFrom:
-          secretKeyRef:
-            name: vault-env
-            key: POSTGRES_USER
-
-      POSTGRES_PASS:
-        valueFrom:
-          secretKeyRef:
-            name: vault-env
-            key: POSTGRES_PASS
-
-
-      # Not used
-      #INVITATION_ORG_NAME:
-      #  valueFrom:
-      #    secretKeyRef:
-      #      name: vault-env
-      #      key: INVITATION_ORG_NAME
-
-      # Not used
-      #SMTP_HOST:
-      #  valueFrom:
-      #    secretKeyRef:
-      #      name: vault-env
-      #      key: SMTP_HOST
-
-      #SMTP_FROM:
-      #  valueFrom:
-      #    secretKeyRef:
-      #      name: vault-env
-      #      key: SMTP_FROM
-
-      #SMTP_FROM_NAME:
-      #  valueFrom:
-      #    secretKeyRef:
-      #      name: vault-env
-      #      key: SMTP_FROM
-
-      #SMTP_USERNAME:
-      #  valueFrom:
-      #    secretKeyRef:
-      #      name: vault-env
-      #      key: SMTP_USERNAME
-
-      #SMTP_PASSWORD:
-      #  valueFrom:
-      #    secretKeyRef:
-      #      name: vault-env
-      #      key: SMTP_PASSWORD
 
     envFrom:
       - secretRef:
