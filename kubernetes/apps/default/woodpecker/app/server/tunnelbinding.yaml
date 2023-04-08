@@ -2,12 +2,12 @@
 apiVersion: networking.cfargotunnel.com/v1alpha1
 kind: TunnelBinding
 metadata:
-  name: linkding-tunnelbinding
+  name: woodpecker-tunnelbinding
   namespace: default
 subjects:
-  - name: linkding
+  - name: woodpecker-woodpecker-server
     spec:
-      fqdn: "linkding.${SECRET_DOMAIN}"
+      fqdn: "woodpecker.${SECRET_DOMAIN}"
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
