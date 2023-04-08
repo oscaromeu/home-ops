@@ -25,7 +25,7 @@ spec:
   values:
 
     env:
-      WOODPECKER_SERVER: "woodpecker-woodpecker-server.default.svc.cluster.local:9000"
+      WOODPECKER_SERVER: "http://woodpecker-woodpecker-server.default.svc.cluster.local:9000"
 
 
     extraSecretNamesForEnvFrom:
