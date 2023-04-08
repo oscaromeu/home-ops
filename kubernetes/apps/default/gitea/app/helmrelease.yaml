@@ -64,6 +64,12 @@ spec:
           NAME: gitea
           SCHEMA: public
           SSL_MODE: disable
+        webhook:
+          TASK_QUEUE_LENGTH: 1000
+          ALLOWED_HOST_LIST:
+            - "*.${SECRET_DOMAIN}"
+            - external
+            - loopback
       metrics:
         enabled: true
         serviceMonitor:
