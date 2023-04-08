@@ -30,25 +30,25 @@ spec:
       WOODPECKER_GITHUB: false
       WOODPECKER_GITEA: true
       WOODPECKER_GITEA_SKIP_VERIFY: "true"
-      WOODPECKER_GITEA_URL:
-        valueFrom:
-          secretKeyRef:
-            name: *app
-            key: WOODPECKER_GITEA_URL
-      WOODPECKER_GITEA_CLIENT:
-        valueFrom:
-          secretKeyRef:
-            name: *app
-            key: WOODPECKER_GITEA_CLIENT
-      WOODPECKER_GITEA_SECRET:
-        valueFrom:
-          secretKeyRef:
-            name: *app
-            key: WOODPECKER_GITEA_SECRET
+      #WOODPECKER_GITEA_URL:
+      #  valueFrom:
+      #    secretKeyRef:
+      #      name: *app
+      #      key: WOODPECKER_GITEA_URL
+      #WOODPECKER_GITEA_CLIENT:
+      #  valueFrom:
+      #    secretKeyRef:
+      #      name: *app
+      #      key: WOODPECKER_GITEA_CLIENT
+      #WOODPECKER_GITEA_SECRET:
+      #  valueFrom:
+      #    secretKeyRef:
+      #      name: *app
+      #      key: WOODPECKER_GITEA_SECRET
 
-    #envFrom:
-    #  - secretRef:
-    #      name: *app
+    envFrom:
+      - secretRef:
+          name: *app
 
     persistentVolume:
       enabled: true
