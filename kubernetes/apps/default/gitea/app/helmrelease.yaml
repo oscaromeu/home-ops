@@ -26,11 +26,18 @@ spec:
   uninstall:
     keepHistory: false
   values:
+
     controller:
       replicas: 0
       strategy: RollingUpdate
       annotations:
         reloader.stakater.com/auto: "true"
+
+    containerSecurityContext:
+      capabilities:
+        add:
+          - SYS_CHROOT
+
     ingress:
       enabled: true
       className: nginx
@@ -45,31 +52,79 @@ spec:
       tls:
         - hosts:
             - *host
+    #service:
+    #  ssh:
+    #    type: LoadBalancer
+    #    port: 22
+    #    externalTrafficPolicy: Local
+    #    externalIPs:
+    #      - "${SVC_GITEA_IP}"
+
+
     gitea:
       admin:
         username: 'gitea'
       config:
         APP_NAME: Tea, Git, Hot
+
         server:
           DISABLE_SSH: false
+          SSH_PORT: 22
+          SSH_LISTEN_PORT: 22
+          SSH_DOMAIN: "ssh.git.${SECRET_DOMAIN}"
           DOMAIN: "git.${SECRET_DOMAIN}"
           ROOT_URL: "https://git.${SECRET_DOMAIN}"
           ENABLE_GZIP: true
           LANDING_PAGE: login
           LFS_START_SERVER: true
+
         admin:
           DISABLE_REGULAR_ORG_CREATION: true
+        ui:
+          DEFAULT_THEME: auto
+          THEMES: gitea, arc-green
+
         database:
           DB_TYPE: postgres
           NAME: gitea
           SCHEMA: public
           SSL_MODE: disable
+
         webhook:
           ALLOWED_HOST_LIST: "*"
+
+        service:
+          DISABLE_REGISTRATION: true
+          REQUIRE_SIGNIN_VIEW: true
+
+        #mailer:
+        #  ENABLED: true
+        #  MAILER_TYPE: smtp+startls
+        #  HOST: smtp.mailgun.org:587
+        #  USER: ${SECRET_MAILGUN_USERNAME}
+        #  PASSWD: ${SECRET_MAILGUN_PASSWORD}
+        #  FROM: "Gitea <gitea@${SECRET_DOMAIN}>"
+
+        #openid:
+        #  ENABLE_OPENID_SIGNIN: false
+        #  ENABLE_OPENID_SIGNUP: true
+        #  WHITELISTED_URIS: "auth.${SECRET_DOMAIN}"
+
+      #oauth:
+      #  - name: authelia
+      #    provider: openidConnect
+      #    key: gitea
+      #    secret: "${SECRET_AUTHELIA_GITEA_CLIENT_SECRET}"
+      #    autoDiscoverUrl: "https://auth.${SECRET_DOMAIN}/.well-known/openid-configuration"
+      #    groupClaimName: groups
+      #    adminGroup: admins
+      #    restrictedGroup: people
+
+
       metrics:
-        enabled: true
+        enabled: false
         serviceMonitor:
-          enabled: true
+          enabled: false
       podAnnotations:
         secret.reloader.stakater.com/reload: gitea-config
 
