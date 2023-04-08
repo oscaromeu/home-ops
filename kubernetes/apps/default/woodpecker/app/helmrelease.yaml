@@ -46,9 +46,9 @@ spec:
             name: *app
             key: WOODPECKER_GITEA_SECRET
 
-    envFrom:
-      - secretRef:
-          name: *app
+    #envFrom:
+    #  - secretRef:
+    #      name: *app
 
     persistentVolume:
       enabled: true
