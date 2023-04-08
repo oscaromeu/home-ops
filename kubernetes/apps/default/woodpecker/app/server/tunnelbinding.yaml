@@ -7,7 +7,7 @@ metadata:
 subjects:
   - name: woodpecker-woodpecker-server
     spec:
-      fqdn: "woodpecker.${SECRET_DOMAIN}"
+      fqdn: "ci.${SECRET_DOMAIN}"
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
