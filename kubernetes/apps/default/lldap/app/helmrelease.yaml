@@ -64,7 +64,7 @@ spec:
     persistence:
       data:
         enabled: true
-        existingClaim: lldap_data
+        existingClaim: lldap-data
         mountPath: /data
         subPath: lldap
     resources:
