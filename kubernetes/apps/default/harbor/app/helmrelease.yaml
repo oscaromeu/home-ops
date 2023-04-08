@@ -62,6 +62,10 @@ spec:
       nodeSelector:
         kubernetes.io/arch: amd64
 
+    trivy:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+
     notary:
       enabled: true
 
