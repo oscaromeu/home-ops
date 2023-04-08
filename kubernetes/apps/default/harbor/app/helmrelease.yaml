@@ -38,10 +38,16 @@ spec:
       ingress:
         hosts:
           core: harbor.${SECRET_DOMAIN}
-          #notary: notary.${SECRET_DOMAIN}
+          notary: notary.${SECRET_DOMAIN}
         className: nginx
         annotations:
           hajimari.io/icon: simple-icons:harbor
+          hajimari.io/enable: "true"
+        tls:
+          certSource: secret
+          secretName: harbor-tls-certificate
+          notarySecretName: notary-tls-certificate
+
 
     ipFamily:
       ipv6:
@@ -64,7 +70,7 @@ spec:
     secretKey: "${HARBOR_ENCRPYTION_KEY}"
 
     notary:
-      enabled: false
+      enabled: true
 
     #nginx:
     #  podAnnotations:
