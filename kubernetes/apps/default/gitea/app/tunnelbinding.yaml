@@ -21,6 +21,7 @@ subjects:
   - name: gitea-ssh
     spec:
       fqdn: "git.${SECRET_DOMAIN}"
+      target: "tcp://gitea-ssh.default.svc.cluster.local:22"
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
