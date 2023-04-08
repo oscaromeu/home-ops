@@ -62,10 +62,8 @@ spec:
         enabled: true
         ingressClassName: nginx
         annotations:
-          auth.home.arpa/enabled: "true"
-          # external-dns.home.arpa/enabled: "true"
           hajimari.io/enable: "true"
-          hajimari.io/icon: simple-icons:drone
+          hajimari.io/icon: link
         hosts:
           - host: &host "ci.${SECRET_DOMAIN}"
             paths:
