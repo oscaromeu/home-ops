@@ -25,7 +25,7 @@ spec:
   values:
 
     env:
-      WOODPECKER_SERVER: "https://ci.${SECRET_DOMAIN}"
+      WOODPECKER_SERVER: "ci.${SECRET_DOMAIN}:9000"
 
 
     extraSecretNamesForEnvFrom:
