@@ -65,9 +65,7 @@ spec:
           SCHEMA: public
           SSL_MODE: disable
         webhook:
-          ALLOWED_HOST_LIST:
-            - external
-            - loopback
+          ALLOWED_HOST_LIST: "*"
       metrics:
         enabled: true
         serviceMonitor:
