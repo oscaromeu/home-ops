@@ -65,9 +65,9 @@ spec:
           storageClass: longhorn
           subPath: chartmuseum
 
-    harborAdminPassword: "${HARBOR_ADMIN_PASSWORD}"
+    #harborAdminPassword: "${HARBOR_ADMIN_PASSWORD}"
     # The secret key used for encryption. Must be a string of 16 chars.
-    secretKey: "${HARBOR_ENCRPYTION_KEY}"
+    #secretKey: "${HARBOR_ENCRPYTION_KEY}"
 
     notary:
       enabled: true
@@ -76,12 +76,12 @@ spec:
     #  podAnnotations:
     #    secret.reloader.stakater.com/reload: tls.harbor
 
-  valuesFrom:
-    - targetPath: harborAdminPassword
-      kind: Secret
-      name: harbor
-      valuesKey: harborAdminPassword
-    - targetPath: secretKey
-      kind: Secret
-      name: harbor
-      valuesKey: haborEncryptionKey
+  #valuesFrom:
+  #  - targetPath: harborAdminPassword
+  #    kind: Secret
+  #    name: harbor
+  #    valuesKey: harborAdminPassword
+  #  - targetPath: secretKey
+  #    kind: Secret
+  #    name: harbor
+  #    valuesKey: haborEncryptionKey
