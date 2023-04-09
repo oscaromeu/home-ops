@@ -63,6 +63,7 @@ spec:
       annotations:
         hajimari.io/enable: "true"
         hajimari.io/icon: simple-icons:drone
+        hajimari.io/appName: Woodpecker
       hosts:
         - host: &host "ci.${SECRET_DOMAIN}"
           paths:

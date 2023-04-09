@@ -41,3 +41,5 @@ spec:
       annotations:
         external-dns.home.arpa/enabled: "true"
         hajimari.io/icon: iconoir:database-backup
+        hajimari.io/enable: "true"
+        hajimari.io/appName: Longhorn

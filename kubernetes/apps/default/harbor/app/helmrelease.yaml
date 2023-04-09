@@ -29,9 +29,15 @@ spec:
           core: harbor.${SECRET_DOMAIN}
           notary: notary.${SECRET_DOMAIN}
         className: nginx
-        annotations:
-          hajimari.io/icon: simple-icons:harbor
-          hajimari.io/enable: "true"
+        notary:
+          annotations:
+            hajimari.io/icon: simple-icons:harbor
+            hajimari.io/enable: "false"
+        harbor:
+          annotations:
+            hajimari.io/icon: simple-icons:harbor
+            hajimari.io/enable: "true"
+            hajimari.io/appName: Harbor
         tls:
           certSource: secret
           secretName: harbor-tls-certificate
