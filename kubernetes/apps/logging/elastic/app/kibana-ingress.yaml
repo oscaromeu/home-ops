@@ -12,6 +12,9 @@
    namespace: logging
  spec:
    ingressClassName: nginx
+   annotations:
+     hajimari.io/enable: "true"
+     hajimari.io/icon: simple-icons:kibana
    rules:
    - host: "kibana.${SECRET_DOMAIN}"
      http:

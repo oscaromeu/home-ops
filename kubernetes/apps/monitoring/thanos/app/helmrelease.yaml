@@ -47,6 +47,9 @@ spec:
         hostname: "thanos.${SECRET_DOMAIN}"
         ingressClassName: "nginx"
         tls: true
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: simple-icons:prometheus
 
     existingObjstoreSecret: &secret thanos-objstore
 

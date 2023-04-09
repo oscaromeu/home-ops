@@ -12,6 +12,9 @@
    namespace: logging
  spec:
    ingressClassName: nginx
+   annotations:
+     hajimari.io/enable: "true"
+     hajimari.io/icon: simple-icons:elasticsearch
    rules:
    - host: "elastic.${SECRET_DOMAIN}"
      http:

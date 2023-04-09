@@ -79,7 +79,7 @@ spec:
       annotations:
         hajimari.io/appName: "grafana"
         hajimari.io/enable: "true"
-        hajimari.io/icon: "logos:grafana"
+        hajimari.io/icon: "simple-icons:grafana"
       hosts:
         - "grafana.${SECRET_DOMAIN}"
       paths:

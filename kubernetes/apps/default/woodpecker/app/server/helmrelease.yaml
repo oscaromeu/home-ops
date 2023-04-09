@@ -62,7 +62,7 @@ spec:
       ingressClassName: nginx
       annotations:
         hajimari.io/enable: "true"
-        hajimari.io/icon: link
+        hajimari.io/icon: simple-icons:drone
       hosts:
         - host: &host "ci.${SECRET_DOMAIN}"
           paths:
