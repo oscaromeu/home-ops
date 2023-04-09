@@ -34,23 +34,24 @@ spec:
       showAppUrls: false
       defaultEnable: true
       namespaceSelector:
-        matchNames:
-          - kube-public
-          - kube-node-lease
-          - cert-manager
-          - databases
-          - default
-          - kube-system
-          - logging
-          - longhorn
-          - networking
-          - system-upgrade
-          - cloudflare-operator-system
-          - calico-system
-          - tigera-operator
-          - volsync
-          - monitoring
-          - flux-system
+        any: true
+        #matchNames:
+        #  - kube-public
+        #  - kube-node-lease
+        #  - cert-manager
+        #  - databases
+        #  - default
+        #  - kube-system
+        #  - logging
+        #  - longhorn
+        #  - networking
+        #  - system-upgrade
+        #  - cloudflare-operator-system
+        #  - calico-system
+        #  - tigera-operator
+        #  - volsync
+        #  - monitoring
+        #  - flux-system
       defaultSearchProvider: Google
       searchProviders:
         - name: Google
