@@ -26,16 +26,59 @@ spec:
       title: Apps
       darkTheme: espresso
       alwaysTargetBlank: true
-      showGreeting: false
+      showGreeting: true
       showAppGroups: false
       showAppStatus: false
-      showBookmarkGroups: false
+      showBookmarkGroups: true
       showGlobalBookmarks: false
       showAppUrls: false
       defaultEnable: true
       namespaceSelector:
         matchNames:
+          - kube-public
+          - kube-node-lease
+          - cert-manager
+          - databases
           - default
+          - kube-system
+          - logging
+          - longhorn
+          - networking
+          - system-upgrade
+          - cloudflare-operator-system
+          - calico-system
+          - tigera-operator
+          - volsync
+          - monitoring
+          - flux-system
+      defaultSearchProvider: Google
+      searchProviders:
+        - name: Google
+          token: g
+          icon: simple-icons:google
+          searchUrl: https://www.google.com/search?q={query}
+          url: https://www.google.com
+        - name: YouTube
+          token: 'y'
+          icon: simple-icons:youtube
+          searchUrl: https://www.youtube.com/results?search_query={query}
+          url: https://www.youtube.com
+        - name: Spotify
+          token: s
+          icon: simple-icons:spotify
+          searchUrl: hhttps://open.spotify.com/search/{query}
+          url: https://open.spotify.com
+
+      globalBookmarks:
+        - group: Communicate
+          bookmarks:
+            - name: Discord
+              url: 'https://discord.com'
+            - name: Gmail
+              url: 'http://gmail.com'
+            - name: Slack
+              url: 'https://slack.com/signin'
+
     ingress:
       main:
         enabled: true
