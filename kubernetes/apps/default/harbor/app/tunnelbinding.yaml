@@ -8,6 +8,7 @@ subjects:
   - name: harbor-portal
     spec:
       fqdn: "harbor.${SECRET_DOMAIN}"
+      target: "http://harbor-portal.default.svc.cluster.local:8080"
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
