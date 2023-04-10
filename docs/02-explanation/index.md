@@ -9,7 +9,7 @@ In this documentation, we will cover a general overview of the tools and technol
 
 Prometheus metrics are collected from Kubernetes clusters and use industry standard tools for analyzing and alerting such as PromQL and Grafana
 
-![Metrics ecosystem](../../img/ecosystem.jpg){ width="1600"}
+![Metrics ecosystem](./img/ecosystem.jpg){ width="1600"}
 _Source:_ [Prometheus Stack Review](https://clux.dev/post/2022-01-11-prometheus-ecosystem/)
 
 ## Streaming
@@ -18,7 +18,7 @@ Log streaming platforms are systems that efficiently gather, process, and analyz
 
 Below is an overview of the key phases and components involved in a log streaming platform:
 
-![Streaming Logs Architecture](../../img/stream_logs_arch_w.pdf)
+![Streaming Logs Architecture](./img/stream_logs_arch_w.pdf)
 
 ### __Data Collection__
 
