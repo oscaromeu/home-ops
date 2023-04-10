@@ -18,7 +18,7 @@ Log streaming platforms are systems that efficiently gather, process, and analyz
 
 Below is an overview of the key phases and components involved in a log streaming platform:
 
-![Streaming Logs Architecture](./img/stream_logs_arch_w.pdf)
+![Streaming Logs Architecture](./img/stream_logs_arch_w.png)
 
 ### __Data Collection__
 
