@@ -95,12 +95,21 @@ configMapGenerator:
         grafana_dashboard: k8s-detailed-overview-pods
       disableNameSuffixHash: true
 
-  - name: k8s-detailed-overview-persitent-volumes
+  - name: k8s-detailed-overview-persistent-volumes
     files:
       - k8s-detailed-overview-pv.json
     options:
       labels:
-        grafana_dashboard: k8s-detailed-overview-pods
+        grafana_dashboard: k8s-detailed-overview-pv
+      disableNameSuffixHash: true
+
+
+  - name: k8s-event-exporter
+    files:
+      - k8s-event-exporter.json
+    options:
+      labels:
+        grafana_dashboard: k8s-event-exporter
       disableNameSuffixHash: true
 
   #- name: k8s-detailed-overview-nodes
