@@ -37,6 +37,7 @@ spec:
   values:
     query:
       enabled: true
+      replicaCount: 3
       replicaLabels:
         - replica
       dnsDiscovery:
@@ -58,6 +59,7 @@ spec:
 
     bucketweb:
       enabled: true
+      replicaCount: 3
       podAnnotations:
         secret.reloader.stakater.com/reload: *secret
 
@@ -79,7 +81,7 @@ spec:
 
     storegateway:
       enabled: true
-      replicaCount: 1
+      replicaCount: 3
       podAntiAffinityPreset: hard
       persistence:
         enabled: true
