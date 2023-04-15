@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-rook-ceph-cluster
+    - name: cluster-apps-longhorn-cluster
   path: ./kubernetes/apps/default/clickhouse/app
   prune: true
   sourceRef:
