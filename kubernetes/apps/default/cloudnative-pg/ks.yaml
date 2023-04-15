@@ -31,6 +31,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-cloudnative-pg
+    - name: cluster-apps-rook-ceph-cluster
     #- name: cluster-apps-kyverno
     #- name: cluster-apps-local-path-provisioner
     #- name: cluster-apps-minio

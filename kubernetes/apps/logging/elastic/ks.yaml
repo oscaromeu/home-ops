@@ -12,7 +12,7 @@ spec:
     - name: cluster-apps-external-secrets-stores
     - name: cluster-apps-cloudflare-operator-tunnels
     - name: cluster-apps-elastic-operator
-    - name: cluster-apps-localpath
+    - name: cluster-apps-rook-ceph
     - name: cluster-apps-kube-prometheus
   path: ./kubernetes/apps/logging/elastic/app
   prune: true

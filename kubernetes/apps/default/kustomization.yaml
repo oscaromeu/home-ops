@@ -10,7 +10,7 @@ resources:
   - ./redis/ks.yaml
   - ./excalidraw/ks.yaml
   - ./cloudnative-pg/ks.yaml
-  - ./clickhouse/ks.yaml
+  #- ./clickhouse/ks.yaml
   - ./jupyterhub/ks.yaml
   - ./joplin/ks.yaml
   - ./vaultwarden/ks.yaml
@@ -21,5 +21,5 @@ resources:
   - ./gitea/ks.yaml
   - ./vikunja/ks.yaml
   - ./woodpecker/ks.yaml
-  - ./harbor/ks.yaml
+  #- ./harbor/ks.yaml
   - ./lldap/ks.yaml
