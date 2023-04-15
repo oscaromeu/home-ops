@@ -158,12 +158,9 @@ spec:
               limits:
                 memory: 2Gi
             instances: 1
-          healthCheck:
-            bucket:
-              interval: 60s
         storageClass:
           enabled: true
           name: ceph-bucket
           reclaimPolicy: Delete
-          #parameters:
-          #  region: us-east-1
+          parameters:
+            region: us-east-1
