@@ -14,7 +14,7 @@ spec:
     name: home-kubernetes
   dependsOn:
     - name: cluster-apps-cloudnative-pg-cluster
-    - name: cluster-apps-longhorn
+    - name: cluster-apps-localpath
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease

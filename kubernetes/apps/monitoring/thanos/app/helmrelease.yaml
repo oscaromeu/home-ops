@@ -75,7 +75,7 @@ spec:
       persistence:
         enabled: true
         size: 10Gi
-        storageClass: longhorn
+        storageClass: localpath
       podAnnotations:
         secret.reloader.stakater.com/reload: *secret
 

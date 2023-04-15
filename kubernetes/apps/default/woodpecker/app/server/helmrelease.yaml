@@ -55,7 +55,7 @@ spec:
       enabled: true
       size: 5Gi
       mountPath: "/var/lib/woodpecker"
-      storageClass: "longhorn"
+      storageClass: "localpath"
 
     ingress:
       enabled: true

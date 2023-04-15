@@ -91,7 +91,7 @@ spec:
 
     persistence:
       enabled: false
-      storageClassName: longhorn
+      storageClassName: localpath
       accessModes:
         - ReadWriteOnce
       size: 5Gi

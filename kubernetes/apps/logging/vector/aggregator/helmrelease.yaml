@@ -173,7 +173,7 @@ spec:
     #  accessModes:
     #    - ReadWriteOnce
     #  size: 1Gi
-    #  storageClass: longhorn
+    #  storageClass: localpath
 
     podMonitor:
       enabled: false

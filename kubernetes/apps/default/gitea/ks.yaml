@@ -14,7 +14,7 @@ spec:
     name: home-kubernetes
   dependsOn:
     - name: cluster-apps-cloudnative-pg-cluster
-    - name: cluster-apps-longhorn
+    - name: cluster-apps-localpath
   healthChecks:
     #- apiVersion: batch/v1
     #  kind: CronJob

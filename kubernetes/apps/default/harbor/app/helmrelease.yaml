@@ -53,11 +53,11 @@ spec:
       persistentVolumeClaim:
         registry:
           existingClaim: harbor-registry-v1
-          storageClass: longhorn
+          storageClass: localpath
           subPath: registry
         chartmuseum:
           existingClaim: harbor-registry-v1
-          storageClass: longhorn
+          storageClass: localpath
           subPath: chartmuseum
 
     #harborAdminPassword: "${HARBOR_ADMIN_PASSWORD}"
