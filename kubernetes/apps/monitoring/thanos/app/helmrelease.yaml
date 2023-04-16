@@ -51,6 +51,8 @@ spec:
         annotations:
           hajimari.io/enable: "true"
           hajimari.io/icon: simple-icons:prometheus
+      nodeSelector:
+        kubernetes.io/arch: amd64
 
     existingObjstoreSecret: &secret thanos-objstore
 
@@ -62,6 +64,8 @@ spec:
       replicaCount: 3
       podAnnotations:
         secret.reloader.stakater.com/reload: *secret
+      nodeSelector:
+        kubernetes.io/arch: amd64
 
     compactor:
       enabled: true
@@ -78,6 +82,8 @@ spec:
         storageClass: longhorn
       podAnnotations:
         secret.reloader.stakater.com/reload: *secret
+      nodeSelector:
+        kubernetes.io/arch: amd64
 
     storegateway:
       enabled: true
@@ -88,6 +94,9 @@ spec:
         size: 5Gi
       podAnnotations:
         secret.reloader.stakater.com/reload: *secret
+      nodeSelector:
+        kubernetes.io/arch: amd64
+
 
     metrics:
       enabled: false
