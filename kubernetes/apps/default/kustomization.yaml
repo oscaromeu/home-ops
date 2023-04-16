@@ -18,7 +18,7 @@ resources:
   #- ./glauth/ks.yaml
   #- ./authelia/ks.yaml
   - ./maddy/ks.yaml
-  #- ./gitea/ks.yaml
+  - ./gitea/ks.yaml
   - ./vikunja/ks.yaml
   - ./woodpecker/ks.yaml
   #- ./harbor/ks.yaml
