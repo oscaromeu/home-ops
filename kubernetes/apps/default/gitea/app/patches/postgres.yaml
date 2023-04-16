@@ -20,7 +20,7 @@ spec:
           - name: POSTGRES_SUPER_PASS
             valueFrom:
               secretKeyRef:
-                name: postgres-superuser
+                name: cloudnative-pg-secret
                 key: password
           - name: POSTGRES_USER
             valueFrom:
