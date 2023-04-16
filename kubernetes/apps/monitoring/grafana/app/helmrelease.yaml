@@ -91,7 +91,7 @@ spec:
 
     persistence:
       enabled: false
-      storageClassName: localpath
+      storageClassName: local-path
       accessModes:
         - ReadWriteOnce
       size: 5Gi

@@ -219,10 +219,10 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: "localpath"
+              storageClassName: "longhorn"
               resources:
                 requests:
-                  storage: 20Gi
+                  storage: 15Gi
 
         #remoteWrite:
         #  - url: "https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push"

@@ -154,7 +154,7 @@ spec:
     #  accessModes:
     #    - ReadWriteOnce
     #  size: 1Gi
-    #  storageClass: localpath
+    #  storageClass: local-path
 
     podMonitor:
       enabled: true

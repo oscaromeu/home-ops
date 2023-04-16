@@ -135,7 +135,7 @@ spec:
       enabled: true
       accessModes: ["ReadWriteOnce"]
       size: 10Gi
-      storageClass: localpath
+      storageClass: longhorn
 
   valuesFrom:
     - targetPath: gitea.admin.email

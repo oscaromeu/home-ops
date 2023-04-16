@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
     #- name: cluster-apps-local-path-provisioner
-    #- name: cluster-apps-localpath
+    #- name: cluster-apps-local-path
   path: ./kubernetes/apps/default/redis/app
   prune: true
   sourceRef:

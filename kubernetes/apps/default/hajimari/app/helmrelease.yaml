@@ -43,7 +43,7 @@ spec:
         #  - default
         #  - kube-system
         #  - logging
-        #  - localpath
+        #  - local-path
         #  - networking
         #  - system-upgrade
         #  - cloudflare-operator-system

@@ -32,7 +32,7 @@ spec:
       #  kubernetes.io/os: amd64
       db:
         pvc:
-          storageClassName: localpath
+          storageClassName: longhorn
       resources:
         requests:
           cpu: 0.5
@@ -61,7 +61,7 @@ spec:
         type: dynamic
         capacity: 3Gi
         dynamic:
-          storageClass: localpath
+          storageClass: longhorn
       cpu:
         guarantee: 0.5
       memory:
