@@ -94,12 +94,13 @@ nav:
 
 
 
-  - Explanation:
-    - 02-explanation/index.md
+  - Comprehensive Guides:
+    - 02-lab-docs/index.md
+    - 02-lab-docs/secret-management.md
     #- Analytics:
     #  #- observability/analytics/index.md
     #  - observability/analytics/elk.md
 
     - Data Platform:
       #- observability/data-platform/index.md
-      - 02-explanation/data-platform/prometheus.md
+      - 02-lab-docs/data-platform/prometheus.md

@@ -2,134 +2,31 @@
 title: Secret Management
 ---
 
-## Introduction
-
-This guide demonstrates how to manage secrets in Kubernetes using External Secrets and Doppler. External Secrets allows you to sync secrets from external secret management systems into Kubernetes, while Doppler is a secure and easy-to-use secrets management service.
-
-+ [Doppler Secret Provider](https://external-secrets.io/main/provider/doppler/)
-+ [Doppler Secrets Operator](https://docs.doppler.com/docs/kubernetes-operator)
-
-## Prerequisites
-
-1. A Kubernetes cluster, fluxcd, kubectl
-2. External Secrets operator
-3. Doppler CLI installed and configured
-
 ## Overview
 
-## Set Up Doppler
+This guide demonstrates the different ways to utilize Kubernetes secrets when using [Flux](https://fluxcd.io/), [SOPS](https://github.com/mozilla/sops) and External Secrets with Doppler provider.
 
-1. Sign up for a Doppler account at https://dashboard.doppler.com/signup
-2. Follow the documentation for the [doppler provider](https://external-secrets.io/main/provider/doppler/) until "Use Cases".
+_Check the following [document](https://fluxcd.io/docs/guides/mozilla-sops/) on how to integrate SOPS into Flux_
 
-The Service Token is located under the `kube-system/external-secrets/stores/doppler`
+All the examples will use the following secret
 
-
-+ `doppler_store.yaml`: Defines a `SecretStore`. A SecretStore is a custom resource provided by the External Secrets Manager that defines the connection and authentication information needed to access an external secret management system. This resource acts as a centralized reference for other resources within the Kubernetes cluster when they need to access the secrets stored in the external system.
-
-    ```yaml
-    apiVersion: external-secrets.io/v1beta1
-    kind: SecretStore
-    metadata:
-      name: doppler-auth-api
-    spec:
-      provider:
-        doppler:
-          auth:
-            secretRef:
-              dopplerToken:
-                name: doppler-token-auth-api
-                key: dopplerToken
-    ```
-
-+ `secret.sops.yaml`: The authentication credentials in plain yaml. The contents of the file are similar to :
-
-    ```yaml
-    apiVersion: v1
-    data:
-        dopplerToken: aG91c2Uud29ybGR4eHp3NkZBRzQ2Q3RIN1dXQUlKbTlJZTZOa05Jd1BzV1lqZjNzZ0JKc3oK
-    kind: Secret
-    metadata:
-        name: doppler-token-auth-api
-    ```
-
-+ `test.yaml`: Secret to test that the configuration has been done correctly.
-
-
-2. Create a new project and configure your secrets
-
-
-## Secret Configuration
-
-### ClusterSecretStore vs SecretStore
-
-There are two types of secret stores provided by the External Secrets Manager:
-
-+ `ClusterSecretStore:` A cluster-wide secret store that can be referenced by ExternalSecret resources across all namespaces in the cluster.
-+ `SecretStore:` A namespace-scoped secret store that can only be referenced by ExternalSecret resources within the same namespace.
-
-### ClusterSecretStore
-
-A ClusterSecretStore is suitable for scenarios where a single external secret provider (such as Doppler) is used by multiple applications or services in different namespaces. It provides centralized configuration, consistency, reduced duplication, and access control.
-
-#### Example
 
 ```yaml
-apiVersion: external-secrets.io/v1beta1
-kind: ClusterSecretStore
+apiVersion: v1
+kind: Secret
 metadata:
-  name: doppler-cluster-wide-secret-store
-spec:
-  provider:
-    doppler:
-      auth:
-        secretRef:
-          dopplerToken:
-            name: doppler-token
-            key: dopplerToken
-            namespace: kube-system
+  name: application-secret
+  namespace: default
+stringData:
+  AWESOME_SECRET: "SUPER SECRET VALUE"
 ```
 
-### SecretStore
+## Create the Secret
 
-A `SecretStore` is suitable for scenarios where different namespaces need to use different external secret providers or configurations. It provides more granular control over secret provider configurations within each namespace.
-
-#### Example
-
-```yaml
-apiVersion: external-secrets.io/v1beta1
-kind: SecretStore
-metadata:
-  name: doppler-namespace-scoped-secret-store
-  namespace: my-namespace
-spec:
-  provider:
-    doppler:
-      auth:
-        secretRef:
-          dopplerToken:
-            name: doppler-token
-            key: dopplerToken
-```
-
-
-### Secret Example
+1. Create in Doppler the `AWESOME_SECRET` variable with the desired value
+2. Create an external secret resource
 
 ```yaml
----
-apiVersion: external-secrets.io/v1beta1
-kind: ClusterSecretStore
-metadata:
-  name: vector-aggregator-elastic
-spec:
-  provider:
-    doppler:
-      auth:
-        secretRef:
-          dopplerToken:
-            name: doppler-token-auth-api
-            key: dopplerToken
-            namespace: kube-system
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
@@ -138,48 +35,94 @@ metadata:
 spec:
   secretStoreRef:
     kind: ClusterSecretStore
-    name: vector-aggregator-elastic
-
+    name: doppler-auth-api
   target:
-    name: es-ingestion-credentials
+    name: application-secret
 
   data:
-    - secretKey: ELASTICSEARCH_PASSWORD
+    - secretKey: AWESOME_SECRET
       remoteRef:
-        key: ELASTICSEARCH_PASSWORD
-
-    - secretKey: ELASTICSEARCH_USERNAME
-      remoteRef:
-        key: ELASTICSEARCH_USERNAME
+        key: AWESOME_SECRET
 ```
 
-## Extra: Install Doppler CLI
+## Method 1: `envFrom`
 
-Follow the installation instructions for your operating system at https://docs.doppler.com/docs/enclave-installation
+Use `envFrom` in a deployment or a Helm chart that supports the setting, this will pass all secret items from the secret into the containers environment.
 
-## List of secrets
-
-```
-$ doppler secrets --only-names
-
-NAME
------------------------
-CLICKHOUSE_PASSWORD
-CLICKHOUSE_USERNAME
-CLOUDFLARE_APIKEY
-CLOUDFLARE_TOKEN
-ELASTICSEARCH_PASSWORD
-ELASTICSEARCH_USERNAME
-
+```yaml
+envFrom:
+  - secretRef:
+      name: application-secret
 ```
 
+Add an example
+
+## Method 2: `env.valueFrom`
+
+Similar to the above but it's possible with `env` to pick an item from a secret.
+
+```yaml
+env:
+  - name: WAY_COOLER_ENV_VARIABLE
+    valueFrom:
+      secretKeyRef:
+        name: application-secret
+        key: AWESOME_SECRET
 ```
-./kubernetes/apps/monitoring/kube-prometheus-stack/app/secret.sops.yaml
-./kubernetes/apps/monitoring/kube-prometheus-stack/app/grafana-secret.sops.yaml
-./kubernetes/apps/monitoring/botkube/app/secret.sops.yaml
-./kubernetes/apps/monitoring/botkube/app/helmrelease.yaml
-./kubernetes/apps/monitoring/botkube/app/values.yml.key
-./kubernetes/apps/monitoring/botkube/app/com_config.sops.yaml
-./kubernetes/apps/monitoring/thanos/app/secret.sops.yaml
-./kubernetes/apps/logging/loki/app/secret_loki.sops.yaml
+
+Add an example
+
+## Method 3: `spec.valuesFrom`
+
+The Flux HelmRelease option `valuesFrom` can inject a secret item into the Helm values of a `HelmRelease`
+ * _Does not work with merging array values
+ * _Care needed with keys that contain dot notation in the name
+
+```yaml
+valuesFrom:
+  - targetPath: config."admin\.password"
+    kind: Secret
+    name: application-secret
+    valuesKey: AWESOME_SECRET
 ```
+
+Add an example
+
+## Method 4: Variable Substitution with Flux
+
+Flux variable substitution can inject secrets into any YAML manifest. This requires the [Flux Kustomization](https://fluxcd.io/docs/components/kustomize/kustomization/) configured to enable [variable substitution](https://fluxcd.io/docs/components/kustomize/kustomization/#variable-substitution). Correctly configured this allows you to use `${GLOBAL_AWESOME_SECRET}` in any YAML manifest.
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cluster-secrets
+  namespace: flux-system
+stringData:
+  GLOBAL_AWESOME_SECRET: "GLOBAL SUPER SECRET VALUE"
+```
+
+```yaml
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+# ...
+spec:
+# ...
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  postBuild:
+    substituteFrom:
+      - kind: Secret
+        name: cluster-secrets
+```
+
+Add an example
+
+
+* For the first **three methods** consider using a tool like [stakater/reloader](https://github.com/stakater/Reloader) to restart the pod when the secret changes.
+
+* Using reloader on a pod using a secret provided by Flux Variable Substitution will lead to pods being restarted during any change to the secret while related to the pod or not.
+
+* The last method should be used when all other methods are not an option, or used when you have a “global” secret used by a bunch of YAML manifests.
