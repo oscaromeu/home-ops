@@ -29,7 +29,7 @@ spec:
     hub:
       authenticatePrometheus: false
       nodeSelector:
-        kubernetes.io/os: amd64
+        kubernetes.io/arch: amd64
       db:
         pvc:
           storageClassName: longhorn
