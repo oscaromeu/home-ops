@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-longhorn
-  path: ./kubernetes/apps/default/tekton-operator/app
+  path: ./kubernetes/apps/default/tekton/operator
   prune: true
   sourceRef:
     kind: GitRepository
