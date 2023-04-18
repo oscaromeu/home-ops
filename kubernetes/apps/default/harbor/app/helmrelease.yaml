@@ -24,6 +24,9 @@ spec:
 
   values:
     expose:
+      tls:
+        # The ingress controller has a default certificate so we don't need to configure it
+        certSource: none
       ingress:
         hosts:
           core: harbor.${SECRET_DOMAIN}
@@ -38,10 +41,6 @@ spec:
             hajimari.io/icon: simple-icons:harbor
             hajimari.io/enable: "true"
             hajimari.io/appName: Harbor
-        tls:
-          certSource: secret
-          secretName: harbor-tls-certificate
-          notarySecretName: notary-tls-certificate
 
 
     ipFamily:
@@ -60,9 +59,9 @@ spec:
           storageClass: longhorn
           subPath: chartmuseum
 
-    #harborAdminPassword: "${HARBOR_ADMIN_PASSWORD}"
+    harborAdminPassword: "${HARBOR_ADMIN_PASSWORD}"
     # The secret key used for encryption. Must be a string of 16 chars.
-    #secretKey: "${HARBOR_ENCRPYTION_KEY}"
+    secretKey: "${HARBOR_ENCRPYTION_KEY}"
 
     database:
       nodeSelector:
@@ -73,7 +72,9 @@ spec:
         kubernetes.io/arch: amd64
 
     notary:
-      enabled: true
+      enabled: false
+      nodeSelector:
+        kubernetes.io/arch: amd64
 
     #nginx:
     #  podAnnotations:
