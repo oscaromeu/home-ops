@@ -46,16 +46,16 @@ spec:
 
 
     singleuser:
-      #extraNodeAffinity:
-      #  required:
-      #    - matchExpressions:
-      #        - key: kubernetes.io/arch
-      #          operator: In
-      #          values:
-      #            - amd64
-      #            - i386
-      #            - i686
-      #            - x86
+      extraNodeAffinity:
+        required:
+          - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                  - amd64
+                  - i386
+                  - i686
+                  - x86
 
       storage:
         type: dynamic
@@ -110,3 +110,34 @@ spec:
         - hosts:
             - *host
 
+    defaultUrl: "/lab"
+    extraEnv:
+      JUPYTERHUB_SINGLEUSER_APP: "jupyter_server.serverapp.ServerApp"
+    storage:
+      capacity: 5Gi
+      dynamic:
+        storageClass: longhorn
+    # Defines the default image
+    image:
+      name: jupyter/scipy-notebook
+      tag: 82ce73789ba4
+    profileList:
+      - display_name: "Minimal environment"
+        description: "To avoid too much bells and whistles: Python."
+        kubespawner_override:
+          image: jupyter/minimal-notebook:82ce73789ba4
+      - display_name: "Datascience environment"
+        description: "If you want the additional bells and whistles: Python, R, and Julia."
+        default: false
+      - display_name: "Learning Data Science"
+        description: "Datascience Environment with Sample Notebooks"
+        kubespawner_override:
+          image: jupyter/datascience-notebook:2343e33dec46
+          # lifecycle_hooks:
+          #   postStart:
+          #     exec:
+          #       command:
+          #         - "sh"
+          #         - "-c"
+          #         - >
+          #           gitpuller https://github.com/data-8/materials-fa17 master materials-fa;
