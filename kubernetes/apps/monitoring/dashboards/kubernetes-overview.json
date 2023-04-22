@@ -24,9 +24,59 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 9,
   "links": [],
   "liveNow": false,
   "panels": [
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "editorMode": "code",
+          "expr": "{app=\"event-exporter\"} | json |  line_format \"{{ .message }}\" |  line_format \"{{.log}}\" |  json | line_format \"{{ .involvedObject_namespace }} {{ .type }}  {{ .reason }} {{ .involvedObject_kind }}/{{ .involvedObject_name }} {{ .message }}\"",
+          "hide": false,
+          "queryType": "range",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "editorMode": "code",
+          "expr": "{app=\"event-exporter\"} | json |  line_format \"{{ .message }}\" |  line_format \"{{.log}}\" |  json | line_format \"{{ .involvedObject_namespace }} {{ .type }}  {{ .reason }} {{ .involvedObject_kind }}/{{ .involvedObject_name }} {{ .message }}\" | type = \"Warning|Error\"",
+          "hide": true,
+          "queryType": "range",
+          "refId": "B"
+        }
+      ],
+      "title": "Events",
+      "type": "logs"
+    },
     {
       "datasource": {
         "type": "prometheus",
@@ -55,10 +105,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 3,
+        "h": 8,
+        "w": 24,
         "x": 0,
-        "y": 0
+        "y": 8
       },
       "id": 17,
       "options": {
@@ -99,46 +149,59 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
           }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 4,
-        "y": 0
+        "h": 7,
+        "w": 7,
+        "x": 0,
+        "y": 16
       },
-      "id": 15,
+      "id": 4,
       "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "calculate": false,
+        "cellGap": 0,
+        "color": {
+          "exponent": 0.5,
+          "fill": "dark-orange",
+          "max": 55,
+          "mode": "scheme",
+          "reverse": false,
+          "scale": "exponential",
+          "scheme": "RdYlGn",
+          "steps": 60
         },
-        "textMode": "auto"
+        "exemplars": {
+          "color": "rgba(255,0,255,0.7)"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": false
+        },
+        "rowsFrame": {
+          "layout": "auto"
+        },
+        "tooltip": {
+          "show": true,
+          "yHistogram": false
+        },
+        "yAxis": {
+          "axisPlacement": "hidden",
+          "reverse": false
+        }
       },
       "pluginVersion": "9.3.6",
       "targets": [
@@ -148,14 +211,17 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "count(up{job=\"node-exporter\"})",
-          "legendFormat": "__auto",
+          "exemplar": false,
+          "expr": "sum(sum(kube_pod_info * on(pod, namespace) group_right(node) kube_pod_status_phase{phase=\"Running\"}) by (node,phase)) by (node)",
+          "format": "time_series",
+          "instant": false,
+          "legendFormat": "{{  node }}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Nodes",
-      "type": "stat"
+      "title": "Number of running pods per node",
+      "type": "heatmap"
     },
     {
       "datasource": {
@@ -218,7 +284,7 @@
         "h": 7,
         "w": 7,
         "x": 7,
-        "y": 0
+        "y": 16
       },
       "id": 6,
       "options": {
@@ -325,7 +391,7 @@
         "h": 7,
         "w": 10,
         "x": 14,
-        "y": 0
+        "y": 16
       },
       "id": 8,
       "options": {
@@ -388,8 +454,73 @@
       "gridPos": {
         "h": 4,
         "w": 2,
-        "x": 0,
-        "y": 7
+        "x": 8,
+        "y": 23
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.3.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "count(kube_namespace_created)",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Namespaces",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 10,
+        "y": 23
       },
       "id": 12,
       "options": {
@@ -453,10 +584,10 @@
       "gridPos": {
         "h": 4,
         "w": 2,
-        "x": 2,
-        "y": 7
+        "x": 12,
+        "y": 23
       },
-      "id": 14,
+      "id": 15,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
@@ -479,95 +610,14 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "count(kube_namespace_created)",
+          "expr": "count(up{job=\"node-exporter\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Namespaces",
+      "title": "Nodes",
       "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "scaleDistribution": {
-              "type": "linear"
-            }
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 7,
-        "x": 0,
-        "y": 11
-      },
-      "id": 4,
-      "options": {
-        "calculate": false,
-        "cellGap": 0,
-        "color": {
-          "exponent": 0.5,
-          "fill": "dark-orange",
-          "max": 55,
-          "mode": "scheme",
-          "reverse": false,
-          "scale": "exponential",
-          "scheme": "RdYlGn",
-          "steps": 60
-        },
-        "exemplars": {
-          "color": "rgba(255,0,255,0.7)"
-        },
-        "filterValues": {
-          "le": 1e-9
-        },
-        "legend": {
-          "show": false
-        },
-        "rowsFrame": {
-          "layout": "auto"
-        },
-        "tooltip": {
-          "show": true,
-          "yHistogram": false
-        },
-        "yAxis": {
-          "axisPlacement": "hidden",
-          "reverse": false
-        }
-      },
-      "pluginVersion": "9.3.6",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum(sum(kube_pod_info * on(pod, namespace) group_right(node) kube_pod_status_phase{phase=\"Running\"}) by (node,phase)) by (node)",
-          "format": "time_series",
-          "instant": false,
-          "legendFormat": "{{  node }}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Number of running pods per node",
-      "type": "heatmap"
     },
     {
       "datasource": {
@@ -599,9 +649,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 7,
-        "x": 0,
-        "y": 18
+        "w": 10,
+        "x": 14,
+        "y": 23
       },
       "id": 10,
       "options": {
@@ -636,45 +686,9 @@
       ],
       "title": "Top 10 High Cardinality Series",
       "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 25
-      },
-      "id": 2,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": true,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": true,
-        "sortOrder": "Descending",
-        "wrapLogMessage": true
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
-          },
-          "editorMode": "code",
-          "expr": "{app=\"event-exporter\"}",
-          "queryType": "range",
-          "refId": "A"
-        }
-      ],
-      "title": "Events",
-      "type": "logs"
     }
   ],
+  "refresh": false,
   "schemaVersion": 37,
   "style": "dark",
   "tags": [],
@@ -705,6 +719,29 @@
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "default",
+          "value": "default"
+        },
+        "definition": "label_values(kube_pod_info, namespace)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Namespace",
+        "multi": false,
+        "name": "namespace",
+        "options": [],
+        "query": {
+          "query": "label_values(kube_pod_info, namespace)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
@@ -716,6 +753,6 @@
   "timezone": "",
   "title": "Kubernetes Overview",
   "uid": "maSfOmA4k",
-  "version": 2,
+  "version": 1,
   "weekStart": ""
 }
