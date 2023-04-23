@@ -137,6 +137,9 @@ spec:
       size: 10Gi
       storageClass: longhorn
 
+    nodeSelector:
+      kubernetes.io/arch: amd64
+
   valuesFrom:
     - targetPath: gitea.admin.email
       kind: Secret
