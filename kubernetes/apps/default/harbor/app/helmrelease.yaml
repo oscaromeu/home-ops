@@ -68,6 +68,7 @@ spec:
         kubernetes.io/arch: amd64
 
     trivy:
+      enabled: false
       nodeSelector:
         kubernetes.io/arch: amd64
 
@@ -76,16 +77,19 @@ spec:
       nodeSelector:
         kubernetes.io/arch: amd64
 
+    chartmuseum:
+      enabled: false
+
     #nginx:
     #  podAnnotations:
     #    secret.reloader.stakater.com/reload: tls.harbor
 
-  #valuesFrom:
-  #  - targetPath: harborAdminPassword
-  #    kind: Secret
-  #    name: harbor
-  #    valuesKey: harborAdminPassword
-  #  - targetPath: secretKey
-  #    kind: Secret
-  #    name: harbor
-  #    valuesKey: haborEncryptionKey
+  valuesFrom:
+    - targetPath: harborAdminPassword
+      kind: Secret
+      name: harbor
+      valuesKey: harborAdminPassword
+    - targetPath: secretKey
+      kind: Secret
+      name: harbor
+      valuesKey: haborEncryptionKey
