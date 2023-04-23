@@ -47,6 +47,15 @@ spec:
             url: http://prometheus-alertmanager.monitoring.svc.cluster.local:9093
             jsonData:
               implementation: prometheus
+
+    downloadDashboards:
+      resources:
+        requests:
+          cpu: 5m
+          memory: 89M
+        limits:
+          memory: 89M
+
     sidecar:
       dashboards:
         enabled: true
@@ -54,9 +63,26 @@ spec:
         # folderAnnotation: grafana_folder
         # provider:
         #   foldersFromFilesStructure: true
+
+
       datasources:
         enabled: true
         searchNamespace: ALL
+
+      resources:
+        requests:
+          cpu: 5m
+          memory: 89M
+        limits:
+          memory: 89M
+
+    resources:
+      requests:
+        cpu: 5m
+        memory: 93Mi
+      limits:
+        #cpu: 100m
+        memory: 93Mi
 
     plugins:
       - digrich-bubblechart-panel
@@ -99,3 +125,4 @@ spec:
 
       extraPvcLabels:
         snapshot.home.arpa/enabled: "true"
+
