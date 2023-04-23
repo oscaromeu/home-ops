@@ -47,21 +47,24 @@ spec:
       ipv6:
         enabled: false
 
+    exporter:
+      image:
+        repository: ghcr.io/octohelm/harbor/harbor-exporter
     persistence:
       enabled: true
       persistentVolumeClaim:
         registry:
-          existingClaim: harbor-registry-v1
-          storageClass: local-path
-          subPath: registry
-        chartmuseum:
-          existingClaim: harbor-registry-v1
-          storageClass: local-path
-          subPath: chartmuseum
+          existingClaim: registry
+        jobservice:
+          existingClaim: jobservice
+        database:
+          existingClaim: database
+        redis:
+          existingClaim: redis
 
-    harborAdminPassword: "${HARBOR_ADMIN_PASSWORD}"
+    #harborAdminPassword: "${HARBOR_ADMIN_PASSWORD}"
     # The secret key used for encryption. Must be a string of 16 chars.
-    secretKey: "${HARBOR_ENCRPYTION_KEY}"
+    #secretKey: "${HARBOR_ENCRPYTION_KEY}"
 
     database:
       nodeSelector:
@@ -84,12 +87,12 @@ spec:
     #  podAnnotations:
     #    secret.reloader.stakater.com/reload: tls.harbor
 
-  valuesFrom:
-    - targetPath: harborAdminPassword
-      kind: Secret
-      name: harbor
-      valuesKey: harborAdminPassword
-    - targetPath: secretKey
-      kind: Secret
-      name: harbor
-      valuesKey: haborEncryptionKey
+  #valuesFrom:
+  #  - targetPath: harborAdminPassword
+  #    kind: Secret
+  #    name: harbor
+  #    valuesKey: harborAdminPassword
+  #  - targetPath: secretKey
+  #    kind: Secret
+  #    name: harbor
+  #    valuesKey: haborEncryptionKey
