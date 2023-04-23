@@ -33,10 +33,10 @@ spec:
         tag: 0.13.0
       resources:
         requests:
-          cpu: 10m
-          memory: 100M
+          cpu: 5m
+          memory: 64M
         limits:
-          memory: 200M
+          memory: 64M
       extraArgs:
         storage: prometheus
         prometheus-address: |-
