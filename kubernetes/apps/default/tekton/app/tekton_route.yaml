@@ -8,9 +8,10 @@ spec:
   - host: "tekton.${SECRET_DOMAIN}"
     http:
       paths:
-      - pathType: ImplementationSpecific
+      - pathType: Prefix
         backend:
           service:
             name: tekton-dashboard
             port:
               number: 9097
+        path: /
