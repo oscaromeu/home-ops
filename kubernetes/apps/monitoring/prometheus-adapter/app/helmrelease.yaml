@@ -33,3 +33,10 @@ spec:
       url: http://prometheus-prometheus.monitoring.svc.cluster.local
       port: 9090
 
+    resources:
+      requests:
+        cpu: 148m
+        memory: 258M
+      limits:
+        memory: 258M
+
