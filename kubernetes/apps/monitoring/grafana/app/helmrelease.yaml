@@ -79,10 +79,10 @@ spec:
     resources:
       requests:
         cpu: 5m
-        memory: 93Mi
+        memory: 92M
       limits:
         #cpu: 100m
-        memory: 93Mi
+        memory: 92M
 
     plugins:
       - digrich-bubblechart-panel
