@@ -4,3 +4,4 @@ namespace: default
 resources:
   - tekton_config.yaml
   - tekton_route.yaml
+  - tekton_tunnel.yaml
