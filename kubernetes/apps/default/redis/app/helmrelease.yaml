@@ -39,8 +39,27 @@ spec:
       enabled: true
       masterSet: redis-master
       getMasterTimeout: 60
+      readinessProbe:
+        enabled: true
+        initialDelaySeconds: 60
+        periodSeconds: 10
+        timeoutSeconds: 30
+        successThreshold: 1
+        failureThreshold: 60
+      livenessProbe:
+        enabled: true
+        initialDelaySeconds: 20
+        periodSeconds: 10
+        timeoutSeconds: 30
+        successThreshold: 1
+        failureThreshold: 60
       startupProbe:
-        failureThreshold: 10
+        enabled: true
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        timeoutSeconds: 5
+        successThreshold: 1
+        failureThreshold: 22
       persistence:
         enabled: false
     metrics:
