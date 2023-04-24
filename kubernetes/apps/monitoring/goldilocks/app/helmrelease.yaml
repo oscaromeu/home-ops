@@ -26,7 +26,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-
     controller:
       resources:
         requests:

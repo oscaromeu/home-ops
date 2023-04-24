@@ -36,10 +36,10 @@ spec:
               value: "10"
           resources:
             requests:
-              memory: 2Gi
-              cpu: 500m
-            limits:
               memory: 4Gi
+              cpu: 203m
+            limits:
+              memory: 8Gi
 
 
         #affinity:
