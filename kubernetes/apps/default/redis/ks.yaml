@@ -8,9 +8,9 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
+    - name: cluster-apps-longhorn
     - name: cluster-apps-external-secrets-stores
-    #- name: cluster-apps-local-path-provisioner
-    #- name: cluster-apps-local-path
+    - name: cluster-apps-cloudflare-operator-tunnels
   path: ./kubernetes/apps/default/redis/app
   prune: true
   sourceRef:

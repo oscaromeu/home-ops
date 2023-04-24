@@ -9,6 +9,8 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-longhorn
+    - name: cluster-apps-external-secrets-stores
+    - name: cluster-apps-cloudflare-operator-tunnels
   path: ./kubernetes/apps/default/jupyterhub/app
   prune: true
   sourceRef:
