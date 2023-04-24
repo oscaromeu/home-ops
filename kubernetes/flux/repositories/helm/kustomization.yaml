@@ -34,3 +34,4 @@ resources:
   - ./tf-controller.yaml
   - ./gitea.yaml
   - ./woodpecker.yaml
+  - ./twun.yaml
