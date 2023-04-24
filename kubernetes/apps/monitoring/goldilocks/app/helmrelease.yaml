@@ -33,7 +33,7 @@ spec:
           cpu: 15m
           memory: 145M
         limits:
-          memory: 800M
+          memory: 2G
 
     dashboard:
       rbac:
@@ -41,7 +41,7 @@ spec:
       serviceAccount:
         create: true
         name: goldilocks-dashboard-sa
-      replicaCount: 1
+      replicaCount: 2
       ingress:
         enabled: true
         ingressClassName: nginx
@@ -61,4 +61,4 @@ spec:
           cpu: 15m
           memory: 64M
         limits:
-          memory: 500M
+          memory: 2G
