@@ -24,3 +24,4 @@ resources:
   #- ./harbor/ks.yaml
   - ./lldap/ks.yaml
   - ./tekton/ks.yaml
+  - ./twuni/ks.yaml
