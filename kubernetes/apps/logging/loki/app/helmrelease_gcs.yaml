@@ -55,7 +55,7 @@ spec:
     backend:
       replicas: 1
       persistence:
-        storageClass: longhorn
+        storageClass: local-path
         size: 10Gi
       extraEnv:
         - name: GOOGLE_APPLICATION_CREDENTIALS
@@ -76,7 +76,7 @@ spec:
       persistence:
         enabled: true
         size: 10Gi
-        storageClass: longhorn
+        storageClass: local-path
 
       extraEnv:
         - name: GOOGLE_APPLICATION_CREDENTIALS
@@ -97,7 +97,7 @@ spec:
       persistence:
         enabled: true
         size: 10Gi
-        storageClass: longhorn
+        storageClass: local-path
       extraEnv:
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: "/etc/loki_secrets/gcp_service_account.json"

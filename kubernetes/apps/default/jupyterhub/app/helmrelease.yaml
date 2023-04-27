@@ -116,7 +116,7 @@ spec:
     storage:
       capacity: 5Gi
       dynamic:
-        storageClass: longhorn
+        storageClass: local-path
     # Defines the default image
     image:
       name: jupyter/scipy-notebook
