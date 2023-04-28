@@ -69,9 +69,7 @@ spec:
           osdsPerDevice: "1"
         nodes:
           - name: mbmwk1
-            devices:
-              - name: sdb
-              - name: sda
+            deviceFilter: "."
     cephBlockPools:
       - name: ceph-blockpool
         spec:
