@@ -13,7 +13,7 @@ spec:
     kind: GitRepository
     name: home-kubernetes
   dependsOn:
-    - name: cluster-apps-longhorn
+    - name: cluster-apps-rook-ceph-cluster
     - name: cluster-apps-external-secrets-stores
     - name: cluster-apps-cloudflare-operator-tunnels
     - name: cluster-apps-cloudnative-pg-cluster

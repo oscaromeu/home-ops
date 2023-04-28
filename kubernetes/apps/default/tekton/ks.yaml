@@ -8,7 +8,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-longhorn
+    - name: cluster-apps-rook-ceph-cluster
     - name: cluster-apps-external-secrets-stores
     - name: cluster-apps-cloudflare-operator-tunnels
   path: ./kubernetes/apps/default/tekton/operator
@@ -29,7 +29,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-longhorn
+    - name: cluster-apps-rook-ceph-cluster
     - name: cluster-apps-tekton-operator
   path: ./kubernetes/apps/default/tekton/app
   prune: true
