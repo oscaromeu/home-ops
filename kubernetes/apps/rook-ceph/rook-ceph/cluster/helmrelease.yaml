@@ -68,17 +68,10 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          - name: mbmmt1
-            devices:
-              - name: /dev/disk/by-id/nvme-KINGSTON_OM8SEP4512Q-A0_50026B7381956EDD-part3
           - name: mbmwk1
             devices:
               - name: /dev/disk/by-id/ata-SSDPR-CL100-480-G3_G0Z047886
-              - name: /dev/disk/by-id/ata-SSDPR-CL100-480-G3_GXE092715
-              - name: /dev/disk/by-id/nvme-KINGSTON_OM8PDP3256B-A01_50026B768596F47C-part4
-          - name: rpmwk4
-            devices:
-              - name: /dev/disk/by-id/scsi-1JMicron_Tech_DD56419883955-part2
+              - name: /devices/pci0000:00/0000:00:17.0/ata1/host0/target0:0:0/0:0:0:0/block/sda
     cephBlockPools:
       - name: ceph-blockpool
         spec:
