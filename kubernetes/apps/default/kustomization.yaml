@@ -24,3 +24,4 @@ resources:
   - ./lldap/ks.yaml
   - ./tekton/ks.yaml
   - ./twuni/ks.yaml
+  - ./busybox/ks.yaml
