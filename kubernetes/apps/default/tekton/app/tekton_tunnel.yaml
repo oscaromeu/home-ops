@@ -8,7 +8,7 @@ subjects:
   - name: tekton-dashboard
     spec:
       fqdn: "tekton.${SECRET_DOMAIN}"
-      target: "http://tekton.tekton-pipelines.svc.cluster.local:9097"
+      target: "http://tekton-dashboard.tekton-pipelines.svc.cluster.local:9097"
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
