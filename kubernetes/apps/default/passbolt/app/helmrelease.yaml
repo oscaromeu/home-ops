@@ -51,7 +51,7 @@ spec:
       secondary:
         persistence:
           enabled: true
-          existingClaim: "mariadb-primary-pvc"
+          existingClaim: "mariadb-secondary-pvc"
 
 
     app:
@@ -152,6 +152,10 @@ spec:
       kind: Secret
       name: passbolt
       valuesKey: MARIADB_ROOT_PASSWORD
+    - targetPath: mariadb.auth.username
+      kind: Secret
+      name: passbolt
+      valuesKey: MARIADB_USERNAME
     - targetPath: mariadb.auth.password
       kind: Secret
       name: passbolt
