@@ -32,92 +32,29 @@ spec:
     redis:
       auth:
         enabled: false
-        password: "CHANGEME"
+      #  password: "CHANGEME"
       sentinel:
         enabled: true
 
-    ## MariaDB dependency parameters
-    mariadbDependencyEnabled: true
     mariadb:
-      architecture: replication
-      auth:
-        # -- Configure mariadb auth root password
-        rootPassword: root
-        # -- Configure mariadb auth username
-        username: mariadb
-        # -- Configure mariadb auth password
-        password: CHANGEME
-        # -- Configure mariadb auth database
-        database: passbolt
-        # -- Configure mariadb auth replicationPassword
-        replicationPassword: CHANGEME
-      # -- Configure parameters for the primary instance.
+      #auth:
+      #  rootPassword: root
+      #  username: mariadb
+      #  password: CHANGEME
+      #  database: passbolt
+      #  replicationPassword: CHANGEME
       primary:
         persistence:
           enabled: true
-          # When it's set the rest of persistence parameters are ignored.
           existingClaim: "mariadb-primary-pvc"
 
-      # -- Configure parameters for the secondary instance.
       secondary:
-        # -- Configure persistence options.
         persistence:
-          # -- Enable persistence on MariaDB secondary replicas using a `PersistentVolumeClaim`. If false, use emptyDir
           enabled: true
-          # -- Name of an existing `PersistentVolumeClaim` for MariaDB secondary replicas. When it's set the rest of persistence parameters are ignored.
-          existingClaim: ""
-          # -- Subdirectory of the volume to mount at
-          subPath: ""
-          # -- Secondary persistent volume storage Class
-          storageClass: ""
-          # -- Labels for the PVC
-          labels: {}
-          # -- Secondary persistent volume claim annotations
-          annotations: {}
-          # -- Secondary persistent volume access Modes
-          accessModes:
-            - ReadWriteOnce
-          # -- Secondary persistent volume size
-          size: 8Gi
-          # -- Selector to match an existing Persistent Volume
-          selector: {}
+          existingClaim: "mariadb-primary-pvc"
 
-    ## Passbolt configuration
 
-    ## Passbolt container and sidecar parameters
     app:
-      initImage:
-        # -- Configure pasbolt deployment image repsitory
-        repository: mariadb
-        # -- Configure pasbolt deployment image pullPolicy
-        pullPolicy: IfNotPresent
-        # -- Overrides the image tag whose default is the chart appVersion.
-        tag: latest
-      image:
-        # -- Configure pasbolt deployment image repsitory
-        repository: passbolt/passbolt
-        # -- Configure pasbolt deployment image pullPolicy
-        pullPolicy: IfNotPresent
-        # -- Overrides the image tag whose default is the chart appVersion.
-        tag: 3.12.0-3-ce
-      cache:
-        # Use CACHE_CAKE_DEFAULT_* variables to configure the connection to redis instance
-        # on the passboltEnv configuration section
-        redis:
-          # -- By enabling redis the chart will mount a configuration file on /etc/passbolt/app.php
-          # That instructs passbolt to store sessions on redis and to use it as a general cache.
-          enabled: true
-          sentinelProxy:
-            # -- Inject a haproxy sidecar container configured as a proxy to redis sentinel
-            # Make sure that CACHE_CAKE_DEFAULT_SERVER is set to '127.0.0.1' to use the proxy
-            enabled: true
-            # -- Configure redis sentinel proxy image
-            image:
-              # -- Configure redis sentinel image repository
-              repository: haproxy
-              # -- Configure redis sentinel image tag
-              tag: "latest"
-            # -- Configure the passbolt deployment resources
       resources: {}
 
     # -- Enable email cron
@@ -127,93 +64,33 @@ spec:
 
     ## Passbolt environment parameters
 
-    # -- Pro subscription key in base64 only if you are using pro version
-    # subscriptionKey:
-    # -- Configure passbolt subscription key path
-    # subscription_keyPath: /etc/passbolt/subscription_key.txt
-
-    # -- Configure passbolt gpg directory
-    gpgPath: /etc/passbolt/gpg
-    # -- Gpg server private key in base64
-    gpgServerKeyPrivate: ""
-    # -- Gpg server public key in base64
-    gpgServerKeyPublic: ""
-
-    # -- Configure passbolt jwt directory
-    jwtPath: /etc/passbolt/jwt
-    # -- JWT server private key in base64
-    jwtServerPrivate:
-    # -- JWT server public key in base64
-    jwtServerPublic:
 
     passboltEnv:
       plain:
-        # -- Configure passbolt privacy url
-        PASSBOLT_LEGAL_PRIVACYPOLICYURL: https://www.passbolt.com/privacy
-        # -- Configure passbolt fullBaseUrl
-        APP_FULL_BASE_URL: https://passbolt.local
-        # -- Configure passbolt to force ssl
+        APP_FULL_BASE_URL: "https://passbolt.${SECRET_DOMAIN}"
         PASSBOLT_SSL_FORCE: true
-        # -- Toggle passbolt public registration
         PASSBOLT_REGISTRATION_PUBLIC: true
-        # -- Configure passbolt cake cache server
-        CACHE_CAKE_DEFAULT_SERVER: 127.0.0.1
-        # -- Configure passbolt default email service port
-        EMAIL_TRANSPORT_DEFAULT_PORT: 587
-        # -- Toggle passbolt debug mode
         DEBUG: false
-        # -- Configure email used on gpg key. This is used when automatically creating a new gpg server key and when automatically calculating the fingerprint.
         PASSBOLT_KEY_EMAIL: passbolt@yourdomain.com
-        # -- Toggle passbolt selenium mode
         PASSBOLT_SELENIUM_ACTIVE: false
-        # -- Configure passbolt license path
-        PASSBOLT_PLUGINS_LICENSE_LICENSE: /etc/passbolt/subscription_key.txt
-        # -- Configure passbolt default email from
         EMAIL_DEFAULT_FROM: no-reply@passbolt.local
-        # -- Configure passbolt default email host
         EMAIL_TRANSPORT_DEFAULT_HOST: 127.0.0.1
-        # -- Toggle passbolt tls
         EMAIL_TRANSPORT_DEFAULT_TLS: true
-        # -- Configure passbolt jwt private key path
-        PASSBOLT_JWT_SERVER_KEY: /var/www/passbolt/config/jwt/jwt.key
-        # -- Configure passbolt jwt public key path
-        PASSBOLT_JWT_SERVER_PEM: /var/www/passbolt/config/jwt/jwt.pem
-        # -- Toggle passbolt jwt authentication
-        PASSBOLT_PLUGINS_JWT_AUTHENTICATION_ENABLED: true
-        # -- Download Command for kubectl
-        KUBECTL_DOWNLOAD_CMD: curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-      secret:
-        # -- Configure passbolt cake cache password
-        CACHE_CAKE_DEFAULT_PASSWORD: CHANGEME
-        # -- Configure passbolt default database password
-        DATASOURCES_DEFAULT_PASSWORD: CHANGEME
-        # -- Configure passbolt default database username
-        DATASOURCES_DEFAULT_USERNAME: CHANGEME
-        # -- Configure passbolt default database
-        DATASOURCES_DEFAULT_DATABASE: passbolt
-        # -- Configure passbolt default email service username
-        EMAIL_TRANSPORT_DEFAULT_USERNAME: CHANGEME
-        # -- Configure passbolt default email service password
-        EMAIL_TRANSPORT_DEFAULT_PASSWORD: CHANGEME
-        # -- Configure passbolt server gpg key fingerprint
-        # PASSBOLT_GPG_SERVER_KEY_FINGERPRINT:
-        # -- Configure passbolt security salt.
-        # SECURITY_SALT:
+      #secret:
+      #  CACHE_CAKE_DEFAULT_PASSWORD: CHANGEME
+      #  DATASOURCES_DEFAULT_PASSWORD: CHANGEME
+      #  DATASOURCES_DEFAULT_USERNAME: CHANGEME
+      #  EMAIL_TRANSPORT_DEFAULT_USERNAME: CHANGEME
+      #  EMAIL_TRANSPORT_DEFAULT_PASSWORD: CHANGEME
 
     ## Passbolt deployment parameters
 
-    # -- If autoscaling is disabled this will define the number of pods to run
-    replicaCount: 2
+    replicaCount: 1
 
-    # Configure autoscaling on passbolt deployment
     autoscaling:
-      # -- Enable autoscaling on passbolt deployment
       enabled: false
-      # -- Configure autoscaling minimum replicas
       minReplicas: 1
-      # -- Configure autoscaling maximum replicas
-      maxReplicas: 100
-      # -- Configure autoscaling target CPU uptilization percentage
+      maxReplicas: 2
       targetCPUUtilizationPercentage: 80
       # targetMemoryUtilizationPercentage: 80
 
@@ -245,73 +122,61 @@ spec:
       initialDelaySeconds: 5
       periodSeconds: 10
 
-    # Configure network policies to allow ingress access passbolt pods
-    # networkPolicy defines which labels are allowed to reach to passbolt
-    # and which namespaces
-    networkPolicy:
-      # -- Enable network policies to allow ingress access passbolt pods
-      enabled: false
-      # -- Configure network policies label for ingress deployment
-      label: app.kubernetes.io/name
-      # -- Configure network policies podLabel for podSelector
-      podLabel: ingress-nginx
-      # -- Configure network policies namespaceLabel for namespaceSelector
-      namespaceLabel: ingress-nginx
-
-    # -- Configure image pull secrets
-    imagePullSecrets: []
-    # -- Value to override the chart name on default
-    nameOverride: ""
-    # -- Value to override the whole fullName
-    fullnameOverride: ""
-
-    serviceAccount:
-      # -- Specifies whether a service account should be created
-      create: true
-      # -- Annotations to add to the service account
-      annotations: {}
-
-    # -- Map of annotation for passbolt server pod
-    podAnnotations: {}
-
-    # -- Security Context configuration for passbolt server pod
-    podSecurityContext:
-      {}
-      # fsGroup: 2000
-
-    service:
-      # -- Configure passbolt service type
-      type: ClusterIP
-      # -- Configure passbolt service port
-      port: 443
-      # -- Configure passbolt service targetPort
-      targetPort: 443
-      # -- Configure passbolt service port name
-      name: https
 
     ingress:
-      # -- Enable passbolt ingress
-      enabled: false
-      # -- Configure passbolt ingress annotations
-      annotations: {}
-      # -- Configure passbolt ingress hosts
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        external-dns.home.arpa/enabled: "true"
+        hajimari.io/icon: mdi:draw-pen
       hosts:
-        # @ignored
-        - host: passbolt.local
+        - host: &host "passbolt.${SECRET_DOMAIN}"
           paths:
             - path: /
-              pathType: ImplementationSpecific
-      # -- Configure passbolt ingress tls
+              pathType: Prefix
       tls:
-        # @ignored
         - secretName: tls
           hosts:
-            - passbolt.local
-    # -- Configure passbolt deployment nodeSelector
+            - *host
+
     nodeSelector: {}
-
-    # -- Configure passbolt deployment tolerations
     tolerations: []
-
-    # -- Configure passbolt deployment affinity
     affinity: {}
+
+  valuesFrom:
+    - targetPath: redis.auth.password
+      kind: Secret
+      name: passbolt
+      valuesKey: REDIS_PASSWORD
+    - targetPath: mariadb.auth.rootPassword
+      kind: Secret
+      name: passbolt
+      valuesKey: MARIADB_ROOT_PASSWORD
+    - targetPath: mariadb.auth.password
+      kind: Secret
+      name: passbolt
+      valuesKey: MARIADB_PASSWORD
+    - targetPath: mariadb.auth.replicationPassword
+      kind: Secret
+      name: passbolt
+      valuesKey: MARIADB_REPLICATION_PASSWORD
+    - targetPath: passboltEnv.auth.secret.CACHE_CAKE_DEFAULT_PASSWORD
+      kind: Secret
+      name: passbolt
+      valuesKey: CACHE_CAKE_DEFAULT_PASSWORD
+    - targetPath: passboltEnv.auth.secret.DATASOURCES_DEFAULT_PASSWORD
+      kind: Secret
+      name: passbolt
+      valuesKey: DATASOURCES_DEFAULT_PASSWORD
+    - targetPath: passboltEnv.auth.secret.DATASOURCES_DEFAULT_USERNAME
+      kind: Secret
+      name: passbolt
+      valuesKey: DATASOURCES_DEFAULT_USERNAME
+    - targetPath: passboltEnv.auth.secret.EMAIL_TRANSPORT_DEFAULT_USERNAME
+      kind: Secret
+      name: passbolt
+      valuesKey: EMAIL_TRANSPORT_DEFAULT_USERNAME
+    - targetPath: passboltEnv.auth.secret."EMAIL_TRANSPORT_DEFAULT_PASSWORD"
+      kind: Secret
+      name: passbolt
+      valuesKey: EMAIL_TRANSPORT_DEFAULT_PASSWORD

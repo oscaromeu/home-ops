@@ -35,3 +35,4 @@ resources:
   - ./gitea.yaml
   - ./woodpecker.yaml
   - ./twuni.yaml
+  - ./passbolt.yaml
