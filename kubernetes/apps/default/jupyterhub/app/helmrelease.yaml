@@ -32,7 +32,7 @@ spec:
         kubernetes.io/arch: amd64
       db:
         pvc:
-          storageClassName: longhorn
+          storageClassName: local-path
       resources:
         requests:
           cpu: 0.5
@@ -46,6 +46,31 @@ spec:
 
 
     singleuser:
+      # Defines the default image
+      image:
+        name: jupyter/scipy-notebook
+        tag: 82ce73789ba4
+      profileList:
+        - display_name: "Minimal environment"
+          description: "To avoid too much bells and whistles: Python."
+          kubespawner_override:
+            image: jupyter/minimal-notebook:82ce73789ba4
+        - display_name: "Datascience environment"
+          description: "If you want the additional bells and whistles: Python, R, and Julia."
+          default: false
+        - display_name: "Learning Data Science"
+          description: "Datascience Environment with Sample Notebooks"
+          kubespawner_override:
+            image: jupyter/datascience-notebook:2343e33dec46
+            # lifecycle_hooks:
+            #   postStart:
+            #     exec:
+            #       command:
+            #         - "sh"
+            #         - "-c"
+            #         - >
+            #           gitpuller https://github.com/data-8/materials-fa17 master materials-fa;
+
       extraNodeAffinity:
         required:
           - matchExpressions:
@@ -117,27 +142,3 @@ spec:
       capacity: 5Gi
       dynamic:
         storageClass: local-path
-    # Defines the default image
-    image:
-      name: jupyter/scipy-notebook
-      tag: 82ce73789ba4
-    profileList:
-      - display_name: "Minimal environment"
-        description: "To avoid too much bells and whistles: Python."
-        kubespawner_override:
-          image: jupyter/minimal-notebook:82ce73789ba4
-      - display_name: "Datascience environment"
-        description: "If you want the additional bells and whistles: Python, R, and Julia."
-        default: false
-      - display_name: "Learning Data Science"
-        description: "Datascience Environment with Sample Notebooks"
-        kubespawner_override:
-          image: jupyter/datascience-notebook:2343e33dec46
-          # lifecycle_hooks:
-          #   postStart:
-          #     exec:
-          #       command:
-          #         - "sh"
-          #         - "-c"
-          #         - >
-          #           gitpuller https://github.com/data-8/materials-fa17 master materials-fa;
