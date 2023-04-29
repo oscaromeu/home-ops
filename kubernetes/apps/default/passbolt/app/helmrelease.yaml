@@ -50,7 +50,7 @@ spec:
 
       secondary:
         persistence:
-          enabled: true
+          enabled: false
           existingClaim: "mariadb-secondary-pvc"
 
 
