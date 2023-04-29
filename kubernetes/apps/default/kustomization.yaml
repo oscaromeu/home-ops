@@ -25,4 +25,4 @@ resources:
   - ./tekton/ks.yaml
   - ./twuni/ks.yaml
   - ./busybox/ks.yaml
-  - ./passbolt/ks.yaml
+  #- ./passbolt/ks.yaml
