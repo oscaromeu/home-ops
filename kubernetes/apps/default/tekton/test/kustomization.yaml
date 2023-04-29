@@ -2,8 +2,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./hello-world.yaml
-  - ./hello-world-run.yaml
-  - ./goodbye-world.yaml
-  - ./hello-goodbye-pipeline-run.yaml
-  - ./hello-goodbye-pipeline.yaml
+  #- ./hello-world.yaml
+  #- ./hello-world-run.yaml
+  #- ./goodbye-world.yaml
+  #- ./hello-goodbye-pipeline-run.yaml
+  #- ./hello-goodbye-pipeline.yaml
+  - ./clone-build-push.yaml
+  - ./clone-build-push-run.yaml
