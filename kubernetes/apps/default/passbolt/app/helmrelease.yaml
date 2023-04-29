@@ -176,7 +176,7 @@ spec:
       kind: Secret
       name: passbolt
       valuesKey: EMAIL_TRANSPORT_DEFAULT_USERNAME
-    - targetPath: passboltEnv.auth.secret."EMAIL_TRANSPORT_DEFAULT_PASSWORD"
+    - targetPath: passboltEnv.auth.secret.EMAIL_TRANSPORT_DEFAULT_PASSWORD
       kind: Secret
       name: passbolt
       valuesKey: EMAIL_TRANSPORT_DEFAULT_PASSWORD
