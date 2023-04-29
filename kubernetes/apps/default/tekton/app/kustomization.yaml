@@ -4,5 +4,5 @@ namespace: default
 resources:
   - https://raw.githubusercontent.com/tektoncd/operator/main/config/crs/kubernetes/config/all/operator_v1alpha1_config_cr.yaml
   #- tekton_config.yaml
-  #- tekton_route.yaml
-  #- tekton_tunnel.yaml
+  - tekton_route.yaml
+  - tekton_tunnel.yaml
