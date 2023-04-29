@@ -34,7 +34,7 @@ spec:
         enabled: false
       #  password: "CHANGEME"
       sentinel:
-        enabled: true
+        enabled: false
 
     mariadb:
       #auth:
