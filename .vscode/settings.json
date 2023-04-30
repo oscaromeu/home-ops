@@ -9,7 +9,8 @@
     },
     "yaml.schemas": {
         "ansible": "ansible/*.yml",
-        "Kubernetes": "kubernetes/*.yaml"
+        "Kubernetes": "kubernetes/*.yaml",
+        "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json": "file:///Users/oscaromeu/Documents/Repos/gh/home-ops/kubernetes/apps/default/tekton/tasks/kustomization.yaml"
     },
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": true,
