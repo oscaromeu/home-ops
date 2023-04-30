@@ -25,6 +25,8 @@ spec:
     params:
     - name: url
       value: $(params.repo-url)
+    - name: sslVerify
+      value: $(params.ssl-verify)
   - name: build-push
     runAfter: ["fetch-source"]
     taskRef:
