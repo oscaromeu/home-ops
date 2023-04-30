@@ -23,12 +23,12 @@ spec:
         TZ: "Europe/Madrid"
       #provider: aws
       backupStorageLocation:
-        #name: default
-        provider: aws
-        bucket: velero-dc20847555ad6493
-        default: true
-        config:
-          region: us-east-1
+       -  name: default
+          provider: aws
+          bucket: velero-dc20847555ad6493
+          default: true
+          config:
+            region: us-east-1
       resticTimeout: 4h
     credentials:
       existingSecret: velero-s3-creds
