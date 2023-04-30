@@ -34,7 +34,7 @@ spec:
       enabled: true
       className: nginx
       hosts:
-        - "registry.${SECRET_DOMAIN}"
+        - "docker.${SECRET_DOMAIN}"
       tls:
         - hosts:
-            - "registry.${SECRET_DOMAIN}"
+            - "docker.${SECRET_DOMAIN}"
