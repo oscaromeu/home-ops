@@ -21,7 +21,7 @@ spec:
     configuration:
       extraEnvVars:
         TZ: "Europe/Madrid"
-      provider: aws
+      #provider: aws
       backupStorageLocation:
         #name: default
         provider: aws
