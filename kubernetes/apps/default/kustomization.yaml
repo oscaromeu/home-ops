@@ -19,7 +19,7 @@ resources:
   #- ./authelia/ks.yaml
   - ./maddy/ks.yaml
   - ./gitea/ks.yaml
-  #- ./vikunja/ks.yaml
+  - ./vikunja/ks.yaml
   #- ./woodpecker/ks.yaml
   - ./lldap/ks.yaml
   - ./tekton/ks.yaml
