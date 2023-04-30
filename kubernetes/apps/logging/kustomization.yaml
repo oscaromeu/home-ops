@@ -5,7 +5,7 @@ resources:
   - ./namespace.yaml
   - ./elastic-operator/ks.yaml
   - ./elastic/ks.yaml
-  - ./redis/ks.yaml
+  #- ./redis/ks.yaml
   #- ./filebeat
   #- ./logstash/ks.yaml
   - ./elastic-exporter/ks.yaml
