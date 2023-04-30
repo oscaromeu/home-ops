@@ -8,3 +8,7 @@ resources:
   - ./reloader/ks.yaml
 #  - ./descheduler/ks.yaml
   - ./external-secrets/ks.yaml
+
+  # Enable CSI snapshots support in k3s
+  - https://github.com/kubernetes-csi/external-snapshotter/client/config/crd/?ref=v6.2.0
+  - https://github.com/kubernetes-csi/external-snapshotter/deploy/kubernetes/snapshot-controller/?ref=v6.2.0
