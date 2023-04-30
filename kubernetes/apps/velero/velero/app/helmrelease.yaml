@@ -24,6 +24,7 @@ spec:
       provider: aws
       backupStorageLocation:
         #name: default
+        provider: aws
         bucket: velero-dc20847555ad6493
         default: true
         config:
