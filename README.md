@@ -19,7 +19,7 @@ This project aims to achieve its goals while adhering to industry-standard pract
 + [longhorn](https://longhorn.io): Distributed block storage for persistent storage.
 + [sops](https://github.com/mozilla/sops)
 + [tf-controller](https://github.com/weaveworks/tf-controller): Additional Flux component used to run Terraform from within a Kubernetes Cluster.
-+ [volsync](https://github.com/backube/volsync) and [snapscheduler](https://github.com/backube/snapscheduler): Backup and recovery of persistent volume claims.
++ [velero](https://velero.io): Backup and restore, perform disaster recovery, and migrate Kubernetes cluster resources and persistent volumes.
 
 ### Hardware
 
