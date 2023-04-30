@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   rules:
-  - host: "docker.${SECRET_DOMAIN}"
+  - host: "registry.${SECRET_DOMAIN}"
     http:
       paths:
       - pathType: Prefix
