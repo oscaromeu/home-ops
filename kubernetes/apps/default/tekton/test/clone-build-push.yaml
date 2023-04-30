@@ -10,6 +10,8 @@ spec:
   params:
   - name: repo-url
     type: string
+  - name: ssl-verify
+    type: boolean
   - name: image-reference
     type: string
   workspaces:
