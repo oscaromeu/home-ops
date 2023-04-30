@@ -6,3 +6,4 @@ resources:
   #- ./registry_route.yaml
   - ./pvc.yaml
   - ./tunnelbinding.yaml
+  - ./externalsecret.yaml
