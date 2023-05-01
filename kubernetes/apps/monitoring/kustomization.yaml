@@ -7,10 +7,11 @@ resources:
   - ./grafana/ks.yaml
   - ./prometheus-adapter/ks.yaml
   - ./thanos/ks.yaml
-  - ./botkube/ks.yaml
+  #- ./botkube/ks.yaml
   - ./vpa/ks.yaml
   - ./goldilocks/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
   - ./promlens/ks.yaml
+  - ./robusta/ks.yaml
   - ./dashboards
 

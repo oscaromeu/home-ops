@@ -37,3 +37,4 @@ resources:
   - ./twuni.yaml
   - ./passbolt.yaml
   - ./vmware.yaml
+  - ./robusta.yaml
