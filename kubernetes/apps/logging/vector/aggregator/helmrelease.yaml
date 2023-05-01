@@ -182,7 +182,7 @@ spec:
 
     env:
       - name: VECTOR_LOG
-        value: "debug"
+        value: "info"
 
       - name: ELASTICSEARCH_PASSWORD
         valueFrom:
