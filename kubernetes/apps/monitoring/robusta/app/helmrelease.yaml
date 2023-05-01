@@ -46,6 +46,7 @@ spec:
     enablePlatformPlaybooks: true
     runner:
       sendAdditionalTelemetry: true
+      log_level: DEBUG
 
   valuesFrom:
     - kind: Secret
