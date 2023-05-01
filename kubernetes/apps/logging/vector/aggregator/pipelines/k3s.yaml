@@ -31,6 +31,8 @@ sinks:
 
   elasticsearch:
     type: elasticsearch
+    batch:
+      max_bytes: 2049000
     inputs:
       - kubernetes_remap
     auth:
@@ -70,3 +72,4 @@ sinks:
        app: '{{ custom_app_name }}'
        namespace: '{{ kubernetes.pod_namespace }}'
        node: '{{ kubernetes.pod_node_name }}'
+
