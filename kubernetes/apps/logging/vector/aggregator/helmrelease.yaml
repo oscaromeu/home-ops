@@ -30,6 +30,8 @@ spec:
 
   values:
 
+    replicas: 3
+
     args:
       - --config-dir
       - "/etc/vector"
