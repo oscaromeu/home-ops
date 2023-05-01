@@ -10,10 +10,10 @@ resources:
   - ./redis/ks.yaml
   - ./excalidraw/ks.yaml
   - ./cloudnative-pg/ks.yaml
-  - ./clickhouse/ks.yaml
-  - ./jupyterhub/ks.yaml
+  #- ./clickhouse/ks.yaml
+  #- ./jupyterhub/ks.yaml
   - ./joplin/ks.yaml
-  - ./vaultwarden/ks.yaml
+  #- ./vaultwarden/ks.yaml
   - ./linkding/ks.yaml
   #- ./glauth/ks.yaml
   #- ./authelia/ks.yaml
