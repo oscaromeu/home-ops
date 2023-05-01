@@ -177,7 +177,7 @@ spec:
     #  storageClass: local-path
 
     podMonitor:
-      enabled: true
+      enabled: false
 
     env:
       - name: VECTOR_LOG
