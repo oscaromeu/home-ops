@@ -11,6 +11,6 @@ resources:
   - ./elastic-exporter/ks.yaml
   - ./redis-exporter/ks.yaml
   - ./loki/ks.yaml # WIP
-  - ./vector/ks.yaml
+  #- ./vector/ks.yaml
 
 

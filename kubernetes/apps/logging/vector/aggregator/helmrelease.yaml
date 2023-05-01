@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -30,7 +29,7 @@ spec:
 
   values:
 
-    replicas: 5
+    replicas: 3
 
     args:
       - --config-dir
@@ -178,7 +177,7 @@ spec:
     #  storageClass: local-path
 
     podMonitor:
-      enabled: false
+      enabled: true
 
     env:
       - name: VECTOR_LOG
