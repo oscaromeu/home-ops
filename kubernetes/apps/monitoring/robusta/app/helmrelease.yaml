@@ -62,12 +62,12 @@ spec:
     - kind: Secret
       name: robusta
       valuesKey: SLACK_SINK_API_KEY
-      targetPath: sinksConfig.slack_sink.api_key
+      targetPath: sinksConfig[0].api_key
       optional: false
     - kind: Secret
       name: robusta
       valuesKey: SLACK_SINK_API_KEY
-      targetPath: sinksConfig.robusta_sink.token
+      targetPath: sinksConfig[1].token
       optional: false
     - kind: Secret
       name: robusta
