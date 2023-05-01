@@ -31,8 +31,8 @@ sinks:
 
   elasticsearch:
     type: elasticsearch
-    batch:
-      max_bytes: 2049000
+    #batch:
+    #  max_bytes: 2049000
     inputs:
       - kubernetes_remap
     auth:
@@ -57,19 +57,20 @@ sinks:
 
 
   loki:
-     type: loki
-     batch:
-       max_bytes: 2049000
-     encoding:
-       codec: json
-     endpoint: http://loki.logging.svc.cluster.local:3100
-     inputs:
-       - kubernetes_remap
-     out_of_order_action: accept
-     remove_label_fields: true
-     remove_timestamp: true
-     labels:
-       app: '{{ custom_app_name }}'
-       namespace: '{{ kubernetes.pod_namespace }}'
-       node: '{{ kubernetes.pod_node_name }}'
+    type: loki
+    #batch:
+    #  max_bytes: 2049000
+
+    encoding:
+      codec: json
+    endpoint: http://loki.logging.svc.cluster.local:3100
+    inputs:
+      - kubernetes_remap
+    out_of_order_action: accept
+    remove_label_fields: true
+    remove_timestamp: true
+    labels:
+      app: '{{ custom_app_name }}'
+      namespace: '{{ kubernetes.pod_namespace }}'
+      node: '{{ kubernetes.pod_node_name }}'
 
