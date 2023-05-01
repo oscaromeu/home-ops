@@ -38,11 +38,14 @@ spec:
       prometheus_url: "prometheus.${SECRET_DOMAIN}"
 
     sinksConfig:
-    - slack_sink:
-        name: main_slack_sink
-        slack_channel: monitoring
-    - robusta_sink:
-        name: robusta_ui_sink
+      - slack_sink:
+          name: main_slack_sink
+          slack_channel: monitoring
+          api_key: ${SLACK_SINK_API_KEY}
+
+      - robusta_sink:
+          name: robusta_ui_sink
+          token: ${ROBUSTA_SINK_TOKEN}
     enablePlatformPlaybooks: true
     runner:
       sendAdditionalTelemetry: true
@@ -58,16 +61,6 @@ spec:
       name: robusta
       valuesKey: GLOBAL_ACCOUNT_ID
       targetPath: globalConfig.account_id
-      optional: false
-    - kind: Secret
-      name: robusta
-      valuesKey: SLACK_SINK_API_KEY
-      targetPath: sinksConfig[0].api_key
-      optional: false
-    - kind: Secret
-      name: robusta
-      valuesKey: SLACK_SINK_API_KEY
-      targetPath: sinksConfig[1].token
       optional: false
     - kind: Secret
       name: robusta
