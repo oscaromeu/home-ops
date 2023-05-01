@@ -30,7 +30,7 @@ spec:
 
   values:
 
-    replicas: 2
+    replicas: 4
 
     args:
       - --config-dir
