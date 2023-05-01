@@ -5,4 +5,6 @@ namespace: velero
 resources:
   - ./secrets.sops.yaml
   - ./helmrelease.yaml
+  ## Schedules
+  - ./schedules/gitea.yaml
 
