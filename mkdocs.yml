@@ -89,6 +89,7 @@ nav:
     #- guides/loki.md
     - 01-how-to-guides/networking.md
     - 01-how-to-guides/secret_management.md
+    - 01-how-to-guides/volumes-and-storage.md
     #- guides/semantic_git_messages.md
     #- guides/troubleshooting.md
 
@@ -97,6 +98,7 @@ nav:
   - Comprehensive Guides:
     - 02-docs/index.md
     - 02-docs/secret-management.md
+    - 02-docs/volumes-and-storage.md
     #- Analytics:
     #  #- observability/analytics/index.md
     #  - observability/analytics/elk.md

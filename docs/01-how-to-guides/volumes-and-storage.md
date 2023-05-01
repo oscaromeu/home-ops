@@ -1,8 +1,10 @@
 ---
-title: Backup and restore
+title: Volumes and Storage
 ---
 
-## Schedule a periodic full backup
+## Backup and restore
+
+### Schedule a periodic full backup
 
 ```yaml
 apiVersion: velero.io/v1
