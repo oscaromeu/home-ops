@@ -12,6 +12,5 @@ resources:
   - ./goldilocks/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
   - ./promlens/ks.yaml
-  - ./robusta/ks.yaml
   - ./dashboards
 
