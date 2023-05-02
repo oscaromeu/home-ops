@@ -18,13 +18,11 @@ spec:
         resources:
           requests:
             storage: 1Gi
-#  - name: docker-credentials
-#    secret:
-#      secretName: docker-credentials
+  - name: docker-credentials
+    secret:
+      secretName: docker-credentials
   params:
   - name: repo-url
     value: https://github.com/google/docsy-example.git
-  - name: ssl-verify
-    value: false
   - name: image-reference
-    value: docker.oscaromeu.io/dev/test_app:0.1.0
+    value: registry.oscaromeu.io/dev/test_app:0.1.0
