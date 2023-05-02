@@ -5,7 +5,8 @@ resources:
   #- ./hello-world.yaml
   #- ./hello-world-run.yaml
   #- ./goodbye-world.yaml
-  - ./hello-goodbye-pipeline-run.yaml
-  - ./hello-goodbye-pipeline.yaml
-  #- ./clone-build-push.yaml
-  #- ./clone-build-push-run.yaml
+  #- ./hello-goodbye-pipeline-run.yaml
+  #- ./hello-goodbye-pipeline.yaml
+  - ./clone-build-push.yaml
+  - ./clone-build-push-run.yaml
+  - ./ls.yaml

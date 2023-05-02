@@ -1,14 +1,15 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: clone-build-push-run
-  namespace: default
+  generateName: my-pipeline-
 spec:
   pipelineRef:
-    name: clone-build-push
-  podTemplate:
-    securityContext:
-      fsGroup: 65532
+    name: my-pipeline
+  params:
+  - name: repo-url
+    value: https://github.com/leandronsp/chespirito.git
+  - name: revision
+    value: main
   workspaces:
   - name: shared-data
     volumeClaimTemplate:
@@ -18,13 +19,3 @@ spec:
         resources:
           requests:
             storage: 1Gi
-  - name: docker-credentials
-    secret:
-      secretName: docker-credentials
-  params:
-  - name: repo-url
-    value: https://github.com/google/docsy-example.git
-  - name: ssl-verify
-    value: "false"
-  - name: image-reference
-    value: registry.oscaromeu.io/dev/test_app:0.1.0
