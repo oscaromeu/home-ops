@@ -7,5 +7,5 @@ resources:
   - tekton_route.yaml
   - tekton_tunnel.yaml
   ### Tasks Tekton Hub
-  - https://raw.githubusercontent.com/tektoncd/catalog/main/task/git-clone/0.9/git-clone.yaml
+  #- https://raw.githubusercontent.com/tektoncd/catalog/main/task/git-clone/0.8/git-clone.yaml
   - https://raw.githubusercontent.com/tektoncd/catalog/main/task/kaniko/0.6/kaniko.yaml
