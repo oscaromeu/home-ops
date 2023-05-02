@@ -2,7 +2,6 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: list-source
-  namespace: default
 spec:
   steps:
   - name: ls
