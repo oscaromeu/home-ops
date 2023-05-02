@@ -2,7 +2,6 @@ apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
   generateName: my-pipeline-
-  namespace: default
 spec:
   pipelineRef:
     name: my-pipeline
