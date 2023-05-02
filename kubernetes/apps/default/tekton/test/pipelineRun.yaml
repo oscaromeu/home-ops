@@ -20,3 +20,5 @@ spec:
   params:
   - name: repo-url
     value: https://github.com/tektoncd/website.git
+  - name: ssl
+    value: "false"

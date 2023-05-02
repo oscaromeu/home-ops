@@ -9,6 +9,9 @@ spec:
   - name: repo-url
     type: string
     description: The git repo URL to clone from.
+  - name: ssl
+    type: string
+    description: SSL verify parameter
   workspaces:
   - name: shared-data
     description: |
@@ -24,3 +27,5 @@ spec:
     params:
     - name: url
       value: $(params.repo-url)
+    - name: sslVerify
+      value: $(params.ssl)
