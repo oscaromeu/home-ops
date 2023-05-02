@@ -10,6 +10,8 @@ spec:
   params:
   - name: repo-url
     type: string
+  - name: ssl-verify
+    type: string
   - name: image-reference
     type: string
   workspaces:
@@ -25,6 +27,8 @@ spec:
     params:
     - name: url
       value: $(params.repo-url)
+    - name: sslVerify
+      value: $(params.ssl-verify)
   - name: build-push
     runAfter: ["fetch-source"]
     taskRef:

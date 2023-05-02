@@ -24,5 +24,7 @@ spec:
   params:
   - name: repo-url
     value: https://github.com/google/docsy-example.git
+  - name: ssl-verify
+    value: "false"
   - name: image-reference
     value: registry.oscaromeu.io/dev/test_app:0.1.0
