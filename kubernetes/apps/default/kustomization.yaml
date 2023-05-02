@@ -12,7 +12,7 @@ resources:
   - ./cloudnative-pg/ks.yaml
   #- ./clickhouse/ks.yaml
   #- ./jupyterhub/ks.yaml
-  - ./joplin/ks.yaml
+  #- ./joplin/ks.yaml
   #- ./vaultwarden/ks.yaml
   - ./linkding/ks.yaml
   #- ./glauth/ks.yaml
