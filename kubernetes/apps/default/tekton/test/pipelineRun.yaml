@@ -1,15 +1,13 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: my-pipeline-run
+  name: clone-read-run
 spec:
   pipelineRef:
-    name: my-pipeline
-  params:
-  - name: repo-url
-    value: https://github.com/leandronsp/chespirito.git
-  - name: revision
-    value: main
+    name: clone-read
+  podTemplate:
+    securityContext:
+      fsGroup: 65532
   workspaces:
   - name: shared-data
     volumeClaimTemplate:
@@ -19,3 +17,6 @@ spec:
         resources:
           requests:
             storage: 1Gi
+  params:
+  - name: repo-url
+    value: https://github.com/tektoncd/website.git
