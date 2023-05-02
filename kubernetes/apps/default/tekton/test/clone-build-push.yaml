@@ -21,3 +21,11 @@ spec:
     runAfter: ["fetch-source"]
     taskRef:
       name: list-source
+
+    workspaces:
+    - name: output
+      workspace: shared-data
+
+  workspaces:
+  - name: shared-data
+    optional: true
