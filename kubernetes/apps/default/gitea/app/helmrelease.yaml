@@ -4,7 +4,9 @@ kind: HelmRelease
 metadata:
   name: gitea
   namespace: default
-  app: gitea
+  labels:
+    environment: production
+    app: gitea
 spec:
   interval: 15m
   chart:
