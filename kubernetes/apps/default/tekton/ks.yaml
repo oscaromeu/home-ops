@@ -2,16 +2,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-tekton-operator
+  name: cluster-apps-tekton
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
     - name: cluster-apps-longhorn
-    - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-cloudflare-operator-tunnels
-  path: ./kubernetes/apps/default/tekton/operator
+  path: ./kubernetes/apps/default/tekton/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -23,15 +21,14 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-tekton
+  name: cluster-apps-tekton-dashboard
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-longhorn
-    - name: cluster-apps-tekton-operator
-  path: ./kubernetes/apps/default/tekton/app
+    - name: cluster-apps-tekton
+  path: ./kubernetes/apps/default/tekton/dashboard
   prune: true
   sourceRef:
     kind: GitRepository
@@ -39,22 +36,3 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 3m
-#---
-#apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-#kind: Kustomization
-#metadata:
-#  name: cluster-apps-tekton-test
-#  namespace: flux-system
-#  labels:
-#    substitution.flux.home.arpa/enabled: "true"
-#spec:
-#  dependsOn:
-#    - name: cluster-apps-tekton
-#  path: ./kubernetes/apps/default/tekton/test
-#  prune: true
-#  sourceRef:
-#    kind: GitRepository
-#    name: home-kubernetes
-#  interval: 30m
-#  retryInterval: 1m
-#  timeout: 3m
