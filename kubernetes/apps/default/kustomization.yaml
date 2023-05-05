@@ -21,7 +21,7 @@ resources:
   - ./vikunja/ks.yaml
   #- ./woodpecker/ks.yaml
   - ./lldap/ks.yaml
-  - ./tekton/ks.yaml
+  #- ./tekton/ks.yaml
   - ./registry/ks.yaml
   - ./busybox/ks.yaml
   #- ./passbolt/ks.yaml
