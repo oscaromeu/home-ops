@@ -4,7 +4,9 @@ kind: HelmRelease
 metadata:
   name: &app linkding
   namespace: default
-  app: linkding
+  labels:
+    environment: production
+    app: linkding
 spec:
   interval: 15m
   chart:
