@@ -227,7 +227,7 @@ stringData:
 ```
 
 ```yaml
-apiVersion: kustomize.toolkit.fluxcd.io/v1
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 # ...
 spec:

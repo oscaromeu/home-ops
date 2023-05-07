@@ -23,7 +23,7 @@ spec:
     # renovate: depName=tektoncd/chains
     !/chains/previous/v0.16.0/release.yaml
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
   name: cluster-apps-tekton-source
