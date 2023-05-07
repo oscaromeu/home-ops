@@ -5,3 +5,4 @@ resources:
   - source.yaml
   - ingress.yaml
   - tunnel.yaml
+  - tasks
