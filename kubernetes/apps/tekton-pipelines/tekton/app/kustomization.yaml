@@ -5,4 +5,10 @@ resources:
   - source.yaml
   - ingress.yaml
   - tunnel.yaml
-  - tasks
+
+  - pipeline.yaml
+  - pipelineRun.yaml
+
+  # Tasks
+  - https://raw.githubusercontent.com/tektoncd/catalog/main/task/kaniko/0.6/kaniko.yaml
+  - https://raw.githubusercontent.com/tektoncd/catalog/main/task/git-clone/0.9/git-clone.yaml
