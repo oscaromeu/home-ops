@@ -24,4 +24,3 @@ resources:
   #- ./tekton/ks.yaml
   - ./registry/ks.yaml
   - ./busybox/ks.yaml
-  #- ./passbolt/ks.yaml
