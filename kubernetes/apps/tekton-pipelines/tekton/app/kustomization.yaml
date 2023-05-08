@@ -5,7 +5,3 @@ resources:
   - source.yaml
   - ingress.yaml
   - tunnel.yaml
-
-  # Install tasks
-  - https://raw.githubusercontent.com/tektoncd/catalog/main/task/git-clone/0.9/git-clone.yaml
-  - https://raw.githubusercontent.com/tektoncd/catalog/main/task/kaniko/0.6/kaniko.yaml
