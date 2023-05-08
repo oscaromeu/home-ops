@@ -9,4 +9,4 @@ resources:
   - pipeline.yaml
   - pipelineRun.yaml
 
-  #- tasks
+  - ./tasks
