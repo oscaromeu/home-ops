@@ -5,8 +5,3 @@ resources:
   - source.yaml
   - ingress.yaml
   - tunnel.yaml
-
-  - pipeline.yaml
-  - pipelineRun.yaml
-
-  - ./tasks
