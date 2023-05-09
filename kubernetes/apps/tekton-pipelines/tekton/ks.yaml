@@ -1,48 +1,27 @@
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-tekton-operator
+  name: cluster-apps-tekton
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
-  path: ./kubernetes/apps/tekton-pipelines/tekton/operator
+  path: ./kubernetes/apps/tekton-pipelines/tekton/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
   interval: 15m
   retryInterval: 1m
-  timeout: 30s
+  timeout: 3m
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-kind: Kustomization
-metadata:
-  name: cluster-apps-tekton-pipelines
-  namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
-spec:
-  path: ./kubernetes/apps/tekton-pipelines/tekton/pipelines
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: home-kubernetes
-  interval: 15m
-  retryInterval: 1m
-  timeout: 30s
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cluster-apps-tekton-tasks
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-tekton-pipelines
+    - name: cluster-apps-tekton
   path: ./kubernetes/apps/tekton-pipelines/tekton/tasks
   prune: true
   sourceRef:
@@ -50,24 +29,4 @@ spec:
     name: home-kubernetes
   interval: 15m
   retryInterval: 1m
-  timeout: 30s
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-kind: Kustomization
-metadata:
-  name: cluster-apps-tekton-dashboard
-  namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
-spec:
-  dependsOn:
-    - name: cluster-apps-tekton-pipelines
-    - name: cluster-apps-tekton-tasks
-  path: ./kubernetes/apps/tekton-pipelines/tekton/dashboard
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: home-kubernetes
-  interval: 15m
-  retryInterval: 1m
-  timeout: 30s
+  timeout: 3m
