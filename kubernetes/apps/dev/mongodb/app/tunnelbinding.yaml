@@ -7,7 +7,7 @@ metadata:
 subjects:
   - name: mongodb-headless
     spec:
-      fqdn: "mongodb.${SECRET_DOMAIN}"
+      fqdn: "mongodb.devfu.io"
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
