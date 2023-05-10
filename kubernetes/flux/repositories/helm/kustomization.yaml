@@ -38,3 +38,4 @@ resources:
   - ./passbolt.yaml
   - ./vmware.yaml
   - ./robusta.yaml
+  - ./mongodb.yaml
