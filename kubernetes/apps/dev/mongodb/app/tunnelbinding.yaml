@@ -5,9 +5,9 @@ metadata:
   name: mongodb-tunnelbinding
   namespace: dev
 subjects:
-  - name: mongodb
+  - name: mongodb-headless
     spec:
-      fqdn: "mongodb.${SECRET_DOMAIN}"
+      fqdn: "mongodb.devfu.io"
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
