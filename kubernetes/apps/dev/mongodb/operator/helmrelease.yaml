@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: community-operator
-      version: 13.10.3
+      version: 0.7.9
       sourceRef:
         kind: HelmRepository
         name: mongodb
