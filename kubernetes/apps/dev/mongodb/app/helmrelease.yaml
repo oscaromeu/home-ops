@@ -30,5 +30,19 @@ spec:
     auth:
       enabled: false
 
+
     architecture: replicaset
 
+  valuesFrom:
+    - targetPath: auth.usernames
+      kind: Secret
+      name: mongodb
+      valuesKey: PASSWORDS
+    - targetPath: auth.passwords
+      kind: Secret
+      name: mongodb
+      valuesKey: PASSWORDS
+    - targetPath: auth.databases
+      kind: Secret
+      name: mongodb
+      valuesKey: DATABASES
