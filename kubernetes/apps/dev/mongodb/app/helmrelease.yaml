@@ -34,15 +34,15 @@ spec:
     architecture: replicaset
 
   valuesFrom:
-    - targetPath: auth.usernames[0]
+    - targetPath: auth.username
       kind: Secret
       name: mongodb
       valuesKey: PASSWORDS
-    - targetPath: auth.passwords[0]
+    - targetPath: auth.password
       kind: Secret
       name: mongodb
       valuesKey: PASSWORDS
-    - targetPath: auth.databases[0]
+    - targetPath: auth.database
       kind: Secret
       name: mongodb
       valuesKey: DATABASES
