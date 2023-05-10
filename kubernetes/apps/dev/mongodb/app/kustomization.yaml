@@ -6,4 +6,4 @@ resources:
   #- ./pvc.yaml
   - https://raw.githubusercontent.com/mongodb/mongodb-kubernetes-operator/master/config/samples/mongodb.com_v1_mongodbcommunity_cr.yaml
   #- ./externalsecret.yaml
-  #- ./tunnelbinding.yaml
+  - ./tunnelbinding.yaml

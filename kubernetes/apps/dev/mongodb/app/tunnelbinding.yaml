@@ -5,7 +5,7 @@ metadata:
   name: mongodb-tunnelbinding
   namespace: dev
 subjects:
-  - name: mongodb-headless
+  - name: example-mongodb-svc
     spec:
       fqdn: "mongodb.${SECRET_DOMAIN}"
 tunnelRef:
