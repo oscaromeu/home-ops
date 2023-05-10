@@ -29,10 +29,6 @@ spec:
 
     auth:
       enabled: false
-      password: admin
-      rootUser: admin
-      username: admin
-      rootPassword: admin
 
     architecture: replicaset
 
