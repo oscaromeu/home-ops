@@ -12,7 +12,7 @@ spec:
       version: 13.10.3
       sourceRef:
         kind: HelmRepository
-        name: bitnami-oci
+        name: bitnami
         namespace: flux-system
       interval: 15m
   install:
