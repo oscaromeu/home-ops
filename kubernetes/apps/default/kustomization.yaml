@@ -13,7 +13,7 @@ resources:
   #- ./clickhouse/ks.yaml
   #- ./jupyterhub/ks.yaml
   #- ./vaultwarden/ks.yaml
-  #- ./linkding/ks.yaml
+  - ./linkding/ks.yaml
   #- ./glauth/ks.yaml
   #- ./authelia/ks.yaml
   - ./maddy/ks.yaml
