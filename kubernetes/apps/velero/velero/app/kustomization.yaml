@@ -6,5 +6,5 @@ resources:
   - ./secrets.sops.yaml
   - ./helmrelease.yaml
   ## Schedules
-  - ./schedules
+  #- ./schedules
 
