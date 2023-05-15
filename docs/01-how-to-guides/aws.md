@@ -26,9 +26,12 @@ aws s3api create-bucket \
     --region us-east-1
 ```
 
-## Set permissions for the App
+## Set permissions for the App with an IAM user
 
-### Option 1: Set permissions with an IAM user
+!!! Info
+
+    The permissions for the app can be configured also using kube2iam method.
+
 
 For more information, see [the AWS documentation on IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)
 
