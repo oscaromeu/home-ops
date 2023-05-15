@@ -4,6 +4,23 @@ title: Volumes and Storage
 
 ## Backup and restore
 
+### Postgres Backup with Barman
+
+```yaml
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: postgres
+  namespace: default
+spec:
+  schedule: "@weekly"
+  immediate: true
+  backupOwnerReference: self
+  cluster:
+    name: postgres
+```
+
 ### Schedule a periodic full backup
 
 ```yaml
@@ -35,3 +52,4 @@ spec:
 ## Resources
 
 + [https://velero.io/docs/v1.3.0/api-types/schedule/](https://velero.io/docs/v1.3.0/api-types/schedule/)
++ [CloudNativePG API reference](https://cloudnative-pg.io/documentation/1.20/api_reference/)
