@@ -4,11 +4,15 @@ title: Secret Management
 
 ## Overview
 
-This guide demonstrates the different ways that secrets can be made available onto the cluster  when using [Flux](https://fluxcd.io/), [SOPS](https://github.com/mozilla/sops) and External Secrets with Doppler provider.
+This guide demonstrates how to make secrets available on a Kubernetes cluster using [Flux](https://fluxcd.io/), [SOPS](https://github.com/mozilla/sops), and External Secrets with the Doppler provider.
+
+If you're new to Flux or SOPS, be sure to check out the Flux documentation and the SOPS GitHub repository for more information.
 
 _Check the following [document](https://fluxcd.io/docs/guides/mozilla-sops/) on how to integrate SOPS into Flux_
 
-## Generate secret with different keys
+### Generate Secrets from Doppler through External Secrets
+
+#### Example 1
 
 ```yaml
 ---
@@ -24,19 +28,27 @@ spec:
     name: es-ingestion-credentials
 
   data:
-    - secretKey: ELASTICSEARCH_PASSWORD
+    - secretKey: ELASTICSEARCH_PASSWORD   # key to be created
       remoteRef:
-        key: ELASTICSEARCH_PASSWORD
+        key: ELASTICSEARCH_PASSWORD       # remote secret name
 
-    - secretKey: ELASTICSEARCH_USERNAME
+    - secretKey: ELASTICSEARCH_USERNAME   # key to be created
       remoteRef:
-        key: ELASTICSEARCH_USERNAME
+        key: ELASTICSEARCH_USERNAME       # remote secret name
 ```
 
+This YAML snippet shows an example of creating an ExternalSecret with different keys. The `secretStoreRef` field specifies the name of the `ClusterSecretStore` to use for retrieving secrets, note that this is necessary in order to retrieve the data (secrets) stored in Doppler. The target field specifies the name of the Kubernetes Secret that should be created or updated with the retrieved secrets. Finally, the data field specifies the keys of the secrets to retrieve and the remote reference to use for retrieving each secret. In this concrete example in Doppler there is:
 
-## All keys, one secret
+```
+ELASTICSEARCH_USERNAME: MY_USERNAME
+ELASTICSEARCH_PASSWORD: MY_PASSWORD
+```
 
-Use dataFrom field to get multiple key-values from an external secret.
+Note that `secretKey` has not to be the same as `remoteRef.key`
+
+### Example 2
+
+This YAML snippet shows an example of creating an ExternalSecret that retrieves all of its secrets from a single remote reference using the `dataFrom` field. The extract field specifies the key of the secret to retrieve, and the retrieved secret is assumed to be a JSON object containing key-value pairs.
 
 ```yaml
 ---
@@ -83,3 +95,5 @@ The contents of the GITEA field are a json with the key value pairs
   "DEPLOYMENT_RSA_PRIV_KEY": "MY PRIVATE KEY"
 }
 ```
+
+The keys in the JSON object are used to populate the data field of the Kubernetes Secret, while the values are rendered using Go templates. The Go templates can be used to substitute environment variables or other values at runtime.
