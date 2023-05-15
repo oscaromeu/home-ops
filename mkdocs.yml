@@ -87,6 +87,7 @@ nav:
     #- guides/fluxcd.md
     #- guides/helpful_commands.md
     #- guides/loki.md
+    - 01-how-to-guides/aws.md
     - 01-how-to-guides/networking.md
     - 01-how-to-guides/secret_management.md
     - 01-how-to-guides/volumes-and-storage.md
