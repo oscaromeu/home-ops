@@ -10,9 +10,9 @@ If you're new to Flux or SOPS, be sure to check out the Flux documentation and t
 
 _Check the following [document](https://fluxcd.io/docs/guides/mozilla-sops/) on how to integrate SOPS into Flux_
 
-### Generate Secrets from Doppler through External Secrets
+## Generating Secrets with Doppler and External Secrets
 
-#### Example 1
+### Example 1
 
 ```yaml
 ---
