@@ -11,3 +11,17 @@ subjects:
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: alertmanager-tunnel
+  namespace: monitoring
+subjects:
+  - name: alertmanager-operated
+    spec:
+      fqdn: "alertmanager.${SECRET_DOMAIN}"
+      target: "tcp://alertmanager-operated.monitoring.svc.cluster.local:9093"
+tunnelRef:
+  kind: ClusterTunnel
+  name: cluster-tunnel
