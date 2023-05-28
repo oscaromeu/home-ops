@@ -59,6 +59,13 @@ spec:
                 prefix: loki_index_
                 period: 24h
         common:
+          instance_interface_names:
+            - "lo"
+          ring:
+            kvstore:
+              store: memberlist
+            instance_interface_names:
+              - "lo"
           path_prefix: /var/loki
           replication_factor: 3
           storage:
@@ -67,9 +74,6 @@ spec:
               region: "us-east-1"
               insecure: true
               s3forcepathstyle: true
-          ring:
-            kvstore:
-              store: memberlist
         ruler:
           enable_api: true
           enable_alertmanager_v2: true
