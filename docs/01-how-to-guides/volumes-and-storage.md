@@ -2,6 +2,36 @@
 title: Volumes and Storage
 ---
 
+## Setting Longhorn as default k3s storage class
+
+By default, k3s includes Rancher's Local Path Provisioner, which allows the creation of persistent volume claims using local storage on the respective node.
+
+To set Longhorn as the default storageClass when installing a new Helm chart, you need to remove Local Path Provisioner from the default storage class.
+
+After installing Longhorn, you can check the default storage classes by running the following command:
+
+```
+kubectl get storageclass
+```
+
+The output will show the available storage classes:
+
+```
+NAME                   PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-path (default)   rancher.io/local-path   Delete          WaitForFirstConsumer   false                  10m
+longhorn (default)     driver.longhorn.io      Delete          Immediate              true                   3m27s
+```
+
+Both Local Path and Longhorn are defined as default storage classes.
+
+To remove Local Path from the default storage classes, use the following command:
+
+```
+kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+```
+
+For detailed instructions, you can refer to the Kubernetes documentation on how to "Change the Default Storage Class".
+
 ## Backup and restore
 
 ### Postgres
