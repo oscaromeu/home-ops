@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: logging
 resources:
   - ./externalsecret.yaml
-  #- ./helmrelease.yaml
+  - ./helmrelease.yaml
