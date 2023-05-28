@@ -31,6 +31,7 @@ spec:
             orgId: 1
           - name: Alertmanager
             orgId: 1
+
         datasources:
           - name: Prometheus
             type: prometheus
@@ -40,11 +41,13 @@ spec:
           - name: Loki
             type: loki
             access: proxy
-            url: http://loki.logging.svc.cluster.local:3100
+            url: http://loki-gateway.monitoring.svc.cluster.local
+            jsonData:
+              maxLines: 250
           - name: Alertmanager
             type: alertmanager
             access: proxy
-            url: http://prometheus-alertmanager.monitoring.svc.cluster.local:9093
+            url: http://alertmanager-operated.monitoring.svc.cluster.local:9093
             jsonData:
               implementation: prometheus
 
