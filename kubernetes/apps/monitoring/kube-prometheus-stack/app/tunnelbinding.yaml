@@ -21,7 +21,7 @@ subjects:
   - name: alertmanager-operated
     spec:
       fqdn: "alertmanager.${SECRET_DOMAIN}"
-      target: "tcp://alertmanager-operated.monitoring.svc.cluster.local:9093"
+      #target: "http://alertmanager-operated.monitoring.svc.cluster.local:9093"
 tunnelRef:
   kind: ClusterTunnel
   name: cluster-tunnel
