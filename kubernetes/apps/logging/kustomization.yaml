@@ -10,7 +10,7 @@ resources:
   #- ./logstash/ks.yaml
   - ./elastic-exporter/ks.yaml
   - ./redis-exporter/ks.yaml
-  - ./loki/ks.yaml # WIP
+  #- ./loki/ks.yaml # WIP
   - ./vector/ks.yaml
 
 
