@@ -64,6 +64,7 @@ spec:
           storage:
             s3:
               s3: null
+              region: "us-east-1"
               insecure: true
               s3forcepathstyle: true
           ring:
