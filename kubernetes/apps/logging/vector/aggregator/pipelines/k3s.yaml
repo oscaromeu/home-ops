@@ -10,6 +10,8 @@ sources:
     key: "k3s_prod"
     decoding:
       codec: json
+    batch:
+      timeout_secs: 30
 
 #
 # Transforms
