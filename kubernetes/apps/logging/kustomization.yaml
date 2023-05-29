@@ -9,6 +9,6 @@ resources:
   #- ./filebeat
   #- ./logstash/ks.yaml
   - ./elastic-exporter/ks.yaml
-  - ./redis-exporter/ks.yaml
+  #- ./redis-exporter/ks.yaml
   - ./loki/ks.yaml # WIP
-  - ./vector/ks.yaml
+  #- ./vector/ks.yaml
