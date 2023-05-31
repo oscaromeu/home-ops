@@ -19,5 +19,3 @@ sinks:
     key: "k3s_prod"
     encoding:
       codec: json
-    batch:
-      timeout_secs: 30
