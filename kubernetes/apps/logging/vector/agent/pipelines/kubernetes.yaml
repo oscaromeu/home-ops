@@ -19,3 +19,5 @@ sinks:
     key: "k3s_prod"
     encoding:
       codec: json
+    batch:
+      max_bytes: 2049000
