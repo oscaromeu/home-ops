@@ -10,6 +10,8 @@ sources:
     key: "k3s_prod"
     decoding:
       codec: json
+    batch:
+      max_bytes: 2049000
 
 #
 # Transforms
