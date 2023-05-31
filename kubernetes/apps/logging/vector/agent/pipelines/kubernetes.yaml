@@ -15,7 +15,7 @@ sinks:
     type: redis
     inputs:
       - kubernetes_source
-    url: redis://redis-headless.logging.svc.cluster.local:6379/0
+    url: redis://redis-master.logging.svc.cluster.local:6379/0
     key: "k3s_prod"
     encoding:
       codec: json
