@@ -13,7 +13,7 @@ metadata:
   name: prometheus-k8s-prometheus-rules
   namespace: monitoring
 spec:
-  groups:
+  groups: 
   - name: prometheus
     rules:
     - alert: PrometheusBadConfig
