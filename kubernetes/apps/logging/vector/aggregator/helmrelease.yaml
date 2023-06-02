@@ -29,7 +29,7 @@ spec:
 
   values:
 
-    replicas: 1
+    replicas: 2
 
     args:
       - --config-dir
