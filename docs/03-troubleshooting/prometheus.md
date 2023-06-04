@@ -113,3 +113,14 @@ $ kubectl get prom -Ao yaml | grep -A3 -B3 podMonitor
     probeNamespaceSelector: {}
     probeSelector:
 ```
+
+```
+$ kubectl get prom -Ao yaml | grep -A3 -B3 ruleSelector
+    retentionSize: 15GB
+    routePrefix: /
+    ruleNamespaceSelector: {}
+    ruleSelector:
+      matchLabels:
+        release: kube-prometheus-stack
+    scrapeInterval: 60s
+```
