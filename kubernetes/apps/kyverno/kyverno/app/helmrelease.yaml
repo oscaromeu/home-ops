@@ -30,7 +30,7 @@ spec:
       install: true
     replicaCount: 3
     grafana:
-      enabled: true
+      enabled: false
     serviceMonitor:
       enabled: false
       interval: 1m
