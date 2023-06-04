@@ -90,3 +90,16 @@ $ kubectl get prom -Ao yaml | grep -A3 -B3 podMonitor
     portName: http-web
 ```
 
+_after the fix_
+
+```
+$ kubectl get prom -Ao yaml | grep -A3 -B3 podMonitor
+    logFormat: logfmt
+    logLevel: info
+    paused: false
+    podMonitorNamespaceSelector: {}
+    podMonitorSelector: {}
+    portName: http-web
+    probeNamespaceSelector: {}
+    probeSelector:
+```
