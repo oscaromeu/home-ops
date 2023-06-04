@@ -7,4 +7,3 @@ resources:
   - elastic-ingress.yaml
   - kibana-ingress.yaml
   - tunnelbinding.yaml
-  - ./dashboards
