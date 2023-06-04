@@ -1,3 +1,13 @@
+
+```yaml
+prometheus:
+  prometheusSpec:
+    podMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
+    serviceMonitorSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
+```
+
 ## ServiceMonitor not showing up in targets
 
 !!! info
