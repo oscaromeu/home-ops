@@ -1,0 +1,294 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+  namespace: monitoring
+spec:
+
+  interval: 5m
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      version: 45.21.0
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system
+      interval: 5m
+
+  install:
+    createNamespace: false
+    remediation:
+      retries: 5
+
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: 5
+  # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+  values:
+
+    fullnameOverride: prometheus
+
+    alertmanager:
+      enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          hajimari.io/appName: "alertmanager"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "simple-icons:prometheus"
+        hosts:
+          - "alertmanager.${SECRET_DOMAIN}"
+        paths:
+          - /
+        pathType: ImplementationSpecific
+        tls:
+          - hosts:
+              - "alertmanager.${SECRET_DOMAIN}"
+
+    grafana:
+      enabled: false
+      forceDeployDashboards: false
+      defaultDashboardsEnabled: false
+
+    kubeApiServer:
+      serviceMonitor:
+        metricRelabelings:
+          # remove duplicates
+          #- action: drop
+          #  sourceLabels: ["__name__"]
+          #  regex: '(aggregator_|apiextensions_|etcd_|scheduler_|workqueue).+'
+
+          - action: drop
+            regex: apiserver_request_duration_seconds_bucket;(0.15|0.2|0.3|0.35|0.4|0.45|0.6|0.7|0.8|0.9|1.25|1.5|1.75|2|3|3.5|4|4.5|6|7|8|9|15|25|40|50)
+            sourceLabels:
+              - __name__
+              - le
+
+          - action: keep
+            sourceLabels:
+              - __name__
+            regex: 'apiserver_admission_controller_admission_duration_seconds_bucket|apiserver_admission_controller_admission_duration_seconds_count|apiserver_admission_controller_admission_duration_seconds_sum|apiserver_admission_step_admission_duration_seconds_bucket|apiserver_admission_step_admission_duration_seconds_count|apiserver_admission_step_admission_duration_seconds_sum|apiserver_admission_step_admission_duration_seconds_summary|apiserver_admission_step_admission_duration_seconds_summary_count|apiserver_admission_step_admission_duration_seconds_summary_sum|apiserver_admission_webhook_admission_duration_seconds_bucket|apiserver_admission_webhook_admission_duration_seconds_count|apiserver_admission_webhook_admission_duration_seconds_sum|apiserver_admission_webhook_fail_open_count|apiserver_admission_webhook_rejection_count|apiserver_admission_webhook_request_total|apiserver_audit_event_total|apiserver_audit_requests_rejected_total|apiserver_current_inflight_requests|apiserver_current_inqueue_requests|apiserver_delegated_authn_request_duration_seconds_bucket|apiserver_delegated_authn_request_duration_seconds_count|apiserver_delegated_authn_request_duration_seconds_sum|apiserver_delegated_authn_request_total|apiserver_delegated_authz_request_duration_seconds_bucket|apiserver_delegated_authz_request_duration_seconds_count|apiserver_delegated_authz_request_duration_seconds_sum|apiserver_delegated_authz_request_total|apiserver_init_events_total|apiserver_longrunning_requests|apiserver_request:availability30d|apiserver_request:burnrated|apiserver_request:burnrateh|apiserver_request:burnrate2h|apiserver_request:burnrate30m|apiserver_request:burnrate3d|apiserver_request:burnrate5m|apiserver_request:burnrate6h|apiserver_request_aborts_total|apiserver_request_duration_seconds_bucket|apiserver_request_duration_seconds_count|apiserver_request_duration_seconds_sum|apiserver_request_filter_duration_seconds_bucket|apiserver_request_filter_duration_seconds_count|apiserver_request_filter_duration_seconds_sum|apiserver_request_post_timeout_total|apiserver_request_sli_duration_seconds_bucket|apiserver_request_sli_duration_seconds_count|apiserver_request_sli_duration_seconds_sum|apiserver_request_slo_duration_seconds_bucket|apiserver_request_slo_duration_seconds_count|apiserver_request_slo_duration_seconds_sum|apiserver_request_terminations_total|apiserver_request_timestamp_comparison_time_bucket|apiserver_request_timestamp_comparison_time_count|apiserver_request_timestamp_comparison_time_sum|apiserver_request_total|apiserver_requested_deprecated_apis|apiserver_response_sizes_bucket|apiserver_response_sizes_count|apiserver_response_sizes_sum|apiserver_selfrequest_total|apiserver_storage_db_total_size_in_bytes|apiserver_storage_list_evaluated_objects_total|apiserver_storage_list_fetched_objects_total|apiserver_storage_list_returned_objects_total|apiserver_storage_list_total|apiserver_storage_objects|apiserver_terminated_watchers_total|apiserver_tls_handshake_errors_total|apiserver_watch_events_sizes_bucket|apiserver_watch_events_sizes_count|apiserver_watch_events_sizes_sum|apiserver_watch_events_total'
+
+          - sourceLabels: ["__name__"]
+            regex: (apiserver|etcd|rest_client)_request(|_sli|_slo)_duration_seconds_bucket
+            action: drop
+
+          - sourceLabels: ["__name__"]
+            regex: (apiserver_response_sizes_bucket|apiserver_watch_events_sizes_bucket)
+            action: drop
+
+    kubelet:
+      enabled: true
+      serviceMonitor:
+        metricRelabelings:
+          - action: replace
+            sourceLabels: ["node"]
+            targetLabel: instance
+          # remove duplicates
+          - sourceLabels: ["__name__"]
+            regex: "(apiserver_audit|apiserver_client|apiserver_delegated|apiserver_envelope|apiserver_storage|apiserver_webhooks|authentication_token|csi_operations|disabled_metric|get_token|go|hidden_metric|kubelet_certificate|kubelet_cgroup|kubelet_container|kubelet_containers|kubelet_cpu|kubelet_device|kubelet_graceful|kubelet_http|kubelet_lifecycle|kubelet_managed|kubelet_node|kubelet_pleg|kubelet_pod|kubelet_run|kubelet_running|kubelet_runtime|kubelet_server|kubelet_started|kubelet_volume|kubernetes_build|kubernetes_feature|machine_cpu|machine_memory|machine_nvm|machine_scrape|node_namespace|plugin_manager|prober_probe|process_cpu|process_max|process_open|process_resident|process_start|process_virtual|registered_metric|rest_client|scrape_duration|scrape_samples|scrape_series|storage_operation|volume_manager|volume_operation|workqueue)_(.+)"
+            action: keep
+          - sourceLabels: ["__name__"]
+            regex: rest_client_request_duration_seconds_bucket
+            action: drop
+
+        #####
+        # If you are using k3s, you can use the following to relabel metrics to match the kubernetes-mixin
+        ## Example
+        #kubelet:
+        #  serviceMonitor:
+        #    metricRelabelings:
+        #      # k3s exposes all metrics on all endpoints, relabel jobs that belong to other components
+        #      - sourceLabels: [__name__]
+        #        regex: "scheduler_(.+)"
+        #        targetLabel: "job"
+        #        replacement: "kube-scheduler"
+        #      - sourceLabels: [__name__]
+        #        regex: "kubeproxy_(.+)"
+        #        targetLabel: "job"
+        #        replacement: "kube-proxy"
+        #####
+
+        # remove duplicates
+        # https://github.com/google/cadvisor/blob/master/docs/storage/prometheus.md#prometheus-container-metrics
+        cAdvisorMetricRelabelings:
+          - sourceLabels: [__name__]
+            action: keep
+            regex: "cadvisor_version|container_blkio|container_cpu_cfs_periods_total|container_cpu_cfs_throttled_periods_total|container_cpu_cfs_throttled_seconds_total|container_cpu_usage_seconds_total|container_memory_rss|container_memory_usage_bytes|container_memory_working_set_bytes|container_network_receive_bytes_total|container_network_transmit_bytes_total|container_network_receive_packets_total|container_network_transmit_packets_total|container_network_receive_packets_dropped_total|container_network_transmit_packets_dropped_total|container_oom_events_total|container_fs_reads_total|container_fs_writes_total|container_fs_reads_bytes_total|container_fs_writes_bytes_total"
+
+
+    kubeControllerManager:
+      enabled: true
+      endpoints: ["192.168.1.49"]
+      serviceMonitor:
+        metricRelabelings:
+
+          # Remove duplicate metrics
+          - sourceLabels: ["__name__"]
+            regex: "(apiserver_audit|apiserver_client|apiserver_delegated|apiserver_envelope|apiserver_storage|apiserver_webhooks|attachdetach_controller|authenticated_user|authentication|cronjob_controller|disabled_metric|endpoint_slice|ephemeral_volume|garbagecollector_controller|get_token|go|hidden_metric|job_controller|kubernetes_build|kubernetes_feature|leader_election|node_collector|node_ipam|process_cpu|process_max|process_open|process_resident|process_start|process_virtual|pv_collector|registered_metric|replicaset_controller|rest_client|retroactive_storageclass|root_ca|running_managed|scrape_duration|scrape_samples|scrape_series|service_controller|storage_count|storage_operation|ttl_after|volume_operation|workqueue)_(.+)"
+            action: keep
+
+          - sourceLabels: ["__name__"]
+            regex: rest_client_request_duration_seconds_bucket
+            action: drop
+
+
+    kubeScheduler:
+      enabled: true
+      endpoints: ["192.168.1.49"]
+      serviceMonitor:
+        metricRelabelings:
+          # Remove duplicate metrics
+          - sourceLabels: ["__name__"]
+            regex: "(apiserver_audit|apiserver_client|apiserver_delegated|apiserver_envelope|apiserver_storage|apiserver_webhooks|authenticated_user|authentication|disabled_metric|go|hidden_metric|kubernetes_build|kubernetes_feature|leader_election|process_cpu|process_max|process_open|process_resident|process_start|process_virtual|registered_metric|rest_client|scheduler|scrape_duration|scrape_samples|scrape_series|workqueue)_(.+)"
+            action: keep
+
+    kubeProxy:
+      enabled: false
+      endpoints: ["192.168.1.49"]
+      serviceMonitor:
+        metricRelabelings:
+          # Remove duplicate metrics
+          - sourceLabels: ["__name__"]
+            regex: "(kubeproxy)_(.+)"
+            action: keep
+
+
+
+    kube-state-metrics:
+      prometheus:
+        monitor:
+          metricRelabelings:
+          # - action: keep
+          #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
+          #   sourceLabels: [__name__]
+            - action: keep
+              regex: 'kube_node_role|kube_namespace_created|kube_pod_owner|kube_pod_container_resource_requests|kube_pod_status_phase|kube_pod_container_resource_limits|kube_pod_info|kube_pod_labels|kube_pod_container_info|kube_pod_container_status_waiting|kube_pod_container_status_waiting_reason|kube_pod_container_status_running|kube_pod_container_status_terminated|kube_pod_container_status_terminated_reason|kube_pod_container_status_restarts_total|kube_replicaset_owner|kube_resourcequota|kube_namespace_status_phase|kube_node_spec_unschedulable|kube_node_status_allocatable|kube_node_status_capacity|kube_node_info|kube_node_status_condition|kube_node_spec_taint|kube_daemonset_created|kube_daemonset_status_current_number_scheduled|kube_daemonset_status_desired_number_scheduled|kube_daemonset_status_number_available|kube_daemonset_status_number_ready|kube_daemonset_status_number_unavailable|kube_daemonset_labels|kube_deployment_labels|kube_deployment_spec_replicas|kube_deployment_status_replicas_available|kube_deployment_status_replicas_unavailable|kube_deployment_status_replicas_updated|kube_statefulset_labels|kube_statefulset_status_replicas_available|kube_statefulset_status_replicas|kube_statefulset_status_replicas_current|kube_job_status_start_time|kube_job_status_active|kube_job_failed|kube_horizontalpodautoscaler_status_desired_replicas|kube_horizontalpodautoscaler_status_current_replicas|kube_horizontalpodautoscaler_spec_min_replicas|kube_horizontalpodautoscaler_spec_max_replicas|kubernetes_build_info|kube_persistentvolumeclaim_info|kube_storageclass_info'
+              sourceLabels: [__name__]
+
+    kubeEtcd:
+      enabled: false
+      endpoints: ["192.168.1.49"]
+
+
+    prometheus:
+
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          hajimari.io/appName: "prometheus"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "simple-icons:prometheus"
+        hosts:
+          - "prometheus.${SECRET_DOMAIN}"
+        paths:
+          - /
+        pathType: ImplementationSpecific
+        tls:
+          - hosts:
+              - "prometheus.${SECRET_DOMAIN}"
+
+
+      thanosService:
+        enabled: true
+
+      thanosServiceMonitor:
+        enabled: true
+
+      prometheusSpec:
+        scrapeInterval: 60s
+        replicas: 1
+
+        externalLabels:
+          cluster: homelab
+
+
+        resources:
+          requests:
+            cpu: 130m
+            memory: 1900M
+          limits:
+            memory: 4744M
+
+        retention: 2d
+        retentionSize: 15GB
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: "local-path"
+              resources:
+                requests:
+                  storage: 15Gi
+
+        #remoteWrite:
+        #  - url: "https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push"
+        #    basicAuth:
+        #      username:
+        #        name: grafana-cloud
+        #        key: username
+        #      password:
+        #        name: grafana-cloud
+        #        key: password
+
+
+        ruleNamespaceSelector: {}
+        ruleSelectorNilUsesHelmValues: false
+        podMonitorNamespaceSelector: {}
+        podMonitorSelector: {}
+        podMonitorSelectorNilUsesHelmValues: false
+        serviceMonitorNamespaceSelector: {}
+        serviceMonitorSelector: {}
+        serviceMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
+
+        thanos:
+          image: quay.io/thanos/thanos:v0.30.1
+          # renovate: datasource=docker depName=quay.io/thanos/thanos
+          version: "v0.30.1"
+          objectStorageConfig:
+            name: thanos-objstore
+            key: objstore.yml
+
+
+    # Prometheus operator values
+    prometheusOperator:
+      resources:
+        requests:
+          cpu: 35m
+          memory: 273M
+        limits:
+          memory: 326M
+
+      prometheusConfigReloader:
+        # resource config for prometheusConfigReloader
+        resources:
+          requests:
+            cpu: 11m
+            memory: 32M
+          limits:
+            memory: 32M
+
+    nodeExporter:
+       enabled: true
+       serviceMonitor:
+         relabelings:
+           - action: replace
+             regex: (.*)
+             replacement: $1
+             sourceLabels:
+               - __meta_kubernetes_pod_node_name
+             targetLabel: kubernetes_node
+
+    prometheus-node-exporter:
+      prometheus:
+        monitor:
+          metricRelabelings:
+            - action: keep
+              regex: 'node_memory_MemTotal_bytes|node_cpu_seconds_total|node_memory_MemAvailable_bytes|node_memory_Buffers_bytes|node_memory_Cached_bytes|node_memory_MemFree_bytes|node_memory_Slab_bytes|node_filesystem_avail_bytes|node_filesystem_size_bytes|node_time_seconds|node_exporter_build_info|node_load1|node_vmstat_pgmajfault|node_network_receive_bytes_total|node_network_transmit_bytes_total|node_network_receive_drop_total|node_network_transmit_drop_total|node_disk_io_time_seconds_total|node_disk_io_time_weighted_seconds_total|node_load5|node_load15|node_disk_read_bytes_total|node_disk_written_bytes_total|node_uname_info'
+              sourceLabels: [__name__]
+
