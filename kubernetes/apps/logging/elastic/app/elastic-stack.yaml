@@ -1,0 +1,159 @@
+---
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elk
+  namespace: logging
+  labels:
+    app: elk
+spec:
+  version: 8.6.2
+  volumeClaimDeletePolicy: DeleteOnScaledownOnly
+  nodeSets:
+  - name: master
+    count: 1
+    config:
+      node.roles: ["master","data_hot","data_content", "remote_cluster_client"]
+      node.attr.type: "hot"
+      node.store.allow_mmap: false
+      xpack.monitoring.collection.enabled: true
+      xpack.monitoring.elasticsearch.collection.enabled: true
+      xpack.monitoring.collection.cluster.stats.timeout: "10m"
+      xpack.monitoring.collection.index.recovery.active_only: "false"
+      xpack.monitoring.collection.index.recovery.timeout: "10m"
+      xpack.monitoring.collection.index.stats.timeout: "10m"
+      xpack.monitoring.collection.indices: "'*'"
+      xpack.monitoring.collection.interval: "60s"
+      xpack.monitoring.history.duration: "7d"
+    podTemplate:
+      spec:
+        containers:
+        - name: elasticsearch
+          env:
+            - name: ES_JAVA_OPTS
+              value: "-Xms2g -Xmx2g"
+            - name: READINESS_PROBE_TIMEOUT
+              value: "10"
+          resources:
+            requests:
+              memory: 5Gi
+              cpu: 113m
+            limits:
+              memory: 10Gi
+
+
+        #affinity:
+        #  podAntiAffinity:
+        #    preferredDuringSchedulingIgnoredDuringExecution:
+        #    - weight: 100
+        #      podAffinityTerm:
+        #        labelSelector:
+        #          matchLabels:
+        #            elasticsearch.k8s.elastic.co/cluster-name: elk
+        #        topologyKey: kubernetes.io/hostname
+
+        nodeSelector:
+          kubernetes.io/arch: amd64
+      metadata:
+        labels:
+          stack-monitoring.elastic.co/type: es
+        annotations:
+          co.elastic.logs/enabled: "true"
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data # this name is required for the volume to be mounted
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: local-path
+
+  - name: data
+    count: 1
+    config:
+      node.roles: ["data_warm", "data_content","remote_cluster_client"]
+      node.store.allow_mmap: false
+      node.attr.type: "warm"
+      # XPack - Monitoring configuration
+      xpack.monitoring.collection.enabled: true
+      xpack.monitoring.elasticsearch.collection.enabled: true
+      xpack.monitoring.collection.cluster.stats.timeout: "10m"
+      xpack.monitoring.collection.index.recovery.active_only: "false"
+      xpack.monitoring.collection.index.recovery.timeout: "10m"
+      xpack.monitoring.collection.index.stats.timeout: "10m"
+      xpack.monitoring.collection.indices: "'*'"
+      xpack.monitoring.collection.interval: "60s"
+      xpack.monitoring.history.duration: "7d"
+    podTemplate:
+      metadata:
+        labels:
+          stack-monitoring.elastic.co/type: es
+        annotations:
+          co.elastic.logs/enabled: "true"
+      spec:
+        containers:
+        - name: elasticsearch
+          env:
+            - name: ES_JAVA_OPTS
+              value: "-Xms2g -Xmx2g"
+
+          resources:
+            requests:
+              memory: 2Gi
+              cpu: 500m
+            limits:
+              memory: 4Gi
+        #affinity:
+        #  podAntiAffinity:
+        #    preferredDuringSchedulingIgnoredDuringExecution:
+        #    - weight: 100
+        #      podAffinityTerm:
+        #        labelSelector:
+        #          matchLabels:
+        #            elasticsearch.k8s.elastic.co/cluster-name: elk
+        #        topologyKey: kubernetes.io/hostname
+        nodeSelector:
+          kubernetes.io/arch: amd64
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data # this name is required for the volume to be mounteds
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: local-path
+---
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: elk
+  namespace: logging
+  labels:
+    app: elk
+spec:
+  version: 8.5.0
+  count: 1
+  elasticsearchRef:
+    name: elk
+  config:
+    server:
+      publicBaseUrl: "https://kibana.${SECRET_DOMAIN}"
+
+  #nodeSelector:
+  #  kubernetes.io/arch: amd64
+#---
+#apiVersion: apm.k8s.elastic.co/v1
+#kind: ApmServer
+#metadata:
+#  name: elk
+#  labels:
+#    app: elk
+#spec:
+#  version: 8.0.0
+#  count: 1
+#  elasticsearchRef:
+#    name: elk

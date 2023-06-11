@@ -1,0 +1,32 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: logstash
+  namespace: logging
+  labels:
+    app: "logstash"
+resources:
+  - svc_logstash.yaml
+  - dp_logstash.yaml
+  #- as_logstash_cpu.yaml
+  #- logstash-redis-certs-sops.yaml
+
+generatorOptions:
+ disableNameSuffixHash: true
+ labels:
+   namespace: logging
+
+
+secretGenerator:
+- name: logstash-config
+  namespace: logging
+  files:
+    - config/jvm.options
+    - config/pipelines.yml
+    - config/logstash.yml
+- name: logstash-pipeline
+  namespace: logging
+  files:
+    - pipeline/uptime/uptime_pipeline
+    - pipeline/k3s_prod/k3s_prod_pipeline
+

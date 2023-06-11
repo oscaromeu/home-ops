@@ -1,0 +1,51 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elk-elasticsearch
+  namespace: logging
+  labels:
+    app: elk
+spec:
+  ports:
+    - name: https
+      port: 9200
+      targetPort: 9200
+  selector:
+    # Select coordinating nodes
+    elasticsearch.k8s.elastic.co/cluster-name: "elk"
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: elk-elasticsearch-read
+#  labels:
+#    app: elk
+#spec:
+#  ports:
+#    - name: https
+#      port: 9200
+#      targetPort: 9200
+#  selector:
+#    # Select coordinating nodes
+#    elasticsearch.k8s.elastic.co/cluster-name: "elk"
+#    elasticsearch.k8s.elastic.co/node-master: "false"
+#    elasticsearch.k8s.elastic.co/node-data: "false"
+#    elasticsearch.k8s.elastic.co/node-ingest: "false"
+#    elasticsearch.k8s.elastic.co/node-ml: "false"
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: elk-elasticsearch-write
+#  labels:
+#    app: elk
+#spec:
+#  ports:
+#    - name: https
+#      port: 9200
+#      targetPort: 9200
+#  selector:
+#    # Select ingest nodes
+#    elasticsearch.k8s.elastic.co/cluster-name: "elk"
+#    elasticsearch.k8s.elastic.co/node-ingest: "true"

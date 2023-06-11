@@ -1,0 +1,13 @@
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: vector-binding
+  namespace: logging
+subjects:
+  - name: vector-aggregator
+    spec:
+      fqdn: "vector.${SECRET_DOMAIN}"
+tunnelRef:
+  kind: ClusterTunnel
+  name: cluster-tunnel

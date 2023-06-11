@@ -1,0 +1,169 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app vector-agent
+  namespace: logging
+spec:
+  interval: 15m
+  chart:
+    spec:
+      # renovate: registryUrl=https://helm.vector.dev
+      chart: vector
+      version: 0.19.0
+      sourceRef:
+        kind: HelmRepository
+        name: vector
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+
+  values:
+
+    role: "Agent"
+
+    args:
+      - --config-dir
+      - "/etc/vector"
+
+    dataDir: /vector-data-dir
+    existingConfigMaps:
+      # config
+      - vector-agent
+      # pipelines
+      - kubernetes-pipeline
+
+    ingress:
+      enabled: false
+
+
+    containerPorts:
+      #- name: datadog-agent
+      #  containerPort: 8282
+      #  protocol: TCP
+      #- name: logstash
+      #  containerPort: 5044
+      #  protocol: TCP
+      #- name: statsd
+      #  containerPort: 8125
+      #  protocol: TCP
+      #- name: syslog
+      #  containerPort: 9000
+      #  protocol: TCP
+      - name: vector
+        containerPort: 6000
+        protocol: TCP
+      - name: prom-exporter
+        containerPort: 9090
+        protocol: TCP
+
+    resources:
+      requests:
+        cpu: 200m
+        memory: 256Mi
+      limits:
+        memory: 256Mi
+
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: vector-agent
+
+    service:
+      enabled: true
+      ports:
+        - name: api
+          port: 8686
+          protocol: TCP
+        #- name: fluent
+        #  port: 24224
+        #  protocol: TCP
+        #- name: logstash
+        #  port: 5044
+        #  protocol: TCP
+        #- name: splunk-hec
+        #  port: 8080
+        #  protocol: TCP
+        #- name: statsd
+        #  port: 8125
+        #  protocol: TCP
+        #- name: syslog
+        #  port: 9000
+        #  protocol: TCP
+        - name: vector
+          port: 6000
+          protocol: TCP
+        - name: prom-exporter
+          port: 9090
+          protocol: TCP
+
+    serviceHeadless:
+      enabled: true
+      ports:
+        #- name: datadog-agent
+        #  port: 8282
+        #  protocol: TCP
+        #- name: fluent
+        #  port: 24224
+        #  protocol: TCP
+        #- name: logstash
+        #  port: 5044
+        #  protocol: TCP
+        #- name: splunk-hec
+        #  port: 8080
+        #  protocol: TCP
+        #- name: statsd
+        #  port: 8125
+        #  protocol: TCP
+        #- name: syslog
+        #  port: 9000
+        #  protocol: TCP
+        - name: vector
+          port: 6000
+          protocol: TCP
+        - name: prom-exporter
+          port: 9090
+          protocol: TCP
+
+
+    #extraVolumes:
+    #  - name: config
+    #    configMap:
+    #      name: vector-aggregator
+    #  - name: data
+    #    emptyDir: {}
+
+    #extraVolumeMounts:
+    #  - name: vector-config-volume
+    #    mountPath: "/etc/vector/"
+    #    readOnly: true
+    #  - name: data
+    #    mountPath: /vector-data-dir
+
+
+    #persistence:
+    #  enabled: true
+    #  accessModes:
+    #    - ReadWriteOnce
+    #  size: 1Gi
+    #  storageClass: local-path
+    # https://github.com/billimek/k8s-gitops/blob/master/logs/loki/loki.yaml
+    podMonitor:
+      enabled: true
+
+    env:
+      - name: VECTOR_LOG
+        value: "info"
+      # - name: MY_VARIABLE
+      #   valueFrom:
+      #     secretKeyRef:
+      #       name: vector
+      #       key: my_variable

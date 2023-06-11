@@ -1,0 +1,196 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app vector-aggregator
+  namespace: logging
+spec:
+  interval: 15m
+  chart:
+    spec:
+      # renovate: registryUrl=https://helm.vector.dev
+      chart: vector
+      version: 0.22.0
+      sourceRef:
+        kind: HelmRepository
+        name: vector
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+
+  values:
+
+    replicas: 2
+
+    args:
+      - --config-dir
+      - "/etc/vector"
+
+    dataDir: /vector-data-dir
+    existingConfigMaps:
+      # config
+      - vector-aggregator
+      # pipelines
+      - kubernetes-pipeline-aggregator
+
+    ingress:
+      enabled: false
+      #ClassName: nginx
+      #annotations:
+      #  hajimari.io/appName: "vector-aggregator"
+      #  hajimari.io/enable: "true"
+      #  hajimari.io/icon: "alarm-light-outline"
+      #hosts:
+      #  - hosts: vector.${SECRET_DOMAIN}
+      #    paths:
+      #      - path: /
+      #        pathType: ImplementationSpecific
+      #        port:
+      #          name: api
+      #          number: 8686
+      #tls:
+      #  - hosts:
+      #      - vector.${SECRET_DOMAIN}
+
+
+    containerPorts:
+      #- name: datadog-agent
+      #  containerPort: 8282
+      #  protocol: TCP
+      #- name: logstash
+      #  containerPort: 5044
+      #  protocol: TCP
+      #- name: statsd
+      #  containerPort: 8125
+      #  protocol: TCP
+      #- name: syslog
+      #  containerPort: 9000
+      #  protocol: TCP
+      - name: vector
+        containerPort: 6000
+        protocol: TCP
+      - name: prom-exporter
+        containerPort: 9090
+        protocol: TCP
+
+    image:
+      repository: timberio/vector
+      tag: 0.30.0-debian
+      pullPolicy: IfNotPresent
+
+    resources:
+      requests:
+        cpu: 200m
+        memory: 256Mi
+      limits:
+        memory: 256Mi
+
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: vector-aggregator
+
+    service:
+      enabled: true
+      ports:
+        - name: api
+          port: 8686
+          protocol: TCP
+        #- name: fluent
+        #  port: 24224
+        #  protocol: TCP
+        #- name: logstash
+        #  port: 5044
+        #  protocol: TCP
+        #- name: splunk-hec
+        #  port: 8080
+        #  protocol: TCP
+        #- name: statsd
+        #  port: 8125
+        #  protocol: TCP
+        #- name: syslog
+        #  port: 9000
+        #  protocol: TCP
+        - name: vector
+          port: 6000
+          protocol: TCP
+        - name: prom-exporter
+          port: 9090
+          protocol: TCP
+
+    serviceHeadless:
+      enabled: true
+      ports:
+        #- name: datadog-agent
+        #  port: 8282
+        #  protocol: TCP
+        #- name: fluent
+        #  port: 24224
+        #  protocol: TCP
+        #- name: logstash
+        #  port: 5044
+        #  protocol: TCP
+        #- name: splunk-hec
+        #  port: 8080
+        #  protocol: TCP
+        #- name: statsd
+        #  port: 8125
+        #  protocol: TCP
+        #- name: syslog
+        #  port: 9000
+        #  protocol: TCP
+        - name: vector
+          port: 6000
+          protocol: TCP
+        - name: prom-exporter
+          port: 9090
+          protocol: TCP
+
+
+    #extraVolumes:
+    #  - name: config
+    #    configMap:
+    #      name: vector-aggregator
+    #  - name: data
+    #    emptyDir: {}
+
+    #extraVolumeMounts:
+    #  - name: vector-config-volume
+    #    mountPath: "/etc/vector/"
+    #    readOnly: true
+    #  - name: data
+    #    mountPath: /vector-data-dir
+
+
+    #persistence:
+    #  enabled: true
+    #  accessModes:
+    #    - ReadWriteOnce
+    #  size: 1Gi
+    #  storageClass: local-path
+
+    podMonitor:
+      enabled: false
+
+    env:
+      - name: VECTOR_LOG
+        value: "debug"
+
+      - name: ELASTICSEARCH_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            key: ELASTICSEARCH_PASSWORD
+            name: es-ingestion-credentials
+
+      - name: ELASTICSEARCH_USERNAME
+        valueFrom:
+          secretKeyRef:
+            key: ELASTICSEARCH_USERNAME
+            name: es-ingestion-credentials

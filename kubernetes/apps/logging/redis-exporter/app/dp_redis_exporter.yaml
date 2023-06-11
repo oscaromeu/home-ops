@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-exporter
+  template:
+    metadata:
+      # annotations:
+      #   prometheus.io/scrape: "true"
+      #   prometheus.io/port: "9121"
+      labels:
+        app: redis-exporter
+    spec:
+      containers:
+      - name: redis-exporter
+        image: oliver006/redis_exporter:v1.50.0
+        resources:
+          requests:
+            cpu: 10m
+            memory: 10Mi
+          limits:
+            #cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 9121
+        env:
+          - name: REDIS_ADDR
+            value: "redis://redis-master.logging.svc.cluster.local:6379"
+          - name: REDIS_EXPORTER_SKIP_TLS_VERIFICATION
+            value: "true"
+          - name: REDIS_EXPORTER_SET_CLIENT_NAME
+            value: "false"
+          - name: REDIS_EXPORTER_CHECK_KEYS
+            value: "*"

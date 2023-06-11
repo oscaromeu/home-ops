@@ -1,0 +1,35 @@
+filebeat.config.inputs:
+  enabled: true
+  path: ${path.config}/inputs.d/*.yml
+  reload.enabled: true
+  reload.period: 10m
+
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: true
+  reload.period: 10m
+
+output.redis:
+  hosts: ${REDIS_HOSTS}
+  key: '${REDIS_KEY_NAME}' # default: bm_hl
+  #keys: '${REDIS_KEY_NAME}_%{[agent.hostname]}'
+
+  #ssl:
+  #  enabled: ${REDIS_ENABLE_SSL}
+  #  verification_mode: ${REDIS_SSL_VERIFY}
+  #  certificate: "/etc/filebeat/ssl/filebeat.pem"
+  #  key: "/etc/filebeat/ssl/filebeat.key"
+  #  certificate_authorities: /etc/filebeat/ssl/filebeat.ca
+  #  supported:protocols: [ TLSv1.0, TLSv1.1, TLSv1.2,SSLv3 ]
+
+
+logging.level: debug
+logging.to_files: true
+logging.to_syslog: false
+logging.files:
+  path: /var/log/beats
+  name: filebeat.log
+  keepfiles: 7
+  permissions: 0644
+
+filebeat.max_procs: 1

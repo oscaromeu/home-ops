@@ -1,0 +1,19 @@
+- type: container
+  paths:
+    - /var/log/containers/event*.log
+    #- /var/log/containers/*.log
+  exclude_files: ['\.gz$']
+  tail_files: true
+
+  processors:
+    - add_kubernetes_metadata:
+        in_cluster: true
+        #host: ${NODE_NAME}
+        matchers:
+        - logs_path:
+            logs_path: "/var/log/containers/"
+  fields:
+    k3s_cluster_name: ${CLUSTER_NAME}
+    log_type: ${LOG_TYPE}
+  fields_under_root: true
+
