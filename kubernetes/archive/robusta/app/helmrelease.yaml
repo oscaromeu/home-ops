@@ -1,0 +1,75 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app robusta
+  namespace: monitoring
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: robusta
+      version: 0.10.15
+      sourceRef:
+        kind: HelmRepository
+        name: robusta
+        namespace: flux-system
+      interval: 15m
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+
+    #https://github.com/robusta-dev/robusta/blob/master/helm/robusta/values.yaml
+
+    clusterName: home-ops
+
+    # see https://docs.robusta.dev/master/user-guide/configuration.html#global-config
+    globalConfig:
+      grafana_url: "grafana.${SECRET_DOMAIN}"
+      prometheus_url: "prometheus.${SECRET_DOMAIN}"
+
+    sinksConfig:
+      - slack_sink:
+          name: main_slack_sink
+          slack_channel: monitoring
+          api_key: ${SLACK_SINK_API_KEY}
+
+      - robusta_sink:
+          name: robusta_ui_sink
+          token: ${ROBUSTA_SINK_TOKEN}
+    enablePlatformPlaybooks: true
+    runner:
+      sendAdditionalTelemetry: true
+      log_level: DEBUG
+
+  valuesFrom:
+    - kind: Secret
+      name: robusta
+      valuesKey: GLOBAL_CONFIG_SIGNING_KEY
+      targetPath: globalConfig.signing_key
+      optional: false
+    - kind: Secret
+      name: robusta
+      valuesKey: GLOBAL_ACCOUNT_ID
+      targetPath: globalConfig.account_id
+      optional: false
+    - kind: Secret
+      name: robusta
+      valuesKey: RSA_PRIVATE
+      targetPath: rsa.private
+      optional: false
+    - kind: Secret
+      name: robusta
+      valuesKey: RSA_PUBLIC
+      targetPath: rsa.public
+      optional: false
+
