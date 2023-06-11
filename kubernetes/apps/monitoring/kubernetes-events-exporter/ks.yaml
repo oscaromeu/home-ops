@@ -2,15 +2,15 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-grafana
+  name: cluster-apps-kubernetes-events-exporter
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-cloudflare-operator-tunnels
+    - name: cluster-apps-vpa
     - name: cluster-apps-kube-prometheus-stack
-  path: ./kubernetes/apps/monitoring/grafana/app
+  path: ./kubernetes/apps/monitoring/kubernetes-events-exporter/app
   prune: true
   sourceRef:
     kind: GitRepository

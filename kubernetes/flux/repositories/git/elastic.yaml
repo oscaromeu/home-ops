@@ -1,0 +1,16 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: eck-operator
+  namespace: flux-system
+spec:
+  interval: 5m
+  url: https://github.com/elastic/cloud-on-k8s
+  ref:
+    branch: '2.6'
+  ignore: |
+    # exclude all
+    /*
+    # include eck-operator helm chart directory
+    !/deploy/eck-operator

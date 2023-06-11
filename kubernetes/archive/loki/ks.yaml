@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-ingress-nginx
-    - name: cluster-apps-kube-prometheus
+    - name: cluster-apps-kube-prometheus-stack
   path: ./kubernetes/apps/logging/loki/app
   prune: true
   sourceRef:

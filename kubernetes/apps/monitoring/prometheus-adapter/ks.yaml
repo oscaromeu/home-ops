@@ -2,19 +2,23 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-grafana
+  name: cluster-apps-prometheus-adapter
   namespace: flux-system
   labels:
-    substitution.flux.home.arpa/enabled: "true"
+    substitution.flux.home.arpa/enabled: "false"
 spec:
   dependsOn:
-    - name: cluster-apps-cloudflare-operator-tunnels
     - name: cluster-apps-kube-prometheus-stack
-  path: ./kubernetes/apps/monitoring/grafana/app
+  path: ./kubernetes/apps/monitoring/prometheus-adapter/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: prometheus-adapter
+      namespace: monitoring
   interval: 30m
   retryInterval: 1m
   timeout: 5m

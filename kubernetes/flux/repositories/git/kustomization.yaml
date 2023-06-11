@@ -3,3 +3,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./local-path-provisioner.yaml
+  - ./elastic.yaml
+  #- ./cloudflare_operator.yaml
+  #- ./helloworld.yaml

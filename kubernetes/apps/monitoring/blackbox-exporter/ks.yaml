@@ -8,7 +8,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-kube-prometheus
+    - name: cluster-apps-kube-prometheus-stack
   path: ./kubernetes/apps/monitoring/blackbox-exporter/app
   prune: true
   sourceRef:
