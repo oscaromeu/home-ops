@@ -1,0 +1,138 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: vaultwarden
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.3.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 15m
+
+  values:
+    image:
+      repository: vaultwarden/server
+      tag: "1.28.1"
+
+    strategy:
+      type: Recreate
+
+    env:
+      TZ: "${TIMEZONE}"
+      DOMAIN: "https://vault.${SECRET_DOMAIN}"
+      DATA_FOLDER: "config"
+      LOG_LEVEL: "debug"
+      ICON_CACHE_FOLDER: "config/icon_cache"
+      ATTACHMENTS_FOLDER: "config/attachments"
+      SENDS_FOLDER: "config/sends"
+      SIGNUPS_ALLOWED: false
+      INVITATIONS_ALLOWED: false
+      WEBSOCKET_ENABLED: true
+      WEBSOCKET_ADDRESS: 0.0.0.0
+      WEBSOCKET_PORT: 3012
+      SENDS_ALLOWED: true
+      EMERGENCY_ACCESS_ALLOWED: true
+      DISABLE_ICON_DOWNLOAD: false
+      DISABLE_2FA_REMEMBER: false
+      EMAIL_ATTEMPTS_LIMIT: 3
+      PASSWORD_HINTS_ALLOWED: false
+      ROCKET_PORT: 8080
+      # 'DATABASE_URL=postgresql://user_name:user_password@db_host:5432/vaultwarden'
+      DATABASE_URL: "postgresql://$(POSTGRES_USER):$(POSTGRES_PASS)@$(POSTGRES_HOST):$(POSTGRES_PORT)/$(POSTGRES_DB)"
+      SMTP_FROM_NAME: Vault
+      SMTP_FROM: vault@${SECRET_DOMAIN}
+      SMTP_PORT: 587
+      SMTP_SSL: "true"
+
+      #SIGNUPS_DOMAINS_WHITELIST:
+      #  valueFrom:
+      #    secretKeyRef:
+      #      name: vault-env
+      #      key: SIGNUPS_DOMAINS_WHITELIST
+
+    envFrom:
+      - secretRef:
+          name: vault-env
+
+    service:
+      main:
+        ports:
+          http:
+            port: 8080
+          websocket:
+            enabled: true
+            port: 3012
+
+    ingress:
+      main:
+        enabled: false
+        ingressClassName: "nginx"
+        annotations:
+
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "shield-key"
+          hajimari.io/appName: "vault"
+          # external-dns/is-public: "true"
+          # external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+        hosts:
+        - host: &host "vault.${SECRET_DOMAIN}"
+          paths:
+          - path: /
+            pathType: Prefix
+            service:
+              port: 8080
+          - path: /notifications/hub
+            pathType: Prefix
+            service:
+              port: 3012
+          - path: /notifications/hub/negotiate
+            pathType: Prefix
+            service:
+              port: 8080
+        tls:
+        - hosts:
+          - *host
+      admin:
+        enabled: true
+        ingressClassName: "nginx"
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "shield-key"
+          hajimari.io/appName: "vaultadmin"
+        hosts:
+        - host: *host
+          paths:
+          - path: /admin
+            pathType: Prefix
+            service:
+              port: 8080
+        tls:
+        - hosts:
+          - *host
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: vaultwarden-config-pvc
+
+    resources:
+      requests:
+        memory: 100Mi
+        cpu: 100m
+      limits:
+        memory: 2000Mi
+
+    poddefaultContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups:
+        - 100

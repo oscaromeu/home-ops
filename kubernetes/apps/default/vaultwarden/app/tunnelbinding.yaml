@@ -1,0 +1,14 @@
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: vault-tunnelbinding
+  namespace: default
+subjects:
+  - name: vaultwarden
+    spec:
+      fqdn: "vault.${SECRET_DOMAIN}"
+      target: "http://vaultwarden.default.svc.cluster.local:8080"
+tunnelRef:
+  kind: ClusterTunnel
+  name: cluster-tunnel

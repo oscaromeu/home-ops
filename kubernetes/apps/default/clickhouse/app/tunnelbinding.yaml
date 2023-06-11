@@ -1,0 +1,15 @@
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: clickhouse-tunnelbinding
+  namespace: default
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+subjects:
+  - name: clickhouse
+    spec:
+      fqdn: "clickhouse.${SECRET_DOMAIN}"
+tunnelRef:
+  kind: ClusterTunnel
+  name: cluster-tunnel

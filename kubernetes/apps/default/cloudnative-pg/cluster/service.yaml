@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: &app postgres
+  namespace: default
+  annotations:
+    # Currently does not work
+    # https://github.com/ori-edge/k8s_gateway/issues/185
+    coredns.io/hostname: "postgres.${SECRET_DOMAIN}"
+  labels:
+    app.kubernetes.io/name: *app
+    app.kubernetes.io/instance: *app
+spec:
+  type: LoadBalancer
+  #externalTrafficPolicy: Local
+  #externalIPs: ["${SVC_POSTGRES_ADDR}"]
+  ports:
+    - name: postgres
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+  selector:
+    postgresql: postgres
+    role: primary

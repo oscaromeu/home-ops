@@ -1,0 +1,31 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-apps-vaultwarden
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+spec:
+  dependsOn:
+    - name: cluster-apps-longhorn
+    - name: cluster-apps-external-secrets-stores
+    - name: cluster-apps-cloudflare-operator-tunnels
+  path: ./kubernetes/apps/default/vaultwarden/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: vaultwarden
+      namespace: default
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+  postBuild:
+    substituteFrom:
+      - kind: Secret
+        name: vault-env
+        optional: true

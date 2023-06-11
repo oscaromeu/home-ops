@@ -1,0 +1,61 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres
+  namespace: default
+  annotations:
+    kyverno.io/ignore: "true"
+spec:
+  instances: 3
+  imageName: ghcr.io/cloudnative-pg/postgresql:14.5
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 5Gi
+    storageClass: local-path
+  superuserSecret:
+    name: cloudnative-pg-secret
+  #bootstrap:
+  #  recovery:
+  #    source: &active-cluster postgres-v2
+  postgresql:
+    parameters:
+      max_connections: "300"
+      shared_buffers: 512MB
+    pg_hba:
+      - host all all all trust
+
+  monitoring:
+    enablePodMonitor: true
+  backup:
+    retentionPolicy: 30d
+    barmanObjectStore:
+      wal:
+        compression: bzip2
+        maxParallel: 8
+      destinationPath: s3://postgres-6484dcf2e155f357dc726df0183f43489564/
+      #endpointURL: ""
+      #serverName: postgres-v3
+      s3Credentials:
+        accessKeyId:
+          name: cloudnative-pg-secret
+          key: AWS_ACCESS_KEY_ID
+        secretAccessKey:
+          name: cloudnative-pg-secret
+          key: AWS_SECRET_ACCESS_KEY
+  # externalClusters is needed when recovering from an existing cnpg cluster
+  #externalClusters:
+  #  - name: *active-cluster
+  #    barmanObjectStore:
+  #      wal:
+  #        compression: bzip2
+  #        maxParallel: 8
+  #      destinationPath: s3://postgresql/
+  #      endpointURL: http://minio.default.svc.cluster.local:9000
+  #      s3Credentials:
+  #        accessKeyId:
+  #          name: cloudnative-pg-secret
+  #          key: aws-access-key-id
+  #        secretAccessKey:
+  #          name: cloudnative-pg-secret
+  #          key: aws-secret-access-key

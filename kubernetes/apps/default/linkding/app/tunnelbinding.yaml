@@ -1,0 +1,13 @@
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: linkding-tunnelbinding
+  namespace: default
+subjects:
+  - name: linkding
+    spec:
+      fqdn: "link.${SECRET_DOMAIN}"
+tunnelRef:
+  kind: ClusterTunnel
+  name: cluster-tunnel

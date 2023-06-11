@@ -1,0 +1,144 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app jupyterhub
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: jupyterhub
+      version: 2.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: jupyterhub
+        namespace: flux-system
+  install:
+    disableWait: true
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    #disableWait: true
+    timeout: 10m
+    remediation:
+      retries: 3
+  values:
+
+    hub:
+      authenticatePrometheus: false
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      db:
+        pvc:
+          storageClassName: local-path
+      resources:
+        requests:
+          cpu: 0.5
+          memory: 1G
+        limits:
+          #cpu: 1
+          memory: 2G
+
+    #proxy:
+
+
+
+    singleuser:
+      # Defines the default image
+      image:
+        name: jupyter/scipy-notebook
+        tag: 82ce73789ba4
+      profileList:
+        - display_name: "Minimal environment"
+          description: "To avoid too much bells and whistles: Python."
+          kubespawner_override:
+            image: jupyter/minimal-notebook:82ce73789ba4
+        - display_name: "Datascience environment"
+          description: "If you want the additional bells and whistles: Python, R, and Julia."
+          default: false
+        - display_name: "Learning Data Science"
+          description: "Datascience Environment with Sample Notebooks"
+          kubespawner_override:
+            image: jupyter/datascience-notebook:2343e33dec46
+            # lifecycle_hooks:
+            #   postStart:
+            #     exec:
+            #       command:
+            #         - "sh"
+            #         - "-c"
+            #         - >
+            #           gitpuller https://github.com/data-8/materials-fa17 master materials-fa;
+
+      extraNodeAffinity:
+        required:
+          - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                  - amd64
+                  - i386
+                  - i686
+                  - x86
+
+      storage:
+        type: dynamic
+        capacity: 3Gi
+        dynamic:
+          storageClass: local-path
+      cpu:
+        guarantee: 0.5
+      memory:
+        limit: 5G
+        guarantee: 0.5G
+
+    scheduling:
+      userScheduler:
+        enabled: true
+        #nodeSelector:
+        #  kubernetes.io/os: amd64
+        resources:
+          requests:
+            cpu: 1m
+            memory: 100M
+          limits:
+            #cpu: 1
+            memory: 200M
+
+    prePuller:
+      #hook:
+      #  nodeSelector:
+      #    kubernetes.io/os: amd64
+      resources:
+        requests:
+          cpu: 1m
+          memory: 100M
+        limits:
+          #cpu: 1
+          memory: 200M
+
+    ingress:
+      enabled: false #
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-staging
+        #external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+        external-dns.home.arpa/enabled: "true"
+        hajimari.io/icon: carbon:logo-jupyter
+      hosts:
+        - host: &host "jupyter.${SECRET_DOMAIN}"
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - *host
+
+    defaultUrl: "/lab"
+    extraEnv:
+      JUPYTERHUB_SINGLEUSER_APP: "jupyter_server.serverapp.ServerApp"
+    storage:
+      capacity: 5Gi
+      dynamic:
+        storageClass: local-path

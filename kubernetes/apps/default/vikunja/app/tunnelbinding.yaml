@@ -1,0 +1,13 @@
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: vikunja-tunnelbinding
+  namespace: default
+subjects:
+  - name: vikunja
+    spec:
+      fqdn: "vikunja.${SECRET_DOMAIN}"
+tunnelRef:
+  kind: ClusterTunnel
+  name: cluster-tunnel
