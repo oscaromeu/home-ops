@@ -1,0 +1,22 @@
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: linkding-full
+  namespace: velero
+spec:
+  schedule: 0 4 * * *
+  template:
+    hooks: {}
+    includedNamespaces:
+    - 'default'
+    #included_resources:
+    #- '*'
+    labelSelector:
+      matchLabels:
+        app: linkding
+    includeClusterResources: true
+    metadata:
+      labels:
+        type: 'full'
+        schedule: 'daily'
+    ttl: 720h0m0s

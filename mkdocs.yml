@@ -1,0 +1,109 @@
+# yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
+
+site_name: Oscar's Homelab
+  #copyright:
+theme:
+  name: material
+  features:
+      #- navigation.tabs
+      #- navigation.tabs.sticky
+      - navigation.instant
+      - navigation.sections
+      - navigation.indexes
+      - navigation.top
+      - search.highlight
+      - search.suggest
+      - search.share
+      - content.code.annotate
+      - header.autohide
+      - announce.dismiss
+      - toc.follow
+
+  icon:
+    repo: 'fontawesome/brands/github'
+
+  palette:
+
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      scheme: default
+      toggle:
+        icon: material/brightness-auto
+        name: Follow system preferences
+
+    # Toggle light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: 'black'
+      accent: 'orange'
+      toggle:
+        icon: material/brightness-7
+        name: Burn my eyes!
+
+    # Toggle dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: 'black'
+      accent: 'orange'
+      toggle:
+        icon: material/brightness-4
+        name: Love my eyes!
+
+  font:
+    text: 'Ubuntu'
+    code: 'Ubuntu Mono'
+
+
+markdown_extensions:
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - attr_list
+  - admonition
+  - pymdownx.details
+  - pymdownx.snippets:
+      check_paths: true
+  - def_list
+  - pymdownx.tasklist:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+
+nav:
+
+  - Home: index.md
+
+  - Getting Started:
+    - 00-getting-started/about.md
+
+  #- Administration:
+  #  - administration/fluxcd.md
+
+  - How-to guides:
+    #- guides/fluxcd.md
+    #- guides/helpful_commands.md
+    #- guides/loki.md
+    - 01-how-to-guides/aws.md
+    - 01-how-to-guides/networking.md
+    - 01-how-to-guides/secret_management.md
+    - 01-how-to-guides/volumes-and-storage.md
+    #- guides/semantic_git_messages.md
+    #- guides/troubleshooting.md
+
+
+
+  - Troubleshooting:
+  #  - 02-docs/index.md
+    - 03-troubleshooting/prometheus.md
+  #  - 02-docs/volumes-and-storage.md
+    #- Analytics:
+    #  #- observability/analytics/index.md
+    #  - observability/analytics/elk.md
+
+    #- Data Platform:
+    #  #- observability/data-platform/index.md
+    #  - 02-docs/data-platform/prometheus.md
