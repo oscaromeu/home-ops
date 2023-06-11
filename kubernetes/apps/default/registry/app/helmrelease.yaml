@@ -31,13 +31,15 @@ spec:
       existingClaim: registry
     replicaCount: 1
     ingress:
+      annotations:
+        external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
       enabled: true
       className: nginx
       hosts:
-        - "docker.${SECRET_DOMAIN}"
+        - "registry.${SECRET_DOMAIN}"
       tls:
         - hosts:
-            - "docker.${SECRET_DOMAIN}"
+            - "registry.${SECRET_DOMAIN}"
 
   valuesFrom:
     - targetPath: secrets.htpasswd

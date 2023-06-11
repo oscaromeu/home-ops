@@ -6,6 +6,4 @@ resources:
   - ./helmrelease.yaml
   - ./externalsecret.yaml
   - ./pvc.yaml
-  # https://icon-sets.iconify.design/simple-icons/drone/
-  - ./tunnelbinding.yaml
 
