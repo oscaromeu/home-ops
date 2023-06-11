@@ -9,7 +9,6 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-ingress-nginx
-    - name: cluster-apps-cloudflare-operator-tunnels
   path: ./kubernetes/apps/longhorn/longhorn/app
   prune: true
   sourceRef:

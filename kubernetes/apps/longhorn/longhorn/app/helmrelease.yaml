@@ -39,6 +39,7 @@ spec:
       tls: true
       host: "longhorn.${SECRET_DOMAIN}"
       annotations:
+        external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
         external-dns.home.arpa/enabled: "true"
         hajimari.io/icon: iconoir:database-backup
         hajimari.io/enable: "true"
