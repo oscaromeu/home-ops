@@ -45,7 +45,7 @@ spec:
     # https://github.com/sissbruecker/linkding/issues/145
     persistence:
       data:
-        enabled: true
+        enabled: false
         mountPath: /etc/linkding/data
         existingClaim: ld-config-pvc
         subPath: linkding
