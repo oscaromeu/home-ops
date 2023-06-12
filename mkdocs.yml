@@ -100,10 +100,10 @@ nav:
   #  - 02-docs/index.md
     - 03-troubleshooting/prometheus.md
   #  - 02-docs/volumes-and-storage.md
-    #- Analytics:
+    - Flow & Policy Logging:
     #  #- observability/analytics/index.md
-    #  - observability/analytics/elk.md
+      - observability/analytics/elk.md
 
-    #- Data Platform:
+    - Ops & Sec Metrics:
     #  #- observability/data-platform/index.md
-    #  - 02-docs/data-platform/prometheus.md
+      - 02-docs/data-platform/prometheus.md
