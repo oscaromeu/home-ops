@@ -12,7 +12,7 @@ spec:
     - name: cluster-apps-external-secrets-stores
     - name: cluster-apps-elastic-operator
     - name: cluster-apps-longhorn
-    - name: cluster-apps-kube-prometheus
+    - name: cluster-apps-kube-prometheus-stack
   path: ./kubernetes/apps/logging/elastic/app
   prune: true
   sourceRef:
