@@ -6,4 +6,3 @@ resources:
   - node-type-svc.yaml
   - elastic-ingress.yaml
   - kibana-ingress.yaml
-  - tunnelbinding.yaml

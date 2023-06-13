@@ -2,6 +2,7 @@
  kind: Ingress
  metadata:
    annotations:
+     external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
      cert-manager.io/cluster-issuer: letsencrypt-staging
      nginx.ingress.kubernetes.io/backend-protocol: HTTPS
      nginx.ingress.kubernetes.io/whitelist-source-range: |
