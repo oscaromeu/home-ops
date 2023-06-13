@@ -8,3 +8,4 @@ resources:
   - ./kubernetes-dashboard/ks.yaml
   - ./vpa/ks.yaml
   - ./goldilocks/ks.yaml
+  - ./dashboards
