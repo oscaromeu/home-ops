@@ -33,7 +33,6 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-cloudflare-operator
     - name: cluster-apps-redis
   path: ./kubernetes/apps/logging/vector/aggregator
   prune: true
