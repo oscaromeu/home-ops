@@ -45,6 +45,7 @@ spec:
         enabled: true
         ingressClassName: nginx
         annotations:
+          external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
           hajimari.io/enable: "true"
           hajimari.io/icon: mdi:align-vertical-top
         hosts:
