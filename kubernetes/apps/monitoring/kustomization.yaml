@@ -6,3 +6,5 @@ resources:
   - ./grafana/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./kubernetes-dashboard/ks.yaml
+  - ./vpa/ks.yaml
+  - ./goldilocks/ks.yaml
