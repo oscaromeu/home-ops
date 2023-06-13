@@ -10,7 +10,6 @@ spec:
   dependsOn:
     - name: cluster-apps-ingress-nginx
     - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-cloudflare-operator-tunnels
     - name: cluster-apps-elastic-operator
     - name: cluster-apps-longhorn
     - name: cluster-apps-kube-prometheus
