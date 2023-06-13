@@ -8,7 +8,6 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-cloudflare-operator-tunnels
     - name: cluster-apps-vpa
     - name: cluster-apps-kube-prometheus-stack
   path: ./kubernetes/apps/monitoring/goldilocks/app
