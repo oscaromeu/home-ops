@@ -1,36 +1,15 @@
----
-#
-# Sources
-#
-sources:
-  k3s:
-    type: redis
-    url: redis://redis-master.logging.svc.cluster.local:6379/0
-    key: "k3s_prod"
-    decoding:
-      codec: json
 
-#
-# Transforms
-#
-transforms:
-  kubernetes_remap:
-    type: remap
-    inputs: ["k3s"]
-    source: |
-      # Standardize 'app' index
-      .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
+## Vector pipeline with double sink is stucked
 
-      # Standardize 'message' name
-      .log = .message
-#
-# Sinks
-#
+A pipeline with double sink may be get stucked if one of the sinks is failing. For example,
+in `k3s` aggregator pipeline with double output as shown below:
+
+```yaml
 sinks:
   elasticsearch:
     type: elasticsearch
-    batch:
-      max_bytes: 2049000
+    #batch:
+    #  max_bytes: 2049000
     inputs:
       - kubernetes_remap
     auth:
@@ -69,3 +48,6 @@ sinks:
       app: '{{ custom_app_name }}'
       namespace: '{{ kubernetes.pod_namespace }}'
       node: '{{ kubernetes.pod_node_name }}'
+```
+
+If the connection to loki fails

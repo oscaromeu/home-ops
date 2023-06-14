@@ -94,16 +94,19 @@ nav:
     #- guides/semantic_git_messages.md
     #- guides/troubleshooting.md
 
+  - Documentation:
+    - Flow & Policy Logging:
+    #  #- observability/analytics/index.md
+      - 02-docs/observability/analytics/elk.md
+
+    - Ops & Sec Metrics:
+    #  #- observability/data-platform/index.md
+      - 02-docs/data-platform/prometheus.md
 
 
   - Troubleshooting:
   #  - 02-docs/index.md
     - 03-troubleshooting/prometheus.md
+    - 03-troubleshooting/vector.md
   #  - 02-docs/volumes-and-storage.md
-    - Flow & Policy Logging:
-    #  #- observability/analytics/index.md
-      - observability/analytics/elk.md
 
-    - Ops & Sec Metrics:
-    #  #- observability/data-platform/index.md
-      - 02-docs/data-platform/prometheus.md
