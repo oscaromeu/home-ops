@@ -69,10 +69,10 @@ spec:
 
     resources:
       requests:
-        cpu: 200m
-        memory: 256Mi
+        cpu: 78m
+        memory: 88Mi
       limits:
-        memory: 256Mi
+        memory: 88Mi
 
     podAnnotations:
       configmap.reloader.stakater.com/reload: vector-agent
