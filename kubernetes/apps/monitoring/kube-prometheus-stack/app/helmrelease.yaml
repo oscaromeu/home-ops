@@ -122,6 +122,8 @@ spec:
           - hosts:
               - *host
       prometheusSpec:
+        externalLabels:
+          cluster: homelab
         ruleSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
