@@ -123,7 +123,7 @@ spec:
               - *host
       prometheusSpec:
         externalLabels:
-          cluster: homelab
+          cluster: homelabz
         ruleSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false

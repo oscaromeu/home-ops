@@ -60,9 +60,9 @@ spec:
         default-ssl-certificate: "networking/${SECRET_DOMAIN/./-}-production-tls"
       resources:
         requests:
-          cpu: 10m
-          memory: 250Mi
+          cpu: 8m
+          memory: 245Mi
         limits:
-          memory: 500Mi
+          memory: 245Mi
     defaultBackend:
       enabled: false

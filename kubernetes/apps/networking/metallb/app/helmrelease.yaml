@@ -28,3 +28,17 @@ spec:
   values:
     crds:
       enabled: true
+    controller:
+      resources:
+        requests:
+          cpu: 7m
+          memory: 65Mi
+        limits:
+          memory: 65Mi
+    #speaker:
+    #  resources:
+    #    requests:
+    #      cpu: 7m
+    #      memory: 65Mi
+    #    limits:
+    #      memory: 65Mi
