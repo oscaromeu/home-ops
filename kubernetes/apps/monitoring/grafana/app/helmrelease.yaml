@@ -95,3 +95,13 @@ spec:
       storageClassName: local-path
     testFramework:
       enabled: false
+
+    plugins:
+      - digrich-bubblechart-panel
+      - grafana-clock-panel
+      - redis-datasource
+      - marcusolsson-hexmap-panel
+      - grafana-polystat-panel
+      - pyroscope-panel
+      - flant-statusmap-panel
+      - marcusolsson-csv-datasource
