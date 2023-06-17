@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: redis-exporter
-        image: oliver006/redis_exporter:v1.50.0
+        image: oliver006/redis_exporter:v1.51.0
         resources:
           requests:
             cpu: 10m
