@@ -19,7 +19,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: *job
-              image: ghcr.io/onedr0p/kubernetes-kubectl:1.26.2@sha256:ac57906914821d74d65f880984c1af869a0bb33758d0701f227cf294e3665de5
+              image: ghcr.io/onedr0p/kubernetes-kubectl:1.27.3@sha256:fcc5372b0e1e3d51c0d3a95282fdfd80aeb389aa4077fd430276c511857313cf
               command:
                 - "/bin/bash"
                 - &path "/app/api-query.sh"
