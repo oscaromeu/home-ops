@@ -41,6 +41,15 @@ spec:
         - hosts:
             - "registry.${SECRET_DOMAIN}"
 
+
+    resources:
+      requests:
+        cpu: 5m
+        memory: 9766Ki
+      limits:
+        #cpu: 1000m
+        memory: 9766Ki
+
   valuesFrom:
     - targetPath: secrets.htpasswd
       kind: Secret
