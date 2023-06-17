@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: passbolt
-      version: 0.2.1
+      version: 0.3.3
       sourceRef:
         kind: HelmRepository
         name: passbolt
