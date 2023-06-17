@@ -9,3 +9,4 @@ resources:
   - ./vpa/ks.yaml
   - ./goldilocks/ks.yaml
   - ./dashboards
+  - ./kubernetes-events-exporter/ks.yaml
