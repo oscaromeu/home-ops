@@ -40,3 +40,29 @@ spec:
       servicemonitor:
         enabled: true
         prometheusInstance: monitoring
+
+    resources:
+      requests:
+        cpu: 5m
+        memory: 57Mi
+      limits:
+        #cpu: 1000m
+        memory: 57Mi
+
+    webhook:
+      resources:
+        requests:
+          cpu: 5m
+          memory: 57Mi
+        limits:
+          #cpu: 1000m
+          memory: 57Mi
+
+    cainjector:
+      resources:
+        requests:
+          cpu: 5m
+          memory: 16Mi
+        limits:
+          #cpu: 1000m
+          memory: 16Mi
