@@ -47,7 +47,7 @@ spec:
         memory: 57Mi
       limits:
         #cpu: 1000m
-        memory: 114Mi
+        memory: 57Mi
 
     webhook:
       resources:
@@ -56,7 +56,7 @@ spec:
           memory: 57Mi
         limits:
           #cpu: 1000m
-          memory: 114Mi
+          memory: 57Mi
 
     cainjector:
       resources:
@@ -65,4 +65,4 @@ spec:
           memory: 109Mi
         limits:
           #cpu: 1000m
-          memory: 200Mi
+          memory: 109Mi
