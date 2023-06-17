@@ -142,6 +142,17 @@ spec:
   config:
     server:
       publicBaseUrl: "https://kibana.${SECRET_DOMAIN}"
+  podTemplate:
+    spec:
+      containers:
+      - name: kibana
+        resources:
+          requests:
+            cpu: 56m
+            memory: 494Mi
+          limits:
+            memory: 494Mi
+            #cpu: 1
 
   #nodeSelector:
   #  kubernetes.io/arch: amd64
