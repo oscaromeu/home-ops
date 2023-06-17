@@ -120,6 +120,13 @@ spec:
         tls:
           - hosts:
               - *host
+      resources:
+        requests:
+          cpu: 5m
+          memory: 26Mi
+        limits:
+          #cpu:
+          memory: 26Mi
     read:
       persistence:
         storageClass: local-path
@@ -129,12 +136,34 @@ spec:
       extraVolumes:
         - name: rules
           emptyDir: {}
+      resources:
+        requests:
+          cpu: 26m
+          memory: 81Mi
+        limits:
+          #cpu:
+          memory: 81Mi
     write:
       persistence:
         storageClass: local-path
+      resources:
+        requests:
+          cpu: 17m
+          memory: 52Mi
+        limits:
+          #cpu:
+          memory: 52Mi
+
     backend:
       persistence:
         storageClass: local-path
+      resources:
+        requests:
+          cpu: 8m
+          memory: 4Mi
+        limits:
+          #cpu:
+          memory: 48Mi
       extraVolumeMounts:
         - name: rules
           mountPath: /rules/fake
@@ -162,6 +191,14 @@ spec:
           installOperator: false
       lokiCanary:
         enabled: false
+        #resources:
+        #  requests:
+        #    cpu:
+        #    memory:
+        #  limits:
+        #    #cpu:
+        #    memory:
+
     test:
       enabled: false
   valuesFrom:
