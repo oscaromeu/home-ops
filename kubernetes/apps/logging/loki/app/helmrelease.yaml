@@ -28,6 +28,7 @@ spec:
     keepHistory: false
   values:
     loki:
+      auth_enabled: false
       structuredConfig:
         auth_enabled: false
         server:
