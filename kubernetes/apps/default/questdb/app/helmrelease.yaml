@@ -60,7 +60,7 @@ spec:
       hosts:
         - host: "questdb.${SECRET_DOMAIN}"
           paths:
-            - path: /
+            - /
 
       tls:
         - hosts:
