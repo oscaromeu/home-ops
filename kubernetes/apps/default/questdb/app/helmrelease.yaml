@@ -61,7 +61,6 @@ spec:
         - host: "questdb.${SECRET_DOMAIN}"
           paths:
             - path: /
-              pathType: Prefix
 
       tls:
         - hosts:
