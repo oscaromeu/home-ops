@@ -38,4 +38,4 @@ spec:
         memory: 46Mi
       limits:
         #cpu: 1000m
-        memory: 46Mi
+        memory: 92Mi
