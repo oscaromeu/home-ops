@@ -10,3 +10,4 @@ resources:
   - ./goldilocks/ks.yaml
   - ./dashboards
   - ./kubernetes-events-exporter/ks.yaml
+  - ./thanos/ks.yaml

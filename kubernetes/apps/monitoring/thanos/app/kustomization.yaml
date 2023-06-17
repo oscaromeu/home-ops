@@ -5,5 +5,4 @@ resources:
   - ./secret.sops.yaml
   - ./helmrelease.yaml
   #- ./dashboards
-  - ./tunnelbinding.yaml
 
