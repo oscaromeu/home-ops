@@ -32,7 +32,7 @@ spec:
       storage:
         type: s3
         s3:
-          endpoint: null"
+          endpoint: null
           region: "eu-west-1"
           s3ForcePathStyle: true
           insecure: true
