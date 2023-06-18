@@ -3,6 +3,6 @@ kind: Kustomization
 
 resources:
   - ./secret.sops.yaml
-  - ./helmrelease.yaml
+  #- ./helmrelease.yaml
   #- ./dashboards
 
