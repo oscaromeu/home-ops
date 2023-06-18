@@ -93,7 +93,7 @@ spec:
           memory: 26Mi
         limits:
           #cpu:
-          memory: 26Mi
+          memory: 52Mi
 
     read:
       persistence:
@@ -111,7 +111,7 @@ spec:
           memory: 81Mi
         limits:
           #cpu:
-          memory: 81Mi
+          memory: 160Mi
 
     write:
       persistence:
@@ -123,7 +123,7 @@ spec:
           memory: 52Mi
         limits:
           #cpu:
-          memory: 52Mi
+          memory: 100Mi
 
     backend:
       persistence:
