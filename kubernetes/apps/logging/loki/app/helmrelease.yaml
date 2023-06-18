@@ -28,7 +28,40 @@ spec:
     keepHistory: false
   values:
     loki:
+      # https://grafana.com/docs/loki/latest/installation/helm/reference/
+      # https://grafana.com/docs/loki/latest/configuration/
       auth_enabled: false
+      analytics: false
+      limits_config:
+        #query_timeout: 1m
+        retention_period: 14d
+        enforce_metric_name: false
+        reject_old_samples: true
+        reject_old_samples_max_age: 168h
+        max_cache_freshness_per_query: 10m
+        split_queries_by_interval: 15m
+        ingestion_rate_mb: 50
+        ingestion_burst_size_mb: 1000
+        per_stream_rate_limit: 5MB
+        per_stream_rate_limit_burst: 20MB
+        shard_streams:
+          enabled: true
+
+      server:
+        http_server_read_timeout: 1m
+        http_server_write_timeout: 1m
+
+
+      schema_config:
+        configs:
+          - from: "2022-01-11" # quote
+            store: boltdb-shipper
+            object_store: s3
+            schema: v12
+            index:
+              prefix: loki_index_
+              period: 24h
+
       storage:
         type: s3
         s3:
@@ -54,13 +87,70 @@ spec:
         tls:
           - hosts:
               - *host
+      resources:
+        requests:
+          cpu: 5m
+          memory: 26Mi
+        limits:
+          #cpu:
+          memory: 26Mi
+
+    read:
+      persistence:
+        storageClass: local-path
+        size: 5Gi
+      #extraVolumeMounts:
+      #  - name: rules
+      #    mountPath: /rules
+      #extraVolumes:
+      #  - name: rules
+      #    emptyDir: {}
+      resources:
+        requests:
+          cpu: 26m
+          memory: 81Mi
+        limits:
+          #cpu:
+          memory: 81Mi
+
+    write:
+      persistence:
+        storageClass: local-path
+        size: 5Gi
+      resources:
+        requests:
+          cpu: 17m
+          memory: 52Mi
+        limits:
+          #cpu:
+          memory: 52Mi
+
+    backend:
+      persistence:
+        storageClass: local-path
+        size: 5Gi
+      resources:
+        requests:
+          cpu: 8m
+          memory: 4Mi
+        limits:
+          #cpu:
+          memory: 48Mi
+      #extraVolumeMounts:
+      #  - name: rules
+      #    mountPath: /rules/fake
+      #  - name: scratch
+      #    mountPath: /tmp/scratch
+      #extraVolumes:
+      #  - name: rules
+      #    configMap:
+      #      name: loki-alerting-rules
+      #  - name: scratch
+      #    emptyDir: {}
 
     monitoring:
       dashboards:
-        annotations:
-          kustomize.toolkit.fluxcd.io/substitute: disabled
-        labels:
-          grafana_dashboard: "false"
+        enabled: false
       serviceMonitor:
         enabled: false
         metricsInstance:
@@ -73,6 +163,7 @@ spec:
         enabled: false
     test:
       enabled: false
+
   valuesFrom:
     - targetPath: loki.storage.bucketNames.chunks
       kind: Secret
