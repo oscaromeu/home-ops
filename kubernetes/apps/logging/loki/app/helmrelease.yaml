@@ -35,37 +35,7 @@ spec:
           region: "eu-west-1"
           s3ForcePathStyle: false
           insecure: false
-        ruler:
-          enable_api: true
-          enable_alertmanager_v2: true
-          #alertmanager_url: http://kube-prometheus-stack-alertmanager:9093
-          storage:
-            type: local
-            local:
-              directory: /rules
-          rule_path: /tmp/scratch
-          ring:
-            kvstore:
-              store: memberlist
-        distributor:
-          ring:
-            kvstore:
-              store: memberlist
-        compactor:
-          working_directory: /var/loki/boltdb-shipper-compactor
-          shared_store: s3
-          compaction_interval: 10m
-          retention_enabled: true
-          retention_delete_delay: 2h
-          retention_delete_worker_count: 150
-        ingester:
-          max_chunk_age: 1h
-          lifecycler:
-            ring:
-              kvstore:
-                store: memberlist
-        analytics:
-          reporting_enabled: false
+
     gateway:
       replicas: 3
       ingress:
@@ -79,32 +49,7 @@ spec:
         tls:
           - hosts:
               - *host
-    read:
-      persistence:
-        storageClass: local-path
-      extraVolumeMounts:
-        - name: rules
-          mountPath: /rules
-      extraVolumes:
-        - name: rules
-          emptyDir: {}
-    write:
-      persistence:
-        storageClass: local-path
-    backend:
-      persistence:
-        storageClass: local-path
-      extraVolumeMounts:
-        - name: rules
-          mountPath: /rules/fake
-        - name: scratch
-          mountPath: /tmp/scratch
-      extraVolumes:
-        - name: rules
-          configMap:
-            name: loki-alerting-rules
-        - name: scratch
-          emptyDir: {}
+
     monitoring:
       dashboards:
         annotations:
