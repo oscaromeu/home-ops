@@ -70,15 +70,15 @@ spec:
     test:
       enabled: false
   valuesFrom:
-    - targetPath: loki.storage.s3.bucketNames.chunks
+    - targetPath: loki.storage.bucketNames.chunks
       kind: Secret
       name: loki-bucket-v2
       valuesKey: BUCKET_NAME
-    - targetPath: loki.storage.s3.bucketNames.ruler
+    - targetPath: loki.storage.bucketNames.ruler
       kind: Secret
       name: loki-bucket-v2
       valuesKey: BUCKET_NAME
-    - targetPath: loki.storage.s3.bucketNames.admin
+    - targetPath: loki.storage.bucketNames.admin
       kind: Secret
       name: loki-bucket-v2
       valuesKey: BUCKET_NAME
