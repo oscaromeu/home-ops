@@ -32,10 +32,13 @@ spec:
       storage:
         type: s3
         s3:
-          s3: s3://eu-west-1/loki-a41e709ee34555404f68b146e7334c523272
           region: "eu-west-1"
           s3ForcePathStyle: true
           insecure: true
+        bucketNames:
+          chunks: loki-a41e709ee34555404f68b146e7334c523272
+          ruler: loki-a41e709ee34555404f68b146e7334c523272
+          admin: loki-a41e709ee34555404f68b146e7334c523272
 
     gateway:
       replicas: 3
