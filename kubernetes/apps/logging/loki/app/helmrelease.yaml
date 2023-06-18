@@ -28,6 +28,7 @@ spec:
     keepHistory: false
   values:
     loki:
+      auth_enabled: false
       storage:
         type: s3
         s3:
