@@ -151,7 +151,7 @@ spec:
             cpu: 1200m
             memory: 494Mi
           limits:
-            memory: 494Mi
+            memory: 900Mi
             #cpu: 1
 
   #nodeSelector:
