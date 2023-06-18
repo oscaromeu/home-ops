@@ -395,7 +395,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "e517ff00-9c8c-42e1-b9bd-42e94db23561"
       },
       "gridPos": {
         "h": 8,
@@ -418,21 +418,19 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "e517ff00-9c8c-42e1-b9bd-42e94db23561"
           },
           "editorMode": "code",
           "expr": "{app=\"event-exporter\"} | json |  line_format \"{{ .message }}\" |  line_format \"{{.log}}\" |  json | line_format \"{{ .involvedObject_namespace }} {{ .type }}  {{ .reason }} {{ .involvedObject_kind }}/{{ .involvedObject_name }} {{ .message }}\" | type = \"Warning\" or type = \"Error\"",
-          "hide": false,
           "queryType": "range",
           "refId": "A"
         },
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "e517ff00-9c8c-42e1-b9bd-42e94db23561"
           },
-          "editorMode": "code",
-          "expr": "{app=\"event-exporter\"} | json |  line_format \"{{ .message }}\" |  line_format \"{{.log}}\" |  json | line_format \"{{ .involvedObject_namespace }} {{ .type }}  {{ .reason }} {{ .involvedObject_kind }}/{{ .involvedObject_name }} {{ .message }}\" | type = \"Warning|Error\"",
+          "expr": "{app=\"event-exporter\"}",
           "hide": true,
           "queryType": "range",
           "refId": "B"
@@ -444,59 +442,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
+        "uid": "e517ff00-9c8c-42e1-b9bd-42e94db23561"
       },
       "gridPos": {
         "h": 7,
@@ -506,57 +452,49 @@
       },
       "id": 18,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
       },
       "pluginVersion": "9.3.6",
       "targets": [
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "e517ff00-9c8c-42e1-b9bd-42e94db23561"
           },
           "editorMode": "code",
           "expr": "sum(count_over_time({app=\"event-exporter\"} |~ \"$probe\" | json |  line_format \"{{ .message }}\" |  line_format \"{{.log}}\" |  json [$__interval])) by (involvedObject_labels_app_kubernetes_io_name)",
-          "hide": false,
-          "legendFormat": "{{ involvedObject_labels_app_kubernetes_io_name }}",
           "queryType": "range",
           "refId": "A"
         },
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "e517ff00-9c8c-42e1-b9bd-42e94db23561"
           },
-          "editorMode": "code",
-          "expr": "sum(count_over_time({app=\"event-exporter\"} |~ \"$probe\" | json |  line_format \"{{ .message }}\" |  line_format \"{{.log}}\" |  json [$__interval])) by (source_host, involvedObject_labels_app_kubernetes_io_name)",
+          "expr": "{app=\"event-exporter\"}",
           "hide": true,
-          "legendFormat": "{{ source_host }} - {{ involvedObject_labels_app_kubernetes_io_name }}  ",
           "queryType": "range",
           "refId": "B"
         },
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "e517ff00-9c8c-42e1-b9bd-42e94db23561"
           },
-          "editorMode": "code",
-          "expr": "{app=\"event-exporter\"} | json |  line_format \"{{ .message }}\" |  line_format \"{{.log}}\" |  json | line_format \"{{ .involvedObject_namespace }} {{ .type }}  {{ .reason }} {{ .involvedObject_kind }}/{{ .involvedObject_name }} {{ .message }}\" | type = \"Warning\" or type = \"Error\"",
-          "hide": true,
+          "expr": "{app=\"event-exporter\"}",
           "queryType": "range",
           "refId": "C"
         }
       ],
       "title": "Liveness / Readines Failed Probes",
-      "type": "timeseries"
+      "type": "logs"
     },
     {
       "datasource": {
@@ -904,9 +842,10 @@
     "list": [
       {
         "current": {
-          "selected": false,
-          "text": "homelab",
-          "value": "homelab"
+          "isNone": true,
+          "selected": true,
+          "text": "None",
+          "value": ""
         },
         "datasource": {
           "type": "prometheus",
@@ -931,8 +870,8 @@
       {
         "current": {
           "selected": false,
-          "text": "default",
-          "value": "default"
+          "text": "logging",
+          "value": "logging"
         },
         "datasource": {
           "type": "prometheus",
@@ -957,7 +896,7 @@
       },
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "probe failed",
           "value": "probe failed"
         },
@@ -973,6 +912,7 @@
           }
         ],
         "query": "probe failed",
+        "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
       }
@@ -986,6 +926,6 @@
   "timezone": "",
   "title": "Kubernetes Overview",
   "uid": "maSfOmA4k",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
