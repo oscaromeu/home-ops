@@ -93,7 +93,7 @@ spec:
           memory: 26Mi
         limits:
           #cpu:
-          memory: 52Mi
+          memory: 500Mi
 
     read:
       persistence:
@@ -111,7 +111,7 @@ spec:
           memory: 81Mi
         limits:
           #cpu:
-          memory: 160Mi
+          memory: 500Mi
 
     write:
       persistence:
@@ -123,7 +123,7 @@ spec:
           memory: 52Mi
         limits:
           #cpu:
-          memory: 100Mi
+          memory: 500Mi
 
     backend:
       persistence:
@@ -135,7 +135,7 @@ spec:
           memory: 4Mi
         limits:
           #cpu:
-          memory: 48Mi
+          memory: 500Mi
       #extraVolumeMounts:
       #  - name: rules
       #    mountPath: /rules/fake
