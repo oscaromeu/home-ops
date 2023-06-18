@@ -27,6 +27,10 @@ This project aims to achieve its goals while adhering to industry-standard pract
     - CPU: `AMD Ryzen 5 3550H`
     - RAM: `32GB`
     - SSD: `512GB`
+- 1 × Vant `moove15`:
+    - CPU: `Intel Core i7-1255u`
+    - RAM: `16GB`
+    - SSD: `512GB`
 - 1 x Raspberry pi
     - CPU: `ARM Cortex-A72 processor`
     - RAM: `8GB`
