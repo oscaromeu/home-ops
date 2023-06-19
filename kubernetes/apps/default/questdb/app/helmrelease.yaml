@@ -36,7 +36,7 @@ spec:
       enabled: true
       accessMode: ReadWriteOnce
       size: 1Gi
-      annotations: {}
+      storageClass: local-path
 
     resources:
       requests:
