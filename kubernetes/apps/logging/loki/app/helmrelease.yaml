@@ -119,8 +119,8 @@ spec:
         size: 5Gi
       resources:
         requests:
-          cpu: 17m
-          memory: 52Mi
+          cpu: 119m
+          memory: 260Mi
         limits:
           #cpu:
           memory: 500Mi
@@ -131,8 +131,8 @@ spec:
         size: 5Gi
       resources:
         requests:
-          cpu: 8m
-          memory: 4Mi
+          cpu: 28m
+          memory: 91Mi
         limits:
           #cpu:
           memory: 500Mi
