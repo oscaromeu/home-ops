@@ -59,13 +59,13 @@ spec:
         hajimari.io/icon: "alarm-light-outline"
 
       hosts:
-        - host: "questdb.${SECRET_DOMAIN}"
+        - host: "qdb.${SECRET_DOMAIN}"
           paths:
             - /
 
       tls:
         - hosts:
-            - "questdb.${SECRET_DOMAIN}"
+            - "qdb.${SECRET_DOMAIN}"
           secretName: questdb-certificates
 
 
