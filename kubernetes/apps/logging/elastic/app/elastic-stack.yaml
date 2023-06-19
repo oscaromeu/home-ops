@@ -36,8 +36,8 @@ spec:
               value: "10"
           resources:
             requests:
-              memory: 5Gi
-              cpu: 113m
+              memory: 4Gi
+              cpu: 164m
             limits:
               memory: 10Gi
 
@@ -101,10 +101,10 @@ spec:
 
           resources:
             requests:
-              memory: 2Gi
-              cpu: 500m
+              memory: 6Gi
+              cpu: 71m
             limits:
-              memory: 4Gi
+              memory: 10Gi
         #affinity:
         #  podAntiAffinity:
         #    preferredDuringSchedulingIgnoredDuringExecution:
@@ -148,10 +148,10 @@ spec:
       - name: kibana
         resources:
           requests:
-            cpu: 1200m
-            memory: 494Mi
+            cpu: 32mm
+            memory: 762Mi
           limits:
-            memory: 900Mi
+            memory: 1.5Gi
             #cpu: 1
 
   #nodeSelector:
