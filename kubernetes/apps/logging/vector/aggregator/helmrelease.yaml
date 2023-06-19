@@ -89,10 +89,10 @@ spec:
 
     resources:
       requests:
-        cpu: 948m
-        memory: 179Mi
+        cpu: 18m
+        memory: 129Mi
       limits:
-        memory: 360Mi
+        memory: 1Gi
 
     podAnnotations:
       configmap.reloader.stakater.com/reload: vector-aggregator
