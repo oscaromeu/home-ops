@@ -90,7 +90,7 @@ spec:
       resources:
         requests:
           cpu: 5m
-          memory: 26Mi
+          memory: 12Mi
         limits:
           #cpu:
           memory: 500Mi
@@ -107,8 +107,8 @@ spec:
       #    emptyDir: {}
       resources:
         requests:
-          cpu: 26m
-          memory: 81Mi
+          cpu: 34m
+          memory: 77Mi
         limits:
           #cpu:
           memory: 500Mi

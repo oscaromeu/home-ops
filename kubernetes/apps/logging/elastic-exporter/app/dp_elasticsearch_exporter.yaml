@@ -74,8 +74,6 @@ spec:
                 - SYS_CHROOT
                 - SETFCAP
             readOnlyRootFilesystem: true
-          resources:
-            {}
           ports:
             - containerPort: 9108
               name: http
@@ -93,6 +91,13 @@ spec:
             initialDelaySeconds: 1
             timeoutSeconds: 5
             periodSeconds: 5
+          resources:
+            requests:
+              cpu: 11m
+              memory: 20Mi
+            limits:
+              #cpu:
+              memory: 100Mi
           lifecycle:
             preStop:
               exec:
