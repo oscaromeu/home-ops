@@ -33,6 +33,13 @@ spec:
       persistence:
         enabled: true
         size: 512Mi
+    resources:
+      requests:
+        cpu: 36m
+        memory: 138Mi
+      limits:
+        #cpu:
+        memory: 12Gi
     metrics:
       enabled: false
       serviceMonitor:
