@@ -8,16 +8,16 @@ resources:
   #- ./demo-service/ks.yaml
   #- ./knative-operator/ks.yaml
   - ./redis/ks.yaml
-  - ./excalidraw/ks.yaml
-  - ./cloudnative-pg/ks.yaml
+  #- ./excalidraw/ks.yaml
+  #- ./cloudnative-pg/ks.yaml
   #- ./clickhouse/ks.yaml
-  - ./jupyterhub/ks.yaml
+  #- ./jupyterhub/ks.yaml
   #- ./vaultwarden/ks.yaml
-  - ./linkding/ks.yaml
+  #- ./linkding/ks.yaml
   #- ./glauth/ks.yaml
   #- ./authelia/ks.yaml
   #- ./maddy/ks.yaml
-  - ./gitea/ks.yaml
+  #- ./gitea/ks.yaml
   #- ./vikunja/ks.yaml
   #- ./woodpecker/ks.yaml
   #- ./lldap/ks.yaml
