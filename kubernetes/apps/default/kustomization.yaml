@@ -9,7 +9,7 @@ resources:
   #- ./knative-operator/ks.yaml
   - ./redis/ks.yaml
   #- ./excalidraw/ks.yaml
-  #- ./cloudnative-pg/ks.yaml
+  - ./cloudnative-pg/ks.yaml
   #- ./clickhouse/ks.yaml
   #- ./jupyterhub/ks.yaml
   #- ./vaultwarden/ks.yaml
