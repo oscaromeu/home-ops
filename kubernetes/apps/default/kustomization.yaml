@@ -8,7 +8,7 @@ resources:
   #- ./demo-service/ks.yaml
   #- ./knative-operator/ks.yaml
   - ./redis/ks.yaml
-  #- ./excalidraw/ks.yaml
+  - ./excalidraw/ks.yaml
   - ./cloudnative-pg/ks.yaml
   #- ./clickhouse/ks.yaml
   #- ./jupyterhub/ks.yaml
