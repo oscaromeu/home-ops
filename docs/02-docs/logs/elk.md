@@ -176,7 +176,9 @@ The logs is composed by the following [Component Templates](https://www.elastic.
 | Total time spent on fetches     | `elasticsearch_indices_search_fetch_time_seconds`  | Work: Performance |
 | _Number of fetches currently in progress_  **  | `indices.search.fetch_current`    | Work: Throughput |
 
+## Alerting
 
+TBD
 
 ## References
 

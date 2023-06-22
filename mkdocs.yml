@@ -96,12 +96,11 @@ nav:
 
   - Documentation:
     - Flow & Policy Logging:
-    #  #- observability/analytics/index.md
       - 02-docs/logs/index.md
       - 02-docs/logs/elk.md
 
     - Ops & Sec Metrics:
-    #  #- observability/data-platform/index.md
+      - 02-docs/metrics/index.md
       - 02-docs/metrics/prometheus.md
 
 

@@ -655,15 +655,11 @@ To avoid duplicates, reduce memory consumption and minimize costs the following 
 + [`kube-proxy` (`{job="kube-proxy"}`)](https://github.com/oscaromeu/home-ops/blob/main/kubernetes/apps/monitoring/kube-prometheus-stack/app/helmrelease.yaml#L133-L141)
 
 
-## Rule evaluation and alerting
 
-```
-kubectl get prometheusrules -n monitoring --no-headers=true |\
-awk '{print $1}' |\
-xargs -I{} kubectl get prometheusrule {} -n monitoring -ojson |\
-jq '.spec.groups[].rules[]'
-```
 
+## Monitoring
+
+## Alerting
 
 ## References
 
