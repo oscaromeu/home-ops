@@ -291,8 +291,77 @@
     },
     {
       "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "description": "The query calculates the number of time series per job and metric name. Only the top 10 are shown.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 4
+      },
+      "id": 10,
+      "options": {
+        "displayMode": "gradient",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "valueMode": "color"
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "topk(10,(count by (job, __name__) ({__name__!=\"\"})))",
+          "instant": true,
+          "legendFormat": "{{__name__}} - {{job}}",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Top 10 High Cardinality Series",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
         "type": "postgres",
-        "uid": "e7694255-0836-4e25-866c-245577a39c8c"
+        "uid": "e45927ad-9e32-40ef-919f-dfbc32f82a0c"
       },
       "fieldConfig": {
         "defaults": {
@@ -335,8 +404,8 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 24,
-        "x": 0,
+        "w": 12,
+        "x": 12,
         "y": 4
       },
       "id": 19,
@@ -363,12 +432,12 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "e7694255-0836-4e25-866c-245577a39c8c"
+            "uid": "e45927ad-9e32-40ef-919f-dfbc32f82a0c"
           },
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT * FROM \"data.csv\"",
+          "rawSql": "select * from home_ops_$namespace",
           "refId": "A",
           "sql": {
             "columns": [
@@ -395,10 +464,10 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "e517ff00-9c8c-42e1-b9bd-42e94db23561"
+        "uid": "P8E80F9AEF21F6940"
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 24,
         "x": 0,
         "y": 13
@@ -418,19 +487,20 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "e517ff00-9c8c-42e1-b9bd-42e94db23561"
+            "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{app=\"event-exporter\"} | json |  line_format \"{{ .message }}\" |  line_format \"{{.log}}\" |  json | line_format \"{{ .involvedObject_namespace }} {{ .type }}  {{ .reason }} {{ .involvedObject_kind }}/{{ .involvedObject_name }} {{ .message }}\" | type = \"Warning\" or type = \"Error\"",
+          "expr": "{app=\"event-exporter\"} | json |  line_format \"{{ .message }}\" | json | line_format \"{{ .involvedObject_namespace }} {{ .type }}  {{ .reason }} {{ .involvedObject_kind }}/{{ .involvedObject_name }} {{ .message }}\" | type = \"Warning\" or type = \"Error\"",
           "queryType": "range",
           "refId": "A"
         },
         {
           "datasource": {
             "type": "loki",
-            "uid": "e517ff00-9c8c-42e1-b9bd-42e94db23561"
+            "uid": "P8E80F9AEF21F6940"
           },
-          "expr": "{app=\"event-exporter\"}",
+          "editorMode": "code",
+          "expr": "{app=\"event-exporter\"} | json |  line_format \"{{ .message }}\" |  line_format \"{{.log}}\" |  json | line_format \"{{ .involvedObject_namespace }} {{ .type }}  {{ .reason }} {{ .involvedObject_kind }}/{{ .involvedObject_name }} {{ .message }}\" | type = \"Warning\" or type = \"Error\"",
           "hide": true,
           "queryType": "range",
           "refId": "B"
@@ -442,13 +512,13 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "e517ff00-9c8c-42e1-b9bd-42e94db23561"
+        "uid": "P8E80F9AEF21F6940"
       },
       "gridPos": {
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 22
       },
       "id": 18,
       "options": {
@@ -466,27 +536,28 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "e517ff00-9c8c-42e1-b9bd-42e94db23561"
+            "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
           "expr": "sum(count_over_time({app=\"event-exporter\"} |~ \"$probe\" | json |  line_format \"{{ .message }}\" |  line_format \"{{.log}}\" |  json [$__interval])) by (involvedObject_labels_app_kubernetes_io_name)",
+          "hide": true,
           "queryType": "range",
           "refId": "A"
         },
         {
           "datasource": {
             "type": "loki",
-            "uid": "e517ff00-9c8c-42e1-b9bd-42e94db23561"
+            "uid": "P8E80F9AEF21F6940"
           },
-          "expr": "{app=\"event-exporter\"}",
-          "hide": true,
+          "editorMode": "code",
+          "expr": "{app=\"event-exporter\"} |~ \"$probe\"",
           "queryType": "range",
           "refId": "B"
         },
         {
           "datasource": {
             "type": "loki",
-            "uid": "e517ff00-9c8c-42e1-b9bd-42e94db23561"
+            "uid": "P8E80F9AEF21F6940"
           },
           "expr": "{app=\"event-exporter\"}",
           "queryType": "range",
@@ -528,7 +599,7 @@
         "h": 10,
         "w": 12,
         "x": 0,
-        "y": 28
+        "y": 29
       },
       "id": 17,
       "options": {
@@ -561,75 +632,6 @@
         }
       ],
       "title": "Running Pods per Namespace",
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "description": "The query calculates the number of time series per job and metric name. Only the top 10 are shown.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 10,
-        "w": 12,
-        "x": 12,
-        "y": 28
-      },
-      "id": 10,
-      "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "valueMode": "color"
-      },
-      "pluginVersion": "9.5.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "topk(10,(count by (job, __name__) ({__name__!=\"\"})))",
-          "instant": true,
-          "legendFormat": "{{__name__}} - {{job}}",
-          "range": false,
-          "refId": "A"
-        }
-      ],
-      "title": "Top 10 High Cardinality Series",
       "type": "bargauge"
     },
     {
@@ -693,7 +695,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 38
+        "y": 39
       },
       "id": 6,
       "options": {
@@ -784,8 +786,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -800,7 +801,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 46
+        "y": 47
       },
       "id": 8,
       "options": {
@@ -926,6 +927,6 @@
   "timezone": "",
   "title": "Kubernetes Overview",
   "uid": "maSfOmA4k",
-  "version": 2,
+  "version": 1,
   "weekStart": ""
 }
