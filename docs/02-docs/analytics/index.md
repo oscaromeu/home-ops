@@ -1,4 +1,0 @@
-# Analytics
-
-+ [Elasticsearch](elk.md)
-
