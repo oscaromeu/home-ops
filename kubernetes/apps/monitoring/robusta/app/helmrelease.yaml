@@ -54,9 +54,8 @@ spec:
       log_level: DEBUG
       #additional_env_vars: []
       additional_env_froms:
-      - secretRef:
-        name: robusta-env-vars
-        optional: false
+        - secretRef:
+          name: robusta-env-vars
       resources:
         requests:
           cpu: 250m
