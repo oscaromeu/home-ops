@@ -46,10 +46,24 @@ spec:
       - robusta_sink:
           name: robusta_ui_sink
           token: ${ROBUSTA_SINK_TOKEN}
+
     enablePlatformPlaybooks: true
+
     runner:
-      sendAdditionalTelemetry: true
+      sendAdditionalTelemetry: false
       log_level: DEBUG
+      #additional_env_vars: []
+      additional_env_froms:
+      - secretRef:
+        name: robusta-env-vars
+        optional: false
+      resources:
+        requests:
+          cpu: 250m
+          memory: 1024Mi
+        limits:
+          cpu: ~
+          memory: 2048Mi
 
   valuesFrom:
     - kind: Secret
