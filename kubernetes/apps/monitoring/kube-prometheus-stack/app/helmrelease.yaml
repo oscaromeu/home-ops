@@ -121,15 +121,22 @@ spec:
         tls:
           - hosts:
               - *host
+      thanosService:
+        enabled: true
+      thanosServiceMonitor:
+        enabled: false
       prometheusSpec:
+        scrapeInterval: 60s
+        replicas: 3
         externalLabels:
-          cluster: home-ops
+          cluster: homeops
         ruleSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
         enableAdminAPI: true
         walCompression: true
+        retention: 2d
         retentionSize: 8GB
         storageSpec:
           volumeClaimTemplate:
@@ -138,3 +145,10 @@ spec:
               resources:
                 requests:
                   storage: 10Gi
+        thanos:
+          image: quay.io/thanos/thanos:v0.30.1
+          # renovate: datasource=docker depName=quay.io/thanos/thanos
+          version: "v0.30.1"
+          objectStorageConfig:
+            name: thanos-objstore
+            key: objstore.yml
