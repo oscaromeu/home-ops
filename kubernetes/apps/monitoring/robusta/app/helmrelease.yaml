@@ -55,7 +55,7 @@ spec:
       #additional_env_vars: []
       additional_env_froms:
         - secretRef:
-          name: robusta-env-vars
+            name: robusta-env-vars
       resources:
         requests:
           cpu: 250m
