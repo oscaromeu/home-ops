@@ -11,4 +11,4 @@ resources:
   - ./dashboards
   - ./kubernetes-events-exporter/ks.yaml
   - ./thanos/ks.yaml
-  #- ./robusta/ks.yaml
+  - ./robusta/ks.yaml
