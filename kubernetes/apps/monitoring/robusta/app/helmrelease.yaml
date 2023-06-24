@@ -41,11 +41,11 @@ spec:
       - slack_sink:
           name: main_slack_sink
           slack_channel: monitoring
-          api_key: $(SLACK_SINK_API_KEY)
+          api_key: ${SLACK_SINK_API_KEY}
 
       - robusta_sink:
           name: robusta_ui_sink
-          token: $(ROBUSTA_SINK_TOKEN)
+          token: ${ROBUSTA_SINK_TOKEN}
 
     enablePlatformPlaybooks: true
 
@@ -55,7 +55,7 @@ spec:
       #additional_env_vars: []
       additional_env_froms:
         - secretRef:
-            name: robusta-env-vars
+            name: robusta
       resources:
         requests:
           cpu: 250m
