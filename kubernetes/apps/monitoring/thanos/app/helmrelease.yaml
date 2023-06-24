@@ -51,6 +51,7 @@ spec:
         annotations:
           hajimari.io/enable: "true"
           hajimari.io/icon: simple-icons:prometheus
+          external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
       nodeSelector:
         kubernetes.io/arch: amd64
 
