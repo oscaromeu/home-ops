@@ -37,7 +37,7 @@ spec:
   values:
     query:
       enabled: true
-      replicaCount: 1
+      replicaCount: 3
       replicaLabels:
         - replica
       dnsDiscovery:
@@ -62,7 +62,7 @@ spec:
 
     bucketweb:
       enabled: true
-      replicaCount: 1
+      replicaCount: 3
       podAnnotations:
         secret.reloader.stakater.com/reload: *secret
       nodeSelector:
@@ -92,7 +92,9 @@ spec:
       podAntiAffinityPreset: hard
       persistence:
         enabled: true
+        storageClass: local-path
         size: 5Gi
+
       podAnnotations:
         secret.reloader.stakater.com/reload: *secret
       nodeSelector:
