@@ -41,11 +41,11 @@ spec:
       - slack_sink:
           name: main_slack_sink
           slack_channel: monitoring
-          api_key: ${SLACK_SINK_API_KEY}
+          api_key: "${SECRET_SLACK_SINK_API_KEY}"
 
       - robusta_sink:
           name: robusta_ui_sink
-          token: ${ROBUSTA_SINK_TOKEN}
+          token: "${SECRET_ROBUSTA_SINK_TOKEN}"
 
     enablePlatformPlaybooks: true
 
