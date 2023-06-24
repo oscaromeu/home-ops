@@ -49,13 +49,13 @@ spec:
       - name: LD_DB_USER
         valueFrom:
           secretKeyRef:
-            name: postgresql-user
-            key: username
+            name: linkding
+            key: LD_DB_USER
       - name: LD_DB_PASSWORD
         valueFrom:
           secretKeyRef:
-            name: postgresql-user
-            key: password
+            name: linkding
+            key: LD_DB_PASSWORD
     envFrom:
       - secretRef:
           name: *app
