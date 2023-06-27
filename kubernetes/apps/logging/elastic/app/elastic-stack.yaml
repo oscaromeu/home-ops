@@ -11,7 +11,7 @@ spec:
   volumeClaimDeletePolicy: DeleteOnScaledownOnly
   nodeSets:
   - name: master
-    count: 1
+    count: 3
     config:
       node.roles: ["master","data_hot","data_content", "remote_cluster_client"]
       node.attr.type: "hot"
@@ -37,7 +37,7 @@ spec:
           resources:
             requests:
               memory: 4Gi
-              cpu: 164m
+              cpu: 241m
             limits:
               memory: 10Gi
 
@@ -71,7 +71,7 @@ spec:
         storageClassName: local-path
 
   - name: data
-    count: 1
+    count: 3
     config:
       node.roles: ["data_warm", "data_content","remote_cluster_client"]
       node.store.allow_mmap: false
@@ -101,8 +101,8 @@ spec:
 
           resources:
             requests:
-              memory: 6Gi
-              cpu: 71m
+              memory: 4Gi
+              cpu: 241m
             limits:
               memory: 10Gi
         #affinity:
@@ -148,10 +148,10 @@ spec:
       - name: kibana
         resources:
           requests:
-            cpu: 32mm
-            memory: 762Mi
+            cpu: 92m
+            memory: 1.6Gi
           limits:
-            memory: 1.5Gi
+            memory: 2Gi
             #cpu: 1
 
   #nodeSelector:
