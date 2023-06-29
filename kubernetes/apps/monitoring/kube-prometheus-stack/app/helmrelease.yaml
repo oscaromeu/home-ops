@@ -32,17 +32,40 @@ spec:
     - name: local-path-provisioner
       namespace: kube-system
   values:
+
+    defaultRules:
+      create: false
+
     cleanPrometheusOperatorObjectNames: true
+
     alertmanager:
-      enabled: false
+      enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          hajimari.io/appName: "alertmanager"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "simple-icons:prometheus"
+        hosts:
+          - "alertmanager.${SECRET_DOMAIN}"
+        paths:
+          - /
+        pathType: ImplementationSpecific
+        tls:
+          - hosts:
+              - "alertmanager.${SECRET_DOMAIN}"
+        resources: {}
+
     grafana:
       enabled: false
       forceDeployDashboards: true
+      defaultDashboardsEnabled: true
       sidecar:
         dashboards:
           multicluster:
             etcd:
-              enabled: true
+              enabled: false
     kube-state-metrics:
       metricLabelsAllowlist:
         - "pods=[*]"
