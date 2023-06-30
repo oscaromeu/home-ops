@@ -33,6 +33,7 @@ spec:
       persistence:
         enabled: true
         size: 512Mi
+        storageClass: local-path
     resources:
       requests:
         cpu: 36m
