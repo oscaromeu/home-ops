@@ -39,7 +39,7 @@ spec:
     cleanPrometheusOperatorObjectNames: true
 
     alertmanager:
-      enabled: true
+      enabled: false
       ingress:
         enabled: true
         ingressClassName: nginx
