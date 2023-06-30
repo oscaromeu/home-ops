@@ -22,10 +22,6 @@ spec:
     master:
       nodeSelector:
         kubernetes.io/arch: amd64
-      persistence:
-        enabled: true
-        storageClass: local-path
-        size: 8Gi
     replica:
       replicaCount: 1
       nodeSelector:
