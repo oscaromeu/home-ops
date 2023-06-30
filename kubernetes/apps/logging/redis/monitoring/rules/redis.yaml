@@ -91,3 +91,12 @@ groups:
         annotations:
           summary: Redis rejected connections (instance {{ $labels.instance }})
           description: "Some connections to Redis has been rejected\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+      - alert: RedisKeyLenghtHigh
+        expr: redis_key_size > 10^3
+        for: 5m
+        labels:
+          severity: page
+        annotations:
+          summary: Redis key lenght is high (instance {{ $labels.instance }})
+          description: "Some Redis key has high key length \n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
