@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: logging
+resources:
+  #- alertmanager.yaml
+  - kube-prometheus.yaml
+  - kube-state-metrics.yaml
+  - kubernetes-monitoring.yaml
+  - kustomization.yaml
+  - node-exporter.yaml
+  - prometheus.yaml
+  #- thanos-query.yaml
+  #- thanos-store.yaml
