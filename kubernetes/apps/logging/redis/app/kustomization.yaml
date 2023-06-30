@@ -4,4 +4,3 @@ kind: Kustomization
 namespace: logging
 resources:
   - ./helmrelease.yaml
-  - ./dashboards
