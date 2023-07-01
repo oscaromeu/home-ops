@@ -11,5 +11,7 @@ This page provides instructions on how to configure persistent storage using eit
 ## Databases
 
 ```
-
+GRANT linkding TO admin;
+GRANT linkding TO postgres;
+SELECT rolname FROM pg_roles;
 ```
