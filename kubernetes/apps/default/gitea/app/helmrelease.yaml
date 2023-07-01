@@ -181,5 +181,5 @@ spec:
                       image: ghcr.io/onedr0p/postgres-initdb:14.7
                       envFrom:
                         - secretRef:
-                            name: *app
+                            name: gitea-db
 
