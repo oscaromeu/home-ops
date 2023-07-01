@@ -29,6 +29,7 @@ spec:
     crds:
       enabled: true
     prometheus:
+      serviceAccount: "kube-prometheus-stack-prometheus"
       serviceMonitor:
         enabled: false
     controller:
