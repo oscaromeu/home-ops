@@ -7,3 +7,9 @@ To ensure that your application's data is not lost, you will need to establish p
 In Kubernetes, a persistent volume (PV) is a storage unit within the cluster, while a persistent volume claim (PVC) is a request for storage. To learn more about the functionality of PVs and PVCs, you can consult the official Kubernetes documentation on storage.
 
 This page provides instructions on how to configure persistent storage using either a local storage provider or Longhorn.
+
+## Databases
+
+```
+
+```
