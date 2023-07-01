@@ -15,4 +15,6 @@ GRANT linkding TO admin;
 GRANT linkding TO postgres;
 SELECT rolname FROM pg_roles;
 SELECT usename FROM pg_user;
+postgres=> GRANT gitea TO postgres;
+GRANT <ROLE> TO <USER>
 ```
