@@ -1,5 +1,13 @@
 ---
-groups:
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    prometheus: k8s
+    role: alert-rules
+  name: redis
+spec:
+  groups:
   - name: redis
     rules:
       - alert: RedisDown
