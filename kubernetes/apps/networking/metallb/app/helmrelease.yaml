@@ -28,6 +28,9 @@ spec:
   values:
     crds:
       enabled: true
+    prometheus:
+      serviceMonitor:
+        enabled: true
     controller:
       resources:
         requests:
