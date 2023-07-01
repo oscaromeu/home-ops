@@ -30,7 +30,7 @@ spec:
       enabled: true
     prometheus:
       serviceMonitor:
-        enabled: true
+        enabled: false
     controller:
       resources:
         requests:
