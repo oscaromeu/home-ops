@@ -8,7 +8,6 @@ resources:
   - ./kubernetes-dashboard/ks.yaml
   - ./vpa/ks.yaml
   - ./goldilocks/ks.yaml
-  - ./dashboards
   - ./kubernetes-events-exporter/ks.yaml
   - ./thanos/ks.yaml
   - ./robusta/ks.yaml
