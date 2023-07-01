@@ -55,7 +55,7 @@ spec:
       secret.reloader.stakater.com/reload: external-dns-secret
     resources:
       requests:
-        cpu: 561m
-        memory: 143Mi
+        cpu: 5m
+        memory: 83Mi
       limits:
-        memory: 243Mi
+        memory: 168Mi

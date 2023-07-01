@@ -32,13 +32,34 @@ spec:
       resources:
         requests:
           cpu: 7m
+          memory: 469Mi
+        limits:
+          memory: 1Gi
+    speaker:
+      resources:
+        requests:
+          cpu: 7m
           memory: 65Mi
         limits:
           memory: 65Mi
-    #speaker:
-    #  resources:
-    #    requests:
-    #      cpu: 7m
-    #      memory: 65Mi
-    #    limits:
-    #      memory: 65Mi
+    frr:
+      resources:
+        requests:
+          cpu: 5m
+          memory: 78Mi
+        limits:
+          memory: 160Mi
+    reloader:
+      resources:
+        requests:
+          cpu: 5m
+          memory: 24Mi
+        limits:
+          memory: 100Mi
+    frrMetrics:
+      resources:
+        requests:
+          cpu: 5m
+          memory: 24Mi
+        limits:
+          memory: 100Mi

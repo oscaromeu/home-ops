@@ -97,8 +97,8 @@ spec:
     resources:
       requests:
         cpu: 10m
-        memory: 178Mi
+        memory: 106Mi
       limits:
-        memory: 278Mi
+        memory: 206Mi
     nodeSelector:
       kubernetes.io/arch: amd64
