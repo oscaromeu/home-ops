@@ -46,24 +46,24 @@ spec:
           memory: 65Mi
         limits:
           memory: 65Mi
-    frr:
-      resources:
-        requests:
-          cpu: 5m
-          memory: 78Mi
-        limits:
-          memory: 160Mi
-    reloader:
-      resources:
-        requests:
-          cpu: 5m
-          memory: 24Mi
-        limits:
-          memory: 100Mi
-    frrMetrics:
-      resources:
-        requests:
-          cpu: 5m
-          memory: 24Mi
-        limits:
-          memory: 100Mi
+      frr:
+        resources:
+          requests:
+            cpu: 5m
+            memory: 78Mi
+          limits:
+            memory: 160Mi
+      reloader:
+        resources:
+          requests:
+            cpu: 5m
+            memory: 24Mi
+          limits:
+            memory: 100Mi
+      frrMetrics:
+        resources:
+          requests:
+            cpu: 5m
+            memory: 24Mi
+          limits:
+            memory: 100Mi
