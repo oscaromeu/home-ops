@@ -14,4 +14,5 @@ This page provides instructions on how to configure persistent storage using eit
 GRANT linkding TO admin;
 GRANT linkding TO postgres;
 SELECT rolname FROM pg_roles;
+SELECT usename FROM pg_user;
 ```
