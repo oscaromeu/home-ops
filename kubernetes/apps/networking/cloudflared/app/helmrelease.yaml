@@ -96,9 +96,9 @@ spec:
         readOnly: true
     resources:
       requests:
-        cpu: 26m
-        memory: 32Mi
+        cpu: 10m
+        memory: 178Mi
       limits:
-        memory: 32Mi
+        memory: 278Mi
     nodeSelector:
       kubernetes.io/arch: amd64
