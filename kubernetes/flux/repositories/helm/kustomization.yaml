@@ -38,6 +38,7 @@ resources:
   - ./timescale.yaml
   - ./twuni.yaml
   - ./vector.yaml
+  - ./vm.yaml
   - ./vmware.yaml
   - ./weave-gitops.yaml
   - ./woodpecker.yaml
