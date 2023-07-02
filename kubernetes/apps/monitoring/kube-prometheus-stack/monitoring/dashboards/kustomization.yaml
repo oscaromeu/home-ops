@@ -45,4 +45,6 @@ configMapGenerator:
     options:
       labels:
         grafana_dashboard: k8s-detailed-overview-nodes
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
       disableNameSuffixHash: true
