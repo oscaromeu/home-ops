@@ -32,18 +32,18 @@ spec:
           expr: vector(1)
           labels:
             severity: none
-    - name: node-network
-      rules:
-        - alert: NodeNetworkInterfaceFlapping
-          annotations:
-            description: Network interface "{{ $labels.device }}" changing its up status often on node-exporter {{ $labels.namespace }}/{{ $labels.pod }}
-            runbook_url: https://runbooks.prometheus-operator.dev/runbooks/general/nodenetworkinterfaceflapping
-            summary: Network interface is often changin its status
-          expr: |
-            changes(node_network_up{job="node-exporter",device!~"veth.+"}[2m]) > 2
-          for: 2m
-          labels:
-            severity: warning
+    #- name: node-network
+    #  rules:
+    #    - alert: NodeNetworkInterfaceFlapping
+    #      annotations:
+    #        description: Network interface "{{ $labels.device }}" changing its up status often on node-exporter {{ $labels.namespace }}/{{ $labels.pod }}
+    #        runbook_url: https://runbooks.prometheus-operator.dev/runbooks/general/nodenetworkinterfaceflapping
+    #        summary: Network interface is often changin its status
+    #      expr: |
+    #        changes(node_network_up{job="node-exporter",device!~"veth.+"}[2m]) > 2
+    #      for: 2m
+    #      labels:
+    #        severity: warning
     - name: kube-prometheus-node-recording.rules
       rules:
         - expr: sum(rate(node_cpu_seconds_total{mode!="idle",mode!="iowait",mode!="steal"}[3m])) BY (instance)

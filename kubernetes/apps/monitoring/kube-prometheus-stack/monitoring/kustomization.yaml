@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./dashboards
-  #- ./rules
+  - ./rules

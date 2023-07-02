@@ -6,7 +6,6 @@ resources:
   - kube-prometheus.yaml
   - kube-state-metrics.yaml
   - kubernetes-monitoring.yaml
-  - kustomization.yaml
   - node-exporter.yaml
   - prometheus.yaml
   #- thanos-query.yaml
