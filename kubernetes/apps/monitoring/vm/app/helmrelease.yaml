@@ -39,7 +39,7 @@ spec:
     server:
       resources:
         limits:
-          memory: 512Mi
+          memory: 6Gi
         requests:
           cpu: 500m
           memory: 512Mi
@@ -53,8 +53,8 @@ spec:
           external-dns.home.arpa/enabled: "true"
           hajimari.io/icon: simple-icons:prometheus
         hosts:
-          - name: &host vmselect.${SECRET_DOMAIN}
-            path: /select
+          - name: &host vm.${SECRET_DOMAIN}
+            path: /
             port: http
         tls:
           - secretName: vmselect-ingress-tls
