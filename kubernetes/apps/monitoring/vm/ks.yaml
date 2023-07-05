@@ -17,7 +17,7 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
-      name: vm-cluster
+      name: vm-single
       namespace: monitoring
   interval: 30m
   retryInterval: 1m
