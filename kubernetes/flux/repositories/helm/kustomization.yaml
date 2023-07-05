@@ -30,6 +30,7 @@ resources:
   - ./metrics-server.yaml
   - ./mongodb.yaml
   - ./passbolt.yaml
+  - ./podinfo.yaml
   - ./prometheus-community.yaml
   - ./pyroscope.yaml
   - ./robusta.yaml

@@ -24,3 +24,4 @@ resources:
   - ./registry/ks.yaml
   #- ./busybox/ks.yaml
   - ./questdb/ks.yaml
+  - ./podinfo/ks.yaml
