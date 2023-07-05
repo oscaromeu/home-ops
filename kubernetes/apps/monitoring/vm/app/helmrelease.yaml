@@ -55,7 +55,7 @@ spec:
           external-dns.home.arpa/enabled: "true"
           hajimari.io/icon: simple-icons:prometheus
         hosts:
-          - name: &host vmselect.${SECRET_DOMAIN}
+          - name: &host vm.${SECRET_DOMAIN}
             path: /select
             port: http
         tls:
@@ -85,7 +85,7 @@ spec:
           external-dns.home.arpa/enabled: "true"
           hajimari.io/icon: simple-icons:prometheus
         hosts:
-          - name: &host vminsert.${SECRET_DOMAIN}
+          - name: &host vm.${SECRET_DOMAIN}
             path: /insert
             port: http
         tls:
