@@ -52,6 +52,9 @@ spec:
 
       hosts:
         - host: "podinfo.${SECRET_DOMAIN}"
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
 
       tls:
         - hosts:
