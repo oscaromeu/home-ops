@@ -17,6 +17,7 @@ resources:
   - ./grafana.yaml
   - ./hajimari.yaml
   - ./harbor.yaml
+  - ./influxdata.yaml
   - ./ingress-nginx.yaml
   - ./istio.yaml
   - ./jetstack.yaml
