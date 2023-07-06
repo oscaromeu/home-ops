@@ -29,8 +29,8 @@ transforms:
 sinks:
   elasticsearch:
     type: elasticsearch
-    batch:
-      max_bytes: 2049000
+    #batch:
+    #  max_bytes: 2049000
     inputs:
       - kubernetes_remap
     auth:
