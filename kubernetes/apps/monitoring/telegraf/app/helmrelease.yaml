@@ -35,6 +35,16 @@ spec:
 #      namespace: rook-ceph
 
   values:
+
+    volumes:
+    - name: telegraf-config
+      configMap:
+        name: "telegraf-config"
+    mountPoints:
+    - name: telegraf-config
+      mountPath: /etc/telegraf/conf.d
+      subPath: stackdriver.conf
+
     resources:
       requests:
         memory: 128Mi
