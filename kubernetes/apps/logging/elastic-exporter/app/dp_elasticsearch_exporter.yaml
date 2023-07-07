@@ -6,7 +6,7 @@ metadata:
   labels:
     app: prometheus-elasticsearch-exporter
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: prometheus-elasticsearch-exporter
