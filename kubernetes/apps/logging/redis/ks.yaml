@@ -9,7 +9,6 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-elastic
-    - name: cluster-apps-loki
   path: ./kubernetes/apps/logging/redis/app
   prune: true
   sourceRef:
