@@ -33,3 +33,53 @@ endpoints:
       - "[STATUS] == 200"
     alerts:
       - type: slack
+  - name: prometheus
+    group: monitoring
+    url: https://prometheus.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://1.1.1.1:53
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+      - type: slack
+  - name: grafana
+    group: monitoring
+    url: https://grafana.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://1.1.1.1:53
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+      - type: slack
+  - name: kibana
+    group: monitoring
+    url: https://kibana.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://1.1.1.1:53
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+      - type: slack
+  - name: thanos
+    group: monitoring
+    url: https://thanos.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://1.1.1.1:53
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+      - type: slack
+  - name: git
+    group: development
+    url: https://git.${SECRET_DOMAIN}
+    interval: 1m
+    client:
+      dns-resolver: tcp://1.1.1.1:53
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+      - type: slack
