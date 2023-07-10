@@ -8,9 +8,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-longhorn
     - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-cloudflare-operator-tunnels
   path: ./kubernetes/apps/default/woodpecker/app/server
   prune: true
   sourceRef:
@@ -34,9 +32,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-longhorn
     - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-cloudflare-operator-tunnels
     - name: cluster-apps-woodpecker
   path: ./kubernetes/apps/default/woodpecker/app/agent
   prune: true

@@ -7,8 +7,6 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  dependsOn:
-    - name: cluster-apps-longhorn
   path: ./kubernetes/apps/default/maddy/app
   prune: true
   sourceRef:

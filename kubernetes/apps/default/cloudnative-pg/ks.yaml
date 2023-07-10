@@ -8,7 +8,6 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-longhorn
     - name: cluster-apps-external-secrets-stores
   path: ./kubernetes/apps/default/cloudnative-pg/app
   prune: true
@@ -34,7 +33,6 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-cloudnative-pg
-    - name: cluster-apps-longhorn
     - name: cluster-apps-external-secrets-stores
   path: ./kubernetes/apps/default/cloudnative-pg/cluster
   prune: true
