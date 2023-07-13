@@ -1,0 +1,10 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: sloth
+  namespace: flux-system
+spec:
+  interval: 2h
+  url: https://slok.github.io/sloth
+  timeout: 3m

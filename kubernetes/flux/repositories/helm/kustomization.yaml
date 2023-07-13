@@ -35,6 +35,7 @@ resources:
   - ./pyroscope.yaml
   - ./robusta.yaml
   - ./rook-ceph.yaml
+  - ./sloth.yaml
   - ./stakater.yaml
   - ./tf-controller.yaml
   - ./timescale.yaml

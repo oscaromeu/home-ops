@@ -1,0 +1,44 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: sloth
+  namespace: monitoring
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: sloth
+      version: 0.7.0
+      sourceRef:
+        kind: HelmRepository
+        name: sloth
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+
+    resources:
+      limits:
+        memory: 150Mi
+      requests:
+        cpu: 5m
+        memory: 75Mi
+
+    commonPlugins:
+      gitRepo:
+        resources:
+          limits:
+            memory: 100Mi
+          requests:
+            cpu: 5m
+            memory: 50Mi

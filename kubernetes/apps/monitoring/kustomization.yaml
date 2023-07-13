@@ -13,3 +13,4 @@ resources:
   - ./thanos/ks.yaml
   - ./vm/ks.yaml
   - ./robusta/ks.yaml
+  - ./sloth/ks.yaml
