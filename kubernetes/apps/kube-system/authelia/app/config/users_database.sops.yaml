@@ -2,8 +2,9 @@ apiVersion: v1
 kind: Secret
 metadata:
     name: authelia-users
+    namespace: kube-system
 stringData:
-    users_database.yml: ENC[AES256_GCM,data:rpCXmtzoSrmLmSnt7LIg5B006f+0Th9bWLUL6Rt0QBHqWVkqGzHmPAYyIuJPDzeft9akaaoWYL/YAMUKUOyzOnE2xTEbl5HJqb+zYf4/VMYFyf0Di5E23cFYDGqw1t5Kt/OvG1Squ1YMmW4zGKl1N7p4HbglZMSYNXE/XffjFDcsBK1RfGa8VYzA24aH0+gVeSblsgNZnW/17tmNoZZnp8YPfes6sesRcQSyQIrtehijoTSfeqcEEjNbQcCCXNaYBEAXOZaZDgbwJPRwvAGbsl1URmOFm6+E7a18btDmbVUvaGfs2lL8OL8+nEn+6GD/lsAQnFygRlWuyFNtrBHxuUYMGSjKbvLjL5/afetyyGIohMKZybeNkcTh2PlsF4rcO32mKQW71PqIYq/bj1dsMV8QtRMjDTFTuIJjOCySRfLnZyirpodVhg2NM+9igZ73fTC+8JN7a4BkYminmFfZQKI9fesSGpNPpeBmqg8kBf3o/qZwKn0JDCFYDMS6oghly3bmQRRNnC5GwQPX1EjZxHYtckwKkUKGzGPeVBwA7XhfLWWDUrRHDjMTu0rm2syyNLn+yJ0FPlqNnaPStm6oNwahDUGRLzlDuWyAlNoOfANCf6PWmKOqgIl/ctKNV5xyxhiuiFe6sYzVN4/kmPtVoDdqssJgwzvWWHe9M+lOZF8uT4XP1aP6Va9oP/A0tgsJiv4K52w/nBanEd1Ol1dIiC2oEFJqaePuRJufpKQ9TYHaDjf2/t6PFij8lq1kJaf3PGkuhecIRrvrtDJqpEntO/x74sPa0ShP6hAOYgR++uD9ickgwUb3FenPNKiAheb8Ijl+JYAd++/BnwBwZM8VWX6gjYebZwWcVjYNo2DwY2TXPBzBiiVblA9Acjz0WGPjAHWbKvAMFPNzo3u4oqO1UKV1O4ldahdxevpJF68uffU+bv57DetKqvQGNYYRFFqSJqRhDN4cNcV1dC3wnBgxVP85Xi7pxcSWxvoI4klOumlFqKId,iv:BoudiiEEC+UsrcfQZzJ4k/J7umMhKZs7imGzItRZQJU=,tag:MpmDpLqSC3asOSFrH1HNkQ==,type:str]
+    users_database.yml: ENC[AES256_GCM,data:5e0mBlBKlHo1AXZ9VAqUMjewyI87LqFMdGhn7rUtoe6fxkxWrkKetT344Tw7LVZvUNxidQ0PoM1kGXrGuniFchB9TBYNU7Rpm0TpCh/E8ImSDs1K8ZjBi/L77EBVPV0/bRfA0mk56fMP2gGR6yzPdcmEnVdfjJacdNYp7oX53hojFLNahfZgVTImoMUWuIYOyfzpGOXrfQdtsiZUbc3T06UkaPGmAUID3vANZyEnbUuUEdjUw/iVC8YTrMoBzM06BfUS+TCETrVDaauCALe30dTrWZN5O9JSvnwBSa2sh+uHX6/YN2ZjVm82aVCnF3FgsxXzDyuZezGh+N5i3Y7DRI4W95hjbboCz9/FtVSAe2VTz1dhzmxJqmiDMBrNcM4UMpIWTRsbVC479vA6P/Id30hcLXTNykq7LxXVHZcgoHWJ+LZtyfRZG2yYnM3DXKSxtuvEWZBSnNuAZeh7ZjfGw42KRZxX0eohxo3t15CeRz2FhG1s0YOL7mBlWZY6TuWE+bNNBj5PJzMK8e5NQfW4aUKvk6QJq+bGNTFLz7/x7OMc1BWvZe2x6LvrSlANsyJY4fYtec1u2oLtl9MdFnfRa+TLHch4VdHcRyeIEf93uR82T7/mWeVJeexxOCUqk9lNe5BsgBtSn949T6m7I6sfqyrk1xzN64wu0/Fj4b5r5JHIjxHa3hMR/1GwHxsriEtaGA5LKs4n00o/nq3cBmRXFuzb6YrgSGEru84pCoIkyR7rPHrtHmxq/xET0CdsKu2Y3dyEDFjuknPS/K173nHLpQ3uXqwoS1yUL66yhKt+kt5MemAQjnVu8iAO0qBzpYlYEVOX8wg9+Xm4o/PzZch9pO0ELR7D2yuKJDApm7wLAutAnnnowsbBrk5Cg+5le5YdGEbSHXiPh1qY9WaKq/6QVwIuCJCT0Sp6XZJyXqdM87+MUp/foLbON3UvA/TgCo4mH5D4vEBjWT5DdI2IwMJSFawGGPXaa8vZ54WzIAYK9bsGslVv,iv:Vf+Po6BGsCpHe8xpHOXoPEdSZyF9ll19yvVbP96HOC0=,tag:5MnaOVUMncx4nm4xhAnlzA==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -13,14 +14,14 @@ sops:
         - recipient: age1ptththqpxnx0zuzmq0peq9x30vqgdedjsdlsuzxr5gfc36mnwqlsylrpr8
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBWelJUZWR0RnBqZnFzTWVY
-            ZFlsdHBGVDk4REoxL1Ixeml6SXU3Y0VvTWc4Cng0QXE4WWVFc2lsQVpsN3Jkakwx
-            RHlCS2c2RWZLK1crNHRiWnVMem8yNTAKLS0tIGRXeDkrbTQ3WHpyUlFZa00xdjNs
-            S2x0QU41eUZOMDAzRDhnUTdORlgzSmcKq2bWr3kpCfAC5k/WkUkzjutH1oe3EHbA
-            Hi+vo9WCsRs9eUaIWtjeCmSDR9z5JQDORXyDgJAG3x0Sm9/Xa4zKcQ==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBvdHFDRzRnYmxWeFpJRWlk
+            SG1BWS9lMG1DK3NTS1BYN1dGMVJEK3pTT2drCldzQm5JUmNIZVNMN0hQRFR4Smk1
+            UGJLTWkxNjFJYzl2U1N1ZTNKMGVua2sKLS0tIHRSUVR1d2tBWTRnVzEwdkpuZ09G
+            R1lwcXJuQTdOS3Y4NFF3WDVjWFBrTkkKs7EoUDhqruulI8NF7c/55IbivxhYggEE
+            myz4Cwxcrcf38CAj4YvhKNdJEYKFy2jzNGy1AKRHIl5+uhkTTdYhHQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-07-11T07:13:57Z"
-    mac: ENC[AES256_GCM,data:4zCVQTFWvCuMBOEwq78FP0M9bUaVR4snSEb8PizIKE6kNTeT+OBFjjeugvro4fZ42HQlHevrRGpA29c8w+tXTkyHXEPXV+8WH6cxt2r6tyn1NWrVdy0anFrRD7nGWnWU6rNaqZJlNrVW8h9I/XHZ7loamAg2sizfB+NatkbNLF0=,iv:RtUJ/pT+jbUlZiylWaFRk5WYUxdjAZDshEO8sX5wtUA=,tag:5b99kek/SvlKYD1wuR+iNQ==,type:str]
+    lastmodified: "2023-07-13T06:05:24Z"
+    mac: ENC[AES256_GCM,data:iWKV3G5A22tzvVT+GgiKvSrL0nKZHf0pObiphO4GKTn5xf+O1BIF0rPNiFDdDLOschNCWi3SahQpygU5A5Cbfg4zbv2762UsFaB9JluN8WRaF33JZU1WR3F1oXpz/ijxqEgJTGjAiJyB9gZKj2mVEWcE2u2CUzzwK9mA/Wvi2v0=,iv:gGu8px4ka0d6N1/ni+AtC1ySm/bZt2aCnUSqQBWfg3E=,tag:NNqi29rSgB2UoJsUCy+MOw==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.7.3
