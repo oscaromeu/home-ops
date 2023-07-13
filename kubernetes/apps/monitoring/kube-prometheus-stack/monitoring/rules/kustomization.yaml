@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: logging
 resources:
   #- alertmanager.yaml
+  - apiserver.yaml
   - kube-prometheus.yaml
   - kube-state-metrics.yaml
   - kubernetes-monitoring.yaml
