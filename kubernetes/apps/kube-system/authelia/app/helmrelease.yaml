@@ -140,7 +140,7 @@ spec:
     - targetPath: configMap.storage.postgres.password
       kind: Secret
       name: authelia
-      valuesKey: POSTGRES_PASSWORD
+      valuesKey: POSTGRES_PASS
     - targetPath: configMap.notifier.smtp.username
       kind: Secret
       name: authelia
