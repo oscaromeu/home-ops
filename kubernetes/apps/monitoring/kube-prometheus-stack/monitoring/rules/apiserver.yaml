@@ -5,7 +5,7 @@ metadata:
   labels:
     prometheus: k8s
     role: alert-rules
-  name: alertmanager-main-rules
+  name: apiserver-main-rules
 spec:
   groups:
   - name: sloth-slo-sli-recordings-k8s-apiserver-requests-availability
