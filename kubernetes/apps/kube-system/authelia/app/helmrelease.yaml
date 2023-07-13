@@ -15,8 +15,6 @@ spec:
         name: authelia
         namespace: flux-system
       interval: 5m
-  dependsOn:
-    - name: cluster-apps-redis-default
   values:
     domain: ${SECRET_DOMAIN}
     ingress:
