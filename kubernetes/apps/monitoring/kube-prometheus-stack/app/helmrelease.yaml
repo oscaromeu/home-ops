@@ -140,6 +140,8 @@ spec:
           external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
           hajimari.io/appName: Prometheus
           hajimari.io/icon: simple-icons:prometheus
+          nginx.ingress.kubernetes.io/auth-url: http://authelia.networking.svc.cluster.local/api/verify
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
         pathType: Prefix
         hosts:
           - &host "prometheus.${SECRET_DOMAIN}"
