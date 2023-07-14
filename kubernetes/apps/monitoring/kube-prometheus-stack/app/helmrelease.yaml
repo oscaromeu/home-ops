@@ -47,6 +47,8 @@ spec:
           hajimari.io/appName: "alertmanager"
           hajimari.io/enable: "true"
           hajimari.io/icon: "simple-icons:prometheus"
+          nginx.ingress.kubernetes.io/auth-url: http://authelia.networking.svc.cluster.local/api/verify
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
         hosts:
           - "alertmanager.${SECRET_DOMAIN}"
         paths:
