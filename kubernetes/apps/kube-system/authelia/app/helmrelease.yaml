@@ -95,6 +95,7 @@ spec:
           domain:
           - prometheus.${SECRET_DOMAIN}
           - goldilocks.${SECRET_DOMAIN}
+          - status.${SECRET_DOMAIN}
       session:
         name: authelia_session
         same_site: lax
