@@ -4,7 +4,7 @@ metadata:
     name: authelia-users
     namespace: kube-system
 stringData:
-    users_database.yml: ENC[AES256_GCM,data:5e0mBlBKlHo1AXZ9VAqUMjewyI87LqFMdGhn7rUtoe6fxkxWrkKetT344Tw7LVZvUNxidQ0PoM1kGXrGuniFchB9TBYNU7Rpm0TpCh/E8ImSDs1K8ZjBi/L77EBVPV0/bRfA0mk56fMP2gGR6yzPdcmEnVdfjJacdNYp7oX53hojFLNahfZgVTImoMUWuIYOyfzpGOXrfQdtsiZUbc3T06UkaPGmAUID3vANZyEnbUuUEdjUw/iVC8YTrMoBzM06BfUS+TCETrVDaauCALe30dTrWZN5O9JSvnwBSa2sh+uHX6/YN2ZjVm82aVCnF3FgsxXzDyuZezGh+N5i3Y7DRI4W95hjbboCz9/FtVSAe2VTz1dhzmxJqmiDMBrNcM4UMpIWTRsbVC479vA6P/Id30hcLXTNykq7LxXVHZcgoHWJ+LZtyfRZG2yYnM3DXKSxtuvEWZBSnNuAZeh7ZjfGw42KRZxX0eohxo3t15CeRz2FhG1s0YOL7mBlWZY6TuWE+bNNBj5PJzMK8e5NQfW4aUKvk6QJq+bGNTFLz7/x7OMc1BWvZe2x6LvrSlANsyJY4fYtec1u2oLtl9MdFnfRa+TLHch4VdHcRyeIEf93uR82T7/mWeVJeexxOCUqk9lNe5BsgBtSn949T6m7I6sfqyrk1xzN64wu0/Fj4b5r5JHIjxHa3hMR/1GwHxsriEtaGA5LKs4n00o/nq3cBmRXFuzb6YrgSGEru84pCoIkyR7rPHrtHmxq/xET0CdsKu2Y3dyEDFjuknPS/K173nHLpQ3uXqwoS1yUL66yhKt+kt5MemAQjnVu8iAO0qBzpYlYEVOX8wg9+Xm4o/PzZch9pO0ELR7D2yuKJDApm7wLAutAnnnowsbBrk5Cg+5le5YdGEbSHXiPh1qY9WaKq/6QVwIuCJCT0Sp6XZJyXqdM87+MUp/foLbON3UvA/TgCo4mH5D4vEBjWT5DdI2IwMJSFawGGPXaa8vZ54WzIAYK9bsGslVv,iv:Vf+Po6BGsCpHe8xpHOXoPEdSZyF9ll19yvVbP96HOC0=,tag:5MnaOVUMncx4nm4xhAnlzA==,type:str]
+    users_database.yml: ENC[AES256_GCM,data:1NH/qFSvypeHfxIdZDLYw+DdCXz7T85Woi0dCv1VP3oLM6P53y89Z+VJpJBFxGJrAhY/hx2xCxH1Ny1U0LKFHxMYCk46xGpQ2CWdc5KqyHHoSiNCx0q/MtmJKpO0JatiWm9MPwRXUWu/3G5sqp0y7FinETIsAJdLaKvl2hjAdC22Yndp1R9x/YeVlNcz6IHogIwzqaXimMWKeDXAblVUQs95XPYXZoOMhnprdgRpLWs5ytsQ5C0ZhsCAvGr6Tv3mjcrGwHv9OwcU2T1O791EjLthPbOsdQ2Fxx+QzSo68cs6/rb0jY2RoVT0p3JIBglAstGRPgb6NDwklFz7Ok/p3gmVBcn6zcpPaFEyjYs070NtldKkKCCTnf4zZefG1qkux0eJ9mWhe7uUvYuPiRDLG5wQCx9fPAUU3pPfKHCobsQP01D7c2cNcU3EPCtPMlEj+w9p4HD/tDj1N/prCoCsL8S0ms3kHezu/aISISO8sMa/0TZVU1ZOCZbfnn9UgO1PORey4edquyQyroe6qVRU436s9owHT84m1AvMXuQAtebbMBkIPq+AkudJMCSu/ChZgBKu7AnddfF1uBwO5TxbF/bO5pTxu8W/i/UreUY1EhVoaq+ag5qknme09d+c5e+KdX1bgMTUG9i+rDANqeu1MyVl6KStT91orJwvmYY2S1n6cB5dwpugLZRx4dW2qkWlVX9OupNJuMpnw5cXMHcng9DuCL/vMp9sjIww4OrAn1F9,iv:9H+iyjr57f+/fSEBrwVEkWZ1oCeI7Uu/Srk2CvjBzT8=,tag:L0g4kYRDCrXyxYs189WK1g==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -14,14 +14,14 @@ sops:
         - recipient: age1ptththqpxnx0zuzmq0peq9x30vqgdedjsdlsuzxr5gfc36mnwqlsylrpr8
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBvdHFDRzRnYmxWeFpJRWlk
-            SG1BWS9lMG1DK3NTS1BYN1dGMVJEK3pTT2drCldzQm5JUmNIZVNMN0hQRFR4Smk1
-            UGJLTWkxNjFJYzl2U1N1ZTNKMGVua2sKLS0tIHRSUVR1d2tBWTRnVzEwdkpuZ09G
-            R1lwcXJuQTdOS3Y4NFF3WDVjWFBrTkkKs7EoUDhqruulI8NF7c/55IbivxhYggEE
-            myz4Cwxcrcf38CAj4YvhKNdJEYKFy2jzNGy1AKRHIl5+uhkTTdYhHQ==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBpTFV3TStHL1Vaempyd01K
+            ckQrV0pqek5qYjlCVG8yMGVZcS9HaDJ6VlVFCll5T0dwNkRwQjNmSHd1S3oxVWRR
+            U2ZBd1hRVFN6SzRrN25sdjRrMm1RM0kKLS0tIHVVK0VBN2tuV2pQVnNwZGM3aUhW
+            NVBXbGpDYmUvcjRYaG56b01WMEtSdDgK8kIeFUvTANLzueSCHt62PsxBo3AlHUnx
+            sdH2AN8jKvs2cWavZx4tN/uJrJFxesPk0Vq/pxvlmT6PM0mI2Kk0tw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-07-13T06:05:24Z"
-    mac: ENC[AES256_GCM,data:iWKV3G5A22tzvVT+GgiKvSrL0nKZHf0pObiphO4GKTn5xf+O1BIF0rPNiFDdDLOschNCWi3SahQpygU5A5Cbfg4zbv2762UsFaB9JluN8WRaF33JZU1WR3F1oXpz/ijxqEgJTGjAiJyB9gZKj2mVEWcE2u2CUzzwK9mA/Wvi2v0=,iv:gGu8px4ka0d6N1/ni+AtC1ySm/bZt2aCnUSqQBWfg3E=,tag:NNqi29rSgB2UoJsUCy+MOw==,type:str]
+    lastmodified: "2023-07-14T05:40:40Z"
+    mac: ENC[AES256_GCM,data:pfWahcrnEss9sQy6ACxMn7rWD/HzwniLOaks+uWzSMwVirWzPhzWqJP/DQsbX5VRXEpWji6KtoDPDeDdJMcsTDql7aBThelVhFWAYdUUxULmSBkYngZhpHwCE1nQyHfcXn1CzCtO08CN+178DEBatLCuGIJe7XoY9xnqS/Eg4f4=,iv:EeDieuxVD1YoF0IPOcaS4nkxgehxQqQHdgivGYgLEBs=,tag:VeZIproOXXcbKFoZJPnwWg==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.7.3
