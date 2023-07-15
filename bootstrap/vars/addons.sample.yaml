@@ -1,0 +1,35 @@
+---
+#
+# Addons configuration - addons.yaml is gitignored
+#
+
+# https://github.com/toboshii/hajimari
+hajimari:
+  enabled: true
+
+# https://github.com/grafana/grafana
+grafana:
+  enabled: true
+  password: 35866f5cf1d7865d0f67c274
+
+# https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack
+kube_prometheus_stack:
+  enabled: true
+
+# https://github.com/kubernetes/dashboard
+kubernetes_dashboard:
+  enabled: true
+
+# https://github.com/weaveworks/weave-gitops
+weave_gitops:
+  enabled: false
+  # password: # password for `admin` user
+
+# https://github.com/kubernetes-csi/csi-driver-nfs
+csi_driver_nfs:
+  enabled: false
+  storage_class: []
+    # - name:   # name of the storage class (must match [a-z0-9-]+)
+    #   server: # dns name or ip address of nfs server
+    #   share:  # exported share (path)
+    # ...

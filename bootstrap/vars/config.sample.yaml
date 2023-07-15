@@ -1,0 +1,61 @@
+---
+#
+# Bootstrap configuration - config.yaml is gitignored
+#
+
+# Github username (e.g. onedr0p)
+bootstrap_github_username: oscaromeu
+# Github repository (e.g. flux-cluster-template)
+bootstrap_github_repository_name: home-ops
+# Age Public Key (e.g. age15uzrw396e67z9wdzsxzdk7ka0g2gr3l460e0slaea563zll3hdfqwqxdta)
+bootstrap_age_public_key: age1ptththqpxnx0zuzmq0peq9x30vqgdedjsdlsuzxr5gfc36mnwqlsylrpr8
+# Choose your timezone (e.g. America/New_York)
+bootstrap_timezone: Europe/Madrid
+# Email you want to be associated with the ACME account (used for TLS certificates via letsencrypt.org)
+bootstrap_acme_email: oscaromeu@gmail.com
+
+# Flux github webhook token (openssl rand -hex 12)
+bootstrap_flux_github_webhook_token: 346fcb10a506f0ab680bad28
+
+# Cloudflare domain
+bootstrap_cloudflare_domain: oscaromeu.io
+# Cloudflare API Token (not API Key)
+bootstrap_cloudflare_token: KRvfoaJI8i5fb8Q_MkHIjvPOZBwQ32fwyf9ZtPsS
+# Cloudflared Account Tag (cat ~/.cloudflared/*.json | jq -r .AccountTag)
+bootstrap_cloudflare_account_tag: 41b4afbb8fc2b5fe4a3ce7709d578586
+# Cloudflared Tunnel Secret (cat ~/.cloudflared/*.json | jq -r .TunnelSecret)
+bootstrap_cloudflare_tunnel_secret: Y5olrDcVwr+lNcbChKG8DF/QkhbLUzrI5D9jfYNNiHM=
+# Cloudflared Tunnel ID (cat ~/.cloudflared/*.json | jq -r .TunnelID)
+bootstrap_cloudflare_tunnel_id: aca6d978-082b-41d5-baf8-7fc56ede537f
+
+# CIDR your nodes are on (e.g. 192.168.1.0/24)
+bootstrap_node_cidr: 192.168.1.0/24
+# The IP address to use with kube-vip, choose an available IP in your nodes network that is not being used
+bootstrap_kube_vip_addr: 192.168.1.154
+# The Load balancer IP for k8s_gateway, choose an available IP in your nodes network that is not being used
+bootstrap_k8s_gateway_addr: 192.168.1.120
+# The Load balancer IP for ingress-nginx, choose an available IP in your nodes network that is not being used
+bootstrap_ingress_nginx_addr: 192.168.1.121
+# Choose your cluster and service cidrs, leave these unchanged unless you know what you are doing
+bootstrap_cluster_cidr: 10.42.0.0/16
+bootstrap_service_cidr: 10.43.0.0/16
+
+# Node information
+bootstrap_nodes:
+  # Use only 1, 3 or more odd master nodes, recommended is 3
+  master:
+    - name:     lbpkm1
+      address:  192.168.1.34
+      username: pi
+      password: monit
+    # ...
+  worker:
+    - name:     lbpkw1
+      address:  192.168.1.45
+      username: pi
+      password: monit
+    - name:     lbpkw2
+      address:  192.168.1.49
+      username: pi
+      password: monit
+    # ...
