@@ -1,0 +1,10 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: twuni
+  namespace: flux-system
+spec:
+  interval: 2h
+  url: https://helm.twun.io
+  timeout: 3m

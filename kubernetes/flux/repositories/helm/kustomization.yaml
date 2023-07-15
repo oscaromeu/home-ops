@@ -2,19 +2,48 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - ./actions-runner-controller.yaml
+  - ./authelia.yaml
   - ./bitnami.yaml
   - ./bjw-s.yaml
+  - ./botkube.yaml
+  - ./calico.yaml
   - ./cilium.yaml
-  - ./coredns.yaml
-  - ./csi-driver-nfs.yaml
+  - ./cloudnative-pg.yaml
+  - ./descheduler.yaml
   - ./external-dns.yaml
+  - ./external-secrets.yaml
+  - ./fairwinds.yaml
+  - ./gitea.yaml
   - ./grafana.yaml
   - ./hajimari.yaml
+  - ./harbor.yaml
+  - ./influxdata.yaml
   - ./ingress-nginx.yaml
+  - ./istio.yaml
   - ./jetstack.yaml
+  - ./jupyter.yaml
   - ./k8s-gateway.yaml
   - ./kubernetes-dashboard.yaml
+  - ./kyverno.yaml
+  - ./longhorn.yaml
+  - ./metallb.yaml
   - ./metrics-server.yaml
+  - ./mongodb.yaml
+  - ./passbolt.yaml
+  - ./podinfo.yaml
   - ./prometheus-community.yaml
+  - ./pyroscope.yaml
+  - ./robusta.yaml
+  - ./rook-ceph.yaml
+  - ./sloth.yaml
   - ./stakater.yaml
+  - ./tf-controller.yaml
+  - ./timescale.yaml
+  - ./twuni.yaml
+  - ./vector.yaml
+  - ./vm.yaml
+  - ./vmware.yaml
   - ./weave-gitops.yaml
+  - ./woodpecker.yaml
+  - ./questdb.yaml
