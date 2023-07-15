@@ -24,9 +24,10 @@ bootstrap_cloudflare_token: KRvfoaJI8i5fb8Q_MkHIjvPOZBwQ32fwyf9ZtPsS
 # Cloudflared Account Tag (cat ~/.cloudflared/*.json | jq -r .AccountTag)
 bootstrap_cloudflare_account_tag: 41b4afbb8fc2b5fe4a3ce7709d578586
 # Cloudflared Tunnel Secret (cat ~/.cloudflared/*.json | jq -r .TunnelSecret)
-bootstrap_cloudflare_tunnel_secret: Y5olrDcVwr+lNcbChKG8DF/QkhbLUzrI5D9jfYNNiHM=
+bootstrap_cloudflare_tunnel_secret: +QmGBgjliR7dlEYMJ1PLRH4hDMAlFrd1aiSFO591YN8=
 # Cloudflared Tunnel ID (cat ~/.cloudflared/*.json | jq -r .TunnelID)
-bootstrap_cloudflare_tunnel_id: aca6d978-082b-41d5-baf8-7fc56ede537f
+bootstrap_cloudflare_tunnel_id: a030f584-4cd3-49bc-a098-6efd0485d7a5
+
 
 # CIDR your nodes are on (e.g. 192.168.1.0/24)
 bootstrap_node_cidr: 192.168.1.0/24

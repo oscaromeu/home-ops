@@ -5,7 +5,7 @@ metadata:
   name: hajimari
   namespace: default
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       chart: hajimari
@@ -25,6 +25,9 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  dependsOn:
+    - name: ingress-nginx
+      namespace: networking
   values:
     hajimari:
       title: Apps
