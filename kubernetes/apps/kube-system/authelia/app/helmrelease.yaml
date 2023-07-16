@@ -22,7 +22,7 @@ spec:
       subdomain: auth
       className: nginx
       annotations:
-          #external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
+          external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
           hajimari.io/appName: "auth"
           hajimari.io/enable: "true"
           hajimari.io/icon: "alarm-light-outline"

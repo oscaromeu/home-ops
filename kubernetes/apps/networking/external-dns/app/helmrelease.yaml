@@ -5,7 +5,7 @@ metadata:
   name: &app external-dns
   namespace: networking
 spec:
-  interval: 30m
+  interval: 15m
   chart:
     spec:
       chart: external-dns
@@ -29,11 +29,16 @@ spec:
     fullnameOverride: *app
     provider: cloudflare
     env:
-      - name: CF_API_TOKEN
+      - name: CF_API_EMAIL
         valueFrom:
           secretKeyRef:
             name: external-dns-secret
-            key: api-token
+            key: email
+      - name: CF_API_KEY
+        valueFrom:
+          secretKeyRef:
+            name: external-dns-secret
+            key: api-key
     extraArgs:
       - --annotation-filter=external-dns.alpha.kubernetes.io/target
       - --cloudflare-proxied
@@ -48,3 +53,9 @@ spec:
       enabled: true
     podAnnotations:
       secret.reloader.stakater.com/reload: external-dns-secret
+    resources:
+      requests:
+        cpu: 5m
+        memory: 83Mi
+      limits:
+        memory: 168Mi

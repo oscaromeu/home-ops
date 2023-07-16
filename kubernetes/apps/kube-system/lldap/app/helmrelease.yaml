@@ -62,7 +62,7 @@ spec:
         enabled: true
         ingressClassName: nginx
         annotations:
-          #external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
+          external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
           hajimari.io/appName: "lldap"
           hajimari.io/enable: "true"
           hajimari.io/icon: "alarm-light-outline"

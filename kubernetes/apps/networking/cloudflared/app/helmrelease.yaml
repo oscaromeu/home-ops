@@ -5,7 +5,7 @@ metadata:
   name: cloudflared
   namespace: networking
 spec:
-  interval: 30m
+  interval: 15m
   chart:
     spec:
       chart: app-template
@@ -27,13 +27,13 @@ spec:
     keepHistory: false
   values:
     controller:
-      replicas: 1
+      replicas: 3
       strategy: RollingUpdate
       annotations:
         reloader.stakater.com/auto: "true"
     image:
       repository: docker.io/cloudflare/cloudflared
-      tag: 2023.7.0
+      tag: 2023.5.1
     env:
       NO_AUTOUPDATE: "true"
       TUNNEL_CRED_FILE: /etc/cloudflared/creds/credentials.json
@@ -96,7 +96,9 @@ spec:
         readOnly: true
     resources:
       requests:
-        cpu: 5m
-        memory: 10Mi
+        cpu: 10m
+        memory: 106Mi
       limits:
-        memory: 256Mi
+        memory: 206Mi
+    nodeSelector:
+      kubernetes.io/arch: amd64

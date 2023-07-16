@@ -5,11 +5,11 @@ metadata:
   name: cert-manager
   namespace: cert-manager
 spec:
-  interval: 30m
+  interval: 15m
   chart:
     spec:
       chart: cert-manager
-      version: v1.12.2
+      version: v1.12.1
       sourceRef:
         kind: HelmRepository
         name: jetstack
@@ -40,3 +40,29 @@ spec:
       servicemonitor:
         enabled: true
         prometheusInstance: monitoring
+
+    resources:
+      requests:
+        cpu: 5m
+        memory: 147Mi
+      limits:
+        #cpu: 1000m
+        memory: 300Mi
+
+    webhook:
+      resources:
+        requests:
+          cpu: 5m
+          memory: 35Mi
+        limits:
+          #cpu: 1000m
+          memory: 70Mi
+
+    cainjector:
+      resources:
+        requests:
+          cpu: 5m
+          memory: 229Mi
+        limits:
+          #cpu: 1000m
+          memory: 500Mi

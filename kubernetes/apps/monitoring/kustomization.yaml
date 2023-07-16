@@ -11,6 +11,6 @@ resources:
   - ./goldilocks/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
   - ./thanos/ks.yaml
-  #- ./vm/ks.yaml
+  - ./vm/ks.yaml
   - ./robusta/ks.yaml
-  #- ./sloth/ks.yaml
+  - ./sloth/ks.yaml

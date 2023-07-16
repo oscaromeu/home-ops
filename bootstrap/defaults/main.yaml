@@ -1,2 +1,0 @@
----
-bootstrap_coredns_addr: "{{ bootstrap_service_cidr | ansible.utils.nthhost(10) }}"

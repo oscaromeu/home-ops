@@ -1,4 +1,4 @@
-:qw :name: ci
+name: ci
 on:
   push:
     branches:

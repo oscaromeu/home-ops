@@ -4,10 +4,9 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./cilium/ks.yaml
-  - ./coredns/ks.yaml
   - ./local-path-provisioner/ks.yaml
   - ./metrics-server/ks.yaml
   - ./reloader/ks.yaml
   - ./external-secrets/ks.yaml
-  #- ./lldap/ks.yaml
-  #- ./authelia/ks.yaml
+  - ./lldap/ks.yaml
+  - ./authelia/ks.yaml

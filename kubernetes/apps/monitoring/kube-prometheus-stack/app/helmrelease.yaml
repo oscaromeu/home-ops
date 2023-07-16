@@ -32,12 +32,9 @@ spec:
     - name: local-path-provisioner
       namespace: kube-system
   values:
-
     defaultRules:
       create: false
-
     cleanPrometheusOperatorObjectNames: true
-
     alertmanager:
       enabled: false
       ingress:
@@ -58,7 +55,6 @@ spec:
           - hosts:
               - "alertmanager.${SECRET_DOMAIN}"
         resources: {}
-
     grafana:
       enabled: false
       forceDeployDashboards: true
@@ -111,7 +107,7 @@ spec:
     kubeControllerManager:
       enabled: true
       endpoints: &cp
-        - 192.168.1.49
+        - 192.168.1.34
       serviceMonitor:
         metricRelabelings:
           # Remove duplicate metrics
@@ -137,7 +133,7 @@ spec:
         enabled: true
         ingressClassName: nginx
         annotations:
-          #external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
+          external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
           hajimari.io/appName: Prometheus
           hajimari.io/icon: simple-icons:prometheus
           nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
@@ -154,7 +150,7 @@ spec:
         enabled: false
       prometheusSpec:
         scrapeInterval: 60s
-        replicas: 1
+        replicas: 3
         externalLabels:
           cluster: homeops
         ruleSelectorNilUsesHelmValues: false

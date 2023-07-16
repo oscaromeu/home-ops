@@ -5,15 +5,16 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: "${SECRET_ACME_EMAIL}"
+    email: "${SECRET_CLOUDFLARE_EMAIL}"
     privateKeySecretRef:
       name: letsencrypt-production
     solvers:
       - dns01:
           cloudflare:
-            apiTokenSecretRef:
+            email: "${SECRET_CLOUDFLARE_EMAIL}"
+            apiKeySecretRef:
               name: cert-manager-secret
-              key: api-token
+              key: api-key
         selector:
           dnsZones:
             - "${SECRET_DOMAIN}"
@@ -25,15 +26,16 @@ metadata:
 spec:
   acme:
     server: https://acme-staging-v02.api.letsencrypt.org/directory
-    email: "${SECRET_ACME_EMAIL}"
+    email: "${SECRET_CLOUDFLARE_EMAIL}"
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
       - dns01:
           cloudflare:
-            apiTokenSecretRef:
+            email: "${SECRET_CLOUDFLARE_EMAIL}"
+            apiKeySecretRef:
               name: cert-manager-secret
-              key: api-token
+              key: api-key
         selector:
           dnsZones:
             - "${SECRET_DOMAIN}"

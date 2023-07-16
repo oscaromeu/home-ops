@@ -11,3 +11,5 @@ kubeconfig
 *.key
 # Ansible
 xanmanning.k3s*
+hack/*
+hack
