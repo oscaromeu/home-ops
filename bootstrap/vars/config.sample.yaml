@@ -20,13 +20,13 @@ bootstrap_flux_github_webhook_token: 346fcb10a506f0ab680bad28
 # Cloudflare domain
 bootstrap_cloudflare_domain: oscaromeu.io
 # Cloudflare API Token (not API Key)
-bootstrap_cloudflare_token: KRvfoaJI8i5fb8Q_MkHIjvPOZBwQ32fwyf9ZtPsS
+bootstrap_cloudflare_token: YNv1ZK10W_PTK2UjxsIGc4dc3cpd5HIUje9H90eP
 # Cloudflared Account Tag (cat ~/.cloudflared/*.json | jq -r .AccountTag)
 bootstrap_cloudflare_account_tag: 41b4afbb8fc2b5fe4a3ce7709d578586
 # Cloudflared Tunnel Secret (cat ~/.cloudflared/*.json | jq -r .TunnelSecret)
-bootstrap_cloudflare_tunnel_secret: +QmGBgjliR7dlEYMJ1PLRH4hDMAlFrd1aiSFO591YN8=
+bootstrap_cloudflare_tunnel_secret: adZ3gt11miv5upfupGcEDSNU8xovMQ6H/6dTfaBlgZQ=
 # Cloudflared Tunnel ID (cat ~/.cloudflared/*.json | jq -r .TunnelID)
-bootstrap_cloudflare_tunnel_id: a030f584-4cd3-49bc-a098-6efd0485d7a5
+bootstrap_cloudflare_tunnel_id: b079348e-b6c8-4168-becf-cd948f20f3fa
 
 
 # CIDR your nodes are on (e.g. 192.168.1.0/24)
