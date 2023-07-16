@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: cluster-apps-external-secrets-stores
+    - name: cluster-apps-kube-prometheus-stack
   path: ./kubernetes/apps/monitoring/gatus/app
   prune: true
   sourceRef:

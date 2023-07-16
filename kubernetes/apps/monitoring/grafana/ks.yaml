@@ -5,6 +5,8 @@ metadata:
   name: cluster-apps-grafana
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: cluster-apps-kube-prometheus-stack
   path: ./kubernetes/apps/monitoring/grafana/app
   prune: true
   sourceRef:
