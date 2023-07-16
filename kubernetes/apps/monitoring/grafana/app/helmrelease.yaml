@@ -31,7 +31,7 @@ spec:
   values:
     admin:
       existingSecret: grafana-admin-secret
-    replicas: 3
+    replicas: 1
     env:
       GF_EXPLORE_ENABLED: true
       GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"
