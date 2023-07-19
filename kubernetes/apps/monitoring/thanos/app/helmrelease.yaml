@@ -58,7 +58,45 @@ spec:
     existingObjstoreSecret: &secret thanos-objstore
 
     queryFrontend:
-      enabled: false
+      enabled: true
+      extraFlags:
+        - |-
+          --query-range.response-cache-config="config":
+            "addr": "redis://redis-master.logging.svc.cluster.local:6379/1"
+            "username": ""
+            "password": ""
+            "db": "0"
+            "dial_timeout": "5s"
+            "read_timeout": "3s"
+            "write_timeout": "3s"
+            "max_get_multi_concurrency": "100"
+            "get_multi_batch_size": "100"
+            "max_set_multi_concurrency": "100"
+            "set_multi_batch_size": "100"
+            "tls_enabled": "false"
+            "cache_size": "0"
+            "master_name": ""
+            "expiration": "24h0m0s"
+          "type": "redis"
+        - |-
+          --labels.response-cache-config="config":
+            "addr": "redis://redis-master.logging.svc.cluster.local:6379/1"
+            "username": ""
+            "password": ""
+            "db": "0"
+            "dial_timeout": "5s"
+            "read_timeout": "3s"
+            "write_timeout": "3s"
+            "max_get_multi_concurrency": "100"
+            "get_multi_batch_size": "100"
+            "max_set_multi_concurrency": "100"
+            "set_multi_batch_size": "100"
+            "tls_enabled": "false"
+            "cache_size": "0"
+            "master_name": ""
+            "expiration": "24h0m0s"
+          "type": "redis"
+
 
     bucketweb:
       enabled: true
