@@ -52,8 +52,6 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: simple-icons:prometheus
           external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
-      nodeSelector:
-        kubernetes.io/arch: amd64
 
     existingObjstoreSecret: &secret thanos-objstore
 
@@ -95,7 +93,15 @@ spec:
             "cache_size": 0
             "expiration": "24h0m0s"
           "type": "redis"
-
+      ingress:
+        enabled: true
+        hostname: "thanos-query.${SECRET_DOMAIN}"
+        ingressClassName: "nginx"
+        tls: true
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: simple-icons:prometheus
+          external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
 
     bucketweb:
       enabled: true
