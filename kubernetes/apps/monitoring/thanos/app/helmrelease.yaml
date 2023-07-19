@@ -131,12 +131,28 @@ spec:
 
     storegateway:
       enabled: true
-      replicaCount: 1
+      replicaCount: 3
       podAntiAffinityPreset: hard
       persistence:
         enabled: true
         storageClass: local-path
         size: 5Gi
+      sharded:
+  sharded:
+    enabled: true
+    hashPartitioning:
+      shards: 3
+    #timePartitioning:
+    #  - min: ""
+    #    max: ""
+    #service:
+    #  clusterIPs: []
+    #  loadBalancerIPs: []
+    #  http:
+    #    nodePorts: []
+    #  grpc:
+    #    nodePorts: []
+
 
       podAnnotations:
         secret.reloader.stakater.com/reload: *secret
