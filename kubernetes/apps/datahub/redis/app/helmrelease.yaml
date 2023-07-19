@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: redis
-  namespace: default
+  namespace: datahub
 spec:
   interval: 15m
   chart:
@@ -30,11 +30,28 @@ spec:
       enabled: false
       sentinel: false
     master:
+      resources:
+        limits:
+          memory: 1Gi
+          #cpu:
+        requests:
+          memory: 11Mi
+          cpu: 50m
       persistence:
-        enabled: false
+        enabled: true
+        storageClass: "local-path"
     replica:
+      replicaCount: 3
       persistence:
-        enabled: false
+        enabled: true
+        storageClass: "local-path"
+    resources:
+      limits:
+        #cpu: 250m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 256Mi
     sentinel:
       enabled: true
       masterSet: redis-master
@@ -62,8 +79,26 @@ spec:
         failureThreshold: 22
       persistence:
         enabled: false
+      resources:
+        limits:
+          #cpu: 250m
+          memory: 256Mi
+        requests:
+          cpu: 250m
+          memory: 256Mi
     metrics:
       enabled: false
       serviceMonitor:
         enabled: false
         interval: 1m
+      resources:
+        limits:
+          #cpu: 250m
+          memory: 256Mi
+        requests:
+          cpu: 250m
+          memory: 256Mi
+    useExternalDNS:
+      enabled: false
+      suffix: "redis.${SECRET_DOMAIN}"
+      annotationKey: external-dns.alpha.kubernetes.io/
