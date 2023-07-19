@@ -44,7 +44,7 @@ spec:
         sidecarsService: kube-prometheus-stack-thanos-discovery
         sidecarsNamespace: monitoring
       ingress:
-        enabled: true
+        enabled: false
         hostname: "thanos.${SECRET_DOMAIN}"
         ingressClassName: "nginx"
         tls: true
@@ -95,7 +95,7 @@ spec:
           "type": "redis"
       ingress:
         enabled: true
-        hostname: "thanos-query.${SECRET_DOMAIN}"
+        hostname: "thanos.${SECRET_DOMAIN}"
         ingressClassName: "nginx"
         tls: true
         annotations:
