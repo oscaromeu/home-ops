@@ -75,7 +75,6 @@ spec:
             "set_multi_batch_size": 100
             "tls_enabled": false
             "cache_size": 0
-            "master_name": "redis-master"
             "expiration": "24h0m0s"
           "type": "redis"
         - |-
@@ -93,7 +92,6 @@ spec:
             "set_multi_batch_size": 100
             "tls_enabled": false
             "cache_size": 0
-            "master_name": "redis-master"
             "expiration": "24h0m0s"
           "type": "redis"
 
