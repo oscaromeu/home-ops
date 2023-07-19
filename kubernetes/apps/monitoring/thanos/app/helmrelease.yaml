@@ -60,7 +60,7 @@ spec:
     queryFrontend:
       enabled: true
       extraFlags:
-        - --query-frontend.log-queries-longer-than="60s"
+        - --query-frontend.log-queries-longer-than=60
         - |-
           --query-range.response-cache-config="config":
             "addr": "redis-master.logging.svc.cluster.local"
