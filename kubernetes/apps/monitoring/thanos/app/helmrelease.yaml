@@ -69,12 +69,12 @@ spec:
             "dial_timeout": "5s"
             "read_timeout": "3s"
             "write_timeout": "3s"
-            "max_get_multi_concurrency": "100"
-            "get_multi_batch_size": "100"
-            "max_set_multi_concurrency": "100"
-            "set_multi_batch_size": "100"
-            "tls_enabled": "false"
-            "cache_size": "0"
+            "max_get_multi_concurrency": 100
+            "get_multi_batch_size": 100
+            "max_set_multi_concurrency": 100
+            "set_multi_batch_size": 100
+            "tls_enabled": false
+            "cache_size": 0
             "master_name": ""
             "expiration": "24h0m0s"
           "type": "redis"
@@ -87,12 +87,12 @@ spec:
             "dial_timeout": "5s"
             "read_timeout": "3s"
             "write_timeout": "3s"
-            "max_get_multi_concurrency": "100"
-            "get_multi_batch_size": "100"
-            "max_set_multi_concurrency": "100"
-            "set_multi_batch_size": "100"
-            "tls_enabled": "false"
-            "cache_size": "0"
+            "max_get_multi_concurrency": 100
+            "get_multi_batch_size": 100
+            "max_set_multi_concurrency": 100
+            "set_multi_batch_size": 100
+            "tls_enabled": false
+            "cache_size": 0
             "master_name": ""
             "expiration": "24h0m0s"
           "type": "redis"
