@@ -63,10 +63,10 @@ spec:
         - --query-frontend.log-queries-longer-than="60s"
         - |-
           --query-range.response-cache-config="config":
-            "addr": "redis://redis-master.logging.svc.cluster.local:6379/1"
+            "addr": "redis-master.logging.svc.cluster.local"
             "username": ""
             "password": ""
-            "db": 0
+            "db": 1
             "dial_timeout": "5s"
             "read_timeout": "3s"
             "write_timeout": "3s"
@@ -80,10 +80,10 @@ spec:
           "type": "redis"
         - |-
           --labels.response-cache-config="config":
-            "addr": "redis://redis-master.logging.svc.cluster.local:6379/1"
+            "addr": "redis-master.logging.svc.cluster.local"
             "username": ""
             "password": ""
-            "db": 0
+            "db": 1
             "dial_timeout": "5s"
             "read_timeout": "3s"
             "write_timeout": "3s"
