@@ -102,3 +102,5 @@ spec:
       enabled: false
       suffix: "redis.${SECRET_DOMAIN}"
       annotationKey: external-dns.alpha.kubernetes.io/
+      additionalAnnotations:
+        external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
