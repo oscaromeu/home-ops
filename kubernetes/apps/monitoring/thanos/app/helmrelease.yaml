@@ -131,7 +131,7 @@ spec:
 
     storegateway:
       enabled: true
-      replicaCount: 3
+      replicaCount: 1
       podAntiAffinityPreset: hard
       persistence:
         enabled: true
