@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
-  path: ./kubernetes/apps/default/clickhouse/app
+  path: ./kubernetes/apps/datahub/clickhouse/app
   prune: true
   sourceRef:
     kind: GitRepository
