@@ -61,7 +61,7 @@ spec:
         #- --query-frontend.log-queries-longer-than=60s
         - |-
           --query-range.response-cache-config="config":
-            "addr": "redis-master.logging.svc.cluster.local:6379"
+            "addr": "redis-headless.datahub.svc.cluster.local:6379"
             "username": ""
             "password": ""
             "db": 1
@@ -78,7 +78,7 @@ spec:
           "type": "redis"
         - |-
           --labels.response-cache-config="config":
-            "addr": "redis-master.logging.svc.cluster.local:6379"
+            "addr": "redis-headless.datahub.svc.cluster.local:6379"
             "username": ""
             "password": ""
             "db": 1
@@ -108,8 +108,6 @@ spec:
       replicaCount: 3
       podAnnotations:
         secret.reloader.stakater.com/reload: *secret
-      nodeSelector:
-        kubernetes.io/arch: amd64
 
     compactor:
       enabled: true
@@ -137,11 +135,10 @@ spec:
         enabled: true
         storageClass: local-path
         size: 5Gi
-      sharded:
-  sharded:
-    enabled: true
-    hashPartitioning:
-      shards: 3
+  #sharded:
+  #  enabled: true
+  #  hashPartitioning:
+  #    shards: 3
     #timePartitioning:
     #  - min: ""
     #    max: ""
