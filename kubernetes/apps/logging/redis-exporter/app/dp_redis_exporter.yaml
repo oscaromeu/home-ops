@@ -30,7 +30,7 @@ spec:
         - containerPort: 9121
         env:
           - name: REDIS_ADDR
-            value: "redis://redis-master.logging.svc.cluster.local:6379"
+            value: "redis://redis-headless.datahub.svc.cluster.local:26379"
           - name: REDIS_EXPORTER_SKIP_TLS_VERIFICATION
             value: "true"
           - name: REDIS_EXPORTER_SET_CLIENT_NAME
