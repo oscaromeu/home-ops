@@ -134,7 +134,7 @@ spec:
       extraFlags:
         - |-
           --index-cache.config="config":
-            "addr": "redis-headless.datahub.svc.cluster.local:6379"
+            "addr": "redis-headless.datahub.svc.cluster.local:26379"
             "username": ""
             "password": ""
             "db": 1
