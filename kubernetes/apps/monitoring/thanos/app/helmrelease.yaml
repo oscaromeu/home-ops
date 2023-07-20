@@ -75,6 +75,7 @@ spec:
             "tls_enabled": false
             "cache_size": 0
             "expiration": "24h0m0s"
+            "master_name": "redis-master"
           "type": "redis"
         - |-
           --labels.response-cache-config="config":
@@ -92,6 +93,7 @@ spec:
             "tls_enabled": false
             "cache_size": 0
             "expiration": "24h0m0s"
+            "master_name": "redis-master"
           "type": "redis"
       ingress:
         enabled: true
@@ -146,6 +148,7 @@ spec:
             "tls_enabled": false
             "cache_size": 0
             "expiration": "24h0m0s"
+            "master_name": "redis-master"
           "type": "redis"
       replicaCount: 1
       podAntiAffinityPreset: hard
