@@ -61,7 +61,7 @@ spec:
         #- --query-frontend.log-queries-longer-than=60s
         - |-
           --query-range.response-cache-config="config":
-            "addr": "redis-headless.datahub.svc.cluster.local:6379"
+            "addr": "redis-headless.datahub.svc.cluster.local:26379"
             "username": ""
             "password": ""
             "db": 1
@@ -79,7 +79,7 @@ spec:
           "type": "redis"
         - |-
           --labels.response-cache-config="config":
-            "addr": "redis-headless.datahub.svc.cluster.local:6379"
+            "addr": "redis-headless.datahub.svc.cluster.local:26379"
             "username": ""
             "password": ""
             "db": 1
