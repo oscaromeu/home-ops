@@ -5,7 +5,7 @@
 sources:
   k3s:
     type: redis
-    url: redis://redis-master.logging.svc.cluster.local:6379/0
+    url: redis://redis-headless.datahub.svc.cluster.local:6379/1
     key: "k3s_prod"
     decoding:
       codec: json
