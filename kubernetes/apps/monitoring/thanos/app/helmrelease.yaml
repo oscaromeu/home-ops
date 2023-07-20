@@ -146,7 +146,7 @@ spec:
             "max_set_multi_concurrency": 100
             "set_multi_batch_size": 100
             "tls_enabled": false
-            "cache_size": 0
+            "cache_size": "125MB"
             "expiration": "24h0m0s"
             "master_name": "redis-master"
           "type": "redis"
