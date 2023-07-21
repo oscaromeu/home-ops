@@ -1,6 +1,5 @@
 # About
 
-
 This documentation uses the [Diátaxis](https://diataxis.fr) technical documentation system, so is split between four modes of documentation:
 
 + Getting started
@@ -14,9 +13,10 @@ If you have any questions, don't hesitate to ask me on the community's Discord s
 
 ## Key Points
 
-+ Focuses on the main challenges in setting up and operating the platform.
-+ The document doesn't cover every use case or technology in-depth.
-+ It showcases essential components and their roles.
++ The essentials of setting up and running the laboratory with ease.
++ How to operate the laboratory. Note that this document won't delve into every use case or technology in-depth.
++ Architecture diagrams and the vital roles of each component.
++ Observability.
 
 
 
