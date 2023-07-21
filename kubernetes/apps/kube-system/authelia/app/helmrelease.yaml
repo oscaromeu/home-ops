@@ -105,7 +105,7 @@ spec:
         redis:
           enabled: true
           enabledSecret: false
-          host: redis-headless.default.svc.cluster.local
+          host: redis-headless.datahub.svc.cluster.local
       regulation:
         max_retries: 3
         find_time: 2m
