@@ -14,16 +14,13 @@ route:
       matchers:
         - alertname =~ "Watchdog"
       repeat_interval: 5m
-
     - receiver: "null"
       matchers:
         - alertname =~ "InfoInhibitor"
-
     - receiver: pushover
       continue: true
       matchers:
         - severity = "critical"
-
     - receiver: alerta
       continue: true
       matchers:

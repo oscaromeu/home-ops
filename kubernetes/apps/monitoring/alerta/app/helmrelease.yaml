@@ -99,7 +99,7 @@ spec:
         enabled: true
         type: emptyDir
       config-file:
-        enabled: false
+        enabled: true
         type: configMap
         name: alerta-configmap
         mountPath: /app/alertad.conf
