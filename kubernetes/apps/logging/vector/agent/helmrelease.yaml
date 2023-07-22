@@ -157,7 +157,7 @@ spec:
     #  storageClass: local-path
     # https://github.com/billimek/k8s-gitops/blob/master/logs/loki/loki.yaml
     podMonitor:
-      enabled: false
+      enabled: falset
 
     env:
       - name: VECTOR_LOG
