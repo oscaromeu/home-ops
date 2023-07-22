@@ -14,10 +14,17 @@ route:
       matchers:
         - alertname =~ "Watchdog"
       repeat_interval: 5m
+
     - receiver: "null"
       matchers:
         - alertname =~ "InfoInhibitor"
+
     - receiver: pushover
+      continue: true
+      matchers:
+        - severity = "critical"
+
+    - receiver: alerta
       continue: true
       matchers:
         - severity = "critical"
@@ -28,11 +35,19 @@ inhibit_rules:
     target_matchers:
       - severity = "warning"
 receivers:
-  - name: heartbeat
+
+  - name: "alerta"
     webhook_configs:
-      - send_resolved: true
-        url: "https://alerta.${SECRET_DOMAIN}"
+    - url: 'https://alerta.${SECRET_DOMAIN}/api/webhooks/prometheus'
+      send_resolved: true
+
+  - name: "heartbeat"
+    webhook_configs:
+    - url: 'https://alerta.${SECRET_DOMAIN}/api/webhooks/prometheus'
+      send_resolved: false
+
   - name: "null"
+
   - name: pushover
     pushover_configs:
       - html: true
