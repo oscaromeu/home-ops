@@ -37,55 +37,6 @@ spec:
     cleanPrometheusOperatorObjectNames: true
     alertmanager:
       enabled: true
-      config:
-        global:
-          resolve_timeout: 5m
-        inhibit_rules:
-          - source_matchers:
-              - 'severity = critical'
-            target_matchers:
-              - 'severity =~ warning|info'
-            equal:
-              - 'namespace'
-              - 'alertname'
-          - source_matchers:
-              - 'severity = warning'
-            target_matchers:
-              - 'severity = info'
-            equal:
-              - 'namespace'
-              - 'alertname'
-          - source_matchers:
-              - 'alertname = InfoInhibitor'
-            target_matchers:
-              - 'severity = info'
-            equal:
-              - 'namespace'
-        route:
-          group_by: ['namespace', 'alertname']
-          group_wait: 30s
-          group_interval: 5m
-          repeat_interval: 12h
-          receiver: 'null'
-          routes:
-          - receiver: 'null'
-            matchers:
-              - alertname =~ "InfoInhibitor|Watchdog"
-
-        receivers:
-        - name: 'null'
-        - name: "alerta"
-          webhook_configs:
-          - url: 'https://alerta.${SECRET_DOMAIN}/api/webhooks/prometheus'
-            send_resolved: true
-
-        - name: "alerta_no_resolve"
-          webhook_configs:
-          - url: 'https://alerta.${SECRET_DOMAIN}/api/webhooks/prometheus'
-            send_resolved: false
-
-        templates:
-        - '/etc/alertmanager/config/*.tmpl'
       ingress:
         enabled: true
         ingressClassName: nginx
@@ -105,6 +56,16 @@ spec:
           - hosts:
               - *host
       alertmanagerSpec:
+        replicas: 1
+        useExistingSecret: true
+        configSecret: alertmanager-secret
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: local-path
+              resources:
+                requests:
+                  storage: 1Gi
         resources:
           requests:
             memory: 24Mi
