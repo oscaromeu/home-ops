@@ -75,6 +75,12 @@ spec:
               - *host
 
     probes:
+      liveness:
+        spec:
+          initialDelaySeconds: 300
+      readiness:
+        spec:
+          initialDelaySeconds: 300
       startup:
         enabled: false
 
