@@ -54,7 +54,7 @@ spec:
         ingressClassName: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-staging
-          #external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+          external-dns.alpha.kubernetes.io/target: ingress.${SECRET_DOMAIN}
           external-dns.home.arpa/enabled: "true"
           hajimari.io/icon: simple-icons:prometheus
         hosts:
