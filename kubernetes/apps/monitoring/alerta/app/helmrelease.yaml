@@ -76,7 +76,7 @@ spec:
 
     probes:
       liveness:
-        enabled: true
+        enabled: false
         custom: true
         spec:
           httpGet:
@@ -84,7 +84,7 @@ spec:
             port: http
           initialDelaySeconds: 300
       readiness:
-        enabled: true
+        enabled: false
         custom: true
         spec:
           httpGet:
