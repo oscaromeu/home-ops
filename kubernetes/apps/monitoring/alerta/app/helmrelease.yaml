@@ -86,7 +86,7 @@ spec:
         enabled: true
         type: configMap
         name: alerta-configmap
-        mountPath: /config/alertad.conf
+        mountPath: /app/alertad.conf
         subPath: alertad.conf
         readOnly: true
     resources:
