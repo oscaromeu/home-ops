@@ -31,7 +31,7 @@ receivers:
   - name: heartbeat
     webhook_configs:
       - send_resolved: true
-        url: "alerta.${SECRET_DOMAIN}"
+        url: "https://alerta.${SECRET_DOMAIN}"
   - name: "null"
   - name: pushover
     pushover_configs:
