@@ -9,7 +9,6 @@ resources:
   - ./kubernetes-dashboard/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
   #- ./kube-prometheus-stack/ks.yaml
-  - ./robusta/ks.yaml
   - ./sloth/ks.yaml
   - ./thanos/ks.yaml
   - ./vpa/ks.yaml
