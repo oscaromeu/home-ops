@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
-  path: ./kubernetes/apps/default/registry/app
+  path: ./kubernetes/apps/dev/registry/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -18,7 +18,7 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: docker-registry
-      namespace: default
+      namespace: dev
   interval: 30m
   retryInterval: 1m
   timeout: 3m
