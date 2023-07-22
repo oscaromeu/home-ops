@@ -76,10 +76,18 @@ spec:
 
     probes:
       liveness:
+        custom: true
         spec:
+          httpGet:
+            path: /
+            port: http
           initialDelaySeconds: 300
       readiness:
+        custom: true
         spec:
+          httpGet:
+            path: /
+            port: http
           initialDelaySeconds: 300
       startup:
         enabled: false
