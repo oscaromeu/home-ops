@@ -8,7 +8,7 @@ resources:
   - ./grafana/ks.yaml
   - ./kubernetes-dashboard/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
-  - ./kube-prometheus-stack/ks.yaml
+  #- ./kube-prometheus-stack/ks.yaml
   - ./robusta/ks.yaml
   - ./sloth/ks.yaml
   - ./thanos/ks.yaml
