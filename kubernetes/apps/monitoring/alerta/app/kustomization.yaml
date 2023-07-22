@@ -4,12 +4,12 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ./externalsecret.yaml
-  - ./helmrelease.yaml
-configMapGenerator:
-  - name: alerta-configmap
-    files:
-      - ./config/alertad.conf
-generatorOptions:
-  disableNameSuffixHash: true
-  annotations:
-    kustomize.toolkit.fluxcd.io/substitute: disabled
+#  - ./helmrelease.yaml
+#configMapGenerator:
+#  - name: alerta-configmap
+#    files:
+#      - ./config/alertad.conf
+#generatorOptions:
+#  disableNameSuffixHash: true
+#  annotations:
+#    kustomize.toolkit.fluxcd.io/substitute: disabled
