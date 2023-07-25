@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    labels:
+        license.k8s.elastic.co/scope: operator
+    name: eck-license
+type: Opaque
+data:
+    license: ENC[AES256_GCM,data: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,iv:5jzJHkTTYZFxz2ykG1hLq8dt3OONkaRY4Ic8NmDow3Y=,tag:1HnpW4fnYl0CQEGN3FP1HA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1ptththqpxnx0zuzmq0peq9x30vqgdedjsdlsuzxr5gfc36mnwqlsylrpr8
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBBdWVoT2g0SWFQNzBtUkc2
+            QVhOQ2RqM01Rbmx6cVcyYktzOXJZUTNERkFvCkFNTEhsL2xGU0RrZnE4VHR5L1lM
+            NmJIWXdaakdPSkJKSmpyYU5DTUpmMGMKLS0tIEVnQjFGT21lNEFwZEo3MGFJbmtl
+            ZmNaVzJNZkhMYnk4NUl6VEUrRUtCWDAKSYVDqPEL0nJwFPY7LW7QaQz4mSEJE7Vo
+            Ucj6YugsHFPAk3GF+BwN96XJldCEDeiAdkfvv4dvmQQpdlI9Zhteag==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-07-25T04:57:13Z"
+    mac: ENC[AES256_GCM,data:IEn5hMmkYGHdgup2DyjPnuiTM5LWQx6lygnigvP9k0Ao74Ql0NofMDcnoyIDTc/tTU+skxtGDhwjewodusLxXkMHfUkohSTvWkjBX51rOh2kZwPmrx/+doa7zFoo7YzQceqDZ1BJuq3poxJmtcsGQQb2b2ujLaDCIIod3Opce8c=,iv:ajgWQjfLSjM48jY6+sS0OWeP5zJM4/gVcEZ4oXhgvlw=,tag:Wv/FxV+ssZy+gU91rUdn9Q==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.3
