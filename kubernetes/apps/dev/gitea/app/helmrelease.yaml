@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: gitea
-  namespace: default
+  namespace: dev
   labels:
     environment: production
     app: gitea
@@ -128,6 +128,7 @@ spec:
         enabled: false
         serviceMonitor:
           enabled: false
+
       actions:
         enabled: true
 
