@@ -55,13 +55,15 @@ spec:
       tls:
         - hosts:
             - *host
-    #service:
-    #  ssh:
-    #    type: LoadBalancer
-    #    port: 22
-    #    externalTrafficPolicy: Local
-    #    externalIPs:
-    #      - "${SVC_GITEA_IP}"
+    service:
+      ssh:
+        annotations:
+          metallb.universe.tf/allow-shared-ip: shared-ip
+        #type: LoadBalancer
+        #port: 22
+        #externalTrafficPolicy: Local
+        #externalIPs:
+        #  - "${SVC_GITEA_IP}"
 
 
     gitea:
