@@ -3,12 +3,19 @@
 # Sources
 #
 sources:
+
   k3s:
     type: redis
-    url: redis://redis-master.logging.svc.cluster.local:6379/0
+    url: redis://redis-headless.datahub.svc.cluster.local:6379/0
     key: "k3s_prod"
     decoding:
       codec: json
+
+  k3s_loki:
+    type: vector
+    version: "2"
+    address: 0.0.0.0:6010
+
 
 #
 # Transforms
@@ -23,6 +30,17 @@ transforms:
 
       # Standardize 'message' name
       .log = .message
+
+  kubernetes_remap_loki:
+    type: remap
+    inputs: ["k3s_loki"]
+    source: |
+      # Standardize 'app' index
+      .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
+
+      # Standardize 'message' name
+      .log = .message
+
 #
 # Sinks
 #
@@ -61,7 +79,7 @@ sinks:
       codec: json
     endpoint: http://loki-gateway.logging.svc.cluster.local:80
     inputs:
-      - kubernetes_remap
+      - kubernetes_remap_loki
     out_of_order_action: accept
     remove_label_fields: true
     remove_timestamp: true
