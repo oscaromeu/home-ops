@@ -9,4 +9,4 @@ resources:
   - ./reloader/ks.yaml
   - ./external-secrets/ks.yaml
   - ./glauth/ks.yaml
-  #- ./authelia/ks.yaml
+  - ./authelia/ks.yaml
