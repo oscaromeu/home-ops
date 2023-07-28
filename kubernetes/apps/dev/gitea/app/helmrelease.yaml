@@ -95,6 +95,10 @@ spec:
           SCHEMA: public
           SSL_MODE: disable
 
+        cache:
+          ADAPTER: redis-cluster
+          HOST: redis://redis-headless.datahub.svc.cluster.local:26379/3?pool_size=100&idle_timeout=180s
+
         webhook:
           ALLOWED_HOST_LIST: "*"
 
