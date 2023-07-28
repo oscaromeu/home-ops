@@ -140,6 +140,12 @@ spec:
     postgresql:
       enabled: false
 
+    postgresql-ha:
+      enabled: false
+
+    redis-cluster:
+      enabled: false
+
     persistence:
       enabled: true
       accessModes: ["ReadWriteOnce"]
@@ -172,19 +178,19 @@ spec:
       valuesKey: host
 
 
-  #postRenderers:
-  #  - kustomize:
-  #      patchesStrategicMerge:
-  #        - kind: StatefulSet
-  #          apiVersion: apps/v1
-  #          metadata:
-  #            name: gitea
-  #          spec:
-  #            template:
-  #              spec:
-  #                initContainers:
-  #                  - name: init-db
-  #                    image: ghcr.io/onedr0p/postgres-initdb:14.7
-  #                    envFrom:
-  #                      - secretRef:
-  #                          name: gitea-db
+  postRenderers:
+    - kustomize:
+        patchesStrategicMerge:
+          - kind: Deployment
+            apiVersion: apps/v1
+            metadata:
+              name: gitea
+            spec:
+              template:
+                spec:
+                  initContainers:
+                    - name: init-db
+                      image: ghcr.io/onedr0p/postgres-initdb:14.7
+                      envFrom:
+                        - secretRef:
+                            name: gitea-db
