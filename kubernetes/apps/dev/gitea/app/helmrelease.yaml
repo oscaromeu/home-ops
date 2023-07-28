@@ -97,8 +97,12 @@ spec:
 
         cache:
           ADAPTER: redis-cluster
-          HOST: redis://redis-headless.datahub.svc.cluster.local:26379/3?pool_size=100&idle_timeout=180s
-
+          HOST: redis://redis-headless.datahub.svc.cluster.local:26379/3
+        session:
+          PROVIDER: redis-cluster
+        queue:
+          TYPE: redis
+          CONN_STR: redis://redis-headless.datahub.svc.cluster.local:26379/3
         webhook:
           ALLOWED_HOST_LIST: "*"
 
