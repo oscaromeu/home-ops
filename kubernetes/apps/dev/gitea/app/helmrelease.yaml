@@ -96,10 +96,10 @@ spec:
           SSL_MODE: disable
 
         cache:
-          ADAPTER: redis-cluster
+          ADAPTER: redis
           HOST: redis://redis-headless.datahub.svc.cluster.local:6379/3
         session:
-          PROVIDER: redis-cluster
+          PROVIDER: redis
         #queue:
         #  TYPE: redis
         #  CONN_STR: redis://redis-headless.datahub.svc.cluster.local:6379/3
