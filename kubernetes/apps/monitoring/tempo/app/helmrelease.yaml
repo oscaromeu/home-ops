@@ -35,9 +35,11 @@ spec:
         enabled: false
       storage:
         trace:
-          backend: gcs
-          gcs:
-            insecure: true  # optional. enable if endpoint is http
+          backend: local
+          local:
+            path: /var/tempo/traces
+          #gcs:
+          #  insecure: true  # optional. enable if endpoint is http
 
       resources:
         requests:
@@ -50,11 +52,11 @@ spec:
       #extraEnvFrom:
       #  - tempo-objstore
 
-      extraVolumeMounts:
-        - name: tempo-objstore
-          mountPath: /mnt/tempo-objstore
-          readOnly: true
-          existingClaim: tempo-gcs
+      #extraVolumeMounts:
+      #  - name: tempo-objstore
+      #    mountPath: /mnt/tempo-objstore
+      #    readOnly: true
+      #    existingClaim: tempo-gcs
 
 
     persistence:
