@@ -6,7 +6,7 @@ configMapGenerator:
 
   - name: fastapi-app
     files:
-      - fastapi-app.json
+      - ./dashboards/fastapi-app.json
     options:
       labels:
         grafana_dashboard: fastapi-app
