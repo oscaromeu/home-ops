@@ -89,11 +89,14 @@ spec:
 
         #cache:
         #  ADAPTER: redis
-        #  HOST: redis://redis-headless.datahub.svc.cluster.local:6379/0
+        #  HOST: redis://redis-headless.datahub.svc.cluster.local:6379/2
 
-        queue:
-          TYPE: redis
-          CONN_STR: redis://redis-headless.datahub.svc.cluster.local:6379/0
+        #queue:
+        #  TYPE: redis
+        #  CONN_STR: redis://redis-headless.datahub.svc.cluster.local:6379/2
+
+        #task:
+        #  QUEUE_CONN_STR: redis://redis-headless.datahub.svc.cluster.local:6379/2
 
         webhook:
           ALLOWED_HOST_LIST: "*"
@@ -144,7 +147,7 @@ spec:
       enabled: false
 
     redis-cluster:
-      enabled: false
+      enabled: true
 
     persistence:
       enabled: true
