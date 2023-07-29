@@ -39,22 +39,22 @@ spec:
           gcs:
             insecure: true  # optional. enable if endpoint is http
 
-        resources:
-          requests:
-            cpu: 1000m
-            memory: 500Mi
-          limits:
-            #cpu: 2000m
-            memory: 2Gi
+      resources:
+        requests:
+          cpu: 1000m
+          memory: 500Mi
+        limits:
+          #cpu: 2000m
+          memory: 2Gi
 
-        #extraEnvFrom:
-        #  - tempo-objstore
+      #extraEnvFrom:
+      #  - tempo-objstore
 
-        extraVolumeMounts:
-          - name: tempo-objstore
-            mountPath: /mnt/tempo-objstore
-            readOnly: true
-            existingClaim: tempo-gcs
+      extraVolumeMounts:
+        - name: tempo-objstore
+          mountPath: /mnt/tempo-objstore
+          readOnly: true
+          existingClaim: tempo-gcs
 
 
     persistence:
