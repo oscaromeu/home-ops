@@ -33,6 +33,7 @@ spec:
       reportingEnabled: false
       metricsGenerator:
         enabled: false
+
       storage:
         trace:
           backend: local
@@ -59,8 +60,12 @@ spec:
       #    existingClaim: tempo-gcs
 
 
-    persistence:
-      enabled: false
+      persistence:
+        enabled: true
+        # storageClassName: local-path
+        accessModes:
+          - ReadWriteOnce
+        size: 10Gi
 
     tempoQuery:
       ingress:
