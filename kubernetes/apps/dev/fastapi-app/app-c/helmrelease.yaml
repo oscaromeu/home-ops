@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: app-a
+  name: app-c
   namespace: dev
 spec:
   interval: 15m
@@ -26,19 +26,4 @@ spec:
       repository: ghcr.io/oscaromeu/fastapi-observability
       tag: v0.1.0
     env:
-      APP_NAME: "app-a"
-    service:
-      main:
-        ports:
-          http:
-            port: &port 8000
-
-    serviceMonitor:
-      main:
-        enabled: false
-        endpoints:
-          - port: http
-            scheme: http
-            path: /metrics
-            interval: 1m
-            scrapeTimeout: 10s
+      APP_NAME: "app-c"
