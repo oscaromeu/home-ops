@@ -100,9 +100,9 @@ spec:
           HOST: redis://redis-headless.datahub.svc.cluster.local:6379/0
         session:
           PROVIDER: redis
-        #queue:
-        #  TYPE: redis
-        #  CONN_STR: redis://redis-headless.datahub.svc.cluster.local:6379/3
+        queue:
+          TYPE: redis
+          CONN_STR: redis://redis-headless.datahub.svc.cluster.local:6379/0
         webhook:
           ALLOWED_HOST_LIST: "*"
 
