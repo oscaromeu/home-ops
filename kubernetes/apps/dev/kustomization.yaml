@@ -4,6 +4,6 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./alerta/ks.yaml
-  #- ./gitea/ks.yaml
+  - ./gitea/ks.yaml
   - ./registry/ks.yaml
   #- ./tekton
