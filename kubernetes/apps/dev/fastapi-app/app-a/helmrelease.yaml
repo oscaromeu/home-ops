@@ -35,7 +35,7 @@ spec:
 
     serviceMonitor:
       main:
-        enabled: false
+        enabled: true
         endpoints:
           - port: http
             scheme: http

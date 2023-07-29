@@ -27,3 +27,18 @@ spec:
       tag: v0.1.0
     env:
       APP_NAME: "app-b"
+    service:
+      main:
+        ports:
+          http:
+            port: &port 8000
+
+    serviceMonitor:
+      main:
+        enabled: true
+        endpoints:
+          - port: http
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
