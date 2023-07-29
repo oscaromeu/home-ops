@@ -30,16 +30,11 @@ spec:
     keepHistory: false
   values:
 
-    controller:
-      replicas: 0
-      strategy: RollingUpdate
-      annotations:
-        reloader.stakater.com/auto: "true"
-
-    containerSecurityContext:
-      capabilities:
-        add:
-          - SYS_CHROOT
+    # All values at https://gitea.com/gitea/helm-chart
+    image:
+      repository: gitea/gitea
+      tag: 1.20.1
+      pullPolicy: IfNotPresent
 
     ingress:
       enabled: true
@@ -57,13 +52,10 @@ spec:
             - *host
     service:
       ssh:
+        type: LoadBalancer
+        port: 2222
         annotations:
-          metallb.universe.tf/allow-shared-ip: shared-ip
-        #type: LoadBalancer
-        #port: 22
-        #externalTrafficPolicy: Local
-        #externalIPs:
-        #  - "${SVC_GITEA_IP}"
+          metallb.universe.tf/loadBalancerIPs: "192.168.1.45"
 
 
     gitea:
@@ -74,8 +66,8 @@ spec:
 
         server:
           DISABLE_SSH: false
-          SSH_PORT: 22
-          SSH_LISTEN_PORT: 22
+          SSH_PORT: 2222
+          SSH_LISTEN_PORT: 2222
           SSH_DOMAIN: "ssh.git.${SECRET_DOMAIN}"
           DOMAIN: "git.${SECRET_DOMAIN}"
           ROOT_URL: "https://git.${SECRET_DOMAIN}"
