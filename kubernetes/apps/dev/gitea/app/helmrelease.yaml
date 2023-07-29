@@ -87,13 +87,6 @@ spec:
           SCHEMA: public
           SSL_MODE: disable
 
-        cache:
-          ADAPTER: redis
-          HOST: redis://redis-headless.datahub.svc.cluster.local:6379/0
-
-        queue:
-          TYPE: redis
-          CONN_STR: redis://redis-headless.datahub.svc.cluster.local:6379/0
         webhook:
           ALLOWED_HOST_LIST: "*"
 
