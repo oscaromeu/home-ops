@@ -6,5 +6,6 @@ resources:
   - ./alerta/ks.yaml
   - ./gitea/ks.yaml
   - ./registry/ks.yaml
-  - ./fastapi-app/ks.yaml
+  - ./spring-boot-app/ks.yaml
+  #- ./fastapi-app/ks.yaml
   #- ./tekton

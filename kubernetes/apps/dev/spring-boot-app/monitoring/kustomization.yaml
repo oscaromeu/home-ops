@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: monitoring
+
+configMapGenerator:
+
+  - name: fastapi-app
+    files:
+      - ./dashboards/fastapi-app.json
+    options:
+      labels:
+        grafana_dashboard: fastapi-app
+      disableNameSuffixHash: true
