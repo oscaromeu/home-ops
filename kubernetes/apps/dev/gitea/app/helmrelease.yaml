@@ -65,7 +65,7 @@ spec:
         APP_NAME: Tea, Git, Hot
 
         server:
-          DISABLE_SSH: true
+          DISABLE_SSH: false
           SSH_PORT: 2222
           SSH_LISTEN_PORT: 2222
           SSH_DOMAIN: "ssh.git.${SECRET_DOMAIN}"
