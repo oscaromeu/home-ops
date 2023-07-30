@@ -12,7 +12,7 @@ spec:
   chart:
     spec:
       chart: gitea
-      version: 9.0.4
+      version: 8.1.0
       sourceRef:
         kind: HelmRepository
         name: gitea
@@ -30,11 +30,16 @@ spec:
     keepHistory: false
   values:
 
-    # All values at https://gitea.com/gitea/helm-chart
-    image:
-      repository: gitea/gitea
-      tag: 1.20.1
-      pullPolicy: IfNotPresent
+    controller:
+      replicas: 0
+      strategy: RollingUpdate
+      annotations:
+        reloader.stakater.com/auto: "true"
+
+    containerSecurityContext:
+      capabilities:
+        add:
+          - SYS_CHROOT
 
     ingress:
       enabled: true
@@ -50,12 +55,13 @@ spec:
       tls:
         - hosts:
             - *host
-    service:
-      ssh:
-        type: LoadBalancer
-        port: 2222
-        annotations:
-          metallb.universe.tf/loadBalancerIPs: "192.168.1.45"
+    #service:
+    #  ssh:
+    #    type: LoadBalancer
+    #    port: 22
+    #    externalTrafficPolicy: Local
+    #    externalIPs:
+    #      - "${SVC_GITEA_IP}"
 
 
     gitea:
@@ -66,8 +72,8 @@ spec:
 
         server:
           DISABLE_SSH: false
-          SSH_PORT: 2222
-          SSH_LISTEN_PORT: 2222
+          SSH_PORT: 22
+          SSH_LISTEN_PORT: 22
           SSH_DOMAIN: "ssh.git.${SECRET_DOMAIN}"
           DOMAIN: "git.${SECRET_DOMAIN}"
           ROOT_URL: "https://git.${SECRET_DOMAIN}"
@@ -86,17 +92,6 @@ spec:
           NAME: gitea
           SCHEMA: public
           SSL_MODE: disable
-
-        #cache:
-        #  ADAPTER: redis
-        #  HOST: redis://redis-headless.datahub.svc.cluster.local:6379/2
-
-        #queue:
-        #  TYPE: redis
-        #  CONN_STR: redis://redis-headless.datahub.svc.cluster.local:6379/2
-
-        #task:
-        #  QUEUE_CONN_STR: redis://redis-headless.datahub.svc.cluster.local:6379/2
 
         webhook:
           ALLOWED_HOST_LIST: "*"
@@ -133,21 +128,11 @@ spec:
         enabled: false
         serviceMonitor:
           enabled: false
-
-      actions:
-        enabled: true
-
       podAnnotations:
         secret.reloader.stakater.com/reload: gitea-config
 
     postgresql:
       enabled: false
-
-    postgresql-ha:
-      enabled: false
-
-    redis-cluster:
-      enabled: true
 
     persistence:
       enabled: true
@@ -183,8 +168,8 @@ spec:
 
   postRenderers:
     - kustomize:
-        patches:
-          - kind: Deployment
+        patchesStrategicMerge:
+          - kind: StatefulSet
             apiVersion: apps/v1
             metadata:
               name: gitea
