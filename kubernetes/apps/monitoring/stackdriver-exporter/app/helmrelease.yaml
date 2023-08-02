@@ -48,3 +48,8 @@ spec:
       projectId: "refined-ensign-355816"
       serviceAccountSecret: "stackdriver-credentials"
 
+
+      metrics:
+        # The prefixes to gather metrics for, we default to just CPU metrics.
+        typePrefixes: 'cloudsql.googleapis.com/database'
+        #typePrefixes: 'cloudsql.googleapis.com/database/cpu/,cloudsql.googleapis.com/database/disk/,cloudsql.googleapis.com/database/network/,cloudsql.googleapis.com/database/memory/'
