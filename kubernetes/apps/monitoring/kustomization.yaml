@@ -10,7 +10,7 @@ resources:
   - ./prometheus-adapter/ks.yaml
   - ./promlens/ks.yaml
   - ./sloth/ks.yaml
-  #- ./stackdriver-exporter/ks.yaml
+  - ./stackdriver-exporter/ks.yaml
   - ./tempo/ks.yaml
   - ./thanos/ks.yaml
   - ./vpa/ks.yaml
