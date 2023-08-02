@@ -9,11 +9,11 @@ spec:
   chart:
     spec:
       # renovate: registryUrl=https://charts.bitnami.com/bitnami
-      chart: telegraf
-      version: 1.8.28
+      chart: prometheus-stackdriver-exporter
+      version: 4.3.0
       sourceRef:
         kind: HelmRepository
-        name: influxdata
+        name: prometheus-community
         namespace: flux-system
       interval: 5m
 
@@ -36,15 +36,6 @@ spec:
 
   values:
 
-    volumes:
-    - name: telegraf-config
-      configMap:
-        name: "telegraf-config"
-    mountPoints:
-    - name: telegraf-config
-      mountPath: /etc/telegraf/conf.d
-      subPath: stackdriver.conf
-
     resources:
       requests:
         memory: 128Mi
@@ -52,18 +43,8 @@ spec:
       limits:
         memory: 128Mi
         #cpu: 100m
-    outputs:
-      - influxdb:
-          urls:
-            - "http://<victoriametrics-addr>:8428"
-    inputs:
-      - statsd:
-          service_address: ":8125"
-          percentiles:
-            - 50
-            - 95
-            - 99
-          metric_separator: "_"
-          allowed_pending_messages: 10000
-          percentile_limit: 1000
+
+    stackdriver:
+      projectId: "refined-ensign-355816"
+      serviceAccountSecret: "stackdriver-credentials"
 
