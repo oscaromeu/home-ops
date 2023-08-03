@@ -10,6 +10,7 @@ resources:
   - ./calico.yaml
   - ./cilium.yaml
   - ./cloudnative-pg.yaml
+  - ./crossplane.yaml
   - ./deliveryhero.yaml
   - ./descheduler.yaml
   - ./external-dns.yaml
