@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: crossplane
+  namespace: kube-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: crossplane
+      version: 1.13.1
+      sourceRef:
+        kind: HelmRepository
+        name: crossplane
+        namespace: flux-system
+      interval: 5m
+  values:
+    provider:
+      packages:
+        - xpkg.upbound.io/crossplane-contrib/provider-gcp:v0.35.0

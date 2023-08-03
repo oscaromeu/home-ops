@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: authelia-users
+    namespace: kube-system
+stringData:
+    users_database.yml: ENC[AES256_GCM,data:1NH/qFSvypeHfxIdZDLYw+DdCXz7T85Woi0dCv1VP3oLM6P53y89Z+VJpJBFxGJrAhY/hx2xCxH1Ny1U0LKFHxMYCk46xGpQ2CWdc5KqyHHoSiNCx0q/MtmJKpO0JatiWm9MPwRXUWu/3G5sqp0y7FinETIsAJdLaKvl2hjAdC22Yndp1R9x/YeVlNcz6IHogIwzqaXimMWKeDXAblVUQs95XPYXZoOMhnprdgRpLWs5ytsQ5C0ZhsCAvGr6Tv3mjcrGwHv9OwcU2T1O791EjLthPbOsdQ2Fxx+QzSo68cs6/rb0jY2RoVT0p3JIBglAstGRPgb6NDwklFz7Ok/p3gmVBcn6zcpPaFEyjYs070NtldKkKCCTnf4zZefG1qkux0eJ9mWhe7uUvYuPiRDLG5wQCx9fPAUU3pPfKHCobsQP01D7c2cNcU3EPCtPMlEj+w9p4HD/tDj1N/prCoCsL8S0ms3kHezu/aISISO8sMa/0TZVU1ZOCZbfnn9UgO1PORey4edquyQyroe6qVRU436s9owHT84m1AvMXuQAtebbMBkIPq+AkudJMCSu/ChZgBKu7AnddfF1uBwO5TxbF/bO5pTxu8W/i/UreUY1EhVoaq+ag5qknme09d+c5e+KdX1bgMTUG9i+rDANqeu1MyVl6KStT91orJwvmYY2S1n6cB5dwpugLZRx4dW2qkWlVX9OupNJuMpnw5cXMHcng9DuCL/vMp9sjIww4OrAn1F9,iv:9H+iyjr57f+/fSEBrwVEkWZ1oCeI7Uu/Srk2CvjBzT8=,tag:L0g4kYRDCrXyxYs189WK1g==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1ptththqpxnx0zuzmq0peq9x30vqgdedjsdlsuzxr5gfc36mnwqlsylrpr8
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBpTFV3TStHL1Vaempyd01K
+            ckQrV0pqek5qYjlCVG8yMGVZcS9HaDJ6VlVFCll5T0dwNkRwQjNmSHd1S3oxVWRR
+            U2ZBd1hRVFN6SzRrN25sdjRrMm1RM0kKLS0tIHVVK0VBN2tuV2pQVnNwZGM3aUhW
+            NVBXbGpDYmUvcjRYaG56b01WMEtSdDgK8kIeFUvTANLzueSCHt62PsxBo3AlHUnx
+            sdH2AN8jKvs2cWavZx4tN/uJrJFxesPk0Vq/pxvlmT6PM0mI2Kk0tw==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-07-14T05:40:40Z"
+    mac: ENC[AES256_GCM,data:pfWahcrnEss9sQy6ACxMn7rWD/HzwniLOaks+uWzSMwVirWzPhzWqJP/DQsbX5VRXEpWji6KtoDPDeDdJMcsTDql7aBThelVhFWAYdUUxULmSBkYngZhpHwCE1nQyHfcXn1CzCtO08CN+178DEBatLCuGIJe7XoY9xnqS/Eg4f4=,iv:EeDieuxVD1YoF0IPOcaS4nkxgehxQqQHdgivGYgLEBs=,tag:VeZIproOXXcbKFoZJPnwWg==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.3
