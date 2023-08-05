@@ -18,7 +18,7 @@ spec:
   values:
     domain: ${SECRET_DOMAIN}
     ingress:
-      enabled: true
+      enabled: false
       subdomain: auth
       className: nginx
       annotations:
@@ -28,7 +28,6 @@ spec:
           hajimari.io/icon: "alarm-light-outline"
       tls:
         enabled: true
-
     pod:
       kind: Deployment
       replicas: 1
