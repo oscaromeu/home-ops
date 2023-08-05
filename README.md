@@ -24,13 +24,20 @@ This project aims to achieve its goals while adhering to industry-standard pract
 
 ### Hardware
 
-- 2 × MinisForum `um350`:
-    - CPU: `AMD Ryzen 5 3550H`
+- 1 × MinisForum `um350`:
+    - CPU: `Intel i5-8279U (8) @ 4.100GHz`
+    - RAM: `32GB`
+    - M.2 SSD: `256GB`
+    - HDD SSD: `500GB`
+
+- 1 × MinisForum `um350`:
+    - CPU: `AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx (8) @ 2.100GHz`
     - RAM: `32GB`
     - M.2 SSD: `512GB`
-    - HDD: `500GB`
+    - HDD SSD: `500GB`
+
 - 1 × Minisforum `um560`:
-    - CPU: `AMD Ryzen 5 5600H`
+    - CPU: `AMD Ryzen 5 5600H with Radeon Graphics @ 12x 3.3GHz`
     - RAM: `32GB`
     - M.2 SSD: `1TB`
     - HDD SSD: `1TB`
