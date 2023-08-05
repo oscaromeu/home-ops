@@ -9,6 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-kube-prometheus-stack
+    - name: cluster-apps-thanos
   path: ./kubernetes/apps/monitoring/vpa/app
   prune: true
   sourceRef:
