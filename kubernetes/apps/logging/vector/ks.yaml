@@ -33,7 +33,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-redis
+    - name: cluster-apps-redis-datahub
   path: ./kubernetes/apps/logging/vector/aggregator
   prune: true
   sourceRef:
