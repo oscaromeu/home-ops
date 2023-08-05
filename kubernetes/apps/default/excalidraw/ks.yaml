@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     #- name: cluster-apps-ingress-nginx
-    - name: cluster-apps-external-secrets-storess
+    - name: cluster-apps-external-secrets-stores
   path: ./kubernetes/apps/default/excalidraw/app
   prune: true
   sourceRef:
