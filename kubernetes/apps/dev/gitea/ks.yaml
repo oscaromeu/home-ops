@@ -10,13 +10,12 @@ spec:
   dependsOn:
     - name: cluster-apps-ingress-nginx
     - name: cluster-apps-external-secrets-stores
+    - name: cluster-apps-cloudnative-pg-cluster
   path: ./kubernetes/apps/dev/gitea/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  dependsOn:
-    - name: cluster-apps-cloudnative-pg-cluster
   healthChecks:
     #- apiVersion: batch/v1
     #  kind: CronJob
