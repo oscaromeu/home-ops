@@ -27,11 +27,13 @@ This project aims to achieve its goals while adhering to industry-standard pract
 - 2 × MinisForum `um350`:
     - CPU: `AMD Ryzen 5 3550H`
     - RAM: `32GB`
-    - SSD: `512GB`
-- 1 × Vant `moove15`:
-    - CPU: `Intel Core i7-1255u`
-    - RAM: `16GB`
-    - SSD: `512GB`
+    - M.2 SSD: `512GB`
+    - HDD: `500GB`
+- 1 × Minisforum `um560`:
+    - CPU: `AMD Ryzen 5 5600H`
+    - RAM: `32GB`
+    - M.2 SSD: `1TB`
+    - HDD SSD: `1TB`
 
 ### 🚧 Features
 
