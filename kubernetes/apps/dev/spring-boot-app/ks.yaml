@@ -7,6 +7,9 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  dependsOn:
+    - name: cluster-apps-ingress-nginx
+    - name: cluster-apps-external-secrets-stores
   path: ./kubernetes/apps/dev/spring-boot-app/app-a
   prune: true
   sourceRef:

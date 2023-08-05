@@ -5,6 +5,9 @@ metadata:
   name: cluster-apps-hajimari
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: cluster-apps-ingress-nginx
+    - name: cluster-apps-external-secrets-stores
   path: ./kubernetes/apps/default/hajimari/app
   prune: true
   sourceRef:
