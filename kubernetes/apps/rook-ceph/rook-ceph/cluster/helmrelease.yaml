@@ -38,7 +38,7 @@ spec:
           hajimari.io/appName: "Rook"
           hajimari.io/icon: mdi:chess-rook
         host:
-          name: &host rook.oscaromeu.io
+          name: &host "rook.${SECRET_DOMAIN}"
           path: /
         tls:
           - hosts:
@@ -67,9 +67,9 @@ spec:
         useAllDevices: false
         config:
           osdsPerDevice: "1"
-        nodes:
-          - name: mbmwk1
-            deviceFilter: "."
+        #nodes:
+        #  - name: *
+        #    deviceFilter: "."
     cephBlockPools:
       - name: ceph-blockpool
         spec:
