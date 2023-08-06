@@ -31,7 +31,7 @@ spec:
       createPrometheusRules: false
     ingress:
       dashboard:
-        ingressClassName: internal
+        ingressClassName: nginx
         annotations:
           external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
         host:
