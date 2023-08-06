@@ -50,3 +50,8 @@ __Note:__ Replace __TERMINATING_NAMESPACE__ with the name of your stuck namespac
 ```
 kubectl get namespaces
 ```
+
+
+## Related information
+
++ [Knowledge Center - How do I troubleshoot namespaces in a termianted state in my Amazon EKS Cluster?](https://repost.aws/knowledge-center/eks-terminated-namespaces)
