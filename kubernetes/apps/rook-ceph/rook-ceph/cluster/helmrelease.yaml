@@ -68,6 +68,9 @@ spec:
               - name: /dev/disk/by-id/ata-KIOXIA-EXCERIA_SATA_SSD_23OB80AAK0Z5
           - name: lbpkw1
             devices:
+              - name: /dev/disk/by-id/ata-SSDPR-CL100-480-G3_GXE092715
+          - name: lbpkw2
+            devices:
               - name: /dev/disk/by-id/ata-SSDPR-CL100-480-G3_G0Z047886
     cephBlockPools:
       - name: ceph-blockpool
