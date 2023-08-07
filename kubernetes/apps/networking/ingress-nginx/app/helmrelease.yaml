@@ -65,8 +65,9 @@ spec:
           memory: 1.4Gi
         limits:
           memory: 2Gi
+      admissionWebhooks:
+        enabled: false
+        timeoutSeconds: 30
     defaultBackend:
       enabled: false
-    admissionWebhooks:
-      enabled: false
-      timeoutSeconds: 30
+
