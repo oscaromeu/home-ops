@@ -34,6 +34,8 @@ spec:
         ingressClassName: nginx
         annotations:
           external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
+          hajimari.io/appName: Rook
+          hajimari.io/icon: mdi:chess-rook
         host:
           name: &host "rook.${SECRET_DOMAIN}"
           path: /
