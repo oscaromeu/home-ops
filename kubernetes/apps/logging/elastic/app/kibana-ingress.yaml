@@ -16,7 +16,7 @@
  spec:
    ingressClassName: nginx
    rules:
-   - host: "kibana.${SECRET_DOMAIN}"
+   - host: &host "kibana.${SECRET_DOMAIN}"
      http:
        paths:
        - backend:
@@ -28,5 +28,5 @@
          pathType: Prefix
    tls:
    - hosts:
-     - "kibana.${SECRET_DOMAIN}"
-     secretName: kibana-tls
+     - *host
+     #secretName: kibana-tls
