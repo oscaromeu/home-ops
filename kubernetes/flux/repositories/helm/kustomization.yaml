@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./actions-runner-controller.yaml
   - ./authelia.yaml
+  - ./backube.yaml
   - ./bitnami.yaml
   - ./bjw-s.yaml
   - ./botkube.yaml
