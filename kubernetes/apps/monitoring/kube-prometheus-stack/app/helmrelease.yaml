@@ -166,7 +166,7 @@ spec:
         enabled: false
       prometheusSpec:
         scrapeInterval: 60s
-        replicas: 1
+        replicas: 3
         externalLabels:
           cluster: homeops
         ruleSelectorNilUsesHelmValues: false
