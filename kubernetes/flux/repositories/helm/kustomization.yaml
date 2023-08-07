@@ -32,6 +32,7 @@ resources:
   - ./metallb.yaml
   - ./metrics-server.yaml
   - ./mongodb.yaml
+  - ./node-feature-discovery.yaml
   - ./passbolt.yaml
   - ./piraeus.yaml
   - ./podinfo.yaml
