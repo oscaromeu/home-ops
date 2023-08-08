@@ -40,6 +40,7 @@ spec:
       persistence:
         enabled: true
         storageClass: "local-path"
+      disableCommands: []
     replica:
       replicaCount: 3
       persistence:
