@@ -184,7 +184,7 @@ spec:
       - name: VECTOR_LOG
         value: "debug"
       - name: VECTOR_SELF_NODE_NAME
-        value: "${VECTOR_AGGREGATOR_SERVICE_HOST}"
+        value: "$(VECTOR_AGGREGATOR_SERVICE_HOST)"
 
       - name: ELASTICSEARCH_PASSWORD
         valueFrom:
