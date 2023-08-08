@@ -11,20 +11,9 @@ sources:
 
 sinks:
 
-  redis:
-    type: redis
-    inputs:
-      - kubernetes_source
-    url: redis://redis-headless.datahub.svc.cluster.local:6379/0
-    key: "k3s_prod"
-    encoding:
-      codec: json
-    batch:
-      max_bytes: 2049000
-
-  kubernetes:
+  loki_k3s:
     type: vector
     compression: true
     version: "2"
-    address: vector-aggregator.logging.svc.cluster.local:6010
+    address: vector-aggregator.logging.svc.cluster.local:6011
     inputs: ["kubernetes_source"]
