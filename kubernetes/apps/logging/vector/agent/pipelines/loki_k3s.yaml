@@ -1,6 +1,6 @@
 ---
 sources:
-  kubernetes_source:
+  loki_k3s_source:
     type: kubernetes_logs
     pod_annotation_fields:
       container_image: container_image
@@ -16,4 +16,4 @@ sinks:
     compression: true
     version: "2"
     address: vector-aggregator.logging.svc.cluster.local:6011
-    inputs: ["kubernetes_source"]
+    inputs: ["loki_k3s_source"]

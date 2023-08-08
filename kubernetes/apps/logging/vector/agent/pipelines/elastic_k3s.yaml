@@ -1,6 +1,6 @@
 ---
 sources:
-  kubernetes_source:
+  elastic_k3s_source:
     type: kubernetes_logs
     pod_annotation_fields:
       container_image: container_image
@@ -14,7 +14,7 @@ sinks:
   redis:
     type: redis
     inputs:
-      - kubernetes_source
+      - elastic_k3s_source
     url: redis://redis-headless.datahub.svc.cluster.local:6379/0
     key: "k3s_prod"
     encoding:
