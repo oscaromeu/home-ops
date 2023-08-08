@@ -183,6 +183,8 @@ spec:
     env:
       - name: VECTOR_LOG
         value: "debug"
+      - name: VECTOR_SELF_NODE_NAME
+        value: "doraemon"
 
       - name: ELASTICSEARCH_PASSWORD
         valueFrom:
