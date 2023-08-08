@@ -41,7 +41,8 @@ spec:
       # config
       - vector-agent
       # pipelines
-      - kubernetes-pipeline
+      - loki-pipeline
+      - elastic-pipeline
 
     ingress:
       enabled: false
