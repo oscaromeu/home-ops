@@ -7,6 +7,7 @@ resources:
   - ./grafana/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
+  - ./node-problem-detector/ks.yaml
   - ./prometheus-adapter/ks.yaml
   - ./promlens/ks.yaml
   - ./sloth/ks.yaml
