@@ -29,10 +29,6 @@ spec:
   dependsOn:
     - name: kube-prometheus-stack
       namespace: monitoring
-    - name: ingress-nginx
-      namespace: networking
-#    - name: rook-ceph
-#      namespace: rook-ceph
 
   values:
 
