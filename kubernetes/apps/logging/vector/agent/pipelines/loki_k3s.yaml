@@ -11,9 +11,13 @@ sources:
 
 sinks:
 
-  loki_k3s:
-    type: vector
-    compression: true
-    version: "2"
-    address: vector-aggregator.logging.svc.cluster.local:6010
-    inputs: ["loki_k3s_source"]
+  loki_redis:
+    type: redis
+    inputs:
+      - loki_k3s_source
+    url: redis://redis-headless.datahub.svc.cluster.local:6379/0
+    key: "loki_k3s_prod"
+    encoding:
+      codec: json
+    batch:
+      max_bytes: 2049000

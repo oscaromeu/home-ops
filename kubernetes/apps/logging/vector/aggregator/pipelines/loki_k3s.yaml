@@ -5,9 +5,11 @@
 sources:
 
   loki_k3s:
-    type: vector
-    version: "2"
-    address: 0.0.0.0:6010
+    type: redis
+    url: redis://redis-headless.datahub.svc.cluster.local:6379/0
+    key: "loki_k3s_prod"
+    decoding:
+      codec: json
 
 
 #

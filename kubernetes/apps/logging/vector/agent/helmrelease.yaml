@@ -68,6 +68,7 @@ spec:
         containerPort: 9090
         protocol: TCP
 
+
     resources:
       requests:
         cpu: 47m
