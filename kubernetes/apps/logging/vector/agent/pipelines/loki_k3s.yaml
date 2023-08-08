@@ -15,5 +15,5 @@ sinks:
     type: vector
     compression: true
     version: "2"
-    address: vector-aggregator.logging.svc.cluster.local:6011
+    address: vector-aggregator.logging.svc.cluster.local:6010
     inputs: ["loki_k3s_source"]

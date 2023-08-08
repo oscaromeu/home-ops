@@ -7,7 +7,7 @@ sources:
   loki_k3s:
     type: vector
     version: "2"
-    address: 0.0.0.0:6011
+    address: 0.0.0.0:6010
 
 
 #
