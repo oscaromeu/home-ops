@@ -1,6 +1,6 @@
 ---
 sources:
-  loki_k3s_source:
+  kubernetes_source:
     type: kubernetes_logs
     pod_annotation_fields:
       container_image: container_image
@@ -11,12 +11,23 @@ sources:
 
 sinks:
 
-  loki_redis:
+  redis:
     type: redis
     inputs:
-      - loki_k3s_source
+      - kubernetes_source
     url: redis://redis-headless.datahub.svc.cluster.local:6379/0
-    key: "loki_k3s_prod"
+    key: "k3s_prod"
+    encoding:
+      codec: json
+    batch:
+      max_bytes: 2049000
+
+  test_redis:
+    type: redis
+    inputs:
+      - kubernetes_source
+    url: redis://redis-headless.datahub.svc.cluster.local:6379/0
+    key: "test_prod"
     encoding:
       codec: json
     batch:

@@ -11,13 +11,9 @@ configMapGenerator:
     files:
       - vector.yaml=./config/vector.yaml
 
-  - name: elastic-pipeline
+  - name: k3s-pipeline
     files:
       - elastic_k3s.yaml=./pipelines/elastic_k3s.yaml
-
-  - name: loki-pipeline
-    files:
-      - loki_k3s.yaml=./pipelines/loki_k3s.yaml
 
 generatorOptions:
   disableNameSuffixHash: true

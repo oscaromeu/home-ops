@@ -40,8 +40,8 @@ spec:
       # config
       - vector-aggregator
       # pipelines
-      - loki-pipeline
-      - elastic-pipeline
+      #- loki-pipeline
+      - k3s-pipeline
 
     ingress:
       enabled: false
