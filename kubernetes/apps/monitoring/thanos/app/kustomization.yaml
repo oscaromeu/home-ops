@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   #- ./secret.sops.yaml
+  - ./objectbucketclaim.yaml
   - ./helmrelease.yaml
   #- ./dashboards
 
