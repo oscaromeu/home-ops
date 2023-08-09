@@ -51,15 +51,14 @@ spec:
         hajimari.io/icon: "alarm-light-outline"
 
       hosts:
-        - host: "podinfo.${SECRET_DOMAIN}"
+        - host: &host "podinfo.${SECRET_DOMAIN}"
           paths:
             - path: /
               pathType: ImplementationSpecific
 
       tls:
         - hosts:
-            - "podinfo.${SECRET_DOMAIN}"
-          secretName: podinfo-certificates
+            - *host
 
 
 

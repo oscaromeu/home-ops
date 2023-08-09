@@ -4,7 +4,7 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
   name: docker-registry
-  namespace: default
+  namespace: dev
 spec:
   rules:
   - host: "registry.${SECRET_DOMAIN}"

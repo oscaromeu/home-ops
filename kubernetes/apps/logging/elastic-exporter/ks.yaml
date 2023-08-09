@@ -10,7 +10,6 @@ spec:
   path: ./kubernetes/apps/logging/elastic-exporter/app
   dependsOn:
     - name: cluster-apps-elastic
-    - name: cluster-apps-kube-prometheus-stack
   prune: true
   sourceRef:
     kind: GitRepository

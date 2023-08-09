@@ -5,6 +5,10 @@ metadata:
   name: cluster-apps-rook-ceph
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: cluster-apps-snapshot-controller
+    - name: cluster-apps-volsync
+
   path: ./kubernetes/apps/rook-ceph/rook-ceph/app
   prune: true
   sourceRef:
