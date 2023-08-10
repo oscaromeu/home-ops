@@ -25,6 +25,15 @@ spec:
       xpack.monitoring.collection.indices: "'*'"
       xpack.monitoring.collection.interval: "60s"
       xpack.monitoring.history.duration: "7d"
+      xpack.notification.email.account:
+        gmail_account:
+            profile: gmail
+            smtp:
+                auth: true
+                starttls.enable: true
+                host: smtp.gmail.com
+                port: 587
+                user: oscaromeu@gmail.com
     podTemplate:
       spec:
         containers:
