@@ -25,6 +25,9 @@ transforms:
       # Standardize 'message' name
       .log = .message
 
+      # Drop pod_labels
+      del(.pod_labels)
+
 #
 # Sinks
 #
@@ -54,3 +57,16 @@ sinks:
       verify_certificate: false
     encoding:
       except_fields: ["pod_labels"]
+
+  loki:
+    inputs: ["kubernetes_remap"]
+    type: loki
+    endpoint: http://loki-gateway.logging.svc.cluster.local
+    encoding: { codec: json }
+    out_of_order_action: accept
+    remove_label_fields: true
+    remove_timestamp: true
+    labels:
+      app: '{{ custom_app_name }}'
+      namespace: '{{ kubernetes.pod_namespace }}'
+      node: '{{ kubernetes.pod_node_name }}'
