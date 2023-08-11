@@ -27,3 +27,14 @@ spec:
     remediation:
       retries: 5
 
+  values:
+    console:
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        host: &host "minio.${SECRET_DOMAIN}"
+        path: /
+        pathType: Prefix
+        tls:
+          - hosts:
+              - *host
