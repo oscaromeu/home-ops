@@ -32,6 +32,7 @@ resources:
   - ./longhorn.yaml
   - ./metallb.yaml
   - ./metrics-server.yaml
+  - ./minio.yaml
   - ./mongodb.yaml
   - ./node-feature-discovery.yaml
   - ./passbolt.yaml
