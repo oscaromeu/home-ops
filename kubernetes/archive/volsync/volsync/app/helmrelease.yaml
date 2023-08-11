@@ -5,18 +5,17 @@ metadata:
   name: volsync
   namespace: volsync
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       chart: volsync
-      version: 0.5.0
+      version: 0.7.1
       sourceRef:
         kind: HelmRepository
         name: backube
         namespace: flux-system
-  maxHistory: 3
+  maxHistory: 2
   install:
-    createNamespace: true
     remediation:
       retries: 3
   upgrade:
@@ -29,3 +28,23 @@ spec:
     manageCRDs: true
     metrics:
       disableAuth: true
+  postRenderers:
+    - kustomize:
+        patchesStrategicMerge:
+          - apiVersion: apps/v1
+            kind: Deployment
+            metadata:
+              name: volsync
+            spec:
+              template:
+                spec:
+                  containers:
+                    - name: manager
+                      volumeMounts:
+                        - name: tz-config
+                          mountPath: /etc/localtime
+                  volumes:
+                    - name: tz-config
+                      hostPath:
+                        path: /usr/share/zoneinfo/Europe/Madrid
+                        type: File
