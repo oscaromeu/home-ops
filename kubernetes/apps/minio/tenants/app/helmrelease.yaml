@@ -2,45 +2,37 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: longhorn
-  namespace: longhorn
+  name: minio
+  namespace: minio
 spec:
-  interval: 5m
+  interval: 12h
+  maxHistory: 2
   chart:
     spec:
-      # renovate: registryUrl=https://charts.longhorn.io
-      chart: longhorn
-      version: 1.5.1
+      chart: tenant
+      version: 5.0.7
       sourceRef:
         kind: HelmRepository
-        name: longhorn
+        name: minio
         namespace: flux-system
-      interval: 5m
-
   install:
-    createNamespace: false
     remediation:
-      retries: 5
-
+      retries: 3
   upgrade:
-    crds: CreateReplace
+    cleanupOnFail: true
     remediation:
-      retries: 5
-
+      retries: 3
+  uninstall:
+    keepHistory: false
   values:
-    persistence:
-      defaultClassReplicaCount: 2
-    defaultSettings:
-      defaultReplicaCount: 2
-    pspEnable: false
-    ingress:
-      enabled: true
-      ingressClassName: "nginx"
-      tls: true
-      host: "longhorn.${SECRET_DOMAIN}"
-      annotations:
-        external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
-        external-dns.home.arpa/enabled: "true"
-        hajimari.io/icon: iconoir:database-backup
-        hajimari.io/enable: "true"
-        hajimari.io/appName: Longhorn
+    tenant:
+      name: home-ops
+      pools:
+        - name: pool-0
+          servers: 4
+          volumesPerServer: 4
+          size: 10Gi
+      buckets:
+        - name: home-ops-metrics
+          objectLock: false
+          region: eu-west-1
