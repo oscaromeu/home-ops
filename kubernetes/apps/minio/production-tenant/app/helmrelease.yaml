@@ -26,17 +26,31 @@ spec:
     keepHistory: false
   values:
     tenant:
-      name: home-ops
+      name: production-tier-storage
       pools:
         - name: pool-0
-          servers: 4
-          volumesPerServer: 4
+          servers: 5
+          volumesPerServer: 5
           size: 10Gi
           storageClassName: local-path
+
       buckets:
-        - name: home-ops-metrics
+        - name: metrics
           objectLock: false
           region: eu-west-1
+        - name: logs
+          objectLock: false
+          region: eu-west-1
+        - name: traces
+          objectLock: false
+          region: eu-west-1
+
+      metrics:
+        enabled: true
+
+      env:
+        MINIO_PROMETHEUS_URL: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
+
 
     ingress:
       api:
@@ -57,7 +71,7 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
           hajimari.io/icon: simple-icons:minio
-        host: &host "minio-console.${SECRET_DOMAIN}"
+        host: &host "s3.${SECRET_DOMAIN}"
         path: /
         pathType: Prefix
         tls:

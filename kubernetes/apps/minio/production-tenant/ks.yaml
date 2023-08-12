@@ -2,14 +2,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-minio-tenant
+  name: cluster-apps-minio-production-tenant
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
     - name: cluster-apps-ingress-nginx
-  path: ./kubernetes/apps/minio/tenants/app
+  path: ./kubernetes/apps/minio/production-tenant/app
   prune: true
   sourceRef:
     kind: GitRepository
