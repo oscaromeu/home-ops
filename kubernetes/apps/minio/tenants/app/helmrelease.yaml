@@ -45,19 +45,21 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
           hajimari.io/icon: simple-icons:minio
-        host: &host minio-api.${SECRET_DOMAIN}
+        host: &host "minio-api.${SECRET_DOMAIN}"
         path: /
         pathType: Prefix
         tls:
-          - *host
+          - hosts:
+              - *host
       console:
         enabled: true
         ingressClassName: "nginx"
         annotations:
           external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
           hajimari.io/icon: simple-icons:minio
-        host: &host minio-console.${SECRET_DOMAIN}
+        host: &host "minio-console.${SECRET_DOMAIN}"
         path: /
         pathType: Prefix
         tls:
-          - *host
+          - hosts:
+              - *host
