@@ -180,10 +180,10 @@ spec:
       kind: Secret
       name: loki-bucket-v2
       valuesKey: BUCKET_NAME
-    #- targetPath: loki.storage.s3.endpoint
-    #  kind: Secret
-    #  name: loki-bucket-v2
-    #  valuesKey: BUCKET_HOST
+    - targetPath: loki.storage.s3.endpoint
+      kind: Secret
+      name: loki-bucket-v2
+      valuesKey: BUCKET_HOST
     - targetPath: loki.storage.s3.secretAccessKey
       kind: Secret
       name: loki-bucket-v2
