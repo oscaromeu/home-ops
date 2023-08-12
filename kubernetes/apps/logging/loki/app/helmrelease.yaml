@@ -65,14 +65,14 @@ spec:
       storage:
         type: s3
         s3:
-          endpoint: null
+          #endpoint: http://minio:minio123@192.168.1.126:9000/loki
           region: "eu-west-1"
           s3ForcePathStyle: true
           insecure: true
         bucketNames:
-          chunks: loki-a41e709ee34555404f68b146e7334c523272
-          ruler: loki-a41e709ee34555404f68b146e7334c523272
-          admin: loki-a41e709ee34555404f68b146e7334c523272
+          chunks: loki
+          ruler: loki
+          admin: loki
 
     gateway:
       replicas: 1
