@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: minio
+  name: minio-production-tier
   namespace: minio
 spec:
   interval: 12h
