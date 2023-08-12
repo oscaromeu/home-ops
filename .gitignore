@@ -13,3 +13,4 @@ kubeconfig
 xanmanning.k3s*
 hack/*
 hack
+*values.yaml
