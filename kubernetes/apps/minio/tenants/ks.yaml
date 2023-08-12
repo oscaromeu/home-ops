@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-ingress-nginx
-  path: ./kubernetes/apps/minio/tenantsa/app
+  path: ./kubernetes/apps/minio/tenants/app
   prune: true
   sourceRef:
     kind: GitRepository
