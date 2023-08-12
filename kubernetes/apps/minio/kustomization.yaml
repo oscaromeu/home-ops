@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   # Flux-Kustomizations
   - ./operator/ks.yaml
-  - ./tenant/ks.yaml
+  - ./tenants/ks.yaml
