@@ -26,6 +26,10 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    global:
+      extraEnvFrom:
+        - secretRef:
+            name: thanos-objstore
     alertmanager:
       persistentVolume:
         storageClass: local-path

@@ -32,6 +32,7 @@ spec:
           servers: 4
           volumesPerServer: 4
           size: 10Gi
+          storageClassName: local-path
       buckets:
         - name: home-ops-metrics
           objectLock: false
