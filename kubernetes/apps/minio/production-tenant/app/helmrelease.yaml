@@ -52,6 +52,10 @@ spec:
         - name: MINIO_PROMETHEUS_URL
           value: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
 
+      exposeServices:
+        console: true
+        minio: true
+
     ingress:
       api:
         enabled: true
