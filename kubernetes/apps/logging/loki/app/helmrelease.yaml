@@ -75,7 +75,7 @@ spec:
           admin: loki-a41e709ee34555404f68b146e7334c523272
 
     gateway:
-      replicas: 3
+      replicas: 1
       ingress:
         enabled: true
         ingressClassName: nginx
@@ -96,6 +96,7 @@ spec:
           memory: 500Mi
 
     read:
+      replicas: 1
       persistence:
         storageClass: local-path
         size: 5Gi
@@ -114,6 +115,7 @@ spec:
           memory: 500Mi
 
     write:
+      replicas: 1
       persistence:
         storageClass: local-path
         size: 5Gi
@@ -126,6 +128,7 @@ spec:
           memory: 500Mi
 
     backend:
+      replicas: 1
       persistence:
         storageClass: local-path
         size: 5Gi
