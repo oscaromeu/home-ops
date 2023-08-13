@@ -1,3 +1,12 @@
+#---
+#apiVersion: source.toolkit.fluxcd.io/v1beta2
+#kind: HelmRepository
+#metadata:
+#  name: minio
+#  namespace: flux-system
+#spec:
+#  interval: 1h
+#  url: https://operator.min.io/
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
@@ -6,4 +15,4 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1h
-  url: https://operator.min.io/
+  url: https://charts.min.io/
