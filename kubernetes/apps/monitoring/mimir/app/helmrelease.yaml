@@ -35,8 +35,8 @@ spec:
         limits:
           memory: 1.4Gi
         requests:
-          cpu: 1
-          memory: 1Gi
+          cpu: 1m
+          memory: 100Mi
       statefulSet:
         enabled: true
 
@@ -48,8 +48,8 @@ spec:
         limits:
           memory: 2.1Gi
         requests:
-          cpu: 1
-          memory: 1.5Gi
+          cpu: 25m
+          memory: 100Mi
 
     distributor:
       replicas: 2
@@ -57,8 +57,8 @@ spec:
         limits:
           memory: 5.7Gi
         requests:
-          cpu: 2
-          memory: 4Gi
+          cpu: 25m
+          memory: 100Mi
 
     ingester:
       persistentVolume:
@@ -67,10 +67,10 @@ spec:
       replicas: 3
       resources:
         limits:
-          memory: 12Gi
+          memory: 10Gi
         requests:
-          cpu: 3.5
-          memory: 8Gi
+          cpu: 25m
+          memory: 100Mi
       topologySpreadConstraints: {}
       affinity:
         podAntiAffinity:
@@ -131,8 +131,8 @@ spec:
         limits:
           memory: 5.6Gi
         requests:
-          cpu: 2
-          memory: 4Gi
+          cpu: 25m
+          memory: 100Mi
 
     query_frontend:
       replicas: 1
@@ -140,8 +140,8 @@ spec:
         limits:
           memory: 2.8Gi
         requests:
-          cpu: 2
-          memory: 2Gi
+          cpu: 25m
+          memory: 100Mi
 
     ruler:
       replicas: 1
@@ -149,8 +149,8 @@ spec:
         limits:
           memory: 2.8Gi
         requests:
-          cpu: 1
-          memory: 2Gi
+          cpu: 25m
+          memory: 100Mi
 
     store_gateway:
       replicas: 3
@@ -161,8 +161,8 @@ spec:
         limits:
           memory: 2.1Gi
         requests:
-          cpu: 1
-          memory: 1.5Gi
+          cpu: 25m
+          memory: 100Mi
       topologySpreadConstraints: {}
       affinity:
         podAntiAffinity:
@@ -203,8 +203,8 @@ spec:
         limits:
           memory: 731Mi
         requests:
-          cpu: 1
-          memory: 512Mi
+          cpu: 25m
+          memory: 100Mi
 
     # Grafana Enterprise Metrics feature related
     #admin_api:
@@ -228,8 +228,8 @@ spec:
         limits:
           memory: 731Mi
         requests:
-          cpu: 1
-          memory: 512Mi
+          cpu: 25m
+          memory: 100Mi
     mimir:
       structuredConfig:
         alertmanager_storage:
