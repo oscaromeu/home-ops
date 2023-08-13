@@ -75,7 +75,7 @@ spec:
           admin: logs
 
     gateway:
-      replicas: 1
+      replicas: 3
       ingress:
         enabled: true
         ingressClassName: nginx
@@ -96,7 +96,7 @@ spec:
           memory: 500Mi
 
     read:
-      replicas: 1
+      replicas: 3
       persistence:
         storageClass: local-path
         size: 5Gi
@@ -115,7 +115,7 @@ spec:
           memory: 500Mi
 
     write:
-      replicas: 1
+      replicas: 3
       persistence:
         storageClass: local-path
         size: 5Gi
@@ -128,7 +128,7 @@ spec:
           memory: 500Mi
 
     backend:
-      replicas: 1
+      replicas: 3
       persistence:
         storageClass: local-path
         size: 5Gi
