@@ -65,7 +65,7 @@ spec:
       storage:
         type: s3
         s3:
-          #endpoint: http://minio:minio123@192.168.1.126:9000/loki
+          #endpoint:
           region: "eu-west-1"
           s3ForcePathStyle: true
           insecure: true
