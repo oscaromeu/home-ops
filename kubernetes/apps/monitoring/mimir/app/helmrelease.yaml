@@ -30,7 +30,7 @@ spec:
       persistentVolume:
         storageClass: local-path
         enabled: true
-      replicas: 2
+      replicas: 1
       resources:
         limits:
           memory: 1.4Gi
