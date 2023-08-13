@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-kube-prometheus-stack
-    - name: cluster-apps-thanos
+    #- name: cluster-apps-mimir
   path: ./kubernetes/apps/monitoring/prometheus-adapter/app
   prune: true
   sourceRef:
