@@ -29,9 +29,9 @@ spec:
 
   values:
     persistence:
-      defaultClassReplicaCount: 2
+      defaultClassReplicaCount: 0
     defaultSettings:
-      defaultReplicaCount: 2
+      defaultReplicaCount: 0
     pspEnable: false
     ingress:
       enabled: true
