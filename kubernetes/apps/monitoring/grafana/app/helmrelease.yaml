@@ -55,6 +55,11 @@ spec:
       datasources.yaml:
         apiVersion: 1
         datasources:
+          - name: Mimir
+            type: prometheus
+            access: proxy
+            url: http://mimir-nginx.monitoring.svc.cluster.local:80/prometheus
+            isDefault: true
           - name: Prometheus
             type: prometheus
             access: proxy

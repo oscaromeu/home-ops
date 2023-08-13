@@ -187,7 +187,7 @@ spec:
                   storage: 10Gi
 
         remoteWrite:
-          - url: "http://mimir-nginx.monitoring.svc.cluster.local/api/v1/push"
+          - url: "http://mimir-nginx.monitoring.svc.cluster.local:80/api/v1/push"
             write_relabel_configs:
             - source_labels: [__name__]
               target_label: __name__
