@@ -26,7 +26,7 @@ spec:
     keepHistory: false
   values:
     # Get root user/password from secret
-    existingSecret: minio
+    existingSecret: minio-secret
 
     # Number of drives attached to a node
     drivesPerNode: 1
@@ -99,11 +99,11 @@ spec:
     # Minio Users
     users:
       - accessKey: loki
-        existingSecret: minio
+        existingSecret: minio-secret
         existingSecretKey: minio-secret-key
         policy: loki
       - accessKey: tempo
-        existingSecret: minio
+        existingSecret: minio-secret
         existingSecretKey: minio-secret-key
         policy: tempo
 
