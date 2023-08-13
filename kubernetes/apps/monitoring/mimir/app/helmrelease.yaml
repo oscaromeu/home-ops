@@ -52,7 +52,7 @@ spec:
           memory: 100Mi
 
     distributor:
-      replicas: 2
+      replicas: 1
       resources:
         limits:
           memory: 5.7Gi
@@ -64,54 +64,54 @@ spec:
       persistentVolume:
         size: 50Gi
         storageClass: local-path
-      replicas: 3
+      replicas: 1
       resources:
         limits:
           memory: 10Gi
         requests:
           cpu: 25m
           memory: 100Mi
-      topologySpreadConstraints: {}
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: target # support for enterprise.legacyLabels
-                    operator: In
-                    values:
-                      - ingester
-              topologyKey: 'kubernetes.io/hostname'
+      #topologySpreadConstraints: {}
+      #affinity:
+      #  podAntiAffinity:
+      #    requiredDuringSchedulingIgnoredDuringExecution:
+      #      - labelSelector:
+      #          matchExpressions:
+      #            - key: target # support for enterprise.legacyLabels
+      #              operator: In
+      #              values:
+      #                - ingester
+      #        topologyKey: 'kubernetes.io/hostname'
 
-            - labelSelector:
-                matchExpressions:
-                  - key: app.kubernetes.io/component
-                    operator: In
-                    values:
-                      - ingester
-              topologyKey: 'kubernetes.io/hostname'
+      #      - labelSelector:
+      #          matchExpressions:
+      #            - key: app.kubernetes.io/component
+      #              operator: In
+      #              values:
+      #                - ingester
+      #        topologyKey: 'kubernetes.io/hostname'
 
       zoneAwareReplication:
         topologyKey: 'kubernetes.io/hostname'
 
     admin-cache:
       enabled: true
-      replicas: 2
+      replicas: 1
 
     chunks-cache:
       enabled: true
-      replicas: 2
+      replicas: 1
 
     index-cache:
       enabled: true
-      replicas: 3
+      replicas: 1
 
     metadata-cache:
       enabled: true
 
     results-cache:
       enabled: true
-      replicas: 2
+      replicas: 1
 
     minio:
       enabled: false
@@ -153,7 +153,7 @@ spec:
           memory: 100Mi
 
     store_gateway:
-      replicas: 2
+      replicas: 1
       persistentVolume:
         size: 10Gi
         storageClass: local-path
@@ -163,27 +163,27 @@ spec:
         requests:
           cpu: 25m
           memory: 100Mi
-      topologySpreadConstraints: {}
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: target # support for enterprise.legacyLabels
-                    operator: In
-                    values:
-                      - store-gateway
-              topologyKey: 'kubernetes.io/hostname'
+      #topologySpreadConstraints: {}
+      #affinity:
+      #  podAntiAffinity:
+      #    requiredDuringSchedulingIgnoredDuringExecution:
+      #      - labelSelector:
+      #          matchExpressions:
+      #            - key: target # support for enterprise.legacyLabels
+      #              operator: In
+      #              values:
+      #                - store-gateway
+      #        topologyKey: 'kubernetes.io/hostname'
 
-            - labelSelector:
-                matchExpressions:
-                  - key: app.kubernetes.io/component
-                    operator: In
-                    values:
-                      - store-gateway
-              topologyKey: 'kubernetes.io/hostname'
-      zoneAwareReplication:
-        topologyKey: 'kubernetes.io/hostname'
+      #      - labelSelector:
+      #          matchExpressions:
+      #            - key: app.kubernetes.io/component
+      #              operator: In
+      #              values:
+      #                - store-gateway
+      #        topologyKey: 'kubernetes.io/hostname'
+      #zoneAwareReplication:
+      #  topologyKey: 'kubernetes.io/hostname'
 
     nginx:
       ingress:
