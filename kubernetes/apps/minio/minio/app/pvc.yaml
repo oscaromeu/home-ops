@@ -5,7 +5,7 @@ metadata:
   name: minio-storage
   namespace: minio
 spec:
-  accessModes: ["ReadWriteMany"]
+  accessModes: ["ReadWriteOnce"]
   storageClassName: longhorn
   resources:
     requests:
