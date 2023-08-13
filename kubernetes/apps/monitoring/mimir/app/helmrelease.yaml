@@ -153,7 +153,7 @@ spec:
           memory: 100Mi
 
     store_gateway:
-      replicas: 3
+      replicas: 2
       persistentVolume:
         size: 10Gi
         storageClass: local-path
