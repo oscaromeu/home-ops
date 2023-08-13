@@ -133,3 +133,9 @@ spec:
       annotations:
         external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
         hajimari.io/icon: simple-icons:minio
+
+    environment:
+      - name: MINIO_PROMETHEUS_URL
+        value: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
+      - name: MINIO_BROWSER
+        value: on
