@@ -2,14 +2,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-minio-production-tenant
+  name: cluster-apps-minio-monitoring-tenant
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
     - name: cluster-apps-ingress-nginx
-  path: ./kubernetes/apps/minio/production-tenant/app
+  path: ./kubernetes/apps/minio/monitoring-tenant/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -17,8 +17,8 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
-      name: minio-production-tier
-      namespace: minio
+      name: monitoring-tenant
+      namespace: monitoring-tenant
   interval: 30m
   retryInterval: 1m
   timeout: 5m

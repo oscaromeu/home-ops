@@ -2,8 +2,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: minio-production-tier
-  namespace: minio
+  name: monitoring-tenant
+  namespace: monitoring-tenant
 spec:
   interval: 12h
   maxHistory: 2
@@ -26,7 +26,7 @@ spec:
     keepHistory: false
   values:
     tenant:
-      name: production-tier-storage
+      name: monitoring-storage
       pools:
         - name: pool-0
           servers: 5
