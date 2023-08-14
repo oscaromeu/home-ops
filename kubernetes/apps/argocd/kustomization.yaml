@@ -7,3 +7,4 @@ resources:
   - ./namespace.yaml
   # Flux-Kustomizations
   - ./argocd/ks.yaml
+  - ./argocd/application.yaml
