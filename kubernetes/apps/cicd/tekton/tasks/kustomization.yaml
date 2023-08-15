@@ -16,8 +16,6 @@ resources:
   # Curl - https://hub.tekton.dev/tekton/task/curl
   - https://raw.githubusercontent.com/tektoncd/catalog/main/task/curl/0.1/curl.yaml
 
-  - ./pipelines
-  - ./pipelineRun
 
 # patchesJSON6902:
 #   - target:
