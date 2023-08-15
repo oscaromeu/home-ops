@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cicd-tekton-tasks
+  name: cluster-apps-tekton-tasks
   namespace: flux-system
 spec:
   dependsOn:
@@ -20,11 +20,11 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cicd-tekton-tasks-pipeline
+  name: cluster-apps-tekton-pipeline
   namespace: flux-system
 spec:
   dependsOn:
-    - name: cluster-apps-tekton
+    - name: cluster-apps-tekton-tasks
   path: ./kubernetes/apps/cicd/tekton/pipeline
   prune: true
   sourceRef:
@@ -38,12 +38,12 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cicd-tekton-tasks-pipeline-run
+  name: cluster-apps-tekton-pipeline-run
   namespace: flux-system
 spec:
   dependsOn:
-    - name: cluster-apps-tekton
-  path: ./kubernetes/apps/cicd/tekton/pipelinerun
+    - name: cluster-apps-tekton-pipeline
+  path: ./kubernetes/apps/cicd/tekton/pipeline/run
   prune: true
   sourceRef:
     kind: GitRepository
