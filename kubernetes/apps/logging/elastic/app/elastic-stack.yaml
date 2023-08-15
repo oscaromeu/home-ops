@@ -25,7 +25,6 @@ spec:
       xpack.monitoring.collection.indices: "'*'"
       xpack.monitoring.collection.interval: "60s"
       xpack.monitoring.history.duration: "7d"
-
     podTemplate:
       spec:
         containers:
