@@ -75,7 +75,7 @@ spec:
     grafana:
       enabled: false
       forceDeployDashboards: true
-      defaultDashboardsEnabled: true
+      defaultDashboardsEnabled: false
       sidecar:
         dashboards:
           multicluster:
