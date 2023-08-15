@@ -25,10 +25,3 @@ spec:
     params:
     - name: url
       value: $(params.repo-url)
-  - name: show-readme
-    runAfter: ["fetch-source"]
-    taskRef:
-      name: show-readme
-    workspaces:
-    - name: source
-      workspace: shared-data
