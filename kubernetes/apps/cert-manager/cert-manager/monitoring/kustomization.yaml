@@ -12,5 +12,5 @@ configMapGenerator:
       - cert-manager.json
     options:
       labels:
-        grafana_dashboard: cert-manager
+        home_ops: cert-manager
       disableNameSuffixHash: true

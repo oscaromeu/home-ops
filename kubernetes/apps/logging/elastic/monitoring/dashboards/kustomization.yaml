@@ -9,6 +9,6 @@ configMapGenerator:
       - ./elastic.json
     options:
       labels:
-        grafana_dashboard: elastic
+        home_ops: elastic
       disableNameSuffixHash: true
 

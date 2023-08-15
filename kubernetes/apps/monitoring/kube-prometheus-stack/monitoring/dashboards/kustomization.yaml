@@ -9,7 +9,7 @@ configMapGenerator:
       - k8s-overview.json
     options:
       labels:
-        grafana_dashboard: k8s-overview
+        home_ops: k8s-overview
       disableNameSuffixHash: true
 
   - name: k8s-detailed-overview-cluster
@@ -17,7 +17,7 @@ configMapGenerator:
       - k8s-detailed-overview-cluster.json
     options:
       labels:
-        grafana_dashboard: k8s-detailed-overview-cluster
+        home_ops: k8s-detailed-overview-cluster
       disableNameSuffixHash: true
 
 
@@ -26,7 +26,7 @@ configMapGenerator:
       - k8s-detailed-overview-namespaces.json
     options:
       labels:
-        grafana_dashboard: k8s-detailed-overview-namespaces
+        home_ops: k8s-detailed-overview-namespaces
       disableNameSuffixHash: true
 
 
@@ -35,7 +35,7 @@ configMapGenerator:
       - k8s-detailed-overview-pods.json
     options:
       labels:
-        grafana_dashboard: k8s-detailed-overview-pods
+        home_ops: k8s-detailed-overview-pods
       disableNameSuffixHash: true
 
 
@@ -44,7 +44,7 @@ configMapGenerator:
       - k8s-detailed-overview-nodes.json
     options:
       labels:
-        grafana_dashboard: k8s-detailed-overview-nodes
+        home_ops: k8s-detailed-overview-nodes
       annotations:
         kustomize.toolkit.fluxcd.io/substitute: disabled
       disableNameSuffixHash: true
