@@ -153,16 +153,6 @@ spec:
           limits:
             memory: 2Gi
             #cpu: 1
-  volumeClaimTemplates:
-  - metadata:
-      name: elasticsearch-data # this name is required for the volume to be mounteds
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: 1Gi
-      storageClassName: longhorn
 
   #nodeSelector:
   #  kubernetes.io/arch: amd64
