@@ -97,7 +97,7 @@ spec:
       dashboards:
         enabled: true
         searchNamespace: ALL
-        #label: home_ops
+        label: home_ops
       datasources:
         enabled: true
         searchNamespace: ALL
