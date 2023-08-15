@@ -2,6 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: clone-read
+  namespace: cicd
 spec:
   description: |
     This pipeline clones a git repo, then echoes the README file to the stout.
