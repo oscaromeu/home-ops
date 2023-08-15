@@ -97,9 +97,12 @@ spec:
       dashboards:
         enabled: true
         searchNamespace: ALL
+        #label: home_ops
       datasources:
         enabled: true
         searchNamespace: ALL
+      provider:
+        allowUiUpdates: true
     serviceMonitor:
       enabled: true
     ingress:
