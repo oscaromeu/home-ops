@@ -6,7 +6,7 @@ configMapGenerator:
 
   - name: elasticsearch
     files:
-      - elastic.json
+      - ./dashboards/elastic.json
     options:
       labels:
         grafana_dashboard: elastic
