@@ -87,15 +87,6 @@ spec:
       xpack.monitoring.collection.indices: "'*'"
       xpack.monitoring.collection.interval: "60s"
       xpack.monitoring.history.duration: "7d"
-      xpack.notification.email.account:
-        gmail_account:
-            profile: gmail
-            smtp:
-                auth: true
-                starttls.enable: true
-                host: smtp.gmail.com
-                port: 587
-                user: oscaromeu@gmail.com
     podTemplate:
       metadata:
         labels:
@@ -163,6 +154,16 @@ spec:
           limits:
             memory: 2Gi
             #cpu: 1
+  volumeClaimTemplates:
+  - metadata:
+      name: elasticsearch-data # this name is required for the volume to be mounteds
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+      storageClassName: longhorn
 
   #nodeSelector:
   #  kubernetes.io/arch: amd64
