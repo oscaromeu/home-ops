@@ -16,3 +16,17 @@ patches:
     target:
       group: networking.k8s.io
       kind: NetworkPolicy
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: argocd
+  labels:
+    goldilocks.fairwinds.com/enabled: "true"
+    kustomize.toolkit.fluxcd.io/prune: disabled
+
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - https://github.com/flux-subsystem-argo/flamingo//release?ref=v2.7.10-fl.15-main-688d2fd7
