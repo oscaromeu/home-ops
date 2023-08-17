@@ -17,7 +17,7 @@
            service:
              name: argocd-server
              port:
-               number: 443
+               number: 8080
          path: /
          pathType: Prefix
    tls:
