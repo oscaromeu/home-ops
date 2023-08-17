@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-argocd
+  name: cluster-apps-clickhouse
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "false"
@@ -14,3 +14,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
