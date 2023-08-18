@@ -76,7 +76,7 @@ spec:
           - 192.168.1.0/16
         rules:
         # Disable Authelia for local network
-        - policy: bypass
+        - policy: one_factor
           domain: "*.${SECRET_DOMAIN}"
           networks:
           - private
