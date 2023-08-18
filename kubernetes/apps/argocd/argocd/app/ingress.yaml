@@ -17,9 +17,9 @@
            service:
              name: argocd-server
              port:
-               name: http
+               name: https
          path: /
-         pathType: Prefix
+         pathType: ImplementationSpecific
    tls:
    - hosts:
      - *host
