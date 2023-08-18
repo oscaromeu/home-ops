@@ -161,3 +161,11 @@ spec:
       kind: Secret
       name: authelia
       valuesKey: MAIL_APP_PASSWORD
+    - targetPath: configMap.authentication_backend.ldap.base_dn
+      kind: Secret
+      name: authelia
+      valuesKey: AUTHELIA__LDAP_BASE_DN
+    - targetPath: configMap.authentication_backend.ldap.user
+      kind: Secret
+      name: authelia
+      valuesKey: AUTHELIA__LDAP_USER_PASS
