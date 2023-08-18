@@ -59,8 +59,6 @@ spec:
           username_attribute: uid
           additional_users_dn: ""
           additional_groups_dn: ""
-          base_dn: ${AUTHELIA__LDAP_BASE_DN}
-          user: ${AUTHELIA__LDAP_USER},${AUTHELIA__LDAP_PASSWORD}
           users_filter: "(&({username_attribute}={input})(objectClass=person))"
           groups_filter: "(&(member={dn})(objectclass=groupOfNames))"
 
