@@ -166,4 +166,4 @@ spec:
     - targetPath: configMap.authentication_backend.ldap.user
       kind: Secret
       name: authelia
-      valuesKey: AUTHELIA__LDAP_USER_PASS
+      valuesKey: AUTHELIA__LDAP_USER
