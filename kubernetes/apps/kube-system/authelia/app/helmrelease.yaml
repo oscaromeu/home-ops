@@ -53,9 +53,19 @@ spec:
       theme: dark
       authentication_backend:
         ldap:
-          enabled: false
-        file:
           enabled: true
+          implementation: custom
+          url: "ldap://glauth.kube-system.svc.cluster.local:389"
+          username_attribute: uid
+          additional_users_dn: ""
+          additional_groups_dn: ""
+          base_dn: ${AUTHELIA__LDAP_BASE_DN}
+          user: ${AUTHELIA__LDAP_USER},${AUTHELIA__LDAP_PASSWORD}
+          users_filter: "(&({username_attribute}={input})(objectClass=person))"
+          groups_filter: "(&(member={dn})(objectclass=groupOfNames))"
+
+        file:
+          enabled: false
           path: /config/users_database.yml
           password:
             algorithm: argon2
@@ -121,6 +131,7 @@ spec:
           host: smtp.gmail.com
           port: 587
           sender: authelia@${SECRET_DOMAIN}
+          subject: "[Authelia] {title}"
 
     secret:
       existingSecret: authelia
