@@ -101,7 +101,7 @@ spec:
           memory: 256Mi
     useExternalDNS:
       enabled: true
-      suffix: "redis.${SECRET_DOMAIN}"
+      suffix: "${SECRET_DOMAIN}"
       annotationKey: external-dns.alpha.kubernetes.io/
       additionalAnnotations:
         external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
