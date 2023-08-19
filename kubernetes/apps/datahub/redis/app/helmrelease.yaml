@@ -41,11 +41,15 @@ spec:
         enabled: true
         storageClass: "local-path"
       disableCommands: []
+      service:
+        type: LoadBalancer
     replica:
       replicaCount: 3
       persistence:
         enabled: true
         storageClass: "local-path"
+      service:
+        type: LoadBalancer
     resources:
       limits:
         #cpu: 250m
@@ -54,7 +58,8 @@ spec:
         cpu: 250m
         memory: 256Mi
     sentinel:
-      enabled: true
+      # https://artifacthub.io/packages/helm/bitnami/redis#master-replicas-with-sentinel
+      enabled: false
       masterSet: redis-master
       getMasterTimeout: 60
       readinessProbe:
