@@ -61,6 +61,7 @@ spec:
           username_attribute: uid
           additional_users_dn: ""
           additional_groups_dn: ""
+          user: "${SECRET_LDAP_USER},${SECRET_LDAP_BASE_DN}"
           users_filter: "(&({username_attribute}={input})(objectClass=person))"
           groups_filter: "(&(member={dn})(objectclass=groupOfNames))"
 
@@ -135,6 +136,7 @@ spec:
 
     secret:
       existingSecret: authelia
+
 
   valuesFrom:
     - targetPath: configMap.storage.postgres.database
