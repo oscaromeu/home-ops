@@ -50,6 +50,8 @@ spec:
           memory: 50Mi
 
     configMap:
+      log:
+        level: debug
       theme: dark
       authentication_backend:
         ldap:
