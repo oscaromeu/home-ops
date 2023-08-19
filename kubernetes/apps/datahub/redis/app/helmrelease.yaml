@@ -44,12 +44,13 @@ spec:
       service:
         type: LoadBalancer
     replica:
-      replicaCount: 3
+      replicaCount: 1
       persistence:
         enabled: true
         storageClass: "local-path"
-      service:
-        type: LoadBalancer
+      #service:
+      #  type: LoadBalancer
+      disableCommands: []
     resources:
       limits:
         #cpu: 250m
