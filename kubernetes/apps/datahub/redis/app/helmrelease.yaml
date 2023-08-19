@@ -107,9 +107,3 @@ spec:
         requests:
           cpu: 250m
           memory: 256Mi
-    useExternalDNS:
-      enabled: false
-      suffix: "${SECRET_DOMAIN}"
-      annotationKey: external-dns.alpha.kubernetes.io/
-      additionalAnnotations:
-        external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
