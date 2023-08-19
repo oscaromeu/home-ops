@@ -61,6 +61,7 @@ spec:
           username_attribute: uid
           additional_users_dn: ""
           additional_groups_dn: ""
+          base_dn: "${SECRET_LDAP_BASE_DN}"
           user: "${SECRET_LDAP_USER},${SECRET_LDAP_BASE_DN}"
           users_filter: "(&({username_attribute}={input})(objectClass=person))"
           groups_filter: "(&(member={dn})(objectclass=groupOfNames))"
@@ -163,11 +164,3 @@ spec:
       kind: Secret
       name: authelia
       valuesKey: MAIL_APP_PASSWORD
-    - targetPath: configMap.authentication_backend.ldap.base_dn
-      kind: Secret
-      name: authelia
-      valuesKey: AUTHELIA__LDAP_BASE_DN
-    - targetPath: configMap.authentication_backend.ldap.user
-      kind: Secret
-      name: authelia
-      valuesKey: AUTHELIA__LDAP_USER
