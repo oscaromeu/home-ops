@@ -26,6 +26,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    global:
+      storageClass: longhorn
     auth:
       enabled: false
       sentinel: false
@@ -106,7 +108,7 @@ spec:
           cpu: 250m
           memory: 256Mi
     useExternalDNS:
-      enabled: true
+      enabled: false
       suffix: "${SECRET_DOMAIN}"
       annotationKey: external-dns.alpha.kubernetes.io/
       additionalAnnotations:
