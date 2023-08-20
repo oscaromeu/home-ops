@@ -5,5 +5,5 @@ namespace: datahub
 resources:
   - ./extrenalsecret.yaml
   - ./cluster.yaml
-  - ./scheduledbackup.yaml
+  #- ./scheduledbackup.yaml
   - ./service.yaml
