@@ -188,10 +188,10 @@ spec:
 
         remoteWrite:
           - url: "http://mimir-nginx.monitoring.svc.cluster.local:80/api/v1/push"
-            write_relabel_configs:
-            - source_labels: [__name__]
-              target_label: __name__
-              regex: "(.*)"
+            #write_relabel_configs:
+            #- source_labels: [__name__]
+            #  target_label: __name__
+            #  regex: "(.*)"
         #  - url: "https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push"
         #    basicAuth:
         #      username:
