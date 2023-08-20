@@ -43,8 +43,8 @@ spec:
         enabled: true
         storageClass: "local-path"
       disableCommands: []
-      #service:
-      #  type: ClusterIp
+      service:
+        type: LoadBalancer
     replica:
       replicaCount: 1
       persistence:
@@ -107,3 +107,8 @@ spec:
         requests:
           cpu: 250m
           memory: 256Mi
+    useExternalDNS:
+      enabled: true
+      suffix: "${SECRET_DOMAIN}"
+      annotationKey: external-dns.alpha.kubernetes.io/
+      additionalAnnotations: {}

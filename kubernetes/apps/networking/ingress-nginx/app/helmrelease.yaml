@@ -58,7 +58,6 @@ spec:
             any: true
       extraArgs:
         default-ssl-certificate: "networking/${SECRET_DOMAIN/./-}-production-tls"
-        tcp-services-configmap: datahub/redistore
       replicaCount: 3
       resources:
         requests:
