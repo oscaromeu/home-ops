@@ -6,4 +6,4 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "false"
 data:
-  6379: "datahub/redis-master:6379"
+  "6379": "datahub/redis-master:6379"
