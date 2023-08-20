@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-master
+  namespace: datahub
+data:
+  6379: "datahub/redis-master:6379"
