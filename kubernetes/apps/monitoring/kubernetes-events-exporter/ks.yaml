@@ -10,7 +10,6 @@ spec:
   dependsOn:
     - name: cluster-apps-vpa
     - name: cluster-apps-kube-prometheus-stack
-    - name: cluster-apps-thanos
   path: ./kubernetes/apps/monitoring/kubernetes-events-exporter/app
   prune: true
   sourceRef:
