@@ -43,8 +43,8 @@ spec:
         enabled: true
         storageClass: "local-path"
       disableCommands: []
-      service:
-        type: LoadBalancer
+      #service:
+      #  type: ClusterIp
     replica:
       replicaCount: 1
       persistence:
