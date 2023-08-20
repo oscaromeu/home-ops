@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: datahub
 resources:
   - ./helmrelease.yaml
-  #- ./cm.yaml
+  - ./cm.yaml
