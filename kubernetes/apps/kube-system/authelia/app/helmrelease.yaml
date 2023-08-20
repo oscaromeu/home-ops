@@ -88,15 +88,15 @@ spec:
           - 192.168.1.0/16
         rules:
         # Disable Authelia for local network
-        #- policy: one_factor
-        #  domain: "*.${SECRET_DOMAIN}"
-        #  networks:
-        #  - private
+        - policy: one_factor
+          domain: "*.${SECRET_DOMAIN}"
+          networks:
+          - private
         # Applications without auth
-        #- policy: two_factor
-        #  domain:
-        #  - longhorn.${SECRET_DOMAIN}
-        # Applications with built-in auth
+        - policy: two_factor
+          domain:
+          - longhorn.${SECRET_DOMAIN}
+         #Applications with built-in auth
         - policy: one_factor
           domain:
           - grafana.${SECRET_DOMAIN}
