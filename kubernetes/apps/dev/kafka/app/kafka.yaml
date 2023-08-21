@@ -44,7 +44,7 @@ spec:
             - name: SERVICE
               value: kafka-svc
             - name: NAMESPACE
-              value: default
+              value: dev
             - name: SHARE_DIR
               value: /mnt/kafka
             - name: CLUSTER_ID
