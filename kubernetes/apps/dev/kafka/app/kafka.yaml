@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-svc
+  labels:
+    app: kafka-app
+spec:
+  clusterIP: None
+  ports:
+    - name: '9092'
+      port: 9092
+      protocol: TCP
+      targetPort: 9092
+  selector:
+    app: kafka-app
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kafka
+  labels:
+    app: kafka-app
+spec:
+  serviceName: kafka-svc
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kafka-app
+  template:
+    metadata:
+      labels:
+        app: kafka-app
+    spec:
+      containers:
+        - name: kafka-container
+          image: doughgle/kafka-kraft
+          ports:
+            - containerPort: 9092
+            - containerPort: 9093
+          env:
+            - name: REPLICAS
+              value: '3'
+            - name: SERVICE
+              value: kafka-svc
+            - name: NAMESPACE
+              value: default
+            - name: SHARE_DIR
+              value: /mnt/kafka
+            - name: CLUSTER_ID
+              value: oh-sxaDRTcyAr6pFRbXyzA
+            - name: DEFAULT_REPLICATION_FACTOR
+              value: '3'
+            - name: DEFAULT_MIN_INSYNC_REPLICAS
+              value: '2'
+          volumeMounts:
+            - name: data
+              mountPath: /mnt/kafka
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: "1Gi"

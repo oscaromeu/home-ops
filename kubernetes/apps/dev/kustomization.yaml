@@ -5,6 +5,7 @@ resources:
   - ./namespace.yaml
   - ./alerta/ks.yaml
   - ./gitea/ks.yaml
+  - ./kafka/ks.yaml
   - ./registry/ks.yaml
   #- ./spring-boot-app/ks.yaml
   #- ./fastapi-app/ks.yaml
