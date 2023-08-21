@@ -245,6 +245,7 @@ spec:
           s3:
             insecure: true
         limits:
+          compactor_blocks_retention_period: 90d
           max_label_names_per_series: 120
           max_global_series_per_user: 12000000
           ingestion_rate: 400000
