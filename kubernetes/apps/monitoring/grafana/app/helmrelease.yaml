@@ -131,3 +131,4 @@ spec:
       - pyroscope-panel
       - flant-statusmap-panel
       - marcusolsson-csv-datasource
+      - redis-datasource
