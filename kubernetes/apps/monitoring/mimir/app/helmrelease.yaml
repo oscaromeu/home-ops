@@ -71,46 +71,24 @@ spec:
         requests:
           cpu: 25m
           memory: 100Mi
-      #topologySpreadConstraints: {}
-      #affinity:
-      #  podAntiAffinity:
-      #    requiredDuringSchedulingIgnoredDuringExecution:
-      #      - labelSelector:
-      #          matchExpressions:
-      #            - key: target # support for enterprise.legacyLabels
-      #              operator: In
-      #              values:
-      #                - ingester
-      #        topologyKey: 'kubernetes.io/hostname'
-
-      #      - labelSelector:
-      #          matchExpressions:
-      #            - key: app.kubernetes.io/component
-      #              operator: In
-      #              values:
-      #                - ingester
-      #        topologyKey: 'kubernetes.io/hostname'
-
-      #zoneAwareReplication:
-      #  topologyKey: 'kubernetes.io/hostname'
 
     admin-cache:
       enabled: true
       replicas: 1
 
     chunks-cache:
-      enabled: true
+      enabled: false
       replicas: 1
 
     index-cache:
-      enabled: true
+      enabled: false
       replicas: 1
 
     metadata-cache:
-      enabled: true
+      enabled: false
 
     results-cache:
-      enabled: true
+      enabled: false
       replicas: 1
 
     minio:
@@ -232,14 +210,40 @@ spec:
           memory: 100Mi
     mimir:
       structuredConfig:
+
+        backend: s3
+        s3:
+          insecure: true
+
         alertmanager_storage:
           backend: s3
           s3:
             insecure: true
+
         blocks_storage:
-          backend: s3
-          s3:
-            insecure: true
+          chunks_cache:
+            backend: redis
+            redis:
+              endpoint: redis://redis-master.datahub.svc.cluster.local:6379
+              db: 2
+          index_cache:
+            backend: redis
+            redis:
+              endpoint: redis://redis-master.datahub.svc.cluster.local:6379
+              db: 2
+          metadata_cache:
+            backend: redis
+            redis:
+              endpoint: redis://redis-master.datahub.svc.cluster.local:6379
+              db: 2
+
+        frontend:
+          cache_results: true
+          results_cache:
+            backend: redis
+            redis:
+              endpoint: redis://redis-master.datahub.svc.cluster.local:6379
+              db: 2
         ruler_storage:
           backend: s3
           s3:
