@@ -211,16 +211,15 @@ spec:
     mimir:
       structuredConfig:
 
-        backend: s3
-        s3:
-          insecure: true
-
         alertmanager_storage:
           backend: s3
           s3:
             insecure: true
 
         blocks_storage:
+          backend: s3
+          s3:
+            insecure: true
           chunks_cache:
             backend: redis
             redis:
