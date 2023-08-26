@@ -20,14 +20,15 @@ spec:
     ingress:
       enabled: true
       subdomain: auth
-      className: nginx
+      className: external
       annotations:
-          external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           hajimari.io/appName: "auth"
           hajimari.io/enable: "true"
           hajimari.io/icon: "alarm-light-outline"
       tls:
         enabled: true
+        secret: "auth.${SECRET_DOMAIN}"
     pod:
       kind: Deployment
       replicas: 1

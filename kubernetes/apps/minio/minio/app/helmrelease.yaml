@@ -109,7 +109,7 @@ spec:
 
     ingress:
       enabled: true
-      ingressClassName: nginx
+      ingressClassName: external
       hosts:
         - &host s3.${SECRET_DOMAIN}
       tls:
@@ -117,7 +117,7 @@ spec:
             - *host
       path: /
       annotations:
-        external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
+        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         hajimari.io/icon: simple-icons:minio
 
 

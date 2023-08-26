@@ -32,9 +32,9 @@ spec:
     replicaCount: 1
     ingress:
       annotations:
-        external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
+        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
       enabled: true
-      className: nginx
+      className: external
       hosts:
         - "registry.${SECRET_DOMAIN}"
       tls:

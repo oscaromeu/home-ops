@@ -43,9 +43,9 @@ spec:
 
     ingress:
       enabled: "true"
-      ClassName: nginx
+      ClassName: internal
       annotations:
-        external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
+        external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
         hajimari.io/appName: "podinfo"
         hajimari.io/enable: "true"
         hajimari.io/icon: "alarm-light-outline"

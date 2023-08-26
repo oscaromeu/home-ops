@@ -2,7 +2,7 @@
  kind: Ingress
  metadata:
    annotations:
-     external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
+     external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
      hajimari.io/enable: "true"
      hajimari.io/icon: simple-icons:argocd
      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -10,7 +10,7 @@
    name: argocd
    namespace: argocd
  spec:
-   ingressClassName: nginx
+   ingressClassName: external
    rules:
    - host: &host "argocd.${SECRET_DOMAIN}"
      http:
