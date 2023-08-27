@@ -78,7 +78,7 @@ spec:
       replicas: 3
       ingress:
         enabled: true
-        ingressClassName: nginx
+        ingressClassName: internal
         hosts:
           - host: &host "loki.${SECRET_DOMAIN}"
             paths:

@@ -12,10 +12,14 @@
   color: "72ccf3"
   description: >-
     Changes made in the kubernetes directory
-- name: area/template
+- name: area/addons
   color: "72ccf3"
   description: >-
-    Changes made in the tmpl directory
+    Changes made in the addons directory
+- name: area/bootstrap
+  color: "72ccf3"
+  description: >-
+    Changes made in the bootstrap directory
 # Renovate
 - name: renovate/ansible
   color: "ffc300"

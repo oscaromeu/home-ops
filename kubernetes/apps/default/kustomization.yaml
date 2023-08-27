@@ -4,8 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   #- ./default-app/ks.yaml
-  - ./echo-server/ks.yaml
-  - ./excalidraw/ks.yaml
+  #- ./excalidraw/ks.yaml
   - ./hajimari/ks.yaml
   - ./linkding/ks.yaml
-  - ./podinfo/ks.yaml
+  #- ./podinfo/ks.yaml
