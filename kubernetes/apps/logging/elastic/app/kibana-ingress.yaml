@@ -3,6 +3,7 @@
  metadata:
    annotations:
      external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+     nginx.ingress.kubernetes.io/backend-protocol: HTTPS
      hajimari.io/enable: "true"
      hajimari.io/icon: simple-icons:kibana
    labels:
