@@ -1,0 +1,23 @@
+{
+  "priority": 101,
+  "template": {
+    "settings": {
+      "index": {
+        "lifecycle": {
+          "name": "logs-k3s"
+        },
+        "number_of_shards": "1",
+        "number_of_replicas": "0"
+      }
+    }
+  },
+  "index_patterns": [
+    "logs-k3s_*"
+  ],
+  "data_stream": {},
+  "composed_of": [
+    "logs-mappings",
+    "data-streams-mappings",
+    "logs-settings"
+  ]
+}

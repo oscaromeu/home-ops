@@ -64,6 +64,8 @@ The following policies have been created.
 
 #### Create lifecycle policy
 
+[Elasticsearch ILM policy documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-rollover.html)
+
 ```json
 PUT _ilm/policy/logs-k3s
 {
@@ -73,7 +75,8 @@ PUT _ilm/policy/logs-k3s
         "actions": {
           "rollover": {
             "max_age": "5d",
-            "max_primary_shard_size": "200mb"
+            "max_primary_shard_size": "200mb",
+            "min_primary_shard_size": "200mb"
           },
           "set_priority": {
             "priority": 100
