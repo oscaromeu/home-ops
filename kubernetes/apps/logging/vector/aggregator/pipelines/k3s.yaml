@@ -32,31 +32,31 @@ transforms:
 # Sinks
 #
 sinks:
-  elasticsearch:
-    type: elasticsearch
-    #batch:
-    #  max_bytes: 2049000
-    inputs:
-      - kubernetes_remap
-    auth:
-      strategy: "basic"
-      user: "${ELASTICSEARCH_PASSWORD:-ingestion}"
-      password: "${ELASTICSEARCH_PASSWORD:-monitor}"
-    data_stream:
-      # {data_stream.type}-{data_stream.dataset}-{data_stream.namespace}
-      # https://www.elastic.co/guide/en/ecs/master/ecs-data_stream.html
-      type: logs
-      dataset: "k3s_prod"
-      namespace: "{{ .kubernetes.pod_namespace }}"
-    mode: "data_stream"
-    bulk:
-      action: "create"
-    endpoints:
-      - "https://elk-es-master.logging.svc.cluster.local:9200"
-    tls:
-      verify_certificate: false
-    encoding:
-      except_fields: ["pod_labels"]
+  #elasticsearch:
+  #  type: elasticsearch
+  #  #batch:
+  #  #  max_bytes: 2049000
+  #  inputs:
+  #    - kubernetes_remap
+  #  auth:
+  #    strategy: "basic"
+  #    user: "${ELASTICSEARCH_PASSWORD:-ingestion}"
+  #    password: "${ELASTICSEARCH_PASSWORD:-monitor}"
+  #  data_stream:
+  #    # {data_stream.type}-{data_stream.dataset}-{data_stream.namespace}
+  #    # https://www.elastic.co/guide/en/ecs/master/ecs-data_stream.html
+  #    type: logs
+  #    dataset: "k3s_prod"
+  #    namespace: "{{ .kubernetes.pod_namespace }}"
+  #  mode: "data_stream"
+  #  bulk:
+  #    action: "create"
+  #  endpoints:
+  #    - "https://elk-es-master.logging.svc.cluster.local:9200"
+  #  tls:
+  #    verify_certificate: false
+  #  encoding:
+  #    except_fields: ["pod_labels"]
 
   loki:
     inputs: ["kubernetes_remap"]
