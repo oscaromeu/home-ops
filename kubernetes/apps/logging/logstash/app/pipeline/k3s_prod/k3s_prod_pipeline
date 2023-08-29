@@ -7,7 +7,7 @@ input {
       key => "k3s_prod"
       ssl => false
       port => 6379
-      db => 3
+      db => 4
   }
 
 }
