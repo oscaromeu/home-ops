@@ -7,6 +7,7 @@ input {
       key => "k3s_prod"
       ssl => false
       port => 6379
+      db => 3
   }
 
 }
@@ -14,8 +15,8 @@ input {
 filter {
 
     #if [log_type] == "k3s_cluster" {drop {}}
-    mutate { 
-      rename => { "host" => "[host][name]" } 
+    mutate {
+      rename => { "host" => "[host][name]" }
       copy => { "[kubernetes][namespace]" => "k3s_project_name" }
       rename => { "message" => "log" }
       lowercase => [ "k3s_cluster_name", "k3s_project_name" ]

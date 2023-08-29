@@ -12,6 +12,7 @@ filebeat.config.modules:
 output.redis:
   hosts: ${REDIS_HOSTS}
   key: '${REDIS_KEY_NAME}' # default: bm_hl
+  db: 3
   #keys: '${REDIS_KEY_NAME}_%{[agent.hostname]}'
 
   #ssl:
