@@ -1,7 +1,7 @@
 input {
 
   redis {
-      host => "redis-headless.datahub.svc"
+      host => "redis-master.datahub.svc"
       type => "redis-input"
       data_type => "list"
       key => "k3s_prod"
