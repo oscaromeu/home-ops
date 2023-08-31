@@ -101,12 +101,12 @@ spec:
             memory: 680Mi
         env:
           - name: ELASTICSEARCH_USERNAME
-            value: "elastic"
+            value: "ingestion"
           - name: ELASTICSEARCH_PASSWORD
             valueFrom:
               secretKeyRef:
-                key: elastic
-                name: elk-es-elastic-user
+                key: ELASTICSEARCH_PASSWORD
+                name: es-ingestion-credentials
         volumeMounts:
           #- name: logstash
           #  mountPath: "/usr/share/logstash/data"
