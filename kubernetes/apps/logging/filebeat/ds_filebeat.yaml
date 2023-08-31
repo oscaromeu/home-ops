@@ -32,7 +32,7 @@ spec:
         - name: ELASTICSEARCH_PORT
           value: "9200"
         - name: REDIS_HOSTS
-          value: "['redis-headless.datahub.svc:6379']"
+          value: "['redis-master.datahub.svc:6379']"
         - name: LOG_TYPE
           value: k3s_cluster
         - name: CLUSTER_NAME
