@@ -35,7 +35,7 @@ spec:
     master:
       resources:
         limits:
-          memory: 10Gi
+          memory: 15Gi
           #cpu:
         requests:
           memory: 11Mi

@@ -117,7 +117,7 @@ spec:
         redis:
           enabled: true
           enabledSecret: false
-          host: redis-headless.datahub.svc.cluster.local
+          host: redis-master.datahub.svc.cluster.local
           database_index: 3
       regulation:
         max_retries: 3
