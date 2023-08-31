@@ -1,0 +1,20 @@
+- module: prometheus
+  period: 30s
+  hosts: ["prometheus-k8s.monitoring.svc.cluster.local:9090"]
+  ssl.verification_mode: "none"
+  fields:
+    metricset.module: elasticsearch-capacity-planning
+  metricsets: ["query"]
+  queries:
+    - name: 'elastic_number_of_nodes'
+      path: '/api/v1/query'
+      params:
+        query: "elasticsearch_cluster_health_number_of_nodes{job='prometheus-elasticsearch-exporter'}"
+    - name: 'elastic_total_active_shards'
+      path: '/api/v1/query'
+      params:
+        query: "elasticsearch_cluster_health_active_shards{job='prometheus-elasticsearch-exporter'}"
+    - name: 'elastic_indices_store_size'
+      path: '/api/v1/query'
+      params:
+        query: "round(sum(elasticsearch_indices_store_size_bytes{job='prometheus-elasticsearch-exporter'} / 1024 / 1024 / 1024), 0.1)"
