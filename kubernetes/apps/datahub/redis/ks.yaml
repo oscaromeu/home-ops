@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-elastic
-  path: ./kubernetes/apps/logging/redis/app
+  path: ./kubernetes/apps/datahub/redis/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -28,7 +28,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-redis
-  path: ./kubernetes/apps/logging/redis/monitoring
+  path: ./kubernetes/apps/datahub/redis/monitoring
   prune: true
   sourceRef:
     kind: GitRepository
