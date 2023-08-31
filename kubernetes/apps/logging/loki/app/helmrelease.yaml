@@ -125,7 +125,7 @@ spec:
           memory: 260Mi
         limits:
           #cpu:
-          memory: 500Mi
+          memory: 1000Mi
 
     backend:
       replicas: 3
