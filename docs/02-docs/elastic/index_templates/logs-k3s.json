@@ -12,7 +12,8 @@
     }
   },
   "index_patterns": [
-    "logs-k3s_*"
+    "logs-k3s_*",
+    "logs-pi_prod-k3s_*"
   ],
   "data_stream": {},
   "composed_of": [
