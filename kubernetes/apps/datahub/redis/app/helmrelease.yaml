@@ -36,7 +36,7 @@ spec:
         memory: 138Mi
       limits:
         #cpu:
-        memory: 12Gi
+        memory: 5Gi
     metrics:
       enabled: false
       serviceMonitor:
