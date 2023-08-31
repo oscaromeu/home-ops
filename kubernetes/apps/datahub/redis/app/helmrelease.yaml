@@ -5,7 +5,7 @@ metadata:
   name: redis
   namespace: datahub
 spec:
-  interval: 15m
+  interval: 5m
   chart:
     spec:
       chart: redis
@@ -14,123 +14,35 @@ spec:
         kind: HelmRepository
         name: bitnami
         namespace: flux-system
-  maxHistory: 3
-  install:
-    createNamespace: true
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
-  uninstall:
-    keepHistory: false
+      interval: 5m
   values:
     architecture: standalone
     auth:
       enabled: false
-      sentinel: false
-    global:
-      storageClass: longhorn
     master:
-      resources:
-        limits:
-          memory: 15Gi
-          #cpu:
-        requests:
-          memory: 11Mi
-          cpu: 50m
-      persistence:
-        enabled: true
-        storageClass: "local-path"
-      disableCommands: []
-      service:
-        type: LoadBalancer
-      readinessProbe:
-        enabled: true
-        initialDelaySeconds: 60
-        periodSeconds: 10
-        timeoutSeconds: 30
-        successThreshold: 1
-        failureThreshold: 60
-      livenessProbe:
-        enabled: true
-        initialDelaySeconds: 20
-        periodSeconds: 10
-        timeoutSeconds: 30
-        successThreshold: 1
-        failureThreshold: 60
-      startupProbe:
-        enabled: true
-        initialDelaySeconds: 10
-        periodSeconds: 10
-        timeoutSeconds: 5
-        successThreshold: 1
-        failureThreshold: 22
+      nodeSelector:
+        kubernetes.io/arch: amd64
     replica:
       replicaCount: 1
+      nodeSelector:
+        kubernetes.io/arch: amd64
       persistence:
         enabled: true
-        storageClass: "local-path"
-      #service:
-      #  type: LoadBalancer
-      disableCommands: []
+        size: 512Mi
+        storageClass: local-path
     resources:
-      limits:
-        #cpu: 250m
-        memory: 256Mi
       requests:
-        cpu: 250m
-        memory: 256Mi
-    sentinel:
-      # https://artifacthub.io/packages/helm/bitnami/redis#master-replicas-with-sentinel
-      enabled: false
-      masterSet: redis-master
-      getMasterTimeout: 60
-      readinessProbe:
-        enabled: true
-        initialDelaySeconds: 60
-        periodSeconds: 10
-        timeoutSeconds: 30
-        successThreshold: 1
-        failureThreshold: 60
-      livenessProbe:
-        enabled: true
-        initialDelaySeconds: 20
-        periodSeconds: 10
-        timeoutSeconds: 30
-        successThreshold: 1
-        failureThreshold: 60
-      startupProbe:
-        enabled: true
-        initialDelaySeconds: 10
-        periodSeconds: 10
-        timeoutSeconds: 5
-        successThreshold: 1
-        failureThreshold: 22
-      persistence:
-        enabled: false
-      resources:
-        limits:
-          #cpu: 250m
-          memory: 256Mi
-        requests:
-          cpu: 250m
-          memory: 256Mi
+        cpu: 36m
+        memory: 138Mi
+      limits:
+        #cpu:
+        memory: 12Gi
     metrics:
       enabled: false
       serviceMonitor:
         enabled: false
-        interval: 1m
-      resources:
-        limits:
-          #cpu: 250m
-          memory: 256Mi
-        requests:
-          cpu: 250m
-          memory: 256Mi
-    useExternalDNS:
-      enabled: false
-      suffix: "${SECRET_DOMAIN}"
-      annotationKey: external-dns.alpha.kubernetes.io/
-      additionalAnnotations: {}
+        namespace: "datahub"
+      extraEnvVars:
+        - name: REDIS_EXPORTER_CHECK_KEYS
+          value: "*" # Check all keys
+

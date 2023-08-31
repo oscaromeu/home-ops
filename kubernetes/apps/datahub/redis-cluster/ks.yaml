@@ -2,21 +2,27 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-redis
+  name: cluster-apps-redis-datahub
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-elastic
-  path: ./kubernetes/apps/logging/redis/app
+    #- name: cluster-apps-nginx-external
+    - name: cluster-apps-external-secrets-stores
+  path: ./kubernetes/apps/datahub/redis/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: redis
+      namespace: datahub
   interval: 30m
   retryInterval: 1m
-  timeout: 5m
+  timeout: 3m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
@@ -27,8 +33,8 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-redis
-  path: ./kubernetes/apps/logging/redis/monitoring
+    - name: cluster-apps-redis-datahub
+  path: ./kubernetes/apps/datahub/redis/monitoring
   prune: true
   sourceRef:
     kind: GitRepository
