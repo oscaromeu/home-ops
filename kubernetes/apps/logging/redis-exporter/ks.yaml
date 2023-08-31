@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-kube-prometheus-stack
-    - name: cluster-apps-redis-datahub
+    - name: cluster-apps-redis
   path: ./kubernetes/apps/logging/redis-exporter/app
   prune: true
   sourceRef:
