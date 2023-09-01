@@ -19,21 +19,21 @@ spec:
           node: ${NODE_NAME}
           type: kubernetes
       modules:
-      - module: system
-        period: 10s
-        metricsets:
-        - cpu
-        - load
-        - memory
-        - network
-        - process
-        - process_summary
-        process:
-          include_top_n:
-            by_cpu: 5
-            by_memory: 5
-        processes:
-        - .*
+      #- module: system
+      #  period: 10s
+      #  metricsets:
+      #  - cpu
+      #  - load
+      #  - memory
+      #  - network
+      #  - process
+      #  - process_summary
+      #  process:
+      #    include_top_n:
+      #      by_cpu: 5
+      #      by_memory: 5
+      #  processes:
+      #  - .*
       - module: system
         period: 1m
         metricsets:
