@@ -1,0 +1,10 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: logging
+resources:
+  - ./sa_metricbeat.yaml
+  - ./cr_metricbeat.yaml
+  - ./crb_metricbeat.yaml
+  - ./metricbeat.yaml

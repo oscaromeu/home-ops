@@ -1,0 +1,125 @@
+apiVersion: beat.k8s.elastic.co/v1beta1
+kind: Beat
+metadata:
+  name: metricbeat
+spec:
+  type: metricbeat
+  version: 8.8.0
+  elasticsearchRef:
+    name: elk
+  #kibanaRef:
+  #  name: kibana
+  config:
+    metricbeat:
+      autodiscover:
+        providers:
+        - hints:
+            default_config: {}
+            enabled: "true"
+          node: ${NODE_NAME}
+          type: kubernetes
+      modules:
+      - module: system
+        period: 10s
+        metricsets:
+        - cpu
+        - load
+        - memory
+        - network
+        - process
+        - process_summary
+        process:
+          include_top_n:
+            by_cpu: 5
+            by_memory: 5
+        processes:
+        - .*
+      - module: system
+        period: 1m
+        metricsets:
+        - filesystem
+        - fsstat
+        processors:
+        - drop_event:
+            when:
+              regexp:
+                system:
+                  filesystem:
+                    mount_point: ^/(sys|cgroup|proc|dev|etc|host|lib)($|/)
+      - module: kubernetes
+        period: 10s
+        node: ${NODE_NAME}
+        hosts:
+        - https://${NODE_NAME}:10250
+        bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+        ssl:
+          verification_mode: none
+        metricsets:
+        - node
+        - system
+        - pod
+        - container
+        - volume
+      - module: prometheus
+        period: 60s
+        hosts: ["prometheus-k8s.monitoring.svc.cluster.local:9090"]
+        ssl.verification_mode: "none"
+        fields:
+          metricset.module: elasticsearch-capacity-planning
+        metricsets: ["query"]
+        queries:
+          - name: 'elastic_number_of_nodes'
+            path: '/api/v1/query'
+            params:
+              query: "elasticsearch_cluster_health_number_of_nodes{job='prometheus-elasticsearch-exporter'}"
+          - name: 'elastic_total_active_shards'
+            path: '/api/v1/query'
+            params:
+              query: "elasticsearch_cluster_health_active_shards{job='prometheus-elasticsearch-exporter'}"
+          - name: 'elastic_indices_store_size'
+            path: '/api/v1/query'
+            params:
+              query: "round(sum(elasticsearch_indices_store_size_bytes{job='prometheus-elasticsearch-exporter'} / 1024 / 1024 / 1024), 0.1)"
+
+    processors:
+    - add_cloud_metadata: {}
+    - add_host_metadata: {}
+  daemonSet:
+    podTemplate:
+      spec:
+        serviceAccountName: metricbeat
+        automountServiceAccountToken: true # some older Beat versions are depending on this settings presence in k8s context
+        containers:
+        - args:
+          - -e
+          - -c
+          - /etc/beat.yml
+          - -system.hostfs=/hostfs
+          name: metricbeat
+          volumeMounts:
+          - mountPath: /hostfs/sys/fs/cgroup
+            name: cgroup
+          - mountPath: /var/run/docker.sock
+            name: dockersock
+          - mountPath: /hostfs/proc
+            name: proc
+          env:
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+        dnsPolicy: ClusterFirstWithHostNet
+        hostNetwork: true # Allows to provide richer host metadata
+        securityContext:
+          runAsUser: 0
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - hostPath:
+            path: /sys/fs/cgroup
+          name: cgroup
+        - hostPath:
+            path: /var/run/docker.sock
+          name: dockersock
+        - hostPath:
+            path: /proc
+          name: proc
