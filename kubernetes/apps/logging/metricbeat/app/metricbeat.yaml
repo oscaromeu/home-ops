@@ -74,42 +74,281 @@ spec:
             params:
               query: "sum by (cluster) (elasticsearch_cluster_health_active_primary_shards{job=\"prometheus-elasticsearch-exporter\"})"
 
-          - name: 'elastic_total_active_shards'
+          - name: 'elasticsearch_cluster_health_active_shards'
             path: '/api/v1/query'
             params:
-              query: ""
+              query: "sum by (cluster) (elasticsearch_cluster_health_active_shards{job=\"prometheus-elasticsearch-exporter\"})"
 
-          - name: 'elastic_indices_store_size'
+          - name: 'elasticsearch_cluster_health_number_of_data_nodes'
             path: '/api/v1/query'
             params:
               query: "round(sum(elasticsearch_indices_store_size_bytes{job='prometheus-elasticsearch-exporter'} / 1024 / 1024 / 1024), 0.1)"
 
-          - name: 'raw_elastic_indices_store_size'
+          - name: 'elasticsearch_cluster_health_number_of_data_nodes'
             path: '/api/v1/query'
             params:
-              query: "elasticsearch_indices_store_size_bytes{job='prometheus-elasticsearch-exporter'}"
+              query: "sum by (cluster) (elasticsearch_cluster_health_number_of_data_nodes{job=\"prometheus-elasticsearch-exporter\"})"
 
-          - name: 'datastream_store_size'
+          - name: 'elasticsearch_cluster_health_number_of_nodes'
             path: '/api/v1/query'
             params:
-              query: "sum by (data_stream) (rate(elasticsearch_data_stream_store_size_bytes[1h]))"
+              query: "sum by (cluster) (elasticsearch_cluster_health_number_of_data_nodes{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_filesystem_data_available_bytes'
+            path: '/api/v1/query'
+            params:
+              query: "sum by (cluster) (elasticsearch_filesystem_data_available_bytes{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_filesystem_data_free_bytes'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_filesystem_data_free_bytes{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_filesystem_data_size_bytes'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_filesystem_data_size_bytes{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_indices_docs'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_indices_docs{job=\"prometheus-elasticsearch-exporter\"})"
+
+
+          - name: 'elasticsearch_indices_deleted_docs_primary'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_indices_deleted_docs_primary{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_indices_docs_primary'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_indices_docs_primary{job=\"prometheus-elasticsearch-exporter\"})"
 
           - name: 'elasticsearch_indices_docs_total'
             path: '/api/v1/query'
             params:
-              query: "elasticsearch_indices_docs_total"
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_indices_docs_total{job=\"prometheus-elasticsearch-exporter\"})"
 
-          - name: 'elasticsearch_indices_docs_total'
+          - name: 'elasticsearch_indices_indexing_delete_time_seconds_total'
             path: '/api/v1/query'
             params:
-              query: "elasticsearch_indices_docs_total"
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (elasticsearch_indices_indexing_delete_time_seconds_total{job=\"prometheus-elasticsearch-exporter\"})"
 
-
-          - name: 'elasticsearch_indices_docs_total_2'
+          - name: 'elasticsearch_indices_indexing_delete_total'
             path: '/api/v1/query'
             params:
-              query: "sum by (index) (elasticsearch_indices_docs_total)"
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_indices_indexing_delete_time_seconds_total{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
 
+          - name: 'elasticsearch_indices_index_current'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_indices_index_current{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_indices_indexing_index_time_seconds_total'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_indices_indexing_index_time_seconds_total{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
+
+          - name: 'elasticsearch_indices_indexing_index_total'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_indices_indexing_index_total{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
+
+          - name: 'elasticsearch_indices_query_cache_cache_total'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_indices_query_cache_cache_total{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
+
+          - name: 'elasticsearch_indices_query_cache_cache_size'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_indices_query_cache_cache_size{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_indices_query_cache_count'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_indices_query_cache_count{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
+
+          - name: 'elasticsearch_indices_query_cache_memory_size_bytes'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_indices_query_cache_memory_size_bytes{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_indices_query_cache_total'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_indices_query_cache_total{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
+
+          - name: 'elasticsearch_indices_search_fetch_time_seconds'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_indices_search_fetch_time_seconds{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
+
+          - name: 'elasticsearch_indices_search_fetch_total'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_indices_search_fetch_total{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
+
+          - name: 'elasticsearch_indices_search_query_time_seconds'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_indices_search_query_time_seconds{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
+
+          - name: 'elasticsearch_indices_search_query_total'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_indices_search_query_total{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
+
+          - name: 'elasticsearch_indices_segments_count'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_indices_segments_count{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_indices_segments_memory_bytes'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_indices_segments_memory_bytes{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_indices_shards_docs'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_indices_shards_docs{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_indices_shards_docs_deleted'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_indices_shards_docs_deleted{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_indices_store_size_bytes'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_indices_store_size_bytes{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_indices_store_size_bytes_primary'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_indices_store_size_bytes_primary{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_indices_store_size_bytes_total'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_indices_store_size_bytes_total{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_jvm_gc_collection_seconds_count'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_jvm_gc_collection_seconds_count{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
+
+          - name: 'elasticsearch_jvm_gc_collection_seconds_sum'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_jvm_gc_collection_seconds_sum{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
+
+          - name: 'elasticsearch_jvm_memory_committed_bytes'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_jvm_memory_committed_bytes{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_jvm_memory_max_bytes'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_jvm_memory_max_bytes{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_jvm_memory_used_bytes'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_jvm_memory_used_bytes{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_jvm_memory_pool_used_bytes'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_jvm_memory_pool_used_bytes{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_jvm_memory_pool_max_bytes'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_jvm_memory_pool_max_bytes{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
+
+          - name: 'elasticsearch_jvm_memory_pool_peak_used_bytes'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_jvm_memory_pool_peak_used_bytes{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
+
+          - name: 'elasticsearch_jvm_memory_pool_peak_max_bytes'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_jvm_memory_pool_peak_max_bytes{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
+
+          - name: 'elasticsearch_os_cpu_percent'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_os_cpu_percent{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_os_load1'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_os_load1{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_os_load5'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_os_load5{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_os_load15'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_os_load15{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_thread_pool_active_count'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_thread_pool_active_count{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_thread_pool_completed_count'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_thread_pool_completed_count{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
+
+          - name: 'elasticsearch_thread_pool_largest_count'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_thread_pool_largest_count{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_thread_pool_queue_count'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_thread_pool_queue_count{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_thread_pool_rejected_count'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_thread_pool_rejected_count{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
+
+          - name: 'elasticsearch_thread_pool_threads_count'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_thread_pool_threads_count{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_transport_rx_size_bytes_total'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_transport_rx_size_bytes_total{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
+
+          - name: 'elasticsearch_transport_tx_size_bytes_total'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service)  (rate(elasticsearch_transport_rx_size_bytes_total{job=\"prometheus-elasticsearch-exporter\"}[1h]))"
+
+          - name: 'elasticsearch_data_stream_backing_indices_total'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_data_stream_backing_indices_total{job=\"prometheus-elasticsearch-exporter\"})"
+
+          - name: 'elasticsearch_data_stream_store_size_bytes'
+            path: '/api/v1/query'
+            params:
+              query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_data_stream_store_size_bytes{job=\"prometheus-elasticsearch-exporter\"})"
 
 
     processors:
