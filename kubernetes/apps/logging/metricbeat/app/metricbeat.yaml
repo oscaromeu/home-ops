@@ -68,22 +68,31 @@ spec:
           metricset.module: elasticsearch-capacity-planning
         metricsets: ["query"]
         queries:
-          - name: 'elastic_number_of_nodes'
+
+          - name: 'elasticsearch_cluster_health_active_primary_shards'
             path: '/api/v1/query'
             params:
-              query: "elasticsearch_cluster_health_number_of_nodes{job='prometheus-elasticsearch-exporter'}"
+              query: "sum by (cluster) (elasticsearch_cluster_health_active_primary_shards{job=\"prometheus-elasticsearch-exporter\"})"
+
           - name: 'elastic_total_active_shards'
             path: '/api/v1/query'
             params:
-              query: "elasticsearch_cluster_health_active_shards{job='prometheus-elasticsearch-exporter'}"
+              query: ""
+
           - name: 'elastic_indices_store_size'
             path: '/api/v1/query'
             params:
               query: "round(sum(elasticsearch_indices_store_size_bytes{job='prometheus-elasticsearch-exporter'} / 1024 / 1024 / 1024), 0.1)"
+
           - name: 'raw_elastic_indices_store_size'
             path: '/api/v1/query'
             params:
               query: "elasticsearch_indices_store_size_bytes{job='prometheus-elasticsearch-exporter'}"
+
+          - name: 'datastream_store_size'
+            path: '/api/v1/query'
+            params:
+              query: "sum by (data_stream) (rate(elasticsearch_data_stream_store_size_bytes[1h]))"
 
 
     processors:
