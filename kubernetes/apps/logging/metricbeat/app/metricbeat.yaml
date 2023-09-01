@@ -80,7 +80,7 @@ spec:
             path: '/api/v1/query'
             params:
               query: "round(sum(elasticsearch_indices_store_size_bytes{job='prometheus-elasticsearch-exporter'} / 1024 / 1024 / 1024), 0.1)"
-          - name: 'elastic_indices_store_size'
+          - name: 'raw_elastic_indices_store_size'
             path: '/api/v1/query'
             params:
               query: "elasticsearch_indices_store_size_bytes{job='prometheus-elasticsearch-exporter'}"
