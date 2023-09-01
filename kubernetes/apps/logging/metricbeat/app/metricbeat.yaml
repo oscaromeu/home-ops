@@ -62,7 +62,7 @@ spec:
       #  - volume
       - module: prometheus
         period: 60s
-        hosts: ["kube-prometheus-stack-prometheus.svc.cluster.local:9090"]
+        hosts: ["kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"]
         ssl.verification_mode: "none"
         fields:
           metricset.module: elasticsearch-capacity-planning
