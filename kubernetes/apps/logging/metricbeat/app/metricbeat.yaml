@@ -46,20 +46,20 @@ spec:
       #          system:
       #            filesystem:
       #              mount_point: ^/(sys|cgroup|proc|dev|etc|host|lib)($|/)
-      - module: kubernetes
-        period: 10s
-        node: ${NODE_NAME}
-        hosts:
-        - https://${NODE_NAME}:10250
-        bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-        ssl:
-          verification_mode: none
-        metricsets:
-        - node
-        - system
-        - pod
-        - container
-        - volume
+      #- module: kubernetes
+      #  period: 10s
+      #  node: ${NODE_NAME}
+      #  hosts:
+      #  - https://${NODE_NAME}:10250
+      #  bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+      #  ssl:
+      #    verification_mode: none
+      #  metricsets:
+      #  - node
+      #  - system
+      #  - pod
+      #  - container
+      #  - volume
       - module: prometheus
         period: 60s
         hosts: ["prometheus-k8s.monitoring.svc.cluster.local:9090"]
