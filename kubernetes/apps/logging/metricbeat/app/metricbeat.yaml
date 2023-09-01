@@ -94,6 +94,23 @@ spec:
             params:
               query: "sum by (data_stream) (rate(elasticsearch_data_stream_store_size_bytes[1h]))"
 
+          - name: 'elasticsearch_indices_docs_total'
+            path: '/api/v1/query'
+            params:
+              query: "elasticsearch_indices_docs_total"
+
+          - name: 'elasticsearch_indices_docs_total'
+            path: '/api/v1/query'
+            params:
+              query: "elasticsearch_indices_docs_total"
+
+
+          - name: 'elasticsearch_indices_docs_total_2'
+            path: '/api/v1/query'
+            params:
+              query: "sum by (index) (elasticsearch_indices_docs_total)"
+
+
 
     processors:
     - add_cloud_metadata: {}
