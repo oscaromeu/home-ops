@@ -62,6 +62,7 @@ spec:
           username_attribute: uid
           additional_users_dn: ""
           additional_groups_dn: ""
+          mail_attribute: ${GMAIL}
           base_dn: ${SECRET_LDAP_BASE_DN}
           user: ${SECRET_LDAP_USER},${SECRET_LDAP_BASE_DN}
           users_filter: "(&({username_attribute}={input})(objectClass=*))"
@@ -165,3 +166,7 @@ spec:
       kind: Secret
       name: authelia
       valuesKey: MAIL_APP_PASSWORD
+    - targetPath: authentication_backend.ldap.mail_attribute
+      kind: Secret
+      name: authelia
+      valuesKey: MAIL_USERNAME
