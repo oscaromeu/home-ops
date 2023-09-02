@@ -67,6 +67,10 @@ spec:
           users_filter: "(&({username_attribute}={input})(objectClass=*))"
           groups_filter: "(&(member={dn})(objectclass=groupOfNames))"
 
+        storage:
+          postgres:
+            schema: ""
+
         file:
           enabled: false
           path: /config/users_database.yml
