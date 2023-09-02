@@ -60,6 +60,7 @@ spec:
       #  - pod
       #  - container
       #  - volume
+
       - module: prometheus
         period: 60s
         hosts: ["kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"]
@@ -350,10 +351,10 @@ spec:
             params:
               query: "sum without (container,endpoint,host,namespace,pod,job,instance,service) (elasticsearch_data_stream_store_size_bytes{job=\"prometheus-elasticsearch-exporter\"})"
 
-
     processors:
     - add_cloud_metadata: {}
     - add_host_metadata: {}
+
   daemonSet:
     podTemplate:
       spec:
