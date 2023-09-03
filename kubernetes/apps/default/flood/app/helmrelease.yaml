@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -37,9 +36,9 @@ spec:
       FLOOD_OPTION_RUNDIR: /data
       FLOOD_OPTION_AUTH: "none"
       FLOOD_OPTION_QBURL: "http://qbittorrent.default.svc.cluster.local.:8080"
-    envFrom:
-      - secretRef:
-          name: flood-secret
+    #envFrom:
+    #  - secretRef:
+    #      name: flood-secret
     service:
       main:
         ports:
