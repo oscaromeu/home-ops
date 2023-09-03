@@ -65,7 +65,8 @@ spec:
       data:
         enabled: true
         type: hostPath
-        mountPath: /home/pi/Downloads/lidarr
+        hostPath: /home/pi/Downloads/lidarr
+        mountPath: /downloads
     resources:
       requests:
         cpu: 10m
