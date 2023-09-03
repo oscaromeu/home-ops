@@ -89,11 +89,13 @@ spec:
       downloads:
         enabled: true
         type: hostPath
+        hostPathType: Directory
         #path: /home/pi/Downloads/torrent
         mountPath: /home/pi/Downloads/torrent
       video-qbittorrent:
         enabled: true
         type: hostPath
+        hostPathType: Directory
         #path: /home/pi/Downloads/torrent
         mountPath: /home/pi/Downloads/torrent
     resources:
