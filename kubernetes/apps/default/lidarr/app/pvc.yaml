@@ -11,16 +11,3 @@ spec:
     requests:
       storage: 100Mi
   storageClassName: local-path
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: data
-  namespace: default
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Gi
-  storageClassName: longhorn

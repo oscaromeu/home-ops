@@ -88,14 +88,14 @@ spec:
         mountPath: /config
       downloads:
         enabled: true
-        existingClaim: qbittorrent-downloads
-        path: /mnt/storage/downloads
-        mountPath: /mnt/storage/downloads
+        type: hostPath
+        path: /home/pi/Downloads/torrent
+        mountPath: /home/pi/Downloads/torrent
       video-qbittorrent:
         enabled: true
-        existingClaim: qbittorrent-video-qbittorrent
-        path: /mnt/storage/video/.qbittorrent
-        mountPath: /mnt/storage/video/.qbittorrent
+        type: hostPath
+        path: /home/pi/Downloads/torrent
+        mountPath: /home/pi/Downloads/torrent
     resources:
       requests:
         cpu: 500m

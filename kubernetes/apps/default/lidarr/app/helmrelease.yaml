@@ -64,9 +64,9 @@ spec:
         existingClaim: config
       data:
         enabled: true
-        existingClaim: data
-        mountPath: /data
-        readOnly: false
+        type: hostPath
+        path: /home/pi/Downloads/lidarr
+        mountPath: /home/pi/Downloads/lidarr
     resources:
       requests:
         cpu: 10m

@@ -11,29 +11,3 @@ spec:
   resources:
     requests:
       storage: 100Mi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: qbittorrent-downloads
-  namespace: default
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: longhorn
-  resources:
-    requests:
-      storage: 100Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: qbittorrent-video-qbittorrent
-  namespace: default
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: longhorn
-  resources:
-    requests:
-      storage: 10Gi
