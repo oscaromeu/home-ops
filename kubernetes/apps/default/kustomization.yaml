@@ -5,6 +5,7 @@ resources:
   - ./namespace.yaml
   #- ./default-app/ks.yaml
   #- ./excalidraw/ks.yaml
+  - ./flood/ks.yaml
   #- ./hajimari/ks.yaml
   - ./lidarr/ks.yaml
   - ./linkding/ks.yaml
