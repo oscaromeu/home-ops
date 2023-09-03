@@ -37,6 +37,9 @@ spec:
       - secretRef:
           name: *app
 
+    env:
+      TZ: "${TIMEZONE}"
+
     # TODO: fix chown on mounted directory
     # https://github.com/sissbruecker/linkding/issues/145
     persistence:
