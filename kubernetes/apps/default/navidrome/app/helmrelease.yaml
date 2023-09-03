@@ -52,16 +52,15 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "nginx"
+        ingressClassName: external
         annotations:
-          external-dns.home.arpa/enabled: "true"
           hajimari.io/icon: mdi:music
           hajimari.io/group: "media"
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: &host navidrome.${SECRET_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
