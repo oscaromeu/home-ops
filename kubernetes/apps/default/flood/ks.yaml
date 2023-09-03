@@ -8,7 +8,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-qbittorrent-app
+    - name: cluster-apps-qbittorrent
   path: ./kubernetes/apps/default/flood/app
   prune: true
   sourceRef:
