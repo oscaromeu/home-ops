@@ -10,4 +10,4 @@ resources:
   - ./linkding/ks.yaml
   - ./navidrome/ks.yaml
   #- ./podinfo/ks.yaml
-  #- ./qbittorrent/ks.yaml
+  - ./qbittorrent/ks.yaml
