@@ -94,11 +94,11 @@ spec:
         hostPath: /home/pi/Downloads/torrent
         mountPath: /downloads
       video-qbittorrent:
-        enabled: true
+        enabled: false
         type: hostPath
         hostPathType: Directory
         hostPath: /home/pi/Downloads/torrent
-        mountPath: /downloads
+        mountPath: /downloads/video
     resources:
       requests:
         cpu: 500m
