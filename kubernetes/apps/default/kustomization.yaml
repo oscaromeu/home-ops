@@ -8,4 +8,5 @@ resources:
   #- ./hajimari/ks.yaml
   - ./lidarr/ks.yaml
   - ./linkding/ks.yaml
+  - ./navidrome/ks.yaml
   #- ./podinfo/ks.yaml

@@ -1,0 +1,93 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app navidrome
+  namespace: default
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    image:
+      repository: ghcr.io/navidrome/navidrome
+      tag: 0.49.3
+    env:
+      TZ: "${TIMEZONE}"
+      ND_DATAFOLDER: /config
+      ND_ENABLEGRAVATAR: "true"
+      ND_LOGLEVEL: info
+      ND_MUSICFOLDER: /mnt/storage/music/Artistes
+      ND_PORT: &port 8080
+      ND_PROMETHEUS_ENABLED: "true"
+      ND_REVERSEPROXYUSERHEADER: "Remote-User"
+      ND_REVERSEPROXYWHITELIST: "0.0.0.0/0"
+      ND_SCANSCHEDULE: "@every 1h"
+      ND_SESSIONTIMEOUT: 24h
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+    serviceMonitor:
+      main:
+        enabled: true
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "nginx"
+        annotations:
+          external-dns.home.arpa/enabled: "true"
+          hajimari.io/icon: mdi:music
+          hajimari.io/group: "media"
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_CLUSTER}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups:
+        - 100
+    persistence:
+      config:
+        enabled: true
+        existingClaim: navidrome-config
+      music:
+        enabled: true
+        existingClaim: navidrome-data
+        path: /mnt/storage/music
+        mountPath: /mnt/storage/music
+        readOnly: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 250Mi
+      limits:
+        memory: 750Mi

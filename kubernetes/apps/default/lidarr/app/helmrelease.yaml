@@ -12,7 +12,7 @@ spec:
       chart: app-template
       sourceRef:
         kind: HelmRepository
-        name: bjw-s-charts
+        name: bjw-s
         namespace: flux-system
       interval: 5m
   install:
@@ -43,7 +43,6 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "music-box"
           hajimari.io/group: "media"
-          auth.home.arpa/enabled: "true"
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
