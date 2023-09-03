@@ -65,7 +65,6 @@ spec:
       data:
         enabled: true
         type: hostPath
-        path: /home/pi/Downloads/lidarr
         mountPath: /home/pi/Downloads/lidarr
     resources:
       requests:
