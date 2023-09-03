@@ -115,6 +115,7 @@ spec:
           - longhorn.${SECRET_DOMAIN}
           - lidarr.${SECRET_DOMAIN}
           - navidrome.${SECRET_DOMAIN}
+          - qbittorent.${SECRET_DOMAIN}
           #Applications with built-in auth
           - argocd.${SECRET_DOMAIN}
           - minio.${SECRET_DOMAIN}
