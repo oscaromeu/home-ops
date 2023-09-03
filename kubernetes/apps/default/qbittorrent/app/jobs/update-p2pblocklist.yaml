@@ -1,0 +1,40 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: &app qbittorrent-upgrade-p2pblocklist
+  namespace: default
+spec:
+  schedule: "@daily"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: *app
+        spec:
+          serviceAccountName: jobs
+          containers:
+            - name: *app
+              image: ghcr.io/auricom/kubectl:1.28.1@sha256:af0bd42480bdc9a0106bef1b90650d523570acd746be8aae6bfb6960ff052195
+              imagePullPolicy: IfNotPresent
+              command:
+                - "/bin/bash"
+                - "-c"
+                - |
+                  #!/bin/bash
+
+                  set -o errexit
+                  set -o nounset
+
+                  curl --silent --location https://github.com/DavidMoore/ipfilter/releases/download/lists/ipfilter.dat.gz --output /tmp/ipfilter.dat.gz
+                  gunzip /tmp/ipfilter.dat.gz
+                  result=$(kubectl get pod --selector app.kubernetes.io/name=qbittorrent --output custom-columns=:metadata.name --namespace default)
+                  QBITTORRENT_POD=$(echo $result | awk '{ print $NF }')
+                  if [[ $QBITTORRENT_POD == *"qbittorrent"* ]]; then
+                    kubectl cp /tmp/ipfilter.dat default/$QBITTORRENT_POD:/config/ipfilter.dat
+                    kubectl rollout restart deployment qbittorrent --namespace default
+                  else
+                    echo "qbittorrent deployment not found"
+                    exit 1
+                  fi
+          restartPolicy: Never
