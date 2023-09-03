@@ -99,20 +99,27 @@ spec:
           networks:
           - private
         # Applications without auth
-        - policy: two_factor
-          domain:
-          - longhorn.${SECRET_DOMAIN}
-         #Applications with built-in auth
-        - policy: one_factor
-          domain:
-          - grafana.${SECRET_DOMAIN}
-          # - rancher.${SECRET_DOMAIN}
+        #- policy: two_factor
+        #  domain:
+        #  - longhorn.${SECRET_DOMAIN}
+        # Applications with built-in auth
+        #- policy: one_factor
+        #  domain:
+        #  - grafana.${SECRET_DOMAIN}
         # Applications without auth but low security requirements
         - policy: one_factor
           domain:
           - prometheus.${SECRET_DOMAIN}
-          - goldilocks.${SECRET_DOMAIN}
           - status.${SECRET_DOMAIN}
+          - tekton.${SECRET_DOMAIN}
+          - longhorn.${SECRET_DOMAIN}
+          #Applications with built-in auth
+          - argocd.${SECRET_DOMAIN}
+          - minio.${SECRET_DOMAIN}
+          - link.${SECRET_DOMAIN}
+          - grafana.${SECRET_DOMAIN}
+          - kibana.${SECRET_DOMAIN}
+          - elastic.${SECRET_DOMAIN}
       session:
         name: authelia_session
         same_site: lax
