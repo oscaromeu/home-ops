@@ -1,0 +1,11 @@
+logs-k3s_prod-cert-manager
+logs-k3s_prod-datahub
+logs-k3s_prod-dev
+logs-k3s_prod-flux-system
+logs-k3s_prod-kube-system
+logs-k3s_prod-kyverno
+logs-k3s_prod-longhorn
+logs-k3s_prod-networking
+logs-k3s_prod-tekton-chains
+logs-k3s_prod-tekton-pipelines
+logs-k3s_prod-tekton-pipelines-resolvers
