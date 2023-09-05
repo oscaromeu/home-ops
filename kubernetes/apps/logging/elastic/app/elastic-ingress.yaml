@@ -2,7 +2,7 @@
  kind: Ingress
  metadata:
    annotations:
-    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+    #external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
     nginx.ingress.kubernetes.io/backend-protocol: HTTPS
     hajimari.io/enable: "true"
     hajimari.io/icon: simple-icons:elasticsearch
@@ -13,7 +13,7 @@
    name: elastic
    namespace: logging
  spec:
-   ingressClassName: external
+   ingressClassName: internal
    rules:
    - host: "elastic.${SECRET_DOMAIN}"
      http:
