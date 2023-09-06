@@ -31,10 +31,10 @@ spec:
       existingClaim: registry
     replicaCount: 1
     ingress:
-      annotations:
-        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+      #annotations:
+      #  external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
       enabled: true
-      className: external
+      className: internal
       hosts:
         - "registry.${SECRET_DOMAIN}"
       tls:
