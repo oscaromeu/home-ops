@@ -1,8 +1,8 @@
 #!/bin/bash
 
-ZONE_ID="25ccc3c437cf8f7e516110cf942c2b10"
-AUTH_EMAIL="oscaromeu@gmail.com"
-AUTH_KEY="b1b66a7f16f17cde4d3eefa18e42c8e825c55"
+ZONE_ID="${ZONE_ID}"
+AUTH_EMAIL="${AUTH_EMAIL}"
+AUTH_KEY="${AUTH_KEY}"
 
 # Get the DNS record IDs
 record_ids=$(curl -s --request GET \
