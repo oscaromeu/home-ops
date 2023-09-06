@@ -27,6 +27,7 @@ resources:
   - ./jetstack.yaml
   - ./jupyter.yaml
   - ./k8s-gateway.yaml
+  - ./kafka.yaml
   - ./kubernetes-dashboard.yaml
   - ./kyverno.yaml
   - ./longhorn.yaml
