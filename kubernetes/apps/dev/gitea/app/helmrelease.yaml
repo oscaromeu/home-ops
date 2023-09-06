@@ -43,9 +43,9 @@ spec:
 
     ingress:
       enabled: true
-      className: external
+      className: internal
       annotations:
-        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        #external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         hajimari.io/icon: pajamas:gitea
       hosts:
         - host: &host "git.${SECRET_DOMAIN}"

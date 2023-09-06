@@ -2,18 +2,18 @@
  kind: Ingress
  metadata:
    annotations:
-    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+    #external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
     nginx.ingress.kubernetes.io/backend-protocol: HTTPS
     hajimari.io/enable: "true"
     hajimari.io/icon: simple-icons:kibana
-    nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
-    nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
+    #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
+    #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
    labels:
      app: elk
    name: kibana
    namespace: logging
  spec:
-   ingressClassName: external
+   ingressClassName: internal
    rules:
    - host: &host "kibana.${SECRET_DOMAIN}"
      http:
