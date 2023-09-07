@@ -81,5 +81,5 @@ nav:
     - Ops & Sec Metrics:
       - 02-docs/metrics/index.md
 
-  - Troubleshooting:
-    - 03-troubleshooting/index.md
+  - Tools:
+    - 03-tools/elastic/README.md
