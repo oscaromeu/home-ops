@@ -83,8 +83,3 @@ nav:
 
   - Troubleshooting:
     - 03-troubleshooting/index.md
-
-  - Runbooks:
-    - Alertmanager:
-      - 04-runbooks/alertmanager/AlertmanagerClusterCrashlooping.md
-      - 04-runbooks/alertmanager/AlertmanagerClusterDown.md
