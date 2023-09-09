@@ -11,6 +11,7 @@ resources:
   - ./calico.yaml
   - ./cilium.yaml
   - ./cloudnative-pg.yaml
+  - ./coredns.yaml
   - ./crossplane.yaml
   - ./deliveryhero.yaml
   - ./descheduler.yaml
