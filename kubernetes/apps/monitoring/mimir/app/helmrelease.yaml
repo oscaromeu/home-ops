@@ -243,6 +243,7 @@ spec:
             redis:
               endpoint: redis://redis-master.datahub.svc.cluster.local:6379
               db: 2
+
         ruler_storage:
           backend: s3
           s3:
