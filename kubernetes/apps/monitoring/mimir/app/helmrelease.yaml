@@ -216,7 +216,11 @@ spec:
           s3:
             insecure: true
 
+        # Blocks storage requires a prefix when using a common object storage bucket.
         blocks_storage:
+          storage_prefix: blocks
+          tsdb:
+            dir: /data/ingester
           backend: s3
           s3:
             insecure: true
