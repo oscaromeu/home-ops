@@ -69,8 +69,7 @@ spec:
       metrics:
         enabled: true
       buckets:
-        - name: mimir-ruler
-        - name: mimir-tsdb
+        - name: loki-bucket-v2
       ## List of secret names to use for generating MinIO users during tenant provisioning
       users:
         - name: admin-user-secret
