@@ -65,11 +65,11 @@ spec:
       metrics:
         enabled: true
       buckets:
-        - mimir-ruler
-        - mimir-tsdb
+        - name: mimir-ruler
+        - name: mimir-tsdb
       ## List of secret names to use for generating MinIO users during tenant provisioning
       users:
-        - admin-user-secret
+        - name: admin-user-secret
 
       env:
         - name: MINIO_PROMETHEUS_URL
