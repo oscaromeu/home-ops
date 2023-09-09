@@ -66,6 +66,7 @@ spec:
         type: s3
         s3:
           #endpoint: http://minio.logging.svc.cluster.local:9000/logs
+          s3: http://minio.logging.svc.cluster.local:9000
           region: "eu-west-1"
           s3ForcePathStyle: true
           insecure: true
