@@ -33,6 +33,7 @@ resources:
   - ./longhorn.yaml
   - ./metallb.yaml
   - ./metrics-server.yaml
+  - ./minio-operator.yaml
   - ./minio.yaml
   - ./mongodb.yaml
   - ./node-feature-discovery.yaml
