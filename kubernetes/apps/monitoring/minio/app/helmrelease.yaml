@@ -28,6 +28,7 @@ spec:
     secrets:
       existingSecret: monitoring-tenant-env-configuration
     tenant:
+      name: monitoring
       configuration:
         name: monitoring-tenant-env-configuration
       pools:
