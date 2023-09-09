@@ -26,8 +26,10 @@ spec:
     keepHistory: false
   values:
     secrets:
-      existingSecret: monitoring-tenant-secret
+      existingSecret: monitoring-tenant-env-configuration
     tenant:
+      configuration:
+        name: monitoring-tenant-env-configuration
       pools:
         - servers: 2
           name: pool-0
