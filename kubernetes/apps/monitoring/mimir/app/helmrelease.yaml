@@ -220,21 +220,22 @@ spec:
           backend: s3
           s3:
             insecure: true
-          chunks_cache:
-            backend: redis
-            redis:
-              endpoint: redis://redis-master.datahub.svc.cluster.local:6379
-              db: 2
-          index_cache:
-            backend: redis
-            redis:
-              endpoint: redis://redis-master.datahub.svc.cluster.local:6379
-              db: 2
-          metadata_cache:
-            backend: redis
-            redis:
-              endpoint: redis://redis-master.datahub.svc.cluster.local:6379
-              db: 2
+          bucket_store:
+            chunks_cache:
+              backend: redis
+              redis:
+                endpoint: redis://redis-master.datahub.svc.cluster.local:6379
+                db: 2
+            index_cache:
+              backend: redis
+              redis:
+                endpoint: redis://redis-master.datahub.svc.cluster.local:6379
+                db: 2
+            metadata_cache:
+              backend: redis
+              redis:
+                endpoint: redis://redis-master.datahub.svc.cluster.local:6379
+                db: 2
 
         frontend:
           cache_results: true
