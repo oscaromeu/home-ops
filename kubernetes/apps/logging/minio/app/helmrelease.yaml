@@ -34,12 +34,12 @@ spec:
       pools:
         - servers: 2
           name: pool-0
+          storageClassName: local-path
           volumesPerServer: 2
           volumeClaimTemplate:
             metadata:
               name: data
             spec:
-              storageClassName: local-path
               accessModes:
                 - ReadWriteOnce
               resources:

@@ -34,6 +34,7 @@ spec:
       pools:
         - servers: 2
           name: pool-0
+          storageClassName: local-path
           volumesPerServer: 2
           volumeClaimTemplate:
             metadata:
