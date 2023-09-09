@@ -116,12 +116,3 @@ spec:
         path: /
         pathType: Prefix
 
-  valuesFrom:
-    - targetPath: secrets.accessKey
-      name: logging-tenant-env-configuration
-      kind: Secret
-      valuesKey: accessKey
-    - targetPath: secrets.secretKey
-      name: logging-tenant-env-configuration
-      kind: Secret
-      valuesKey: secretKey
