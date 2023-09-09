@@ -116,3 +116,13 @@ spec:
               - *host
         path: /
         pathType: Prefix
+
+  valuesFrom:
+    - targetPath: secrets.accessKey
+      name: monitoring-tenant-env-configuration
+      kind: Secret
+      valuesKey: accessKey
+    - targetPath: secrets.secretKey
+      name: monitoring-tenant-env-configuration
+      kind: Secret
+      valuesKey: secretKey
