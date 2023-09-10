@@ -220,7 +220,7 @@ spec:
         blocks_storage:
           storage_prefix: blocks
           tsdb:
-            dir: /data/ingester
+            dir: /data/tsdb
           backend: s3
           s3:
             insecure: true
