@@ -233,17 +233,17 @@ spec:
             chunks_cache:
               backend: redis
               redis:
-                endpoint: redis://redis-master.datahub.svc.cluster.local:6379
+                endpoint: redis-master.datahub.svc.cluster.local:6379
                 db: 2
             index_cache:
               backend: redis
               redis:
-                endpoint: redis://redis-master.datahub.svc.cluster.local:6379
+                endpoint: redis-master.datahub.svc.cluster.local:6379
                 db: 2
             metadata_cache:
               backend: redis
               redis:
-                endpoint: redis://redis-master.datahub.svc.cluster.local:6379
+                endpoint: redis-master.datahub.svc.cluster.local:6379
                 db: 2
 
         frontend:
@@ -251,7 +251,7 @@ spec:
           results_cache:
             backend: redis
             redis:
-              endpoint: redis://redis-master.datahub.svc.cluster.local:6379
+              endpoint: redis-master.datahub.svc.cluster.local:6379
               db: 2
 
         ruler_storage:
