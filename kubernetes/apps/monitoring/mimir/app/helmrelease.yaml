@@ -215,6 +215,8 @@ spec:
           backend: s3
           s3:
             insecure: true
+            http:
+              insecure_skip_verify: true
 
         # Blocks storage requires a prefix when using a common object storage bucket.
         blocks_storage:
@@ -224,6 +226,9 @@ spec:
           backend: s3
           s3:
             insecure: false
+            http:
+              insecure_skip_verify: true
+
           bucket_store:
             chunks_cache:
               backend: redis
@@ -253,6 +258,8 @@ spec:
           backend: s3
           s3:
             insecure: false
+            http:
+              insecure_skip_verify: true
         limits:
           compactor_blocks_retention_period: 90d
           max_label_names_per_series: 120
