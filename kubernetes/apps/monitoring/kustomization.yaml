@@ -8,7 +8,6 @@ resources:
   - ./grafana/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
-  - ./metricbeat/ks.yaml
   - ./mimir/ks.yaml
   - ./minio/ks.yaml
   - ./node-problem-detector/ks.yaml
