@@ -5,6 +5,8 @@ metadata:
   name: cluster-apps-tekton
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: cluster-apps-nginx-internal
   path: ./kubernetes/apps/tekton-pipelines/tekton/app
   prune: true
   sourceRef:
