@@ -66,10 +66,11 @@ spec:
         type: s3
         s3:
           #endpoint: http://minio.logging.svc.cluster.local:9000/logs
-          s3: http://minio.logging.svc.cluster.local:9000
-          region: "eu-west-1"
+          s3: minio.logging-hl.svc.cluster.local:9000
           s3ForcePathStyle: true
-          insecure: true
+          insecure: false
+          http_config:
+            insecure_skip_verify: true
         bucketNames:
           chunks: loki-bucket-v2
           ruler: loki-bucket-v2
