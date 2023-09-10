@@ -5,7 +5,7 @@ metadata:
   name: monitoring-tenant
   namespace: monitoring
 spec:
-  interval: 12h
+  interval: 5m
   maxHistory: 2
   chart:
     spec:
