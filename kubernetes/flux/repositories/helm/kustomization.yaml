@@ -2,19 +2,58 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - ./actions-runner-controller.yaml
+  - ./authelia.yaml
+  - ./backube.yaml
   - ./bitnami.yaml
   - ./bjw-s.yaml
+  - ./botkube.yaml
+  - ./calico.yaml
   - ./cilium.yaml
+  - ./cloudnative-pg.yaml
   - ./coredns.yaml
+  - ./crossplane.yaml
   - ./csi-driver-nfs.yaml
+  - ./deliveryhero.yaml
+  - ./descheduler.yaml
   - ./external-dns.yaml
+  - ./external-secrets.yaml
+  - ./fairwinds.yaml
+  - ./gitea.yaml
   - ./grafana.yaml
   - ./hajimari.yaml
+  - ./harbor.yaml
+  - ./influxdata.yaml
   - ./ingress-nginx.yaml
+  - ./istio.yaml
   - ./jetstack.yaml
+  - ./jupyter.yaml
   - ./k8s-gateway.yaml
+  - ./kafka.yaml
   - ./kubernetes-dashboard.yaml
+  - ./kyverno.yaml
+  - ./longhorn.yaml
+  - ./metallb.yaml
   - ./metrics-server.yaml
+  - ./minio-operator.yaml
+  - ./minio.yaml
+  - ./mongodb.yaml
+  - ./node-feature-discovery.yaml
+  - ./passbolt.yaml
+  - ./piraeus.yaml
+  - ./podinfo.yaml
   - ./prometheus-community.yaml
+  - ./pyroscope.yaml
+  - ./questdb.yaml
+  - ./robusta.yaml
+  - ./rook-ceph.yaml
+  - ./sloth.yaml
   - ./stakater.yaml
+  - ./tf-controller.yaml
+  - ./timescale.yaml
+  - ./twuni.yaml
+  - ./vector.yaml
+  - ./vm.yaml
+  - ./vmware.yaml
   - ./weave-gitops.yaml
+  - ./woodpecker.yaml
