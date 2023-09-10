@@ -9,6 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-nginx-internal
+    - name: cluster-apps-external-secrets
   path: ./kubernetes/apps/minio/operator/app
   prune: true
   sourceRef:
