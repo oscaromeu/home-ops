@@ -10,6 +10,7 @@ spec:
   dependsOn:
     #- name: cluster-apps-nginx-external
     - name: cluster-apps-kube-prometheus-stack
+    - name: cluster-apps-minio-logging-tenant
   path: ./kubernetes/apps/logging/loki/app
   prune: true
   sourceRef:
