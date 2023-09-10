@@ -5,7 +5,7 @@ ES_URL="${ES_URL}"
 
 # Define the Elasticsearch credentials
 ES_USER="${ES_USER}"
-ES_PASS=$(gopass show -o personal/homeops/logging/elastic)
+ES_PASS=${ES_PASS}
 
 # Get the JSON file path from the command-line argument
 JSON_FILE="$1"

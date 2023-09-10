@@ -223,7 +223,7 @@ spec:
             dir: /data/tsdb
           backend: s3
           s3:
-            insecure: true
+            insecure: false
           bucket_store:
             chunks_cache:
               backend: redis
@@ -252,7 +252,7 @@ spec:
         ruler_storage:
           backend: s3
           s3:
-            insecure: true
+            insecure: false
         limits:
           compactor_blocks_retention_period: 90d
           max_label_names_per_series: 120
