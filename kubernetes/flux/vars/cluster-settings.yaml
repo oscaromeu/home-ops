@@ -5,7 +5,7 @@ metadata:
   name: cluster-settings
   namespace: flux-system
 data:
-  TIMEZONE: "Europe/Madrid"
+  TIMEZONE: "Etc/UTC"
   COREDNS_ADDR: "10.43.0.10"
   KUBE_VIP_ADDR: "192.168.1.154"
   CLUSTER_CIDR: "10.42.0.0/16"

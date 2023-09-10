@@ -5,7 +5,7 @@ kubernetes:
       hosts:
         lbpkm1:
           ansible_user: pi
-          ansible_host: 192.168.1.51
+          ansible_host: 192.168.1.52
     worker:
       hosts:
         lbpkw1:
