@@ -16,4 +16,4 @@ resources:
   - ./sloth/ks.yaml
   #- ./stackdriver-exporter/ks.yaml
   - ./tempo/ks.yaml
-  #- ./vpa/ks.yaml
+   #./vpa/ks.yaml
