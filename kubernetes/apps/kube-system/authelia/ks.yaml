@@ -9,6 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
+    - name: cluster-apps-redis
   path: ./kubernetes/apps/kube-system/authelia/app
   prune: true
   sourceRef:

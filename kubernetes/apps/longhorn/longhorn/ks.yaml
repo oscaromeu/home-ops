@@ -8,7 +8,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-nginx-external
+    - name: cluster-apps-nginx-internal
   path: ./kubernetes/apps/longhorn/longhorn/app
   prune: true
   sourceRef:
