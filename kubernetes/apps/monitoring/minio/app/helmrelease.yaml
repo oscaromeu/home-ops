@@ -72,6 +72,7 @@ spec:
       buckets:
         - name: mimir-ruler
         - name: mimir-tsdb
+        - name: grafana-pyroscope-data
       ## List of secret names to use for generating MinIO users during tenant provisioning
       users:
         - name: admin-user-secret
