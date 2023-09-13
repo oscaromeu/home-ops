@@ -72,7 +72,7 @@ spec:
             limits:
               memory: 16Gi
             requests:
-              memory: 8Gi
+              memory: 1Gi
               cpu: 100m
         store-gateway:
           kind: StatefulSet
@@ -85,7 +85,7 @@ spec:
             limits:
               memory: 16Gi
             requests:
-              memory: 8Gi
+              memory: 1Gi
               cpu: 100m
       persistence:
         enabled: false
