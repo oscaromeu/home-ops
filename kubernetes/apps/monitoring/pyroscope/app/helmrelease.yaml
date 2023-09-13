@@ -96,8 +96,6 @@ spec:
         storage:
           backend: s3
           s3:
-            endpoint: ""
-            bucket_name: grafana-pyroscope-data
             insecure: false
             http:
               insecure_skip_verify: true
