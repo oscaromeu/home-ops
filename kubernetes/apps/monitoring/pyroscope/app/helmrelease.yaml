@@ -88,7 +88,7 @@ spec:
               memory: 8Gi
               cpu: 1
       persistence:
-        enabled: true
+        enabled: false
         accessModes:
           - ReadWriteOnce
         size: 10Gi
@@ -96,6 +96,8 @@ spec:
         storage:
           backend: s3
           s3:
+            endpoint: ""
+            bucket_name: grafana-pyroscope-data
             insecure: false
             http:
               insecure_skip_verify: true
