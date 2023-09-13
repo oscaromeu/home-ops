@@ -47,12 +47,6 @@ spec:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
-          profiles.grafana.com/memory.scrape: "true"
-          profiles.grafana.com/memory.port: "8080"
-          profiles.grafana.com/cpu.scrape: "true"
-          profiles.grafana.com/cpu.port: "8080"
-          profiles.grafana.com/goroutine.scrape: "true"
-          profiles.grafana.com/goroutine.port: "8080"
         hosts:
           - &host "alertmanager.${SECRET_DOMAIN}"
         paths:
@@ -152,6 +146,13 @@ spec:
             regex: "(apiserver_audit|apiserver_client|apiserver_delegated|apiserver_envelope|apiserver_storage|apiserver_webhooks|authenticated_user|authentication|disabled_metric|go|hidden_metric|kubernetes_build|kubernetes_feature|leader_election|process_cpu|process_max|process_open|process_resident|process_start|process_virtual|registered_metric|rest_client|scheduler|scrape_duration|scrape_samples|scrape_series|workqueue)_(.+)"
             action: keep
     prometheus:
+      annotations:
+        profiles.grafana.com/memory.scrape: "true"
+        profiles.grafana.com/memory.port: "8080"
+        profiles.grafana.com/cpu.scrape: "true"
+        profiles.grafana.com/cpu.port: "8080"
+        profiles.grafana.com/goroutine.scrape: "true"
+        profiles.grafana.com/goroutine.port: "8080"
       ingress:
         enabled: true
         ingressClassName: internal
