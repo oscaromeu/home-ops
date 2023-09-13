@@ -169,11 +169,11 @@ spec:
         podMetadata:
           annotations:
             profiles.grafana.com/memory.scrape: "true"
-            profiles.grafana.com/memory.port: "8080"
+            profiles.grafana.com/memory.port: "9090"
             profiles.grafana.com/cpu.scrape: "true"
-            profiles.grafana.com/cpu.port: "8080"
+            profiles.grafana.com/cpu.port: "9090"
             profiles.grafana.com/goroutine.scrape: "true"
-            profiles.grafana.com/goroutine.port: "8080"
+            profiles.grafana.com/goroutine.port: "9090"
         scrapeInterval: 60s
         replicas: 1
         externalLabels:
