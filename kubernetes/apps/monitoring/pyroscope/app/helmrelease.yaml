@@ -85,7 +85,7 @@ spec:
             limits:
               memory: 16Gi
             requests:
-              memory: 1Gi
+              memory: 100Mi
               cpu: 100m
       persistence:
         enabled: false
