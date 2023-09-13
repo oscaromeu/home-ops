@@ -95,10 +95,7 @@ spec:
             editable: true
           - name: Pyroscope
             type: pyroscope
-            access: proxy
             url: http://pyroscope-querier.monitoring.svc.cluster.local:4040
-            jsonData:
-              maxLines: 250
     sidecar:
       dashboards:
         enabled: true
