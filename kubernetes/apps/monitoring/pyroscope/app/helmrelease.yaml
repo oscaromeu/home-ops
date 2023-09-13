@@ -1,0 +1,125 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: pyroscope
+  namespace: monitoring
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: pyroscope
+      version: 1.0.1
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    pyroscope:
+      components:
+        querier:
+          kind: Deployment
+          replicaCount: 3
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              memory: 256Mi
+              cpu: 1
+        query-frontend:
+          kind: Deployment
+          replicaCount: 2
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              memory: 256Mi
+              cpu: 100m
+        query-scheduler:
+          kind: Deployment
+          replicaCount: 2
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              memory: 256Mi
+              cpu: 100m
+        distributor:
+          kind: Deployment
+          replicaCount: 2
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              memory: 256Mi
+              cpu: 500m
+        ingester:
+          kind: StatefulSet
+          replicaCount: 3
+          terminationGracePeriodSeconds: 600
+          resources:
+            limits:
+              memory: 16Gi
+            requests:
+              memory: 8Gi
+              cpu: 1
+        store-gateway:
+          kind: StatefulSet
+          replicaCount: 3
+          persistence:
+          # The store-gateway needs not need persistent storage, but we still run it as a StatefulSet
+          # This is to avoid having blocks of data being
+            enabled: false
+          resources:
+            limits:
+              memory: 16Gi
+            requests:
+              memory: 8Gi
+              cpu: 1
+      persistence:
+        enabled: true
+        accessModes:
+          - ReadWriteOnce
+        size: 10Gi
+      structuredConfig:
+        storage:
+          backend: s3
+          s3:
+            endpoint: ""
+            bucket_name: grafana-pyroscope-data
+            access_key_id:
+            secret_access_key:
+            insecure: false
+            http:
+              insecure_skip_verify: true
+    minio:
+      enabled: false
+
+  valuesFrom:
+    - targetPath: pyroscope.structuredConfig.storage.s3.bucket_name
+      name: grafana-pyroscope-data
+      kind: Secret
+      valuesKey: BUCKET_NAME
+    - targetPath: pyroscope.structuredConfig.storage.s3.endpoint
+      name: grafana-pyroscope-data
+      kind: Secret
+      valuesKey: BUCKET_HOST
+    - targetPath: pyroscope.structuredConfig.storage.s3.access_key_id
+      name: minio-access-key-id
+      kind: Secret
+      valuesKey: AWS_ACCESS_KEY_ID
+    - targetPath: pyroscope.structuredConfig.storage.s3.secret_access_key
+      name: minio-secret-key
+      kind: Secret
+      valuesKey: AWS_SECRET_ACCESS_KEY
