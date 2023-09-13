@@ -36,7 +36,7 @@ spec:
               memory: 1Gi
             requests:
               memory: 256Mi
-              cpu: 1
+              cpu: 100m
         query-frontend:
           kind: Deployment
           replicaCount: 2
@@ -63,7 +63,7 @@ spec:
               memory: 1Gi
             requests:
               memory: 256Mi
-              cpu: 500m
+              cpu: 100m
         ingester:
           kind: StatefulSet
           replicaCount: 3
@@ -73,7 +73,7 @@ spec:
               memory: 16Gi
             requests:
               memory: 8Gi
-              cpu: 1
+              cpu: 100m
         store-gateway:
           kind: StatefulSet
           replicaCount: 3
@@ -86,7 +86,7 @@ spec:
               memory: 16Gi
             requests:
               memory: 8Gi
-              cpu: 1
+              cpu: 100m
       persistence:
         enabled: false
         accessModes:
