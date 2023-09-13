@@ -47,6 +47,12 @@ spec:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
           nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
+          profiles.grafana.com/memory.scrape: "true"
+          profiles.grafana.com/memory.port: "8080"
+          profiles.grafana.com/cpu.scrape: "true"
+          profiles.grafana.com/cpu.port: "8080"
+          profiles.grafana.com/goroutine.scrape: "true"
+          profiles.grafana.com/goroutine.port: "8080"
         hosts:
           - &host "alertmanager.${SECRET_DOMAIN}"
         paths:
