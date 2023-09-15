@@ -7,6 +7,6 @@ resources:
   - ./gitea/ks.yaml
   #- ./kafka/ks.yaml
   - ./registry/ks.yaml
-  - ./spring-boot-app/ks.yaml
+  #- ./spring-boot-app/ks.yaml
   #- ./fastapi-app/ks.yaml
   #- ./tekton
