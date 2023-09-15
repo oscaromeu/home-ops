@@ -43,3 +43,8 @@ spec:
         tls:
           - hosts:
               - *host
+
+    service:
+      main:
+        ports:
+          port: 9122
