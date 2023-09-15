@@ -1,0 +1,131 @@
+NAME: influxdb-exporter
+LAST DEPLOYED: Fri Sep 15 23:07:45 2023
+NAMESPACE: default
+STATUS: pending-install
+REVISION: 1
+TEST SUITE: None
+HOOKS:
+MANIFEST:
+---
+# Source: influxdb-exporter/templates/common.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb-exporter
+  labels:
+    app.kubernetes.io/instance: influxdb-exporter
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: influxdb-exporter
+    app.kubernetes.io/version: v0.11.4
+    helm.sh/chart: influxdb-exporter-1.1.3
+  annotations:
+spec:
+  type: ClusterIP
+  ports:
+  - port: 9122
+    targetPort: 9122
+    protocol: TCP
+    name: http
+  selector:
+    app.kubernetes.io/name: influxdb-exporter
+    app.kubernetes.io/instance: influxdb-exporter
+---
+# Source: influxdb-exporter/templates/common.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb-exporter-udp
+  labels:
+    app.kubernetes.io/instance: influxdb-exporter
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: influxdb-exporter
+    app.kubernetes.io/version: v0.11.4
+    helm.sh/chart: influxdb-exporter-1.1.3
+  annotations:
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 9123
+    targetPort: 9123
+    protocol: UDP
+    name: udp
+  selector:
+    app.kubernetes.io/name: influxdb-exporter
+    app.kubernetes.io/instance: influxdb-exporter
+---
+# Source: influxdb-exporter/templates/common.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: influxdb-exporter
+  labels:
+    app.kubernetes.io/instance: influxdb-exporter
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: influxdb-exporter
+    app.kubernetes.io/version: v0.11.4
+    helm.sh/chart: influxdb-exporter-1.1.3
+spec:
+  revisionHistoryLimit: 3
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: influxdb-exporter
+      app.kubernetes.io/instance: influxdb-exporter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: influxdb-exporter
+        app.kubernetes.io/instance: influxdb-exporter
+    spec:
+
+      serviceAccountName: default
+      automountServiceAccountToken: true
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      containers:
+        - name: influxdb-exporter
+          image: "prom/influxdb-exporter:v0.11.4"
+          imagePullPolicy: IfNotPresent
+          args:
+
+            - --udp.bind-address=0.0.0.0:9123
+          env:
+            - name: TZ
+              value: UTC
+          ports:
+            - name: http
+              containerPort: 9122
+              protocol: TCP
+            - name: udp
+              containerPort: 9123
+              protocol: UDP
+          livenessProbe:
+            tcpSocket:
+              port: 9122
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 9122
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          startupProbe:
+            tcpSocket:
+              port: 9122
+            initialDelaySeconds: 0
+            failureThreshold: 30
+            timeoutSeconds: 1
+            periodSeconds: 5
+
+
+NOTES:
+1. Get the application URL by running these commands:
+  export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/name=influxdb-exporter,app.kubernetes.io/instance=influxdb-exporter" -o jsonpath="{.items[0].metadata.name}")
+  echo "Visit http://127.0.0.1:8080 to use your application"
+  kubectl port-forward $POD_NAME 8080:9122
