@@ -14,6 +14,7 @@ resources:
   - ./coredns.yaml
   - ./crossplane.yaml
   - ./csi-driver-nfs.yaml
+  - ./ddosify.yaml
   - ./deliveryhero.yaml
   - ./descheduler.yaml
   - ./external-dns.yaml
