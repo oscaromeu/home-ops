@@ -1,0 +1,41 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app ddosify
+  namespace: monitoring
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: ddosify
+      version: 1.4.2
+      sourceRef:
+        kind: HelmRepository
+        name: ddosify
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    ingress:
+      enabled: true
+      className: internal
+      annotations:
+        hajimari.io/enable: "false"
+      hosts:
+        - host: &host "ddosify.${SECRET_DOMAIN}"
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - *host
