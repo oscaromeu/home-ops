@@ -29,7 +29,7 @@ spec:
       TARGET_ONE_HOST: app-b
       TARGET_TWO_HOST: app-c
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo.monitoring.svc.cluster.local:4317
-      OTEL_RESOURCE_ATTRIBUTES: service.name= app-a,compose_service=app-a
+      OTEL_RESOURCE_ATTRIBUTES: service.name=app-a,compose_service=app-a
       OTEL_METRICS_EXPORTER: none
       MANAGEMENT_METRICS_TAGS_APPLICATION: app-a
     service:

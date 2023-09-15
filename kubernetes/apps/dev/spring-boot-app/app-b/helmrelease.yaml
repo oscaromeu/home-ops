@@ -23,15 +23,20 @@ spec:
       retries: 5
   values:
     image:
-      repository: ghcr.io/oscaromeu/fastapi-observability
+      repository: ghcr.io/oscaromeu/spring-boot-observability
       tag: v0.1.0
     env:
-      APP_NAME: "app-b"
+      TARGET_ONE_HOST: app-b
+      TARGET_TWO_HOST: app-c
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo.monitoring.svc.cluster.local:4317
+      OTEL_RESOURCE_ATTRIBUTES: "service.name=app-b,compose_service=app-b"
+      OTEL_METRICS_EXPORTER: none
+      MANAGEMENT_METRICS_TAGS_APPLICATION: app-b
     service:
       main:
         ports:
           http:
-            port: &port 8000
+            port: &port 8080
 
     serviceMonitor:
       main:
@@ -42,7 +47,6 @@ spec:
             path: /actuator/prometheus
             interval: 1m
             scrapeTimeout: 10s
-
 
     ingress:
       main:
