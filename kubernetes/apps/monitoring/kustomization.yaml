@@ -4,10 +4,10 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   #- ./blackbox-exporter/ks.yaml
-  #- ./ddosify/ks.yaml
+  - ./ddosify/ks.yaml
   - ./gatus/ks.yaml
   - ./grafana/ks.yaml
-  #- ./influxdb-exporter/ks.yaml
+  - ./influxdb-exporter/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
   - ./mimir/ks.yaml
