@@ -25,7 +25,6 @@ spec:
     image:
       repository: prom/influxdb-exporter:v0.11.4
     ingress:
-      enabled: true
       className: internal
       annotations:
         hajimari.io/enable: "false"
