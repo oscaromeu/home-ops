@@ -9,5 +9,5 @@ configMapGenerator:
       - ./dashboards/fastapi-app.json
     options:
       labels:
-        grafana_dashboard: fastapi-app
+        home_ops: fastapi-app
       disableNameSuffixHash: true

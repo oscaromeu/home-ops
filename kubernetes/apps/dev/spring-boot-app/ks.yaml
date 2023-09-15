@@ -23,54 +23,54 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 3m
-#---
-#apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-#kind: Kustomization
-#metadata:
-#  name: cluster-apps-fastapi-app-b
-#  namespace: flux-system
-#  labels:
-#    substitution.flux.home.arpa/enabled: "true"
-#spec:
-#  dependsOn:
-#    - name: cluster-apps-external-secrets-stores
-#  path: ./kubernetes/apps/dev/fastapi-app/app-b
-#  prune: true
-#  sourceRef:
-#    kind: GitRepository
-#    name: home-kubernetes
-#  healthChecks:
-#    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-#      kind: HelmRelease
-#      name: app-b
-#      namespace: dev
-#  interval: 30m
-#  retryInterval: 1m
-#  timeout: 3m
-#---
-#apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-#kind: Kustomization
-#metadata:
-#  name: cluster-apps-fastapi-app-c
-#  namespace: flux-system
-#  labels:
-#    substitution.flux.home.arpa/enabled: "true"
-#spec:
-#  dependsOn:
-#    - name: cluster-apps-external-secrets-stores
-#  path: ./kubernetes/apps/dev/fastapi-app/app-c
-#  prune: true
-#  sourceRef:
-#    kind: GitRepository
-#    name: home-kubernetes
-#  healthChecks:
-#    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-#      kind: HelmRelease
-#      name: app-c
-#      namespace: dev
-#  interval: 30m
-#  retryInterval: 1m
-#  timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-apps-fastapi-app-b
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+spec:
+  dependsOn:
+    - name: cluster-apps-external-secrets-stores
+  path: ./kubernetes/apps/dev/fastapi-app/app-b
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: app-b
+      namespace: dev
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-apps-fastapi-app-c
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+spec:
+  dependsOn:
+    - name: cluster-apps-external-secrets-stores
+  path: ./kubernetes/apps/dev/fastapi-app/app-c
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: app-c
+      namespace: dev
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
