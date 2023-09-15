@@ -9,6 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
+      version: 1.5.1
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -23,7 +24,8 @@ spec:
       retries: 5
   values:
     image:
-      repository: prom/influxdb-exporter:v0.11.4
+      repository: prom/influxdb-exporter
+      tag: v0.11.4
     ingress:
       className: internal
       annotations:
