@@ -34,7 +34,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
-  path: ./kubernetes/apps/dev/fastapi-app/app-b
+  path: ./kubernetes/apps/dev/spring-boot-app/app-b
   prune: true
   sourceRef:
     kind: GitRepository
@@ -58,7 +58,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
-  path: ./kubernetes/apps/dev/fastapi-app/app-c
+  path: ./kubernetes/apps/dev/spring-boot-app/app-c
   prune: true
   sourceRef:
     kind: GitRepository
