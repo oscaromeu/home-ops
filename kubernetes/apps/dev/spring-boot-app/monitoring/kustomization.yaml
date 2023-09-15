@@ -4,10 +4,10 @@ namespace: monitoring
 
 configMapGenerator:
 
-  - name: fastapi-app
+  - name: springboot-observability
     files:
-      - ./dashboards/fastapi-app.json
+      - ./dashboards/springboot-observability.json
     options:
       labels:
-        home_ops: fastapi-app
+        home_ops: springboot-observability
       disableNameSuffixHash: true
