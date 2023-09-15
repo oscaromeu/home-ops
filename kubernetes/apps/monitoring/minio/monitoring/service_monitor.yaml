@@ -3,6 +3,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: minio
+  namespace: monitoring
   labels:
     v1.min.io/tenant: monitoring
 spec:
