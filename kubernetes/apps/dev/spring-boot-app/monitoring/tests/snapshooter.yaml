@@ -27,4 +27,4 @@ spec:
           volumes:
             - name: app-a-test-1
               configMap:
-                name: app-a-test-1
+                name: app-a-test-1.yaml
