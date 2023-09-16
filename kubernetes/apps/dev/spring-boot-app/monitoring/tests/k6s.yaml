@@ -8,5 +8,4 @@ spec:
   script:
     configMap:
       name: scenarios-springboot-test
-      file:
-        - app-a-1.js
+      file: app-a-1.js
