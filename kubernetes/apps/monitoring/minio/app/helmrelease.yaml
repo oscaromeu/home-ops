@@ -77,6 +77,8 @@ spec:
       users:
         - name: admin-user-secret
 
+      prometheusOperator: true
+
       env:
         - name: MINIO_PROMETHEUS_URL
           value: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
