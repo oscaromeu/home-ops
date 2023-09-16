@@ -27,7 +27,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-fastapi-app-b
+  name: cluster-apps-spring-boot-app-b
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
@@ -51,7 +51,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-fastapi-app-c
+  name: cluster-apps-spring-boot-app-c
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
