@@ -18,6 +18,3 @@ configMapGenerator:
   - name: app-a-test-1
     files:
       - app-a-test-1.yaml
-  - name: app-a-test-2
-    files:
-      - app-a-test-2.yaml
