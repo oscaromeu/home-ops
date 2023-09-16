@@ -35,7 +35,7 @@ metadata:
   name: k6-monitoring
   namespace: monitoring
 roleRef:
-  kind: Role
+  kind: ClusterRole
   name: k6-monitoring
   apiGroup: rbac.authorization.k8s.io
 subjects:
