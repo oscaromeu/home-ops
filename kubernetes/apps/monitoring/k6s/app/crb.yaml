@@ -8,6 +8,7 @@ rules:
   - apiGroups:
       - k6.io
       - v1
+      - ""
     resources:
       - k6s
       - configmaps
