@@ -7,10 +7,18 @@ metadata:
 rules:
   - apiGroups:
       - k6.io
-      - v1
-      - ""
     resources:
       - k6s
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups: [""]
+    resources:
       - configmaps
     verbs:
       - create
