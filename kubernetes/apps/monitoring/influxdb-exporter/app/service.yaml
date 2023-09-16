@@ -6,7 +6,6 @@ metadata:
   namespace: monitoring
   labels:
     app.kubernetes.io/instance: influxdb-exporter
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: influxdb-exporter
     app.kubernetes.io/version: v0.11.4
 spec:
