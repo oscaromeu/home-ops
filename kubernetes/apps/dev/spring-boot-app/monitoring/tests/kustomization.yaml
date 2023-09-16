@@ -10,6 +10,7 @@ resources:
   # Scheduled test
   - ./scenarios-springboot-test.yaml
   - ./snapshooter.yaml
+  - ./k6.yaml
 
 configMapGenerator:
   - name: scenarios-springboot-test-config
