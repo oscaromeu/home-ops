@@ -24,13 +24,14 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 33,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
-        "type": "prometheus",
-        "id": "mimir"
+        "id": "mimir",
+        "type": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -69,12 +70,12 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.1.6",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "id": "mimir"
+            "id": "mimir",
+            "type": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -91,8 +92,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "id": "mimir"
+        "id": "mimir",
+        "type": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -131,12 +132,12 @@
         },
         "textMode": "value_and_name"
       },
-      "pluginVersion": "9.1.6",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "id": "mimir"
+            "id": "mimir",
+            "type": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -153,8 +154,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "id": "mimir"
+        "id": "mimir",
+        "type": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -198,14 +199,15 @@
           "fields": "",
           "values": false
         },
-        "showUnfilled": true
+        "showUnfilled": true,
+        "valueMode": "color"
       },
-      "pluginVersion": "9.1.6",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "id": "mimir"
+            "id": "mimir",
+            "type": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -221,8 +223,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "id": "mimir"
+        "id": "mimir",
+        "type": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -267,12 +269,12 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "9.1.6",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "id": "mimir"
+            "id": "mimir",
+            "type": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -289,8 +291,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "id": "mimir"
+        "id": "mimir",
+        "type": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -312,6 +314,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -368,8 +371,8 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "id": "mimir"
+            "id": "mimir",
+            "type": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -385,8 +388,8 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "id": "mimir"
+        "id": "mimir",
+        "type": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -408,6 +411,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -464,8 +468,8 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "id": "mimir"
+            "id": "mimir",
+            "type": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -482,7 +486,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "id": "mimir"
+        "uid": "PAE45454D0EDB9216"
       },
       "fieldConfig": {
         "defaults": {
@@ -496,15 +500,16 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 11,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
-            "lineWidth": 1,
+            "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -559,12 +564,12 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "id": "mimir"
+            "id": "mimir",
+            "type": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "histogram_quantile(.99,sum(rate(http_server_requests_seconds_bucket{application=\"$app_name\", uri!=\"/actuator/prometheus\"}[1m])) by(uri, le))",
+          "expr": "histogram_quantile(.99,sum(rate(http_server_requests_seconds_bucket{application=\"$app_name\", uri!=\"/actuator/prometheus\"}[$__range])) by(uri, le))",
           "interval": "",
           "legendFormat": "{{uri}}",
           "range": true,
@@ -577,7 +582,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "id": "mimir"
+        "uid": "PAE45454D0EDB9216"
       },
       "fieldConfig": {
         "defaults": {
@@ -591,15 +596,16 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 5,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
-            "lineWidth": 1,
+            "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -654,12 +660,12 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "id": "mimir"
+            "id": "mimir",
+            "type": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "histogram_quantile(.95,sum(rate(http_server_requests_seconds_bucket{application=\"$app_name\", uri!=\"/actuator/prometheus\"}[1m])) by(uri, le))",
+          "expr": "histogram_quantile(.95,sum(rate(http_server_requests_seconds_bucket{application=\"$app_name\", uri!=\"/actuator/prometheus\"}[$__range])) by(uri, le))",
           "interval": "",
           "legendFormat": "{{uri}}",
           "range": true,
@@ -672,7 +678,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "id": "mimir"
+        "uid": "PAE45454D0EDB9216"
       },
       "fieldConfig": {
         "defaults": {
@@ -686,15 +692,16 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 5,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
-            "lineWidth": 1,
+            "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -749,12 +756,12 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "id": "mimir"
+            "id": "mimir",
+            "type": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum by(uri)(rate(http_server_requests_seconds_count{application=\"$app_name\"}[1m]))",
+          "expr": "sum by(uri)(rate(http_server_requests_seconds_count{application=\"$app_name\"}[$__range]))",
           "interval": "",
           "legendFormat": "{{uri}}",
           "range": true,
@@ -767,7 +774,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "loki"
+        "uid": "P8E80F9AEF21F6940"
       },
       "fieldConfig": {
         "defaults": {
@@ -779,17 +786,19 @@
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
+            "axisSoftMin": 3,
             "barAlignment": 0,
-            "drawStyle": "bars",
-            "fillOpacity": 0,
+            "drawStyle": "line",
+            "fillOpacity": 28,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
-            "lineWidth": 1,
+            "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -844,7 +853,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "green",
+                  "fixedColor": "light-green",
                   "mode": "fixed"
                 }
               }
@@ -864,6 +873,36 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "DEBUG"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "WARN"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
@@ -876,8 +915,12 @@
       "id": 14,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "lastNotNull",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -891,13 +934,24 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "loki"
+            "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "sum by(type) (rate({compose_service=~\"app-.*\"} | pattern `<date> <time> <_>=<trace_id> <_>=<span_id> <_>=<trace_flags> <type> <_> --- <msg>` | type != \"\" |= \"$log_keyword\" [1m]))",
-          "legendFormat": "{{type}}",
+          "expr": "",
           "queryType": "range",
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "editorMode": "code",
+          "expr": "sum by(type) (rate({app=~\"app-.*\"} | pattern `<date> <time> <_>=<trace_id> <_>=<span_id> <_>=<trace_flags> <type> <_> --- <msg>` | type != \"\" |= \"$log_keyword\" [1m]))",
+          "hide": false,
+          "legendFormat": "{{ type }}",
+          "queryType": "range",
+          "refId": "B"
         }
       ],
       "title": "Log Type Rate",
@@ -906,7 +960,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "loki"
+        "uid": "P8E80F9AEF21F6940"
       },
       "gridPos": {
         "h": 9,
@@ -930,11 +984,10 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "loki"
+            "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{compose_service=~\"app-.*\"} | pattern `<date> <time> <_>=<trace_id> <_>=<span_id> <_>=<trace_flags> <type> <_> --- <msg>` | line_format \"{{.compose_service}}\\t{{.type}}\\ttrace_id={{.trace_id}}\\t{{.msg}}\" |= \"$log_keyword\"",
-          "hide": false,
+          "expr": "{app=~\"app-.*\"} | pattern `<date> <time> <_>=<trace_id> <_>=<span_id> <_>=<trace_flags> <type> <_> --- <msg>` | line_format \"{{.compose_service}}\t{{.type}}\ttrace_id={{.trace_id}}\t{{.msg}}\" |= \"$log_keyword\"",
           "queryType": "range",
           "refId": "A"
         }
@@ -944,7 +997,7 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 37,
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -957,7 +1010,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "id": "mimir"
+          "uid": "PAE45454D0EDB9216"
         },
         "definition": "label_values(application)",
         "hide": 0,
@@ -1000,7 +1053,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
