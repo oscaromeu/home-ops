@@ -11,6 +11,8 @@ resources:
   - ./cm.yaml
   - ./snapshooter.yaml
 
+generatorOptions:
+  disableNameSuffixHash: true
 
 configMapGenerator:
   - name: app-a-test-1
