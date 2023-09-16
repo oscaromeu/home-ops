@@ -29,7 +29,7 @@ data:
                         http: null
                 zipkin: null
             remote_write:
-                endpoint: http://tempo.monitoring.svc.cluster.local:3100
+              - endpoint: http://tempo.monitoring.svc.cluster.local:3100
                 retry_on_failure:
                     enabled: false
             scrape_configs:
