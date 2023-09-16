@@ -7,5 +7,5 @@ spec:
   parallelism: 4
   script:
     configMap:
-      name: app-a-test-1-config
-      file: app-a-1.js
+      name: app-a-test-config
+      file: app-a-test-1.js
