@@ -10,6 +10,7 @@ spec:
   dependsOn:
     - name: cluster-apps-nginx-external
     - name: cluster-apps-external-secrets-stores
+    - name: cluster-apps-k6s
   path: ./kubernetes/apps/dev/spring-boot-app/app-a
   prune: true
   sourceRef:
@@ -33,7 +34,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-external-secrets-stores
+    - name: cluster-apps-spring-boot-app-a
   path: ./kubernetes/apps/dev/spring-boot-app/app-b
   prune: true
   sourceRef:
@@ -57,7 +58,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-external-secrets-stores
+    - name: cluster-apps-spring-boot-app-a
   path: ./kubernetes/apps/dev/spring-boot-app/app-c
   prune: true
   sourceRef:
