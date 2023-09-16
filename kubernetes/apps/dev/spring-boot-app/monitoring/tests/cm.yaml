@@ -1,10 +1,12 @@
+# HELPER
+# kubectl create configmap scenarios-test --from-file=./test --dry-run=client -oyaml > cm.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: app-a-test
-  namespace: dev
+  namespace: monitoring
+  name: app-a-test-1-config
 data:
-  app-a.js: |
+  app-a-1.js: |
     import http from "k6/http";
     import { check, sleep } from "k6";
 
@@ -25,6 +27,31 @@ data:
     // Simulated user behavior
     export default function () {
       let res = http.get("http://app-a.dev.svc.cluster.local:8080");
+      // Validate response status
+      check(res, { "status was 200": (r) => r.status == 200 });
+      sleep(1);
+    }
+  app-a-2.js: |
+    import http from "k6/http";
+    import { check, sleep } from "k6";
+
+    // Test configuration
+    export const options = {
+      thresholds: {
+        // Assert that 99% of requests finish within 3000ms.
+        http_req_duration: ["p(99) < 3000"],
+      },
+      // Ramp the number of virtual users up and down
+      stages: [
+        { duration: "30s", target: 15 },
+        { duration: "1m", target: 15 },
+        { duration: "20s", target: 0 },
+      ],
+    };
+
+    // Simulated user behavior
+    export default function () {
+      let res = http.get("http://app-a.dev.svc.cluster.local:8080/actuator/metrics");
       // Validate response status
       check(res, { "status was 200": (r) => r.status == 200 });
       sleep(1);

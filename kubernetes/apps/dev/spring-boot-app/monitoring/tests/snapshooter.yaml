@@ -5,7 +5,7 @@ metadata:
   name: scenarios-springboot-test-cron
   namespace: monitoring
 spec:
-  schedule: "*/5 * * * *"
+  schedule: "*/1 * * * *"
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
@@ -22,9 +22,9 @@ spec:
                 - /bin/bash
               args:
                 - -c
-                - "kubectl delete -f /tmp/scenarios-springboot-test.yaml; kubectl apply -f /tmp/scenarios-springboot-test.yaml"
+                - "kubectl delete -f /tmp/app-a-test-1.yaml; kubectl apply -f /tmp/app-a-test-1.yaml"
           restartPolicy: OnFailure
           volumes:
-            - name: k6-yaml
+            - name: app-a-test-1
               configMap:
-                name: scenarios-springboot-test-config
+                name: app-a-test-1

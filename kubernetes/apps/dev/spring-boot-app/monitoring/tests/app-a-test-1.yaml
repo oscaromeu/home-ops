@@ -1,0 +1,11 @@
+apiVersion: k6.io/v1alpha1
+kind: K6
+metadata:
+  name: app-a-test-1
+  namespace: monitoring
+spec:
+  parallelism: 4
+  script:
+    configMap:
+      name: app-a-test-1-config
+      file: app-a-1.js

@@ -8,11 +8,11 @@ resources:
   #- cm.yaml
   #- k6s.yaml
   # Scheduled test
-  - ./scenarios-springboot-test.yaml
+  - ./cm.yaml
   - ./snapshooter.yaml
-  - ./k6s.yaml
+
 
 configMapGenerator:
-  - name: scenarios-springboot-test-config
+  - name: app-a-test-1
     files:
-      - scenarios-springboot-test.yaml
+      - app-a-test-1.yaml
