@@ -1,0 +1,25 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+    app.kubernetes.io/component: Agent
+    app.kubernetes.io/instance: vector-agent
+    app.kubernetes.io/name: vector
+    app.kubernetes.io/version: 0.27.0-distroless-libc
+  name: vector-agent
+  namespace: logging
+spec:
+  jobLabel: app.kubernetes.io/name
+  namespaceSelector:
+    matchNames:
+    - logging
+  podMetricsEndpoints:
+  - honorLabels: false
+    honorTimestamps: true
+    path: /metrics
+    port: prom-exporter
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: Agent
+      app.kubernetes.io/instance: vector-agent
+      app.kubernetes.io/name: vector

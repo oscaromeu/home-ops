@@ -2,6 +2,32 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
+  name: cluster-apps-vector-aggregator
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+spec:
+  dependsOn:
+    - name: cluster-apps-external-secrets-stores
+    - name: cluster-apps-redis
+    - name: cluster-apps-elastic
+  path: ./kubernetes/apps/logging/vector/aggregator
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: vector-aggregator
+      namespace: logging
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
   name: cluster-apps-vector-agent
   namespace: flux-system
   labels:
@@ -26,16 +52,14 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-vector-aggregator
+  name: cluster-apps-vector-monitoring
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-redis
-    - name: cluster-apps-elastic
-  path: ./kubernetes/apps/logging/vector/aggregator
+    - name: cluster-apps-vector-aggregator
+  path: ./kubernetes/apps/logging/vector/monitoring
   prune: true
   sourceRef:
     kind: GitRepository
@@ -48,4 +72,3 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 3m
-

@@ -15,6 +15,9 @@ configMapGenerator:
     files:
       - k3s.yaml=./pipelines/k3s.yaml
 
+  - name: vector-metrics-pipeline-aggregator
+    files:
+      - vector_metrics.yaml=./pipelines/vector_metrics.yaml
 
 generatorOptions:
   disableNameSuffixHash: true

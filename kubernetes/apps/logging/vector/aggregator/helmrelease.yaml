@@ -110,7 +110,7 @@ spec:
           protocol: TCP
 
     podMonitor:
-      enabled: true
+      enabled: false
 
     env:
       - name: VECTOR_LOG
