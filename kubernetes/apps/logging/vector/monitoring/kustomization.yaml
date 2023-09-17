@@ -4,5 +4,5 @@ kind: Kustomization
 namespace: logging
 resources:
   - ./dashboards
-  - ./podmonitor_agent.yaml
-  - ./podmonitor_aggregator.yaml
+  - ./podmonitor-agent.yaml
+  - ./podmonitor-aggregator.yaml
