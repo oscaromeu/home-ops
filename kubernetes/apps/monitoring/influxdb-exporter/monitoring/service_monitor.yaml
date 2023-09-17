@@ -11,7 +11,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app.kuberne:servic:tes.io/name: influxdb-exporter
+      app.kuberne:services.io/name: influxdb-exporter
       app.kubernetes.io/instance: influxdb-exporter
   endpoints:
     - port: http
