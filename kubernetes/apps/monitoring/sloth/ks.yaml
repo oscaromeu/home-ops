@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-sloth
   namespace: flux-system
   labels:
-    substitution.flux.home.arpa/enabled: "false"
+    substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
     - name: cluster-apps-kube-prometheus-stack
@@ -29,7 +29,7 @@ metadata:
   name: cluster-apps-sloth-monitoring
   namespace: flux-system
   labels:
-    substitution.flux.home.arpa/enabled: "true"
+    substitution.flux.home.arpa/enabled: "false"
 spec:
   dependsOn:
     - name: cluster-apps-sloth
