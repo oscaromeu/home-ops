@@ -9,7 +9,7 @@ configMapGenerator:
       - slo.json
     options:
       labels:
-        grafana_dashboard: slo-detail
+        home_ops: slo-detail
       disableNameSuffixHash: true
 
   - name: slo-overview
@@ -17,5 +17,5 @@ configMapGenerator:
       - sloth-overview.json
     options:
       labels:
-        grafana_dashboard: slo-overview
+        home_ops: slo-overview
       disableNameSuffixHash: true
