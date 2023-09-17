@@ -6,7 +6,7 @@ configMapGenerator:
 
   - name: slo-detail
     files:
-      - slo.json
+      - sloth.json
     options:
       labels:
         home_ops: slo-detail
