@@ -9,6 +9,7 @@ configMapGenerator:
     options:
       labels:
         home_ops: slo-detail
+        kustomize.toolkit.fluxcd.io/substitute: disabled
       disableNameSuffixHash: true
 
   - name: slo-overview
@@ -17,4 +18,5 @@ configMapGenerator:
     options:
       labels:
         home_ops: slo-overview
+        kustomize.toolkit.fluxcd.io/substitute: disabled
       disableNameSuffixHash: true
