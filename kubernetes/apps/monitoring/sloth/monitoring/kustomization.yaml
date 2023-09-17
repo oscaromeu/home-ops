@@ -6,7 +6,7 @@ configMapGenerator:
 
   - name: slo-detail
     files:
-      - slo_detail.json
+      - slo.json
     options:
       labels:
         grafana_dashboard: slo-detail
