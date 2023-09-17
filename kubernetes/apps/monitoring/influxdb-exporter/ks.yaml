@@ -17,23 +17,23 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 3m
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-kind: Kustomization
-metadata:
-  name: cluster-apps-influxdb-exporter-monitoring
-  namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
-spec:
-  dependsOn:
-    - name: cluster-apps-kube-prometheus-stack
-  path: ./kubernetes/apps/monitoring/influxdb-exporter/monitoring
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: home-kubernetes
-  interval: 30m
-  retryInterval: 1m
-  timeout: 3m
+#---
+#apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+#kind: Kustomization
+#metadata:
+#  name: cluster-apps-influxdb-exporter-monitoring
+#  namespace: flux-system
+#  labels:
+#    substitution.flux.home.arpa/enabled: "true"
+#spec:
+#  dependsOn:
+#    - name: cluster-apps-kube-prometheus-stack
+#  path: ./kubernetes/apps/monitoring/influxdb-exporter/monitoring
+#  prune: true
+#  sourceRef:
+#    kind: GitRepository
+#    name: home-kubernetes
+#  interval: 30m
+#  retryInterval: 1m
+#  timeout: 3m
 
