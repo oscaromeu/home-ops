@@ -17,7 +17,7 @@ resources:
   - ./prometheus-adapter/ks.yaml
   - ./promlens/ks.yaml
   - ./pyroscope-distributed/ks.yaml
-  #- ./sloth/ks.yaml
+  - ./sloth/ks.yaml
   #- ./stackdriver-exporter/ks.yaml
   - ./tempo/ks.yaml
    #./vpa/ks.yaml
