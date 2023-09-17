@@ -1,5 +1,14 @@
 {
-  "__inputs": [],
+  "__inputs": [
+    {
+      "name": "DS_REDIS",
+      "label": "Redis",
+      "description": "Redis Data Source",
+      "type": "datasource",
+      "pluginId": "redis-datasource",
+      "pluginName": "Redis"
+    }
+  ],
   "__requires": [
     {
       "type": "panel",
@@ -17,13 +26,13 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "8.2.3"
+      "version": "7.1.4"
     },
     {
       "type": "datasource",
       "id": "redis-datasource",
       "name": "Redis",
-      "version": "2.0.0"
+      "version": "1.2.0"
     },
     {
       "type": "panel",
@@ -47,32 +56,16 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
-        "target": {
-          "limit": 100,
-          "matchAny": false,
-          "tags": [],
-          "type": "dashboard"
-        },
         "type": "dashboard"
       }
     ]
   },
-  "description": "Redis Dashboard",
+  "description": "Predefined dashboards to observe any Redis database using Redis Data Source. Requires Grafana 7.1+.",
   "editable": true,
-  "fiscalYearStartMonth": 0,
-  "gnetId": null,
+  "gnetId": 12776,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1636225729803,
   "links": [
-    {
-      "icon": "external link",
-      "tags": [],
-      "targetBlank": true,
-      "title": "RedisGrafana",
-      "type": "link",
-      "url": "https://redisgrafana.github.io/"
-    },
     {
       "icon": "external link",
       "tags": [],
@@ -82,11 +75,10 @@
       "url": "https://redis.io/"
     }
   ],
-  "liveNow": false,
   "panels": [
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": "${DS_REDIS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -96,13 +88,23 @@
       "id": 56,
       "panels": [],
       "repeat": "redis",
+      "scopedVars": {
+        "redis": {
+          "selected": true,
+          "text": "Redis",
+          "value": "Redis"
+        }
+      },
       "title": "Main",
       "type": "row"
     },
     {
-      "datasource": "$redis",
+      "datasource": "${DS_REDIS}",
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "align": null
+          },
           "decimals": 0,
           "mappings": [],
           "thresholds": {
@@ -139,14 +141,22 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["mean"],
+          "calcs": [
+            "mean"
+          ],
           "fields": "/.*/",
           "values": true
         },
-        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "7.1.4",
+      "scopedVars": {
+        "redis": {
+          "selected": true,
+          "text": "Redis",
+          "value": "Redis"
+        }
+      },
       "targets": [
         {
           "command": "info",
@@ -164,7 +174,9 @@
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": ["instantaneous_ops_per_sec"]
+              "names": [
+                "instantaneous_ops_per_sec"
+              ]
             }
           }
         }
@@ -172,9 +184,12 @@
       "type": "stat"
     },
     {
-      "datasource": "-- Dashboard --",
+      "datasource": "${DS_REDIS}",
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "align": null
+          },
           "decimals": 1,
           "mappings": [],
           "max": 11000,
@@ -210,19 +225,30 @@
       "options": {
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["mean"],
+          "calcs": [
+            "mean"
+          ],
           "fields": "/.*/",
           "values": true
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
+        "showThresholdMarkers": true
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "7.1.4",
+      "scopedVars": {
+        "redis": {
+          "selected": true,
+          "text": "Redis",
+          "value": "Redis"
+        }
+      },
       "targets": [
         {
-          "panelId": 24,
-          "refId": "A"
+          "command": "info",
+          "query": "",
+          "refId": "A",
+          "section": "stats",
+          "type": "command"
         }
       ],
       "timeFrom": null,
@@ -233,7 +259,10 @@
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": ["instantaneous_input_kbps", "instantaneous_output_kbps"]
+              "names": [
+                "instantaneous_input_kbps",
+                "instantaneous_output_kbps"
+              ]
             }
           }
         },
@@ -252,9 +281,12 @@
       "type": "gauge"
     },
     {
-      "datasource": "$redis",
+      "datasource": "${DS_REDIS}",
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "align": null
+          },
           "mappings": [],
           "min": 0,
           "thresholds": {
@@ -342,14 +374,22 @@
         "displayMode": "lcd",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["mean"],
+          "calcs": [
+            "mean"
+          ],
           "fields": "/.*/",
           "values": true
         },
-        "showUnfilled": true,
-        "text": {}
+        "showUnfilled": true
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "7.1.4",
+      "scopedVars": {
+        "redis": {
+          "selected": true,
+          "text": "Redis",
+          "value": "Redis"
+        }
+      },
       "targets": [
         {
           "command": "info",
@@ -367,7 +407,13 @@
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": ["used_memory", "used_memory_peak", "total_system_memory", "maxmemory", "used_memory_lua"]
+              "names": [
+                "used_memory",
+                "used_memory_peak",
+                "total_system_memory",
+                "maxmemory",
+                "used_memory_lua"
+              ]
             }
           }
         },
@@ -395,16 +441,19 @@
       "type": "bargauge"
     },
     {
-      "datasource": "$redis",
+      "datasource": "${DS_REDIS}",
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "align": null
+          },
           "decimals": 0,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-blue",
+                "color": "dark-green",
                 "value": null
               }
             ]
@@ -426,14 +475,22 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["mean"],
+          "calcs": [
+            "mean"
+          ],
           "fields": "/.*/",
           "values": true
         },
-        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "7.1.4",
+      "scopedVars": {
+        "redis": {
+          "selected": true,
+          "text": "Redis",
+          "value": "Redis"
+        }
+      },
       "targets": [
         {
           "command": "info",
@@ -451,7 +508,9 @@
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": ["uptime_in_seconds"]
+              "names": [
+                "uptime_in_seconds"
+              ]
             }
           }
         }
@@ -459,9 +518,10 @@
       "type": "stat"
     },
     {
-      "datasource": "$redis",
+      "datasource": "${DS_REDIS}",
       "fieldConfig": {
         "defaults": {
+          "custom": {},
           "decimals": 0,
           "mappings": [],
           "thresholds": {
@@ -490,14 +550,22 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["mean"],
+          "calcs": [
+            "mean"
+          ],
           "fields": "/.*/",
           "values": true
         },
-        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "7.1.4",
+      "scopedVars": {
+        "redis": {
+          "selected": true,
+          "text": "Redis",
+          "value": "Redis"
+        }
+      },
       "targets": [
         {
           "command": "info",
@@ -515,7 +583,9 @@
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": ["connected_clients"]
+              "names": [
+                "connected_clients"
+              ]
             }
           }
         }
@@ -523,15 +593,18 @@
       "type": "stat"
     },
     {
-      "datasource": "-- Dashboard --",
+      "datasource": "${DS_REDIS}",
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "align": null
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-blue",
+                "color": "dark-green",
                 "value": null
               }
             ]
@@ -547,23 +620,34 @@
       },
       "id": 6,
       "options": {
-        "colorMode": "background",
+        "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["mean"],
+          "calcs": [
+            "mean"
+          ],
           "fields": "/.*/",
           "values": true
         },
-        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "7.1.4",
+      "scopedVars": {
+        "redis": {
+          "selected": true,
+          "text": "Redis",
+          "value": "Redis"
+        }
+      },
       "targets": [
         {
-          "panelId": 19,
-          "refId": "A"
+          "command": "info",
+          "query": "",
+          "refId": "A",
+          "section": "server",
+          "type": "command"
         }
       ],
       "timeFrom": null,
@@ -574,7 +658,9 @@
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": ["redis_version"]
+              "names": [
+                "redis_version"
+              ]
             }
           }
         }
@@ -582,9 +668,12 @@
       "type": "stat"
     },
     {
-      "datasource": "$redis",
+      "datasource": "${DS_REDIS}",
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "align": null
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -612,14 +701,22 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["mean"],
+          "calcs": [
+            "mean"
+          ],
           "fields": "/.*/",
           "values": true
         },
-        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "7.1.4",
+      "scopedVars": {
+        "redis": {
+          "selected": true,
+          "text": "Redis",
+          "value": "Redis"
+        }
+      },
       "targets": [
         {
           "query": "dbsize",
@@ -633,9 +730,12 @@
       "type": "stat"
     },
     {
-      "datasource": "-- Dashboard --",
+      "datasource": "${DS_REDIS}",
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "align": null
+          },
           "decimals": 0,
           "mappings": [],
           "min": 0,
@@ -663,18 +763,29 @@
         "displayMode": "lcd",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["mean"],
+          "calcs": [
+            "mean"
+          ],
           "fields": "/.*/",
           "values": true
         },
-        "showUnfilled": true,
-        "text": {}
+        "showUnfilled": true
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "7.1.4",
+      "scopedVars": {
+        "redis": {
+          "selected": true,
+          "text": "Redis",
+          "value": "Redis"
+        }
+      },
       "targets": [
         {
-          "panelId": 24,
-          "refId": "A"
+          "command": "info",
+          "query": "",
+          "refId": "A",
+          "section": "stats",
+          "type": "command"
         }
       ],
       "timeFrom": null,
@@ -685,7 +796,10 @@
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": ["expired_keys", "evicted_keys"]
+              "names": [
+                "expired_keys",
+                "evicted_keys"
+              ]
             }
           }
         },
@@ -704,9 +818,12 @@
       "type": "bargauge"
     },
     {
-      "datasource": "-- Dashboard --",
+      "datasource": "${DS_REDIS}",
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "align": null
+          },
           "decimals": 0,
           "mappings": [],
           "min": 0,
@@ -734,18 +851,29 @@
         "displayMode": "lcd",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["mean"],
+          "calcs": [
+            "mean"
+          ],
           "fields": "/.*/",
           "values": true
         },
-        "showUnfilled": true,
-        "text": {}
+        "showUnfilled": true
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "7.1.4",
+      "scopedVars": {
+        "redis": {
+          "selected": true,
+          "text": "Redis",
+          "value": "Redis"
+        }
+      },
       "targets": [
         {
-          "panelId": 24,
-          "refId": "A"
+          "command": "info",
+          "query": "",
+          "refId": "A",
+          "section": "stats",
+          "type": "command"
         }
       ],
       "timeFrom": null,
@@ -756,7 +884,10 @@
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": ["keyspace_hits", "keyspace_misses"]
+              "names": [
+                "keyspace_hits",
+                "keyspace_misses"
+              ]
             }
           }
         },
@@ -775,15 +906,18 @@
       "type": "bargauge"
     },
     {
-      "datasource": "-- Dashboard --",
+      "datasource": "${DS_REDIS}",
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "align": null
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-blue",
+                "color": "dark-green",
                 "value": null
               }
             ]
@@ -800,23 +934,34 @@
       },
       "id": 34,
       "options": {
-        "colorMode": "background",
+        "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["mean"],
+          "calcs": [
+            "mean"
+          ],
           "fields": "/.*/",
           "values": true
         },
-        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "7.1.4",
+      "scopedVars": {
+        "redis": {
+          "selected": true,
+          "text": "Redis",
+          "value": "Redis"
+        }
+      },
       "targets": [
         {
-          "panelId": 8,
-          "refId": "A"
+          "command": "info",
+          "query": "",
+          "refId": "A",
+          "section": "memory",
+          "type": "command"
         }
       ],
       "timeFrom": null,
@@ -827,7 +972,9 @@
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": ["maxmemory_policy"]
+              "names": [
+                "maxmemory_policy"
+              ]
             }
           }
         }
@@ -836,7 +983,7 @@
     },
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": "${DS_REDIS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -846,17 +993,23 @@
       "id": 32,
       "panels": [],
       "repeat": "redis",
+      "scopedVars": {
+        "redis": {
+          "selected": true,
+          "text": "Redis",
+          "value": "Redis"
+        }
+      },
       "title": "Other",
       "type": "row"
     },
     {
-      "datasource": "$redis",
+      "datasource": "${DS_REDIS}",
       "fieldConfig": {
         "defaults": {
           "custom": {
             "align": null,
-            "displayMode": "color-text",
-            "filterable": false
+            "displayMode": "color-text"
           },
           "mappings": [],
           "thresholds": {
@@ -940,7 +1093,14 @@
           }
         ]
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "7.1.4",
+      "scopedVars": {
+        "redis": {
+          "selected": true,
+          "text": "Redis",
+          "value": "Redis"
+        }
+      },
       "targets": [
         {
           "command": "clientList",
@@ -957,7 +1117,12 @@
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": ["addr", "age", "idle", "cmd"]
+              "names": [
+                "addr",
+                "age",
+                "idle",
+                "cmd"
+              ]
             }
           }
         },
@@ -979,13 +1144,12 @@
       "type": "table"
     },
     {
-      "datasource": "$redis",
+      "datasource": "${DS_REDIS}",
       "fieldConfig": {
         "defaults": {
           "custom": {
             "align": null,
-            "displayMode": "color-text",
-            "filterable": false
+            "displayMode": "color-text"
           },
           "mappings": [],
           "thresholds": {
@@ -1093,7 +1257,14 @@
           }
         ]
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "7.1.4",
+      "scopedVars": {
+        "redis": {
+          "selected": true,
+          "text": "Redis",
+          "value": "Redis"
+        }
+      },
       "targets": [
         {
           "command": "info",
@@ -1124,15 +1295,23 @@
       "type": "table"
     },
     {
-      "datasource": "$redis",
+      "datasource": "${DS_REDIS}",
       "fieldConfig": {
         "defaults": {
           "custom": {
             "align": null,
-            "displayMode": "color-text",
-            "filterable": false
+            "displayMode": "color-text"
           },
-          "mappings": [],
+          "mappings": [
+            {
+              "from": "",
+              "id": 0,
+              "operator": "",
+              "text": "",
+              "to": "",
+              "type": 1
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1209,7 +1388,14 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "7.1.4",
+      "scopedVars": {
+        "redis": {
+          "selected": true,
+          "text": "Redis",
+          "value": "Redis"
+        }
+      },
       "targets": [
         {
           "command": "slowlogGet",
@@ -1248,7 +1434,7 @@
     },
     {
       "collapsed": false,
-      "datasource": "$redis",
+      "datasource": "${DS_REDIS}",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1261,16 +1447,23 @@
       "type": "row"
     },
     {
-      "datasource": "$redis",
+      "datasource": "${DS_REDIS}",
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "align": null
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-blue",
+                "color": "green",
                 "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
           }
@@ -1290,14 +1483,15 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["mean"],
+          "calcs": [
+            "mean"
+          ],
           "fields": "/.*/",
           "values": true
         },
-        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "7.1.4",
       "targets": [
         {
           "command": "clusterInfo",
@@ -1314,7 +1508,9 @@
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": ["cluster_state"]
+              "names": [
+                "cluster_state"
+              ]
             }
           }
         }
@@ -1322,16 +1518,23 @@
       "type": "stat"
     },
     {
-      "datasource": "$redis",
+      "datasource": "${DS_REDIS}",
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "align": null
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-blue",
+                "color": "green",
                 "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
           }
@@ -1351,14 +1554,15 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["mean"],
+          "calcs": [
+            "mean"
+          ],
           "fields": "/.*/",
           "values": true
         },
-        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "7.1.4",
       "targets": [
         {
           "command": "info",
@@ -1376,7 +1580,9 @@
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": ["role"]
+              "names": [
+                "role"
+              ]
             }
           }
         }
@@ -1384,11 +1590,13 @@
       "type": "stat"
     },
     {
-      "datasource": "-- Dashboard --",
+      "datasource": "${DS_REDIS}",
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "align": null
+          },
           "mappings": [],
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1413,28 +1621,35 @@
         "displayMode": "lcd",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["mean"],
+          "calcs": [
+            "mean"
+          ],
           "fields": "/.*/",
           "values": true
         },
-        "showUnfilled": true,
-        "text": {}
+        "showUnfilled": true
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "7.1.4",
       "targets": [
         {
-          "panelId": 60,
-          "refId": "A"
+          "command": "clusterInfo",
+          "query": "",
+          "refId": "A",
+          "type": "command"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
+      "title": "",
       "transformations": [
         {
           "id": "filterFieldsByName",
           "options": {
             "include": {
-              "names": ["cluster_known_nodes", "cluster_size"]
+              "names": [
+                "cluster_known_nodes",
+                "cluster_size"
+              ]
             }
           }
         },
@@ -1453,13 +1668,11 @@
       "type": "bargauge"
     },
     {
-      "datasource": "$redis",
+      "datasource": "${DS_REDIS}",
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "align": null,
-            "displayMode": "auto",
-            "filterable": false
+            "align": null
           },
           "mappings": [],
           "thresholds": {
@@ -1571,7 +1784,7 @@
           }
         ]
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "7.1.4",
       "targets": [
         {
           "command": "clusterNodes",
@@ -1605,44 +1818,34 @@
       "type": "table"
     }
   ],
-  "refresh": "10s",
-  "schemaVersion": 31,
+  "refresh": "5s",
+  "schemaVersion": 26,
   "style": "dark",
-  "tags": ["redis"],
+  "tags": [
+    "redis"
+  ],
   "templating": {
-    "list": [
-      {
-        "current": {
-          "selected": false,
-          "text": "Redis",
-          "value": "Redis"
-        },
-        "description": null,
-        "error": null,
-        "hide": 0,
-        "includeAll": false,
-        "label": "Redis",
-        "multi": false,
-        "name": "redis",
-        "options": [],
-        "query": "redis-datasource",
-        "queryValue": "",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "type": "datasource"
-      }
-    ]
+    "list": []
   },
   "time": {
     "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
-    "refresh_intervals": ["10s", "30s", "1m", "5m", "15m", "30m", "1h", "2h", "1d"]
+    "refresh_intervals": [
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
   },
   "timezone": "",
   "title": "Redis",
   "uid": "RpSjVqWMz",
-  "version": 1
+  "version": 3
 }

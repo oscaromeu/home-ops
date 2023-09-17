@@ -9,12 +9,12 @@ configMapGenerator:
       - redis_exporter.json
     options:
       labels:
-        grafana_dashboard: redis
+        home_ops: redis
       disableNameSuffixHash: true
 
   - name: redis
     files:
-      - redis.json
+      - redis-overview.json
     options:
       labels:
         grafana_dashboard: redis
