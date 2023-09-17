@@ -40,8 +40,8 @@ spec:
       # config
       - vector-aggregator
       # pipelines
-      #- loki-pipeline
       - k3s-pipeline-aggregator
+      - vector-metrics-pipeline-aggregator
 
     ingress:
       enabled: false
@@ -64,18 +64,6 @@ spec:
 
 
     containerPorts:
-      #- name: datadog-agent
-      #  containerPort: 8282
-      #  protocol: TCP
-      #- name: logstash
-      #  containerPort: 5044
-      #  protocol: TCP
-      #- name: statsd
-      #  containerPort: 8125
-      #  protocol: TCP
-      #- name: syslog
-      #  containerPort: 9000
-      #  protocol: TCP
       - name: vector
         containerPort: 6000
         protocol: TCP
@@ -104,21 +92,6 @@ spec:
         - name: api
           port: 8686
           protocol: TCP
-        #- name: fluent
-        #  port: 24224
-        #  protocol: TCP
-        #- name: logstash
-        #  port: 5044
-        #  protocol: TCP
-        #- name: splunk-hec
-        #  port: 8080
-        #  protocol: TCP
-        #- name: statsd
-        #  port: 8125
-        #  protocol: TCP
-        #- name: syslog
-        #  port: 9000
-        #  protocol: TCP
         - name: vector
           port: 6000
           protocol: TCP
@@ -129,24 +102,6 @@ spec:
     serviceHeadless:
       enabled: true
       ports:
-        #- name: datadog-agent
-        #  port: 8282
-        #  protocol: TCP
-        #- name: fluent
-        #  port: 24224
-        #  protocol: TCP
-        #- name: logstash
-        #  port: 5044
-        #  protocol: TCP
-        #- name: splunk-hec
-        #  port: 8080
-        #  protocol: TCP
-        #- name: statsd
-        #  port: 8125
-        #  protocol: TCP
-        #- name: syslog
-        #  port: 9000
-        #  protocol: TCP
         - name: vector
           port: 6000
           protocol: TCP
@@ -154,31 +109,8 @@ spec:
           port: 9090
           protocol: TCP
 
-
-    #extraVolumes:
-    #  - name: config
-    #    configMap:
-    #      name: vector-aggregator
-    #  - name: data
-    #    emptyDir: {}
-
-    #extraVolumeMounts:
-    #  - name: vector-config-volume
-    #    mountPath: "/etc/vector/"
-    #    readOnly: true
-    #  - name: data
-    #    mountPath: /vector-data-dir
-
-
-    #persistence:
-    #  enabled: true
-    #  accessModes:
-    #    - ReadWriteOnce
-    #  size: 1Gi
-    #  storageClass: local-path
-
     podMonitor:
-      enabled: false
+      enabled: true
 
     env:
       - name: VECTOR_LOG

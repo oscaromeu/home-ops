@@ -1,0 +1,19 @@
+---
+#
+# Sources
+#
+sources:
+
+  vector_metrics:
+    type: internal_metrics
+
+
+#
+# Sinks
+#
+sinks:
+  prom_exporter:
+    type: elasticsearch
+    inputs:
+      - vector_metrics
+    address: 0.0.0.0:9090
