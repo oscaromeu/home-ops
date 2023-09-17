@@ -11,3 +11,11 @@ configMapGenerator:
       labels:
         grafana_dashboard: slo-detail
       disableNameSuffixHash: true
+
+  - name: slo-overview
+    files:
+      - sloth-overview.json
+    options:
+      labels:
+        grafana_dashboard: slo-overview
+      disableNameSuffixHash: true
