@@ -30,16 +30,17 @@ spec:
       darkTheme: espresso
       alwaysTargetBlank: true
       showGreeting: false
-      showAppGroups: false
+      showAppGroups: true
       showAppStatus: false
       showBookmarkGroups: false
       showGlobalBookmarks: false
       showAppUrls: false
       defaultEnable: true
       namespaceSelector:
-        matchNames:
-          - default
-          - monitoring
+        any: true
+        #matchNames:
+        #  - default
+        #  - monitoring
     ingress:
       main:
         enabled: true
