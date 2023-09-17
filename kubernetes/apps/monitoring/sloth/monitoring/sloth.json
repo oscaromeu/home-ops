@@ -1,58 +1,12 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_PROMETHEUS",
-      "label": "prometheus",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus"
-    }
-  ],
-  "__elements": [],
-  "__requires": [
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "8.3.0"
-    },
-    {
-      "type": "panel",
-      "id": "heatmap",
-      "name": "Heatmap",
-      "version": ""
-    },
-    {
-      "type": "datasource",
-      "id": "prometheus",
-      "name": "Prometheus",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "stat",
-      "name": "Stat",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "table",
-      "name": "Table",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "timeseries",
-      "name": "Time series",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -72,13 +26,16 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 14348,
   "graphTooltip": 0,
-  "id": null,
-  "iteration": 1638791238886,
+  "id": 56,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PAE45454D0EDB9216"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -87,6 +44,15 @@
       },
       "id": 36,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PAE45454D0EDB9216"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "General",
       "type": "row"
     },
@@ -103,8 +69,11 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto",
-            "filterable": false
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
           },
           "mappings": [],
           "thresholds": {
@@ -155,8 +124,11 @@
                 }
               },
               {
-                "id": "custom.displayMode",
-                "value": "color-background"
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "color-background"
+                }
               },
               {
                 "id": "unit",
@@ -174,7 +146,9 @@
       },
       "id": 38,
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": "",
           "reducer": [
             "sum"
@@ -190,9 +164,13 @@
           }
         ]
       },
-      "pluginVersion": "8.3.0",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "exemplar": true,
           "expr": "slo:current_burn_rate:ratio > ${min_burning_rate}",
           "format": "table",
@@ -253,6 +231,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -265,6 +245,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 3,
@@ -311,15 +292,21 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "right"
+          "placement": "right",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "multi"
+          "mode": "multi",
+          "sort": "none"
         }
       },
       "pluginVersion": "7.5.2",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "exemplar": true,
           "expr": "slo:current_burn_rate:ratio > ${min_burning_rate}",
           "interval": "",
@@ -333,6 +320,10 @@
     },
     {
       "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PAE45454D0EDB9216"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -342,6 +333,15 @@
       "id": 8,
       "panels": [],
       "repeat": "slo",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PAE45454D0EDB9216"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "$service/$slo",
       "type": "row"
     },
@@ -393,9 +393,13 @@
         "text": {},
         "textMode": "name"
       },
-      "pluginVersion": "8.3.0",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "exemplar": false,
           "expr": "slo:objective:ratio{sloth_service=\"$service\", sloth_slo=\"$slo\"}",
           "format": "time_series",
@@ -419,6 +423,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "axisSoftMax": 0.99,
@@ -433,6 +439,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "smooth",
             "lineStyle": {
               "fill": "solid"
@@ -512,16 +519,22 @@
         "graph": {},
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "7.5.2",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "exemplar": true,
           "expr": "1 - (max(slo:sli_error:ratio_rate${sli_window}{sloth_service=\"$service\", sloth_slo=\"$slo\"}) OR on() vector(0))",
           "interval": "",
@@ -530,6 +543,10 @@
           "refId": "A"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "exemplar": false,
           "expr": "slo:objective:ratio{sloth_service=\"$service\", sloth_slo=\"$slo\"}",
           "hide": false,
@@ -592,9 +609,13 @@
         "text": {},
         "textMode": "name"
       },
-      "pluginVersion": "8.3.0",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "exemplar": false,
           "expr": "sloth_slo_info{sloth_service=\"$service\", sloth_slo=\"$slo\"}",
           "instant": true,
@@ -663,9 +684,13 @@
         "text": {},
         "textMode": "value_and_name"
       },
-      "pluginVersion": "8.3.0",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "exemplar": false,
           "expr": "slo:current_burn_rate:ratio{sloth_service=\"$service\", sloth_slo=\"$slo\"} or on() vector(0)",
           "instant": true,
@@ -734,9 +759,13 @@
         "text": {},
         "textMode": "value_and_name"
       },
-      "pluginVersion": "8.3.0",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "exemplar": false,
           "expr": "1-(\n  sum_over_time(\n    (\n       slo:sli_error:ratio_rate1h{sloth_service=\"$service\",sloth_slo=\"$slo\"}\n       * on() group_left() (\n         month() == bool vector(${__to:date:M})\n       )\n    )[32d:1h]\n  )\n  / on(sloth_id)\n  (\n    slo:error_budget:ratio{sloth_service=\"$service\",sloth_slo=\"$slo\"} *on() group_left() (24 * days_in_month())\n  )\n)",
           "instant": true,
@@ -805,9 +834,13 @@
         "text": {},
         "textMode": "value_and_name"
       },
-      "pluginVersion": "8.3.0",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "exemplar": false,
           "expr": "slo:period_error_budget_remaining:ratio{sloth_service=\"$service\", sloth_slo=\"$slo\"} or on() vector(1)",
           "instant": true,
@@ -831,6 +864,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -843,6 +878,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "smooth",
             "lineStyle": {
               "fill": "solid"
@@ -929,11 +965,13 @@
         "graph": {},
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
-          "placement": "bottom"
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
         "tooltip": {
-          "mode": "multi"
+          "mode": "multi",
+          "sort": "none"
         }
       },
       "pluginVersion": "7.5.2",
@@ -985,6 +1023,21 @@
         "uid": "${datasource}"
       },
       "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          }
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 6,
         "w": 9,
@@ -999,10 +1052,51 @@
       "legend": {
         "show": false
       },
-      "pluginVersion": "7.5.2",
+      "options": {
+        "calculate": true,
+        "calculation": {},
+        "cellGap": 2,
+        "cellValues": {},
+        "color": {
+          "exponent": 0.5,
+          "fill": "#FADE2A",
+          "mode": "opacity",
+          "reverse": false,
+          "scale": "exponential",
+          "scheme": "Oranges",
+          "steps": 128
+        },
+        "exemplars": {
+          "color": "rgba(255,0,255,0.7)"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": false
+        },
+        "rowsFrame": {
+          "layout": "auto"
+        },
+        "showValue": "never",
+        "tooltip": {
+          "show": false,
+          "yHistogram": false
+        },
+        "yAxis": {
+          "axisPlacement": "left",
+          "reverse": false,
+          "unit": "short"
+        }
+      },
+      "pluginVersion": "10.1.1",
       "reverseYBuckets": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "exemplar": true,
           "expr": "slo:current_burn_rate:ratio{sloth_service=\"$service\", sloth_slo=\"$slo\"} > 0",
           "format": "time_series",
@@ -1101,9 +1195,13 @@
         "text": {},
         "textMode": "value_and_name"
       },
-      "pluginVersion": "8.3.0",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "exemplar": false,
           "expr": "max(ALERTS{sloth_service=\"$service\", sloth_slo=\"$slo\", sloth_severity=\"ticket\"}) OR on() vector(0)",
           "instant": true,
@@ -1186,9 +1284,13 @@
         "text": {},
         "textMode": "value_and_name"
       },
-      "pluginVersion": "8.3.0",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
           "exemplar": false,
           "expr": "max(ALERTS{sloth_service=\"$service\", sloth_slo=\"$slo\", sloth_severity=\"page\"}) or on() vector(0)",
           "instant": true,
@@ -1202,7 +1304,7 @@
     }
   ],
   "refresh": "30s",
-  "schemaVersion": 33,
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [
     "service levels",
@@ -1215,13 +1317,18 @@
       {
         "current": {
           "selected": false,
-          "text": "prometheus",
-          "value": "prometheus"
+          "text": [
+            "Mimir"
+          ],
+          "value": [
+            "PAE45454D0EDB9216"
+          ]
         },
         "hide": 0,
         "includeAll": false,
-        "multi": false,
-        "name": "Datasource",
+        "label": "Datasource",
+        "multi": true,
+        "name": "datasource",
         "options": [],
         "query": "prometheus",
         "queryValue": "",
@@ -1231,7 +1338,11 @@
         "type": "datasource"
       },
       {
-        "current": {},
+        "current": {
+          "selected": false,
+          "text": "k8s-apiserver",
+          "value": "k8s-apiserver"
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
@@ -1256,7 +1367,11 @@
         "useTags": false
       },
       {
-        "current": {},
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
@@ -1372,6 +1487,6 @@
   "timezone": "",
   "title": "SLO / Detail",
   "uid": "slo-detail",
-  "version": 1,
+  "version": 3,
   "weekStart": ""
 }
