@@ -58,7 +58,6 @@ spec:
         ingressClassName: external
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-          hajimari.io/group: "Private"
           hajimari.io/enable: "true"
           hajimari.io/icon: link
           nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
