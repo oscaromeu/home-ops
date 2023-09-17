@@ -5,5 +5,4 @@ namespace: monitoring
 resources:
   - ./deployment.yaml
   - ./service.yaml
-  - ./cm.yaml
   - ./ingress.yaml
