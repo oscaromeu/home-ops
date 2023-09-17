@@ -1,0 +1,25 @@
+ apiVersion: networking.k8s.io/v1
+ kind: Ingress
+ metadata:
+   annotations:
+    external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+    #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
+    #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
+   name: influxdb
+   namespace: monitoring
+ spec:
+   ingressClassName: internal
+   rules:
+   - host: &host "influxdb.${SECRET_DOMAIN}"
+     http:
+       paths:
+       - backend:
+           service:
+             name: influxdb-exporter-udp
+             port:
+               number: 9123
+         path: /
+         pathType: Prefix
+   tls:
+   - hosts:
+     - *host
