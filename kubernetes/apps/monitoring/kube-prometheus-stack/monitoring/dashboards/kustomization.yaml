@@ -48,3 +48,13 @@ configMapGenerator:
       annotations:
         kustomize.toolkit.fluxcd.io/substitute: disabled
       disableNameSuffixHash: true
+
+  - name: node-exporter
+    files:
+      - node-exporter.json
+    options:
+      labels:
+        home_ops: node-exporter
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
