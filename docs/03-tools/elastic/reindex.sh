@@ -1,6 +1,6 @@
 #!/bin/bash
 # poor man debugger
-#set -x
+set -x
 # cat datastreams.txt | xargs -I{} sh -c "./reindex.sh {}"
 
 # Define the Elasticsearch URL
@@ -8,7 +8,7 @@ ES_URL="${ES_URL}"
 
 # Define the Elasticsearch credentials
 ES_USER="elastic"
-ES_PASS=$(op item get elastic-api --vault home-ops --fields label=password)
+ES_PASS=$(op item get elastic --vault home-ops --fields label=credencial)
 
 # Get the DATASTREAM name from the command-line argument
 DATASTREAM_NAME="$1"
@@ -39,6 +39,19 @@ confirm_operation() {
   fi
 }
 
+# Define the PUT request for changing index settings
+SETTINGS_PAYLOAD="{
+  \"index\": {
+    \"refresh_interval\": \"0s\",
+    \"number_of_replicas\": 0
+  }
+}"
+
+# Send change settings request
+log_message "Changing settings: $DATASTREAM_NAME"
+change_settings=$(curl -XPOST -sSL "$ES_URL/_settings" -u "$ES_USER:$ES_PASS" -H "Content-Type: application/json" -d "$SETTINGS_PAYLOAD")
+log_message "message: $change_settings"
+log_message "Reindexed: $DATASTREAM_NAME"
 
 # Define the REINDEX_PAYLOAD
 REINDEX_PAYLOAD="{

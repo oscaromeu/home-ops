@@ -29,8 +29,8 @@
         "actions": {
           "rollover": {
             "max_age": "5d",
-            "min_primary_shard_size": "200mb",
-            "max_primary_shard_size": "200mb"
+            "min_primary_shard_size": "10gb",
+            "max_primary_shard_size": "10gb"
           },
           "set_priority": {
             "priority": 100
