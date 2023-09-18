@@ -46,10 +46,10 @@ sinks:
       # {data_stream.type}-{data_stream.dataset}-{data_stream.namespace}
       # https://www.elastic.co/guide/en/ecs/master/ecs-data_stream.html
       type: logs
-      dataset: "k3s_prod"
-      namespace: "{{ .kubernetes.pod_namespace }}"
-      #dataset: "k3s"
-      #namespace: "prod"
+      #dataset: "k3s_prod"
+      #namespace: "{{ .kubernetes.pod_namespace }}"
+      dataset: "k3s"
+      namespace: "prod"
     mode: "data_stream"
     bulk:
       action: "create"

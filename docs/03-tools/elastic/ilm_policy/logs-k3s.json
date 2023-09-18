@@ -8,6 +8,14 @@
       }
     },
     "phases": {
+      "delete": {
+        "min_age": "20d",
+        "actions": {
+          "delete": {
+            "delete_searchable_snapshot": true
+          }
+        }
+      },
       "warm": {
         "min_age": "10d",
         "actions": {
@@ -20,23 +28,15 @@
         "min_age": "0ms",
         "actions": {
           "rollover": {
-            "max_primary_shard_size": "200mb",
             "max_age": "5d",
-            "min_primary_shard_size": "200mb"
+            "min_primary_shard_size": "200mb",
+            "max_primary_shard_size": "200mb"
           },
           "set_priority": {
             "priority": 100
           },
           "shrink": {
             "number_of_shards": 1
-          }
-        }
-      },
-      "delete": {
-        "min_age": "20d",
-        "actions": {
-          "delete": {
-            "delete_searchable_snapshot": true
           }
         }
       }
