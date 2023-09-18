@@ -5,8 +5,8 @@ metadata:
   name: app-a-test-1-cron
   namespace: monitoring
 spec:
-  schedule: "*/1 * * * *"
-  #schedule: "0 0 * * *"
+  #schedule: "*/1 * * * *"
+  schedule: "0 0 * * *"
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
