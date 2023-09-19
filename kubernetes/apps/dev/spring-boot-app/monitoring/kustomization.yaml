@@ -4,6 +4,7 @@ namespace: monitoring
 
 resources:
   - ./tests
+  - ./rules
 
 configMapGenerator:
 

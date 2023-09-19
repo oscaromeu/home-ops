@@ -1,0 +1,33 @@
+apiVersion: sloth.slok.dev/v1
+kind: PrometheusServiceLevel
+metadata:
+  name: slo-springboot-app
+  namespace: monitoring
+spec:
+  service: "springboot-app"
+  labels:
+    owner: "arquitectura"
+    repo: "myorg/springboot"
+    tier: "1"
+  slos:
+    - name: "requests-availability"
+      objective: 99.9
+      description: "Common SLO based on availability for HTTP request responses."
+      sli:
+        events:
+          errorQuery: sum(rate(http_server_requests_seconds_count{job="app-a",status=~"(5..|429)"}[{{.window}}]))
+          totalQuery: sum(rate(http_server_requests_seconds_count{job="app-a"}[{{.window}}]))
+      alerting:
+        name: MyServiceHighErrorRate
+        labels:
+          category: "availability"
+        annotations:
+          summary: "High error rate on 'myservice' requests responses"
+        pageAlert:
+          labels:
+            severity: pageteam
+            routing_key: myteam
+        ticketAlert:
+          labels:
+            severity: "slack"
+            slack_channel: "#alerts-myteam"

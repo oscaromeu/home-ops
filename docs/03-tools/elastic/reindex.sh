@@ -39,19 +39,20 @@ confirm_operation() {
   fi
 }
 
+# Caution this setting has to be applied per datastream
 # Define the PUT request for changing index settings
-SETTINGS_PAYLOAD="{
-  \"index\": {
-    \"refresh_interval\": \"0s\",
-    \"number_of_replicas\": 0
-  }
-}"
-
-# Send change settings request
-log_message "Changing settings: $DATASTREAM_NAME"
-change_settings=$(curl -XPOST -sSL "$ES_URL/_settings" -u "$ES_USER:$ES_PASS" -H "Content-Type: application/json" -d "$SETTINGS_PAYLOAD")
-log_message "message: $change_settings"
-log_message "Reindexed: $DATASTREAM_NAME"
+#SETTINGS_PAYLOAD="{
+#  \"index\": {
+#    \"refresh_interval\": \"0s\",
+#    \"number_of_replicas\": 0
+#  }
+#}"
+#
+## Send change settings request
+#log_message "Changing settings: $DATASTREAM_NAME"
+#change_settings=$(curl -XPOST -sSL "$ES_URL/$DATASTREAM_NAME/_settings" -u "$ES_USER:$ES_PASS" -H "Content-Type: application/json" -d "$SETTINGS_PAYLOAD")
+#log_message "message: $change_settings"
+#log_message "Reindexed: $DATASTREAM_NAME"
 
 # Define the REINDEX_PAYLOAD
 REINDEX_PAYLOAD="{
