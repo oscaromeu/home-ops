@@ -1,0 +1,69 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+    meta.helm.sh/release-name: app-a
+    meta.helm.sh/release-namespace: dev
+  labels:
+    app.kubernetes.io/instance: app-a
+  name: app-a
+  namespace: dev
+spec:
+  endpoints:
+  - interval: 1m
+    path: /actuator/prometheus
+    port: http
+    scheme: http
+    scrapeTimeout: 10s
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: app-a
+      app.kubernetes.io/name: app-a
+      app.kubernetes.io/service: app-a
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+    meta.helm.sh/release-name: app-b
+    meta.helm.sh/release-namespace: dev
+  labels:
+    app.kubernetes.io/instance: app-b
+  name: app-b
+  namespace: dev
+spec:
+  endpoints:
+  - interval: 1m
+    path: /actuator/prometheus
+    port: http
+    scheme: http
+    scrapeTimeout: 10s
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: app-b
+      app.kubernetes.io/name: app-b
+      app.kubernetes.io/service: app-b
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+    meta.helm.sh/release-name: app-c
+    meta.helm.sh/release-namespace: dev
+  labels:
+    app.kubernetes.io/instance: app-c
+  name: app-c
+  namespace: dev
+spec:
+  endpoints:
+  - interval: 1m
+    path: /actuator/prometheus
+    port: http
+    scheme: http
+    scrapeTimeout: 10s
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: app-c
+      app.kubernetes.io/name: app-c
+      app.kubernetes.io/service: app-c

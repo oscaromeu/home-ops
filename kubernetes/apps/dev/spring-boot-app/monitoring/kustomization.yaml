@@ -5,6 +5,7 @@ namespace: monitoring
 resources:
   - ./tests
   - ./rules
+  - ./servicemonitor.yaml
 
 configMapGenerator:
 
