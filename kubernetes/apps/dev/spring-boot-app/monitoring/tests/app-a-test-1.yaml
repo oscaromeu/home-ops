@@ -10,4 +10,3 @@ spec:
     configMap:
       name: app-a-test-config
       file: app-a-test-1.js
-

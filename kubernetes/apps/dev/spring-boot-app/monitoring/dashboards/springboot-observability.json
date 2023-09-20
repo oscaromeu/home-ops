@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 33,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -987,7 +986,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "{app=~\"app-.*\"} | pattern `<date> <time> <_>=<trace_id> <_>=<span_id> <_>=<trace_flags> <type> <_> --- <msg>` | line_format \"{{.compose_service}}\t{{.type}}\ttrace_id={{.trace_id}}\t{{.msg}}\" |= \"$log_keyword\"",
+          "expr": "{app=~\"$app_name\"} | pattern `<date> <time> <_>=<trace_id> <_>=<span_id> <_>=<trace_flags> <type> <_> --- <msg>` | line_format \"{{.compose_service}}\t{{.type}}\ttrace_id={{.trace_id}}\t{{.msg}}\" |= \"$log_keyword\"",
           "queryType": "range",
           "refId": "A"
         }
@@ -996,7 +995,7 @@
       "type": "logs"
     }
   ],
-  "refresh": "5s",
+  "refresh": "1m",
   "schemaVersion": 38,
   "style": "dark",
   "tags": [],
@@ -1004,7 +1003,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "app-a",
           "value": "app-a"
         },
@@ -1053,7 +1052,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
