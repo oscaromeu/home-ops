@@ -1,0 +1,13 @@
+---
+apiVersion: monitoring.googleapis.com/v1
+kind: PodMonitoring
+metadata:
+  name: my-cluster
+spec:
+  selector:
+    matchLabels:
+      strimzi.io/cluster: my-cluster
+  endpoints:
+  - port: 9404
+    interval: 30s
+    path: /
