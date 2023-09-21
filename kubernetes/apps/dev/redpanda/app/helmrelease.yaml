@@ -20,8 +20,8 @@ spec:
       create: true
 
     extraEnvFrom:
-    - secretRef:
-      name: datahub-user
+      - secretRef:
+          name: datahub-user
 
     console:
       # -- Settings for the `Config.yaml` (required).
