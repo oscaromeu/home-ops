@@ -28,7 +28,7 @@ spec:
   values:
     crds:
       install: true
-    replicaCount: 3
+    replicaCount: 1
     grafana:
       enabled: false
     serviceMonitor:
