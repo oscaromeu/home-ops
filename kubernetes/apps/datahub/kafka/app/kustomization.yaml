@@ -6,6 +6,6 @@ resources:
   - ./externalsecret.yaml
   - ./kafkacat.yaml
   - ./kafka-datahub-cluster.yaml
-  - ./datahub-user.yaml
+  - ./kafka-datahub-user.yaml
   - ./topic.yaml
   - ./users.yaml
