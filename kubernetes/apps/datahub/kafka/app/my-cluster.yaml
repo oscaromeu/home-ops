@@ -87,8 +87,8 @@ spec:
       volumes:
       - id: 0
         type: persistent-claim
-        size: 100Gi
-        class: premium-rwo
+        size: 10Gi
+        class: local-path
         deleteClaim: false
   zookeeper:
     template:
@@ -125,8 +125,8 @@ spec:
       -Xmx: 2048m
     storage:
       type: persistent-claim
-      size: 100Gi
-      class: premium-rwo
+      size: 10Gi
+      class: local-path
       deleteClaim: false
   entityOperator:
     tlsSidecar:
