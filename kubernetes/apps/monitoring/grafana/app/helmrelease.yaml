@@ -50,6 +50,10 @@ spec:
         org_name: "Main Org."
         org_role: "Viewer"
 
+      dataproxy:
+        max_idle_connections: 500
+
+
 
     #dashboardProviders:
     #  dashboardproviders.yaml:
