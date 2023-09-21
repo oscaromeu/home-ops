@@ -35,6 +35,7 @@ spec:
       config:
         kafka:
           brokers:
+            - datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9092
             - datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9094
           sasl:
             enabled: true
