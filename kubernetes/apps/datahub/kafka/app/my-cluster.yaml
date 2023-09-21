@@ -1,8 +1,21 @@
----
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
 metadata:
-  name: kafka-datahub-cluster
+  name: my-cluster
 spec:
   kafka:
     version: 3.4.0
@@ -31,7 +44,7 @@ spec:
           labelSelector:
             matchLabels:
               app.kubernetes.io/name: kafka
-              strimzi.io/cluster: kafka-datahub-cluster
+              strimzi.io/cluster: my-cluster
               strimzi.io/component-type: kafka
     resources:
       requests:
@@ -39,6 +52,7 @@ spec:
         cpu: "1"
       limits:
         memory: 5Gi
+        cpu: "2"
     jvmOptions:
       -Xms: 4096m
       -Xmx: 4096m
@@ -74,7 +88,7 @@ spec:
       - id: 0
         type: persistent-claim
         size: 100Gi
-        class: local-path
+        class: premium-rwo
         deleteClaim: false
   zookeeper:
     template:
@@ -96,7 +110,7 @@ spec:
           labelSelector:
             matchLabels:
               app.kubernetes.io/name: zookeeper
-              strimzi.io/cluster: kafka-datahub-cluster
+              strimzi.io/cluster: my-cluster
               strimzi.io/component-type: zookeeper
     replicas: 3
     resources:
@@ -112,7 +126,7 @@ spec:
     storage:
       type: persistent-claim
       size: 100Gi
-      class: local-path
+      class: premium-rwo
       deleteClaim: false
   entityOperator:
     tlsSidecar:
