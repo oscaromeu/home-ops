@@ -16,6 +16,8 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    secret:
+      create: false
 
     console:
       # -- Settings for the `Config.yaml` (required).
