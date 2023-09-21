@@ -16,6 +16,21 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+
+    console:
+      # -- Settings for the `Config.yaml` (required).
+      # For a reference of configuration settings,
+      # see the [Redpanda Console documentation](https://docs.redpanda.com/docs/reference/console/config/).
+      config:
+        kafka:
+          brokers:
+            - datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9094
+          sasl:
+            enabled: true
+            username: datahub-user
+            mechanism: SCRAM-SHA-512
+
+
     ingress:
       main:
         enabled: true
@@ -55,3 +70,10 @@ spec:
       timeoutSeconds: 1
       successThreshold: 1
       failureThreshold: 3
+
+
+  valuesFrom:
+    - targetPath: mimir.structuredConfig.alertmanager_storage.s3.bucket_name
+      name: mimir-ruler
+      kind: Secret
+      valuesKey: BUCKET_NAME
