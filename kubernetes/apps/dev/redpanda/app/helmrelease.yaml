@@ -36,13 +36,13 @@ spec:
         kafka:
           brokers:
             - datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9092
-            - datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9094
+            #- datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9094
           sasl:
-            enabled: true
+            enabled: false
             username: datahub-user
             mechanism: SCRAM-SHA-512
           tls:
-            enabled: true
+            enabled: false
             insecureSkipTlsVerify: true
 
     ingress:
