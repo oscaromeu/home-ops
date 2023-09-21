@@ -16,7 +16,7 @@ resources:
   - ./node-problem-detector/ks.yaml
   - ./prometheus-adapter/ks.yaml
   - ./promlens/ks.yaml
-  - ./pyroscope-distributed/ks.yaml
+  #- ./pyroscope-distributed/ks.yaml
   - ./sloth/ks.yaml
   #- ./stackdriver-exporter/ks.yaml
   - ./tempo/ks.yaml
