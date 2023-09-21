@@ -6,5 +6,5 @@ resources:
   #- ./clickhouse/ks.yaml
   - ./cloudnative-pg/ks.yaml
   #- ./jupyterhub/ks.yaml
-  - ./kafka/ks.yaml
+  #- ./kafka/ks.yaml
   - ./redis/ks.yaml
