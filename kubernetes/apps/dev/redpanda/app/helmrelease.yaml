@@ -40,3 +40,18 @@ spec:
       requests:
         cpu: 100m
         memory: 128Mi
+
+    livenessProbe:
+      initialDelaySeconds: 0
+      periodSeconds: 10
+      timeoutSeconds: 1
+      successThreshold: 1
+      failureThreshold: 3
+
+    readinessProbe:
+      # -- Grant time to test connectivity to upstream services such as Kafka and Schema Registry.
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 1
+      successThreshold: 1
+      failureThreshold: 3
