@@ -46,6 +46,7 @@ resources:
   - ./prometheus-community.yaml
   - ./pyroscope.yaml
   - ./questdb.yaml
+  - ./redpanda.yaml
   - ./robusta.yaml
   - ./rook-ceph.yaml
   - ./sloth.yaml
