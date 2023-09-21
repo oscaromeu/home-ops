@@ -41,8 +41,9 @@ data:
       let res4 = http.get("http://app-a.dev.svc.cluster.local:8080/random_sleep");
       check(res4, { "status was 200": (r) => r.status == 200 });
 
-      #let res5 = http.get("http://app-a.dev.svc.cluster.local:8080/random_status");
-      #check(res5, { "status was 200": (r) => r.status == 200 });
+
+      // let res5 = http.get("http://app-a.dev.svc.cluster.local:8080/random_status");
+      // check(res5, { "status was 200": (r) => r.status == 200 });
 
       let res6 = http.get("http://app-a.dev.svc.cluster.local:8080/chain");
       check(res6, { "status was 200": (r) => r.status == 200 });
