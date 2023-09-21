@@ -73,7 +73,7 @@ spec:
 
 
   valuesFrom:
-    - targetPath: mimir.structuredConfig.alertmanager_storage.s3.bucket_name
-      name: mimir-ruler
+    - targetPath: config.kafka.sasl.password
+      name: datahub-user
       kind: Secret
-      valuesKey: BUCKET_NAME
+      valuesKey: datahub-user
