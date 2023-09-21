@@ -2,11 +2,11 @@
 apiVersion: monitoring.googleapis.com/v1
 kind: PodMonitoring
 metadata:
-  name: my-cluster
+  name: datahub-cluster
 spec:
   selector:
     matchLabels:
-      strimzi.io/cluster: my-cluster
+      strimzi.io/cluster: datahub-cluster
   endpoints:
   - port: 9404
     interval: 30s
