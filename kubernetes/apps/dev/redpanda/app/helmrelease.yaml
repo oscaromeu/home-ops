@@ -41,7 +41,7 @@ spec:
             username: datahub-user
             mechanism: SCRAM-SHA-512
           tls:
-            enabled: true
+            enabled: false
             insecureSkipTlsVerify: false
 
     ingress:
