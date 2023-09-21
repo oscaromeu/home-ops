@@ -73,7 +73,7 @@ spec:
 
 
   valuesFrom:
-    - targetPath: config.kafka.sasl.password
+    - targetPath: console.config.kafka.sasl.password
       name: datahub-user
       kind: Secret
       valuesKey: datahub-user
