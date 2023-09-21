@@ -37,7 +37,7 @@ spec:
             mechanism: SCRAM-SHA-512
           tls:
             enabled: true
-            insecureSkipTlsVerify: true
+            insecureSkipTlsVerify: false
 
     ingress:
       main:
