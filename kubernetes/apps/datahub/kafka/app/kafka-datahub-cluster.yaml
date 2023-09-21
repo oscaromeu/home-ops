@@ -74,7 +74,7 @@ spec:
       - id: 0
         type: persistent-claim
         size: 100Gi
-        class: premium-rwo
+        class: local-path
         deleteClaim: false
   zookeeper:
     template:
@@ -112,7 +112,7 @@ spec:
     storage:
       type: persistent-claim
       size: 100Gi
-      class: premium-rwo
+      class: local-path
       deleteClaim: false
   entityOperator:
     tlsSidecar:
