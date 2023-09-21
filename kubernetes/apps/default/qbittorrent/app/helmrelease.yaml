@@ -33,6 +33,12 @@ spec:
       TZ: ${TIMEZONE}
       QBITTORRENT__PORT: &port 8080
       QBITTORRENT__BT_PORT: &port-bt 58462
+      QBT_BitTorrent__Session__Interface: eth0
+      QBT_BitTorrent__Session__InterfaceAddress:
+        valueFrom:
+          fieldRef:
+            fieldPath: status.podIP
+      QBT_BitTorrent__Session__InterfaceName: eth0
     service:
       main:
         ports:
@@ -79,8 +85,7 @@ spec:
       runAsGroup: 568
       fsGroup: 568
       fsGroupChangePolicy: "OnRootMismatch"
-      supplementalGroups:
-        - 100
+      supplementalGroups: [10000]
     persistence:
       config:
         enabled: true
@@ -99,6 +104,8 @@ spec:
         hostPathType: Directory
         hostPath: /home/pi/Downloads/torrent
         mountPath: /downloads/video
+    nodeSelector:
+      kubernetes.io/hostname: "lbpkm1"
     resources:
       requests:
         cpu: 500m
