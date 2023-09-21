@@ -17,7 +17,11 @@ spec:
       interval: 5m
   values:
     secret:
-      create: false
+      create: true
+
+    extraEnvFrom:
+    - secretRef:
+      name: datahub-user
 
     console:
       # -- Settings for the `Config.yaml` (required).
