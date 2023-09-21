@@ -19,6 +19,11 @@ spec:
     secret:
       create: true
 
+
+    extraEnv:
+      - name: KAKAFKA_SASL_USERNAME
+        value: "datahub-user"
+
     #extraEnvFrom:
     #  - secretRef:
     #      name: datahub-user

@@ -136,9 +136,9 @@ console:
   # roleBindings:
 
 # -- Additional environment variables for the Redpanda Console Deployment.
-extraEnv: []
-  # - name: KAFKA_RACKID
-  #   value: "1"
+extraEnv:
+  - name: KAKAFKA_SASL_USERNAME
+    value: "datahub-user"
 
 # -- Additional environment variables for Redpanda Console mapped from Secret or ConfigMap.
 extraEnvFrom: []
