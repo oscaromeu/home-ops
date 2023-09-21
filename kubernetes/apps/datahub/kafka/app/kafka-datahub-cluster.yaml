@@ -69,12 +69,12 @@ spec:
       min.insync.replicas: 2
       inter.broker.protocol.version: "3.4"
     storage:
-      type: local-path
+      type: jbod
       volumes:
       - id: 0
         type: persistent-claim
         size: 100Gi
-        class: local-path
+        class: premium-rwo
         deleteClaim: false
   zookeeper:
     template:
@@ -112,7 +112,7 @@ spec:
     storage:
       type: persistent-claim
       size: 100Gi
-      class: local-path
+      class: premium-rwo
       deleteClaim: false
   entityOperator:
     tlsSidecar:
