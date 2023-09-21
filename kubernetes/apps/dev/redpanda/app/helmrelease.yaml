@@ -21,7 +21,7 @@ spec:
 
 
     extraEnv:
-      - name: KAKAFKA_SASL_USERNAME
+      - name: KAFKA_SASL_USERNAME
         value: "datahub-user"
 
     #extraEnvFrom:
