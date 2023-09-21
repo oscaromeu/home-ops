@@ -80,12 +80,12 @@ spec:
       failureThreshold: 3
 
 
-  #valuesFrom:
-  #  - targetPath: console.config.kafka.sasl.password
-  #    name: datahub-user
-  #    kind: Secret
-  #    valuesKey: datahub-user
-  #  #- targetPath: secret.kafka.saslPassword
-  #  #  name: datahub-user
-  #  #  kind: Secret
-  #  #  valuesKey: datahub-user
+  valuesFrom:
+    #- targetPath: console.config.kafka.sasl.password
+    #  name: datahub-user
+    #  kind: Secret
+    #  valuesKey: datahub-user
+    - targetPath: secret.kafka.saslPassword
+      name: datahub-user
+      kind: Secret
+      valuesKey: datahub-user
