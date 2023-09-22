@@ -87,6 +87,7 @@ spec:
           memory: 500Mi
     defaultBackend:
       enabled: false
-    #  53: "kube-system/kube-dns:53"
     udp:
       "9123": "monitoring/influxdb-exporter-udp:9123"
+    tcp:
+      "6379": "datahub/redis-master:6379"
