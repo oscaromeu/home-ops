@@ -28,7 +28,7 @@ spec:
           memory: 138Mi
         limits:
           #cpu:
-          memory: 5Gi
+          memory: 8Gi
     replica:
       replicaCount: 1
       nodeSelector:
