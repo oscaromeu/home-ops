@@ -53,7 +53,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-kafka-cluster
-  path: ./kubernetes/apps/datahub/kafka/app
+  path: ./kubernetes/apps/datahub/kafka/monitoring
   prune: true
   sourceRef:
     kind: GitRepository
