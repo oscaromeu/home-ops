@@ -299,7 +299,7 @@
             "uid": "PAE45454D0EDB9216"
           },
           "editorMode": "code",
-          "expr": "sum by (le)(\n  rate(\n    http_server_requests_seconds_bucket{\n      status!=\"404\",status!=\"500\",\n      application =~\"app-a\"\n    }[$__range]\n  )\n)",
+          "expr": "sum by (le)(\n  rate(\n    http_server_requests_seconds_bucket{\n      status!=\"404\",status!=\"500\",\n      application =~\"$app_name\"\n    }[$__range]\n  )\n)",
           "instant": false,
           "interval": "",
           "legendFormat": "{{le}}",
@@ -1093,7 +1093,7 @@
     "list": [
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "app-a",
           "value": "app-a"
         },
@@ -1121,8 +1121,8 @@
       {
         "current": {
           "selected": false,
-          "text": "",
-          "value": ""
+          "text": "INFO",
+          "value": "INFO"
         },
         "description": "query with keyword",
         "hide": 0,
@@ -1131,11 +1131,11 @@
         "options": [
           {
             "selected": true,
-            "text": "",
-            "value": ""
+            "text": "INFO",
+            "value": "INFO"
           }
         ],
-        "query": "",
+        "query": "INFO",
         "skipUrlSync": false,
         "type": "textbox"
       }
