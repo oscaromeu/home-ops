@@ -12,4 +12,5 @@ resources:
   - ./linkding/ks.yaml
   - ./navidrome/ks.yaml
   # - ./podinfo/ks.yaml
+  - ./prowlarr/ks.yaml
   - ./qbittorrent/ks.yaml
