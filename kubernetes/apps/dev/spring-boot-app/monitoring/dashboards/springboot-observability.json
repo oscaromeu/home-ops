@@ -50,7 +50,7 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 4,
+        "w": 11,
         "x": 0,
         "y": 0
       },
@@ -112,8 +112,8 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 8,
-        "x": 4,
+        "w": 13,
+        "x": 11,
         "y": 0
       },
       "id": 16,
@@ -180,10 +180,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
-        "w": 12,
-        "x": 12,
-        "y": 0
+        "h": 9,
+        "w": 11,
+        "x": 0,
+        "y": 6
       },
       "id": 6,
       "options": {
@@ -222,6 +222,96 @@
     },
     {
       "datasource": {
+        "type": "prometheus",
+        "uid": "PAE45454D0EDB9216"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 13,
+        "x": 11,
+        "y": 6
+      },
+      "id": 24,
+      "options": {
+        "calculate": false,
+        "calculation": {
+          "xBuckets": {
+            "mode": "size"
+          },
+          "yBuckets": {
+            "scale": {
+              "type": "linear"
+            }
+          }
+        },
+        "cellGap": 1,
+        "color": {
+          "exponent": 0.5,
+          "fill": "dark-orange",
+          "mode": "scheme",
+          "reverse": false,
+          "scale": "exponential",
+          "scheme": "Turbo",
+          "steps": 128
+        },
+        "exemplars": {
+          "color": "rgba(255,0,255,0.7)"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": true
+        },
+        "rowsFrame": {
+          "layout": "le"
+        },
+        "tooltip": {
+          "show": true,
+          "yHistogram": true
+        },
+        "yAxis": {
+          "axisPlacement": "left",
+          "reverse": false,
+          "unit": "s"
+        }
+      },
+      "pluginVersion": "10.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PAE45454D0EDB9216"
+          },
+          "editorMode": "code",
+          "expr": "sum by (le)(\n  rate(\n    http_server_requests_seconds_bucket{\n      status!=\"404\",status!=\"500\",\n      application =~\"app-a\"\n    }[$__range]\n  )\n)",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{le}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Latency Heatmap",
+      "type": "heatmap"
+    },
+    {
+      "datasource": {
         "id": "mimir",
         "type": "prometheus"
       },
@@ -251,7 +341,7 @@
         "h": 7,
         "w": 4,
         "x": 0,
-        "y": 6
+        "y": 15
       },
       "id": 22,
       "options": {
@@ -352,7 +442,7 @@
         "h": 7,
         "w": 10,
         "x": 4,
-        "y": 6
+        "y": 15
       },
       "id": 18,
       "options": {
@@ -449,7 +539,7 @@
         "h": 7,
         "w": 10,
         "x": 14,
-        "y": 6
+        "y": 15
       },
       "id": 20,
       "options": {
@@ -545,7 +635,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 13
+        "y": 22
       },
       "id": 8,
       "options": {
@@ -641,7 +731,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 13
+        "y": 22
       },
       "id": 23,
       "options": {
@@ -737,7 +827,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 13
+        "y": 22
       },
       "id": 12,
       "options": {
@@ -909,7 +999,7 @@
         "h": 9,
         "w": 6,
         "x": 0,
-        "y": 21
+        "y": 30
       },
       "id": 14,
       "options": {
@@ -965,7 +1055,7 @@
         "h": 9,
         "w": 18,
         "x": 6,
-        "y": 21
+        "y": 30
       },
       "id": 2,
       "options": {
@@ -1052,7 +1142,7 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
