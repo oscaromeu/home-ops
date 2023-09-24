@@ -11,3 +11,11 @@ configMapGenerator:
       labels:
         home_ops: nginx
       disableNameSuffixHash: true
+
+  - name: request-handling-performance
+    files:
+      - ./request-handling-performance.json
+    options:
+      labels:
+        home_ops: request-handling-performance
+      disableNameSuffixHash: true
