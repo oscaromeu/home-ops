@@ -1,0 +1,1277 @@
+
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    creationTimestamp: "2023-09-10T19:14:44Z"
+    generation: 1
+    labels:
+      app: prometheus-elasticsearch-exporter
+      kustomize.toolkit.fluxcd.io/name: cluster-apps-elastic-exporter
+      kustomize.toolkit.fluxcd.io/namespace: flux-system
+    name: prometheus-elasticsearch-exporter-monitor
+    namespace: logging
+    resourceVersion: "13100"
+    uid: 24a8c260-5264-4c68-a5bf-d9b9568f0bcf
+  spec:
+    endpoints:
+    - port: http
+    namespaceSelector:
+      matchNames:
+      - logging
+    selector:
+      matchLabels:
+        app: prometheus-elasticsearch-exporter
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    creationTimestamp: "2023-09-10T19:20:48Z"
+    generation: 1
+    labels:
+      app: redis-exporter
+      kustomize.toolkit.fluxcd.io/name: cluster-apps-redis-exporter
+      kustomize.toolkit.fluxcd.io/namespace: flux-system
+    name: redis-exporter
+    namespace: logging
+    resourceVersion: "20807"
+    uid: 08b37f45-e7d5-49cc-926d-4c156c662af7
+  spec:
+    endpoints:
+    - interval: 60s
+      port: redis-metrics
+    namespaceSelector:
+      matchNames:
+      - logging
+    selector:
+      matchLabels:
+        app: redis-exporter
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: gatus
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:23:04Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/instance: gatus
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: gatus
+      helm.sh/chart: app-template-1.5.1
+      helm.toolkit.fluxcd.io/name: gatus
+      helm.toolkit.fluxcd.io/namespace: monitoring
+    name: gatus
+    namespace: monitoring
+    resourceVersion: "23069"
+    uid: ee303816-daeb-4e8b-9f46-d906a81c8f67
+  spec:
+    endpoints:
+    - interval: 1m
+      path: /metrics
+      port: http
+      scheme: http
+      scrapeTimeout: 10s
+    selector:
+      matchLabels:
+        app.kubernetes.io/instance: gatus
+        app.kubernetes.io/name: gatus
+        app.kubernetes.io/service: gatus
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: grafana
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:32:49Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/instance: grafana
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: grafana
+      app.kubernetes.io/version: 10.1.1
+      helm.sh/chart: grafana-6.59.1
+      helm.toolkit.fluxcd.io/name: grafana
+      helm.toolkit.fluxcd.io/namespace: monitoring
+    name: grafana
+    namespace: monitoring
+    resourceVersion: "3492856"
+    uid: 0820aeb5-64b0-4878-bbbe-c835d53b4500
+  spec:
+    endpoints:
+    - honorLabels: true
+      interval: 1m
+      path: /metrics
+      port: service
+      scheme: http
+      scrapeTimeout: 30s
+    jobLabel: grafana
+    namespaceSelector:
+      matchNames:
+      - monitoring
+    selector:
+      matchLabels:
+        app.kubernetes.io/instance: grafana
+        app.kubernetes.io/name: grafana
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    creationTimestamp: "2023-09-17T16:35:08Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/instance: influxdb-exporter
+      app.kubernetes.io/name: influxdb-exporter
+      app.kubernetes.io/version: v0.11.4
+      kustomize.toolkit.fluxcd.io/name: cluster-apps-influxdb-exporter-monitoring
+      kustomize.toolkit.fluxcd.io/namespace: flux-system
+    name: influxdb-exporter
+    namespace: monitoring
+    resourceVersion: "9254988"
+    uid: 3fea75f6-108a-4992-ab6f-13d9640e230c
+  spec:
+    endpoints:
+    - interval: 15s
+      path: /metrics
+      port: http
+      scrapeTimeout: 5s
+    - interval: 15s
+      path: /metrics/exporter
+      port: http
+      scrapeTimeout: 5s
+    selector:
+      matchLabels:
+        app.kubernetes.io/instance: influxdb-exporter
+        app.kubernetes.io/name: influxdb-exporter
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: kube-prometheus-stack
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:20:07Z"
+    generation: 1
+    labels:
+      app: kube-prometheus-stack-apiserver
+      app.kubernetes.io/instance: kube-prometheus-stack
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/part-of: kube-prometheus-stack
+      app.kubernetes.io/version: 48.1.2
+      chart: kube-prometheus-stack-48.1.2
+      helm.toolkit.fluxcd.io/name: kube-prometheus-stack
+      helm.toolkit.fluxcd.io/namespace: monitoring
+      heritage: Helm
+      release: kube-prometheus-stack
+    name: kube-prometheus-stack-apiserver
+    namespace: monitoring
+    resourceVersion: "19953"
+    uid: 5ac86b03-8f52-4172-9d4a-150d7fd78e3d
+  spec:
+    endpoints:
+    - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+      metricRelabelings:
+      - action: keep
+        regex: (aggregator_openapi|aggregator_unavailable|apiextensions_openapi|apiserver_admission|apiserver_audit|apiserver_cache|apiserver_cel|apiserver_client|apiserver_crd|apiserver_current|apiserver_envelope|apiserver_flowcontrol|apiserver_init|apiserver_kube|apiserver_longrunning|apiserver_request|apiserver_requested|apiserver_response|apiserver_selfrequest|apiserver_storage|apiserver_terminated|apiserver_tls|apiserver_watch|apiserver_webhooks|authenticated_user|authentication|disabled_metric|etcd_bookmark|etcd_lease|etcd_request|field_validation|get_token|go|grpc_client|hidden_metric|kube_apiserver|kubernetes_build|kubernetes_feature|node_authorizer|pod_security|process_cpu|process_max|process_open|process_resident|process_start|process_virtual|registered_metric|rest_client|scrape_duration|scrape_samples|scrape_series|serviceaccount_legacy|serviceaccount_stale|serviceaccount_valid|watch_cache|workqueue)_(.+)
+        sourceLabels:
+        - __name__
+      - action: drop
+        regex: (apiserver|etcd|rest_client)_request(|_sli|_slo)_duration_seconds_bucket
+        sourceLabels:
+        - __name__
+      - action: drop
+        regex: (apiserver_response_sizes_bucket|apiserver_watch_events_sizes_bucket)
+        sourceLabels:
+        - __name__
+      port: https
+      scheme: https
+      tlsConfig:
+        caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        insecureSkipVerify: false
+        serverName: kubernetes
+    jobLabel: component
+    namespaceSelector:
+      matchNames:
+      - default
+    selector:
+      matchLabels:
+        component: apiserver
+        provider: kubernetes
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: kube-prometheus-stack
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:20:06Z"
+    generation: 1
+    labels:
+      app: kube-prometheus-stack-coredns
+      app.kubernetes.io/instance: kube-prometheus-stack
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/part-of: kube-prometheus-stack
+      app.kubernetes.io/version: 48.1.2
+      chart: kube-prometheus-stack-48.1.2
+      helm.toolkit.fluxcd.io/name: kube-prometheus-stack
+      helm.toolkit.fluxcd.io/namespace: monitoring
+      heritage: Helm
+      release: kube-prometheus-stack
+    name: kube-prometheus-stack-coredns
+    namespace: monitoring
+    resourceVersion: "19939"
+    uid: e2d08b71-1080-4261-816b-f65cd5f1b471
+  spec:
+    endpoints:
+    - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+      port: http-metrics
+    jobLabel: jobLabel
+    namespaceSelector:
+      matchNames:
+      - kube-system
+    selector:
+      matchLabels:
+        app: kube-prometheus-stack-coredns
+        release: kube-prometheus-stack
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: kube-prometheus-stack
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:20:06Z"
+    generation: 1
+    labels:
+      app: kube-prometheus-stack-kube-controller-manager
+      app.kubernetes.io/instance: kube-prometheus-stack
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/part-of: kube-prometheus-stack
+      app.kubernetes.io/version: 48.1.2
+      chart: kube-prometheus-stack-48.1.2
+      helm.toolkit.fluxcd.io/name: kube-prometheus-stack
+      helm.toolkit.fluxcd.io/namespace: monitoring
+      heritage: Helm
+      release: kube-prometheus-stack
+    name: kube-prometheus-stack-kube-controller-manager
+    namespace: monitoring
+    resourceVersion: "19940"
+    uid: e0650256-59e6-49e9-9e53-a65b9615e406
+  spec:
+    endpoints:
+    - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+      metricRelabelings:
+      - action: keep
+        regex: (apiserver_audit|apiserver_client|apiserver_delegated|apiserver_envelope|apiserver_storage|apiserver_webhooks|attachdetach_controller|authenticated_user|authentication|cronjob_controller|disabled_metric|endpoint_slice|ephemeral_volume|garbagecollector_controller|get_token|go|hidden_metric|job_controller|kubernetes_build|kubernetes_feature|leader_election|node_collector|node_ipam|process_cpu|process_max|process_open|process_resident|process_start|process_virtual|pv_collector|registered_metric|replicaset_controller|rest_client|retroactive_storageclass|root_ca|running_managed|scrape_duration|scrape_samples|scrape_series|service_controller|storage_count|storage_operation|ttl_after|volume_operation|workqueue)_(.+)
+        sourceLabels:
+        - __name__
+      port: http-metrics
+      scheme: https
+      tlsConfig:
+        caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        insecureSkipVerify: true
+    jobLabel: jobLabel
+    namespaceSelector:
+      matchNames:
+      - kube-system
+    selector:
+      matchLabels:
+        app: kube-prometheus-stack-kube-controller-manager
+        release: kube-prometheus-stack
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: kube-prometheus-stack
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:20:07Z"
+    generation: 1
+    labels:
+      app: kube-prometheus-stack-kube-etcd
+      app.kubernetes.io/instance: kube-prometheus-stack
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/part-of: kube-prometheus-stack
+      app.kubernetes.io/version: 48.1.2
+      chart: kube-prometheus-stack-48.1.2
+      helm.toolkit.fluxcd.io/name: kube-prometheus-stack
+      helm.toolkit.fluxcd.io/namespace: monitoring
+      heritage: Helm
+      release: kube-prometheus-stack
+    name: kube-prometheus-stack-kube-etcd
+    namespace: monitoring
+    resourceVersion: "19946"
+    uid: a1b39f3e-1b9b-4d35-ba69-bc68e1803fd4
+  spec:
+    endpoints:
+    - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+      port: http-metrics
+    jobLabel: jobLabel
+    namespaceSelector:
+      matchNames:
+      - kube-system
+    selector:
+      matchLabels:
+        app: kube-prometheus-stack-kube-etcd
+        release: kube-prometheus-stack
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: kube-prometheus-stack
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:20:07Z"
+    generation: 1
+    labels:
+      app: kube-prometheus-stack-kube-scheduler
+      app.kubernetes.io/instance: kube-prometheus-stack
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/part-of: kube-prometheus-stack
+      app.kubernetes.io/version: 48.1.2
+      chart: kube-prometheus-stack-48.1.2
+      helm.toolkit.fluxcd.io/name: kube-prometheus-stack
+      helm.toolkit.fluxcd.io/namespace: monitoring
+      heritage: Helm
+      release: kube-prometheus-stack
+    name: kube-prometheus-stack-kube-scheduler
+    namespace: monitoring
+    resourceVersion: "19943"
+    uid: bb43e413-054d-4036-86b2-3c389f281ddd
+  spec:
+    endpoints:
+    - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+      metricRelabelings:
+      - action: keep
+        regex: (apiserver_audit|apiserver_client|apiserver_delegated|apiserver_envelope|apiserver_storage|apiserver_webhooks|authenticated_user|authentication|disabled_metric|go|hidden_metric|kubernetes_build|kubernetes_feature|leader_election|process_cpu|process_max|process_open|process_resident|process_start|process_virtual|registered_metric|rest_client|scheduler|scrape_duration|scrape_samples|scrape_series|workqueue)_(.+)
+        sourceLabels:
+        - __name__
+      port: http-metrics
+      scheme: https
+      tlsConfig:
+        caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        insecureSkipVerify: true
+    jobLabel: jobLabel
+    namespaceSelector:
+      matchNames:
+      - kube-system
+    selector:
+      matchLabels:
+        app: kube-prometheus-stack-kube-scheduler
+        release: kube-prometheus-stack
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: kube-prometheus-stack
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:20:07Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/component: metrics
+      app.kubernetes.io/instance: kube-prometheus-stack
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: kube-state-metrics
+      app.kubernetes.io/part-of: kube-state-metrics
+      app.kubernetes.io/version: 2.9.2
+      helm.sh/chart: kube-state-metrics-5.8.2
+      helm.toolkit.fluxcd.io/name: kube-prometheus-stack
+      helm.toolkit.fluxcd.io/namespace: monitoring
+      release: kube-prometheus-stack
+    name: kube-prometheus-stack-kube-state-metrics
+    namespace: monitoring
+    resourceVersion: "19942"
+    uid: 996043d4-f233-4547-9d02-f66d6dd73ee1
+  spec:
+    endpoints:
+    - honorLabels: true
+      port: http
+      relabelings:
+      - action: replace
+        regex: (.*)
+        replacement: $1
+        sourceLabels:
+        - __meta_kubernetes_pod_node_name
+        targetLabel: kubernetes_node
+    jobLabel: app.kubernetes.io/name
+    selector:
+      matchLabels:
+        app.kubernetes.io/instance: kube-prometheus-stack
+        app.kubernetes.io/name: kube-state-metrics
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: kube-prometheus-stack
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:20:07Z"
+    generation: 1
+    labels:
+      app: kube-prometheus-stack-kubelet
+      app.kubernetes.io/instance: kube-prometheus-stack
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/part-of: kube-prometheus-stack
+      app.kubernetes.io/version: 48.1.2
+      chart: kube-prometheus-stack-48.1.2
+      helm.toolkit.fluxcd.io/name: kube-prometheus-stack
+      helm.toolkit.fluxcd.io/namespace: monitoring
+      heritage: Helm
+      release: kube-prometheus-stack
+    name: kube-prometheus-stack-kubelet
+    namespace: monitoring
+    resourceVersion: "19944"
+    uid: daff63b2-d0cf-457f-ac01-dbe6e25304e3
+  spec:
+    endpoints:
+    - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+      honorLabels: true
+      metricRelabelings:
+      - action: keep
+        regex: (apiserver_audit|apiserver_client|apiserver_delegated|apiserver_envelope|apiserver_storage|apiserver_webhooks|authentication_token|cadvisor_version|container_blkio|container_cpu|container_fs|container_last|container_memory|container_network|container_oom|container_processes|container|csi_operations|disabled_metric|get_token|go|hidden_metric|kubelet_certificate|kubelet_cgroup|kubelet_container|kubelet_containers|kubelet_cpu|kubelet_device|kubelet_graceful|kubelet_http|kubelet_lifecycle|kubelet_managed|kubelet_node|kubelet_pleg|kubelet_pod|kubelet_run|kubelet_running|kubelet_runtime|kubelet_server|kubelet_started|kubelet_volume|kubernetes_build|kubernetes_feature|machine_cpu|machine_memory|machine_nvm|machine_scrape|node_namespace|plugin_manager|prober_probe|process_cpu|process_max|process_open|process_resident|process_start|process_virtual|registered_metric|rest_client|scrape_duration|scrape_samples|scrape_series|storage_operation|volume_manager|volume_operation|workqueue)_(.+)
+        sourceLabels:
+        - __name__
+      - action: replace
+        sourceLabels:
+        - node
+        targetLabel: instance
+      port: https-metrics
+      relabelings:
+      - action: replace
+        sourceLabels:
+        - __metrics_path__
+        targetLabel: metrics_path
+      scheme: https
+      tlsConfig:
+        caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        insecureSkipVerify: true
+    - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+      honorLabels: true
+      metricRelabelings:
+      - action: drop
+        regex: container_cpu_(cfs_throttled_seconds_total|load_average_10s|system_seconds_total|user_seconds_total)
+        sourceLabels:
+        - __name__
+      - action: drop
+        regex: container_fs_(io_current|io_time_seconds_total|io_time_weighted_seconds_total|reads_merged_total|sector_reads_total|sector_writes_total|writes_merged_total)
+        sourceLabels:
+        - __name__
+      - action: drop
+        regex: container_memory_(mapped_file|swap)
+        sourceLabels:
+        - __name__
+      - action: drop
+        regex: container_(file_descriptors|tasks_state|threads_max)
+        sourceLabels:
+        - __name__
+      - action: drop
+        regex: container_spec.*
+        sourceLabels:
+        - __name__
+      - action: drop
+        regex: .+;
+        sourceLabels:
+        - id
+        - pod
+      path: /metrics/cadvisor
+      port: https-metrics
+      relabelings:
+      - action: replace
+        sourceLabels:
+        - __metrics_path__
+        targetLabel: metrics_path
+      scheme: https
+      tlsConfig:
+        caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        insecureSkipVerify: true
+    - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+      honorLabels: true
+      path: /metrics/probes
+      port: https-metrics
+      relabelings:
+      - action: replace
+        sourceLabels:
+        - __metrics_path__
+        targetLabel: metrics_path
+      scheme: https
+      tlsConfig:
+        caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        insecureSkipVerify: true
+    jobLabel: k8s-app
+    namespaceSelector:
+      matchNames:
+      - kube-system
+    selector:
+      matchLabels:
+        app.kubernetes.io/name: kubelet
+        k8s-app: kubelet
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: kube-prometheus-stack
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:20:07Z"
+    generation: 1
+    labels:
+      app: kube-prometheus-stack-operator
+      app.kubernetes.io/instance: kube-prometheus-stack
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/part-of: kube-prometheus-stack
+      app.kubernetes.io/version: 48.1.2
+      chart: kube-prometheus-stack-48.1.2
+      helm.toolkit.fluxcd.io/name: kube-prometheus-stack
+      helm.toolkit.fluxcd.io/namespace: monitoring
+      heritage: Helm
+      release: kube-prometheus-stack
+    name: kube-prometheus-stack-operator
+    namespace: monitoring
+    resourceVersion: "19952"
+    uid: bfd2aeae-049d-463c-ba49-64bc5b599a03
+  spec:
+    endpoints:
+    - honorLabels: true
+      port: https
+      scheme: https
+      tlsConfig:
+        ca:
+          secret:
+            key: ca
+            name: kube-prometheus-stack-admission
+            optional: false
+        serverName: kube-prometheus-stack-operator
+    namespaceSelector:
+      matchNames:
+      - monitoring
+    selector:
+      matchLabels:
+        app: kube-prometheus-stack-operator
+        release: kube-prometheus-stack
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: kube-prometheus-stack
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:20:06Z"
+    generation: 1
+    labels:
+      app: kube-prometheus-stack-prometheus
+      app.kubernetes.io/instance: kube-prometheus-stack
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/part-of: kube-prometheus-stack
+      app.kubernetes.io/version: 48.1.2
+      chart: kube-prometheus-stack-48.1.2
+      helm.toolkit.fluxcd.io/name: kube-prometheus-stack
+      helm.toolkit.fluxcd.io/namespace: monitoring
+      heritage: Helm
+      release: kube-prometheus-stack
+    name: kube-prometheus-stack-prometheus
+    namespace: monitoring
+    resourceVersion: "19938"
+    uid: 2c72dd66-8d36-4261-b380-03a51c69c341
+  spec:
+    endpoints:
+    - path: /metrics
+      port: http-web
+    - path: /metrics
+      port: reloader-web
+    namespaceSelector:
+      matchNames:
+      - monitoring
+    selector:
+      matchLabels:
+        app: kube-prometheus-stack-prometheus
+        release: kube-prometheus-stack
+        self-monitor: "true"
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: kube-prometheus-stack
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:20:07Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/component: metrics
+      app.kubernetes.io/instance: kube-prometheus-stack
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: prometheus-node-exporter
+      app.kubernetes.io/part-of: prometheus-node-exporter
+      app.kubernetes.io/version: 1.6.0
+      helm.sh/chart: prometheus-node-exporter-4.18.1
+      helm.toolkit.fluxcd.io/name: kube-prometheus-stack
+      helm.toolkit.fluxcd.io/namespace: monitoring
+      jobLabel: node-exporter
+      release: kube-prometheus-stack
+    name: kube-prometheus-stack-prometheus-node-exporter
+    namespace: monitoring
+    resourceVersion: "19945"
+    uid: afd6271b-3e98-4ed1-9aaa-bab28abf4fba
+  spec:
+    attachMetadata:
+      node: false
+    endpoints:
+    - port: http-metrics
+      scheme: http
+    jobLabel: jobLabel
+    selector:
+      matchLabels:
+        app.kubernetes.io/instance: kube-prometheus-stack
+        app.kubernetes.io/name: prometheus-node-exporter
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: mimir
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:48:03Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/component: alertmanager
+      app.kubernetes.io/instance: mimir
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: mimir
+      app.kubernetes.io/part-of: memberlist
+      app.kubernetes.io/version: 2.9.0
+      helm.sh/chart: mimir-distributed-5.0.0
+      helm.toolkit.fluxcd.io/name: mimir
+      helm.toolkit.fluxcd.io/namespace: monitoring
+    name: mimir-alertmanager
+    namespace: monitoring
+    resourceVersion: "55712"
+    uid: cdae90f7-99e8-4d84-8df0-c4d9a4f3962e
+  spec:
+    endpoints:
+    - interval: 1m
+      port: http-metrics
+      relabelings:
+      - action: replace
+        replacement: monitoring/alertmanager
+        sourceLabels:
+        - job
+        targetLabel: job
+      - action: replace
+        replacement: mimir
+        targetLabel: cluster
+      scheme: http
+      scrapeTimeout: 30s
+    namespaceSelector:
+      matchNames:
+      - monitoring
+    selector:
+      matchExpressions:
+      - key: prometheus.io/service-monitor
+        operator: NotIn
+        values:
+        - "false"
+      matchLabels:
+        app.kubernetes.io/component: alertmanager
+        app.kubernetes.io/instance: mimir
+        app.kubernetes.io/name: mimir
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: mimir
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:48:03Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/component: compactor
+      app.kubernetes.io/instance: mimir
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: mimir
+      app.kubernetes.io/part-of: memberlist
+      app.kubernetes.io/version: 2.9.0
+      helm.sh/chart: mimir-distributed-5.0.0
+      helm.toolkit.fluxcd.io/name: mimir
+      helm.toolkit.fluxcd.io/namespace: monitoring
+    name: mimir-compactor
+    namespace: monitoring
+    resourceVersion: "55710"
+    uid: e1de4c22-3e65-43d2-a895-f5d55919f343
+  spec:
+    endpoints:
+    - interval: 1m
+      port: http-metrics
+      relabelings:
+      - action: replace
+        replacement: monitoring/compactor
+        sourceLabels:
+        - job
+        targetLabel: job
+      - action: replace
+        replacement: mimir
+        targetLabel: cluster
+      scheme: http
+      scrapeTimeout: 30s
+    namespaceSelector:
+      matchNames:
+      - monitoring
+    selector:
+      matchExpressions:
+      - key: prometheus.io/service-monitor
+        operator: NotIn
+        values:
+        - "false"
+      matchLabels:
+        app.kubernetes.io/component: compactor
+        app.kubernetes.io/instance: mimir
+        app.kubernetes.io/name: mimir
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: mimir
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:48:03Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/component: distributor
+      app.kubernetes.io/instance: mimir
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: mimir
+      app.kubernetes.io/part-of: memberlist
+      app.kubernetes.io/version: 2.9.0
+      helm.sh/chart: mimir-distributed-5.0.0
+      helm.toolkit.fluxcd.io/name: mimir
+      helm.toolkit.fluxcd.io/namespace: monitoring
+    name: mimir-distributor
+    namespace: monitoring
+    resourceVersion: "55713"
+    uid: 94774292-35ed-4173-a43b-baad088cd7fd
+  spec:
+    endpoints:
+    - interval: 1m
+      port: http-metrics
+      relabelings:
+      - action: replace
+        replacement: monitoring/distributor
+        sourceLabels:
+        - job
+        targetLabel: job
+      - action: replace
+        replacement: mimir
+        targetLabel: cluster
+      scheme: http
+      scrapeTimeout: 30s
+    namespaceSelector:
+      matchNames:
+      - monitoring
+    selector:
+      matchExpressions:
+      - key: prometheus.io/service-monitor
+        operator: NotIn
+        values:
+        - "false"
+      matchLabels:
+        app.kubernetes.io/component: distributor
+        app.kubernetes.io/instance: mimir
+        app.kubernetes.io/name: mimir
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: mimir
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:48:03Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/component: ingester
+      app.kubernetes.io/instance: mimir
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: mimir
+      app.kubernetes.io/part-of: memberlist
+      app.kubernetes.io/version: 2.9.0
+      helm.sh/chart: mimir-distributed-5.0.0
+      helm.toolkit.fluxcd.io/name: mimir
+      helm.toolkit.fluxcd.io/namespace: monitoring
+    name: mimir-ingester
+    namespace: monitoring
+    resourceVersion: "55709"
+    uid: bade0f76-74d4-4fd2-82b4-cb3235ae26c2
+  spec:
+    endpoints:
+    - interval: 1m
+      port: http-metrics
+      relabelings:
+      - action: replace
+        replacement: monitoring/ingester
+        sourceLabels:
+        - job
+        targetLabel: job
+      - action: replace
+        replacement: mimir
+        targetLabel: cluster
+      scheme: http
+      scrapeTimeout: 30s
+    namespaceSelector:
+      matchNames:
+      - monitoring
+    selector:
+      matchExpressions:
+      - key: prometheus.io/service-monitor
+        operator: NotIn
+        values:
+        - "false"
+      matchLabels:
+        app.kubernetes.io/component: ingester
+        app.kubernetes.io/instance: mimir
+        app.kubernetes.io/name: mimir
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: mimir
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:48:03Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/component: overrides-exporter
+      app.kubernetes.io/instance: mimir
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: mimir
+      app.kubernetes.io/version: 2.9.0
+      helm.sh/chart: mimir-distributed-5.0.0
+      helm.toolkit.fluxcd.io/name: mimir
+      helm.toolkit.fluxcd.io/namespace: monitoring
+    name: mimir-overrides-exporter
+    namespace: monitoring
+    resourceVersion: "55714"
+    uid: 14a7171b-fe69-40ca-b860-ce5f01ee1331
+  spec:
+    endpoints:
+    - interval: 1m
+      port: http-metrics
+      relabelings:
+      - action: replace
+        replacement: monitoring/overrides-exporter
+        sourceLabels:
+        - job
+        targetLabel: job
+      - action: replace
+        replacement: mimir
+        targetLabel: cluster
+      scheme: http
+      scrapeTimeout: 30s
+    namespaceSelector:
+      matchNames:
+      - monitoring
+    selector:
+      matchExpressions:
+      - key: prometheus.io/service-monitor
+        operator: NotIn
+        values:
+        - "false"
+      matchLabels:
+        app.kubernetes.io/component: overrides-exporter
+        app.kubernetes.io/instance: mimir
+        app.kubernetes.io/name: mimir
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: mimir
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:48:03Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/component: querier
+      app.kubernetes.io/instance: mimir
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: mimir
+      app.kubernetes.io/part-of: memberlist
+      app.kubernetes.io/version: 2.9.0
+      helm.sh/chart: mimir-distributed-5.0.0
+      helm.toolkit.fluxcd.io/name: mimir
+      helm.toolkit.fluxcd.io/namespace: monitoring
+    name: mimir-querier
+    namespace: monitoring
+    resourceVersion: "55715"
+    uid: 1b0ae6ad-3916-4134-a96e-d1753b340129
+  spec:
+    endpoints:
+    - interval: 1m
+      port: http-metrics
+      relabelings:
+      - action: replace
+        replacement: monitoring/querier
+        sourceLabels:
+        - job
+        targetLabel: job
+      - action: replace
+        replacement: mimir
+        targetLabel: cluster
+      scheme: http
+      scrapeTimeout: 30s
+    namespaceSelector:
+      matchNames:
+      - monitoring
+    selector:
+      matchExpressions:
+      - key: prometheus.io/service-monitor
+        operator: NotIn
+        values:
+        - "false"
+      matchLabels:
+        app.kubernetes.io/component: querier
+        app.kubernetes.io/instance: mimir
+        app.kubernetes.io/name: mimir
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: mimir
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:48:03Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/component: query-frontend
+      app.kubernetes.io/instance: mimir
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: mimir
+      app.kubernetes.io/version: 2.9.0
+      helm.sh/chart: mimir-distributed-5.0.0
+      helm.toolkit.fluxcd.io/name: mimir
+      helm.toolkit.fluxcd.io/namespace: monitoring
+    name: mimir-query-frontend
+    namespace: monitoring
+    resourceVersion: "55718"
+    uid: 6ae20530-0796-47d7-a074-7e20ace91495
+  spec:
+    endpoints:
+    - interval: 1m
+      port: http-metrics
+      relabelings:
+      - action: replace
+        replacement: monitoring/query-frontend
+        sourceLabels:
+        - job
+        targetLabel: job
+      - action: replace
+        replacement: mimir
+        targetLabel: cluster
+      scheme: http
+      scrapeTimeout: 30s
+    namespaceSelector:
+      matchNames:
+      - monitoring
+    selector:
+      matchExpressions:
+      - key: prometheus.io/service-monitor
+        operator: NotIn
+        values:
+        - "false"
+      matchLabels:
+        app.kubernetes.io/component: query-frontend
+        app.kubernetes.io/instance: mimir
+        app.kubernetes.io/name: mimir
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: mimir
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:48:03Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/component: query-scheduler
+      app.kubernetes.io/instance: mimir
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: mimir
+      app.kubernetes.io/version: 2.9.0
+      helm.sh/chart: mimir-distributed-5.0.0
+      helm.toolkit.fluxcd.io/name: mimir
+      helm.toolkit.fluxcd.io/namespace: monitoring
+    name: mimir-query-scheduler
+    namespace: monitoring
+    resourceVersion: "55719"
+    uid: 691fd327-bc4f-4130-9546-e4e16759d86c
+  spec:
+    endpoints:
+    - interval: 1m
+      port: http-metrics
+      relabelings:
+      - action: replace
+        replacement: monitoring/query-scheduler
+        sourceLabels:
+        - job
+        targetLabel: job
+      - action: replace
+        replacement: mimir
+        targetLabel: cluster
+      scheme: http
+      scrapeTimeout: 30s
+    namespaceSelector:
+      matchNames:
+      - monitoring
+    selector:
+      matchExpressions:
+      - key: prometheus.io/service-monitor
+        operator: NotIn
+        values:
+        - "false"
+      matchLabels:
+        app.kubernetes.io/component: query-scheduler
+        app.kubernetes.io/instance: mimir
+        app.kubernetes.io/name: mimir
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: mimir
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:48:03Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/component: ruler
+      app.kubernetes.io/instance: mimir
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: mimir
+      app.kubernetes.io/part-of: memberlist
+      app.kubernetes.io/version: 2.9.0
+      helm.sh/chart: mimir-distributed-5.0.0
+      helm.toolkit.fluxcd.io/name: mimir
+      helm.toolkit.fluxcd.io/namespace: monitoring
+    name: mimir-ruler
+    namespace: monitoring
+    resourceVersion: "55716"
+    uid: 85054a15-41f5-4373-8bfb-5e06772deff3
+  spec:
+    endpoints:
+    - interval: 1m
+      port: http-metrics
+      relabelings:
+      - action: replace
+        replacement: monitoring/ruler
+        sourceLabels:
+        - job
+        targetLabel: job
+      - action: replace
+        replacement: mimir
+        targetLabel: cluster
+      scheme: http
+      scrapeTimeout: 30s
+    namespaceSelector:
+      matchNames:
+      - monitoring
+    selector:
+      matchExpressions:
+      - key: prometheus.io/service-monitor
+        operator: NotIn
+        values:
+        - "false"
+      matchLabels:
+        app.kubernetes.io/component: ruler
+        app.kubernetes.io/instance: mimir
+        app.kubernetes.io/name: mimir
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: mimir
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:48:03Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/component: store-gateway
+      app.kubernetes.io/instance: mimir
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: mimir
+      app.kubernetes.io/part-of: memberlist
+      app.kubernetes.io/version: 2.9.0
+      helm.sh/chart: mimir-distributed-5.0.0
+      helm.toolkit.fluxcd.io/name: mimir
+      helm.toolkit.fluxcd.io/namespace: monitoring
+    name: mimir-store-gateway
+    namespace: monitoring
+    resourceVersion: "55711"
+    uid: 7bde7c90-2ccc-4208-88e4-5aa1d000e840
+  spec:
+    endpoints:
+    - interval: 1m
+      port: http-metrics
+      relabelings:
+      - action: replace
+        replacement: monitoring/store-gateway
+        sourceLabels:
+        - job
+        targetLabel: job
+      - action: replace
+        replacement: mimir
+        targetLabel: cluster
+      scheme: http
+      scrapeTimeout: 30s
+    namespaceSelector:
+      matchNames:
+      - monitoring
+    selector:
+      matchExpressions:
+      - key: prometheus.io/service-monitor
+        operator: NotIn
+        values:
+        - "false"
+      matchLabels:
+        app.kubernetes.io/component: store-gateway
+        app.kubernetes.io/instance: mimir
+        app.kubernetes.io/name: mimir
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: node-problem-detector
+      meta.helm.sh/release-namespace: monitoring
+    creationTimestamp: "2023-09-10T19:21:01Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/instance: node-problem-detector
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: node-problem-detector
+      helm.sh/chart: node-problem-detector-2.3.5
+      helm.toolkit.fluxcd.io/name: node-problem-detector
+      helm.toolkit.fluxcd.io/namespace: monitoring
+    name: node-problem-detector
+    namespace: monitoring
+    resourceVersion: "21099"
+    uid: 7bfdc5d9-4d73-4df6-85d6-cc28830774c6
+  spec:
+    endpoints:
+    - interval: 60s
+      path: /metrics
+      port: exporter
+      relabelings:
+      - action: replace
+        sourceLabels:
+        - __meta_kubernetes_pod_node_name
+        targetLabel: node
+      - action: replace
+        sourceLabels:
+        - __meta_kubernetes_pod_host_ip
+        targetLabel: host_ip
+    namespaceSelector:
+      matchNames:
+      - monitoring
+    selector:
+      matchLabels:
+        app: node-problem-detector
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: cloudflared
+      meta.helm.sh/release-namespace: networking
+    creationTimestamp: "2023-09-10T19:05:39Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/instance: cloudflared
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: cloudflared
+      helm.sh/chart: app-template-1.5.1
+      helm.toolkit.fluxcd.io/name: cloudflared
+      helm.toolkit.fluxcd.io/namespace: networking
+    name: cloudflared
+    namespace: networking
+    resourceVersion: "5638"
+    uid: cd58536a-125e-4ba4-bb22-bbcf9ed8c455
+  spec:
+    endpoints:
+    - interval: 1m
+      path: /metrics
+      port: http
+      scheme: http
+      scrapeTimeout: 30s
+    selector:
+      matchLabels:
+        app.kubernetes.io/instance: cloudflared
+        app.kubernetes.io/name: cloudflared
+        app.kubernetes.io/service: cloudflared
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: external-dns
+      meta.helm.sh/release-namespace: networking
+    creationTimestamp: "2023-09-10T19:04:46Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/instance: external-dns
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: external-dns
+      app.kubernetes.io/version: 0.13.5
+      helm.sh/chart: external-dns-1.13.0
+      helm.toolkit.fluxcd.io/name: external-dns
+      helm.toolkit.fluxcd.io/namespace: networking
+    name: external-dns
+    namespace: networking
+    resourceVersion: "3991"
+    uid: 711863d5-1028-4cbe-9a80-1f410572c5d3
+  spec:
+    endpoints:
+    - path: /metrics
+      port: http
+    jobLabel: external-dns
+    namespaceSelector:
+      matchNames:
+      - networking
+    selector:
+      matchLabels:
+        app.kubernetes.io/instance: external-dns
+        app.kubernetes.io/name: external-dns
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: nginx-external
+      meta.helm.sh/release-namespace: networking
+    creationTimestamp: "2023-09-10T19:24:54Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: nginx-external
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: ingress-nginx
+      app.kubernetes.io/part-of: ingress-nginx
+      app.kubernetes.io/version: 1.8.1
+      helm.sh/chart: ingress-nginx-4.7.1
+      helm.toolkit.fluxcd.io/name: nginx-external
+      helm.toolkit.fluxcd.io/namespace: networking
+    name: nginx-external-controller
+    namespace: networking
+    resourceVersion: "25745"
+    uid: fb56b6f7-6bc6-4040-88a1-4784148d9b34
+  spec:
+    endpoints:
+    - interval: 30s
+      port: metrics
+    namespaceSelector:
+      any: true
+    selector:
+      matchLabels:
+        app.kubernetes.io/component: controller
+        app.kubernetes.io/instance: nginx-external
+        app.kubernetes.io/name: ingress-nginx
+- apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: nginx-internal
+      meta.helm.sh/release-namespace: networking
+    creationTimestamp: "2023-09-10T19:24:54Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: nginx-internal
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: ingress-nginx
+      app.kubernetes.io/part-of: ingress-nginx
+      app.kubernetes.io/version: 1.8.1
+      helm.sh/chart: ingress-nginx-4.7.1
+      helm.toolkit.fluxcd.io/name: nginx-internal
+      helm.toolkit.fluxcd.io/namespace: networking
+    name: nginx-internal-controller
+    namespace: networking
+    resourceVersion: "25746"
+    uid: ba85f4c1-ce87-4a2e-a0a8-077de417b9c3
+  spec:
+    endpoints:
+    - interval: 30s
+      port: metrics
+    namespaceSelector:
+      any: true
+    selector:
+      matchLabels:
+        app.kubernetes.io/component: controller
+        app.kubernetes.io/instance: nginx-internal
+        app.kubernetes.io/name: ingress-nginx
