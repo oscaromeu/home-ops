@@ -48,6 +48,7 @@ resources:
   - ./questdb.yaml
   - ./redpanda.yaml
   - ./robusta.yaml
+  - ./runix.yaml
   - ./rook-ceph.yaml
   - ./sloth.yaml
   - ./stakater.yaml
