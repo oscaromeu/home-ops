@@ -23,19 +23,3 @@ spec:
         ports:
         - containerPort: 9308
           name: prometheus
----
-apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
-metadata:
-  name: kafka-exporter
-  labels:
-    app.kubernetes.io/name: kafka-exporter
-spec:
-  endpoints:
-  - port: prometheus
-    scheme: http
-    interval: 30s
-    path: /metrics
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: kafka-exporter
