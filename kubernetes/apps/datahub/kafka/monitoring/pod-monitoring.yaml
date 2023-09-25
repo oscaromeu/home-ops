@@ -1,6 +1,6 @@
 ---
-apiVersion: monitoring.googleapis.com/v1
-kind: PodMonitoring
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
 metadata:
   name: datahub-cluster
 spec:

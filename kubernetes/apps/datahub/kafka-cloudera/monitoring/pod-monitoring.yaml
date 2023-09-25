@@ -1,6 +1,6 @@
 ---
 apiVersion: monitoring.coreos.com/v1
-kind: PodMonitoring
+kind: PodMonitor
 metadata:
   name: kafka-cloudera-cluster
 spec:
