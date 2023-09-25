@@ -19,7 +19,7 @@ spec:
       - name: exporter
         image: danielqsj/kafka-exporter:v1.6.0
         args:
-        - --kafka.server=kafka-cloudera-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092
+        - --kafka.server=kafka-cloudera-cluster-kafka-bootstrap.datahub.svc.cluster.local:9092
         ports:
         - containerPort: 9308
           name: prometheus
