@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       strimzi.io/cluster: kafka-cloudera-cluster
-  endpoints:
+  podMetricsEndpoints:
   - port: 9404
     interval: 30s
     path: /
