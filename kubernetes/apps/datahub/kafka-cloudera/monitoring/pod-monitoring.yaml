@@ -1,0 +1,13 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitoring
+metadata:
+  name: kafka-cloudera-cluster
+spec:
+  selector:
+    matchLabels:
+      strimzi.io/cluster: kafka-cloudera-cluster
+  endpoints:
+  - port: 9404
+    interval: 30s
+    path: /

@@ -1,0 +1,54 @@
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaUser
+metadata:
+  name: kafka-cloudera-user
+  labels:
+    strimzi.io/cluster: kafka-cloudera-cluster
+spec:
+  authentication:
+    type: scram-sha-512
+  authorization:
+    type: simple
+    acls:
+      - resource:
+          type: topic
+          name: kafka-cloudera-topic
+          patternType: literal
+        operations:
+          - Create
+          - Describe
+          - Write
+          - Read
+        host: "*"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kafkacat
+spec:
+  containers:
+  - name: kafkacat
+    image: confluentinc/cp-kcat:7.4.0
+    command: ["sh", "-c", "exec tail -f /dev/null"]
+    volumeMounts:
+    - name: kafka-cloudera-user
+      mountPath: "/kafka-cloudera-user"
+      readOnly: true
+    - name: config-volume
+      mountPath: /home/appuser/.config
+  volumes:
+  - name: kafka-cloudera-user
+    secret:
+      secretName: kafka-cloudera-user
+  - name: config-volume
+    configMap:
+      name: kcat-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kcat-config
+data:
+  kcat.conf: enable.ssl.certificate.verification=false
+
