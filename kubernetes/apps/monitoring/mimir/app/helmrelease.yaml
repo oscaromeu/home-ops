@@ -77,18 +77,18 @@ spec:
       replicas: 1
 
     chunks-cache:
-      enabled: false
+      enabled: true
       replicas: 1
 
     index-cache:
-      enabled: false
+      enabled: true
       replicas: 1
 
     metadata-cache:
-      enabled: false
+      enabled: true
 
     results-cache:
-      enabled: false
+      enabled: true
       replicas: 1
 
     minio:
@@ -104,7 +104,7 @@ spec:
           memory: 128Mi
 
     querier:
-      replicas: 1
+      replicas: 3
       resources:
         limits:
           memory: 5.6Gi
@@ -113,7 +113,7 @@ spec:
           memory: 100Mi
 
     query_frontend:
-      replicas: 1
+      replicas: 3
       resources:
         limits:
           memory: 2.8Gi
