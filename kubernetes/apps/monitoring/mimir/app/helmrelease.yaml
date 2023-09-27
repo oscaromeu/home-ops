@@ -73,22 +73,22 @@ spec:
           memory: 100Mi
 
     admin-cache:
-      enabled: true
+      enabled: false
       replicas: 1
 
     chunks-cache:
-      enabled: true
+      enabled: false
       replicas: 1
 
     index-cache:
-      enabled: true
+      enabled: false
       replicas: 1
 
     metadata-cache:
-      enabled: true
+      enabled: false
 
     results-cache:
-      enabled: true
+      enabled: false
       replicas: 1
 
     minio:
