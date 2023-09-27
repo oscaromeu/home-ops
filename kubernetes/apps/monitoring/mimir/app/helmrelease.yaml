@@ -248,6 +248,11 @@ spec:
 
         frontend:
           cache_results: true
+          parallelize_shardable_queries: true
+          query_sharding_target_series_per_shard: 2500
+          split_queries_by_interval: 24h
+          align_queries_with_step: true
+          log_queries_longer_than: 1s
           results_cache:
             backend: redis
             redis:
