@@ -40,6 +40,7 @@ resources:
   - ./minio.yaml
   - ./mongodb.yaml
   - ./node-feature-discovery.yaml
+  - ./nvidia-gpu-feature-discovery.yaml
   - ./passbolt.yaml
   - ./piraeus.yaml
   - ./podinfo.yaml
