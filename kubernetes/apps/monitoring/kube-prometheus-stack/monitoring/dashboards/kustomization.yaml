@@ -4,6 +4,14 @@ namespace: monitoring
 
 configMapGenerator:
 
+  - name: cardinality-explorer
+    files:
+      - cardinality_explorer.json
+    options:
+      labels:
+        home_ops: cardinality-explorer
+      disableNameSuffixHash: true
+
   - name: k8s-overview
     files:
       - k8s-overview.json
