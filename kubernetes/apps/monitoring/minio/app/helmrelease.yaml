@@ -34,7 +34,7 @@ spec:
       pools:
         - servers: 4
           name: pool-0
-          storageClassName: local-path
+          storageClassName: longhorn
           volumesPerServer: 2
           volumeClaimTemplate:
             metadata:
@@ -44,7 +44,7 @@ spec:
                 - ReadWriteOnce
               resources:
                 requests:
-                  storage: 500Gi
+                  storage: 400Gi
                   cpu: 500m
                   memory: 1Gi
                 limits:
