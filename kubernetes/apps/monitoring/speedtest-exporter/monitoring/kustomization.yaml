@@ -5,4 +5,4 @@ namespace: monitoring
 resources:
   - ./dashboard
   - ./prometheusrule.yaml
-  - ./servicemonitor.yaml
+  #- ./servicemonitor.yaml
