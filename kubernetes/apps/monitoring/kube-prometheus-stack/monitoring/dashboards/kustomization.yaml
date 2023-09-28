@@ -10,6 +10,8 @@ configMapGenerator:
     options:
       labels:
         home_ops: cardinality-explorer
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
       disableNameSuffixHash: true
 
   - name: k8s-overview
