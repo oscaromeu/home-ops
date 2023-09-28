@@ -11,8 +11,8 @@ resources:
   - ./k6s/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
-  #- ./mimir/ks.yaml
-  #- ./minio/ks.yaml
+  - ./mimir/ks.yaml
+  - ./minio/ks.yaml
   - ./node-problem-detector/ks.yaml
   - ./prometheus-adapter/ks.yaml
   - ./promlens/ks.yaml
