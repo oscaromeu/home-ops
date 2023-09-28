@@ -6,7 +6,7 @@ configMapGenerator:
 
   - name: cardinality-explorer
     files:
-      - cardinality_explorer.json
+      - cardinality-explorer.json
     options:
       labels:
         home_ops: cardinality-explorer
