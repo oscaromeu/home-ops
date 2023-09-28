@@ -67,6 +67,7 @@ rules:
       - delete
       - patch
       - update
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -422,4 +423,3 @@ roleRef:
   kind: ClusterRole
   name: strimzi-kafka-client
   apiGroup: rbac.authorization.k8s.io
----
