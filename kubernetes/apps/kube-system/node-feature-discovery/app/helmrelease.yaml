@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: node-feature-discovery
-      version: 0.13.3
+      version: 0.14.1
       sourceRef:
         kind: HelmRepository
         name: node-feature-discovery
@@ -27,11 +27,19 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    prometheus:
+      enable: true
+    master:
+      resources:
+        requests:
+          cpu: 15m
+          memory: 64M
+        limits:
+          memory: 64M
     worker:
-      config:
-        core:
-          sources: ["custom", "pci", "usb"]
-        sources:
-          usb:
-            deviceClassWhitelist: ["02", "03", "0e", "ef", "fe", "ff"]
-            deviceLabelFields: ["class", "vendor", "device"]
+      resources:
+        requests:
+          cpu: 15m
+          memory: 64M
+        limits:
+          memory: 64M
