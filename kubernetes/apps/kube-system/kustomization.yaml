@@ -8,8 +8,9 @@ resources:
   - ./coredns/ks.yaml
   - ./external-secrets/ks.yaml
   - ./glauth/ks.yaml
-  - ./gpu-feature-discovery/ks.yaml
+  #- ./gpu-feature-discovery/ks.yaml
+  - ./intel-device-plugin/ks.yaml
   - ./local-path-provisioner/ks.yaml
   - ./metrics-server/ks.yaml
- # - ./node-feature-discovery/ks.yaml
+  - ./node-feature-discovery/ks.yaml
   - ./reloader/ks.yaml

@@ -26,6 +26,7 @@ resources:
   - ./harbor.yaml
   - ./influxdata.yaml
   - ./ingress-nginx.yaml
+  - ./intel.yaml
   - ./istio.yaml
   - ./jetstack.yaml
   - ./jupyter.yaml
