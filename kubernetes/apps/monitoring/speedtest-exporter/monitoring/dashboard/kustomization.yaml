@@ -11,4 +11,4 @@ generatorOptions:
   annotations:
     kustomize.toolkit.fluxcd.io/substitute: disabled
   labels:
-    grafana_dashboard: "true"
+    home_ops: "true"
