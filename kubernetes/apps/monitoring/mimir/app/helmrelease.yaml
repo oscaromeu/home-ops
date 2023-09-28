@@ -142,6 +142,7 @@ spec:
 
     ruler:
       replicas: 1
+      enabled: false
       resources:
         limits:
           memory: 2.8Gi
