@@ -18,7 +18,7 @@ resources:
   - ./promlens/ks.yaml
   #- ./pyroscope-distributed/ks.yaml
   - ./sloth/ks.yaml
-  - ./speedtest-exporter/ks.yaml
+  #- ./speedtest-exporter/ks.yaml
   #- ./stackdriver-exporter/ks.yaml
   - ./tempo/ks.yaml
    #./vpa/ks.yaml
