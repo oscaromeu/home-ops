@@ -5,43 +5,45 @@ metadata:
   name: speedtest-exporter
   namespace: monitoring
 spec:
-  interval: 30m
+  interval: 15m
   chart:
     spec:
       chart: app-template
       version: 1.5.1
-      interval: 30m
       sourceRef:
         kind: HelmRepository
-        name: bjw-s
+        name: bjw-s-helm-charts
         namespace: flux-system
-
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
   values:
     image:
       repository: ghcr.io/miguelndecarvalho/speedtest-exporter
-      tag: v3.5.3
-
-    resources:
-      requests:
-        cpu: 15m
-        memory: 30M
-      limits:
-        memory: 60M
-
+      tag: v3.5.4
+    env:
+      SPEEDTEST_SERVER: "16611"
     service:
       main:
         ports:
           http:
-            enabled: false
-          metrics:
-            enabled: true
-            protocol: TCP
             port: 9798
     serviceMonitor:
       main:
         enabled: true
         endpoints:
-          - interval: 60m
+          - port: http
+            scheme: http
             path: /metrics
-            port: metrics
+            interval: 60m
             scrapeTimeout: 1m
+    resources:
+      requests:
+        cpu: 15m
+        memory: 50M
+      limits:
+        memory: 100M
