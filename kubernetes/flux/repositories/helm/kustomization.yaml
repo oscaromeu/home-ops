@@ -42,6 +42,7 @@ resources:
   - ./mongodb.yaml
   - ./node-feature-discovery.yaml
   - ./nvidia-gpu-feature-discovery.yaml
+  - ./nvidia.yaml
   - ./passbolt.yaml
   - ./piraeus.yaml
   - ./podinfo.yaml

@@ -1,0 +1,10 @@
+---
+# yaml-language-server: $schema=http://kubernetes-schemas.local.lan:8080/source.toolkit.fluxcd.io/helmrepository_v1beta2.json
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: nvidia
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://helm.ngc.nvidia.com/nvidia
