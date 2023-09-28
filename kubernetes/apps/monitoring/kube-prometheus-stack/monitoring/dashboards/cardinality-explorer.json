@@ -297,7 +297,7 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 24,
+        "w": 6,
         "x": 0,
         "y": 6
       },
@@ -346,7 +346,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 10
+        "y": 26
       },
       "id": 9,
       "panels": [],
@@ -405,7 +405,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 11
+        "y": 27
       },
       "id": 20,
       "links": [],
@@ -484,7 +484,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 11
+        "y": 27
       },
       "id": 21,
       "links": [],
@@ -530,7 +530,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 20
+        "y": 36
       },
       "id": 41,
       "panels": [
@@ -608,12 +608,9 @@
       },
       {
         "current": {
-          "selected": true,
-          "text": "cilium-agent",
-          "value": "cilium-agent"
-        },
-        "datasource": {
-          "uid": "$datasource"
+          "selected": false,
+          "text": "app-a",
+          "value": "app-a"
         },
         "definition": "",
         "hide": 0,
@@ -634,11 +631,8 @@
       {
         "current": {
           "selected": false,
-          "text": "cilium_agent_api_process_time_seconds_bucket",
-          "value": "cilium_agent_api_process_time_seconds_bucket"
-        },
-        "datasource": {
-          "uid": "$datasource"
+          "text": "http_server_requests_seconds_bucket",
+          "value": "http_server_requests_seconds_bucket"
         },
         "definition": "",
         "hide": 0,
@@ -659,11 +653,16 @@
       {
         "current": {
           "selected": true,
-          "text": [],
-          "value": []
-        },
-        "datasource": {
-          "uid": "${DS_Z__P1_EU_WEST_1}"
+          "text": [
+            "endpoint",
+            "outcome",
+            "exception"
+          ],
+          "value": [
+            "endpoint",
+            "outcome",
+            "exception"
+          ]
         },
         "definition": "",
         "hide": 0,
@@ -682,9 +681,10 @@
         "useTags": false
       },
       {
-        "current": {},
-        "datasource": {
-          "uid": "${DS_Z__P1_EU_WEST_1}"
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "definition": "",
         "hide": 2,
@@ -736,6 +736,6 @@
   "timezone": "",
   "title": "Cardinality Explorer",
   "uid": "2KnjXXxWz",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
