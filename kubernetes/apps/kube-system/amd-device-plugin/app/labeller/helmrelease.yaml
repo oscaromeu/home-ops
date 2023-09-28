@@ -1,0 +1,78 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: amd-gpu-node-labeller
+  namespace: kube-system
+spec:
+  interval: 35m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  dependsOn:
+    - name: amd-device-plugin
+      namespace: kube-system
+  values:
+    controller:
+      type: daemonset
+    image:
+      repository: docker.io/rocm/k8s-device-plugin
+      tag: labeller-1.25.2.3@sha256:73eef8e85970897ddda1ae474790e77018382858c324ca6747f391c9ef643319
+      pullPolicy: IfNotPresent
+    command: ["/root/k8s-node-labeller"]
+    args: ["-vram", "-cu-count", "-simd-count", "-device-id", "-family"]
+    env:
+      TZ: ${TIMEZONE}
+      DS_NODE_NAME:
+        valueFrom:
+          fieldRef:
+            fieldPath: spec.nodeName
+    serviceAccount:
+      create: false
+      name: amd-gpu-node-labeller
+    securityContext:
+      privileged: true
+      capabilities:
+        drop: ["ALL"]
+    priorityClassName: system-node-critical
+    service:
+      main:
+        enabled: false
+    persistence:
+      sys:
+        enabled: true
+        type: hostPath
+        hostPath: /sys
+      dev:
+        enabled: true
+        type: hostPath
+        hostPath: /dev
+    tolerations:
+      - key: CriticalAddonsOnly
+        operator: Exists
+    nodeSelector:
+      feature.node.kubernetes.io/pci-0300_1002.present: "true"
+      kubernetes.io/arch: amd64
+    resources:
+      requests:
+        cpu: 10m
+        memory: 10Mi
+      limits:
+        memory: 100Mi
+

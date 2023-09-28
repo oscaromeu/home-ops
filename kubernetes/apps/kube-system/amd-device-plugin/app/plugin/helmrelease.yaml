@@ -1,0 +1,66 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: amd-device-plugin
+  namespace: kube-system
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controller:
+      type: daemonset
+    image:
+      repository: docker.io/rocm/k8s-device-plugin
+      tag: 1.25.2.3@sha256:9853a43b85083565f0a130daaeff7c6b1f0a117affe8e5ca5003fb30d1edb92e
+      pullPolicy: IfNotPresent
+    env:
+      TZ: ${TIMEZONE}
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop: ["ALL"]
+    priorityClassName: system-node-critical
+    service:
+      main:
+        enabled: false
+    persistence:
+      sys:
+        enabled: true
+        type: hostPath
+        hostPath: /sys
+      device-plugins:
+        enabled: true
+        type: hostPath
+        hostPath: /var/lib/kubelet/device-plugins
+    tolerations:
+      - key: CriticalAddonsOnly
+        operator: Exists
+    nodeSelector:
+      feature.node.kubernetes.io/pci-0300_1002.present: "true"
+      kubernetes.io/arch: amd64
+    resources:
+      requests:
+        cpu: 10m
+        memory: 10Mi
+      limits:
+        memory: 100Mi
+

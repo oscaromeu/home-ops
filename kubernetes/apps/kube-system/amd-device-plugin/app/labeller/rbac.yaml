@@ -1,0 +1,39 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: amd-gpu-node-labeller
+  namespace: kube-system
+secrets:
+  - name: amd-gpu-node-labeller
+---
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/service-account-token
+metadata:
+  name: amd-gpu-node-labeller
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: amd-gpu-node-labeller
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: amd-gpu-node-labeller
+rules:
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["watch", "get", "list", "update"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: amd-gpu-node-labeller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: amd-gpu-node-labeller
+subjects:
+  - kind: ServiceAccount
+    name: amd-gpu-node-labeller
+    namespace: kube-system
