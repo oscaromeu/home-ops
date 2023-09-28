@@ -7,7 +7,6 @@ sources:
   vector_metrics:
     type: internal_metrics
 
-
 #
 # Sinks
 #
