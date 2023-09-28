@@ -32,7 +32,7 @@ spec:
       configuration:
         name: monitoring-tenant-env-configuration
       pools:
-        - servers: 2
+        - servers: 4
           name: pool-0
           storageClassName: local-path
           volumesPerServer: 2
@@ -44,7 +44,7 @@ spec:
                 - ReadWriteOnce
               resources:
                 requests:
-                  storage: 50Gi
+                  storage: 500Gi
                   cpu: 500m
                   memory: 1Gi
                 limits:
