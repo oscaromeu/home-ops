@@ -32,10 +32,10 @@ spec:
       configuration:
         name: monitoring-tenant-env-configuration
       pools:
-        - servers: 4
+        - servers: 3
           name: pool-0
           storageClassName: longhorn
-          volumesPerServer: 2
+          volumesPerServer: 3
           volumeClaimTemplate:
             metadata:
               name: data
@@ -44,7 +44,7 @@ spec:
                 - ReadWriteOnce
               resources:
                 requests:
-                  storage: 400Gi
+                  storage: 300Gi
                   cpu: 500m
                   memory: 1Gi
                 limits:
