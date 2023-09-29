@@ -13,7 +13,7 @@ sources:
 
   k3s:
     type: kafka
-    bootstrap_servers: datahub-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092
+    bootstrap_servers: datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9092
     topics:
       - k3s-logs-topic
     group_id: logging-consumer-group
