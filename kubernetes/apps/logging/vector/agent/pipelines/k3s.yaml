@@ -11,24 +11,23 @@ sources:
 
 sinks:
 
-  redis:
-    type: redis
-    inputs:
-      - kubernetes_source
-    url: redis://redis-headless.datahub.svc.cluster.local:6379/0
-    key: "k3s_prod"
-    encoding:
-      codec: json
-    batch:
-      max_bytes: 2049000
-
-  #test_redis:
+  #redis:
   #  type: redis
   #  inputs:
   #    - kubernetes_source
   #  url: redis://redis-headless.datahub.svc.cluster.local:6379/0
-  #  key: "test_prod"
+  #  key: "k3s_prod"
   #  encoding:
   #    codec: json
   #  batch:
   #    max_bytes: 2049000
+
+  kafka:
+    type: kafka
+    inputs:
+      - kubernetes_source
+    bootstrap_servers: datahub-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092
+    topic: k3s-logs-topic
+    encoding:
+      codec: json
+

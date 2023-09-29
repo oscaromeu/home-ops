@@ -4,10 +4,18 @@
 #
 sources:
 
-  k3s:
-    type: redis
-    url: redis://redis-master.datahub.svc.cluster.local:6379/0
-    key: "k3s_prod"
+  #k3s:
+  #  type: redis
+  #  url: redis://redis-master.datahub.svc.cluster.local:6379/0
+  #  key: "k3s_prod"
+  #  decoding:
+  #    codec: json
+
+  kafka:
+    type: kafka
+    bootstrap_servers: datahub-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092
+    topic: k3s-logs-topic
+    group_id: logging-consumer-group
     decoding:
       codec: json
 
