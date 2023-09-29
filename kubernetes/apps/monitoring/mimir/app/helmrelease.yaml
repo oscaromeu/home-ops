@@ -128,7 +128,7 @@ spec:
           memory: 128Mi
 
     querier:
-      replicas: 1
+      replicas: 3
       resources:
         limits:
           memory: 5.6Gi
