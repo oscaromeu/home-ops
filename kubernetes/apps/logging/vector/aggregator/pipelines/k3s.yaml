@@ -11,7 +11,7 @@ sources:
   #  decoding:
   #    codec: json
 
-  kafka:
+  k3s:
     type: kafka
     bootstrap_servers: datahub-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092
     topics:
