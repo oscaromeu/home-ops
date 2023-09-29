@@ -51,6 +51,10 @@ spec:
       - name: prom-exporter
         containerPort: 9090
         protocol: TCP
+      - name: kubernetes
+        containerPort: 6010
+        protocol: TCP
+
 
     resources:
       requests:

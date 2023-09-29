@@ -2,6 +2,7 @@
 sources:
   kubernetes_source:
     type: kubernetes_logs
+    use_apiserver_cache: true
     pod_annotation_fields:
       container_image: container_image
       container_name: container_name
@@ -22,11 +23,12 @@ sinks:
   #  batch:
   #    max_bytes: 2049000
 
-  kubernetes_sink:
+  kubernetes:
     type: vector
-    inputs:
-      - kubernetes_source
-    address: vector-aggregator.logging.svc.cluster.local:6000
+    inputs: ["kubernetes_source"]
+    compression: true
+    version: "2"
+    address: vector-aggregator.logging.svc.cluster.local:6010
 
   #kafka:
   #  type: kafka
