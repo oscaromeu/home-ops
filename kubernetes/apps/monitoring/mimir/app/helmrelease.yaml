@@ -276,11 +276,11 @@ spec:
           split_queries_by_interval: 24h
           align_queries_with_step: true
           log_queries_longer_than: 1s
-          results_cache:
-            backend: redis
-            redis:
-              endpoint: redis-master.datahub.svc.cluster.local:6379
-              db: 2
+          #results_cache:
+          #  backend: redis
+          #  redis:
+          #    endpoint: redis-master.datahub.svc.cluster.local:6379
+          #    db: 2
 
         ruler_storage:
           backend: s3
