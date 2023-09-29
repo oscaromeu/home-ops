@@ -3,7 +3,7 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
-  name: datahub-topic
+  name: k3s-logs-topic
   labels:
     strimzi.io/cluster: datahub-cluster
 spec:

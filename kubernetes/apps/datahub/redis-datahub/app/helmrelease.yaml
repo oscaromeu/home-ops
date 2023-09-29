@@ -86,7 +86,7 @@ spec:
     sentinel:
       # https://artifacthub.io/packages/helm/bitnami/redis#master-replicas-with-sentinel
       enabled: true
-      masterSet: redis-datahub
+      masterSet: redis-master
       getMasterTimeout: 60
       readinessProbe:
         enabled: true
