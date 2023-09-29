@@ -26,11 +26,11 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    #global:
-    #  # -- Definitions to set up nginx resolver
-    #  dnsService: coredns
-    #  dnsNamespace: kube-system
-    #  clusterDomain: cluster.local
+    global:
+      # -- Definitions to set up nginx resolver
+      dnsService: coredns
+      dnsNamespace: kube-system
+      clusterDomain: cluster.local
     alertmanager:
       persistentVolume:
         storageClass: local-path
