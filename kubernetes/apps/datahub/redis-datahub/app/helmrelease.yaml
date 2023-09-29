@@ -27,7 +27,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    fullnameOverride: redis-standalone
     auth:
       enabled: false
       sentinel: false
