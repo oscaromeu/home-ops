@@ -5,13 +5,13 @@ resources:
   - ./namespace.yaml
   #- ./default-app/ks.yaml
   #- ./demo-service/ks.yaml
-  - ./excalidraw/ks.yaml
+  #- ./excalidraw/ks.yaml
   #- ./flood/ks.yaml
   - ./hajimari/ks.yaml
-  - ./lidarr/ks.yaml
+  #- ./lidarr/ks.yaml
   - ./linkding/ks.yaml
-  - ./navidrome/ks.yaml
-  - ./overseerr/ks.yaml
+  #- ./navidrome/ks.yaml
+  #- ./overseerr/ks.yaml
   # - ./podinfo/ks.yaml
-  - ./prowlarr/ks.yaml
-  - ./qbittorrent/ks.yaml
+  #- ./prowlarr/ks.yaml
+  #- ./qbittorrent/ks.yaml
