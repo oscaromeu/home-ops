@@ -28,7 +28,7 @@ spec:
   values:
     global:
       # -- Definitions to set up nginx resolver
-      dnsService: coredns
+      dnsService: kube-dns
       dnsNamespace: kube-system
       clusterDomain: cluster.local
     alertmanager:
