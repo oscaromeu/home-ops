@@ -21,6 +21,26 @@ spec:
           - Write
           - Read
         host: "*"
+      - resource:
+          type: topic
+          name: k3s-logs-topic
+          patternType: literal
+        operations:
+          - Create
+          - Describe
+          - Write
+          - Read
+        host: "*"
+      - resource:
+          type: group
+          name: logging-group
+          patternType: prefix
+        operations:
+          - Create
+          - Describe
+          - Write
+          - Read
+        host: "*"
 ---
 apiVersion: v1
 kind: Pod
