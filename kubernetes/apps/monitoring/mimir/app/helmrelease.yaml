@@ -289,14 +289,11 @@ spec:
             http:
               insecure_skip_verify: true
 
-        memcached:
-          image:
-            # -- Memcached Docker image repository
-            repository: memcached
-            # -- Memcached Docker image tag
-            tag: 1.6.19-alpine
-            # -- Memcached Docker image pull policy
-            pullPolicy: IfNotPresent
+      memcached:
+        image:
+          repository: memcached
+          tag: 1.6.19-alpine
+          pullPolicy: IfNotPresent
 
         limits:
           compactor_blocks_retention_period: 1y
