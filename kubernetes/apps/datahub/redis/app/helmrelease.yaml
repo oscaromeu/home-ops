@@ -37,7 +37,7 @@ spec:
       nodeSelector:
         kubernetes.io/arch: amd64
       persistence:
-        enabled: true
+        enabled: false
         size: 512Mi
         storageClass: local-path
     resources:
