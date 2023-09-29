@@ -10,4 +10,4 @@ resources:
   #- ./kafka-cloudera/ks.yaml
   #- ./pgadmin/ks.yaml
   #- ./redis/ks.yaml
-  #- ./redis-datahub/ks.yaml
+  - ./redis-datahub/ks.yaml
