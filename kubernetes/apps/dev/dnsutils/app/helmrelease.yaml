@@ -1,10 +1,9 @@
-# Debugging DNS https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/#create-a-simple-pod-to-use-as-a-test-environment
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: dnsutils
-  namespace: debug
+  namespace: dev
 spec:
   interval: 15m
   chart:
