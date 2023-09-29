@@ -126,13 +126,13 @@ spec:
       session:
         name: authelia_session
         same_site: lax
-        expiration: 1h
-        inactivity: 5m
+        expiration: 24h
+        inactivity: 24h
         remember_me_duration: 1M
         redis:
           enabled: true
           enabledSecret: false
-          host: redis-master.datahub.svc.cluster.local
+          host: redis-standalone-master.datahub.svc.cluster.local
           database_index: 3
       regulation:
         max_retries: 3
