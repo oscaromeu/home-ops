@@ -14,7 +14,8 @@ sources:
   kafka:
     type: kafka
     bootstrap_servers: datahub-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092
-    topic: k3s-logs-topic
+    topics:
+      - k3s-logs-topic
     group_id: logging-consumer-group
     decoding:
       codec: json
