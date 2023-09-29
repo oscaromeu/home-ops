@@ -26,7 +26,7 @@ sinks:
     type: kafka
     inputs:
       - kubernetes_source
-    bootstrap_servers: datahub-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092
+    bootstrap_servers: datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9092
     topic: k3s-logs-topic
     encoding:
       codec: json
