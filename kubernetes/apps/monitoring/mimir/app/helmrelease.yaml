@@ -288,6 +288,16 @@ spec:
             insecure: false
             http:
               insecure_skip_verify: true
+
+        memcached:
+          image:
+            # -- Memcached Docker image repository
+            repository: memcached
+            # -- Memcached Docker image tag
+            tag: 1.6.19-alpine
+            # -- Memcached Docker image pull policy
+            pullPolicy: IfNotPresent
+
         limits:
           compactor_blocks_retention_period: 1y
           max_label_names_per_series: 120
