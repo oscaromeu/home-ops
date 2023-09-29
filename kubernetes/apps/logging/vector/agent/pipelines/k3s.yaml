@@ -25,7 +25,7 @@ sinks:
   kubernetes_sink:
     type: vector
     inputs:
-      - kubernetes_logs
+      - kubernetes_source
     address: vector-aggregator.logging.svc.cluster.local:6000
 
   #kafka:
