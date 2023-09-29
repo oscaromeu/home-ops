@@ -35,6 +35,7 @@ spec:
         - servers: 3
           name: pool-0
           storageClassName: longhorn
+          size: 30Gi
           volumesPerServer: 3
           volumeClaimTemplate:
             metadata:
@@ -44,7 +45,6 @@ spec:
                 - ReadWriteOnce
               resources:
                 requests:
-                  storage: 300Gi
                   cpu: 500m
                   memory: 1Gi
                 limits:
@@ -98,11 +98,9 @@ spec:
           hajimari.io/icon: simple-icons:grafana
           #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
           #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
-        hosts:
-          - &host "minio-monitoring.${SECRET_DOMAIN}"
+        host: &host "minio-monitoring.${SECRET_DOMAIN}"
         tls:
-          - hosts:
-              - *host
+          - *host
         path: /
         pathType: Prefix
       console:
@@ -113,11 +111,9 @@ spec:
           hajimari.io/icon: simple-icons:grafana
           #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
           #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
-        hosts:
-          - &host "minio-console-monitoring.${SECRET_DOMAIN}"
+        host: &host "minio-console-monitoring.${SECRET_DOMAIN}"
         tls:
-          - hosts:
-              - *host
+          - *host
         path: /
         pathType: Prefix
 
