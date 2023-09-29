@@ -289,12 +289,6 @@ spec:
             http:
               insecure_skip_verify: true
 
-      memcached:
-        image:
-          repository: memcached
-          tag: 1.6.19-alpine
-          pullPolicy: IfNotPresent
-
         limits:
           compactor_blocks_retention_period: 1y
           max_label_names_per_series: 120

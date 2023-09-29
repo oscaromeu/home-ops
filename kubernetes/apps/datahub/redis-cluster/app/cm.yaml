@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: redistore
-  namespace: datahub
-  labels:
-    substitution.flux.home.arpa/enabled: "false"
-data:
-  "6379": "datahub/redis-master:6379"

@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: redis
+  name: redis-datahub
   namespace: datahub
 spec:
   interval: 15m
@@ -26,7 +26,7 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    architecture: standalone
+    architecture: replication
     auth:
       enabled: false
       sentinel: false
@@ -42,10 +42,10 @@ spec:
           cpu: 50m
       persistence:
         enabled: true
-        storageClass: "local-path"
+        storageClass: "longhorn"
       disableCommands: []
-      service:
-        type: LoadBalancer
+      #service:
+      #  type: LoadBalancer
       readinessProbe:
         enabled: true
         initialDelaySeconds: 60
@@ -71,7 +71,8 @@ spec:
       replicaCount: 1
       persistence:
         enabled: true
-        storageClass: "local-path"
+        storageClass: "longhorn"
+        size: 20Gi
       #service:
       #  type: LoadBalancer
       disableCommands: []
@@ -84,8 +85,8 @@ spec:
         memory: 256Mi
     sentinel:
       # https://artifacthub.io/packages/helm/bitnami/redis#master-replicas-with-sentinel
-      enabled: false
-      masterSet: redis-master
+      enabled: true
+      masterSet: redis-datahub
       getMasterTimeout: 60
       readinessProbe:
         enabled: true
@@ -129,8 +130,3 @@ spec:
         requests:
           cpu: 250m
           memory: 256Mi
-    useExternalDNS:
-      enabled: false
-      suffix: "${SECRET_DOMAIN}"
-      annotationKey: external-dns.alpha.kubernetes.io/
-      additionalAnnotations: {}
