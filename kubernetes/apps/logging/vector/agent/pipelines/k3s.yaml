@@ -11,16 +11,22 @@ sources:
 
 sinks:
 
-  redis:
-    type: redis
+  #redis:
+  #  type: redis
+  #  inputs:
+  #    - kubernetes_source
+  #  url: redis://redis-standalone-master.datahub.svc.cluster.local:6379/0
+  #  key: "k3s_prod"
+  #  encoding:
+  #    codec: json
+  #  batch:
+  #    max_bytes: 2049000
+
+  kubernetes_sink:
+    type: vector
     inputs:
-      - kubernetes_source
-    url: redis://redis-standalone-master.datahub.svc.cluster.local:6379/0
-    key: "k3s_prod"
-    encoding:
-      codec: json
-    batch:
-      max_bytes: 2049000
+      - kubernetes_logs
+    address: vector-aggregator.logging.svc.cluster.local:6000
 
   #kafka:
   #  type: kafka

@@ -4,12 +4,16 @@
 #
 sources:
 
-  k3s:
-    type: redis
-    url: redis://redis-standalone-master.datahub.svc.cluster.local:6379/0
-    key: "k3s_prod"
-    decoding:
-      codec: json
+  #k3s:
+  #  type: redis
+  #  url: redis://redis-standalone-master.datahub.svc.cluster.local:6379/0
+  #  key: "k3s_prod"
+  #  decoding:
+  #    codec: json
+
+  kubernetes_logs:
+    type: vector
+    address: 0.0.0.0:6000
 
   #k3s:
   #  type: kafka
