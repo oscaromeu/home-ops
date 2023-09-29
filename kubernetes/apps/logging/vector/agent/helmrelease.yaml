@@ -57,7 +57,7 @@ spec:
         cpu: 47m
         memory: 111Mi
       limits:
-        memory: 500Mi
+        memory: 1Gi
 
     podAnnotations:
       configmap.reloader.stakater.com/reload: vector-agent
