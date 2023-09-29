@@ -68,7 +68,7 @@ spec:
         successThreshold: 1
         failureThreshold: 22
     replica:
-      replicaCount: 1
+      replicaCount: 3
       persistence:
         enabled: true
         storageClass: "longhorn"
