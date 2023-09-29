@@ -100,7 +100,8 @@ spec:
           #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
         host: &host "minio-monitoring.${SECRET_DOMAIN}"
         tls:
-          - *host
+          - hosts:
+              - *host
         path: /
         pathType: Prefix
       console:
@@ -113,7 +114,8 @@ spec:
           #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
         host: &host "minio-console-monitoring.${SECRET_DOMAIN}"
         tls:
-          - *host
+          - hosts:
+              - *host
         path: /
         pathType: Prefix
 
