@@ -5,7 +5,7 @@ resources:
   - ./namespace.yaml
   #- ./blackbox-exporter/ks.yaml
   #- ./ddosify/ks.yaml
-  - ./gatus/ks.yaml
+  #- ./gatus/ks.yaml
   - ./grafana/ks.yaml
   - ./influxdb-exporter/ks.yaml
   - ./k6s/ks.yaml
