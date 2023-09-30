@@ -97,22 +97,22 @@ spec:
               topologyKey: 'kubernetes.io/hostname'
 
     admin-cache:
-      enabled: true
+      enabled: false
       replicas: 2
 
     chunks-cache:
-      enabled: true
+      enabled: false
       replicas: 1
 
     index-cache:
-      enabled: true
+      enabled: false
       replicas: 3
 
     metadata-cache:
-      enabled: true
+      enabled: false
 
     results-cache:
-      enabled: true
+      enabled: false
       replicas: 2
 
     minio:
@@ -252,22 +252,22 @@ spec:
             http:
               insecure_skip_verify: true
 
-          #bucket_store:
-          #  chunks_cache:
-          #    backend: redis
-          #    redis:
-          #      endpoint: redis-master.datahub.svc.cluster.local:6379
-          #      db: 2
-          #  index_cache:
-          #    backend: redis
-          #    redis:
-          #      endpoint: redis-master.datahub.svc.cluster.local:6379
-          #      db: 2
-          #  metadata_cache:
-          #    backend: redis
-          #    redis:
-          #      endpoint: redis-master.datahub.svc.cluster.local:6379
-          #      db: 2
+          bucket_store:
+            chunks_cache:
+              backend: redis
+              redis:
+                endpoint: redis-standalone-master.datahub.svc.cluster.local:6379
+                db: 4
+            index_cache:
+              backend: redis
+              redis:
+                endpoint: redis-standalone-master.datahub.svc.cluster.local:6379
+                db: 5
+            metadata_cache:
+              backend: redis
+              redis:
+                endpoint: redis-standalone-master.datahub.svc.cluster.local:6379
+                db: 6
 
         frontend:
           cache_results: true
@@ -276,11 +276,11 @@ spec:
           split_queries_by_interval: 24h
           align_queries_with_step: true
           log_queries_longer_than: 1s
-          #results_cache:
-          #  backend: redis
-          #  redis:
-          #    endpoint: redis-master.datahub.svc.cluster.local:6379
-          #    db: 2
+          results_cache:
+            backend: redis
+            redis:
+              endpoint: redis-standalone-master.datahub.svc.cluster.local:6379
+              db: 7
 
         ruler_storage:
           backend: s3
@@ -293,7 +293,7 @@ spec:
           compactor_blocks_retention_period: 1y
           max_label_names_per_series: 120
           max_global_series_per_user: 12000000
-          ingestion_rate: 400000
+          ingestion_rate: 1000000
           ingestion_burst_size: 8000000
 
   valuesFrom:
