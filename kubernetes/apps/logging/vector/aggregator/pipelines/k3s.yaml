@@ -28,7 +28,7 @@ sources:
       enabled: true
       mechanism: "SCRAM-SHA-512"
       username: "datahub-user"
-      password: "${KAFKA_PASSWORD}"
+      password: "${KAFKA_PASSWORD:-monitor}"
 
 #
 # Transforms
