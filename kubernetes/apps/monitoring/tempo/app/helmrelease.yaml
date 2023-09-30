@@ -70,7 +70,9 @@ spec:
       ingress:
         enabled: true
         annotations:
-          kubernetes.io/ingress.class: internal
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+          external-dns.home.arpa/enabled: "true"
+          hajimari.io/icon: simple-icons:prometheus
         hosts:
           - &host "tempo-query.${SECRET_DOMAIN}"
         tls:

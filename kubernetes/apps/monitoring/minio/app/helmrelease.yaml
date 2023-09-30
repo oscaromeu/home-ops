@@ -95,7 +95,9 @@ spec:
         ingressClassName: internal
         annotations:
           external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-          hajimari.io/icon: simple-icons:grafana
+          hajimari.io/icon: simple-icons:minio
+          nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+          nginx.ingress.kubernetes.io/backend-protocol: HTTPS
           #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
           #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
         host: &host "minio-monitoring.${SECRET_DOMAIN}"
@@ -109,7 +111,9 @@ spec:
         ingressClassName: internal
         annotations:
           external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-          hajimari.io/icon: simple-icons:grafana
+          hajimari.io/icon: simple-icons:minio
+          nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+          nginx.ingress.kubernetes.io/backend-protocol: HTTPS
           #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
           #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
         host: &host "minio-console-monitoring.${SECRET_DOMAIN}"
