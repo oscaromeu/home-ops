@@ -177,7 +177,7 @@ spec:
         scrapeInterval: 60s
         replicas: 1
         externalLabels:
-          cluster: homeops
+          cluster: "home-ops"
         ruleSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
