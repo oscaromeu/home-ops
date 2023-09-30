@@ -188,7 +188,7 @@ spec:
 
     nginx:
       ingress:
-        enabled: true
+        enabled: false
         ingressClassName: internal
         annotations:
           external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"

@@ -68,7 +68,7 @@ spec:
 
     tempoQuery:
       ingress:
-        enabled: true
+        enabled: false
         annotations:
           external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
           external-dns.home.arpa/enabled: "true"
