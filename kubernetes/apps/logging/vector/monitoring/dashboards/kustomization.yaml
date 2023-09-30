@@ -9,7 +9,7 @@ configMapGenerator:
       - ./vector_1.json
     options:
       labels:
-        home_ops: vector
+        home_ops: vector-1
       disableNameSuffixHash: true
 
   - name: vector-2
@@ -17,7 +17,7 @@ configMapGenerator:
       - ./vector_2.json
     options:
       labels:
-        home_ops: vector
+        home_ops: vector-2
       disableNameSuffixHash: true
 
   - name: vector-3
@@ -25,7 +25,7 @@ configMapGenerator:
       - ./vector_3.json
     options:
       labels:
-        home_ops: vector
+        home_ops: vector-3
       disableNameSuffixHash: true
 
   - name: vector-4
@@ -33,7 +33,7 @@ configMapGenerator:
       - ./vector_4.json
     options:
       labels:
-        home_ops: vector
+        home_ops: vector-4
       disableNameSuffixHash: true
 
   - name: vector-5
@@ -41,5 +41,5 @@ configMapGenerator:
       - ./vector_5.json
     options:
       labels:
-        home_ops: vector
+        home_ops: vector-5
       disableNameSuffixHash: true
