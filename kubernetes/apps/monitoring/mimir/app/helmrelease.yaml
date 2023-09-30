@@ -258,6 +258,7 @@ spec:
               redis:
                 endpoint: redis-standalone-master.datahub.svc.cluster.local:6379
                 db: 4
+                max_get_multi_batch_size: 1000
             index_cache:
               backend: redis
               redis:
