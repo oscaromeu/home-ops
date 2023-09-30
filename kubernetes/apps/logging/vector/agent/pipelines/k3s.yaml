@@ -23,19 +23,23 @@ sinks:
   #  batch:
   #    max_bytes: 2049000
 
-  kubernetes:
-    type: vector
-    inputs: ["kubernetes_source"]
-    compression: true
-    version: "2"
-    address: vector-aggregator.logging.svc.cluster.local:6010
+  #kubernetes:
+  #  type: vector
+  #  inputs: ["kubernetes_source"]
+  #  compression: true
+  #  version: "2"
+  #  address: vector-aggregator.logging.svc.cluster.local:6010
 
-  #kafka:
-  #  type: kafka
-  #  inputs:
-  #    - kubernetes_source
-  #  bootstrap_servers: datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9092
-  #  topic: k3s-logs-topic
-  #  encoding:
-  #    codec: json
-
+  kafka:
+    type: kafka
+    inputs:
+      - kubernetes_source
+    bootstrap_servers: datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9092
+    topic: k3s-logs-topic
+    encoding:
+      codec: json
+    sasl:
+      enabled: true
+      mechanism: "SCRAM-SHA-512"
+      username: "datahub-user"
+      password: "${KAFKA_PASSWORD}"
