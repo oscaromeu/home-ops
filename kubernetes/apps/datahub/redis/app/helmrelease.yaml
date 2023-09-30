@@ -48,13 +48,13 @@ spec:
         enabled: false
         size: 10Gi
         storageClass: local-path
-    resources:
-      requests:
-        cpu: 36m
-        memory: 138Mi
-      limits:
-        #cpu:
-        memory: 10Gi
+      resources:
+        requests:
+          cpu: 36m
+          memory: 138Mi
+        limits:
+          #cpu:
+          memory: 10Gi
     metrics:
       enabled: false
       serviceMonitor:
