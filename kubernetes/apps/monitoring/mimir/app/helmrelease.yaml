@@ -199,7 +199,7 @@ spec:
         tls:
           - hosts:
               - *host
-      replicas: 1
+      replicas: 3
       resources:
         limits:
           memory: 731Mi
@@ -281,6 +281,10 @@ spec:
             redis:
               endpoint: redis-standalone-master.datahub.svc.cluster.local:6379
               db: 7
+          scheduler_address: mimir-query-scheduler-headless.monitoring.svc.cluster.local:9095
+        frontend_worker:
+          scheduler_address: mimir-query-scheduler-headless.monitoring.svc.cluster.local:9095
+          frontend_address: mimir-query-frontend.monitoring.svc.cluster.local:9095
 
         ruler_storage:
           backend: s3
