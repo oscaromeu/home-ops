@@ -218,10 +218,21 @@ spec:
     #      memory: 64Mi
 
     metaMonitoring:
+      dashboards:
+        enabled: true
+        labels:
+          home_ops: "1"
+
       serviceMonitor:
         enabled: true
+        clusterLabel: "home-ops"
         interval: 1m
         scrapeTimeout: 30s
+
+      prometheusRule:
+        enabled: true
+        mimirAlerts: true
+        mimirRules: true
 
     gateway:
       replicas: 1
