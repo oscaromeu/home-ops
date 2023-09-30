@@ -79,7 +79,7 @@ spec:
           port: 9090
           protocol: TCP
         - name: kubernetes
-          containerPort: 6010
+          port: 6010
           protocol: TCP
 
     serviceHeadless:
@@ -92,7 +92,7 @@ spec:
           port: 9090
           protocol: TCP
         - name: kubernetes
-          containerPort: 6010
+          port: 6010
           protocol: TCP
 
     podMonitor:
