@@ -18,7 +18,7 @@ sources:
 
   k3s:
     type: kafka
-    bootstrap_servers: datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9092
+    bootstrap_servers: datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9094
     topics:
       - k3s-logs-topic
     group_id: logging-group
@@ -28,7 +28,7 @@ sources:
       enabled: true
       mechanism: "SCRAM-SHA-512"
       username: "datahub-user"
-      password: "password"
+      password: "$(KAFKA_PASSWORD)"
 
 #
 # Transforms
