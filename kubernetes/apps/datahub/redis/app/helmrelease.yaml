@@ -34,7 +34,7 @@ spec:
           #cpu:
           memory: 10Gi
     replica:
-      replicaCount: 3
+      replicaCount: 1
       nodeSelector:
         kubernetes.io/arch: amd64
       persistence:
