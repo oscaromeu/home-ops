@@ -32,14 +32,14 @@ spec:
           memory: 138Mi
         limits:
           #cpu:
-          memory: 8Gi
+          memory: 10Gi
     replica:
-      replicaCount: 1
+      replicaCount: 3
       nodeSelector:
         kubernetes.io/arch: amd64
       persistence:
         enabled: false
-        size: 512Mi
+        size: 10Gi
         storageClass: local-path
     resources:
       requests:
@@ -47,7 +47,7 @@ spec:
         memory: 138Mi
       limits:
         #cpu:
-        memory: 5Gi
+        memory: 10Gi
     metrics:
       enabled: false
       serviceMonitor:
