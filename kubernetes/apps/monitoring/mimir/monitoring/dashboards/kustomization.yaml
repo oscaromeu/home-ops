@@ -4,16 +4,6 @@ namespace: monitoring
 
 configMapGenerator:
 
-  - name: cardinality-explorer
-    files:
-      - cardinality-explorer.json
-    options:
-      labels:
-        home_ops: cardinality-explorer
-      annotations:
-        kustomize.toolkit.fluxcd.io/substitute: disabled
-      disableNameSuffixHash: true
-
   - name: mimir-alertmanager-resources
     files:
       - mimir-alertmanager-resources.json
