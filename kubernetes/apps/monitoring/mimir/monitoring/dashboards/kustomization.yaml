@@ -1,0 +1,265 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: monitoring
+
+configMapGenerator:
+
+  - name: cardinality-explorer
+    files:
+      - cardinality-explorer.json
+    options:
+      labels:
+        home_ops: cardinality-explorer
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-alertmanager-resources
+    files:
+      - mimir-alertmanager-resources.json
+    options:
+      labels:
+        home_ops: mimir-alertmanager
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-alertmanager
+    files:
+      - mimir-alertmanager.json
+    options:
+      labels:
+        home_ops: mimir-alertmanager
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-compactor-resources
+    files:
+      - mimir-compactor-resources.json
+    options:
+      labels:
+        home_ops: mimir-compactor
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-compactor
+    files:
+      - mimir-compactor.json
+    options:
+      labels:
+        home_ops: mimir-compactor
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-config
+    files:
+      - mimir-config.json
+    options:
+      labels:
+        home_ops: mimir-config
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-object-store
+    files:
+      - mimir-object-store.json
+    options:
+      labels:
+        home_ops: mimir-object-store
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-overrides
+    files:
+      - mimir-overrides.json
+    options:
+      labels:
+        home_ops: mimir-overrides
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-overview-networking
+    files:
+      - mimir-overview-networking.json
+    options:
+      labels:
+        home_ops: mimir-overview-networking
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-overview-resources
+    files:
+      - mimir-overview-resources.json
+    options:
+      labels:
+        home_ops: mimir-overview-resources
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-overview
+    files:
+      - mimir-overview.json
+    options:
+      labels:
+        home_ops: mimir-overview
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-queries
+    files:
+      - mimir-queries.json
+    options:
+      labels:
+        home_ops: mimir-queries
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-reads-networking
+    files:
+      - mimir-reads-networking.json
+    options:
+      labels:
+        home_ops: mimir-reads-networking
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-reads-resources
+    files:
+      - mimir-reads-resources.json
+    options:
+      labels:
+        home_ops: mimir-reads-resources
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-reads
+    files:
+      - mimir-reads.json
+    options:
+      labels:
+        home_ops: mimir-reads
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-remote-ruler-reads-resources
+    files:
+      - mimir-remote-ruler-reads-resources.json
+    options:
+      labels:
+        home_ops: mimir-remote-ruler-reads-resources
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-remote-ruler-reads
+    files:
+      - mimir-remote-ruler-reads.json
+    options:
+      labels:
+        home_ops: mimir-remote-ruler-reads
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-rollout-progress
+    files:
+      - mimir-rollout-progress.json
+    options:
+      labels:
+        home_ops: mimir-rollout-progress
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-ruler
+    files:
+      - mimir-ruler.json
+    options:
+      labels:
+        home_ops: mimir-ruler
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-scaling
+    files:
+      - mimir-scaling.json
+    options:
+      labels:
+        home_ops: mimir-scaling
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-slow-queries
+    files:
+      - mimir-slow-queries.json
+    options:
+      labels:
+        home_ops: mimir-slow-queries
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-tenants
+    files:
+      - mimir-tenants.json
+    options:
+      labels:
+        home_ops: mimir-tenants
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-top-tenants
+    files:
+      - mimir-top-tenants.json
+    options:
+      labels:
+        home_ops: mimir-top-tenants
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-writes-networking
+    files:
+      - mimir-writes-networking.json
+    options:
+      labels:
+        home_ops: mimir-writes-networking
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-writes-resources
+    files:
+      - mimir-writes-resources.json
+    options:
+      labels:
+        home_ops: mimir-writes-resources
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
+
+  - name: mimir-writes
+    files:
+      - mimir-writes.json
+    options:
+      labels:
+        home_ops: mimir-writes
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
