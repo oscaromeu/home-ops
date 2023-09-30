@@ -101,6 +101,9 @@ spec:
         - name: prom-exporter
           port: 9090
           protocol: TCP
+        - name: kubernetes
+          containerPort: 6010
+          protocol: TCP
 
     serviceHeadless:
       enabled: true
@@ -110,6 +113,9 @@ spec:
           protocol: TCP
         - name: prom-exporter
           port: 9090
+          protocol: TCP
+        - name: kubernetes
+          containerPort: 6010
           protocol: TCP
 
     podMonitor:
