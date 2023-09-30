@@ -4,31 +4,31 @@
 #
 sources:
 
-  #k3s:
-  #  type: redis
-  #  url: redis://redis-standalone-master.datahub.svc.cluster.local:6379/0
-  #  key: "k3s_prod"
-  #  decoding:
-  #    codec: json
+  k3s:
+    type: redis
+    url: redis://redis-standalone-master.datahub.svc.cluster.local:6379/0
+    key: "k3s_prod"
+    decoding:
+      codec: json
 
   #k3s:
   #  type: vector
   #  address: 0.0.0.0:6010
   #  version: "2"
 
-  k3s:
-    type: kafka
-    bootstrap_servers: datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9094
-    topics:
-      - k3s-logs-topic
-    group_id: logging-group
-    decoding:
-      codec: json
-    sasl:
-      enabled: true
-      mechanism: "SCRAM-SHA-512"
-      username: "datahub-user"
-      password: "${KAFKA_PASSWORD:-monitor}"
+  #k3s:
+  #  type: kafka
+  #  bootstrap_servers: datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9094
+  #  topics:
+  #    - k3s-logs-topic
+  #  group_id: logging-group
+  #  decoding:
+  #    codec: json
+  #  sasl:
+  #    enabled: true
+  #    mechanism: "SCRAM-SHA-512"
+  #    username: "datahub-user"
+  #    password: "${KAFKA_PASSWORD:-monitor}"
 
 #
 # Transforms

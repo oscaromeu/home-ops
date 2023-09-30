@@ -12,16 +12,16 @@ sources:
 
 sinks:
 
-  #redis:
-  #  type: redis
-  #  inputs:
-  #    - kubernetes_source
-  #  url: redis://redis-standalone-master.datahub.svc.cluster.local:6379/0
-  #  key: "k3s_prod"
-  #  encoding:
-  #    codec: json
-  #  batch:
-  #    max_bytes: 2049000
+  redis:
+    type: redis
+    inputs:
+      - kubernetes_source
+    url: redis://redis-standalone-master.datahub.svc.cluster.local:6379/0
+    key: "k3s_prod"
+    encoding:
+      codec: json
+    batch:
+      max_bytes: 2049000
 
   #kubernetes:
   #  type: vector
@@ -30,16 +30,16 @@ sinks:
   #  version: "2"
   #  address: vector-aggregator.logging.svc.cluster.local:6010
 
-  kafka:
-    type: kafka
-    inputs:
-      - kubernetes_source
-    bootstrap_servers: datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9094
-    topic: k3s-logs-topic
-    encoding:
-      codec: json
-    sasl:
-      enabled: true
-      mechanism: "SCRAM-SHA-512"
-      username: "datahub-user"
-      password: "${KAFKA_PASSWORD:-monitor}"
+  #kafka:
+  #  type: kafka
+  #  inputs:
+  #    - kubernetes_source
+  #  bootstrap_servers: datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9094
+  #  topic: k3s-logs-topic
+  #  encoding:
+  #    codec: json
+  #  sasl:
+  #    enabled: true
+  #    mechanism: "SCRAM-SHA-512"
+  #    username: "datahub-user"
+  #    password: "${KAFKA_PASSWORD:-monitor}"
