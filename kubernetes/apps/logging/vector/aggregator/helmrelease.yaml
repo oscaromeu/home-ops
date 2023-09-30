@@ -138,3 +138,10 @@ spec:
           secretKeyRef:
             key: ELASTICSEARCH_USERNAME
             name: es-ingestion-credentials
+
+      - name: KAFKA_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            key: datahub-user
+            name: datahub-user
+
