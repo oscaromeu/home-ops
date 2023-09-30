@@ -36,10 +36,10 @@ configMapGenerator:
         home_ops: vector-4
       disableNameSuffixHash: true
 
-  - name: vector-5
-    files:
-      - ./vector_5.json
-    options:
-      labels:
-        home_ops: vector-5
-      disableNameSuffixHash: true
+  #- name: vector-5
+  #  files:
+  #    - ./vector_5.json
+  #  options:
+  #    labels:
+  #      home_ops: vector-5
+  #    disableNameSuffixHash: true
