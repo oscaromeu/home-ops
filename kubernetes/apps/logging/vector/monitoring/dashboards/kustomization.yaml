@@ -4,11 +4,42 @@ namespace: logging
 
 configMapGenerator:
 
-  - name: vector
+  - name: vector-1
     files:
-      - ./vector.json
+      - ./vector_1.json
     options:
       labels:
         home_ops: vector
       disableNameSuffixHash: true
 
+  - name: vector-2
+    files:
+      - ./vector_2.json
+    options:
+      labels:
+        home_ops: vector
+      disableNameSuffixHash: true
+
+  - name: vector-3
+    files:
+      - ./vector_3.json
+    options:
+      labels:
+        home_ops: vector
+      disableNameSuffixHash: true
+
+  - name: vector-4
+    files:
+      - ./vector_4.json
+    options:
+      labels:
+        home_ops: vector
+      disableNameSuffixHash: true
+
+  - name: vector-5
+    files:
+      - ./vector_5.json
+    options:
+      labels:
+        home_ops: vector
+      disableNameSuffixHash: true
