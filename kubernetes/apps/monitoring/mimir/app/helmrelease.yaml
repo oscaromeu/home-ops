@@ -204,7 +204,7 @@ spec:
         tls:
           - hosts:
               - *host
-      replicas: 3
+      replicas: 1
       resources:
         limits:
           memory: 731Mi
