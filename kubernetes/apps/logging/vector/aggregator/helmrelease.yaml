@@ -130,13 +130,13 @@ spec:
       - name: ELASTICSEARCH_PASSWORD
         valueFrom:
           secretKeyRef:
-            key: ELASTICSEARCH_PASSWORD
+            key: ELASTICSEARCH__PASSWORD
             name: es-ingestion-credentials
 
-      - name: ELASTICSEARCH_USERNAME
+      - name: ELASTICSEARCH_NAME
         valueFrom:
           secretKeyRef:
-            key: ELASTICSEARCH_USERNAME
+            key: ELASTICSEARCH__NAME
             name: es-ingestion-credentials
 
       - name: KAFKA_PASSWORD

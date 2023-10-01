@@ -134,13 +134,13 @@ spec:
     name: es-ingestion-credentials
 
   data:
-    - secretKey: ELASTICSEARCH_PASSWORD
+    - secretKey: ELASTICSEARCH__PASSWORD
       remoteRef:
-        key: ELASTICSEARCH_PASSWORD
+        key: ELASTICSEARCH__PASSWORD
 
-    - secretKey: ELASTICSEARCH_USERNAME
+    - secretKey: ELASTICSEARCH__NAME
       remoteRef:
-        key: ELASTICSEARCH_USERNAME
+        key: ELASTICSEARCH__NAME
 ```
 
 ## Secret Variations with Flux

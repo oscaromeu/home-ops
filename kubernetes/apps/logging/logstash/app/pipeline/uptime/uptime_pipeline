@@ -11,8 +11,8 @@ output {
   elasticsearch {
     hosts => ["https://elk-es-http.logging.svc:9200"]
     cacert => "/usr/share/logstash/config/certs/ca.crt"
-    user => '${ELASTICSEARCH_USERNAME}'
-    password => '${ELASTICSEARCH_PASSWORD}'
+    user => '${ELASTICSEARCH__NAME}'
+    password => '${ELASTICSEARCH__PASSWORD}'
     index => "uptime"
   }
 

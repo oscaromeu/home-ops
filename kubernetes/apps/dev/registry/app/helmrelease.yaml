@@ -54,4 +54,4 @@ spec:
     - targetPath: secrets.htpasswd
       kind: Secret
       name: docker-registry-htpasswd
-      valuesKey: REGISTRY_CREDENTIALS
+      valuesKey: REGISTRY__CREDENTIALS

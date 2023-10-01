@@ -100,12 +100,12 @@ spec:
             cpu: 100m
             memory: 680Mi
         env:
-          - name: ELASTICSEARCH_USERNAME
+          - name: ELASTICSEARCH__NAME
             value: "ingestion"
-          - name: ELASTICSEARCH_PASSWORD
+          - name: ELASTICSEARCH__PASSWORD
             valueFrom:
               secretKeyRef:
-                key: ELASTICSEARCH_PASSWORD
+                key: ELASTICSEARCH__PASSWORD
                 name: es-ingestion-credentials
         volumeMounts:
           #- name: logstash

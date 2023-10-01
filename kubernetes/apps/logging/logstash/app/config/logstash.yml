@@ -6,5 +6,5 @@ xpack.monitoring.elasticsearch.hosts: ["https://elk-es-http.logging.svc:9200"]
 xpack.monitoring.elasticsearch.ssl.certificate_authority: /usr/share/logstash/config/certs/ca.crt
 xpack.monitoring.enabled: true
 xpack.monitoring.collection.interval: 60s
-xpack.monitoring.elasticsearch.username: "${ELASTICSEARCH_USERNAME}"
-xpack.monitoring.elasticsearch.password: "${ELASTICSEARCH_PASSWORD}"
+xpack.monitoring.elasticsearch.username: "${ELASTICSEARCH__NAME}"
+xpack.monitoring.elasticsearch.password: "${ELASTICSEARCH__PASSWORD}"
