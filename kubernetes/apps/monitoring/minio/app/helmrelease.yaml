@@ -34,7 +34,7 @@ spec:
       pools:
         - servers: 3
           name: pool-0
-          storageClassName: longhorn
+          storageClassName: local-path
           size: 30Gi
           volumesPerServer: 3
           volumeClaimTemplate:
@@ -122,4 +122,3 @@ spec:
               - *host
         path: /
         pathType: Prefix
-
