@@ -35,7 +35,7 @@ spec:
                 secretKeyRef:
                   key: elastic
                   name: elk-es-elastic-user
-          image: "quay.io/prometheuscommunity/elasticsearch-exporter:v1.5.0"
+          image: "quay.io/prometheuscommunity/elasticsearch-exporter:v1.6.0"
           imagePullPolicy: IfNotPresent
           command: ["elasticsearch_exporter",
                     "--log.format=logfmt",
