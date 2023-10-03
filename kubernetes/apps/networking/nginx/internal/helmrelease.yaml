@@ -90,4 +90,5 @@ spec:
     udp:
       "9123": "monitoring/influxdb-exporter-udp:9123"
     tcp:
-      "6379": "datahub/redis-master:6379"
+      "6379": "datahub/redis-standalone-master:6379"
+      "9200": "logging/elk-elasticsearchr:9200"
