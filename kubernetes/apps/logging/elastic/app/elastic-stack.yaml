@@ -10,8 +10,8 @@ spec:
   version: 8.8.0
   volumeClaimDeletePolicy: DeleteOnScaledownOnly
   nodeSets:
-  - name: master
-    count: 1
+  - name: hot
+    count: 2
     config:
       node.roles: ["master","data_hot","data_content", "remote_cluster_client"]
       node.attr.type: "hot"
@@ -31,12 +31,12 @@ spec:
         - name: elasticsearch
           env:
             - name: ES_JAVA_OPTS
-              value: "-Xms2g -Xmx2g"
+              value: "-Xms5g -Xmx5g"
             - name: READINESS_PROBE_TIMEOUT
               value: "10"
           resources:
             requests:
-              memory: 4Gi
+              memory: 5Gi
               cpu: 241m
             limits:
               memory: 10Gi
@@ -70,8 +70,8 @@ spec:
             storage: 10Gi
         storageClassName: local-path
 
-  - name: data
-    count: 1
+  - name: warm
+    count: 2
     config:
       node.roles: ["data_warm", "ingest","data_content","remote_cluster_client"]
       node.store.allow_mmap: false
