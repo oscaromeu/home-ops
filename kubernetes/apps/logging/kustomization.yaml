@@ -8,7 +8,7 @@ resources:
   #- ./redis/ks.yaml
   #- ./filebeat
   #- ./logstash/ks.yaml
-  - ./elastic-exporter/ks.yaml
+  #- ./elastic-exporter/ks.yaml
   - ./redis-exporter/ks.yaml
   - ./loki/ks.yaml
   - ./metricbeat/ks.yaml
