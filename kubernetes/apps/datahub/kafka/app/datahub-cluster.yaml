@@ -26,14 +26,14 @@ spec:
                   - "kafka-broker"
     resources:
       requests:
-        memory: 5Gi
-        cpu: "1"
+        memory: 2Gi
+        cpu: "500m"
       limits:
         memory: 5Gi
-        cpu: "2"
+        cpu: "500m"
     jvmOptions:
-      -Xms: 4096m
-      -Xmx: 4096m
+      -Xms: 2048m
+      -Xmx: 2048m
     listeners:
       - name: plain
         port: 9092
@@ -51,6 +51,43 @@ spec:
         tls: true
         authentication:
           type: scram-sha-512
+      - name: external
+        port: 9094
+        type: ingress
+        tls: true
+        authentication:
+          type: scram-sha-512
+        configuration:
+          bootstrap:
+            host: "bootstrap.${SECRET_DOMAIN}"
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: "bootstrap.${SECRET_DOMAIN}"
+              external-dns.alpha.kubernetes.io/ttl: "600"
+              external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+              #hajimari.io/icon: simple-icons:grafana
+          brokers:
+          - broker: 0
+            host: "broker-0.${SECRET_DOMAIN}"
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: "broker-0.${SECRET_DOMAIN}"
+              external-dns.alpha.kubernetes.io/ttl: "600"
+              external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+              #hajimari.io/icon: simple-icons:grafana
+          - broker: 1
+            host: "broker-1.${SECRET_DOMAIN}"
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: "broker-1.${SECRET_DOMAIN}"
+              external-dns.alpha.kubernetes.io/ttl: "600"
+              external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+              #hajimari.io/icon: simple-icons:grafana
+          - broker: 2
+            host: "broker-2.${SECRET_DOMAIN}"
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: "broker-2.${SECRET_DOMAIN}"
+              external-dns.alpha.kubernetes.io/ttl: "600"
+              external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+              #hajimari.io/icon: simple-icons:grafana
+        class: internal
     authorization:
       type: simple
     config:
@@ -68,6 +105,14 @@ spec:
         size: 10Gi
         class: local-path
         deleteClaim: false
+  kafkaExporter:
+    template:
+      pod:
+        metadata:
+          annotations:
+            prometheus.io/path: /metrics
+            prometheus.io/port: "9404"
+            prometheus.io/scrape: "true"
   zookeeper:
     template:
       pod:
