@@ -31,12 +31,12 @@ spec:
         - name: elasticsearch
           env:
             - name: ES_JAVA_OPTS
-              value: "-Xms5g -Xmx5g"
+              value: "-Xms2g -Xmx2g"
             - name: READINESS_PROBE_TIMEOUT
               value: "10"
           resources:
             requests:
-              memory: 5Gi
+              memory: 4Gi
               cpu: 241m
             limits:
               memory: 10Gi
