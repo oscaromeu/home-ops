@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-metricbeat
   namespace: flux-system
   labels:
-    substitution.flux.home.arpa/enabled: "true"
+    substitution.flux.home.arpa/enabled: "false"
 spec:
   dependsOn:
     - name: cluster-apps-elastic
