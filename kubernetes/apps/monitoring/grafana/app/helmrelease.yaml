@@ -71,22 +71,32 @@ spec:
       datasources.yaml:
         apiVersion: 1
         datasources:
+
           - name: Mimir
             type: prometheus
             access: proxy
             url: http://mimir-nginx.monitoring.svc.cluster.local:80/prometheus
             isDefault: true
+
           - name: Prometheus
             type: prometheus
             access: proxy
             url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
             isDefault: false
+
+          - name: Victoria-Metrics
+            type: prometheus
+            access: proxy
+            url: http://victoria-metrics-single-server.monitoring.svc.cluster.local:8428
+            isDefault: false
+
           - name: Loki
             type: loki
             access: proxy
             url: http://loki-gateway.logging.svc.cluster.local:80
             jsonData:
               maxLines: 250
+
           - name: Tempo
             type: tempo
             typeName: Tempo
@@ -109,6 +119,7 @@ spec:
                   - compose_service
             readOnly: false
             editable: true
+
           - name: Pyroscope
             type: pyroscope
             url: http://pyroscope-querier.monitoring.svc.cluster.local:4040
