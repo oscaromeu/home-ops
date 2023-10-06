@@ -52,7 +52,7 @@ spec:
         authentication:
           type: scram-sha-512
       - name: external
-        port: 9094
+        port: 9095
         type: ingress
         tls: true
         authentication:
