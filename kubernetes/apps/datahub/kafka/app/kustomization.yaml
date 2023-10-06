@@ -7,3 +7,10 @@ resources:
   - ./datahub-cluster.yaml
   - ./datahub-user.yaml
   - ./topic.yaml
+
+patches:
+ - target:
+      version: v1
+      kind: Service
+      name: datahub-cluster-kafka-external-1
+   path: ./patches/datahub-cluster-kafka-external-1.yaml

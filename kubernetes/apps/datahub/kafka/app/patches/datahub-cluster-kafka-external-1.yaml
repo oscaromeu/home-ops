@@ -1,0 +1,3 @@
+- op: replace
+  path: /spec/port/0/name
+  value: tcp-external-0
