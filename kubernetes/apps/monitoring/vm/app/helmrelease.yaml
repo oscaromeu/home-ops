@@ -40,6 +40,11 @@ spec:
         requests:
           cpu: 500m
           memory: 512Mi
+      extraArgs:
+        envflag.enable: "true"
+        envflag.prefix: VM_
+        loggerFormat: json
+        retentionPeriod: 1y
 
       ingress:
         enabled: true
