@@ -21,4 +21,5 @@ resources:
   - ./speedtest-exporter/ks.yaml
   #- ./stackdriver-exporter/ks.yaml
   - ./tempo/ks.yaml
+  - ./vm/ks.yaml
    #./vpa/ks.yaml
