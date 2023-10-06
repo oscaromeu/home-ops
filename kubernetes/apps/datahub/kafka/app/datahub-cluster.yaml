@@ -58,6 +58,7 @@ spec:
         authentication:
           type: scram-sha-512
         configuration:
+          class: internal
           bootstrap:
             host: "bootstrap.${SECRET_DOMAIN}"
             annotations:
@@ -87,7 +88,6 @@ spec:
               external-dns.alpha.kubernetes.io/ttl: "600"
               external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
               #hajimari.io/icon: simple-icons:grafana
-        class: internal
     authorization:
       type: simple
     config:
