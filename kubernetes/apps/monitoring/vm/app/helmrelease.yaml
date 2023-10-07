@@ -45,6 +45,7 @@ spec:
         envflag.prefix: VM_
         loggerFormat: json
         retentionPeriod: 1y
+        #maxLabelsPerTimeseries: 50
 
       ingress:
         enabled: true
