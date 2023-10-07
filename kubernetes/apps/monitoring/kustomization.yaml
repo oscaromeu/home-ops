@@ -10,7 +10,7 @@ resources:
   - ./influxdb-exporter/ks.yaml
   - ./k6s/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
-  #- ./kubernetes-dashboard/ks.yaml
+  - ./kubernetes-dashboard/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
   - ./mimir/ks.yaml
   - ./minio/ks.yaml
