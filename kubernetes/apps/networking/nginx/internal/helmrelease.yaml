@@ -45,6 +45,7 @@ spec:
               values: ["internal"]
       config:
         client-body-buffer-size: 100M
+        proxy-add-original-uri-header: "false"
         client-body-timeout: 120
         client-header-timeout: 120
         enable-brotli: "true"
