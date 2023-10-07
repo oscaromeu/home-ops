@@ -22,7 +22,7 @@ spec:
         - module: elasticsearch
           xpack.enabled: true
           period: 10s
-          hosts: ["https://elk-es-http.logging.svc.cluster.local:9200"]
+          hosts: ["http://elk-es-http.logging.svc.cluster.local:9200"]
       #- module: system
       #  period: 10s
       #  metricsets:
