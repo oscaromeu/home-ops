@@ -41,19 +41,19 @@ spec:
           name: cloudnative-pg-secret
           key: AWS_SECRET_ACCESS_KEY
   # Note: externalClusters is needed when recovering from an existing cnpg cluster
-  externalClusters:
-    - name: *previousCluster
-      barmanObjectStore:
-        serverName: *previousCluster
-        wal:
-          compression: bzip2
-          maxParallel: 8
-        destinationPath: s3://cloudnative-pg-v1/
-        endpointURL: "http://default-hl.default.svc.cluster.local:9000"
-        s3Credentials:
-          accessKeyId:
-            name: cloudnative-pg-secret
-            key: AWS_ACCESS_KEY_ID
-          secretAccessKey:
-            name: cloudnative-pg-secret
-            key: AWS_SECRET_ACCESS_KEY
+  #externalClusters:
+  #  - name: *previousCluster
+  #    barmanObjectStore:
+  #      serverName: *previousCluster
+  #      wal:
+  #        compression: bzip2
+  #        maxParallel: 8
+  #      destinationPath: s3://cloudnative-pg-v1/
+  #      endpointURL: "http://default-hl.default.svc.cluster.local:9000"
+  #      s3Credentials:
+  #        accessKeyId:
+  #          name: cloudnative-pg-secret
+  #          key: AWS_ACCESS_KEY_ID
+  #        secretAccessKey:
+  #          name: cloudnative-pg-secret
+  #          key: AWS_SECRET_ACCESS_KEY
