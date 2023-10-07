@@ -9,6 +9,8 @@ spec:
     name: elk
   #kibanaRef:
   #  name: kibana
+  secureSettings:
+    - secretName: elk-es-elastic-user
   config:
     metricbeat:
       autodiscover:
@@ -23,6 +25,8 @@ spec:
           xpack.enabled: true
           period: 10s
           hosts: ["http://elk-es-http.logging.svc.cluster.local:9200"]
+          username: elastic
+          #password: ${}
       #- module: system
       #  period: 10s
       #  metricsets:
