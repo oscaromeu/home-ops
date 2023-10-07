@@ -35,10 +35,12 @@ spec:
       - --token-ttl=43200
     ingress:
       enabled: true
-      className: nginx
+      className: internal
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-staging
         hajimari.io/icon: mdi:kubernetes
+        external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+        #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
+        #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
       hosts:
         - &host "kubernetes.${SECRET_DOMAIN}"
       tls:
