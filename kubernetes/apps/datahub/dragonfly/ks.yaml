@@ -38,6 +38,8 @@ kind: Kustomization
 metadata:
   name: cluster-apps-dragonfly-monitoring
   namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
 spec:
   dependsOn:
     - name: cluster-apps-dragonfly
