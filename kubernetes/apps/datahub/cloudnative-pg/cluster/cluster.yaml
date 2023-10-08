@@ -31,7 +31,7 @@ spec:
         compression: bzip2
         maxParallel: 8
       destinationPath: s3://cloudnative-pg-v1/
-      endpointURL: "http://default-hl.default.svc.cluster.local:9000"
+      endpointURL: "https://default-hl.default.svc.cluster.local:9000"
       serverName: &currentCluster postgres-v7
       s3Credentials:
         accessKeyId:
