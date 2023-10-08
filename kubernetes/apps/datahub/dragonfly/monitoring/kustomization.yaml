@@ -5,3 +5,4 @@ namespace: datahub
 resources:
   #- ./rules
   - ./dashboards
+  - ./servicemonitor.yaml
