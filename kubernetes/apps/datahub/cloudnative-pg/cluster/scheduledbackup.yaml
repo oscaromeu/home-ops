@@ -5,7 +5,7 @@ metadata:
   name: postgres
   namespace: datahub
 spec:
-  schedule: "* * * * *"
+  schedule: "@weekly"
   immediate: true
   backupOwnerReference: self
   cluster:
