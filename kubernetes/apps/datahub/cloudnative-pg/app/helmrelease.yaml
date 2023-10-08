@@ -23,12 +23,8 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
-  uninstall:  
+  uninstall:
     keepHistory: false
-
-  dependsOn:
-    - name: default-tenant
-      namespace: default
 
   values:
     crds:
