@@ -44,3 +44,23 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: cluster-apps-cloudnative-pg-cluster-monitoring
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
+spec:
+  dependsOn:
+    - name: cluster-apps-cloudnative-pg-cluster
+  path: ./kubernetes/apps/datahub/cloudnative-pg/monitoring
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
