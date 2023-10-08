@@ -5,6 +5,7 @@ resources:
   - ./namespace.yaml
   #- ./clickhouse/ks.yaml
   - ./cloudnative-pg/ks.yaml
+  - ./dragonfly/ks.yaml
   #- ./jupyterhub/ks.yaml
   #- ./kafka/ks.yaml
   #- ./kafka-cloudera/ks.yaml
