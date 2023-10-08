@@ -26,12 +26,18 @@ spec:
     enablePodMonitor: true
   backup:
     retentionPolicy: 30d
+    endpointCA:
+      name: default-tls
+      key: public.crt
     barmanObjectStore:
       wal:
         compression: bzip2
         maxParallel: 8
       destinationPath: s3://cloudnative-pg-v1/
       endpointURL: "https://default-hl.default.svc.cluster.local:9000"
+      endpointCA:
+        name: default-tls
+        key: public.crt
       serverName: &currentCluster postgres-v7
       s3Credentials:
         accessKeyId:
