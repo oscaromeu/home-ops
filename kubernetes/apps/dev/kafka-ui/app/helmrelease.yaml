@@ -26,6 +26,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    env:
+      DYNAMIC_CONFIG_ENABLED: "true"
     controller:
       replicas: 1
       strategy: RollingUpdate
