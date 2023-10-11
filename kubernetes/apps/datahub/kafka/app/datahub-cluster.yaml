@@ -56,7 +56,7 @@ spec:
         type: ingress
         tls: true
         authentication:
-          type: scram-sha-512
+          type: tls
         configuration:
           class: internal
           bootstrap:
@@ -85,43 +85,6 @@ spec:
             host: "broker-2.${SECRET_DOMAIN}"
             annotations:
               external-dns.alpha.kubernetes.io/hostname: "broker-2.${SECRET_DOMAIN}"
-              external-dns.alpha.kubernetes.io/ttl: "600"
-              external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-              #hajimari.io/icon: simple-icons:grafana
-      - name: external-tls
-        port: 9096
-        type: ingress
-        tls: true
-        authentication:
-          type: tls
-        configuration:
-          class: internal
-          bootstrap:
-            host: "bootstraps.${SECRET_DOMAIN}"
-            annotations:
-              external-dns.alpha.kubernetes.io/hostname: "bootstraps.${SECRET_DOMAIN}"
-              external-dns.alpha.kubernetes.io/ttl: "600"
-              external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-              #hajimari.io/icon: simple-icons:grafana
-          brokers:
-          - broker: 0
-            host: "brokers-0.${SECRET_DOMAIN}"
-            annotations:
-              external-dns.alpha.kubernetes.io/hostname: "brokers-0.${SECRET_DOMAIN}"
-              external-dns.alpha.kubernetes.io/ttl: "600"
-              external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-              #hajimari.io/icon: simple-icons:grafana
-          - broker: 1
-            host: "brokers-1.${SECRET_DOMAIN}"
-            annotations:
-              external-dns.alpha.kubernetes.io/hostname: "brokers-1.${SECRET_DOMAIN}"
-              external-dns.alpha.kubernetes.io/ttl: "600"
-              external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-              #hajimari.io/icon: simple-icons:grafana
-          - broker: 2
-            host: "brokers-2.${SECRET_DOMAIN}"
-            annotations:
-              external-dns.alpha.kubernetes.io/hostname: "brokers-2.${SECRET_DOMAIN}"
               external-dns.alpha.kubernetes.io/ttl: "600"
               external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
               #hajimari.io/icon: simple-icons:grafana
