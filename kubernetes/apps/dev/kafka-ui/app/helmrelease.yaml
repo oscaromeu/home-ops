@@ -71,4 +71,4 @@ spec:
       searches:
         - ${SECRET_DOMAIN}
 
-    dnsPolicy: ClusterFirst
+    dnsPolicy: None
