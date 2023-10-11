@@ -51,7 +51,7 @@ spec:
         tls: true
         authentication:
           type: scram-sha-512
-      - name: external-sha
+      - name: exsha
         port: 9095
         type: ingress
         tls: true
@@ -88,7 +88,7 @@ spec:
               external-dns.alpha.kubernetes.io/ttl: "600"
               external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
               #hajimari.io/icon: simple-icons:grafana
-      - name: external-tls
+      - name: extls
         port: 9096
         type: ingress
         tls: true
