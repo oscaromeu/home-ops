@@ -16,7 +16,7 @@ spec:
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
-  name: tls-topic
+  name: tls1-topic
   labels:
     strimzi.io/cluster: datahub-cluster
 spec:

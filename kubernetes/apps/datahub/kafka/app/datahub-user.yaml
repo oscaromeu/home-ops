@@ -15,11 +15,7 @@ spec:
           type: topic
           name: tls-topic
           patternType: literal
-        operations:
-          - Create
-          - Describe
-          - Write
-          - Read
+        operations: All
         host: "*"
       - resource:
           type: topic
