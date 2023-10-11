@@ -97,29 +97,29 @@ spec:
         configuration:
           class: internal
           bootstrap:
-            host: "bootstrap-tls.${SECRET_DOMAIN}"
+            host: "bootstraps.${SECRET_DOMAIN}"
             annotations:
-              external-dns.alpha.kubernetes.io/hostname: "bootstraps-.${SECRET_DOMAIN}"
+              external-dns.alpha.kubernetes.io/hostname: "bootstraps.${SECRET_DOMAIN}"
               external-dns.alpha.kubernetes.io/ttl: "600"
               external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
               #hajimari.io/icon: simple-icons:grafana
           brokers:
           - broker: 0
-            host: "broker-0.${SECRET_DOMAIN}"
+            host: "brokers-0.${SECRET_DOMAIN}"
             annotations:
               external-dns.alpha.kubernetes.io/hostname: "brokers-0.${SECRET_DOMAIN}"
               external-dns.alpha.kubernetes.io/ttl: "600"
               external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
               #hajimari.io/icon: simple-icons:grafana
           - broker: 1
-            host: "broker-1.${SECRET_DOMAIN}"
+            host: "brokers-1.${SECRET_DOMAIN}"
             annotations:
               external-dns.alpha.kubernetes.io/hostname: "brokers-1.${SECRET_DOMAIN}"
               external-dns.alpha.kubernetes.io/ttl: "600"
               external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
               #hajimari.io/icon: simple-icons:grafana
           - broker: 2
-            host: "broker-2.${SECRET_DOMAIN}"
+            host: "brokers-2.${SECRET_DOMAIN}"
             annotations:
               external-dns.alpha.kubernetes.io/hostname: "brokers-2.${SECRET_DOMAIN}"
               external-dns.alpha.kubernetes.io/ttl: "600"
