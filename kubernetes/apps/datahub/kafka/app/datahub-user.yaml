@@ -2,6 +2,44 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaUser
 metadata:
+  name: datahub-user-tls
+  labels:
+    strimzi.io/cluster: datahub-cluster
+spec:
+  authentication:
+    type: tls
+  authorization:
+    type: simple
+    acls:
+      - resource:
+          type: topic
+          name: tls-topic
+          patternType: literal
+        operations:
+          - Create
+          - Describe
+          - Write
+          - Read
+        host: "*"
+      - resource:
+          type: topic
+          name: my-topic
+          patternType: literal
+        operation: Read
+      - resource:
+          type: topic
+          name: my-topic
+          patternType: literal
+        operation: Describe
+      - resource:
+          type: group
+          name: my-group
+          patternType: literal
+        operation: Read
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaUser
+metadata:
   name: datahub-user
   labels:
     strimzi.io/cluster: datahub-cluster
