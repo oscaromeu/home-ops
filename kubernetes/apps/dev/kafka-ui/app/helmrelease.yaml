@@ -1,0 +1,52 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kafka-ui
+  namespace: dev
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: kafka-ui
+      version: 0.7.5
+      sourceRef:
+        kind: HelmRepository
+        name: kafka-ui
+        namespace: flux-system
+      interval: 5m
+  values:
+    yamlApplicationConfig:
+      #kafka:
+      #  clusters:
+      #    - name: yaml
+      #      bootstrapServers:  kafka-cluster-broker-endpoints:9092
+      auth:
+        type: disabled
+      management:
+        health:
+          ldap:
+            enabled: false
+
+    ingress:
+      enabled: true
+      className: internal
+      annotations:
+        external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+        #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
+        #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
+      hosts:
+        - host: &host redpanda.${SECRET_DOMAIN}
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - *host
+
+    resources:
+      limits:
+        memory: 512Mi
+      requests:
+        cpu: 200m
+        memory: 256Mi

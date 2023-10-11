@@ -31,6 +31,7 @@ resources:
   - ./jetstack.yaml
   - ./jupyter.yaml
   - ./k8s-gateway.yaml
+  - ./kafka-ui.yaml
   - ./kafka.yaml
   - ./kubernetes-dashboard.yaml
   - ./kyverno.yaml

@@ -54,7 +54,7 @@ spec:
       - name: external
         port: 9095
         type: ingress
-        tls: true
+        tls: false
         authentication:
           type: scram-sha-512
         configuration:
