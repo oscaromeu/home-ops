@@ -51,8 +51,45 @@ spec:
         tls: true
         authentication:
           type: scram-sha-512
-      - name: external
+      - name: external-sha
         port: 9095
+        type: ingress
+        tls: true
+        authentication:
+          type: scram-sha-512
+        configuration:
+          class: internal
+          bootstrap:
+            host: "boostrap-sha.${SECRET_DOMAIN}"
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: "bootstrap-sha.${SECRET_DOMAIN}"
+              external-dns.alpha.kubernetes.io/ttl: "600"
+              external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+              #hajimari.io/icon: simple-icons:grafana
+          brokers:
+          - broker: 0
+            host: "broker-sha-0.${SECRET_DOMAIN}"
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: "broker-sha-0.${SECRET_DOMAIN}"
+              external-dns.alpha.kubernetes.io/ttl: "600"
+              external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+              #hajimari.io/icon: simple-icons:grafana
+          - broker: 1
+            host: "broker-sha-1.${SECRET_DOMAIN}"
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: "broker-sha-1.${SECRET_DOMAIN}"
+              external-dns.alpha.kubernetes.io/ttl: "600"
+              external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+              #hajimari.io/icon: simple-icons:grafana
+          - broker: 2
+            host: "broker-sha-2.${SECRET_DOMAIN}"
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: "broker-sha-2.${SECRET_DOMAIN}"
+              external-dns.alpha.kubernetes.io/ttl: "600"
+              external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+              #hajimari.io/icon: simple-icons:grafana
+      - name: external-tls
+        port: 9096
         type: ingress
         tls: true
         authentication:
@@ -60,31 +97,31 @@ spec:
         configuration:
           class: internal
           bootstrap:
-            host: "bootstrap.${SECRET_DOMAIN}"
+            host: "bootstrap-tls.${SECRET_DOMAIN}"
             annotations:
-              external-dns.alpha.kubernetes.io/hostname: "bootstrap.${SECRET_DOMAIN}"
+              external-dns.alpha.kubernetes.io/hostname: "bootstrap-tls.${SECRET_DOMAIN}"
               external-dns.alpha.kubernetes.io/ttl: "600"
               external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
               #hajimari.io/icon: simple-icons:grafana
           brokers:
           - broker: 0
-            host: "broker-0.${SECRET_DOMAIN}"
+            host: "broker-tls-0.${SECRET_DOMAIN}"
             annotations:
-              external-dns.alpha.kubernetes.io/hostname: "broker-0.${SECRET_DOMAIN}"
+              external-dns.alpha.kubernetes.io/hostname: "broker-tls-0.${SECRET_DOMAIN}"
               external-dns.alpha.kubernetes.io/ttl: "600"
               external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
               #hajimari.io/icon: simple-icons:grafana
           - broker: 1
-            host: "broker-1.${SECRET_DOMAIN}"
+            host: "broker-tls-1.${SECRET_DOMAIN}"
             annotations:
-              external-dns.alpha.kubernetes.io/hostname: "broker-1.${SECRET_DOMAIN}"
+              external-dns.alpha.kubernetes.io/hostname: "broker-tls-1.${SECRET_DOMAIN}"
               external-dns.alpha.kubernetes.io/ttl: "600"
               external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
               #hajimari.io/icon: simple-icons:grafana
           - broker: 2
-            host: "broker-2.${SECRET_DOMAIN}"
+            host: "broker-tls-2.${SECRET_DOMAIN}"
             annotations:
-              external-dns.alpha.kubernetes.io/hostname: "broker-2.${SECRET_DOMAIN}"
+              external-dns.alpha.kubernetes.io/hostname: "broker-tls-2.${SECRET_DOMAIN}"
               external-dns.alpha.kubernetes.io/ttl: "600"
               external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
               #hajimari.io/icon: simple-icons:grafana
