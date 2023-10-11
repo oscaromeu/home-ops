@@ -64,3 +64,11 @@ spec:
         memory: 256Mi
       limits:
         memory: 512Mi
+
+    dnsConfig:
+      nameservers:
+        - 1.1.1.1
+      searches:
+        - ${SECRET_DOMAIN}
+
+    dnsPolicy: ClusterFirst
