@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: dnsutils
+  name: hello-world-api-k8s
   namespace: dev
 spec:
   interval: 15m
