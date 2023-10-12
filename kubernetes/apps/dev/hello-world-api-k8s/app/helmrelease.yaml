@@ -33,7 +33,7 @@ spec:
       tag: "v0.1.0"
 
     imagePullSecrets:
-      - docker-credentials
+      - name: apps-private-docker-credentials
 
     resources:
       limits:
