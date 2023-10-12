@@ -48,7 +48,7 @@ spec:
         memory: 9766Ki
       limits:
         #cpu: 1000m
-        memory: 9766Ki
+        memory: 500Mi
 
   valuesFrom:
     - targetPath: secrets.htpasswd
