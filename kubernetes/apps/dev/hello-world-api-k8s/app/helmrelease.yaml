@@ -29,11 +29,11 @@ spec:
         enabled: false
 
     image:
-      repository: registry.oscaromeu.io/hello-world-k8s
+      repository: oscaromeu/hello-world-k8s
       tag: "v0.1.0"
 
-    imagePullSecrets:
-      - name: apps-private-docker-credentials
+    #imagePullSecrets:
+    #  - name: apps-private-docker-credentials
 
     resources:
       limits:
