@@ -30,7 +30,7 @@ spec:
 
     image:
       repository: oscaromeu/get-metrics-servicendpoints
-      tag: "v0.1.1"
+      tag: "v0.1.2"
 
     #imagePullSecrets:
     #  - name: apps-private-docker-credentials
