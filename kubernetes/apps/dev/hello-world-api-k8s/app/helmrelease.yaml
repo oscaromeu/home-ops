@@ -30,7 +30,7 @@ spec:
 
     image:
       repository: oscaromeu/hello-world-go-k8s
-      tag: "v0.1.0"
+      tag: "latest"
 
     #imagePullSecrets:
     #  - name: apps-private-docker-credentials
