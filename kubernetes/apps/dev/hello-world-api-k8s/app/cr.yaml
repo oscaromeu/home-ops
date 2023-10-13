@@ -2,7 +2,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: pod-listing-role
+  name: listing-role
 rules:
 - apiGroups: [""]
   resources: ["pods", "services", "endpoints"]
