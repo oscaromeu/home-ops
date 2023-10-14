@@ -33,6 +33,9 @@ spec:
       data:
         INHERITED_ANNOTATIONS: kyverno.io/ignore
 
+    additionalArgs:
+      - leaseDuration: 20s
+
     resources:
       requests:
         cpu: 84m
