@@ -27,6 +27,10 @@ spec:
     service:
       main:
         enabled: true
+        ports:
+          http:
+            enabled: true
+            port: 8080
 
     image:
       repository: castlemock/castlemock
