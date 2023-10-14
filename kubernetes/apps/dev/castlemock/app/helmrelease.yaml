@@ -29,7 +29,6 @@ spec:
         enabled: true
         ports:
           http:
-            enabled: true
             port: 8080
 
     image:
