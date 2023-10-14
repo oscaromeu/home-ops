@@ -55,6 +55,13 @@ spec:
           - hosts:
               - *host
 
+    persistence:
+      config:
+        enabled: true
+        storageClass: local-path
+        size: 1Gi
+        retain: true
+
     resources:
       limits:
         memory: 1Gi
