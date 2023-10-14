@@ -34,7 +34,7 @@ spec:
         INHERITED_ANNOTATIONS: kyverno.io/ignore
 
     additionalArgs:
-      - leaseDuration: 20s
+      - "leaseDuration=20s"
 
     resources:
       requests:
