@@ -50,10 +50,14 @@ spec:
       config:
         enabled: true
         mountPath: /photoprism/storage
+        storageClass: local-path
+        size: 1Gi
 
       originals:
         enabled: true
         mountPath: "/photoprism/originals"
+        storageClass: local-path
+        size: 1Gi
 
 
     service:
