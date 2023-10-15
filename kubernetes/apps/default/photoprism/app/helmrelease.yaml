@@ -1,0 +1,83 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: photoprism
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  # See https://github.com/bjw-s/helm-charts/blob/main/charts/library/common/values.yaml
+  values:
+    image:
+      repository: docker.io/photoprism/photoprism
+      tag: latest@sha256:29b636a388ab50cbcc9aec7dd6fafe634780a59cb316517511ad14c9cf237242
+
+    env:
+      PHOTOPRISM_STORAGE_PATH: /photoprism/storage
+      PHOTOPRISM_ORIGINALS_PATH: /photoprism/originals
+      ## See other config options from PhotoPrism documentation: https://docs.photoprism.org/getting-started/config-options/
+      # PHOTOPRISM_ADMIN_PASSWORD: "please-change"     # Initial admin password: PLEASE CHANGE!
+      # PHOTOPRISM_DEBUG: "false"                      # Run in debug mode (shows additional log messages)
+      PHOTOPRISM_PUBLIC: "true"                     # No authentication required (disables password protection)
+      # PHOTOPRISM_READONLY: "false"                   # Don't modify originals directory (reduced functionality)
+      # PHOTOPRISM_EXPERIMENTAL: "false"               # Enable experimental features
+      PHOTOPRISM_HTTP_COMPRESSION: "gzip"
+      PHOTOPRISM_DATABASE_DRIVER: "postgres"
+      PHOTOPRISM_DATABASE_SERVER: "postgres-rw..datahub.svc.cluster.local:5432"
+      PHOTOPRISM_DATABASE_NAME: "photoprism"
+      PHOTOPRISM_DATABASE_USER: "photoprism"
+      PHOTOPRISM_DATABASE_PASSWORD: "photoprism"
+      PHOTOPRISM_SITE_URL: "https://photos.casa.${SECRET_DOMAIN}/"
+      PHOTOPRISM_TEST_DRIVER: "sqlite"
+      PHOTOPRISM_SITE_TITLE: "Photos Mama"
+      PHOTOPRISM_SITE_CAPTION: "Mama"
+      PHOTOPRISM_SITE_DESCRIPTION: "una descripcion"
+      # PHOTOPRISM_SITE_AUTHOR: ""
+      # # You may optionally set user, group and/or file permissions using environment variables:
+      # UID: 1000
+      # GID: 1000
+      # UMASK: 0000
+      PHOTOPRISM_ORIGINALS_LIMIT: 4000 # in MB (default 1000)
+
+    persistence:
+      config:
+        enabled: true
+        mountPath: /photoprism/storage
+
+      originals:
+        enabled: true
+        mountPath: "/photoprism/originals"
+
+
+    service:
+      main:
+        ports:
+          http:
+            port: 2342
+
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          hajimari.io/icon: simple-icons:photobucket
+          hajimari.io/group: "Public"
+          nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
+          nginx.ingress.kubernetes.io/proxy-body-size: 4G
+        hosts:
+        - host: &host "photos.mama.${SECRET_DOMAIN}"
+          paths:
+          - path: /
+            # Ignored if not kubeVersion >= 1.14-0
+            pathType: Prefix
+        tls:
+        - hosts:
+          - *host
