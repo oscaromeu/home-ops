@@ -52,12 +52,14 @@ spec:
         mountPath: /photoprism/storage
         storageClass: local-path
         size: 1Gi
+        accessMode: ReadWriteOnce
 
       originals:
         enabled: true
         mountPath: "/photoprism/originals"
         storageClass: local-path
         size: 1Gi
+        accessMode: ReadWriteOnce
 
 
     service:
