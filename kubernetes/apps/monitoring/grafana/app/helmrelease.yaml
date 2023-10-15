@@ -76,7 +76,7 @@ spec:
             type: prometheus
             access: proxy
             url: http://mimir-nginx.monitoring.svc.cluster.local:80/prometheus
-            isDefault: true
+            isDefault: false
 
           - name: Prometheus
             type: prometheus
@@ -88,7 +88,7 @@ spec:
             type: prometheus
             access: proxy
             url: http://victoria-metrics-single-server.monitoring.svc.cluster.local:8428
-            isDefault: false
+            isDefault: true
 
           - name: Loki
             type: loki

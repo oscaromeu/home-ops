@@ -8,7 +8,7 @@ resources:
   - ./dnsutils/ks.yaml
   #- ./gitea/ks.yaml
   #- hello-world-api-k8s/ks.yaml
-  - ./kafka-ui/ks.yaml
+  #- ./kafka-ui/ks.yaml
   #- ./kafka/ks.yaml
   #- ./redpanda/ks.yaml
   - ./registry/ks.yaml
