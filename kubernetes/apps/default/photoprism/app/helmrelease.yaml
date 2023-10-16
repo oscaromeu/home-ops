@@ -29,15 +29,15 @@ spec:
       # PHOTOPRISM_READONLY: "false"                   # Don't modify originals directory (reduced functionality)
       # PHOTOPRISM_EXPERIMENTAL: "false"               # Enable experimental features
       PHOTOPRISM_HTTP_COMPRESSION: "gzip"
-      PHOTOPRISM_DATABASE_DRIVER: "postgres"
-      PHOTOPRISM_DATABASE_SERVER: "postgres-rw.datahub.svc.cluster.local:5432"
-      PHOTOPRISM_DATABASE_NAME: "photoprism"
-      PHOTOPRISM_DATABASE_USER: "photoprism"
-      PHOTOPRISM_DATABASE_PASSWORD: "photoprism"
+      #PHOTOPRISM_DATABASE_DRIVER: "postgres"
+      #PHOTOPRISM_DATABASE_SERVER: "postgres-rw.datahub.svc.cluster.local:5432"
+      #PHOTOPRISM_DATABASE_NAME: "photoprism"
+      #PHOTOPRISM_DATABASE_USER: "photoprism"
+      #PHOTOPRISM_DATABASE_PASSWORD: "photoprism"
       PHOTOPRISM_SITE_URL: "https://photos.casa.${SECRET_DOMAIN}/"
       PHOTOPRISM_TEST_DRIVER: "sqlite"
       PHOTOPRISM_SITE_TITLE: "Photos Casa"
-      PHOTOPRISM_SITE_CAPTION: "Mama"
+      PHOTOPRISM_SITE_CAPTION: "Casa"
       PHOTOPRISM_SITE_DESCRIPTION: "una descripcion"
       # PHOTOPRISM_SITE_AUTHOR: ""
       # # You may optionally set user, group and/or file permissions using environment variables:
