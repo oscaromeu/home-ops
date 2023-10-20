@@ -18,8 +18,7 @@ spec:
     image:
       repository: docker.io/photoprism/photoprism
       tag: latest@sha256:29b636a388ab50cbcc9aec7dd6fafe634780a59cb316517511ad14c9cf237242
-    controller:
-      replicas: 2
+
     env:
       PHOTOPRISM_STORAGE_PATH: /photoprism/storage
       PHOTOPRISM_ORIGINALS_PATH: /photoprism/originals
@@ -57,11 +56,10 @@ spec:
 
       originals:
         enabled: true
-        type: hostPath
-        hostPathType: DirectoryOrCreate
-        #path: /home/pi/Downloads/torrent
-        hostPath: /home/pi/Documents/photos
-        mountPath: /photoprism/originals
+        mountPath: "/photoprism/originals"
+        storageClass: longhorn-gold
+        size: 100Gi
+        accessMode: ReadWriteOnce
 
     service:
       main:
