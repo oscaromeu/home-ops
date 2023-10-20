@@ -56,11 +56,11 @@ spec:
 
       originals:
         enabled: true
-        mountPath: "/photoprism/originals"
-        storageClass: longhorn
-        size: 100Gi
-        accessMode: ReadWriteOnce
-
+        type: hostPath
+        hostPathType: Directory
+        #path: /home/pi/Downloads/torrent
+        hostPath: /home/pi/Documents/photos
+        mountPath: /photoprism/originals
 
     service:
       main:
