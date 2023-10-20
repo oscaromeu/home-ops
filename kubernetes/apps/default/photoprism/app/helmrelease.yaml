@@ -57,8 +57,8 @@ spec:
       originals:
         enabled: true
         mountPath: "/photoprism/originals"
-        storageClass: local-path
-        size: 1Gi
+        storageClass: longhorn
+        size: 100Gi
         accessMode: ReadWriteOnce
 
 
