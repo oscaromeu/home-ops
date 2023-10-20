@@ -58,7 +58,7 @@ spec:
       originals:
         enabled: true
         type: hostPath
-        hostPathType: Directory
+        hostPathType: DirectoryOrCreate
         #path: /home/pi/Downloads/torrent
         hostPath: /home/pi/Documents/photos
         mountPath: /photoprism/originals
