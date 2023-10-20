@@ -20,7 +20,7 @@ spec:
       tag: latest@sha256:29b636a388ab50cbcc9aec7dd6fafe634780a59cb316517511ad14c9cf237242
 
     controller:
-      replicas: 2
+      replicas: 1
 
     env:
       PHOTOPRISM_STORAGE_PATH: /photoprism/storage
