@@ -55,18 +55,11 @@ spec:
         accessMode: ReadWriteOnce
 
       originals:
-        #enabled: true
-        #mountPath: "/photoprism/originals"
-        #storageClass: longhorn-gold
-        #size: 100Gi
-        #accessMode: ReadWriteOnce
-
         enabled: true
-        type: hostPath
-        hostPathType: DirectoryOrCreate
-        #path: /home/pi/Downloads/torrent
-        hostPath: /home/pi/Documents/photos
-        mountPath: /photoprism/originals
+        mountPath: "/photoprism/originals"
+        storageClass: longhorn-gold
+        size: 100Gi
+        accessMode: ReadWriteOnce
 
     service:
       main:
