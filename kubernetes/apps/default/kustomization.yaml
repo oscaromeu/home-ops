@@ -13,7 +13,7 @@ resources:
   #- ./minio/ks.yaml
   #- ./navidrome/ks.yaml
   #- ./overseerr/ks.yaml
-  #- ./photoprism/ks.yaml
+  - ./photoprism/ks.yaml
   # - ./podinfo/ks.yaml
   #- ./prowlarr/ks.yaml
   #- ./qbittorrent/ks.yaml
