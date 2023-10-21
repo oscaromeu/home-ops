@@ -2,7 +2,7 @@ apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
 metadata:
   name: backup
-  namespace: longhorn-system
+  namespace: longhorn
 spec:
   cron: "* * * * *"
   task: "backup"
