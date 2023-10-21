@@ -28,7 +28,7 @@ spec:
           hajimari.io/icon: "alarm-light-outline"
       tls:
         enabled: true
-        secret: "auth.${SECRET_DOMAIN}"
+        #secret: "auth.${SECRET_DOMAIN}"
     pod:
       kind: Deployment
       replicas: 1
