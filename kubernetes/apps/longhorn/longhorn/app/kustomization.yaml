@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./helmrelease.yaml
   - ./gold.yaml
-  - ./backup
+  - ./backup.yaml
