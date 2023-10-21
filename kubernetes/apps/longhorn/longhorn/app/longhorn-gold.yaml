@@ -12,13 +12,9 @@ parameters:
 #  mkfsParams: "-I 256 -b 4096 -O ^metadata_csum,^64bit"
 #  diskSelector: "ssd,fast"
 #  nodeSelector: "storage,fast"
-#  recurringJobSelector: '[
-#   {
-#     "name":"snap",
-#     "isGroup":true,
-#   },
-#   {
-#     "name":"backup",
-#     "isGroup":false,
-#   }
-#  ]'
+  recurringJobSelector: '[
+      {
+         "name":"backup",
+         "isGroup":true,
+      }
+    ]'
