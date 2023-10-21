@@ -34,7 +34,7 @@ spec:
       #PHOTOPRISM_DATABASE_NAME: "photoprism"
       #PHOTOPRISM_DATABASE_USER: "photoprism"
       #PHOTOPRISM_DATABASE_PASSWORD: "photoprism"
-      #PHOTOPRISM_SITE_URL: "https://photos.casa.${SECRET_DOMAIN}"
+      PHOTOPRISM_SITE_URL: "https://photos.casa.${SECRET_DOMAIN}/"
       PHOTOPRISM_TEST_DRIVER: "sqlite"
       PHOTOPRISM_SITE_TITLE: "Photos Casa"
       PHOTOPRISM_SITE_CAPTION: "Casa"
