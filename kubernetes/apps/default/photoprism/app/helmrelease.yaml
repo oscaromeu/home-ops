@@ -57,7 +57,7 @@ spec:
       originals:
         enabled: true
         mountPath: "/photoprism/originals"
-        storageClass: longhorn-gold
+        storageClass: gold
         size: 100Gi
         accessMode: ReadWriteOnce
 
