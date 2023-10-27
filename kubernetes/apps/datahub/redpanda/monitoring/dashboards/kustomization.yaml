@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: datahub
+
+configMapGenerator:
+
+  - name: dragonfly
+    files:
+      - dragonfly.json
+    options:
+      labels:
+        home_ops: dragonfly
+      disableNameSuffixHash: true
+
