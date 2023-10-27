@@ -1,0 +1,27 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: redpanda
+  namespace: datahub
+spec:
+  interval: 30m
+  timeout: 15m
+  chart:
+    spec:
+      chart: redpanda-operator
+      version: v23.2.6
+      sourceRef:
+        kind: HelmRepository
+        name: redpanda
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
