@@ -75,8 +75,8 @@ spec:
       kafka:
         port: 9093
 
-  valuesFrom:
-    - targetPath: auth.sasl.secretRef
-      name: redpdanda-sasl-secret
-      kind: Secret
-      valuesKey: REDPANDA_DATAHUB_PASSWORD
+  #valuesFrom:
+  #  - targetPath: auth.sasl.secretRef
+  #    name: redpdanda-sasl-secret
+  #    kind: Secret
+  #    valuesKey: REDPANDA_DATAHUB_PASSWORD
