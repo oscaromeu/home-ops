@@ -11,6 +11,6 @@ resources:
   - ./elastic-exporter/ks.yaml
   - ./redis-exporter/ks.yaml
   - ./loki/ks.yaml
-  - ./metricbeat/ks.yaml
+  #- ./metricbeat/ks.yaml
   - ./minio/ks.yaml
   - ./vector/ks.yaml
