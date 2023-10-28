@@ -11,7 +11,7 @@ resources:
   #- ./kafka-ui/ks.yaml
   #- ./kafka/ks.yaml
   - ./redpanda/ks.yaml
-  - ./registry/ks.yaml
+  #- ./registry/ks.yaml
   - ./spring-boot-app/ks.yaml
   #- ./fastapi-app/ks.yaml
   #- ./tekton
