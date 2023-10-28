@@ -34,6 +34,8 @@ spec:
     auth:
       sasl:
         enabled: true
+        secretRef: "redpanda-superusers"
+        users: []
 
     external:
       service:
