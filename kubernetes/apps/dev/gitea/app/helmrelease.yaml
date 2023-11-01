@@ -138,7 +138,7 @@ spec:
       enabled: true
       accessModes: ["ReadWriteOnce"]
       size: 10Gi
-      storageClass: longhorn-gold
+      storageClass: local-path
 
     nodeSelector:
       kubernetes.io/arch: amd64
