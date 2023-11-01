@@ -22,9 +22,11 @@ spec:
     remediation:
       retries: 5
   values:
-    image:
-      repository: ghcr.io/oscaromeu/spring-boot-observability
-      tag: v0.1.0
+    containers:
+      main:
+        image:
+          repository: ghcr.io/oscaromeu/spring-boot-observability
+          tag: v0.1.0
     env:
       TARGET_ONE_HOST: app-b
       TARGET_TWO_HOST: app-c
