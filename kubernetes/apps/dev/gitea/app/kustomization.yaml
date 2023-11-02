@@ -5,4 +5,5 @@ namespace: dev
 resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
+  - ./gitea-ssh-ingress.yaml
   #- ./pvc.yaml

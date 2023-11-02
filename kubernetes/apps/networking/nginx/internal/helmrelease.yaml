@@ -95,3 +95,4 @@ spec:
       "6379": "datahub/redis-standalone-master:6379"
       "9200": "logging/elk-elasticsearch:9200"
       "9095": "datahub/datahub-cluster-kafka-external-bootstrap:9095"
+      "22": "dev/gitea-ssh:22"

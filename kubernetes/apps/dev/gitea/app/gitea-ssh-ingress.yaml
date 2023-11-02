@@ -1,0 +1,28 @@
+ apiVersion: networking.k8s.io/v1
+ kind: Ingress
+ metadata:
+   annotations:
+    #external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    hajimari.io/enable: "true"
+    hajimari.io/icon: simple-icons:gitea
+    #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
+    #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
+   name: gitea-ssh
+   namespace: dev
+ spec:
+   ingressClassName: internal
+   rules:
+   - host: &host "ssh.git.${SECRET_DOMAIN}"
+     http:
+       paths:
+       - backend:
+           service:
+             name: gitea-ssh
+             port:
+               number: 22
+         path: /
+         pathType: Prefix
+   tls:
+   - hosts:
+     - *host
