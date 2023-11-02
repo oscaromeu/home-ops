@@ -6,7 +6,7 @@ resources:
   #- ./alerta/ks.yaml
   - ./castlemock/ks.yaml
   - ./dnsutils/ks.yaml
-  - ./gitea/ks.yaml
+#  - ./gitea/ks.yaml
   #- hello-world-api-k8s/ks.yaml
   #- ./kafka-ui/ks.yaml
   #- ./kafka/ks.yaml
