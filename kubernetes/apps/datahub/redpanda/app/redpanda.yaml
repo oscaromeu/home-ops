@@ -30,12 +30,26 @@ spec:
     tls:
       enabled: true
 
+    logging:
+      # -- Log level
+      # Valid values (from least to most verbose) are: `warn`, `info`, `debug`, and `trace`.
+      logLevel: info
+      # -- Send usage statistics back to Redpanda Data.
+      # For details,
+      # see the [stats reporting documentation](https://docs.redpanda.com/docs/cluster-administration/monitoring/#stats-reporting).
+      usageStats:
+        enabled: true
+
+    monitoring:
+      enabled: true
+      scrapeInterval: 30s
+
     resources:
-      requests:
-        cpu: 1
-        memory: 1.2Gi
-      limits:
-        memory: 1.2Gi
+      cpu:
+        cores: 1
+      memory:
+        container:
+          max: 2.5Gi
 
     listeners:
       kafka:
