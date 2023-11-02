@@ -13,6 +13,7 @@ spec:
     storageClass: local-path
   superuserSecret:
     name: cloudnative-pg-secret
+
   #bootstrap:
   #  recovery:
   #    source: &previousCluster postgres-v5
@@ -22,8 +23,10 @@ spec:
       shared_buffers: 512MB
     pg_hba:
       - host all all all trust
+
   monitoring:
     enablePodMonitor: true
+
   backup:
     retentionPolicy: 30d
     barmanObjectStore:
@@ -54,3 +57,23 @@ spec:
   #        secretAccessKey:
   #          name: cloudnative-pg-secret
   #          key: AWS_SECRET_ACCESS_KEY
+
+  managed:
+    roles:
+    - name: gitea
+      ensure: present
+      comment: gitea role
+      login: true
+      superuser: false
+      createdb: true
+      createrole: false
+      inherit: false
+      replication: false
+      bypassrls: false
+      connectionLimit: 4
+      validUntil: "2053-04-12T15:04:05Z"
+      inRoles:
+        - pg_monitor
+        - pg_signal_backend
+      passwordSecret:
+        name: cluster-gitea-secret
