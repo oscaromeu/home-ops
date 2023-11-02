@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: redpanda
+  name: redpanda-operator
   namespace: datahub
 spec:
   interval: 30m

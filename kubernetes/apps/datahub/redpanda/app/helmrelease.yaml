@@ -1,0 +1,106 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: redpanda
+  namespace: datahub
+spec:
+  interval: 30m
+  timeout: 15m
+  chart:
+    spec:
+      chart: redpanda
+      version: 5.6.35
+      sourceRef:
+        kind: HelmRepository
+        name: redpanda
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+
+  values:
+
+    console:
+      enabled: false
+
+    image:
+      repository: "docker.redpanda.com/redpandadata/redpanda"
+      tag: "v23.2.14"
+
+    auth:
+      sasl:
+        enabled: true
+        secretRef: "redpanda-superusers"
+        mechanism: "SCRAM-SHA-512"
+        users: []
+
+    tls:
+      enabled: true
+
+    external:
+      service:
+        enabled: false
+
+    logging:
+      # -- Log level
+      # Valid values (from least to most verbose) are: `warn`, `info`, `debug`, and `trace`.
+      logLevel: info
+      # -- Send usage statistics back to Redpanda Data.
+      # For details,
+      # see the [stats reporting documentation](https://docs.redpanda.com/docs/cluster-administration/monitoring/#stats-reporting).
+      usageStats:
+        enabled: true
+
+    monitoring:
+      enabled: true
+      scrapeInterval: 30s
+
+    resources:
+      cpu:
+        cores: 1
+      memory:
+        container:
+          max: 2.5Gi
+
+    storage:
+      persistentVolume:
+        enabled: true
+        size: 10Gi
+        storageClass: "local-path"
+
+    statefulset:
+      replicas: 3
+
+    listeners:
+      kafka:
+        external:
+          default:
+            advertisedPorts: [31093]
+      admin:
+        external:
+          default:
+            advertisedPorts: [31645]
+      http:
+        external:
+          default:
+            advertisedPorts: [30083]
+      rpc:
+        port: 33146
+      schemaRegistry:
+        external:
+          default:
+            advertisedPorts: [30084]
+
+  #valuesFrom:
+  #  - targetPath: auth.sasl.secretRef
+  #    name: redpdanda-sasl-secret
+  #    kind: Secret
+  #    valuesKey: REDPANDA_DATAHUB_PASSWORD
