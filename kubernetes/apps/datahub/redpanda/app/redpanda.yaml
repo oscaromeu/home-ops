@@ -8,6 +8,9 @@ spec:
   image: "docker.redpanda.com/redpandadata/redpanda"
   version: "v23.2.14"
   replicas: 3
+  enableSasl: true
+  superUsers:
+    - username: admin
   resources:
     requests:
       cpu: 1
