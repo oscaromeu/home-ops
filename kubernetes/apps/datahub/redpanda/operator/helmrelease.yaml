@@ -27,6 +27,11 @@ spec:
     keepHistory: false
 
   values:
+
+    image:
+      repository: docker.redpanda.com/redpandadata/redpanda-operator
+      tag: "v23.2.14"
+
     resources:
       cpu:
         cores: 1
