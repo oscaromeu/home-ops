@@ -34,6 +34,8 @@ spec:
         container:
           max: 2.5Gi
 
+    scope: Cluster
+
   #valuesFrom:
   #  - targetPath: auth.sasl.secretRef
   #    name: redpdanda-sasl-secret
