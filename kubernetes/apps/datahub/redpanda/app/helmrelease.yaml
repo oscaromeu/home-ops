@@ -77,7 +77,7 @@ spec:
         storageClass: "local-path"
 
     statefulset:
-      replicas: 3
+      replicas: 1
 
     listeners:
       kafka:
