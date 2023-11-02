@@ -3,6 +3,7 @@ apiVersion: redpanda.vectorized.io/v1alpha1
 kind: Cluster
 metadata:
   name: redpanda-cluster
+  namespace: redpanda
 spec:
   image: "docker.redpanda.com/redpandadata/redpanda"
   version: "v23.2.14"
