@@ -3,13 +3,13 @@ kind: Redpanda
 metadata:
   name: redpanda
 spec:
-  chartRef: {}
-    #chartName: redpanda
-    #chartVersion: 5.6.35
-    #helmRepositoryName: redpanda
-    #upgrade:
-    #  cleanupOnFail: true
-    #  force: true
+  chartRef:
+    chartName: redpanda
+    chartVersion: 5.6.35
+    helmRepositoryName: redpanda
+    upgrade:
+      cleanupOnFail: true
+      force: true
   clusterSpec:
 
     commonLabels:
