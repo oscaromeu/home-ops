@@ -16,6 +16,11 @@ spec:
       env: 'production'
       namespace: 'datahub'
 
+    serviceAccount:
+      create: true
+    rbac:
+      enabled: true
+
     image:
       repository: "docker.redpanda.com/redpandadata/redpanda"
       tag: "v23.2.14"

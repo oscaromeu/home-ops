@@ -38,6 +38,9 @@ spec:
     webhook:
       enabled: true
 
+    rbac:
+      createRPKBundleCRs: true
+
   #valuesFrom:
   #  - targetPath: auth.sasl.secretRef
   #    name: redpdanda-sasl-secret
