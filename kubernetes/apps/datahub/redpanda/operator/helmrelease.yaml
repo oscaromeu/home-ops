@@ -35,6 +35,8 @@ spec:
           max: 2.5Gi
 
     scope: Cluster
+    webhook:
+      enabled: true
 
   #valuesFrom:
   #  - targetPath: auth.sasl.secretRef
