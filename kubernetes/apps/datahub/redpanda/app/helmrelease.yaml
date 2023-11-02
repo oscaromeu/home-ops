@@ -76,28 +76,9 @@ spec:
         size: 10Gi
         storageClass: "local-path"
 
-    statefulset:
-      replicas: 1
-
     listeners:
       kafka:
-        external:
-          default:
-            advertisedPorts: [31093]
-      admin:
-        external:
-          default:
-            advertisedPorts: [31645]
-      http:
-        external:
-          default:
-            advertisedPorts: [30083]
-      rpc:
-        port: 33146
-      schemaRegistry:
-        external:
-          default:
-            advertisedPorts: [30084]
+        port: 9093
 
   #valuesFrom:
   #  - targetPath: auth.sasl.secretRef
