@@ -106,6 +106,19 @@ spec:
           DISABLE_REGISTRATION: true
           REQUIRE_SIGNIN_VIEW: true
 
+        session:
+          PROVIDER: redis
+          PROVIDER_CONFIG: redis://redis-standalone-headless.datahub.svc.cluster.local:6379/3?pool_size=100&idle_timeout=180s&
+
+        cache:
+          ENABLED: true
+          ADAPTER: redis
+          HOST: redis://redis-standalone-headless.datahub.svc.cluster.local:6379/3?pool_size=100&idle_timeout=180s&
+
+        queue:
+          TYPE: redis
+          CONN_STR: redis://redis-standalone-headless.datahub.svc.cluster.local:6379/3?pool_size=100&idle_timeout=180s&
+
         #mailer:
         #  ENABLED: true
         #  MAILER_TYPE: smtp+startls
