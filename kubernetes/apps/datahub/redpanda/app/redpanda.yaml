@@ -17,7 +17,7 @@ spec:
       namespace: 'datahub'
 
     console:
-      enabled: true
+      enabled: false
 
     serviceAccount:
       create: true
