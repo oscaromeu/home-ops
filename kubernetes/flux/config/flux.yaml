@@ -96,3 +96,10 @@ spec:
       target:
         kind: Deployment
         name: helm-controller
+    - patch: |
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --no-cross-namespace-refs=false
+      target:
+        kind: Deployment
+        name: "(kustomize-controller|helm-controller|notification-controller|image-reflector-controller|image-automation-controller)"
