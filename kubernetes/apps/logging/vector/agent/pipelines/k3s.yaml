@@ -40,5 +40,5 @@ sinks:
       codec: json
     tls:
       enabled: true
-      verify_certificate: false
+      verify_certificate: true
       verify_hostname: false
