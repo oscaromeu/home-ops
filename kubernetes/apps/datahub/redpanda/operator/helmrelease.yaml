@@ -32,6 +32,9 @@ spec:
       repository: docker.redpanda.com/redpandadata/redpanda-operator
       tag: "v23.2.14"
 
+    # logLevel -- Set Redpanda Operator log level (debug, info, error, panic, fatal)
+    logLevel: "debug"
+
     resources:
       cpu:
         cores: 1
@@ -39,12 +42,17 @@ spec:
         container:
           max: 2.5Gi
 
-    scope: Cluster
-    webhook:
-      enabled: true
-
     rbac:
+      createAdditionalControllerCRs: true
       createRPKBundleCRs: true
+
+    scope: Cluster
+
+    webhook:
+      enabled: false
+
+
+
 
   #valuesFrom:
   #  - targetPath: auth.sasl.secretRef
