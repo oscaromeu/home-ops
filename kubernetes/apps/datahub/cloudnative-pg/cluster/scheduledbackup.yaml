@@ -8,5 +8,6 @@ spec:
   schedule: "@weekly"
   immediate: true
   backupOwnerReference: self
+  target: primary
   cluster:
     name: postgres
