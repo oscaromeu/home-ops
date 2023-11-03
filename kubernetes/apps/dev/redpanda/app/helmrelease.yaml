@@ -35,14 +35,13 @@ spec:
       config:
         kafka:
           brokers:
-            - datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9092
-            #- datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9094
+            - redpanda-0.redpanda.datahub.svc.cluster.local.:9093
           sasl:
             enabled: false
             username: datahub-user
             mechanism: SCRAM-SHA-512
           tls:
-            enabled: false
+            enabled: true
             insecureSkipTlsVerify: true
 
 
