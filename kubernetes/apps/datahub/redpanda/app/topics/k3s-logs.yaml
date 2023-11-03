@@ -1,0 +1,18 @@
+apiVersion: cluster.redpanda.com/v1alpha1
+kind: Topic
+metadata:
+  name: k3s-logs
+spec:
+  partitions: 3
+  replicationFactor: 3
+  additionalConfig:
+    cleanup.policy: "compact"
+  kafkaApiSpec:
+    brokers:
+      - "redpanda-0.redpanda.datahub.svc.cluster.local:9093"
+      - "redpanda-1.redpanda.datahub.svc.cluster.local:9093"
+      - "redpanda-2.redpanda.datahub.svc.cluster.local:9093"
+    tls:
+      caCertSecretRef:
+        name: "redpanda-default-cert"
+        key: "ca.crt"
