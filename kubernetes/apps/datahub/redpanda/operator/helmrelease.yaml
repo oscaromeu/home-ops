@@ -46,10 +46,10 @@ spec:
       createAdditionalControllerCRs: true
       createRPKBundleCRs: true
 
-    scope: Cluster
+    #scope: Cluster
 
     webhook:
-      enabled: true
+      enabled: false
 
 
 
