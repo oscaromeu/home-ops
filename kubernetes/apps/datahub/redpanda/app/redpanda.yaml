@@ -16,6 +16,9 @@ spec:
       env: 'production'
       namespace: 'datahub'
 
+    console:
+      enabled: true
+
     serviceAccount:
       create: true
     rbac:

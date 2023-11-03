@@ -37,7 +37,7 @@ spec:
 
     auth:
       sasl:
-        enabled: true
+        enabled: false
         secretRef: "redpanda-superusers"
         mechanism: "SCRAM-SHA-512"
         users: []
