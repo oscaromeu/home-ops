@@ -33,7 +33,7 @@ spec:
       wal:
         compression: bzip2
         maxParallel: 8
-      endpointURL: "https://console.cloud.google.com/storage/browser/cloudnative-pg-bucket"
+      #endpointURL: "https://console.cloud.google.com/storage/browser/cloudnative-pg-bucket"
       serverName: &currentCluster postgres-v7
       destinationPath: "gs://cloudnative-pg-bucket"
       googleCredentials:
