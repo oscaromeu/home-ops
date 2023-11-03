@@ -30,16 +30,15 @@ sinks:
   #  version: "2"
   #  address: vector-aggregator.logging.svc.cluster.local:6010
 
-  #kafka:
-  #  type: kafka
-  #  inputs:
-  #    - kubernetes_source
-  #  bootstrap_servers: datahub-cluster-kafka-bootstrap.datahub.svc.cluster.local:9094
-  #  topic: k3s-logs-topic
-  #  encoding:
-  #    codec: json
-  #  sasl:
-  #    enabled: true
-  #    mechanism: "SCRAM-SHA-512"
-  #    username: "datahub-user"
-  #    password: "${KAFKA_PASSWORD:-monitor}"
+  kafka:
+    type: kafka
+    inputs:
+      - kubernetes_source
+    bootstrap_servers: redpanda-0.redpanda.datahub.svc.cluster.local.:9093
+    topic: k3s-logs
+    encoding:
+      codec: json
+    tls:
+      enabled: true
+      verify_certificate: false
+      verify_hostname: false
