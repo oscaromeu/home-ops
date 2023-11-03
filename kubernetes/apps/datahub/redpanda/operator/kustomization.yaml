@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: datahub
 resources:
   - https://github.com/redpanda-data/redpanda//src/go/k8s/config/crd
+  - ./helmrepository.yaml
   - ./helmrelease.yaml
 
