@@ -16,3 +16,9 @@ spec:
       caCertSecretRef:
         name: "redpanda-default-cert"
         key: "ca.crt"
+    sasl:
+      username: k3s-logs
+      passwordSecretRef:
+        - name: "redpanda-k3s-logs"
+          key: "hgoli"
+      mechanism: "SCRAM-SHA-512"
