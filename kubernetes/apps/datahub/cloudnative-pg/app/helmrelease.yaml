@@ -35,7 +35,6 @@ spec:
 
     additionalArgs:
       - "leaseDuration=30s"
-      - "kk=30s"
 
     resources:
       requests:
