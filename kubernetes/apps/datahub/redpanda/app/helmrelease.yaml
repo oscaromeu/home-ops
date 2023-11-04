@@ -80,6 +80,27 @@ spec:
       kafka:
         port: 9093
 
+    statefulset:
+      replicas: 3
+      updateStrategy:
+        type: RollingUpdate
+      budget:
+        maxUnavailable: 1
+      # see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes).
+      startupProbe:
+        initialDelaySeconds: 1
+        failureThreshold: 120
+        periodSeconds: 10
+      livenessProbe:
+        initialDelaySeconds: 10
+        failureThreshold: 3
+        periodSeconds: 60
+      readinessProbe:
+        initialDelaySeconds: 1
+        failureThreshold: 3
+        periodSeconds: 60
+        successThreshold: 1
+
   #valuesFrom:
   #  - targetPath: auth.sasl.secretRef
   #    name: redpdanda-sasl-secret
