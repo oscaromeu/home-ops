@@ -57,7 +57,7 @@ spec:
 
     extraVolumeMounts:
       - name: redpanda-default-cert
-        mountPath: /vector-extra-data-dir
+        mountPath: /redpanda-default-cert
 
     extraVolumes:
       - name: redpanda-default-cert
