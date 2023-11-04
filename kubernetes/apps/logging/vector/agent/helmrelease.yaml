@@ -55,6 +55,15 @@ spec:
         containerPort: 6010
         protocol: TCP
 
+    extraVolumeMounts:
+      - name: redpanda-default-cert
+        mountPath: /vector-extra-data-dir
+
+    extraVolumes:
+      - name: redpanda-default-cert
+        secret:
+          secretName: redpanda-default-cert
+
 
     resources:
       requests:
