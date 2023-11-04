@@ -74,6 +74,15 @@ spec:
         containerPort: 6010
         protocol: TCP
 
+    extraVolumeMounts:
+      - name: redpanda-default-cert
+        mountPath: /redpanda-default-cert
+
+    extraVolumes:
+      - name: redpanda-default-cert
+        secret:
+          secretName: redpanda-default-cert
+
     image:
       repository: timberio/vector
       tag: 0.31.0-debian
@@ -138,10 +147,4 @@ spec:
           secretKeyRef:
             key: ELASTICSEARCH_NAME
             name: es-ingestion-credentials
-
-      - name: KAFKA_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            key: datahub-user
-            name: datahub-user
 
