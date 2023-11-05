@@ -10,6 +10,8 @@ configMapGenerator:
     options:
       labels:
         home_ops: kafka-consumer-offset
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
       disableNameSuffixHash: true
 
   - name: kafka-topics-metrics
@@ -18,6 +20,8 @@ configMapGenerator:
     options:
       labels:
         home_ops: kafka-topics-metrics
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
       disableNameSuffixHash: true
 
   - name: redpanda-default-dashboard
@@ -26,6 +30,8 @@ configMapGenerator:
     options:
       labels:
         home_ops: redpanda-default-dashboard
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
       disableNameSuffixHash: true
 
   - name: redpanda-ops-dashboard
@@ -34,4 +40,6 @@ configMapGenerator:
     options:
       labels:
         home_ops: redpanda-ops-dashboard
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
       disableNameSuffixHash: true
