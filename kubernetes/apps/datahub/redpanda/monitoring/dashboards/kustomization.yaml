@@ -4,11 +4,34 @@ namespace: datahub
 
 configMapGenerator:
 
-  - name: dragonfly
+  - name: kafka-consumer-offset
     files:
-      - dragonfly.json
+      - kafka-consumer-offset.json
     options:
       labels:
-        home_ops: dragonfly
+        home_ops: kafka-consumer-offset
       disableNameSuffixHash: true
 
+  - name: kafka-topics-metrics
+    files:
+      - kafka-topics-metrics.json
+    options:
+      labels:
+        home_ops: kafka-topics-metrics
+      disableNameSuffixHash: true
+
+  - name: redpanda-default-dashboard
+    files:
+      - redpanda-default-dashboard.json
+    options:
+      labels:
+        home_ops: redpanda-default-dashboard
+      disableNameSuffixHash: true
+
+  - name: redpanda-ops-dashboard
+    files:
+      - redpanda-ops-dashboard.json
+    options:
+      labels:
+        home_ops: redpanda-ops-dashboard
+      disableNameSuffixHash: true
