@@ -122,6 +122,7 @@ spec:
           - minio.${SECRET_DOMAIN}
           - link.${SECRET_DOMAIN}
           - grafana.${SECRET_DOMAIN}
+          - grafana.devfu.io
           - kibana.${SECRET_DOMAIN}
           #- elastic.${SECRET_DOMAIN}
       session:
