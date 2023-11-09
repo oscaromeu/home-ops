@@ -1,0 +1,126 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: datahub-tenant
+  namespace: datahub
+spec:
+  interval: 5m
+  maxHistory: 2
+  chart:
+    spec:
+      chart: tenant
+      version: 5.0.8
+      sourceRef:
+        kind: HelmRepository
+        name: minio-operator
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    secrets:
+      existingSecret: datahub-tenant-env-configuration
+    tenant:
+      name: datahub
+      configuration:
+        name: datahub-tenant-env-configuration
+      pools:
+        - servers: 2
+          name: pool-0
+          storageClassName: longhorn
+          volumesPerServer: 2
+          volumeClaimTemplate:
+            metadata:
+              name: data
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 200Gi
+                  cpu: 500m
+                  memory: 1Gi
+                limits:
+                  memory: 2Gi
+          containerSecurityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                  - key: v1.min.io/tenant
+                    operator: In
+                    values:
+                    - test
+                  - key: v1.min.io/pool
+                    operator: In
+                    values:
+                    - pool-0
+                topologyKey: kubernetes.io/hostname
+      metrics:
+        enabled: true
+      buckets:
+        - name: loki-bucket-v2
+        - name: cnpg-bucket-v1
+      ## List of secret names to use for generating MinIO users during tenant provisioning
+      users:
+        - name: admin-user-secret
+
+      prometheusOperator: true
+
+      env:
+        - name: PROMETHEUS_NAMESPACE
+          value: "monitoring"
+        - name: MINIO_PROMETHEUS_URL
+          value: "http://kube-prometheus-stack-prometheus.monitoring:9090"
+        - name: MINIO_PROMETHEUS_AUTH_TYPE
+          value: "public"
+
+      exposeServices:
+        console: true
+        minio: true
+
+    ingress:
+      api:
+        enabled: true
+        ingressClassName: internal
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+          hajimari.io/icon: simple-icons:minio
+          nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+          nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+          #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
+          #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
+        host: &host "minio-datahub.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - *host
+        path: /
+        pathType: Prefix
+      console:
+        enabled: true
+        ingressClassName: internal
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+          hajimari.io/icon: simple-icons:minio
+          nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+          nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+          #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
+          #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
+        host: &host "minio-console-datahub.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - *host
+        path: /
+        pathType: Prefix
+
