@@ -27,19 +27,19 @@ spec:
   monitoring:
     enablePodMonitor: true
 
-  #backup:
-  #  retentionPolicy: 30d
-  #  barmanObjectStore:
-  #    wal:
-  #      compression: bzip2
-  #      maxParallel: 8
-  #    #endpointURL: "https://console.cloud.google.com/storage/browser/cloudnative-pg-bucket"
-  #    #serverName: &currentCluster postgres-v7
-  #    destinationPath: "gs://cloudnative-pg-bucket"
-  #    googleCredentials:
-  #      applicationCredentials:
-  #        name: backup-creds
-  #        key: gcsCredentials
+  backup:
+    retentionPolicy: 30d
+    barmanObjectStore:
+      wal:
+        compression: bzip2
+        maxParallel: 8
+      #endpointURL: "https://console.cloud.google.com/storage/browser/cloudnative-pg-bucket"
+      #serverName: &currentCluster postgres-v7
+      destinationPath: "gs://cloudnative-pg-bucket"
+      googleCredentials:
+        applicationCredentials:
+          name: backup-creds
+          key: gcsCredentials
   # Note: externalClusters is needed when recovering from an existing cnpg cluster
   #externalClusters:
   #  - name: *previousCluster
