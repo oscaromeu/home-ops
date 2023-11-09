@@ -6,7 +6,7 @@ metadata:
   namespace: datahub
 spec:
   instances: 3
-  imageName: ghcr.io/cloudnative-pg/postgresql:14.9-13
+  imageName: ghcr.io/cloudnative-pg/postgresql:15.4-18
   primaryUpdateStrategy: unsupervised
   storage:
     size: 20Gi
@@ -34,7 +34,7 @@ spec:
         compression: bzip2
         maxParallel: 8
       #endpointURL: "https://console.cloud.google.com/storage/browser/cloudnative-pg-bucket"
-      #serverName: &currentCluster postgres-v7
+      serverName: postgres-v1
       destinationPath: "gs://cloudnative-pg-bucket"
       googleCredentials:
         applicationCredentials:
