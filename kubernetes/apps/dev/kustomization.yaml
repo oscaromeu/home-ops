@@ -12,6 +12,7 @@ resources:
   #- ./kafka/ks.yaml
   - ./redpanda/ks.yaml
   - ./registry/ks.yaml
+  - ./semaphore/ks.yaml
   - ./spring-boot-app/ks.yaml
   #- ./fastapi-app/ks.yaml
   #- ./tekton
