@@ -10,5 +10,7 @@ configMapGenerator:
     options:
       labels:
         home_ops: cnpg-dashboard
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
       disableNameSuffixHash: true
 

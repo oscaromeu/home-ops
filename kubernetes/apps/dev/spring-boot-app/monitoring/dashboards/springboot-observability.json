@@ -24,6 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 217,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -575,7 +576,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PAE45454D0EDB9216"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -653,8 +654,8 @@
       "targets": [
         {
           "datasource": {
-            "id": "mimir",
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -671,7 +672,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PAE45454D0EDB9216"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -749,8 +750,8 @@
       "targets": [
         {
           "datasource": {
-            "id": "mimir",
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -767,7 +768,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PAE45454D0EDB9216"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -845,8 +846,8 @@
       "targets": [
         {
           "datasource": {
-            "id": "mimir",
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -1091,6 +1092,24 @@
   "tags": [],
   "templating": {
     "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "Victoria-Metrics",
+          "value": "PE317D6035BC90B33"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
       {
         "current": {
           "selected": true,
