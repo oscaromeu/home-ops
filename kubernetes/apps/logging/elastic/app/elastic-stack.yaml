@@ -4,8 +4,6 @@ kind: Elasticsearch
 metadata:
   name: elk
   namespace: logging
-  labels:
-    app: elk
 spec:
   version: 8.11.0
   volumeClaimDeletePolicy: DeleteOnScaledownOnly
@@ -26,6 +24,15 @@ spec:
       xpack.monitoring.collection.interval: "60s"
       xpack.monitoring.history.duration: "7d"
     podTemplate:
+      metadata:
+        labels:
+          stack-monitoring.elastic.co/type: es
+          app.kubernetes.io/name: elk
+          app.kubernetes.io/service: logging
+          app.kubernetes.io/component: elasticsearch
+          app.kubernetes.io/namespace: logging
+        annotations:
+          co.elastic.logs/enabled: "true"
       spec:
         containers:
         - name: elasticsearch
@@ -54,11 +61,6 @@ spec:
 
         nodeSelector:
           kubernetes.io/arch: amd64
-      metadata:
-        labels:
-          stack-monitoring.elastic.co/type: es
-        annotations:
-          co.elastic.logs/enabled: "true"
     volumeClaimTemplates:
     - metadata:
         name: elasticsearch-data # this name is required for the volume to be mounted
@@ -90,6 +92,10 @@ spec:
       metadata:
         labels:
           stack-monitoring.elastic.co/type: es
+          app.kubernetes.io/name: elk
+          app.kubernetes.io/service: logging
+          app.kubernetes.io/component: elasticsearch
+          app.kubernetes.io/namespace: logging
         annotations:
           co.elastic.logs/enabled: "true"
       spec:
@@ -126,6 +132,14 @@ spec:
           requests:
             storage: 10Gi
         storageClassName: local-path
+  #monitoring:
+  #  metrics:
+  #    elasticsearchRefs:
+  #      - name: elk
+  #  logs:
+  #    elasticsearchRefs:
+  #      - name: elk
+
 ---
 apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
@@ -143,6 +157,15 @@ spec:
     server:
       publicBaseUrl: "https://kibana.${SECRET_DOMAIN}"
   podTemplate:
+    metadata:
+      labels:
+        stack-monitoring.elastic.co/type: es
+        app.kubernetes.io/name: elk
+        app.kubernetes.io/service: logging
+        app.kubernetes.io/component: kibana
+        app.kubernetes.io/namespace: logging
+      annotations:
+        co.elastic.logs/enabled: "true"
     spec:
       containers:
       - name: kibana
