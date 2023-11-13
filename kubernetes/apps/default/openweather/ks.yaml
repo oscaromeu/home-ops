@@ -33,7 +33,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-openweather
-  path: ./kubernetes/apps/default/openweather/app
+  path: ./kubernetes/apps/default/openweather/monitoring
   prune: true
   sourceRef:
     kind: GitRepository
