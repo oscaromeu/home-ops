@@ -36,7 +36,10 @@ spec:
               tag: "v0.0.11"
             env:
               TZ: ${TIMEZONE}
-              SERVER_PORT: "2112"
+              OW_DEGREES_UNIT: "C"
+              #OW_ENABLE_POL: true
+              #OW_ENABLE_UV: true
+              #SERVER_PORT: "9091"
             envFrom:
               - secretRef:
                   name: openweather-secrets
