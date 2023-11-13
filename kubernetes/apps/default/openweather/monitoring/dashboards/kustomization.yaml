@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: default
+
+configMapGenerator:
+
+  - name: openweathermap
+    files:
+      - openweathermap.json
+    options:
+      labels:
+        home_ops: openweathermap
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
