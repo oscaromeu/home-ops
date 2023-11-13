@@ -12,7 +12,7 @@ resources:
   - ./linkding/ks.yaml
   #- ./minio/ks.yaml
   #- ./navidrome/ks.yaml
-  - ./openweathermap.yaml
+  - ./openweather/ks.yaml
   #- ./overseerr/ks.yaml
   - ./photoprism/ks.yaml
   # - ./podinfo/ks.yaml
