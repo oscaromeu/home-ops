@@ -11,7 +11,7 @@
    name: gitea-ssh
    namespace: dev
  spec:
-   ingressClassName: internal
+   ingressClassName: external
    rules:
    - host: &host "ssh.git.${SECRET_DOMAIN}"
      http:
