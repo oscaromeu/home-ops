@@ -1,7 +1,7 @@
 apiVersion: "clickhouse.altinity.com/v1"
 kind: "ClickHouseInstallation"
 metadata:
-  name: "clickhouse"
+  name: "home-ops"
 spec:
   configuration:
     zookeeper:
@@ -9,10 +9,10 @@ spec:
         - host: zookeeper.zoo1ns
           port: 2181
     clusters:
-      - name: "clickhouse"
+      - name: "home-ops"
         layout:
-          shardsCount: 3
-          replicasCount: 3
+          shardsCount: 2
+          replicasCount: 2
         templates:
           podTemplate: clickhouse-stable
           volumeClaimTemplate: storage-vc-template
