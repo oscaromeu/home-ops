@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-clickhouse
+  name: cluster-apps-clickhouse-operator
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "false"
@@ -10,7 +10,7 @@ spec:
   dependsOn:
     #- name: cluster-apps-nginx-external
     - name: cluster-apps-external-secrets-stores
-  path: ./kubernetes/apps/datahub/clickhouse/app
+  path: ./kubernetes/apps/datahub/clickhouse/operator
   prune: true
   sourceRef:
     kind: GitRepository
