@@ -46,6 +46,8 @@ configMapGenerator:
     options:
       labels:
         home_ops: k8s-detailed-overview-pods
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
       disableNameSuffixHash: true
 
 
