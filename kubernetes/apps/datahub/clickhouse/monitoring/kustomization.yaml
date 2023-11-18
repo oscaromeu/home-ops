@@ -4,7 +4,7 @@ namespace: monitoring
 
 configMapGenerator:
 
-  - name: altinity_clickhouse_operator
+  - name: altinity-clickhouse-operator
     files:
       - altinity_clickhouse_operator.json
     options:
@@ -14,7 +14,7 @@ configMapGenerator:
         kustomize.toolkit.fluxcd.io/substitute: disabled
       disableNameSuffixHash: true
 
-  - name: clickhouse_keeper
+  - name: clickhouse-keeper
     files:
       - clickhouse_keeper.json
     options:
@@ -25,7 +25,7 @@ configMapGenerator:
       disableNameSuffixHash: true
 
 
-  - name: clickhouse_queries
+  - name: clickhouse-queries
     files:
       - clickhouse_queries.json
     options:
