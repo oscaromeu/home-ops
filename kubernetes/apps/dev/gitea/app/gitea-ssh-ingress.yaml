@@ -2,7 +2,7 @@
  kind: Ingress
  metadata:
    annotations:
-    #external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+    external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
     nginx.ingress.kubernetes.io/backend-protocol: HTTPS
     hajimari.io/enable: "true"
     hajimari.io/icon: simple-icons:gitea
@@ -11,7 +11,7 @@
    name: gitea-ssh
    namespace: dev
  spec:
-   ingressClassName: external
+   ingressClassName: internal
    rules:
    - host: &host "ssh.git.${SECRET_DOMAIN}"
      http:
