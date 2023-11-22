@@ -3,8 +3,8 @@ modules:
   elastic_test:
     connection:
       type: elastic
-      username: "$(ES_USER)"
-      password: "$(ES_PASS)"
+      username: elastic
+      password: QW5vA1bjf38O355DmC1Q1n5k
       index: "logs-k3s-prod"
       query: |
         {
