@@ -88,7 +88,7 @@ spec:
       containers:
         - name: json-fusion-exporter
           image: "ghcr.io/oscaromeu/json_fusion_exporter:main"
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 7979
@@ -147,11 +147,11 @@ spec:
     interval: 1m
     params:
       target:
-      - https://elastic.oscaromeu.io
+      - https://elk-es-http.logging.svc.cluster.local:9200
     metricRelabelings:
       - sourceLabels: [instance]
         targetLabel: instance
-        replacement: https://elastic.oscaromeu.io
+        replacement: https://elk-es-http.logging.svc.cluster.local:9200
       - sourceLabels: [target]
         targetLabel: target
         replacement: elastic
