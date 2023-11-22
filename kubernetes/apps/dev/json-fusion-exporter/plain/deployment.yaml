@@ -146,15 +146,9 @@ spec:
     path: "/probe"
     interval: 1m
     params:
+      module: [elastic_test]
       target:
       - https://elk-es-http.logging.svc.cluster.local:9200
-    metricRelabelings:
-      - sourceLabels: [instance]
-        targetLabel: instance
-        replacement: https://elk-es-http.logging.svc.cluster.local:9200
-      - sourceLabels: [target]
-        targetLabel: target
-        replacement: elastic
   jobLabel: "json-fusion-exporter"
   selector:
     matchLabels:
