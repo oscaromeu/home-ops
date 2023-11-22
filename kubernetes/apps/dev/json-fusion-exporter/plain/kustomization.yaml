@@ -13,5 +13,5 @@ generatorOptions:
 
 configMapGenerator:
   - files:
-      - ./config/config.yaml
+      - config.yml=./config/config.yml
     name: json-fusion-exporter
