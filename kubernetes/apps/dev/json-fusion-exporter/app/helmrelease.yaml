@@ -32,8 +32,8 @@ spec:
           elastic_test:
             connection:
               type: elastic
-              username: ${ES_USER}
-              password: ${ES_PASS}
+              username: "elastic"
+              password: "$(ES_PASS)"
               index: "logs-k3s-prod"
               query: |
                 {

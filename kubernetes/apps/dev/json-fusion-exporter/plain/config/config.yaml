@@ -1,0 +1,37 @@
+---
+modules:
+  elastic_test:
+    connection:
+      type: elastic
+      username: "$(ES_USER)"
+      password: "$(ES_PASS)"
+      index: "logs-k3s-prod"
+      query: |
+        {
+          "size": 0,
+          "aggs": {
+            "namespace_counts": {
+              "terms": {
+                "field": "kubernetes.pod_namespace",
+                "size": 10000
+              }
+            }
+          }
+        }
+    metrics:
+    - name: kubernetes_namespace
+      type: object
+      help: total docs
+      path: '{}'
+      labels:
+        namespace: 'datahub'
+      values:
+        docs: '{ .aggregations.namespace_counts.buckets[?(@.key == "datahub")].doc_count }'
+    - name: kubernetes_namespace
+      type: object
+      help: total docs
+      path: '{}'
+      labels:
+        namespace: 'networking'
+      values:
+        docs: '{ .aggregations.namespace_counts.buckets[?(@.key == "networking")].doc_count }'

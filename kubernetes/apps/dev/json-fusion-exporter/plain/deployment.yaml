@@ -1,0 +1,165 @@
+#---
+#apiVersion: v1
+#kind: ConfigMap
+#metadata:
+#  name: json-fusion-exporter
+#data:
+#  allow-snippet-annotations: "false"
+#  config.yml: |
+#    ---
+#    modules:
+#      elastic_test:
+#        connection:
+#          type: elastic
+#          username: "$(ES_USER)"
+#          password: "$(ES_PASS)"
+#          index: "logs-k3s-prod"
+#          query: |
+#            {
+#              "size": 0,
+#              "aggs": {
+#                "namespace_counts": {
+#                  "terms": {
+#                    "field": "kubernetes.pod_namespace",
+#                    "size": 10000
+#                  }
+#                }
+#              }
+#            }
+#        metrics:
+#        - name: kubernetes_namespace
+#          type: object
+#          help: total docs
+#          path: '{}'
+#          labels:
+#            namespace: 'datahub'
+#          values:
+#            docs: '{ .aggregations.namespace_counts.buckets[?(@.key == "datahub")].doc_count }'
+#        - name: kubernetes_namespace
+#          type: object
+#          help: total docs
+#          path: '{}'
+#          labels:
+#            namespace: 'networking'
+#          values:
+#            docs: '{ .aggregations.namespace_counts.buckets[?(@.key == "networking")].doc_count }'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: json-fusion-exporter
+  labels:
+    app.kubernetes.io/name: json-fusion-exporter
+    app.kubernetes.io/instance: json-fusion-exporter
+    app.kubernetes.io/version: "0.1.0"
+spec:
+  type: ClusterIP
+  ports:
+    - port: 7979
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: json-fusion-exporter
+    app.kubernetes.io/instance: json-fusion-exporter
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: json-fusion-exporter
+  labels:
+    app.kubernetes.io/name: json-fusion-exporter
+    app.kubernetes.io/instance: json-fusion-exporter
+    app.kubernetes.io/version: "v0.6.0"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: json-fusion-exporter
+      app.kubernetes.io/instance: json-fusion-exporter
+  template:
+    metadata:
+      annotations:
+        checksum/config: ca6646cd5e0fed602ebd4dec5381f12dc3cff4f4f757fa3bae601a8f05db33c5
+      labels:
+        app.kubernetes.io/name: json-fusion-exporter
+        app.kubernetes.io/instance: json-fusion-exporter
+    spec:
+      containers:
+        - name: json-fusion-exporter
+          image: "ghcr.io/oscaromeu/json_fusion_exporter:main"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 7979
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: http
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: config-configmap-volume
+              mountPath: /config.yml
+              subPath: config.yml
+          env:
+            - name: ES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: elastic-credentials
+                  key: ES_USER
+            - name: ES_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: elastic-credentials
+                  key: ES_PASS
+      volumes:
+      - name: config-configmap-volume
+        configMap:
+          name: json-fusion-exporter
+          items:
+            - key: config.yml
+              path: config.yml
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: json-fusion-exporter-elastic
+  labels:
+    app.kubernetes.io/name: json-fusion-exporter
+    app.kubernetes.io/instance: json-fusion-exporter
+    app.kubernetes.io/version: "0.1.0"
+spec:
+  endpoints:
+  - port: http
+    scheme: http
+    path: "/probe"
+    interval: 1m
+    params:
+      target:
+      - https://elastic.oscaromeu.io
+    metricRelabelings:
+      - sourceLabels: [instance]
+        targetLabel: instance
+        replacement: https://elastic.oscaromeu.io
+      - sourceLabels: [target]
+        targetLabel: target
+        replacement: elastic
+  jobLabel: "json-fusion-exporter"
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: json-fusion-exporter
+      app.kubernetes.io/instance: json-fusion-exporter
+  namespaceSelector:
+    matchNames:
+      - dev

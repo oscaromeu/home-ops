@@ -1,24 +1,43 @@
+#---
+#apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+#kind: Kustomization
+#metadata:
+#  name: cluster-apps-json-fusion-exporter
+#  namespace: flux-system
+#  labels:
+#    substitution.flux.home.arpa/enabled: "false"
+#spec:
+#  dependsOn:
+#    - name: cluster-apps-external-secrets-stores
+#  path: ./kubernetes/apps/dev/json-fusion-exporter/app
+#  prune: true
+#  sourceRef:
+#    kind: GitRepository
+#    name: home-kubernetes
+#  healthChecks:
+#    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+#      kind: HelmRelease
+#      name: json-fusion-exporter
+#      namespace: dev
+#  interval: 30m
+#  retryInterval: 1m
+#  timeout: 3m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-json-fusion-exporter
+  name: cluster-apps-json-fusion-exporter-raw
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "false"
 spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
-  path: ./kubernetes/apps/dev/json-fusion-exporter/app
+  path: ./kubernetes/apps/dev/json-fusion-exporter/plain
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      kind: HelmRelease
-      name: json-fusion-exporter
-      namespace: dev
   interval: 30m
   retryInterval: 1m
   timeout: 3m
