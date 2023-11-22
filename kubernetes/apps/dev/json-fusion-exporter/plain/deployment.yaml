@@ -87,7 +87,7 @@ spec:
     spec:
       containers:
         - name: json-fusion-exporter
-          image: "ghcr.io/oscaromeu/json_fusion_exporter:0.1.0"
+          image: "ghcr.io/oscaromeu/json_fusion_exporter:main"
           imagePullPolicy: Always
           ports:
             - name: http
