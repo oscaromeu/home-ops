@@ -70,7 +70,7 @@ metadata:
   labels:
     app.kubernetes.io/name: json-fusion-exporter
     app.kubernetes.io/instance: json-fusion-exporter
-    app.kubernetes.io/version: "v0.6.0"
+    app.kubernetes.io/version: "0.1.0"
 spec:
   replicas: 1
   selector:
