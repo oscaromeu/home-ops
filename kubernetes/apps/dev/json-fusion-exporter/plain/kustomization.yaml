@@ -8,10 +8,11 @@ resources:
   - ./externalsecret.yaml
   - ./deployment.yaml
 
-generatorOptions:
-  disableNameSuffixHash: true
-
 configMapGenerator:
   - files:
       - config.yml=./config/config.yml
     name: json-fusion-exporter
+    options:
+      annotations:
+        kustomize.toolkit.fluxcd.io/substitute: disabled
+      disableNameSuffixHash: true
