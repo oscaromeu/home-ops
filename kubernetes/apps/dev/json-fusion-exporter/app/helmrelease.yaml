@@ -1,0 +1,78 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: json-fusion-exporter
+  namespace: dev
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: prometheus-json-exporter
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system
+  values:
+    replicaCount: 1
+    image:
+      repository: ghcr.io/oscaromeu/json_fusion_exporter
+      tag: "main"
+
+    serviceMonitor:
+      enabled: true
+      targets:
+      - name: elastic
+        url: https://elastic.oscaromeu.io
+      defaults:
+        interval: 1m
+    configuration:
+      config: |
+        ---
+        modules:
+          elastic_test:
+            connection:
+              type: elastic
+              username: ${ES_USER}
+              password: ${ES_PASS}
+              index: "logs-k3s-prod"
+              query: |
+                {
+                  "size": 0,
+                  "aggs": {
+                    "namespace_counts": {
+                      "terms": {
+                        "field": "kubernetes.pod_namespace",
+                        "size": 10000
+                      }
+                    }
+                  }
+                }
+            metrics:
+            - name: kubernetes_namespace
+              type: object
+              help: total docs
+              path: '{}'
+              labels:
+                namespace: 'datahub'
+              values:
+                docs: '{ .aggregations.namespace_counts.buckets[?(@.key == "datahub")].doc_count }'
+            - name: kubernetes_namespace
+              type: object
+              help: total docs
+              path: '{}'
+              labels:
+                namespace: 'networking'
+              values:
+                docs: '{ .aggregations.namespace_counts.buckets[?(@.key == "networking")].doc_count }'
+
+    enviromentalVariables:
+      - name: ES_USER
+        valueFrom:
+          secretKeyRef:
+            name: elastic-credentials
+            key: ES_USER
+      - name: ES_PASS
+        valueFrom:
+          secretKeyRef:
+            name: elastic-credentials
+            key: ES_PASS
