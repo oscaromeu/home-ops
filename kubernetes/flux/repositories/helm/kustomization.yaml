@@ -33,6 +33,7 @@ resources:
   - ./k8s-gateway.yaml
   #- ./kafka-ui.yaml
   - ./kafka.yaml
+  - ./keda.yaml
   - ./kubernetes-dashboard.yaml
   - ./kyverno.yaml
   - ./longhorn.yaml
