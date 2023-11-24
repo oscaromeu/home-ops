@@ -1,0 +1,261 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: microcks
+  namespace: dev
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: microcks
+      version: 1.8.0
+      sourceRef:
+        kind: HelmRepository
+        name: microcks
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    appName: microcks
+    ingresses: true
+
+    microcks:
+      url: microcks.${SECRET_DOMAIN}
+      #ingressSecretRef: my-secret-for-microcks-ingress
+      ingressAnnotations:
+        external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+        #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
+        #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
+      ingressClassName: internal
+      #grpcIngressClassName: nginx
+      generateCert: true
+      image: quay.io/microcks/microcks:1.8.0
+      replicas: 1
+      # Uncomment to change Microcks Service to a NodePort
+      #serviceType: NodePort
+
+      #grpcIngressAnnotations:
+        #myclass.ingress.kubernetes.io/backend-protocol: "GRPC"
+        #myclass.ingress.kubernetes.io/ssl-passthrough: "true"
+
+      resources:
+        requests:
+          cpu: 200m
+          #memory: 400Mi
+        limits:
+          #cpu: 500m
+          memory: 512Mi
+
+      env:
+        - name: SERVICES_UPDATE_INTERVAL
+          value: 0 0 0/2 * * *
+        #- name: MAX_UPLOAD_FILE_SIZE
+        #  value: 5MB
+
+      #logLevel: TRACE | DEBUG | INFO | WARN
+      logLevel: INFO
+
+      # Enabling/disabling mock invocation stats.
+      mockInvocationStats: true
+
+    postman:
+      image: quay.io/microcks/microcks-postman-runtime:latest
+      replicas: 1
+
+    keycloak:
+      install: false
+
+    mongodb:
+      install: true
+      image: centos/mongodb-36-centos7:latest
+      persistent: true
+      volumeSize: 2Gi
+      # Unless you uncomment following line and set class, persistent volume claim is created
+      # with no storage class and relies on cluster default one.
+      storageClassName: local-path
+
+      username: admin
+      # Unless you uncomment following line, admin password will be randomly generated.
+      # Beware that in case of update, new value will be generated and overwrite existing one.
+      #password: 123
+
+      # Or you can uncomment secretRef block if username and password are provided through a Secret.
+      #secretRef:
+        #secret: mongodb
+        #usernameKey: database-user
+        #passwordKey: database-password
+
+      #pvcAnnotations:
+        #helm.sh/resource-policy: keep
+
+      resources:
+        requests:
+          cpu: 250m
+          #memory: 400Mi
+        limits:
+          #cpu: 500m
+          memory: 512Mi
+
+    features:
+      async:
+        enabled: false
+        defaultBinding: KAFKA
+        defaultFrequency: 10
+        defaultAvroEncoding: RAW
+
+        image: quay.io/microcks/microcks-async-minion:1.8.0
+
+        kafka:
+          install: true
+          url: 192.168.99.100.nip.io
+          #url: kafka-bootstrap:9092
+          # Set this to your own class name if not using bare nginx
+          ingressClassName: nginx
+          persistent: false
+          volumeSize: 2Gi
+          resources:
+            #requests:
+              #cpu: 100m
+              #memory: 256Mi
+            limits:
+              #cpu: 500m
+              memory: 800Mi
+          zkResources:
+            #requests:
+              #cpu: 100m
+              #memory: 256Mi
+            limits:
+              #cpu: 500m
+              memory: 800Mi
+          schemaRegistry:
+            #url: http://schema-registry.192.168.99.100.nip.io
+            confluent: true
+            username: microcks
+            credentialsSource: USER_INFO
+
+          # If you choose not to install a Kafka broker and reuse on pre-existing,
+          # you may need to set some authentication parameters.
+          authentication:
+            # If not 'none', we support 'SSL' for mutual TLS and 'SASL_SSL' for SASL over TLS.
+            type: none #SSL #SASL_SSL
+            # For TLS transport, you'll always need a truststore to hold your cluster certificate.
+            # You have to setup a truststore type and a secret reference for retrieving content and password.
+            #truststoreType: PKCS12
+            #truststoreSecretRef:
+              #secret: kafka-cluster-ca-cert
+              #storeKey: ca.p12
+              #passwordKey: ca.password
+            # For mutual TLS authentication, you'll also need a keystore to hold your user private key.
+            # You have to setup a keystore type and a secret reference for retrieving content and password.
+            keystoreType: PKCS12
+            keystoreSecretRef:
+              secret: mtls-user
+              storeKey: user.p12
+              passwordKey: user.password
+            # For SASL authentication, you'll have to specify an additional authentication mechanism
+            # as well as a JAAS configuration line with login module, username and password.
+            #saslMechanism: SCRAM-SHA-512
+            #saslJaasConfig: org.apache.kafka.common.security.scram.ScramLoginModule required username="scram-user" password="tDtDCT3pYKE5";
+
+        # Uncomment the mqtt.url and put a valid endpoint address below to enable MQTT support.
+        mqtt:
+          #url: artemis:1883
+          username: microcks
+          password: microcks
+
+        # Uncomment the amqp.url and put a valid endpoint address below to enable AMQP support.
+        amqp:
+          #url: rabbitmq:5672
+          username: microcks
+          password: microcks
+
+        # Uncomment the nats.url and put a valid endpoint address below to enable NATS support.
+        nats:
+          #url: nats:4222
+          username: microcks
+          password: microcks
+
+        # Uncomment the googlepubsub.project and put a valid project id below to enable PubSub support.
+        googlepubsub:
+          #project: my-project
+          # For authentication, we rely on a Google Service Account JSON file.
+          # You have to setup a secret reference for retrieving this file from secret.
+          serviceAccountSecretRef:
+            secret: googlecloud-service-account
+            fileKey: googlecloud-service-account.json
+
+        # Uncomment the sqs.region and put a valid region below to enable Amazon SQS support.
+        sqs:
+          #region: eu-west-3
+          # For authentication, we rely on either Environment Variables or an AWS Profile of type credentials (see https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/guide_credentials_profiles.html).
+          # You can choose between 'env-variable' and 'profile'
+          credentialsType: env-variable
+          #credentialsType: profile
+          # For 'env-variable', you may want to specify a Secret to get environment variables from.
+          #credentialsSecretRef:
+            #secret: aws-credentials
+            #accessKeyIdKey: access_key_id
+            #secretAccessKeyKey: secret_access_key
+            #sessionTokenKey: session_token
+          # For 'profile', you have to provide the profile name and setup a secret reference for retrieving this file from secret.
+          credentialsProfile: microcks-sqs-admin
+          #credentialsSecretRef:
+            #secret: aws-credentials
+            #fileKey: aws.profile
+
+        # Uncomment the sns.region and put a valid region below to enable Amazon SNS support.
+        sns:
+          #region: eu-west-3
+          # For authentication, we rely on either Environment Variables or an AWS Profile of type credentials (see https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/guide_credentials_profiles.html).
+          # You can choose between 'env-variable' and 'profile'
+          credentialsType: env-variable
+          #credentialsType: profile
+          # For 'env-variable', you may want to specify a Secret to get environment variables from.
+          #credentialsSecretRef:
+            #secret: aws-credentials
+            #accessKeyIdKey: access_key_id
+            #secretAccessKeyKey: secret_access_key
+            #sessionTokenKey: session_token
+          # For 'profile', you have to provide the profile name and setup a secret reference for retrieving this file from secret.
+          credentialsProfile: microcks-sns-admin
+          #credentialsSecretRef:
+            #secret: aws-credentials
+            #fileKey: aws.profile
+
+        ws:
+          #ingressSecretRef: my-secret-for-microcks-ws-ingress
+          #ingressAnnotations:
+            #cert-manager.io/issuer: my-ws-cert-issuer
+            #kubernetes.io/tls-acme: "true"
+          #ingressClassName: nginx
+          generateCert: true
+
+      repositoryFilter:
+        enabled: false
+        labelKey: app
+        labelLabel: Application
+        labelList: app,status
+
+      repositoryTenancy:
+        enabled: false
+        artifactImportAllowedRoles: admin,manager,manager-any
+
+      microcksHub:
+        enabled: true
+        allowedRoles: admin,manager,manager-any
+
+      aiCopilot:
+        enabled: false
+        implementation: openai
+        openai:
+          apiKey: sk-my-openai-api-token
+          timeout: 20
+          #model: gpt-3.5-turbo
+          #maxTokens: 2000

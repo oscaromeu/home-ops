@@ -38,6 +38,7 @@ resources:
   - ./longhorn.yaml
   - ./metallb.yaml
   - ./metrics-server.yaml
+  - ./microcks.yaml
   - ./minio-operator.yaml
   - ./minio.yaml
   - ./mongodb.yaml
