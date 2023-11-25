@@ -11,7 +11,7 @@ spec:
     - name: cluster-apps-nginx-internal
     - name: cluster-apps-external-secrets-stores
     - name: cluster-apps-cloudnative-pg-cluster
-  path: ./kubernetes/apps/dev/gitea/app
+  path: ./kubernetes/apps/tools/gitea/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -24,7 +24,7 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: gitea
-      namespace: dev
+      namespace: tools
   interval: 30m
   retryInterval: 1m
   timeout: 3m

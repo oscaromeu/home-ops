@@ -4,9 +4,6 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   #- ./alerta/ks.yaml
-  #- ./busybox/ks.yaml
-  #- ./dnsutils/ks.yaml
-  #- ./gitea/ks.yaml
   #- hello-world-api-k8s/ks.yaml
   - ./json-fusion-exporter/ks.yaml
   #- ./kafka/ks.yaml
