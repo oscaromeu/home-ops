@@ -107,6 +107,9 @@ spec:
     podMonitor:
       enabled: false
 
+    securityContext:
+      privileged: true
+
     env:
       - name: VECTOR_LOG
         value: "debug"
