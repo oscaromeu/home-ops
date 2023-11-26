@@ -43,7 +43,7 @@ spec:
         users: []
 
     tls:
-      enabled: false
+      enabled: true
 
     external:
       service:
