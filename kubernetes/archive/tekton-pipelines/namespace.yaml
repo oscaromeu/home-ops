@@ -5,10 +5,3 @@ metadata:
   name: tekton-pipelines
   labels:
     kustomize.toolkit.fluxcd.io/prune: disabled
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: tekton
-  labels:
-    kustomize.toolkit.fluxcd.io/prune: disabled
