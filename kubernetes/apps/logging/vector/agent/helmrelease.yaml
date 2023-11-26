@@ -29,7 +29,7 @@ spec:
   values:
     image:
       repository: timberio/vector
-      tag: 0.34.1-distroless-libx
+      tag: 0.34.1-distroless-libc
     role: "Agent"
     args:
       - --config-dir
