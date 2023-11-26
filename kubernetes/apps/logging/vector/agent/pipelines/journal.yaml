@@ -14,11 +14,11 @@ sinks:
     topic: journal-logs
     encoding:
       codec: json
-    librdkafka_options:
-      ssl.ca.location: "/redpanda-default-cert/ca.crt"
+    #librdkafka_options:
+    #  ssl.ca.location: "/redpanda-default-cert/ca.crt"
 
     tls:
       enabled: true
       ca_file: "/redpanda-default-cert/ca.crt"
-      verify_certificate: false
+      verify_certificate: true
       verify_hostname: false
