@@ -108,7 +108,13 @@ spec:
       enabled: false
 
     securityContext:
-      privileged: true
+      runAsUser: 0  # if needed
+      readOnlyRootFilesystem: true  # if applicable
+      capabilities:
+        add:
+        - SYS_ADMIN  # or other necessary capabilities
+        drop:
+        - ALL  # dropping all capabilities not added above
 
     env:
       - name: VECTOR_LOG
