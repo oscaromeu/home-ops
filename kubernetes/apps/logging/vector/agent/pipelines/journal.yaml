@@ -4,8 +4,8 @@ sources:
     type: journald
     #journal_directory: /var/log/journal
     current_boot_only: true
-    extra_args:
-      - "--merge"
+    #extra_args:
+    #  - "--merge"
 
 sinks:
 
