@@ -36,7 +36,7 @@ spec:
         users: []
 
     tls:
-      enabled: false
+      enabled: true
 
     logging:
       # -- Log level
