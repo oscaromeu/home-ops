@@ -9,7 +9,6 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-redis
     - name: cluster-apps-elastic
   path: ./kubernetes/apps/logging/vector/aggregator
   prune: true

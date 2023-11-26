@@ -9,9 +9,9 @@ sinks:
   kafka_journal:
     type: kafka
     inputs:
-      - kubernetes_source
+      - journal_logs
     bootstrap_servers: redpanda-0.redpanda.datahub.svc.cluster.local.:9093
-    topic: k3s-logs
+    topic: journal-logs
     encoding:
       codec: json
     tls:

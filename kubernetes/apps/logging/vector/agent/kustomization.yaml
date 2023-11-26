@@ -20,5 +20,9 @@ configMapGenerator:
     files:
       - vector_metrics.yaml=./pipelines/vector_metrics.yaml
 
+  - name: journal-pipeline
+    files:
+      - journal.yaml=./pipelines/journal.yaml
+
 generatorOptions:
   disableNameSuffixHash: true
