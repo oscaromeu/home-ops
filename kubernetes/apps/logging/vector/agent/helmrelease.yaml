@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: vector
-      version: 0.19.0
+      version: 0.29.0
       sourceRef:
         kind: HelmRepository
         name: vector
@@ -108,13 +108,8 @@ spec:
       enabled: false
 
     securityContext:
-      runAsUser: 0  # if needed
-      readOnlyRootFilesystem: true  # if applicable
-      capabilities:
-        add:
-        - SYS_ADMIN  # or other necessary capabilities
-        drop:
-        - ALL  # dropping all capabilities not added above
+      privileged: true
+
 
     env:
       - name: VECTOR_LOG
