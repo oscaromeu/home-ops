@@ -13,4 +13,4 @@ resources:
   - ./loki/ks.yaml
   #- ./metricbeat/ks.yaml
   - ./minio/ks.yaml
-  #- ./vector/ks.yaml
+  - ./vector/ks.yaml
