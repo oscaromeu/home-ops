@@ -34,7 +34,7 @@ sinks:
     #librdkafka_options:
     #  ssl.ca.location: "/redpanda-default-cert/ca.crt"
     tls:
-      enabled: true
+      enabled: false
       ca_file: "/redpanda-default-cert/ca.crt"
       verify_certificate: true
       verify_hostname: false
