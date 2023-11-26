@@ -16,7 +16,7 @@ configMapGenerator:
     files:
       - k3s.yaml=./pipelines/k3s.yaml
 
-  - name: vector-metrics-pipeline-aggregator
+  - name: vector-metrics-pipeline-agent
     files:
       - vector_metrics.yaml=./pipelines/vector_metrics.yaml
 
