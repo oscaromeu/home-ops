@@ -15,7 +15,7 @@ sinks:
     encoding:
       codec: json
     librdkafka_options:
-      ssl.ca.location: "/redpanda-default-cert/ca.crt"
+      ssl.ca.location: "/redpanda-default-cert/"
 
     tls:
       enabled: true
