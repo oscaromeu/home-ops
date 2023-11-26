@@ -29,7 +29,7 @@ spec:
   values:
     image:
       repository: timberio/vector
-      tag: 0.34.1-alpine
+      tag: 0.34.1-debian
     role: "Agent"
     args:
       - --config-dir
