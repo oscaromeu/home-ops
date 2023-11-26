@@ -1,0 +1,52 @@
+---
+#
+# Sources
+#
+sources:
+
+  journal_logs:
+    type: kafka
+    bootstrap_servers: redpanda-0.redpanda.datahub.svc.cluster.local.:9093
+    topics:
+      - journal-logs
+    group_id: journal-logs-group
+    decoding:
+      codec: json
+    tls:
+      enabled: true
+      ca_file: "/redpanda-default-cert/ca.crt"
+      verify_certificate: true
+      verify_hostname: false
+
+#
+# Sinks
+#
+sinks:
+  elasticsearch:
+    type: elasticsearch
+    #batch:
+    #  max_bytes: 2049000
+    inputs:
+      - kubernetes_remap
+    auth:
+      strategy: "basic"
+      user: "${ELASTICSEARCH__PASSWORD:-ingestion}"
+      password: "${ELASTICSEARCH__PASSWORD:-monitor}"
+    data_stream:
+      # {data_stream.type}-{data_stream.dataset}-{data_stream.namespace}
+      # https://www.elastic.co/guide/en/ecs/master/ecs-data_stream.html
+      type: logs
+      #dataset: "k3s_prod"
+      #namespace: "{{ .kubernetes.pod_namespace }}"
+      dataset: "journal"
+      namespace: "prod"
+    mode: "data_stream"
+    bulk:
+      action: "create"
+    endpoints:
+      - "https://elk-es-http.logging.svc.cluster.local:9200"
+    tls:
+      verify_certificate: false
+    encoding:
+      except_fields: ["pod_labels"]
+

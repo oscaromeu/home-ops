@@ -2,7 +2,10 @@
 sources:
   journal_logs:
     type: journald
-    journal_directory: /var/log/journal
+    #journal_directory: /var/log/journal
+    current_boot_only: true
+    extra_args:
+      - "--merge"
 
 sinks:
 
