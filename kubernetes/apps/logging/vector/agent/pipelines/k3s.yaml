@@ -31,8 +31,8 @@ sinks:
     topic: k3s-logs
     encoding:
       codec: json
-    #librdkafka_options:
-    #  ssl.ca.location: "/redpanda-default-cert"
+    librdkafka_options:
+      ssl.ca.location: "/redpanda-default-cert/ca.crt"
     tls:
       enabled: false
       ca_file: "/redpanda-default-cert/ca.crt"
