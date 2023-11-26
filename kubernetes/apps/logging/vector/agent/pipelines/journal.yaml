@@ -14,8 +14,8 @@ sinks:
     topic: journal-logs
     encoding:
       codec: json
-    #librdkafka_options:
-    #  ssl.ca.location: "/redpanda-default-cert/"
+    librdkafka_options:
+      ssl.ca.location: "/redpanda-default-cert/"
 
     tls:
       enabled: true
