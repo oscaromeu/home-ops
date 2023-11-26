@@ -7,5 +7,6 @@ resources:
   - ./dnsutils/ks.yaml
   - ./gitea/ks.yaml
   - ./microcks/ks.yaml
+  - ./redpanda/ks.yaml
   - ./registry/ks.yaml
   - ./semaphore/ks.yaml
