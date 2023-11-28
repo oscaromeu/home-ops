@@ -91,6 +91,7 @@ spec:
 
     postgresql:
       enabled: false
+      existingSecret: wikijs-db
       # ssl: false
       replication:
         enabled: false
