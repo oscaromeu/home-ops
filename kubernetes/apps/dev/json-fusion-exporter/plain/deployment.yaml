@@ -148,6 +148,14 @@ spec:
     params:
       module:
         - elastic_test
+      target:
+      - https://elk-es-http.logging.svc.cluster.local:9200
+  - port: http
+    scheme: http
+    path: "/probe"
+    interval: 1m
+    params:
+      module:
         - elastic_test_2
       target:
       - https://elk-es-http.logging.svc.cluster.local:9200
