@@ -1,0 +1,119 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: wikijs
+  namespace: tools
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: wiki
+      version: 2.2.20
+      sourceRef:
+        kind: HelmRepository
+        name: wikijs
+        namespace: flux-system
+      interval: 5m
+  values:
+    replicaCount: 2
+    revisionHistoryLimit: 10
+    image:
+      repository: requarks/wiki
+      imagePullPolicy: IfNotPresent
+
+    #imagePullSecrets: []
+    #nameOverride: ""
+    #fullnameOverride: ""
+
+    serviceAccount:
+      create: true
+      annotations: {}
+      name: wikijs-home-ops
+
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: http
+
+    readinessProbe:
+      httpGet:
+        path: /healthz
+        port: http
+
+    startupProbe:
+      initialDelaySeconds: 15
+      periodSeconds: 5
+      timeoutSeconds: 5
+      successThreshold: 1
+      failureThreshold: 60
+      httpGet:
+        path: /healthz
+        port: http
+
+    podSecurityContext: {}
+      # fsGroup: 2000
+
+    securityContext: {}
+      # capabilities:
+      #   drop:
+      #   - ALL
+      # readOnlyRootFilesystem: true
+      # runAsNonRoot: true
+      # runAsUser: 1000
+
+    service:
+      type: ClusterIP
+      port: 80
+
+    ingress:
+      enabled: true
+      className: external
+      annotations:
+        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hajimari.io/icon: pajamas:gitea
+      hosts:
+        - host: &host wiki.${SECRET_DOMAIN}
+          paths:
+            - path: "/"
+              pathType: Prefix
+      tls:
+        - hosts:
+            - *host
+
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+    postgresql:
+      enabled: false
+      # ssl: false
+      replication:
+        enabled: false
+      persistence:
+        enabled: false
+        storageClass: "local-path"
+        size: 8Gi
+
+
+  valuesFrom:
+    - targetPath: postgresql.postgresqlHost
+      name: wikijs-db
+      kind: Secret
+      valuesKey: POSTGRES_HOST
+    - targetPath: postgresql.postgresqlPassword
+      name: wikijs-db
+      kind: Secret
+      valuesKey: POSTGRES_PASS
+    - targetPath: postgresql.postgresqlUser
+      name: wikijs-db
+      kind: Secret
+      valuesKey: POSTGRES_USER
+    - targetPath: postgresql.postgresqlDatabase
+      name: wikijs-db
+      kind: Secret
+      valuesKey: POSTGRES_DB
