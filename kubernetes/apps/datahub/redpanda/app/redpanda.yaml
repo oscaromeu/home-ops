@@ -70,19 +70,19 @@ spec:
       budget:
         maxUnavailable: 1
       annotations: {}
-      startupProbe:
-        initialDelaySeconds: 1
-        failureThreshold: 120
-        periodSeconds: 10
-        timeoutSeconds: 10
-      livenessProbe:
-        timeoutSeconds: 10
-        initialDelaySeconds: 10
-        failureThreshold: 3
-        periodSeconds: 10
-      readinessProbe:
-        timeoutSeconds: 10
-        initialDelaySeconds: 1
-        failureThreshold: 3
-        periodSeconds: 10
-        successThreshold: 1
+      startupProbe: {}
+        #initialDelaySeconds: 1
+        #failureThreshold: 120
+        #periodSeconds: 10
+        #timeoutSeconds: 10
+      livenessProbe: {}
+        #timeoutSeconds: 10
+        #initialDelaySeconds: 10
+        #failureThreshold: 3
+        #periodSeconds: 10
+      readinessProbe: {}
+        #timeoutSeconds: 10
+        #initialDelaySeconds: 1
+        #failureThreshold: 3
+        #periodSeconds: 10
+        #successThreshold: 1
