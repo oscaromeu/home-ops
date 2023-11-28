@@ -146,7 +146,9 @@ spec:
     path: "/probe"
     interval: 1m
     params:
-      module: [elastic_test]
+      module:
+        - elastic_test
+        - elastic_test_2
       target:
       - https://elk-es-http.logging.svc.cluster.local:9200
   jobLabel: "json-fusion-exporter"
