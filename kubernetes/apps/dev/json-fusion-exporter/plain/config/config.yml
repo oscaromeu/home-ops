@@ -35,3 +35,32 @@ modules:
         namespace: 'networking'
       values:
         docs: '{ .aggregations.namespace_counts.buckets[?(@.key == "networking")].doc_count }'
+
+  elastic_test_2:
+    connection:
+      type: elastic
+      username: ${ES_USER}
+      password: ${ES_PASS}
+      index: "logs-k3s-prod"
+      query: |
+        {
+          "size": 0,
+          "aggs": {
+            "namespace_counts": {
+              "terms": {
+                "field": "kubernetes.pod_namespace",
+                "size": 10000
+              }
+            }
+          }
+        }
+    metrics:
+    - name: kubernetes_namespace
+      type: object
+      help: total docs
+      path: '{}'
+      labels:
+        namespace: 'datahub'
+        name: 'pepe'
+      values:
+        docs: '{ .aggregations.namespace_counts.buckets[?(@.key == "datahub")].doc_count }'
