@@ -12,7 +12,7 @@ spec:
       - "redpanda-0.redpanda.datahub.svc.cluster.local:9093"
       - "redpanda-1.redpanda.datahub.svc.cluster.local:9093"
       - "redpanda-2.redpanda.datahub.svc.cluster.local:9093"
-    #tls:
-    #  caCertSecretRef:
-    #    name: "redpanda-default-cert"
-    #    key: "ca.crt"
+    tls:
+      caCertSecretRef:
+        name: "redpanda-default-cert"
+        key: "ca.crt"
