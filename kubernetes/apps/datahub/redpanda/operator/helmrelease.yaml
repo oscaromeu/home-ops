@@ -14,7 +14,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: redpanda
-        namespace: flux-system
+        namespace: datahub
   maxHistory: 2
   install:
     remediation:
