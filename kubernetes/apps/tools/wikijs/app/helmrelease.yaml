@@ -101,32 +101,14 @@ spec:
 #   # For self signed CAs, like DigitalOcean
 #   NODE_TLS_REJECT_UNAUTHORIZED: "0"
 
-    postgresql:
-      enabled: false
-      existingSecret: wikijs-db
-      # ssl: false
-      replication:
-        enabled: false
-      persistence:
-        enabled: false
-        storageClass: "local-path"
-        size: 8Gi
-
-
-  valuesFrom:
-    - targetPath: postgresql.postgresqlHost
-      name: wikijs-db
-      kind: Secret
-      valuesKey: POSTGRES_HOST
-    - targetPath: postgresql.postgresqlPassword
-      name: wikijs-db
-      kind: Secret
-      valuesKey: POSTGRES_PASS
-    - targetPath: postgresql.postgresqlUser
-      name: wikijs-db
-      kind: Secret
-      valuesKey: POSTGRES_USER
-    - targetPath: postgresql.postgresqlDatabase
-      name: wikijs-db
-      kind: Secret
-      valuesKey: POSTGRES_DB
+postgresql:
+  enabled: true
+  postgresqlUser: postgres
+  postgresqlDatabase: wiki
+  replication:
+    enabled: false
+  persistence:
+    enabled: true
+    storageClass: "local-path"
+    accessMode: ReadWriteOnce
+    size: 8Gi
