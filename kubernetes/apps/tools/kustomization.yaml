@@ -10,4 +10,4 @@ resources:
   - ./redpanda/ks.yaml
   - ./registry/ks.yaml
   - ./semaphore/ks.yaml
-  - ./wikijs/ks.yaml
+  #- ./wikijs/ks.yaml
