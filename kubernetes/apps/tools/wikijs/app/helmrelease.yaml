@@ -27,7 +27,7 @@ spec:
     image:
       # https://hub.docker.com/r/requarks/wiki
       repository: ghcr.io/requarks/wiki
-      tag: 2.5.299
+      tag: 2.5.300
     env:
       TZ: "${TIMEZONE}"
       APP_URL: "https://wiki.${SECRET_DOMAIN}"
