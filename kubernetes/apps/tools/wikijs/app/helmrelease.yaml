@@ -94,21 +94,14 @@ spec:
       # Git-Repo containing all locales.json-files you need:
       repoURL: https://github.com/Requarks/wiki-localization
 
-## This will override the postgresql chart values
-# externalPostgresql:
-#   # note: ?sslmode=require => ?ssl=true
-#   databaseURL: postgresql://postgres:postgres@postgres:5432/wiki?ssl=true
-#   # For self signed CAs, like DigitalOcean
-#   NODE_TLS_REJECT_UNAUTHORIZED: "0"
-
-postgresql:
-  enabled: true
-  postgresqlUser: postgres
-  postgresqlDatabase: wiki
-  replication:
-    enabled: false
-  persistence:
-    enabled: true
-    storageClass: "local-path"
-    accessMode: ReadWriteOnce
-    size: 8Gi
+    postgresql:
+      enabled: true
+      postgresqlUser: postgres
+      postgresqlDatabase: wiki
+      replication:
+        enabled: false
+      persistence:
+        enabled: true
+        storageClass: "local-path"
+        accessMode: ReadWriteOnce
+        size: 8Gi
