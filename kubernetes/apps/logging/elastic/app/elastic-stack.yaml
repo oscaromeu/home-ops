@@ -171,10 +171,10 @@ spec:
       - name: kibana
         resources:
           requests:
-            cpu: 92m
+            cpu: 50m
             memory: 1.6Gi
           limits:
-            memory: 2Gi
+            memory: 3Gi
             #cpu: 1
 
   #nodeSelector:
