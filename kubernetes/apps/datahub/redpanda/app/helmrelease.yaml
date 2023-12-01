@@ -87,19 +87,6 @@ spec:
       budget:
         maxUnavailable: 1
       # see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes).
-      startupProbe:
-        initialDelaySeconds: 1
-        failureThreshold: 120
-        periodSeconds: 10
-      livenessProbe:
-        initialDelaySeconds: 10
-        failureThreshold: 3
-        periodSeconds: 60
-      readinessProbe:
-        initialDelaySeconds: 1
-        failureThreshold: 3
-        periodSeconds: 60
-        successThreshold: 1
 
   postRenderers:
     # Instruct helm-controller to use built-in "kustomize" post renderer.
