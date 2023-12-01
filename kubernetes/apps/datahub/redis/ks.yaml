@@ -7,8 +7,6 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  dependsOn:
-    - name: cluster-apps-longhorn
   path: ./kubernetes/apps/datahub/redis/app
   prune: true
   sourceRef:

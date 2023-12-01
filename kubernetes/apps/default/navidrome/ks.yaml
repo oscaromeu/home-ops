@@ -10,7 +10,6 @@ spec:
   dependsOn:
     - name: cluster-apps-nginx-external
     - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-longhorn
   path: ./kubernetes/apps/default/navidrome/app
   prune: true
   sourceRef:

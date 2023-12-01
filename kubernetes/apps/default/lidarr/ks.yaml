@@ -7,7 +7,6 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-nginx-external
-    - name: cluster-apps-longhorn
   path: ./kubernetes/apps/default/lidarr/app
   prune: true
   sourceRef:
