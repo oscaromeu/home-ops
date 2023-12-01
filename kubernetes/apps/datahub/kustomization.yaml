@@ -12,4 +12,4 @@ resources:
   - ./pgadmin/ks.yaml
   - ./redis/ks.yaml
   #- ./redis-datahub/ks.yaml
-  - ./redpanda/ks.yaml
+  #- ./redpanda/ks.yaml
