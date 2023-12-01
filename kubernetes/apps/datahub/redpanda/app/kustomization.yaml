@@ -7,9 +7,9 @@ resources:
   - ./redpanda.yaml
   - ./topics
 
-patchesJson6902:
+patches:
   - target:
       kind: StatefulSet
       name: redpanda
-    path: liveness-readiness-startup-patches.json
+    path: ./patch/liveness-readiness-startup-patches.json
 
