@@ -2,14 +2,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-wikijs
+  name: cluster-apps-harbor
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
     - name: cluster-apps-nginx-external
-  path: ./kubernetes/apps/tools/wikijs/app
+  path: ./kubernetes/apps/tools/harbor/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -17,7 +17,7 @@ spec:
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
-      name: wikijs
+      name: harbor
       namespace: tools
   interval: 30m
   retryInterval: 1m
