@@ -6,7 +6,7 @@ resources:
   #- ./busybox/ks.yaml
   - ./dnsutils/ks.yaml
   - ./gitea/ks.yaml
-  - ./harbor/ks.yaml
+  #- ./harbor/ks.yaml
   - ./microcks/ks.yaml
   - ./redpanda/ks.yaml
   - ./registry/ks.yaml
