@@ -90,6 +90,9 @@ spec:
       enabled: false
     trivy:
       enabled: true
+    chartmuseum:
+      enabled: true
+      replicas: 1
     exporter:
       replicas: 1
       revisionHistoryLimit: 10
