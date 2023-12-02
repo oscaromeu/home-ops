@@ -1,0 +1,16 @@
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: harbor-chartmuseum
+  labels:
+    app.kubernetes.io/name: harbor-chartmuseum
+    app.kubernetes.io/instance: harbor
+spec:
+  storageClassName: local-path
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi

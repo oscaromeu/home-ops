@@ -1,0 +1,110 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: harbor
+spec:
+  interval: 30m
+  timeout: 15m
+  chart:
+    spec:
+      chart: harbor
+      version: 1.13.1
+      sourceRef:
+        kind: HelmRepository
+        name: harbor
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    logLevel: debug
+    externalURL: "https://hcr.${SECRET_DOMAIN}"
+    existingSecretAdminPassword: &secret harbor-secret
+    expose:
+      type: ingress
+      ingress:
+        controller: default
+        className: internal
+        hosts:
+          core: hcr.${SECRET_DOMAIN}
+        annotations:
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+          ingress.kubernetes.io/ssl-redirect: "true"
+          ingress.kubernetes.io/proxy-body-size: "0"
+          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+          nginx.ingress.kubernetes.io/proxy-body-size: "0"
+          nginx.ingress.kubernetes.io/custom-http-errors: "418"
+          nginx.ingress.kubernetes.io/proxy-connect-timeout: "480"
+      tls:
+        enabled: true
+        certSource: none
+        #secret:
+        #  secretName: ""
+    persistence:
+      enabled: true
+      persistentVolumeClaim:
+        registry:
+          existingClaim: "harbor-registry"
+        chartmuseum:
+          existingClaim: "harbor-chartmuseum"
+        jobservice:
+          jobLog:
+            existingClaim: "harbor-jobservice"
+          scanDataExports:
+            existingClaim: "harbor-jobservice-scandata"
+        trivy:
+          existingClaim: "harbor-trivy"
+    registry:
+      relativeurls: true
+    database:
+      type: external
+      external:
+        host: postgres-rw.databases.svc.cluster.local
+        port: "5432"
+        username: harbor
+        existingSecret: *secret
+    redis:
+      type: external
+      external:
+        sentinelMasterSet: ""
+        addr: "redis-standalone-headless.datahub.svc.cluster.local:6379"
+        coreDatabaseIndex: "0"
+        jobserviceDatabaseIndex: "1"
+        registryDatabaseIndex: "2"
+        trivyAdapterIndex: "5"
+        harborDatabaseIndex: "6"
+        cacheLayerDatabaseIndex: "7"
+        username: ""
+        password: ""
+    notary:
+      enabled: false
+    trivy:
+      enabled: true
+    exporter:
+      replicas: 1
+      revisionHistoryLimit: 10
+    metrics:
+      enabled: true
+      core:
+        path: /metrics
+        port: 8001
+      registry:
+        path: /metrics
+        port: 8001
+      jobservice:
+        path: /metrics
+        port: 8001
+      exporter:
+        path: /metrics
+        port: 8001
+    serviceMonitor:
+      enabled: true
