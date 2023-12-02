@@ -69,7 +69,7 @@ spec:
     database:
       type: external
       external:
-        host: postgres-rw.datahub.svc.cluster.local
+        host: postgres-v1-rw.datahub.svc.cluster.local
         port: "5432"
         username: harbor
         existingSecret: *secret
