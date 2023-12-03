@@ -1,9 +1,21 @@
-- hosts: all
-
+---
+- name: Deploy monitoring agents
+  hosts: all
+  become: true
+  gather_facts: true
+  any_errors_fatal: true
   vars:
     pip_install_packages:
       - name: docker
 
-  roles:
-    - geerlingguy.pip
-    - geerlingguy.docker
+  tasks:
+
+    - name: Install Pip
+      ansible.builtin.include_role:
+        name: geerlingguy.pip
+        public: true
+
+    - name: Install Docker
+      ansible.builtin.include_role:
+        name: geerlingguy.docker
+        public: true
