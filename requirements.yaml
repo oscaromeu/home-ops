@@ -13,3 +13,7 @@ collections:
 roles:
   - name: xanmanning.k3s
     version: v3.4.2
+  - name: geerlingguy.docker
+    version: 7.0.2
+  - name: geerlingguy.pip
+    version: 3.0.1
