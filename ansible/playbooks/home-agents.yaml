@@ -4,9 +4,6 @@
   become: true
   gather_facts: true
   any_errors_fatal: true
-  vars:
-    pip_install_packages:
-      - name: docker
 
   tasks:
 
