@@ -1,0 +1,4 @@
+-r ../requirements.txt
+
+molecule-plugins[docker]
+docker>=4.3.1
