@@ -119,6 +119,22 @@ spec:
           TYPE: redis
           CONN_STR: redis://redis-standalone-headless.datahub.svc.cluster.local:6379/3?pool_size=100&idle_timeout=180s&
 
+        cron:
+          ENABLED: true
+        cron.git_gc_repos:
+          ENABLED: true
+          SCHEDULE: "@every 168h"
+
+        storage:
+          STORAGE_TYPE: minio
+          MINIO_ENDPOINT: datahub-hl.datahub.svc.cluster.local:9000
+          MINIO_BUCKET: gitea-bucket
+          MINIO_USE_SSL: true
+          MINIO_INSECURE_SKIP_VERIFY: false
+
+        actions:
+          enabled: true
+
         #mailer:
         #  ENABLED: true
         #  MAILER_TYPE: smtp+startls
@@ -144,9 +160,9 @@ spec:
 
 
       metrics:
-        enabled: false
+        enabled: true
         serviceMonitor:
-          enabled: false
+          enabled: true
       podAnnotations:
         secret.reloader.stakater.com/reload: gitea-config
 
@@ -187,4 +203,11 @@ spec:
       kind: Secret
       name: gitea-config
       valuesKey: host
-
+    - targetPath: gitea.config.storage.MINIO_ACCESS_KEY_ID
+      kind: Secret
+      name: gitea-secrets
+      valuesKey: aws_access_key_id
+    - targetPath: gitea.config.storage.MINIO_SECRET_ACCESS_KEY
+      kind: Secret
+      name: gitea-secrets
+      valuesKey: aws_secret_access_key

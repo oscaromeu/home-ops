@@ -34,11 +34,11 @@ spec:
       type: ingress
       ingress:
         controller: default
-        className: internal
+        className: external
         hosts:
           core: hcr.${SECRET_DOMAIN}
         annotations:
-          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
           ingress.kubernetes.io/ssl-redirect: "true"
           ingress.kubernetes.io/proxy-body-size: "0"
           nginx.ingress.kubernetes.io/ssl-redirect: "true"
