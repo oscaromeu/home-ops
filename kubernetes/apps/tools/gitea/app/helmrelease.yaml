@@ -38,10 +38,7 @@ spec:
     replicaCount: 1
 
     strategy:
-      type: "RollingUpdate"
-      rollingUpdate:
-        maxSurge: "100%"
-        maxUnavailable: 0
+      type: "Recreate"
 
     containerSecurityContext:
       capabilities:
