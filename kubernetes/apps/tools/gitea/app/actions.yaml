@@ -52,8 +52,8 @@ spec:
             - name: GITEA_RUNNER_REGISTRATION_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: gitea-actions2-secrets
-                  key: token
+                  name: gitea-config
+                  key: gitea-actions2-token
 
           securityContext:
             privileged: true
