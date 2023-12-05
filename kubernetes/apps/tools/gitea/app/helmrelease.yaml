@@ -30,6 +30,11 @@ spec:
     keepHistory: false
   values:
 
+    image:
+      repository: gitea/gitea
+      tag: 1.21.1
+      rootless: true
+
     replicaCount: 1
 
     strategy:
@@ -205,9 +210,9 @@ spec:
       valuesKey: host
     - targetPath: gitea.config.storage.MINIO_ACCESS_KEY_ID
       kind: Secret
-      name: gitea-secrets
+      name: gitea-config
       valuesKey: aws_access_key_id
     - targetPath: gitea.config.storage.MINIO_SECRET_ACCESS_KEY
       kind: Secret
-      name: gitea-secrets
+      name: gitea-config
       valuesKey: aws_secret_access_key
