@@ -7,5 +7,5 @@ resources:
   - ./helmrelease.yaml
   - ./gitea-ssh-ingress.yaml
   #- ./actions.yaml
-  - ./actions-dind-docker.yaml
+  - ./dind-docker.yaml
   #- ./pvc.yaml
