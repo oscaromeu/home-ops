@@ -36,15 +36,17 @@ spec:
       containers:
       - name: runner
         image: gitea/act_runner:nightly-dind-rootless
-        command: ["sh", "-c", "while ! nc -z localhost 2376 </dev/null; do echo 'waiting for docker daemon...'; sleep 5; done; /sbin/tini -- /opt/act/run.sh"]
+        command: ["sh", "-c", "(sleep 10 && chmod a+rwx /run/user/1000/docker.sock) & /usr/bin/supervisord -c /etc/supervisord.conf"]
         env:
         # https://gitea.com/gitea/act_runner/issues/280
         - name: DOCKER_HOST
           value: unix:///run/user/1000/docker.sock
-        - name: DOCKER_CERT_PATH
-          value: /certs/client
-        - name: DOCKER_TLS_VERIFY
-          value: "0"
+        #- name: DOCKER_CERT_PATH
+        #  value: /certs/client
+        #- name: DOCKER_TLS_VERIFY
+        #  value: "0"
+        - name: GITEA_RUNNER_LABELS
+          value: ubuntu-latest:docker://catthehacker/ubuntu:runner-22.04,ubuntu-22.04:docker://catthehacker/ubuntu:runner-22.04,ubuntu-20.04:docker://catthehacker/ubuntu:runner-20.04
         - name: GITEA_INSTANCE_URL
           value: http://gitea-http.tools.svc.cluster.local:3000
         - name: GITEA_RUNNER_REGISTRATION_TOKEN
