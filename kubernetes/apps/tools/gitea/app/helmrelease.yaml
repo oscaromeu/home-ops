@@ -37,8 +37,8 @@ spec:
 
     replicaCount: 1
 
-    strategy:
-      type: "Recreate"
+    #strategy:
+    #  type: "Recreate"
 
     containerSecurityContext:
       capabilities:
@@ -92,14 +92,18 @@ spec:
         admin:
           DISABLE_REGULAR_ORG_CREATION: true
         ui:
-          DEFAULT_THEME: auto
-          THEMES: gitea, arc-green
+          DEFAULT_THEME: gitea-auto
+          THEMES: gitea-auto,gitea-light,gitea-dark
 
         database:
           DB_TYPE: postgres
           NAME: gitea
           SCHEMA: public
           SSL_MODE: disable
+          MAX_OPEN_CONNS: 0
+          MAX_IDLE_CONNS: 2
+          CONN_MAX_LIFETIME: 0
+          DB_RETRIES: 10
 
         webhook:
           ALLOWED_HOST_LIST: "*"
