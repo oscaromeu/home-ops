@@ -41,10 +41,10 @@ spec:
         # https://gitea.com/gitea/act_runner/issues/280
         - name: DOCKER_HOST
           value: unix:///run/user/1000/docker.sock
-        #- name: DOCKER_CERT_PATH
-        #  value: /certs/client
-        #- name: DOCKER_TLS_VERIFY
-        #  value: "1"
+        - name: DOCKER_CERT_PATH
+          value: /certs/client
+        - name: DOCKER_TLS_VERIFY
+          value: "1"
         - name: GITEA_INSTANCE_URL
           value: http://gitea-http.tools.svc.cluster.local:3000
         - name: GITEA_RUNNER_REGISTRATION_TOKEN
