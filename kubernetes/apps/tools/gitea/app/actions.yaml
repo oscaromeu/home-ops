@@ -41,6 +41,12 @@ spec:
           image: vegardit/gitea-act-runner:dind-0.2.5
           imagePullPolicy: Always
           env:
+            - name: DOCKER_HOST
+              value: tcp://localhost:2376
+            - name: DOCKER_CERT_PATH
+              value: /certs/client
+            - name: DOCKER_TLS_VERIFY
+              value: "1"
             - name: GITEA_INSTANCE_URL
               value: http://gitea-http.tools.svc.cluster.local:3000
             - name: GITEA_RUNNER_ACTION_CACHE_DIR
