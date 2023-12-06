@@ -1,7 +1,8 @@
-apiVersion: v1
+---
 kind: PersistentVolumeClaim
+apiVersion: v1
 metadata:
-  name: act-runner-vol
+  name: runner2-vol
 spec:
   accessModes:
     - ReadWriteOnce
@@ -13,59 +14,52 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: act-runner
-  name: act-runner
+    app: act-runner2
+  name: act-runner2
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: act-runner
+      app: act-runner2
   strategy: {}
   template:
     metadata:
       labels:
-        app: act-runner
+        app: act-runner2
     spec:
+      securityContext:
+        fsGroup: 2000
       restartPolicy: Always
       volumes:
-      - name: docker-certs
-        emptyDir: {}
-      - name: runner-data
-        persistentVolumeClaim:
-          claimName: act-runner-vol
+        - name: runner2-data
+          persistentVolumeClaim:
+            claimName: runner2-vol
+        - name: runner2-cache
+          emptyDir: {}
       containers:
-      - name: runner
-        image: gitea/act_runner:nightly-dind-rootless
-        command: ["sh", "-c", "(sleep 10 && chmod a+rwx /run/user/1000/docker.sock) & /usr/bin/supervisord -c /etc/supervisord.conf"]
-        env:
-        # https://gitea.com/gitea/act_runner/issues/280
-        - name: DOCKER_HOST
-          value: unix:///run/user/1000/docker.sock
-        #- name: DOCKER_CERT_PATH
-        #  value: /certs/client
-        #- name: DOCKER_TLS_VERIFY
-        #  value: "0"
-        - name: GITEA_RUNNER_LABELS
-          value: ubuntu-latest:docker://catthehacker/ubuntu:runner-22.04,ubuntu-22.04:docker://catthehacker/ubuntu:runner-22.04,ubuntu-20.04:docker://catthehacker/ubuntu:runner-20.04
-        - name: GITEA_INSTANCE_URL
-          value: http://gitea-http.tools.svc.cluster.local:3000
-        - name: GITEA_RUNNER_REGISTRATION_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: gitea-config
-              key: gitea-actions2-token
-        volumeMounts:
-        - name: docker-certs
-          mountPath: /certs
-        - name: runner-data
-          mountPath: /data
-      - name: daemon
-        image: docker:23.0.6-dind
-        env:
-        - name: DOCKER_TLS_CERTDIR
-          value: /certs
-        securityContext:
-          privileged: true
-        volumeMounts:
-        - name: docker-certs
-          mountPath: /certs
+        - name: runner
+          image: vegardit/gitea-act-runner:dind-0.2.5
+          imagePullPolicy: Always
+          env:
+            - name: GITEA_RUNNER_JOB_CONTAINER_NETWORK
+              value: host
+            - name: GITEA_RUNNER_LABELS
+              value: ubuntu-latest:docker://catthehacker/ubuntu:runner-22.04,ubuntu-22.04:docker://catthehacker/ubuntu:runner-22.04,ubuntu-20.04:docker://catthehacker/ubuntu:runner-20.04
+            - name: GITEA_INSTANCE_URL
+              value: http://gitea-http.tools.svc.cluster.local:3000
+            - name: GITEA_RUNNER_REGISTRATION_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: gitea-config
+                  key: gitea-actions2-token
+            - name: GITEA_RUNNER_ACTION_CACHE_DIR
+              value: /cache/actions
+            - name: ACT_CACHE_SERVER_DIR
+              value: /cache/server
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: runner2-data
+              mountPath: /data
+            - name: runner2-cache
+              mountPath: /cache
