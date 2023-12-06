@@ -6,5 +6,6 @@ resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
   - ./gitea-ssh-ingress.yaml
-  - ./actions.yaml
+  #- ./actions.yaml
+  - ./actions-dind-docker.yaml
   #- ./pvc.yaml
