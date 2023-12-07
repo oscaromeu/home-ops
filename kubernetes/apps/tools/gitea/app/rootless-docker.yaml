@@ -67,3 +67,13 @@ spec:
         volumeMounts:
         - name: runner-data
           mountPath: /data
+      - name: daemon
+        image: docker:23.0.6-dind
+        env:
+        - name: DOCKER_TLS_CERTDIR
+          value: /certs
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: docker-certs
+          mountPath: /certs
