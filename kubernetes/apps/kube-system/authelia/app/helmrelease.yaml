@@ -122,7 +122,6 @@ spec:
           - minio.${SECRET_DOMAIN}
           - link.${SECRET_DOMAIN}
           - grafana.${SECRET_DOMAIN}
-          - grafana.devfu.io
           - kibana.${SECRET_DOMAIN}
           #- elastic.${SECRET_DOMAIN}
       session:
@@ -152,6 +151,12 @@ spec:
           port: 587
           sender: authelia@${SECRET_DOMAIN}
           subject: "[Authelia] {title}"
+
+      identity_providers:
+        oidc:
+          cors:
+            endpoints: ["authorization", "token", "revocation", "introspection"]
+            allowed_origins_from_client_redirect_uris: true
 
     secret:
       existingSecret: authelia
