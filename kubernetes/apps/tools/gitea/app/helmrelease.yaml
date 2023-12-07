@@ -127,9 +127,9 @@ spec:
 
         cron:
           ENABLED: true
-        cron.git_gc_repos:
-          ENABLED: true
-          SCHEDULE: "@every 168h"
+        #cron.git_gc_repos:
+        #  ENABLED: true
+        #  SCHEDULE: "@every 168h"
 
         storage:
           STORAGE_TYPE: minio
