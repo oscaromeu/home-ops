@@ -1,3 +1,4 @@
+---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -20,7 +21,6 @@ spec:
   selector:
     matchLabels:
       app: act-runner
-  strategy: {}
   template:
     metadata:
       labels:
@@ -28,15 +28,16 @@ spec:
     spec:
       restartPolicy: Always
       volumes:
-      - name: docker-certs
-        emptyDir: {}
       - name: runner-data
         persistentVolumeClaim:
           claimName: act-runner-vol
+      securityContext:
+        fsGroup: 1000
       containers:
       - name: runner
-        image: gitea/act_runner:nightly
-        command: ["sh", "-c", "while ! nc -z localhost 2376 </dev/null; do echo 'waiting for docker daemon...'; sleep 5; done; /sbin/tini -- /opt/act/run.sh"]
+        image: gitea/act_runner:nightly-dind-rootless
+        imagePullPolicy: Always
+        # command: ["sh", "-c", "while ! nc -z localhost 2376 </dev/null; do echo 'waiting for docker daemon...'; sleep 5; done; /sbin/tini -- /opt/act/run.sh"]
         env:
         - name: DOCKER_HOST
           value: tcp://localhost:2376
@@ -51,18 +52,8 @@ spec:
             secretKeyRef:
               name: gitea-config
               key: gitea-actions2-token
-        volumeMounts:
-        - name: docker-certs
-          mountPath: /certs
-        - name: runner-data
-          mountPath: /data
-      - name: daemon
-        image: docker:23.0.6-dind
-        env:
-        - name: DOCKER_TLS_CERTDIR
-          value: /certs
         securityContext:
           privileged: true
         volumeMounts:
-        - name: docker-certs
-          mountPath: /certs
+        - name: runner-data
+          mountPath: /data
