@@ -66,10 +66,10 @@ spec:
 
     resources:
       limits:
-        memory: 1.5Gi
+        memory: 3Gi
       requests:
-        cpu: 100m
-        memory: 128Mi
+        cpu: 75m
+        memory: 500Mi
 
 
     gitea:
