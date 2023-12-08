@@ -47,7 +47,7 @@ spec:
           - hosts:
               - *host
     toolbox:
-      enabled: true
+      enabled: false
     configOverride: |
       [global]
       bdev_enable_discard = true
