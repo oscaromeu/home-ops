@@ -23,5 +23,5 @@ resources:
   #- ./stackdriver-exporter/ks.yaml
   - ./tempo/ks.yaml
   - ./thanos/ks.yaml
-  - ./vm/ks.yaml
+  #- ./vm/ks.yaml
    #./vpa/ks.yaml
