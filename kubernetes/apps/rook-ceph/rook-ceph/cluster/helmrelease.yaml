@@ -54,12 +54,10 @@ spec:
       bdev_async_discard = true
       osd_class_update_on_start = false
     cephClusterSpec:
-      cephVersion:
-        image: quay.io/ceph/ceph:v18.2.0
       network:
         provider: host
         connections:
-          requireMsgr2: true
+          compression: false
       crashCollector:
         disable: false
       dashboard:
@@ -72,43 +70,111 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          #- name: lbpkm1
-          #  devices:
-          #    - name: /dev/disk/by-id/ata-KIOXIA-EXCERIA_SATA_SSD_23OB80AAK0Z5
+          - name: lbpkm1
+            devices:
+              - name: /dev/disk/by-id/ata-KIOXIA-EXCERIA_SATA_SSD_23OB80AAK0Z5
           - name: lbpkw1
             devices:
               - name: /dev/disk/by-id/ata-SSDPR-CL100-480-G3_GXE092715
           - name: lbpkw2
             devices:
               - name: /dev/disk/by-id/ata-SSDPR-CL100-480-G3_G0Z047886
+      healthCheck:
+        livenessProbe:
+          mon:
+            probe:
+              initialDelaySeconds: 30
+              periodSeconds: 30
+              timeoutSeconds: 10
+          mgr:
+            probe:
+              initialDelaySeconds: 30
+              periodSeconds: 30
+              timeoutSeconds: 10
+          osd:
+            probe:
+              initialDelaySeconds: 30
+              periodSeconds: 30
+              timeoutSeconds: 10
+        startupProbe:
+          mon:
+            probe:
+              initialDelaySeconds: 15
+              periodSeconds: 30
+              timeoutSeconds: 10
+          mgr:
+            probe:
+              initialDelaySeconds: 15
+              periodSeconds: 30
+              timeoutSeconds: 10
+          osd:
+            probe:
+              initialDelaySeconds: 15
+              periodSeconds: 30
+              timeoutSeconds: 10
       resources:
         mgr:
           requests:
             cpu: 500m
             memory: 512Mi
           limits:
-            cpu: 2000m
+            cpu: 50m
             memory: 2Gi
         mon:
           requests:
-            cpu: 1000m
-            memory: 1Gi
+            cpu: 100m
+            memory: 256Mi
           limits:
-            cpu: 4000m
-            memory: 4Gi
+            cpu: 1000m
+            memory: 1280Mi
         osd:
           requests:
-            cpu: 1000m
-            memory: 4Gi
+            cpu: 250m
+            memory: 256Mi
           limits:
-            cpu: 4000m
-            memory: 8Gi
+            cpu: 500m
+            memory: 1792Mi
+        prepareosd:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          limits:
+            cpu: 1000m
+            memory: 400Mi
+        mgr-sidecar:
+          requests:
+            cpu: 50m
+            memory: 40Mi
+          limits:
+            cpu: 256m
+            memory: 100Mi
+        crashcollector:
+          requests:
+            cpu: 15m
+            memory: 64M
+          limits:
+            cpu: 100m
+            memory: 220M
+        logcollector:
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+          limits:
+            cpu: "500m"
+            memory: "1Gi"
+        cleanup:
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
+          limits:
+            cpu: "500m"
+            memory: "1Gi"
     cephBlockPools:
       - name: ceph-blockpool
         spec:
           failureDomain: host
           replicated:
-            size: 6
+            size: 3
         storageClass:
           enabled: true
           name: ceph-block
@@ -135,21 +201,21 @@ spec:
         spec:
           metadataPool:
             replicated:
-              size: 6
+              size: 3
           dataPools:
             - failureDomain: host
               replicated:
-                size: 6
+                size: 3
               name: data0
           metadataServer:
             activeCount: 1
             activeStandby: true
             resources:
               requests:
-                cpu: 1000m
-                memory: 4Gi
+                cpu: 100m
+                memory: 64Mi
               limits:
-                memory: 4Gi
+                memory: 1Gi
         storageClass:
           enabled: true
           isDefault: false
@@ -176,22 +242,22 @@ spec:
           metadataPool:
             failureDomain: host
             replicated:
-              size: 6
+              size: 3
           dataPool:
             failureDomain: host
             erasureCoded:
-              dataChunks: 4
+              dataChunks: 2
               codingChunks: 2
           preservePoolsOnDelete: true
           gateway:
             port: 80
             resources:
               requests:
-                cpu: 1000m
+                cpu: 250m
                 memory: 1Gi
               limits:
                 memory: 2Gi
-            instances: 2
+            instances: 1
           healthCheck:
             bucket:
               interval: 60s
