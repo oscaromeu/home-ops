@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: datahub
 resources:
   - ./externalsecret.yaml
-  #- ./redpanda.yaml
+  - ./redpanda.yaml
   - ./topics
-  - ./helmrelease.yaml
+  #- ./helmrelease.yaml
 
