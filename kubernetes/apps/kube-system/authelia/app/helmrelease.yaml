@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: authelia
-      version: 0.8.57
+      version: 0.8.58
       sourceRef:
         kind: HelmRepository
         name: authelia
@@ -153,6 +153,7 @@ spec:
           subject: "[Authelia] {title}"
 
       identity_providers:
+        enabled: true
         oidc:
           cors:
             endpoints: ["authorization", "token", "revocation", "introspection"]
@@ -171,7 +172,6 @@ spec:
               - profile
               - email
             userinfo_signing_algorithm: none
-
 
     secret:
       existingSecret: authelia
