@@ -5,5 +5,5 @@ namespace: datahub
 resources:
   - https://github.com/redpanda-data/redpanda-operator//src/go/k8s/config/crd
   - ./helmrepository.yaml
-  - ./helmrelease.yaml
+  #- ./helmrelease.yaml
 
