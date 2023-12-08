@@ -50,14 +50,12 @@ spec:
         enabled: false
 
     logging:
-      # -- Log level
       # Valid values (from least to most verbose) are: `warn`, `info`, `debug`, and `trace`.
       logLevel: info
       # -- Send usage statistics back to Redpanda Data.
-      # For details,
       # see the [stats reporting documentation](https://docs.redpanda.com/docs/cluster-administration/monitoring/#stats-reporting).
       usageStats:
-        enabled: true
+        enabled: false
 
     monitoring:
       enabled: true
@@ -74,7 +72,7 @@ spec:
       persistentVolume:
         enabled: true
         size: 50Gi
-        storageClass: "local-path"
+        storageClass: "ceph-blockpool"
 
     listeners:
       kafka:
@@ -102,11 +100,7 @@ spec:
         successThreshold: 1
 
   postRenderers:
-    # Instruct helm-controller to use built-in "kustomize" post renderer.
     - kustomize:
-        # Array of inline JSON6902 patch definitions as YAML object.
-        # Note, this is a YAML object and not a string, to avoid syntax
-        # indention errors.
         patchesJson6902:
           - target:
               version: v1

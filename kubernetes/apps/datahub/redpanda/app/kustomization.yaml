@@ -4,12 +4,6 @@ kind: Kustomization
 namespace: datahub
 resources:
   - ./externalsecret.yaml
-  - ./redpanda.yaml
+  #- ./redpanda.yaml
   - ./topics
-
-patches:
-  - target:
-      kind: StatefulSet
-      name: redpanda
-    path: ./patch/liveness-readiness-startup-patches.json
 
