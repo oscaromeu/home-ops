@@ -115,8 +115,7 @@ spec:
     bucketweb:
       enabled: true
       replicaCount: 2
-      podAnnotations:
-        secret.reloader.stakater.com/reload: *secret
+
 
     compactor:
       enabled: true
@@ -134,10 +133,6 @@ spec:
         enabled: true
         size: 10Gi
         storageClass: "local-path"
-      podAnnotations:
-        secret.reloader.stakater.com/reload: *secret
-      nodeSelector:
-        kubernetes.io/arch: amd64
 
     storegateway:
       enabled: true
@@ -180,12 +175,6 @@ spec:
     #    nodePorts: []
     #  grpc:
     #    nodePorts: []
-
-
-      podAnnotations:
-        secret.reloader.stakater.com/reload: *secret
-      nodeSelector:
-        kubernetes.io/arch: amd64
 
 
     metrics:
