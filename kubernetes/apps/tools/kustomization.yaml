@@ -8,7 +8,7 @@ resources:
   - ./gitea/ks.yaml
   - ./harbor/ks.yaml
   - ./microcks/ks.yaml
-  - ./outline/ks.yaml
+  #- ./outline/ks.yaml
   - ./redpanda/ks.yaml
   - ./registry/ks.yaml
   - ./semaphore/ks.yaml
