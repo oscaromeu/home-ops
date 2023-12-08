@@ -9,6 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
+    - name: cluster-apps-hajimari
   path: ./kubernetes/apps/default/openweather/app
   prune: true
   sourceRef:

@@ -126,7 +126,7 @@ spec:
           CONN_STR: redis://redis-standalone-headless.datahub.svc.cluster.local:6379/3?pool_size=100&idle_timeout=180s&
 
         cron:
-          ENABLED: true
+          ENABLED: false
         #cron.git_gc_repos:
         #  ENABLED: true
         #  SCHEDULE: "@every 168h"

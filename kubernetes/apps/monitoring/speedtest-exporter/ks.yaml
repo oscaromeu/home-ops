@@ -5,6 +5,8 @@ metadata:
   name: cluster-apps-speedtest-exporter
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: cluster-apps-kube-prometheus-stack
   path: ./kubernetes/apps/monitoring/speedtest-exporter/app
   prune: true
   sourceRef:
@@ -21,6 +23,8 @@ metadata:
   name: cluster-apps-speedtest-exporter-monitoring
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: cluster-apps-speedtest-exporter
   path: ./kubernetes/apps/monitoring/speedtest-exporter/monitoring
   prune: true
   sourceRef:
