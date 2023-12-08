@@ -6,4 +6,5 @@ resources:
   - ./externalsecret.yaml
   #- ./redpanda.yaml
   - ./topics
+  - ./helmrelease.yaml
 

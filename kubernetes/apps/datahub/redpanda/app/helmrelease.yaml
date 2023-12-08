@@ -52,21 +52,19 @@ spec:
     logging:
       # Valid values (from least to most verbose) are: `warn`, `info`, `debug`, and `trace`.
       logLevel: info
-      # -- Send usage statistics back to Redpanda Data.
-      # see the [stats reporting documentation](https://docs.redpanda.com/docs/cluster-administration/monitoring/#stats-reporting).
       usageStats:
         enabled: false
 
     monitoring:
       enabled: true
-      scrapeInterval: 30s
+      scrapeInterval: 1m
 
     resources:
       cpu:
-        cores: 2
+        cores: 1
       memory:
         container:
-          max: 5Gi
+          max: 2.5Gi
 
     storage:
       persistentVolume:
