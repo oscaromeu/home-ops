@@ -25,7 +25,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-redis
+    - name: cluster-apps-redis-operator
   path: ./kubernetes/apps/datahub/redis/app
   prune: true
   sourceRef:
