@@ -1,0 +1,37 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: redis-operator
+  namespace: datahub
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: redis-operator
+      version: 0.15.9
+      sourceRef:
+        kind: HelmRepository
+        name: ot-helm
+        namespace: flux-system
+      interval: 5m
+  values:
+    redisOperator:
+      name: redis-operator
+      imageName: quay.io/opstree/redis-operator
+      imageTag: v0.15.1
+
+    replicas: 1
+
+    serviceAccountName: redis-operator
+
+    resources:
+      requests:
+        cpu: 50m
+        memory: 500Mi
+      limits:
+        memory: 500Mi
+
+    annotations:
+      reloader.stakater.com/search: "true"
+
