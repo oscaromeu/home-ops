@@ -52,3 +52,8 @@ tasks:
     desc: Uptime of all the hosts
     dir: "{{.ANSIBLE_DIR}}"
     cmd: ansible all -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yaml --one-line -a 'uptime'
+
+  reset-ceph:
+    desc: Reset Ceph Drives
+    dir: "{{.ANSIBLE_DIR}}"
+    cmd: ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yaml {{.ANSIBLE_PLAYBOOK_DIR}}/cluster-ceph-reset.yaml

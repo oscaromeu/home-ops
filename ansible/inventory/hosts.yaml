@@ -6,11 +6,17 @@ kubernetes:
         lbpkm1:
           ansible_user: pi
           ansible_host: 192.168.1.52
+          ceph_drives:
+            - /dev/disk/by-id/ata-KIOXIA-EXCERIA_SATA_SSD_23OB80AAK0Z5
     worker:
       hosts:
         lbpkw1:
           ansible_user: pi
           ansible_host: 192.168.1.45
+          ceph_drives:
+            - /dev/disk/by-id/ata-SSDPR-CL100-480-G3_GXE092715
         lbpkw2:
           ansible_user: pi
           ansible_host: 192.168.1.49
+          ceph_drives:
+            - /dev/disk/by-id/ata-SSDPR-CL100-480-G3_G0Z047886

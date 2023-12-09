@@ -1,0 +1,31 @@
+---
+- name: Reset Ceph Drives
+  hosts: kubernetes
+  become: true
+  gather_facts: true
+  any_errors_fatal: true
+  pre_tasks:
+    - name: Pausing for 2 seconds...
+      ansible.builtin.pause:
+        seconds: 2
+  tasks:
+    - name: Reset Ceph Drives # noqa: ignore-errors
+      ignore_errors: true
+      when: ceph_drives | default([]) | length > 0
+      block:
+        - name: Delete (/var/lib/rook)
+          ansible.builtin.file:
+            state: absent
+            path: /var/lib/rook
+        # Zap the disk to a fresh, usable state (zap-all is important, b/c MBR has to be clean)
+        - name: Wipe (sgdisk) # noqa: no-changed-when
+          ansible.builtin.command: "sgdisk --zap-all {{ item }}"
+          loop: "{{ ceph_drives }}"
+        # SSDs may be better cleaned with blkdiscard instead of dd
+        - name: Wipe (blkdiscard) # noqa: no-changed-when
+          ansible.builtin.command: "blkdiscard {{ item }}"
+          loop: "{{ ceph_drives }}"
+        # Inform the OS of partition table changes
+        - name: Wipe (partprobe) # noqa: no-changed-when
+          ansible.builtin.command: "partprobe {{ item }}"
+          loop: "{{ ceph_drives }}"
