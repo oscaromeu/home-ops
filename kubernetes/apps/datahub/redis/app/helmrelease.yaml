@@ -2,32 +2,29 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: redis-standalone
+  name: redis
   namespace: datahub
 spec:
   interval: 5m
   chart:
     spec:
       chart: redis
-      version: 17.15.5
+      version: 18.4.0
       sourceRef:
         kind: HelmRepository
         name: bitnami
         namespace: flux-system
       interval: 5m
   values:
-    fullnameOverride: redis-standalone
-    architecture: standalone
     auth:
       enabled: false
+      sentinel: false
     commonConfiguration: |-
       # Enable AOF https://redis.io/topics/persistence#append-only-file
       appendonly no
       # Disable RDB persistence, AOF persistence already enabled.
       save ""
     master:
-      nodeSelector:
-        kubernetes.io/arch: amd64
       disableCommands: []
       #- FLUSHDB
       #- FLUSHALL
@@ -42,12 +39,8 @@ spec:
         enabled: false
     replica:
       replicaCount: 1
-      nodeSelector:
-        kubernetes.io/arch: amd64
       persistence:
         enabled: false
-        size: 10Gi
-        storageClass: local-path
       resources:
         requests:
           cpu: 36m
@@ -55,6 +48,14 @@ spec:
         limits:
           #cpu:
           memory: 10Gi
+    sentinel:
+      enabled: true
+      masterSet: redis-master
+      getMasterTimeout: 10
+      startupProbe:
+        failureThreshold: 2
+      persistence:
+        enabled: false
     metrics:
       enabled: false
       serviceMonitor:

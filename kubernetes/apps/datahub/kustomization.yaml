@@ -8,5 +8,5 @@ resources:
   #- ./jupyterhub/ks.yaml
   - ./minio/ks.yaml
   - ./pgadmin/ks.yaml
-  #- ./redis/ks.yaml
+  - ./redis/ks.yaml
   - ./redpanda/ks.yaml
