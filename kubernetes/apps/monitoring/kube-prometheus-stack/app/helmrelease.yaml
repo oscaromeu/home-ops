@@ -162,9 +162,9 @@ spec:
           - hosts:
               - *host
       thanosService:
-        enabled: false
+        enabled: true
       thanosServiceMonitor:
-        enabled: false
+        enabled: true
       prometheusSpec:
         podMetadata:
           annotations:
