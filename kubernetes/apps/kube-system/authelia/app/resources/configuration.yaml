@@ -5,7 +5,6 @@ authentication_backend:
   refresh_interval: 1m
 
   ldap:
-    enabled: true
     implementation: custom
     url: "ldap://glauth.kube-system.svc.cluster.local:389"
     username_attribute: uid
@@ -16,19 +15,6 @@ authentication_backend:
     user: ${SECRET_LDAP_USER},${SECRET_LDAP_BASE_DN}
     users_filter: "(&(|({username_attribute}={input})({mail_attribute}={input}))(objectClass=*))"
     groups_filter: "(&(member={dn})(objectclass=*))"
-
-  file:
-    enabled: false
-    path: /config/users_database.yml
-    password:
-      algorithm: argon2
-      argon2:
-        variant: argon2id
-        iterations: 1
-        key_length: 32
-        salt_length: 16
-        memory: 1024
-        parallelism: 8
 
 session:
   same_site: lax
@@ -57,15 +43,10 @@ regulation:
   max_retries: 3
   find_time: 2m
   ban_time: 5m
-storage:
-  postgres:
-    enabled: true
 
 notifier:
   disable_startup_check: true
   smtp:
-    enabled: true
-    enabledSecret: true
     host: smtp.gmail.com
     port: 587
     sender: authelia@${SECRET_DOMAIN}
