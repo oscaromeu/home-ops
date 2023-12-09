@@ -38,7 +38,7 @@ spec:
       persistence:
         enabled: false
     replica:
-      replicaCount: 3
+      replicaCount: 1
       persistence:
         enabled: false
       resources:
