@@ -12,15 +12,15 @@ This project aims to achieve its goals while adhering to industry-standard pract
 
 + [actions-runner-controller](https://github.com/actions/actions-runner-controller): Self-hosted Github runners
 + [cert-manager](https://cert-manager.io/docs/): Creates SSL certificates for services in my k3s cluster.
-+ [crossplane](https://www.crossplane.io): Seamlessly manages multi-cloud resources and enables infrastructure-as-code deployments, extending the power of Kubernetes.
 + [external-dns](https://github.com/kubernetes-sigs/external-dns): Automatically manages DNS records from my cluster in a cloud DNS provider.
 + [external-secrets](https://github.com/external-secrets/external-secrets/): Managed Kubernetes secrets using [Doppler](https://www.doppler.com).
 + [cilium](https://cilium.io/get-started/): Internal Kubernetes networking plugin.
 + [ingress-nginx](https://github.com/kubernetes/ingress-nginx/): Ingress controller to expose HTTP traffic to pods over DNS.
-+ [longhorn](https://longhorn.io): Distributed block storage for persistent storage.
++ [Rook](https://rook.io): Distributed block storage for persistent storage.
 + [sops](https://github.com/mozilla/sops): Managed secrets for Kubernetes, Ansible and Terraform which are commited to Git.
-+ [velero](https://velero.io): Backup and restore, perform disaster recovery, and migrate Kubernetes cluster resources and persistent volumes.
 + [volsync](https://volsync.readthedocs.io/en/stable/) and [snapscheduler](https://backube.github.io/snapscheduler/): Backup and recovery of persistent volume claims.
+
+... and more!
 
 ### Hardware
 
@@ -66,8 +66,6 @@ There is a template over at [onedr0p/flux-cluster-template](https://github.com/o
 Also, a lot of inspiration for this repo came from the following people:
 
 - [onedr0p/home-cluster](https://github.com/onedr0p/home-cluster)
-- [danmanners/homelab-kube-cluster](https://github.com/danmanners/homelab-kube-cluster)
-- [billimek/k8s-gitops](https://github.com/billimek/k8s-gitops)
 - [khuedoan/homelab](https://github.com/khuedoan/homelab)
 - [bjw-s/k8s-gitops](https://github.com/bjw-s/k8s-gitops)
 - [ricsanfre/pi-cluster](https://github.com/ricsanfre/pi-cluster)
@@ -75,4 +73,4 @@ Also, a lot of inspiration for this repo came from the following people:
 
 ## Community
 
-There is a k8s@home [Discord](https://discord.gg/7PbmHRK) for this community.
+There is a Discord server [Home Operations](https://discord.gg/home-operations) for this community

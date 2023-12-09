@@ -46,6 +46,7 @@ resources:
   - ./node-feature-discovery.yaml
   - ./nvidia-gpu-feature-discovery.yaml
   - ./nvidia.yaml
+  - ./ot-helm.yaml
   - ./passbolt.yaml
   - ./piraeus.yaml
   - ./podinfo.yaml

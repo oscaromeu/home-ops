@@ -2,31 +2,28 @@
  kind: Ingress
  metadata:
    annotations:
-    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
     hajimari.io/enable: "true"
-    hajimari.io/icon: simple-icons:kibana
-    hajimari.io/group: "Public"
+    hajimari.io/icon: simple-icons:redis
     #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
     #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
    labels:
-     app: elk
-   name: kibana
-   namespace: logging
+     app: redis
+   name: redis
+   namespace: datahub
  spec:
-   ingressClassName: external
+   ingressClassName: internal
    rules:
-   - host: &host "kibana.${SECRET_DOMAIN}"
+   - host: "redis.${SECRET_DOMAIN}"
      http:
        paths:
        - backend:
            service:
-             name: elk-kb-http
+             name: redis-master
              port:
-               number: 5601
+               number: 6379
          path: /
          pathType: Prefix
    tls:
    - hosts:
-     - *host
-     #secretName: kibana-tls
+     - "redis.${SECRET_DOMAIN}"

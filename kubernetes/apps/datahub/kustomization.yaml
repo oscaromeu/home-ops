@@ -5,11 +5,8 @@ resources:
   - ./namespace.yaml
   #- ./clickhouse/ks.yaml
   - ./cloudnative-pg/ks.yaml
-  - ./dragonfly/ks.yaml
   #- ./jupyterhub/ks.yaml
-  #- ./kafka/ks.yaml
   - ./minio/ks.yaml
   - ./pgadmin/ks.yaml
-  #- ./redis/ks.yaml
-  #- ./redis-datahub/ks.yaml
+  - ./redis/ks.yaml
   - ./redpanda/ks.yaml
