@@ -49,7 +49,7 @@ notifier:
   smtp:
     host: smtp.gmail.com
     port: 587
-    sender: authelia@${SECRET_DOMAIN}
+    sender: "authelia@${SECRET_DOMAIN}"
     subject: "[Authelia] {title}"
 
 totp:
