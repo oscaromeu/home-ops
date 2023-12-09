@@ -115,7 +115,7 @@ identity_providers:
       public: false
       authorization_policy: two_factor
       redirect_uris:
-        - https://outline.${SECRET_DOMAIN}/auth/oidc.callback
+        - https://docs.${SECRET_DOMAIN}/auth/oidc.callback
       scopes:
         - openid
         - offline_access
