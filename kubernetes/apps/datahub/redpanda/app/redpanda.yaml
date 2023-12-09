@@ -57,7 +57,7 @@ spec:
         cores: 1
       memory:
         container:
-          max: 2.5Gi
+          max: 3.5Gi
 
     listeners:
       kafka:
