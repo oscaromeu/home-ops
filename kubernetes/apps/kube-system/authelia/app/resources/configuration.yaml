@@ -48,6 +48,8 @@ notifier:
   disable_startup_check: true
   smtp:
     host: smtp.gmail.com
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     port: 587
     sender: "Authelia <authelia@${SECRET_DOMAIN}>"
     disable_require_tls: true
