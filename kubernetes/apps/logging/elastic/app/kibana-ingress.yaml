@@ -14,7 +14,7 @@
    name: kibana
    namespace: logging
  spec:
-   ingressClassName: external
+   ingressClassName: internal
    rules:
    - host: &host "kibana.${SECRET_DOMAIN}"
      http:
