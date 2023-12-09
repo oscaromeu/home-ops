@@ -1,0 +1,208 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: authelia
+  namespace: kube-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: authelia
+      version: 0.8.58
+      sourceRef:
+        kind: HelmRepository
+        name: authelia
+        namespace: flux-system
+      interval: 5m
+  values:
+    domain: ${SECRET_DOMAIN}
+    ingress:
+      enabled: true
+      subdomain: auth
+      className: external
+      annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          hajimari.io/appName: "auth"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "alarm-light-outline"
+      tls:
+        enabled: true
+        #secret: "auth.${SECRET_DOMAIN}"
+    pod:
+      kind: Deployment
+      replicas: 1
+      strategy:
+        type: Recreate
+      extraVolumes:
+      - name: users-volume
+        secret:
+          secretName: authelia-users
+      extraVolumeMounts:
+      - name: users-volume
+        mountPath: /config/users_database.yml
+        subPath: users_database.yml
+
+      resources:
+        limits:
+          memory: 125Mi
+        requests:
+          cpu: 0.25
+          memory: 50Mi
+
+    configMap:
+      log:
+        level: debug
+      theme: dark
+      authentication_backend:
+        ldap:
+          enabled: true
+          implementation: custom
+          url: "ldap://glauth.kube-system.svc.cluster.local:389"
+          username_attribute: uid
+          additional_users_dn: ""
+          additional_groups_dn: ""
+          mail_attribute: ${SECRET_ACME_EMAIL}
+          base_dn: ${SECRET_LDAP_BASE_DN}
+          user: ${SECRET_LDAP_USER},${SECRET_LDAP_BASE_DN}
+          users_filter: "(&(|({username_attribute}={input})({mail_attribute}={input}))(objectClass=*))"
+          groups_filter: "(&(member={dn})(objectclass=*))"
+
+        #storage:
+        #  postgres:
+        #    schema: ""
+
+        file:
+          enabled: false
+          path: /config/users_database.yml
+          password:
+            algorithm: argon2
+            argon2:
+              variant: argon2id
+              iterations: 1
+              key_length: 32
+              salt_length: 16
+              memory: 1024
+              parallelism: 8
+      access_control:
+        default_policy: deny
+        networks:
+        - name: private
+          networks:
+          - 10.42.0.0/16
+          - 10.43.0.0/16
+          - 192.168.1.0/16
+        rules:
+        # Disable Authelia for local network
+        - policy: one_factor
+          domain: "*.${SECRET_DOMAIN}"
+          networks:
+          - private
+        # Applications without auth
+        #- policy: two_factor
+        #  domain:
+        #  - longhorn.${SECRET_DOMAIN}
+        # Applications with built-in auth
+        #- policy: one_factor
+        #  domain:
+        #  - grafana.${SECRET_DOMAIN}
+        # Applications without auth but low security requirements
+        - policy: one_factor
+          domain:
+          - prometheus.${SECRET_DOMAIN}
+          - status.${SECRET_DOMAIN}
+          - tekton.${SECRET_DOMAIN}
+          - longhorn.${SECRET_DOMAIN}
+          - lidarr.${SECRET_DOMAIN}
+          - navidrome.${SECRET_DOMAIN}
+          - qbittorent.${SECRET_DOMAIN}
+          - photos.${SECRET_DOMAIN}
+          #Applications with built-in auth
+          - argocd.${SECRET_DOMAIN}
+          - minio.${SECRET_DOMAIN}
+          - link.${SECRET_DOMAIN}
+          - grafana.${SECRET_DOMAIN}
+          - kibana.${SECRET_DOMAIN}
+          #- elastic.${SECRET_DOMAIN}
+      session:
+        name: authelia_session
+        same_site: lax
+        expiration: 24h
+        inactivity: 24h
+        remember_me_duration: 1M
+        redis:
+          enabled: true
+          enabledSecret: false
+          host: redis-standalone-master.datahub.svc.cluster.local
+          database_index: 3
+      regulation:
+        max_retries: 3
+        find_time: 2m
+        ban_time: 5m
+      storage:
+        postgres:
+          enabled: true
+      notifier:
+        disable_startup_check: true
+        smtp:
+          enabled: true
+          enabledSecret: true
+          host: smtp.gmail.com
+          port: 587
+          sender: authelia@${SECRET_DOMAIN}
+          subject: "[Authelia] {title}"
+
+      identity_providers:
+        enabled: true
+        oidc:
+          cors:
+            endpoints: ["authorization", "token", "revocation", "introspection"]
+            allowed_origins_from_client_redirect_uris: true
+          clients:
+          - id: outline
+            description: Outline
+            secret: '${OUTLINE_OAUTH_CLIENT_SECRET}'
+            public: false
+            authorization_policy: two_factor
+            redirect_uris:
+              - https://outline.${SECRET_DOMAIN}/auth/oidc.callback
+            scopes:
+              - openid
+              - offline_access
+              - profile
+              - email
+            userinfo_signing_algorithm: none
+
+    secret:
+      existingSecret: authelia
+
+
+  valuesFrom:
+    - targetPath: configMap.storage.postgres.database
+      kind: Secret
+      name: authelia
+      valuesKey: POSTGRES_DB
+    - targetPath: configMap.storage.postgres.host
+      kind: Secret
+      name: authelia
+      valuesKey: POSTGRES_HOST
+    - targetPath: configMap.storage.postgres.username
+      kind: Secret
+      name: authelia
+      valuesKey: POSTGRES_USER
+    - targetPath: configMap.storage.postgres.password
+      kind: Secret
+      name: authelia
+      valuesKey: POSTGRES_PASS
+    - targetPath: configMap.notifier.smtp.username
+      kind: Secret
+      name: authelia
+      valuesKey: MAIL_USERNAME
+    - targetPath: configMap.notifier.smtp.password
+      kind: Secret
+      name: authelia
+      valuesKey: MAIL_APP_PASSWORD
+    - targetPath: authentication_backend.ldap.mail_attribute
+      kind: Secret
+      name: authelia
+      valuesKey: MAIL_USERNAME

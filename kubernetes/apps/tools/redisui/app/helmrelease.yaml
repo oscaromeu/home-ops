@@ -26,7 +26,7 @@ spec:
     keepHistory: false
   values:
     image:
-      repository: redislabs/redisui
+      repository: redislabs/redisinsight
       tag: 1.14.0
 
     env:

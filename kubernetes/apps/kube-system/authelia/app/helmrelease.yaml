@@ -2,207 +2,149 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: authelia
-  namespace: kube-system
+  name: &app authelia
 spec:
-  interval: 5m
+  interval: 30m
   chart:
     spec:
-      chart: authelia
-      version: 0.8.58
+      chart: app-template
+      version: 2.3.0
       sourceRef:
         kind: HelmRepository
-        name: authelia
+        name: bjw-s
         namespace: flux-system
-      interval: 5m
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  dependsOn:
+    - name: glauth
+      namespace: kube-system
+    - name: redis
+      namespace: datahub
   values:
-    domain: ${SECRET_DOMAIN}
+    controllers:
+      main:
+        replicas: 2
+        strategy: RollingUpdate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16
+            envFrom: &envFrom
+              - secretRef:
+                  name: authelia-secret
+        containers:
+          main:
+            image:
+              repository: ghcr.io/authelia/authelia
+              tag: v4.38.0-beta3@sha256:46710251ba9142574d4384738e940116e3e526a8cd98bb01be8231995f0a5e37
+            env:
+              AUTHELIA_SERVER_ADDRESS: tcp://0.0.0.0:80
+              AUTHELIA_SERVER_DISABLE_HEALTHCHECK: "true"
+              AUTHELIA_TELEMETRY_METRICS_ADDRESS: tcp://0.0.0.0:8080
+              AUTHELIA_TELEMETRY_METRICS_ENABLED: "true"
+              AUTHELIA_THEME: dark
+              X_AUTHELIA_CONFIG: /config/configuration.yaml
+              X_AUTHELIA_CONFIG_FILTERS: expand-env
+            envFrom: *envFrom
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/health
+                    port: &port 80
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 10m
+                memory: 32Mi
+              limits:
+                memory: 128Mi
+        pod:
+          enableServiceLinks: false
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            runAsNonRoot: true
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: *app
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+          metrics:
+            port: 8080
+    serviceMonitor:
+      main:
+        enabled: true
+        endpoints:
+          - port: metrics
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
     ingress:
-      enabled: true
-      subdomain: auth
-      className: external
-      annotations:
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-          hajimari.io/appName: "auth"
-          hajimari.io/enable: "true"
-          hajimari.io/icon: "alarm-light-outline"
-      tls:
+      main:
         enabled: true
-        #secret: "auth.${SECRET_DOMAIN}"
-    pod:
-      kind: Deployment
-      replicas: 1
-      strategy:
-        type: Recreate
-      extraVolumes:
-      - name: users-volume
-        secret:
-          secretName: authelia-users
-      extraVolumeMounts:
-      - name: users-volume
-        mountPath: /config/users_database.yml
-        subPath: users_database.yml
-
-      resources:
-        limits:
-          memory: 125Mi
-        requests:
-          cpu: 0.25
-          memory: 50Mi
-
-    configMap:
-      log:
-        level: debug
-      theme: dark
-      authentication_backend:
-        ldap:
-          enabled: true
-          implementation: custom
-          url: "ldap://glauth.kube-system.svc.cluster.local:389"
-          username_attribute: uid
-          additional_users_dn: ""
-          additional_groups_dn: ""
-          mail_attribute: ${SECRET_ACME_EMAIL}
-          base_dn: ${SECRET_LDAP_BASE_DN}
-          user: ${SECRET_LDAP_USER},${SECRET_LDAP_BASE_DN}
-          users_filter: "(&(|({username_attribute}={input})({mail_attribute}={input}))(objectClass=*))"
-          groups_filter: "(&(member={dn})(objectclass=*))"
-
-        #storage:
-        #  postgres:
-        #    schema: ""
-
-        file:
-          enabled: false
-          path: /config/users_database.yml
-          password:
-            algorithm: argon2
-            argon2:
-              variant: argon2id
-              iterations: 1
-              key_length: 32
-              salt_length: 16
-              memory: 1024
-              parallelism: 8
-      access_control:
-        default_policy: deny
-        networks:
-        - name: private
-          networks:
-          - 10.42.0.0/16
-          - 10.43.0.0/16
-          - 192.168.1.0/16
-        rules:
-        # Disable Authelia for local network
-        - policy: one_factor
-          domain: "*.${SECRET_DOMAIN}"
-          networks:
-          - private
-        # Applications without auth
-        #- policy: two_factor
-        #  domain:
-        #  - longhorn.${SECRET_DOMAIN}
-        # Applications with built-in auth
-        #- policy: one_factor
-        #  domain:
-        #  - grafana.${SECRET_DOMAIN}
-        # Applications without auth but low security requirements
-        - policy: one_factor
-          domain:
-          - prometheus.${SECRET_DOMAIN}
-          - status.${SECRET_DOMAIN}
-          - tekton.${SECRET_DOMAIN}
-          - longhorn.${SECRET_DOMAIN}
-          - lidarr.${SECRET_DOMAIN}
-          - navidrome.${SECRET_DOMAIN}
-          - qbittorent.${SECRET_DOMAIN}
-          - photos.${SECRET_DOMAIN}
-          #Applications with built-in auth
-          - argocd.${SECRET_DOMAIN}
-          - minio.${SECRET_DOMAIN}
-          - link.${SECRET_DOMAIN}
-          - grafana.${SECRET_DOMAIN}
-          - kibana.${SECRET_DOMAIN}
-          #- elastic.${SECRET_DOMAIN}
-      session:
-        name: authelia_session
-        same_site: lax
-        expiration: 24h
-        inactivity: 24h
-        remember_me_duration: 1M
-        redis:
-          enabled: true
-          enabledSecret: false
-          host: redis-standalone-master.datahub.svc.cluster.local
-          database_index: 3
-      regulation:
-        max_retries: 3
-        find_time: 2m
-        ban_time: 5m
-      storage:
-        postgres:
-          enabled: true
-      notifier:
-        disable_startup_check: true
-        smtp:
-          enabled: true
-          enabledSecret: true
-          host: smtp.gmail.com
-          port: 587
-          sender: authelia@${SECRET_DOMAIN}
-          subject: "[Authelia] {title}"
-
-      identity_providers:
+        className: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            add_header Cache-Control "no-store";
+            add_header Pragma "no-cache";
+            add_header X-Frame-Options "SAMEORIGIN";
+            add_header X-XSS-Protection "1; mode=block";
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+          - host: &customHost auth.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+              - *customHost
+    persistence:
+      config:
         enabled: true
-        oidc:
-          cors:
-            endpoints: ["authorization", "token", "revocation", "introspection"]
-            allowed_origins_from_client_redirect_uris: true
-          clients:
-          - id: outline
-            description: Outline
-            secret: '${OUTLINE_OAUTH_CLIENT_SECRET}'
-            public: false
-            authorization_policy: two_factor
-            redirect_uris:
-              - https://outline.${SECRET_DOMAIN}/auth/oidc.callback
-            scopes:
-              - openid
-              - offline_access
-              - profile
-              - email
-            userinfo_signing_algorithm: none
-
-    secret:
-      existingSecret: authelia
-
-
-  valuesFrom:
-    - targetPath: configMap.storage.postgres.database
-      kind: Secret
-      name: authelia
-      valuesKey: POSTGRES_DB
-    - targetPath: configMap.storage.postgres.host
-      kind: Secret
-      name: authelia
-      valuesKey: POSTGRES_HOST
-    - targetPath: configMap.storage.postgres.username
-      kind: Secret
-      name: authelia
-      valuesKey: POSTGRES_USER
-    - targetPath: configMap.storage.postgres.password
-      kind: Secret
-      name: authelia
-      valuesKey: POSTGRES_PASS
-    - targetPath: configMap.notifier.smtp.username
-      kind: Secret
-      name: authelia
-      valuesKey: MAIL_USERNAME
-    - targetPath: configMap.notifier.smtp.password
-      kind: Secret
-      name: authelia
-      valuesKey: MAIL_APP_PASSWORD
-    - targetPath: authentication_backend.ldap.mail_attribute
-      kind: Secret
-      name: authelia
-      valuesKey: MAIL_USERNAME
+        type: configMap
+        name: authelia-configmap
+        globalMounts:
+          - path: /config/configuration.yaml
+            subPath: configuration.yaml
+            readOnly: true
