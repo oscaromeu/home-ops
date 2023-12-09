@@ -8,8 +8,8 @@ authentication_backend:
     implementation: custom
     url: "ldap://glauth.kube-system.svc.cluster.local:389"
     username_attribute: uid
-    additional_users_dn: ou=people
-    additional_groups_dn: ou=groups
+    #additional_users_dn: ou=people
+    #additional_groups_dn: ou=groups
     mail_attribute: ${SECRET_ACME_EMAIL}
     base_dn: ${SECRET_LDAP_BASE_DN}
     user: ${SECRET_LDAP_USER},${SECRET_LDAP_BASE_DN}
