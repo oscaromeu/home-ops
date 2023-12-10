@@ -47,9 +47,9 @@ regulation:
 notifier:
   disable_startup_check: true
   smtp:
-    address: smtp.gmail.com
+    address: smtp.gmail.com:587
     username: "${SECRET_ACME_EMAIL}"
-    port: 587
+    #port: 587
     sender: "Authelia <authelia@${SECRET_DOMAIN}>"
     disable_require_tls: true
     subject: "[Authelia] {title}"
