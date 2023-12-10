@@ -73,7 +73,7 @@ spec:
                     port: &port 80
                   initialDelaySeconds: 0
                   periodSeconds: 10
-                  timeoutSeconds: 1
+                  timeoutSeconds: 10
                   failureThreshold: 3
               readiness: *probes
               startup:
@@ -87,7 +87,7 @@ spec:
                 cpu: 10m
                 memory: 32Mi
               limits:
-                memory: 128Mi
+                memory: 1Gi
         pod:
           enableServiceLinks: false
           securityContext:
