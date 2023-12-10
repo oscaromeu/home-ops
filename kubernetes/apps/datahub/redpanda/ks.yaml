@@ -21,6 +21,8 @@ kind: Kustomization
 metadata:
   name: cluster-apps-redpanda
   namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "false"
 spec:
   dependsOn:
     - name: cluster-apps-redpanda-operator
