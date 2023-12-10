@@ -104,7 +104,7 @@ spec:
           "type": "redis"
       ingress:
         enabled: true
-        hostname: "thanos-query-frontend.${SECRET_DOMAIN}"
+        hostname: "thanos-query.${SECRET_DOMAIN}"
         ingressClassName: "internal"
         tls: true
         annotations:
