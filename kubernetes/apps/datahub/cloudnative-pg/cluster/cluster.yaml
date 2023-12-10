@@ -30,16 +30,18 @@ spec:
   backup:
     retentionPolicy: 30d
     barmanObjectStore:
+      destinationPath: s3://cnpg-bucket-v1/v1
+      endpointURL: http://datahub-hl.datahub.svc.cluster.local:9000
       wal:
         compression: bzip2
         maxParallel: 8
-      #endpointURL: "https://console.cloud.google.com/storage/browser/cloudnative-pg-bucket"
-      serverName: postgres-v1
-      destinationPath: "gs://cloudnative-pg-bucket"
-      googleCredentials:
-        applicationCredentials:
-          name: backup-creds
-          key: gcsCredentials
+      s3Credentials:
+        accessKeyId:
+          name: cloudnative-pg-secret
+          key: aws-access-key-id
+        secretAccessKey:
+          name: cloudnative-pg-secret
+          key: aws-secret-access-key
   # Note: externalClusters is needed when recovering from an existing cnpg cluster
   #externalClusters:
   #  - name: *previousCluster
