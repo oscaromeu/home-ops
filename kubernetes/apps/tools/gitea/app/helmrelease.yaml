@@ -92,7 +92,7 @@ spec:
         admin:
           DISABLE_REGULAR_ORG_CREATION: true
         ui:
-          DEFAULT_THEME: gitea-auto
+          DEFAULT_THEME: gitea-dark
           THEMES: gitea-auto,gitea-light,gitea-dark
 
         database:
