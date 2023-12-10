@@ -98,7 +98,7 @@ spec:
                     command:
                     - /bin/sh
                     - -c
-                    - curl --silent --fail -k --cacert /etc/tls/certs/default/tls.crt "https://${SERVICE_NAME}.datahub.svc.cluster.local.:9644/v1/status/ready"
+                    - curl --silent --fail -k --cacert /etc/tls/certs/default/tls.crt "https://redpanda.datahub.svc.cluster.local.:9644/v1/status/ready"
                   timeoutSeconds: 15
               - op: add
                 path: /spec/template/spec/containers/0/readinessProbe
@@ -121,7 +121,7 @@ spec:
                     - -c
                     - |
                       set -e
-                      RESULT=$(curl --silent --fail -k --cacert /etc/tls/certs/default/tls.crt "https://${SERVICE_NAME}.datahub.svc.cluster.local.:9644/v1/status/ready")
+                      RESULT=$(curl --silent --fail -k --cacert /etc/tls/certs/default/tls.crt "https://redpanda.datahub.svc.cluster.local.:9644/v1/status/ready")
                       echo $RESULT
                       echo $RESULT | grep ready
                   timeoutSeconds: 15
