@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: kube-prometheus-stack
-      version: 48.1.2
+      version: 55.1.0
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
@@ -33,13 +33,13 @@ spec:
       namespace: kube-system
   values:
     defaultRules:
-      create: false
+      create: true
     cleanPrometheusOperatorObjectNames: true
     alertmanager:
-      enabled: false
+      enabled: true
       ingress:
         enabled: true
-        ingressClassName: external
+        ingressClassName: internal
         annotations:
           hajimari.io/appName: "alertmanager"
           hajimari.io/enable: "true"
@@ -166,6 +166,19 @@ spec:
       thanosServiceMonitor:
         enabled: true
       prometheusSpec:
+        replicas: 2
+        replicaExternalLabelName: __replica__
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
+        scrapeConfigSelectorNilUsesHelmValues: false
+        enableAdminAPI: true
+        walCompression: true
+        enableFeatures:
+          - auto-gomaxprocs
+          - memory-snapshot-on-shutdown
+          - new-service-discovery-manager
         podMetadata:
           annotations:
             profiles.grafana.com/memory.scrape: "true"
@@ -175,17 +188,16 @@ spec:
             profiles.grafana.com/goroutine.scrape: "true"
             profiles.grafana.com/goroutine.port: "9090"
         scrapeInterval: 60s
-        replicas: 1
         externalLabels:
-          cluster: "home-ops"
-        ruleSelectorNilUsesHelmValues: false
-        serviceMonitorSelectorNilUsesHelmValues: false
-        podMonitorSelectorNilUsesHelmValues: false
-        probeSelectorNilUsesHelmValues: false
-        enableAdminAPI: true
-        walCompression: true
+          cluster: "apps"
         retention: 2d
         retentionSize: 8GB
+        thanos:
+          image: quay.io/thanos/thanos:v0.32.5
+          objectStorageConfig:
+            existingSecret:
+              name: thanos-objstore-secret
+              key: objstore.yml
         storageSpec:
           volumeClaimTemplate:
             spec:

@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.bitnami.com/bitnami
       chart: thanos
-      version: 12.8.5
+      version: 12.16.2
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -104,7 +104,7 @@ spec:
           "type": "redis"
       ingress:
         enabled: true
-        hostname: "thanos.${SECRET_DOMAIN}"
+        hostname: "thanos-query-frontend.${SECRET_DOMAIN}"
         ingressClassName: "nginx"
         tls: true
         annotations:
@@ -178,9 +178,9 @@ spec:
 
 
     metrics:
-      enabled: false
+      enabled: true
       serviceMonitor:
-        enabled: false
+        enabled: true
 
   valuesFrom:
     - targetPath: objstoreConfig.config.bucket
