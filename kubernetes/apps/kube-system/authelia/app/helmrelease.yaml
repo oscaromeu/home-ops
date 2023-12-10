@@ -58,10 +58,10 @@ spec:
               X_AUTHELIA_CONFIG: /config/configuration.yaml
               X_AUTHELIA_CONFIG_FILTERS: expand-env
               AUTHELIA_NOTIFIER_DISABLE_STARTUP_CHECK: "true"
-              AUTHELIA_NOTIFIER_SMTP_DISABLE_REQUIRE_TLS: "true"
-              AUTHELIA_NOTIFIER_SMTP_HOST: smtp-relay.networking.svc.cluster.local
-              AUTHELIA_NOTIFIER_SMTP_PORT: "25"
-              AUTHELIA_NOTIFIER_SMTP_SENDER: "Authelia <authelia@${SECRET_DOMAIN}>"
+              #AUTHELIA_NOTIFIER_SMTP_DISABLE_REQUIRE_TLS: "true"
+              #AUTHELIA_NOTIFIER_SMTP_HOST: smtp-relay.networking.svc.cluster.local
+              #AUTHELIA_NOTIFIER_SMTP_PORT: "25"
+              #AUTHELIA_NOTIFIER_SMTP_SENDER: "Authelia <authelia@${SECRET_DOMAIN}>"
             envFrom: *envFrom
             probes:
               liveness: &probes
