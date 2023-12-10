@@ -70,7 +70,7 @@ spec:
       persistentVolume:
         enabled: true
         size: 50Gi
-        storageClass: "ceph-blockpool"
+        storageClass: "ceph-block"
 
     listeners:
       kafka:
