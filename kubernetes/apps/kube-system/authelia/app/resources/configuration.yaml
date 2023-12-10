@@ -50,7 +50,7 @@ notifier:
     address: smtp.gmail.com
     username: "${SECRET_ACME_EMAIL}"
     port: 587
-    sender: "Authelia"
+    sender: "Authelia <authelia@${SECRET_DOMAIN}>"
     disable_require_tls: true
     subject: "[Authelia] {title}"
 
