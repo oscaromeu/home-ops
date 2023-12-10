@@ -1,15 +1,15 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: default
+namespace: networking
 resources:
   - externalsecret.yaml
   - helmrelease.yaml
 #
 configMapGenerator:
-  - name: maddy
+  - name: smtp-relay-configmap
     files:
-      - maddy.conf
+      - maddy.conf=./resources/maddy.conf
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
