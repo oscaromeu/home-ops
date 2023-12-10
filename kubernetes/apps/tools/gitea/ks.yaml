@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: cluster-apps-nginx-internal
     - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-cloudnative-pg-cluster
+    #- name: cluster-apps-cloudnative-pg-cluster
   path: ./kubernetes/apps/tools/gitea/app
   prune: true
   sourceRef:
