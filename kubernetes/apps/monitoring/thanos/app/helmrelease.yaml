@@ -105,7 +105,7 @@ spec:
       ingress:
         enabled: true
         hostname: "thanos-query-frontend.${SECRET_DOMAIN}"
-        ingressClassName: "nginx"
+        ingressClassName: "internal"
         tls: true
         annotations:
           hajimari.io/enable: "true"
