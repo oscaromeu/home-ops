@@ -44,12 +44,12 @@ regulation:
   find_time: 2m
   ban_time: 5m
 
-notifier:
-  disable_startup_check: true
-  smtp:
-    address: smtp-relay.networking.svc.cluster.local:25
-    sender: "Authelia <authelia@${SECRET_DOMAIN}>"
-    disable_require_tls: true
+#notifier:
+#  disable_startup_check: true
+#  smtp:
+#    address: smtp-relay.networking.svc.cluster.local:25
+#    sender: "Authelia <authelia@${SECRET_DOMAIN}>"
+#    disable_require_tls: true
 
 totp:
   disable: false
@@ -113,12 +113,6 @@ identity_providers:
       secret: '${OUTLINE_OAUTH_CLIENT_SECRET}'
       public: false
       authorization_policy: two_factor
-      redirect_uris:
-        - https://docs.${SECRET_DOMAIN}/auth/oidc.callback
-      scopes:
-        - openid
-        - offline_access
-        - profile
-        - email
-        - groups
+      scopes: ["openid", "profile", "email"]
+      redirect_uris: ["https://docs.${SECRET_DOMAIN}/auth/oidc.callback"]
       userinfo_signing_algorithm: none
