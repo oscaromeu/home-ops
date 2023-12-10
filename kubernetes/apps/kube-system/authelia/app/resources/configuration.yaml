@@ -10,11 +10,18 @@ authentication_backend:
     username_attribute: uid
     #additional_users_dn: ou=people
     #additional_groups_dn: ou=groups
-    mail_attribute: ${SECRET_ACME_EMAIL}
+    mail_attribute: mail
     base_dn: ${SECRET_LDAP_BASE_DN}
     user: ${SECRET_LDAP_USER},${SECRET_LDAP_BASE_DN}
-    users_filter: "(&(|({username_attribute}={input})({mail_attribute}={input}))(objectClass=*))"
+    #users_filter: "(&(|({username_attribute}={input})({mail_attribute}={input}))(objectClass=*))"
+    users_filter: "(&(|({username_attribute}={input}))(objectClass=*))"
     groups_filter: "(&(member={dn})(objectclass=*))"
+    attributes:
+      username: uid
+      display_name: displayName
+      mail: mail
+      member_of: memberOf
+      group_name: cn
 
 session:
   same_site: lax
