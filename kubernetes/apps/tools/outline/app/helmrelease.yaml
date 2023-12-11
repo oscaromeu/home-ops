@@ -78,7 +78,7 @@ spec:
         memory: 500Mi
     persistence:
       data:
-        enabled: false
+        enabled: true
         mountPath: /var/lib/outline
         existingClaim: storage-data
         subPath: data
