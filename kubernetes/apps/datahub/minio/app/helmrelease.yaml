@@ -3,116 +3,67 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: minio
+  namespace: tools
 spec:
-  interval: 30m
+  interval: 5m
   chart:
     spec:
-      chart: app-template
-      version: 2.4.0
+      # renovate: registryUrl=https://charts.min.io/
+      chart: minio
+      version: 5.0.14
       sourceRef:
         kind: HelmRepository
-        name: bjw-s
+        name: minio
         namespace: flux-system
-  maxHistory: 2
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
-  uninstall:
-    keepHistory: false
+      interval: 5m
   values:
-    controllers:
-      main:
-        annotations:
-          reloader.stakater.com/auto: "true"
-        containers:
-          main:
-            image:
-              repository: quay.io/minio/minio
-              tag: RELEASE.2023-12-07T04-16-00Z
-            env:
-              MINIO_API_CORS_ALLOW_ORIGIN: https://minio.${SECRET_DOMAIN},https://s3.${SECRET_DOMAIN}
-              MINIO_BROWSER_REDIRECT_URL: https://minio.${SECRET_DOMAIN}
-              MINIO_PROMETHEUS_JOB_ID: minio
-              MINIO_PROMETHEUS_URL: http://kube-prometheus-stack-prometheus.monitoring:9090
-              MINIO_PROMETHEUS_AUTH_TYPE: public
-              MINIO_SERVER_URL: https://s3.${SECRET_DOMAIN}
-              MINIO_UPDATE: "off"
-            envFrom:
-              - secretRef:
-                  name: minio-secret
-            args:
-              - server
-              - /data
-              - --console-address
-              - :9001
-            probes:
-              liveness: &probes
-                enabled: true
-                custom: true
-                spec:
-                  httpGet:
-                    path: /minio/health/live
-                    port: 9000
-                  initialDelaySeconds: 30
-                  periodSeconds: 30
-                  timeoutSeconds: 10
-                  failureThreshold: 6
-              readiness: *probes
-              startup:
-                enabled: false
-            securityContext:
-              runAsUser: 103
-              runAsGroup: 103
-              fsGroup: 103
-              fsGroupChangePolicy: OnRootMismatch
-    service:
-      main:
-        ports:
-          http:
-            port: 9001
-          s3:
-            port: 9000
-    serviceMonitor:
-      main:
-        enabled: true
-        endpoints:
-          - port: s3
-            scheme: http
-            path: /minio/v2/metrics/cluster
-            interval: 1m
-            scrapeTimeout: 10s
-    ingress:
-      main:
-        enabled: true
-        className: internal
-        annotations:
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-          hajimari.io/icon: simple-icons:minio
-          #hajimari.io/group: "Public"
-        hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  name: main
-                  port: http
-          - host: &s3Host s3.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  name: main
-                  port: s3
-        tls:
-          - hosts:
-              - *host
-              - *s3Host
+    image:
+      repository: quay.io/minio/minio
+      tag: RELEASE.2023-12-06T09-09-22Z@sha256:e6833eb7d59b285017b97dfee9216ee9dba88b733682140341cf8be9f93448ad
+      pullPolicy: IfNotPresent
+    mcImage:
+      repository: quay.io/minio/mc
+      tag: RELEASE.2023-01-11T03-14-16Z
+      pullPolicy: IfNotPresent
+    mode: standalone
+    rootUser: ${MINIO_ROOT_USER}
+    rootPassword: ${MINIO_ROOT_PASSWORD}
+    users:
+    - accessKey: ${GITEA_S3_ACCESS_KEY}
+      secretKey: ${GITEA_S3_SECRET_KEY}
+      policy: readwrite
     persistence:
-      data:
+      enabled: true
+      existingClaim: "minio-pvc"
+    ingress:
+      enabled: true
+      ingressClassName: internal
+      annotations:
+        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hajimari.io/icon: simple-icons:grafana
+        hajimari.io/group: "Public"
+      hosts:
+        - s3.${SECRET_DOMAIN}
+      tls:
+        - secretName: minio-cert
+          hosts:
+            - s3.${SECRET_DOMAIN}
+    consoleIngress:
+      enabled: true
+      hosts:
+        - minio.${SECRET_DOMAIN}
+      tls:
+        - secretName: minio-console-cert
+          hosts:
+            - minio.${SECRET_DOMAIN}
+    securityContext:
+      enabled: false
+    resources:
+      requests:
+        memory: 350Mi
+        cpu: 25m
+      limits:
+        memory: 1500Mi
+    metrics:
+      serviceMonitor:
         enabled: true
-        mountPath: /data
-        existingClaim: minio-pvc
-        subPath: minio
