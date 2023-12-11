@@ -2,8 +2,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: monitoring-tenant
-  namespace: monitoring
+  name: datahub-tenant
+  namespace: datahub
 spec:
   interval: 5m
   maxHistory: 2
@@ -26,17 +26,16 @@ spec:
     keepHistory: false
   values:
     secrets:
-      existingSecret: monitoring-tenant-env-configuration
+      existingSecret: datahub-tenant-env-configuration
     tenant:
-      name: monitoring
+      name: datahub
       configuration:
-        name: monitoring-tenant-env-configuration
+        name: datahub-tenant-env-configuration
       pools:
-        - servers: 3
+        - servers: 2
           name: pool-0
           storageClassName: local-path
-          size: 30Gi
-          volumesPerServer: 3
+          volumesPerServer: 2
           volumeClaimTemplate:
             metadata:
               name: data
@@ -45,6 +44,7 @@ spec:
                 - ReadWriteOnce
               resources:
                 requests:
+                  storage: 200Gi
                   cpu: 500m
                   memory: 1Gi
                 limits:
@@ -70,9 +70,8 @@ spec:
       metrics:
         enabled: true
       buckets:
-        - name: mimir-ruler
-        - name: mimir-tsdb
-        - name: grafana-pyroscope-data
+        - name: loki-bucket-v2
+        - name: cnpg-bucket-v1
       ## List of secret names to use for generating MinIO users during tenant provisioning
       users:
         - name: admin-user-secret
@@ -80,10 +79,12 @@ spec:
       prometheusOperator: true
 
       env:
+        - name: PROMETHEUS_NAMESPACE
+          value: "monitoring"
         - name: MINIO_PROMETHEUS_URL
-          value: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
-        - name: MINIO_BROWSER
-          value: on
+          value: "http://kube-prometheus-stack-prometheus.monitoring:9090"
+        - name: MINIO_PROMETHEUS_AUTH_TYPE
+          value: "public"
 
       exposeServices:
         console: true
@@ -100,7 +101,7 @@ spec:
           nginx.ingress.kubernetes.io/backend-protocol: HTTPS
           #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
           #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
-        host: &host "minio-monitoring.${SECRET_DOMAIN}"
+        host: &host "s3.${SECRET_DOMAIN}"
         tls:
           - hosts:
               - *host
@@ -116,9 +117,10 @@ spec:
           nginx.ingress.kubernetes.io/backend-protocol: HTTPS
           #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
           #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
-        host: &host "minio-console-monitoring.${SECRET_DOMAIN}"
+        host: &host "console.${SECRET_DOMAIN}"
         tls:
           - hosts:
               - *host
         path: /
         pathType: Prefix
+

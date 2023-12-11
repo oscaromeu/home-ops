@@ -2,19 +2,18 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: datahub-tenant
-  namespace: datahub
+  name: &app minio
 spec:
-  interval: 5m
-  maxHistory: 2
+  interval: 30m
   chart:
     spec:
-      chart: tenant
-      version: 5.0.8
+      chart: app-template
+      version: 2.3.0
       sourceRef:
         kind: HelmRepository
-        name: minio-operator
+        name: bjw-s
         namespace: flux-system
+  maxHistory: 2
   install:
     remediation:
       retries: 3
@@ -25,102 +24,121 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    secrets:
-      existingSecret: datahub-tenant-env-configuration
-    tenant:
-      name: datahub
-      configuration:
-        name: datahub-tenant-env-configuration
-      pools:
-        - servers: 2
-          name: pool-0
-          storageClassName: local-path
-          volumesPerServer: 2
-          volumeClaimTemplate:
-            metadata:
-              name: data
-            spec:
-              accessModes:
-                - ReadWriteOnce
-              resources:
-                requests:
-                  storage: 200Gi
-                  cpu: 500m
-                  memory: 1Gi
-                limits:
-                  memory: 2Gi
-          containerSecurityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            runAsNonRoot: true
-          affinity:
-            podAntiAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-              - labelSelector:
-                  matchExpressions:
-                  - key: v1.min.io/tenant
-                    operator: In
-                    values:
-                    - test
-                  - key: v1.min.io/pool
-                    operator: In
-                    values:
-                    - pool-0
-                topologyKey: kubernetes.io/hostname
-      metrics:
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: quay.io/minio/minio
+              tag: RELEASE.2023-12-09T18-17-51Z
+            env:
+              TZ: "${TIMEZONE}"
+              MINIO_UPDATE: "off"
+              MINIO_PROMETHEUS_URL: http://kube-prometheus-stack-prometheus.monitoring:9090
+              MINIO_PROMETHEUS_JOB_ID: minio
+              MINIO_BROWSER_REDIRECT_URL: https://minio.${SECRET_DOMAIN}
+              MINIO_SERVER_URL: https://s3.${SECRET_DOMAIN}
+              MINIO_API_CORS_ALLOW_ORIGIN: https://minio.${SECRET_DOMAIN},https://s3.${SECRET_DOMAIN}
+              # MINIO_IDENTITY_OPENID_CONFIG_URL: "https://auth.${SECRET_DOMAIN}/.well-known/openid-configuration"
+              # MINIO_IDENTITY_OPENID_CLIENT_ID: minio
+              # MINIO_IDENTITY_OPENID_CLIENT_SECRET: "${SECRET_MINIO_OAUTH_CLIENT_SECRET}"
+              # MINIO_IDENTITY_OPENID_SCOPES: "openid,profile,email,groups"
+              # MINIO_IDENTITY_OPENID_REDIRECT_URI: "https://minio.${SECRET_DOMAIN}/oauth_callback"
+            envFrom:
+              - secretRef:
+                  name: minio-secret
+            args: ["server", "/data", "--console-address", ":9001"]
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /minio/health/live
+                    port: &api-port 9000
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+              startup:
+                enabled: false
+            resources:
+              requests:
+                memory: 100Mi
+                cpu: 100m
+              limits:
+                memory: 750Mi
+        pod:
+          securityContext:
+            runAsUser: 103
+            runAsGroup: 103
+            fsGroup: 103
+            fsGroupChangePolicy: OnRootMismatch
+
+    service:
+      main:
         enabled: true
-      buckets:
-        - name: loki-bucket-v2
-        - name: cnpg-bucket-v1
-      ## List of secret names to use for generating MinIO users during tenant provisioning
-      users:
-        - name: admin-user-secret
-
-      prometheusOperator: true
-
-      env:
-        - name: PROMETHEUS_NAMESPACE
-          value: "monitoring"
-        - name: MINIO_PROMETHEUS_URL
-          value: "http://kube-prometheus-stack-prometheus.monitoring:9090"
-        - name: MINIO_PROMETHEUS_AUTH_TYPE
-          value: "public"
-
-      exposeServices:
-        console: true
-        minio: true
-
+        ports:
+          http:
+            port: 9001
+          api:
+            enabled: true
+            port: *api-port
+    serviceMonitor:
+      main:
+        enabled: true
+        endpoints:
+          - port: api
+            scheme: http
+            path: /minio/v2/metrics/cluster
+            interval: 1m
+            scrapeTimeout: 10s
+            bearerTokenSecret:
+              name: minio-prometheus
+              key: token
     ingress:
-      api:
+      main:
         enabled: true
-        ingressClassName: internal
+        className: internal
         annotations:
-          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-          hajimari.io/icon: simple-icons:minio
-          nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-          nginx.ingress.kubernetes.io/backend-protocol: HTTPS
-          #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
-          #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
-        host: &host "s3.${SECRET_DOMAIN}"
+          hajimari.io/icon: mdi:pail
+        hosts:
+          - host: &console-host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
-              - *host
-        path: /
-        pathType: Prefix
-      console:
+              - *console-host
+      s3:
         enabled: true
-        ingressClassName: internal
+        className: internal
         annotations:
-          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-          hajimari.io/icon: simple-icons:minio
-          nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-          nginx.ingress.kubernetes.io/backend-protocol: HTTPS
-          #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
-          #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
-        host: &host "console.${SECRET_DOMAIN}"
+          hajimari.io/enable: "false"
+          nginx.ingress.kubernetes.io/proxy-connect-timeout: "180"
+          nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+          nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            chunked_transfer_encoding off;
+        hosts:
+          - host: &api-host s3.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: api
         tls:
           - hosts:
-              - *host
-        path: /
-        pathType: Prefix
+              - *api-host
 
+    persistence:
+      data:
+        enabled: true
+        mountPath: /data
+        existingClaim: minio-pvc
+        subPath: minio
