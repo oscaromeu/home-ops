@@ -84,6 +84,12 @@ spec:
             url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
             isDefault: false
 
+          - name: Thanos
+            type: prometheus
+            access: proxy
+            url: http://thanos-query-frontend.monitoring.svc.cluster.local:9090
+            isDefault: true
+
           #- name: Victoria-Metrics
           #  type: prometheus
           #  access: proxy
