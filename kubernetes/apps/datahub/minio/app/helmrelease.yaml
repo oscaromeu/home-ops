@@ -2,13 +2,13 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app minio
+  name: minio
 spec:
   interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 2.3.0
+      version: 2.4.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -32,24 +32,23 @@ spec:
           main:
             image:
               repository: quay.io/minio/minio
-              tag: RELEASE.2023-12-09T18-17-51Z
+              tag: RELEASE.2023-12-07T04-16-00Z
             env:
-              TZ: "${TIMEZONE}"
-              MINIO_UPDATE: "off"
-              MINIO_PROMETHEUS_URL: http://kube-prometheus-stack-prometheus.monitoring:9090
-              MINIO_PROMETHEUS_JOB_ID: minio
-              MINIO_BROWSER_REDIRECT_URL: https://minio.${SECRET_DOMAIN}
-              MINIO_SERVER_URL: https://s3.${SECRET_DOMAIN}
               MINIO_API_CORS_ALLOW_ORIGIN: https://minio.${SECRET_DOMAIN},https://s3.${SECRET_DOMAIN}
-              # MINIO_IDENTITY_OPENID_CONFIG_URL: "https://auth.${SECRET_DOMAIN}/.well-known/openid-configuration"
-              # MINIO_IDENTITY_OPENID_CLIENT_ID: minio
-              # MINIO_IDENTITY_OPENID_CLIENT_SECRET: "${SECRET_MINIO_OAUTH_CLIENT_SECRET}"
-              # MINIO_IDENTITY_OPENID_SCOPES: "openid,profile,email,groups"
-              # MINIO_IDENTITY_OPENID_REDIRECT_URI: "https://minio.${SECRET_DOMAIN}/oauth_callback"
+              MINIO_BROWSER_REDIRECT_URL: https://minio.${SECRET_DOMAIN}
+              MINIO_PROMETHEUS_JOB_ID: minio
+              MINIO_PROMETHEUS_URL: http://kube-prometheus-stack-prometheus.monitoring:9090
+              MINIO_PROMETHEUS_AUTH_TYPE: public
+              MINIO_SERVER_URL: https://s3.${SECRET_DOMAIN}
+              MINIO_UPDATE: "off"
             envFrom:
               - secretRef:
                   name: minio-secret
-            args: ["server", "/data", "--console-address", ":9001"]
+            args:
+              - server
+              - /data
+              - --console-address
+              - :9001
             probes:
               liveness: &probes
                 enabled: true
@@ -57,85 +56,57 @@ spec:
                 spec:
                   httpGet:
                     path: /minio/health/live
-                    port: &api-port 9000
-                  initialDelaySeconds: 0
-                  periodSeconds: 10
-                  timeoutSeconds: 1
-                  failureThreshold: 3
+                    port: 9000
+                  initialDelaySeconds: 30
+                  periodSeconds: 30
+                  timeoutSeconds: 10
+                  failureThreshold: 6
               readiness: *probes
               startup:
                 enabled: false
-            resources:
-              requests:
-                memory: 100Mi
-                cpu: 100m
-              limits:
-                memory: 750Mi
-        pod:
-          securityContext:
-            runAsUser: 103
-            runAsGroup: 103
-            fsGroup: 103
-            fsGroupChangePolicy: OnRootMismatch
-
+            securityContext:
+              runAsUser: 568
+              runAsGroup: 568
+              fsGroup: 568
+              fsGroupChangePolicy: OnRootMismatch
+              supplementalGroups: [100]
     service:
       main:
-        enabled: true
         ports:
           http:
             port: 9001
-          api:
-            enabled: true
-            port: *api-port
+          s3:
+            port: 9000
     serviceMonitor:
       main:
         enabled: true
         endpoints:
-          - port: api
+          - port: s3
             scheme: http
             path: /minio/v2/metrics/cluster
             interval: 1m
             scrapeTimeout: 10s
-            bearerTokenSecret:
-              name: minio-prometheus
-              key: token
     ingress:
       main:
         enabled: true
         className: internal
-        annotations:
-          hajimari.io/icon: mdi:pail
         hosts:
-          - host: &console-host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
                   name: main
                   port: http
-        tls:
-          - hosts:
-              - *console-host
-      s3:
-        enabled: true
-        className: internal
-        annotations:
-          hajimari.io/enable: "false"
-          nginx.ingress.kubernetes.io/proxy-connect-timeout: "180"
-          nginx.ingress.kubernetes.io/proxy-body-size: 1024m
-          nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-            chunked_transfer_encoding off;
-        hosts:
-          - host: &api-host s3.${SECRET_DOMAIN}
+          - host: &s3Host s3.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
                   name: main
-                  port: api
+                  port: s3
         tls:
           - hosts:
-              - *api-host
-
+              - *host
+              - *s3Host
     persistence:
       data:
         enabled: true
