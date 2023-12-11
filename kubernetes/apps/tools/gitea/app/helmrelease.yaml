@@ -128,12 +128,12 @@ spec:
         cron:
           ENABLED: true
 
-        #storage:
-        #  STORAGE_TYPE: minio
-        #  MINIO_ENDPOINT: minio.datahub.svc.cluster.local:9000
-        #  MINIO_BUCKET: gitea-bucket
-        #  MINIO_USE_SSL: true
-        #  MINIO_INSECURE_SKIP_VERIFY: true
+        storage:
+          STORAGE_TYPE: minio
+          MINIO_ENDPOINT: minio.datahub.svc.cluster.local:9000
+          MINIO_BUCKET: gitea-bucket
+          MINIO_USE_SSL: true
+          MINIO_INSECURE_SKIP_VERIFY: true
 
         actions:
           enabled: true
