@@ -77,7 +77,7 @@ spec:
       type: external
       external:
         sentinelMasterSet: ""
-        addr: "redis-standalone-headless.datahub.svc.cluster.local:6379"
+        addr: "redis-headless.datahub.svc.cluster.local:6379"
         coreDatabaseIndex: "0"
         jobserviceDatabaseIndex: "1"
         registryDatabaseIndex: "2"
