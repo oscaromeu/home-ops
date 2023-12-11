@@ -132,7 +132,7 @@ spec:
           STORAGE_TYPE: minio
           MINIO_ENDPOINT: minio.datahub.svc.cluster.local:9000
           MINIO_BUCKET: gitea-bucket
-          MINIO_USE_SSL: true
+          MINIO_USE_SSL: false
           MINIO_INSECURE_SKIP_VERIFY: true
 
         actions:
