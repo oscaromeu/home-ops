@@ -76,3 +76,9 @@ spec:
         memory: 50Mi
       limits:
         memory: 500Mi
+    persistence:
+      data:
+        enabled: true
+        mountPath: /var/lib/outline
+        existingClaim: storage-data
+        subPath: data
