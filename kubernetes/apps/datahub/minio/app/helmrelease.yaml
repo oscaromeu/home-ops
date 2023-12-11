@@ -65,11 +65,10 @@ spec:
               startup:
                 enabled: false
             securityContext:
-              runAsUser: 568
-              runAsGroup: 568
-              fsGroup: 568
+              runAsUser: 103
+              runAsGroup: 103
+              fsGroup: 103
               fsGroupChangePolicy: OnRootMismatch
-              supplementalGroups: [100]
     service:
       main:
         ports:
