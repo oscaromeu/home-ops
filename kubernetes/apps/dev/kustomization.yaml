@@ -3,13 +3,4 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./namespace.yaml
-  #- ./alerta/ks.yaml
-  #- hello-world-api-k8s/ks.yaml
-  - ./json-fusion-exporter/ks.yaml
-  #- ./kafka/ks.yaml
-  #- ./redpanda/ks.yaml
-  #- ./registry/ks.yaml
-  #- ./semaphore/ks.yaml
   - ./spring-boot-app/ks.yaml
-  #- ./fastapi-app/ks.yaml
-  #- ./tekton

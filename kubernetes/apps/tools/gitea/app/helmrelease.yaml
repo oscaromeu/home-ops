@@ -93,7 +93,7 @@ spec:
           DISABLE_REGULAR_ORG_CREATION: true
         ui:
           DEFAULT_THEME: gitea-dark
-          THEMES: gitea-auto,gitea-light,gitea-dark
+          THEMES: gitea-dark
 
         database:
           DB_TYPE: postgres

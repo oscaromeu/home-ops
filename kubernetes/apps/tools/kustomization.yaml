@@ -10,8 +10,6 @@ resources:
   #- ./harbor/ks.yaml
   #- ./microcks/ks.yaml
   - ./outline/ks.yaml
-  #- ./redisui/ks.yaml
+  - ./redisui/ks.yaml
   #- ./redpanda/ks.yaml
-  #- ./registry/ks.yaml
   #- ./semaphore/ks.yaml
-  #- ./wikijs/ks.yaml

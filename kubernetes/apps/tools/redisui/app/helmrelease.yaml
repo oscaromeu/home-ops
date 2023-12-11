@@ -46,7 +46,7 @@ spec:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           hajimari.io/icon: simple-icons:redis
         hosts:
-          - host: &host "redisui.${SECRET_DOMAIN}"
+          - host: &host "ryu.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
