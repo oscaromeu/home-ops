@@ -37,37 +37,8 @@ spec:
     listeners:
       - name: plain
         port: 9092
-        type: ingress
+        type: internal
         tls: false
-        authentication:
-          type: none
-        configuration:
-          class: internal
-          bootstrap:
-            host: "bootstrap-plain.${SECRET_DOMAIN}"
-            annotations:
-              external-dns.alpha.kubernetes.io/hostname: "bootstrap-plain.${SECRET_DOMAIN}"
-              external-dns.alpha.kubernetes.io/ttl: "600"
-              external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-          brokers:
-            - broker: 0
-              host: "broker-plain-0.${SECRET_DOMAIN}"
-              annotations:
-                external-dns.alpha.kubernetes.io/hostname: "broker-plain-0.${SECRET_DOMAIN}"
-                external-dns.alpha.kubernetes.io/ttl: "600"
-                external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-            - broker: 1
-              host: "broker-plain-1.${SECRET_DOMAIN}"
-              annotations:
-                external-dns.alpha.kubernetes.io/hostname: "broker-plain-1.${SECRET_DOMAIN}"
-                external-dns.alpha.kubernetes.io/ttl: "600"
-                external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-            - broker: 2
-              host: "broker-plain-2.${SECRET_DOMAIN}"
-              annotations:
-                external-dns.alpha.kubernetes.io/hostname: "broker-plain-2.${SECRET_DOMAIN}"
-                external-dns.alpha.kubernetes.io/ttl: "600"
-                external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
       - name: tls
         port: 9093
         type: internal
@@ -80,7 +51,7 @@ spec:
         tls: true
         authentication:
           type: scram-sha-512
-      - name: external-scram-sha
+      - name: exsha
         port: 9095
         type: ingress
         tls: true
@@ -117,7 +88,7 @@ spec:
               external-dns.alpha.kubernetes.io/ttl: "600"
               external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
               #hajimari.io/icon: simple-icons:grafana
-      - name: external-tls
+      - name: extls
         port: 9096
         type: ingress
         tls: true
