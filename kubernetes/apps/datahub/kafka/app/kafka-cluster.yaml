@@ -142,7 +142,15 @@ spec:
         size: 10Gi
         class: local-path
         deleteClaim: false
+    metricsConfig:
+      type: jmxPrometheusExporter
+      valueFrom:
+        configMapKeyRef:
+          name: metrics-config
+          key: kafka-metrics-config.yml
   kafkaExporter:
+    topicRegex: ".*"
+    groupRegex: ".*"
     template:
       pod:
         metadata:

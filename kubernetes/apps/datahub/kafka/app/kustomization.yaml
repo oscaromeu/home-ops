@@ -3,6 +3,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: datahub
 resources:
+  - ./metrics-config.yaml
+  - ./zookeeper-metrics.yaml
   - ./externalsecret.yaml
   - ./kafka-cluster.yaml
   - ./kafka-user.yaml
