@@ -28,7 +28,7 @@ spec:
     dashboards:
       enabled: true
       namespace: ~
-      label: grafana_dashboard # this is the default value from the grafana chart
+      label: home_ops # this is the default value from the grafana chart
       labelValue: "1" # this is the default value from the grafana chart
       annotations: {}
       extraLabels: {}
