@@ -17,6 +17,11 @@ sinks:
     inputs:
       - kubernetes_source
     bootstrap_servers: kafka-cluster-kafka-bootstrap.datahub.svc.cluster.local:9092
-    topic: k3s-logs-topic
+    topic: k3s-logs
     encoding:
       codec: json
+    sasl:
+      enabled: true
+      mechanism: "SCRAM-SHA-512"
+      password: "${KAFKA_PASS}"
+      username: "${KAFKA_USER}"
