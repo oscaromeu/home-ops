@@ -30,15 +30,44 @@ spec:
         cpu: "500m"
       limits:
         memory: 5Gi
-        cpu: "500m"
+        #cpu: "500m"
     jvmOptions:
       -Xms: 2048m
       -Xmx: 2048m
     listeners:
       - name: plain
         port: 9092
-        type: internal
+        type: ingress
         tls: false
+        authentication:
+          type: none
+        configuration:
+          class: internal
+          bootstrap:
+            host: "bootstrap-plain.${SECRET_DOMAIN}"
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: "bootstrap-plain.${SECRET_DOMAIN}"
+              external-dns.alpha.kubernetes.io/ttl: "600"
+              external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+          brokers:
+            - broker: 0
+              host: "broker-plain-0.${SECRET_DOMAIN}"
+              annotations:
+                external-dns.alpha.kubernetes.io/hostname: "broker-plain-0.${SECRET_DOMAIN}"
+                external-dns.alpha.kubernetes.io/ttl: "600"
+                external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+            - broker: 1
+              host: "broker-plain-1.${SECRET_DOMAIN}"
+              annotations:
+                external-dns.alpha.kubernetes.io/hostname: "broker-plain-1.${SECRET_DOMAIN}"
+                external-dns.alpha.kubernetes.io/ttl: "600"
+                external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+            - broker: 2
+              host: "broker-plain-2.${SECRET_DOMAIN}"
+              annotations:
+                external-dns.alpha.kubernetes.io/hostname: "broker-plain-2.${SECRET_DOMAIN}"
+                external-dns.alpha.kubernetes.io/ttl: "600"
+                external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
       - name: tls
         port: 9093
         type: internal
@@ -51,7 +80,7 @@ spec:
         tls: true
         authentication:
           type: scram-sha-512
-      - name: exsha
+      - name: external-scram-sha
         port: 9095
         type: ingress
         tls: true
@@ -88,7 +117,7 @@ spec:
               external-dns.alpha.kubernetes.io/ttl: "600"
               external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
               #hajimari.io/icon: simple-icons:grafana
-      - name: extls
+      - name: external-tls
         port: 9096
         type: ingress
         tls: true
@@ -195,7 +224,7 @@ spec:
           cpu: 100m
           memory: 128Mi
         limits:
-          cpu: 500m
+          #cpu: 500m
           memory: 128Mi
     topicOperator:
       resources:

@@ -33,7 +33,7 @@ spec:
         host: "*"
       - resource:
           type: group
-          name: logging-group
+          name: k3s-logs-group
           patternType: prefix
         operations:
           - Create
