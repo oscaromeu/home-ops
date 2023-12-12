@@ -18,7 +18,7 @@ sources:
 
   k3s:
     type: kafka
-    bootstrap_servers: kafka-cluster-kafka-bootstrap.datahub.svc.cluster.local:9092
+    bootstrap_servers: kafka-cluster-kafka-bootstrap.datahub.svc.cluster.local:9094
     topics:
       - k3s-logs-topic
     group_id: k3s-logs-group
