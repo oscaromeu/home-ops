@@ -24,6 +24,8 @@ sources:
     group_id: k3s-logs-group
     decoding:
       codec: json
+    tls:
+      enabled: true
     sasl:
       enabled: true
       mechanism: "SCRAM-SHA-512"

@@ -20,6 +20,8 @@ sinks:
     topic: k3s-logs
     encoding:
       codec: json
+    tls:
+      enabled: true
     sasl:
       enabled: true
       mechanism: "SCRAM-SHA-512"
