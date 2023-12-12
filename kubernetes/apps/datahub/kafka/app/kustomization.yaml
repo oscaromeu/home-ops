@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: datahub
 resources:
   - ./externalsecret.yaml
-  - ./datahub-cluster.yaml
-  - ./datahub-user.yaml
+  - ./kafka-cluster.yaml
+  - ./kafka-user.yaml
   - ./topic.yaml

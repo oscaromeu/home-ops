@@ -26,7 +26,7 @@ spec:
     featureGates: ""
     tmpDirSizeLimit: 1Mi
     dashboards:
-      enabled: false
+      enabled: true
       namespace: ~
       label: grafana_dashboard # this is the default value from the grafana chart
       labelValue: "1" # this is the default value from the grafana chart
