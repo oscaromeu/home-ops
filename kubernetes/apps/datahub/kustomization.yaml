@@ -9,4 +9,4 @@ resources:
   - ./minio/ks.yaml
   - ./pgadmin/ks.yaml
   - ./redis/ks.yaml
-  - ./redpanda/ks.yaml
+  #- ./redpanda/ks.yaml
