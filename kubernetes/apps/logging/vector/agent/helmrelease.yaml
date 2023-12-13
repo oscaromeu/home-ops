@@ -116,9 +116,3 @@ spec:
     env:
       - name: VECTOR_LOG
         value: "debug"
-
-      - name: KAFKA_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            key: datahub-user
-            name: datahub-user
