@@ -1,5 +1,56 @@
 ---
 modules:
+  prometheus_apps:
+    connection:
+      type: generic
+    metrics:
+    - help: Head min time
+      name: prometheus_status_tsdb_head_min_time_milliseconds
+      path: '{ .data.headStats.minTime }'
+    - help: Head max time
+      name: prometheus_status_tsdb_head_max_time_milliseconds
+      path: '{ .data.headStats.maxTime }'
+    - help: Head series count
+      name: prometheus_status_tsdb_head_series
+      path: '{ .data.headStats.numSeries }'
+    - help: Head label value pairs count
+      name: prometheus_status_tsdb_head_label_value_pairs
+      path: '{ .data.headStats.numLabelPairs }'
+    - help: Head chunks count
+      name: prometheus_status_tsdb_head_chunks
+      path: '{ .data.headStats.chunkCount }'
+    - help: Series count by metric (top 10)
+      labels:
+        metric: '{ .name }'
+      name: prometheus_status_tsdb_metric
+      path: '{ .data.seriesCountByMetricName[*] }'
+      type: object
+      values:
+        series: '{ .value }'
+    - help: Series count by label value pair (top 10)
+      labels:
+        pair: '{ .name }'
+      name: prometheus_status_tsdb_label_value_pair
+      path: '{ .data.seriesCountByLabelValuePair[*] }'
+      type: object
+      values:
+        series: '{ .value }'
+    - help: Label values count by label name (top 10)
+      labels:
+        label: '{ .name }'
+      name: prometheus_status_tsdb_label
+      path: '{ .data.labelValueCountByLabelName[*] }'
+      type: object
+      values:
+        values: '{ .value }'
+    - help: Label size in memory in bytes (top 10)
+      labels:
+        label: '{ .name }'
+      name: prometheus_status_tsdb_label_in_memory_size
+      path: '{ .data.memoryInBytesByLabelName[*] }'
+      type: object
+      values:
+        bytes: '{ .value }'
   elastic_test:
     connection:
       type: elastic
@@ -35,7 +86,6 @@ modules:
         namespace: 'networking'
       values:
         docs: '{ .aggregations.namespace_counts.buckets[?(@.key == "networking")].doc_count }'
-
   elastic_test_2:
     connection:
       type: elastic
