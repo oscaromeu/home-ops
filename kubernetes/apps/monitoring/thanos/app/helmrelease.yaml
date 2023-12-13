@@ -47,7 +47,8 @@ spec:
     query:
       enabled: true
       replicaCount: 2
-      replicaLabels: ["__replica__"]
+      # https://github.com/bitnami/charts/blob/main/bitnami/thanos/values.yaml#L170
+      replicaLabel: ["__replica__"]
       dnsDiscovery:
         sidecarsService: kube-prometheus-stack-thanos-discovery
         sidecarsNamespace: monitoring
