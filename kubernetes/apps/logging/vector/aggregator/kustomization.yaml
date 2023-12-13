@@ -5,7 +5,6 @@ namespace: logging
 resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
-  - ./secret.yaml
 
 configMapGenerator:
   - name: vector-aggregator
