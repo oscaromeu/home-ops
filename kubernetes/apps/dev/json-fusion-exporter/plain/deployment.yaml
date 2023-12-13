@@ -167,7 +167,7 @@ spec:
       module:
         - prometheus_apps
       target:
-      - https://kube-prometheus-stack-prometheus:9090
+      - https://kube-prometheus-stack-prometheus:9090/api/v1/status/tsdb
   jobLabel: "json-fusion-exporter"
   selector:
     matchLabels:
