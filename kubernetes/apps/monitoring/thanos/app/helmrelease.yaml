@@ -54,7 +54,7 @@ spec:
       ingress:
         enabled: false
         hostname: "thanos.${SECRET_DOMAIN}"
-        ingressClassName: "nginx"
+        ingressClassName: "internal"
         tls: true
         annotations:
           hajimari.io/enable: "true"
@@ -104,7 +104,7 @@ spec:
           "type": "redis"
       ingress:
         enabled: true
-        hostname: "thanos-query.${SECRET_DOMAIN}"
+        hostname: "thanos-query-frontend.${SECRET_DOMAIN}"
         ingressClassName: "internal"
         tls: true
         annotations:
@@ -115,6 +115,21 @@ spec:
     bucketweb:
       enabled: true
       replicaCount: 2
+      #resources:
+      #  limits:
+      #    memory:
+      #  requests:
+      #    memory:
+      #    cpu:
+      ingress:
+        enabled: true
+        hostname: "thanos-bucket.${SECRET_DOMAIN}"
+        ingressClassName: "internal"
+        tls: true
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: simple-icons:prometheus
+          external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
 
 
     compactor:

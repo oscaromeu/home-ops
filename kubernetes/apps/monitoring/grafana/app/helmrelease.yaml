@@ -54,7 +54,6 @@ spec:
         max_idle_connections: 500
 
 
-
     #dashboardProviders:
     #  dashboardproviders.yaml:
     #    apiVersion: 1
