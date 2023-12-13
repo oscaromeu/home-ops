@@ -22,6 +22,7 @@ sinks:
       codec: json
     tls:
       enabled: true
+      ca_file: /kafka-cluster-ca-cert/ca.crt
     sasl:
       enabled: true
       mechanism: "SCRAM-SHA-512"

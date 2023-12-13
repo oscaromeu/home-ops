@@ -75,13 +75,13 @@ spec:
         protocol: TCP
 
     extraVolumeMounts:
-      - name: redpanda-default-cert
-        mountPath: /redpanda-default-cert
+      - name: kafka-cluster-ca-cert
+        mountPath: /kafka-cluster-ca-cert
 
     extraVolumes:
-      - name: redpanda-default-cert
+      - name: kafka-cluster-ca-cert
         secret:
-          secretName: redpanda-default-cert
+          secretName: kafka-cluster-ca-cert
 
     image:
       repository: timberio/vector
