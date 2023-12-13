@@ -92,8 +92,8 @@ spec:
         admin:
           DISABLE_REGULAR_ORG_CREATION: true
         ui:
-          DEFAULT_THEME: gitea-dark
-          THEMES: gitea-dark
+          DEFAULT_THEME: arc-green
+          THEMES: arc-green
 
         database:
           DB_TYPE: postgres
