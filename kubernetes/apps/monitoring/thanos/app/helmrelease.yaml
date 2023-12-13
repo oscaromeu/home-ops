@@ -52,7 +52,7 @@ spec:
         sidecarsService: kube-prometheus-stack-thanos-discovery
         sidecarsNamespace: monitoring
       ingress:
-        enabled: false
+        enabled: true
         hostname: "thanos.${SECRET_DOMAIN}"
         ingressClassName: "internal"
         tls: true
