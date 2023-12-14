@@ -27,8 +27,12 @@ spec:
     keepHistory: false
 
   values:
+
+    replicaCount: 3
+
     crds:
       create: true
+
     config:
       data:
         INHERITED_ANNOTATIONS: kyverno.io/ignore
@@ -42,5 +46,7 @@ spec:
         memory: 46Mi
       limits:
         #cpu: 1000m
-        memory: 92Mi
+        memory: 250Mi
 
+    monitoring:
+      podMonitorEnabled: true

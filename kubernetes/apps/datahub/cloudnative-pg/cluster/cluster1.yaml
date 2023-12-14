@@ -6,23 +6,34 @@ metadata:
   namespace: datahub
 spec:
   instances: 3
-  imageName: ghcr.io/cloudnative-pg/postgresql:15.2
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.1-6
   primaryUpdateStrategy: unsupervised
   storage:
     size: 20Gi
     storageClass: local-path
   superuserSecret:
     name: cloudnative-pg-secret
+  enableSuperuserAccess: true
 
+  # Note: Bootstrap is needed when recovering from an existing cnpg cluster
   #bootstrap:
   #  recovery:
   #    source: &previousCluster postgres-v5
+
   postgresql:
     parameters:
       max_connections: "600"
+      max_slot_wal_keep_size: 10GB
       shared_buffers: 512MB
-    pg_hba:
-      - host all all all trust
+
+  resources:
+    requests:
+      memory: "2Gi"
+      cpu: "500m"
+    limits:
+      memory: "4Gi"
+    #pg_hba:
+    #  - host all all all trust
 
   monitoring:
     enablePodMonitor: true
@@ -30,8 +41,9 @@ spec:
   backup:
     retentionPolicy: 30d
     barmanObjectStore:
-      destinationPath: s3://cnpg-bucket-v1/v1
-      endpointURL: http://datahub-hl.datahub.svc.cluster.local:9000
+      destinationPath: s3://cloudnative-pg/
+      endpointURL: https://s3.${SECRET_DOMAIN}
+      serverName: &currentCluster postgres1-v1
       wal:
         compression: bzip2
         maxParallel: 8
@@ -72,7 +84,7 @@ spec:
       inherit: false
       replication: false
       bypassrls: false
-      connectionLimit: 4
+      connectionLimit: 100
       validUntil: "2053-04-12T15:04:05Z"
       inRoles:
         - pg_monitor
