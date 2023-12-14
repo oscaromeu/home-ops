@@ -42,7 +42,7 @@ spec:
     retentionPolicy: 30d
     barmanObjectStore:
       destinationPath: s3://cloudnative-pg/
-      endpointURL: https://s3.${SECRET_DOMAIN}
+      endpointURL: http://minio.datahub.svc.cluster.local:9000
       serverName: &currentCluster postgres1-v1
       wal:
         compression: bzip2
