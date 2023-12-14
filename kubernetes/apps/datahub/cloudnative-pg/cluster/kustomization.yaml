@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: datahub
 resources:
   - ./extrenalsecret.yaml
-  - ./cluster.yaml
+  - ./cluster1.yaml
   #- ./scheduledbackup.yaml
   - ./service.yaml
