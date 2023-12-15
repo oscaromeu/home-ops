@@ -6,4 +6,3 @@ resources:
   - ./namespace.yaml
   # Flux-Kustomizations
   - ./rook-ceph/ks.yaml
-:kus
