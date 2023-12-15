@@ -25,30 +25,34 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    env:
+      TZ: Europe/Madrid
     hajimari:
       title: Apps
       darkTheme: espresso
       alwaysTargetBlank: true
       showGreeting: false
-      showAppGroups: true
+      showAppGroups: false
       showAppStatus: false
       showBookmarkGroups: false
       showGlobalBookmarks: false
       showAppUrls: false
       defaultEnable: true
       namespaceSelector:
-        any: true
-        #matchNames:
-        #  - default
-        #  - monitoring
+        matchNames:
+          - default
+          - flux-system
+          - monitoring
+          - networking
+          - rook-ceph
+          - logging
+          - tools
     ingress:
       main:
         enabled: true
         ingressClassName: internal
-        annotations:
-          hajimari.io/enable: "false"
         hosts:
-          - host: &host "hajimari.${SECRET_DOMAIN}"
+          - host: &host apps.${SECRET_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
@@ -56,7 +60,7 @@ spec:
           - hosts:
               - *host
     podAnnotations:
-      configmap.reloader.stakater.com/reload: hajimari-settings
+      configmap.reloader.stakater.com/reload: "hajimari-settings"
     persistence:
       data:
         enabled: true
