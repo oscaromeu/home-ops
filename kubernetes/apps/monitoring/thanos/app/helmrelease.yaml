@@ -46,7 +46,7 @@ spec:
 
     query:
       enabled: true
-      replicaCount: 2
+      replicaCount: 1
       # https://github.com/bitnami/charts/blob/main/bitnami/thanos/values.yaml#L170
       replicaLabel: ["__replica__"]
       dnsDiscovery:
@@ -112,7 +112,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: simple-icons:prometheus
           external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
-   
+
     bucketweb:
       enabled: true
       replicaCount: 2
