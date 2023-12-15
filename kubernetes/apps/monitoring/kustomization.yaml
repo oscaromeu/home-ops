@@ -16,6 +16,6 @@ resources:
   - ./promlens/ks.yaml
   - ./sloth/ks.yaml
   - ./speedtest-exporter/ks.yaml
-ww  #- ./tempo/ks.yaml
+  #- ./tempo/ks.yaml
   - ./thanos/ks.yaml
   - ./vpa/ks.yaml
