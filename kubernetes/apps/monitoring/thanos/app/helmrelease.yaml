@@ -112,7 +112,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: simple-icons:prometheus
           external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
-
+   
     bucketweb:
       enabled: true
       replicaCount: 2
@@ -132,13 +132,12 @@ spec:
           hajimari.io/icon: simple-icons:prometheus
           external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
 
-
     compactor:
       enabled: true
       extraFlags:
         - --compact.concurrency=4
         - --delete-delay=30m
-      retentionResolutionRaw: 90d
+      retentionResolutionRaw: 30d
       retentionResolution5m: 1y
       retentionResolution1h: 2y
       consistencyDelay: 30m
