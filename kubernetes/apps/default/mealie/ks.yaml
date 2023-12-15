@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-nginx-internal
-    - name: cluster-apps-internal-secrets-stores
+    - name: cluster-apps-external-secrets-stores
   path: ./kubernetes/apps/default/mealie/app
   prune: true
   sourceRef:
