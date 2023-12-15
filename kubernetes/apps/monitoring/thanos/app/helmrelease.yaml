@@ -176,21 +176,11 @@ spec:
             "master_name": "redis-master"
           "type": "redis"
       podAntiAffinityPreset: hard
-  #sharded:
-  #  enabled: true
-  #  hashPartitioning:
-  #    shards: 3
-    #timePartitioning:
-    #  - min: ""
-    #    max: ""
-    #service:
-    #  clusterIPs: []
-    #  loadBalancerIPs: []
-    #  http:
-    #    nodePorts: []
-    #  grpc:
-    #    nodePorts: []
 
+    receive:
+      enabled: true
+      tsdbRetention: 15d
+      
 
     metrics:
       enabled: true
