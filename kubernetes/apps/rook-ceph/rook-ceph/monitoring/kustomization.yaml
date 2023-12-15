@@ -6,6 +6,6 @@ resources:
   - ./exporter-service-monitor.yaml
   - ./externalrules.yaml
   #- ./keda-rgw.yaml
-  - ./localrules.yaml
+  #- ./localrules.yaml
   - ./service-monitor.yaml
   - ./dashboards
