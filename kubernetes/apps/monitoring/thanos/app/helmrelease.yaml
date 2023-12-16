@@ -179,8 +179,26 @@ spec:
 
     receive:
       enabled: true
+      mode: dual-mode
       tsdbRetention: 15d
-      
+      replicationFactor: 2
+      replicaLable: __replica__
+      resources:
+        limits: {}
+        requests: {}
+      persistence:
+        enabled: true
+        storageClass: "ceph-filesystem"
+        size: 10Gi
+      ingress:
+        enabled: true
+        hostname: thanos-receive.${SECRET_DOMAIN}
+        ingressClassName: "internal"
+        tls: true
+        annotations:
+          hajimari.io/enable: "true"
+          hajimari.io/icon: simple-icons:prometheus
+          external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
 
     metrics:
       enabled: true
