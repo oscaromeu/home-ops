@@ -192,12 +192,7 @@ spec:
           cluster: "apps"
         retention: 2d
         retentionSize: 8GB
-        thanos:
-          image: quay.io/thanos/thanos:v0.32.5
-          objectStorageConfig:
-            existingSecret:
-              name: thanos-objstore-secret
-              key: objstore.yml
+        #thanos: {}
         storageSpec:
           volumeClaimTemplate:
             spec:
