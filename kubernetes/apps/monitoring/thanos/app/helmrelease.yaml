@@ -181,9 +181,10 @@ spec:
     receive:
       enabled: true
       mode: dual-mode
+      logLevel: info
       tsdbRetention: 15d
       replicationFactor: 2
-      replicaLable: __replica__
+      replicaLabel: __replica__
       replicaCount: 2
       resources:
         limits: {}
