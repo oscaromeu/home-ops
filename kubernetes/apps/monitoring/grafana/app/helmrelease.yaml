@@ -49,11 +49,8 @@ spec:
         enabled: true
         org_name: "Main Org."
         org_role: "Viewer"
-
       dataproxy:
         max_idle_connections: 500
-
-
     #dashboardProviders:
     #  dashboardproviders.yaml:
     #    apiVersion: 1
@@ -81,13 +78,13 @@ spec:
             type: prometheus
             access: proxy
             url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
-            isDefault: false
+            isDefault: true
 
           - name: Thanos
             type: prometheus
             access: proxy
             url: http://thanos-query-frontend.monitoring.svc.cluster.local:9090
-            isDefault: true
+            isDefault: false
 
           #- name: Victoria-Metrics
           #  type: prometheus
