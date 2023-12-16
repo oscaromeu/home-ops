@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.bitnami.com/bitnami
       chart: thanos
-      version: 12.16.2
+      version: 12.18.0
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -50,6 +50,7 @@ spec:
       # https://github.com/bitnami/charts/blob/main/bitnami/thanos/values.yaml#L170
       replicaLabel: ["__replica__"]
       dnsDiscovery:
+        enabled: false
         sidecarsService: kube-prometheus-stack-thanos-discovery
         sidecarsNamespace: monitoring
       ingress:
