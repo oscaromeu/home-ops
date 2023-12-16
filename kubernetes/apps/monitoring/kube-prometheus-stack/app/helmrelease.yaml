@@ -201,8 +201,8 @@ spec:
                 requests:
                   storage: 10Gi
 
-        remoteWrite:
-          - url: "http://thanos-receive.monitoring.svc.cluster.local:19291/api/v1/receive"
+        #remoteWrite:
+        #  - url: "http://thanos-receive.monitoring.svc.cluster.local:19291/api/v1/receive"
             #queueConfig:
             #  maxSamplesPerSend: 1000
             #  maxShards: 200
