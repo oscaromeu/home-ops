@@ -184,6 +184,7 @@ spec:
       tsdbRetention: 15d
       replicationFactor: 2
       replicaLable: __replica__
+      replicaCount: 2
       resources:
         limits: {}
         requests: {}
