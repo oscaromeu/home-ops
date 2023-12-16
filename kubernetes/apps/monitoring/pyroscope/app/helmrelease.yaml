@@ -1,0 +1,96 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app promlens
+  namespace: monitoring
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: pyroscope
+      version: 1.3.1
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+
+    pyroscope:
+      replicaCount: 1
+
+    image:
+      repository: grafana/pyroscope
+      pullPolicy: IfNotPresent
+      tag: "1.2.1"
+
+    extraArgs:
+      log.level: info
+
+    podAnnotations:
+      # Scrapes itself see https://grafana.com/docs/phlare/latest/operators-guide/deploy-kubernetes/#optional-scrape-your-own-workloads-profiles
+      profiles.grafana.com/memory.scrape: "true"
+      profiles.grafana.com/memory.port_name: http2
+      profiles.grafana.com/cpu.scrape: "true"
+      profiles.grafana.com/cpu.port_name: http2
+      profiles.grafana.com/goroutine.scrape: "true"
+      profiles.grafana.com/goroutine.port_name: http2
+      # profiles.grafana.com/block.scrape: "true"
+      # profiles.grafana.com/mutex.scrape: "true"
+    podSecurityContext:
+      fsGroup: 10001
+      runAsUser: 10001
+      runAsNonRoot: true
+
+    podDisruptionBudget:
+      enabled: true
+      maxUnavailable: 1
+
+    service:
+      type: ClusterIP
+      port: 4040
+      port_name: http2
+      scheme: HTTP
+      annotations: {}
+
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+    agent:
+      enabled: true
+      controller:
+        type: "statefulset"
+        replicas: 1
+        podAnnotations:
+          profiles.grafana.com/memory.scrape: "true"
+          profiles.grafana.com/memory.port_name: "http-metrics"
+          profiles.grafana.com/cpu.scrape: "true"
+          profiles.grafana.com/cpu.port_name: "http-metrics"
+          profiles.grafana.com/goroutine.scrape: "true"
+          profiles.grafana.com/goroutine.port_name: "http-metrics"
+      agent:
+        configMap:
+          create: false
+          name: grafana-agent-config-pyroscope
+        clustering:
+          enabled: true
+
+    ingress:
+      enabled: false
+      className: ""
+      # hosts:
+      #   - localhost
+      # tls:
+      #   - secretName: certificate

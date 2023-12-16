@@ -14,6 +14,7 @@ resources:
   - ./node-problem-detector/ks.yaml
   - ./prometheus-adapter/ks.yaml
   - ./promlens/ks.yaml
+  - ./promlens/ks.yaml
   - ./sloth/ks.yaml
   - ./speedtest-exporter/ks.yaml
   #- ./tempo/ks.yaml
