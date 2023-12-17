@@ -1,4 +1,4 @@
-- op: replace
+- op: add
   path: /spec/thanos/
   value:
     image: "quay.io/thanos/thanos:v0.32.5"
