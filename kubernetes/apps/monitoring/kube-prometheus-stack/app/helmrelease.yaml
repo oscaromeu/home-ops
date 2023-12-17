@@ -45,8 +45,8 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "simple-icons:prometheus"
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-          #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
-          #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
+          nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
         hosts:
           - &host "alertmanager.${SECRET_DOMAIN}"
         paths:
@@ -173,6 +173,26 @@ spec:
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
         scrapeConfigSelectorNilUsesHelmValues: false
+        serviceMonitorNamespaceSelector:
+          matchNames:
+            - cert-manager
+            - csi-addons-system
+            - datahub
+            - default
+            - dev
+            - flux-system
+            - kube-node-lease
+            - kube-public
+            - kube-system
+            - kyverno
+            - logging
+            - minio-operator
+            - monitoring
+            - networking
+            - rook-ceph
+            - system-upgrade
+            - tools
+            - volsync
         enableAdminAPI: true
         walCompression: true
         enableFeatures:
@@ -192,7 +212,12 @@ spec:
           cluster: "apps"
         retention: 2d
         retentionSize: 8GB
-        #thanos: {}
+        thanos:
+          image: quay.io/thanos/thanos:v0.32.5
+          objectStorageConfig:
+            existingSecret:
+              name: thanos-objstore-secret
+              key: objstore.yml
         storageSpec:
           volumeClaimTemplate:
             spec:
@@ -202,11 +227,6 @@ spec:
                   storage: 10Gi
 
         #remoteWrite:
-        #  - url: "http://thanos-receive.monitoring.svc.cluster.local:19291/api/v1/receive"
-            #queueConfig:
-            #  maxSamplesPerSend: 1000
-            #  maxShards: 200
-            #  capacity: 2500
         #  #- url: "http://mimir-nginx.monitoring.svc.cluster.local:80/api/v1/push"
         #  - url: "http://victoria-metrics-single-server.monitoring.svc.cluster.local:8428/api/v1/write"
         #    #queue_config:
@@ -225,5 +245,3 @@ spec:
         #      password:
         #        name: grafana-cloud
         #        key: password
-
-

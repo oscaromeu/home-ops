@@ -179,7 +179,7 @@ spec:
       podAntiAffinityPreset: hard
 
     receive:
-      enabled: true
+      enabled: false
       mode: standalone
       logLevel: debug
       tsdbRetention: 15d
