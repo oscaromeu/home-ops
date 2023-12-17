@@ -9,7 +9,7 @@ resources:
   - ./grafana/ks.yaml
   - ./influxdb-exporter/ks.yaml
   - ./k6s/ks.yaml
-  - ./kube-prometheus-stack/ks.yaml
+  #- ./kube-prometheus-stack/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
   - ./node-problem-detector/ks.yaml
   - ./prometheus-adapter/ks.yaml
