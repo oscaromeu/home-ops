@@ -50,7 +50,7 @@ spec:
       # https://github.com/bitnami/charts/blob/main/bitnami/thanos/values.yaml#L170
       replicaLabel: ["__replica__"]
       dnsDiscovery:
-        enabled: false
+        enabled: true
         sidecarsService: kube-prometheus-stack-thanos-discovery
         sidecarsNamespace: monitoring
       ingress:

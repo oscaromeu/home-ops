@@ -14,8 +14,15 @@ configMapGenerator:
 generatorOptions:
   disableNameSuffixHash: true
 
+# kubectl patch prometheus kube-prometheus-stack  -n monitoring --type='json' -p='[{"op": "replace", "path": "/spec/thanos", "value": {"image": "quay.io/thanos/thanos:v0.32.5"}}]'
 patches:
-  - target:
-      kind: Prometheus
-      name: kube-prometheus-stack
-    path: patches/op-replace-prometheus.yaml
+- target:
+    group: monitoring.coreos.com
+    version: v1
+    kind: Prometheus
+    name: kube-prometheus-stack
+  patch: |-
+    - op: replace
+      path: /spec/thanos
+      value:
+        image: "quay.io/thanos/thanos:v0.32.5"
