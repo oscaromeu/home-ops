@@ -33,16 +33,6 @@ inhibit_rules:
       - severity = "warning"
 receivers:
 
-  - name: "alerta"
-    webhook_configs:
-    - url: 'https://alerta.${SECRET_DOMAIN}/api/webhooks/prometheus'
-      send_resolved: true
-
-  - name: "heartbeat"
-    webhook_configs:
-    - url: 'https://alerta.${SECRET_DOMAIN}/api/webhooks/prometheus'
-      send_resolved: false
-
   - name: "null"
 
   - name: pushover

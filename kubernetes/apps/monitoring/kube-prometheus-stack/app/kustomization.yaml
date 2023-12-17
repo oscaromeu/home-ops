@@ -13,3 +13,9 @@ configMapGenerator:
       - alertmanager.yaml=./config/alertmanager.yaml
 generatorOptions:
   disableNameSuffixHash: true
+
+patches:
+  - target:
+      kind: StatefulSet
+      name: thanos-sidecar
+    path: patches/thanos/op-replace-thanos-sidecar.yaml

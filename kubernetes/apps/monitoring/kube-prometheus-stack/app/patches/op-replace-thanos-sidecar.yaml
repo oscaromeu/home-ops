@@ -1,0 +1,12 @@
+- op: replace
+  path: /spec/template/spec/containers/2/args
+  value:
+    - "sidecar"
+    - "--prometheus.url=http://127.0.0.1:9090/"
+    - "--prometheus.http-client={\"tls_config\": {\"insecure_skip_verify\":true}}"
+    - "--grpc-address=:10901"
+    - "--http-address=:10902"
+    #- "--objstore.config=$(OBJSTORE_CONFIG)"
+    - "--tsdb.path=/prometheus"
+    - "--log.level=info"
+    - "--log.format=logfmt"
