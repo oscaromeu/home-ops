@@ -66,12 +66,7 @@ spec:
   shards: 1
   storage:
     volumeClaimTemplate:
-      spec:
-        resources:
-          requests:
-            storage: 10Gi
-        storageClassName: local-path
-      status: {}
+      volumeName: storage-data
   thanos:
     blockSize: 2h
     image: quay.io/thanos/thanos:v0.32.5
