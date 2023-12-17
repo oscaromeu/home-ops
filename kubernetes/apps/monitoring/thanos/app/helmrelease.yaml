@@ -180,8 +180,8 @@ spec:
 
     receive:
       enabled: true
-      mode: dual-mode
-      logLevel: info
+      mode: standalone
+      logLevel: debug
       tsdbRetention: 15d
       replicationFactor: 2
       replicaLabel: __replica__
