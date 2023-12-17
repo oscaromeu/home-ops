@@ -2,8 +2,8 @@ apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
   labels:
-    app: kube-prometheus-stack-prometheus
-  name: kube-prometheus-stack-long-term-retention
+    app: kps-prometheus
+  name: prometheus-lts
   namespace: monitoring
 spec:
   alerting:
@@ -66,7 +66,11 @@ spec:
   shards: 1
   storage:
     volumeClaimTemplate:
-      volumeName: storage-data
+      spec:
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: local-path
   thanos:
     blockSize: 2h
     image: quay.io/thanos/thanos:v0.32.5

@@ -6,8 +6,7 @@ resources:
   - ./secret.sops.yaml
   - ./externalsecret.yaml
   - ./helmrelease.yaml
-  - ./pvc.yaml
-  - ./prometheus.yaml
+  - ./prometheus-lts.yaml
 
 configMapGenerator:
   - name: alertmanager-config-tpl
