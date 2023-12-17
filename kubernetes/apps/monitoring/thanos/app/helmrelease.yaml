@@ -183,9 +183,9 @@ spec:
       mode: standalone
       logLevel: debug
       tsdbRetention: 15d
-      replicationFactor: 2
+      replicationFactor: 1
       replicaLabel: __replica__
-      replicaCount: 2
+      replicaCount: 1
       resources:
         limits: {}
         requests: {}
