@@ -174,8 +174,26 @@ spec:
         probeSelectorNilUsesHelmValues: false
         scrapeConfigSelectorNilUsesHelmValues: false
         serviceMonitorNamespaceSelector:
-          matchNames:
-            name: csi-addons-system,datahub,default,dev,flux-system,kube-node-lease,kube-public,kube-system,kyverno,minio-operator,monitoring,networking,rook-ceph,system-upgrade,tools,volsync
+          matchExpressions:
+            - key: kubernetes.io/metadata.name
+              operator: In
+              values:
+                - csi-addons-system
+                - datahub
+                - default
+                - dev
+                - flux-system
+                - kube-node-lease
+                - kube-public
+                - kube-system
+                - kyverno
+                - minio-operator
+                - monitoring
+                - networking
+                - rook-ceph
+                - system-upgrade
+                - tools
+                - volsync
         enableAdminAPI: true
         walCompression: true
         enableFeatures:
