@@ -16,6 +16,6 @@ generatorOptions:
 
 patches:
   - target:
-      kind: StatefulSet
-      name: prometheus-kube-prometheus-stack
-    path: patches/op-replace-thanos-sidecar.yaml
+      kind: Prometheus
+      name: kube-prometheus-stack
+    path: patches/op-replace-prometheus.yaml
