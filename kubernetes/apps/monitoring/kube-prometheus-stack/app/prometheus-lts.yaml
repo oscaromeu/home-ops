@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
   labels:
-    app: kps-prometheus
+    app: kube-prometheus-stack-prometheus
   name: prometheus-lts
   namespace: monitoring
 spec:
