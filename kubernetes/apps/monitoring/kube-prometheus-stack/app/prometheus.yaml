@@ -1,0 +1,84 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  labels:
+    app: kube-prometheus-stack-prometheus
+  name: kube-prometheus-stack-long-term-retention
+  namespace: monitoring
+spec:
+  alerting:
+    alertmanagers:
+    - apiVersion: v2
+      name: kube-prometheus-stack-alertmanager
+      namespace: monitoring
+      pathPrefix: /
+      port: http-web
+  arbitraryFSAccessThroughSMs: {}
+  enableAdminAPI: true
+  enableFeatures:
+  - auto-gomaxprocs
+  - memory-snapshot-on-shutdown
+  - new-service-discovery-manager
+  evaluationInterval: 30s
+  externalLabels:
+    cluster: apps
+  externalUrl: http://prometheus.oscaromeu.io/
+  image: quay.io/prometheus/prometheus:v2.48.0
+  logFormat: logfmt
+  logLevel: info
+  podMetadata:
+    annotations:
+      profiles.grafana.com/cpu.port: "9090"
+      profiles.grafana.com/cpu.scrape: "true"
+      profiles.grafana.com/goroutine.port: "9090"
+      profiles.grafana.com/goroutine.scrape: "true"
+      profiles.grafana.com/memory.port: "9090"
+      profiles.grafana.com/memory.scrape: "true"
+  podMonitorNamespaceSelector: {}
+  podMonitorSelector: {}
+  portName: http-web
+  probeNamespaceSelector: {}
+  probeSelector: {}
+  replicaExternalLabelName: __replica__
+  replicas: 1
+  resources: {}
+  retention: 2d
+  ruleNamespaceSelector: {}
+  ruleSelector: {}
+  rules:
+    alert: {}
+  scrapeInterval: 60s
+  securityContext:
+    fsGroup: 2000
+    runAsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccountName: kube-prometheus-stack-prometheus
+  serviceMonitorNamespaceSelector:
+    matchExpressions:
+    - key: kubernetes.io/metadata.name
+      operator: In
+      values:
+      - logging
+  serviceMonitorSelector: {}
+  shards: 1
+  storage:
+    volumeClaimTemplate:
+      spec:
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: local-path
+      status: {}
+  thanos:
+    blockSize: 2h
+    image: quay.io/thanos/thanos:v0.32.5
+    objectStorageConfig:
+      key: objstore.yml
+      name: thanos-objstore-secret
+  tsdb:
+    outOfOrderTimeWindow: 0s
+  version: v2.48.0
+  walCompression: true

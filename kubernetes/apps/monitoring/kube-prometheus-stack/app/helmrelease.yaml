@@ -162,9 +162,9 @@ spec:
           - hosts:
               - *host
       thanosService:
-        enabled: false
+        enabled: true
       thanosServiceMonitor:
-        enabled: false
+        enabled: true
       prometheusSpec:
         replicas: 1
         replicaExternalLabelName: __replica__
@@ -211,21 +211,21 @@ spec:
         scrapeInterval: 60s
         externalLabels:
           cluster: "apps"
-        retention: 2d
-        retentionSize: 8GB
-        thanos:
-          image: quay.io/thanos/thanos:v0.32.5
-          objectStorageConfig:
-            existingSecret:
-              name: thanos-objstore-secret
-              key: objstore.yml
+        retention: 30d
+        #retentionSize: 8GB
+        thanos: {}
+          #image: quay.io/thanos/thanos:v0.32.5
+          #objectStorageConfig:
+          #  existingSecret:
+          #    name: thanos-objstore-secret
+          #    key: objstore.yml
         storageSpec:
           volumeClaimTemplate:
             spec:
               storageClassName: local-path
               resources:
                 requests:
-                  storage: 10Gi
+                  storage: 200Gi
 
         #remoteWrite:
         #  #- url: "http://mimir-nginx.monitoring.svc.cluster.local:80/api/v1/push"
