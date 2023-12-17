@@ -18,5 +18,5 @@ resources:
   - ./sloth/ks.yaml
   - ./speedtest-exporter/ks.yaml
   #- ./tempo/ks.yaml
-  - ./thanos/ks.yaml
+  #- ./thanos/ks.yaml
   - ./vpa/ks.yaml
