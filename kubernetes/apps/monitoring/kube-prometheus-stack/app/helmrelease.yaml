@@ -175,24 +175,7 @@ spec:
         scrapeConfigSelectorNilUsesHelmValues: false
         serviceMonitorNamespaceSelector:
           matchNames:
-            - cert-manager
-            - csi-addons-system
-            - datahub
-            - default
-            - dev
-            - flux-system
-            - kube-node-lease
-            - kube-public
-            - kube-system
-            - kyverno
-            - logging
-            - minio-operator
-            - monitoring
-            - networking
-            - rook-ceph
-            - system-upgrade
-            - tools
-            - volsync
+            name: csi-addons-system,datahub,default,dev,flux-system,kube-node-lease,kube-public,kube-system,kyverno,minio-operator,monitoring,networking,rook-ceph,system-upgrade,tools,volsync
         enableAdminAPI: true
         walCompression: true
         enableFeatures:
