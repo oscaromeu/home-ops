@@ -179,10 +179,10 @@ spec:
       podAntiAffinityPreset: hard
 
     receive:
-      enabled: false
+      enabled: true
       mode: standalone
       logLevel: debug
-      tsdbRetention: 15d
+      tsdbRetention: 1d
       replicationFactor: 1
       replicaLabel: __replica__
       replicaCount: 1
