@@ -37,6 +37,7 @@ resources:
   - ./kubernetes-dashboard.yaml
   - ./kyverno.yaml
   - ./longhorn.yaml
+  - ./marketplane.yaml
   - ./metallb.yaml
   - ./metrics-server.yaml
   - ./microcks.yaml

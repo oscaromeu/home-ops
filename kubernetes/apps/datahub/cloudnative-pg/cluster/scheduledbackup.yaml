@@ -2,7 +2,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
-  name: postgres
+  name: postgres-backup
   namespace: datahub
 spec:
   schedule: "@daily"
@@ -10,4 +10,4 @@ spec:
   backupOwnerReference: self
   target: primary
   cluster:
-    name: postgres
+    name: postgres-v1

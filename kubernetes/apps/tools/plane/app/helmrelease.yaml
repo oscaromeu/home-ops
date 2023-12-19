@@ -1,0 +1,124 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app plane
+  namespace: tools
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: plane-ce
+      version: 1.0.6
+      sourceRef:
+        kind: HelmRepository
+        name: makeplane
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    # https://docs.plane.so/self-hosting/kubernetes
+    ingress:
+      appHost: 'plane.${SECRET_DOMAIN}'
+      ingressClass: 'internal'
+      clientMaxBodySize: 10m
+
+    redis:
+      local_setup: false
+
+    postgres:
+      local_setup: false
+
+    minio:
+      local_setup: false
+
+    web:
+      replicas: 1
+      memoryLimit: 300Mi
+      cpuLimit: 200m
+      hscale:
+        minReplicas: 1
+        maxReplicas: 2
+        precentMemoryUtilization: 80
+        percentCpuUtilization: 60
+
+    space:
+      replicas: 1
+      memoryLimit: 300Mi
+      cpuLimit: 200m
+      hscale:
+        minReplicas: 1
+        maxReplicas: 2
+        precentMemoryUtilization: 80
+        percentCpuUtilization: 60
+
+    api:
+      replicas: 1
+      memoryLimit: 300Mi
+      cpuLimit: 200m
+
+    worker:
+      replicas: 1
+      memoryLimit: 300Mi
+      cpuLimit: 200m
+
+    beatworker:
+      replicas: 1
+      memoryLimit: 300Mi
+      cpuLimit: 200m
+
+    env:
+    # MINIO settings
+    aws_region: ""
+    # DATA STORE
+    docstore_bucket: "uploads"
+    doc_upload_size_limit: "5242880" # 5MB
+    # # LOGIN/SIGNUP SETTINGS
+    enable_signup: 1
+    enable_email_password: 1
+    enable_magic_link_login: 0
+    secret_key: "changeme"
+    # gunicorn
+    gunicorn_api_workers: 1
+
+  valuesFrom:
+    - targetPath: ingress.minioHost
+      kind: Secret
+      name: plane-secret
+      valuesKey: minioHost
+    - targetPath: env.pgdb_username
+      kind: Secret
+      name: plane-secret
+      valuesKey: pgdb_username
+    - targetPath: env.pgdb_password
+      kind: Secret
+      name: plane-secret
+      valuesKey: pgdb_password
+    - targetPath: env.pgdb_name
+      kind: Secret
+      name: plane-secret
+      valuesKey: pgdb_name
+    - targetPath: env.pgdb_remote_url
+      kind: Secret
+      name: plane-secret
+      valuesKey: pgdb_remote_url
+    - targetPath: env.remote_redis_url
+      kind: Secret
+      name: plane-secret
+      valuesKey: remote_redis_url
+    - targetPath: env.aws_access_key
+      kind: Secret
+      name: plane-secret
+      valuesKey: aws_access_key
+    - targetPath: env.aws_secret_access_key
+      kind: Secret
+      name: plane-secret
+      valuesKey: aws_secret_access_key
