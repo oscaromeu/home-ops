@@ -184,7 +184,7 @@ spec:
       logLevel: debug
       tsdbRetention: 1d
       replicationFactor: 1
-      replicaLabel: __replica__
+      replicaLabel: replica
       replicaCount: 1
       resources:
         limits: {}
