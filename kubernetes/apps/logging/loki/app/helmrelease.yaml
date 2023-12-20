@@ -51,7 +51,6 @@ spec:
         http_server_read_timeout: 1m
         http_server_write_timeout: 1m
 
-
       schema_config:
         configs:
           - from: "2022-01-11" # quote

@@ -77,7 +77,7 @@ spec:
 
     env:
     # MINIO settings
-    aws_region: ""
+    aws_region: "eu-west-1"
     # DATA STORE
     docstore_bucket: "uploads"
     doc_upload_size_limit: "5242880" # 5MB
@@ -85,7 +85,6 @@ spec:
     enable_signup: 1
     enable_email_password: 1
     enable_magic_link_login: 0
-    secret_key: "changeme"
     # gunicorn
     gunicorn_api_workers: 1
 
@@ -122,3 +121,10 @@ spec:
       kind: Secret
       name: plane-secret
       valuesKey: aws_secret_access_key
+    - targetPath: env.secret_key
+      kind: Secret
+      name: plane-secret
+      valuesKey: secret_key
+
+
+secret_key: "changeme"
