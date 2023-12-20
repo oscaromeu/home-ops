@@ -184,7 +184,7 @@ spec:
       logLevel: debug
       tsdbRetention: 2h
       extraFlags:
-        --objstore.config=$(OBJSTORE_CONFIG)
+        - --objstore.config=$(OBJSTORE_CONFIG)
       replicationFactor: 1
       replicaLabel: __replica__
       replicaCount: 1
