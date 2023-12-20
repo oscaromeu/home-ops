@@ -195,13 +195,31 @@ spec:
         size: 10Gi
       ingress:
         enabled: true
-        hostname: thanos-receive.${SECRET_DOMAIN}
+        hostname: receive.${SECRET_DOMAIN}
         ingressClassName: "internal"
         tls: true
         annotations:
           hajimari.io/enable: "true"
           hajimari.io/icon: simple-icons:prometheus
           external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
+        extraRules:
+          - host: "receive.${SECRET_DOMAIN}"
+            http:
+              paths:
+                - path: /api/v1/receive
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: "thanos-receive"
+                      port:
+                        name: remote
+                - path: /api/v1/status/tsdb
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: "thanos-receive"
+                      port:
+                        name: http
 
     metrics:
       enabled: true
