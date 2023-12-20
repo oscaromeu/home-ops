@@ -28,10 +28,10 @@ spec:
 
   resources:
     requests:
-      memory: "2Gi"
+      memory: "3Gi"
       cpu: "500m"
     limits:
-      memory: "4Gi"
+      memory: "5Gi"
     #pg_hba:
     #  - host all all all trust
 

@@ -125,6 +125,3 @@ spec:
       kind: Secret
       name: plane-secret
       valuesKey: secret_key
-
-
-secret_key: "changeme"
