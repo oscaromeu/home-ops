@@ -1,20 +1,6 @@
 ---
-#
 # Sources
-#
 sources:
-
-  #k3s:
-  #  type: redis
-  #  url: redis://dragonfly.datahub.svc.cluster.local:6379/0
-  #  key: "k3s_prod"
-  #  decoding:
-  #    codec: json
-
-  #k3s:
-  #  type: vector
-  #  address: 0.0.0.0:6010
-  #  version: "2"
 
   k3s:
     type: kafka
@@ -33,9 +19,8 @@ sources:
       mechanism: "SCRAM-SHA-512"
       password: "${KAFKA_PASS}"
       username: "${KAFKA_USER}"
-#
+
 # Transforms
-#
 transforms:
   kubernetes_remap:
     type: remap
@@ -50,9 +35,7 @@ transforms:
       # Drop pod_labels
       del(.pod_labels)
 
-#
 # Sinks
-#
 sinks:
   elasticsearch:
     type: elasticsearch
@@ -81,16 +64,3 @@ sinks:
       verify_certificate: false
     encoding:
       except_fields: ["pod_labels"]
-
-  loki:
-    inputs: ["kubernetes_remap"]
-    type: loki
-    endpoint: http://loki-gateway.logging.svc.cluster.local
-    encoding: { codec: json }
-    out_of_order_action: accept
-    remove_label_fields: true
-    remove_timestamp: true
-    labels:
-      app: '{{ custom_app_name }}'
-      namespace: '{{ kubernetes.pod_namespace }}'
-      node: '{{ kubernetes.pod_node_name }}'

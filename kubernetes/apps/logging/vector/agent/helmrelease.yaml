@@ -40,8 +40,9 @@ spec:
       # config
       - vector-agent
       # pipelines
-      - k3s-pipeline
-      - vector-metrics-pipeline-aggregator
+      - elastic-agent
+      - vector-metrics-agent
+      - loki-agent
       #- journal-pipeline
 
     ingress:
@@ -111,7 +112,6 @@ spec:
 
     securityContext:
       privileged: true
-
 
     env:
       - name: VECTOR_LOG

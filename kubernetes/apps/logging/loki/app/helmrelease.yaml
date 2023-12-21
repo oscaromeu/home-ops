@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: loki
-      version: 5.8.0
+      version: 5.41.0
       sourceRef:
         kind: HelmRepository
         name: grafana
@@ -26,6 +26,31 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  valuesFrom:
+    - targetPath: loki.storage.bucketNames.chunks
+      kind: Secret
+      name: loki-bucket-v2
+      valuesKey: BUCKET_NAME
+    - targetPath: loki.storage.bucketNames.ruler
+      kind: Secret
+      name: loki-bucket-v2
+      valuesKey: BUCKET_NAME
+    - targetPath: loki.storage.bucketNames.admin
+      kind: Secret
+      name: loki-bucket-v2
+      valuesKey: BUCKET_NAME
+    - targetPath: loki.storage.s3.endpoint
+      kind: Secret
+      name: loki-bucket-v2
+      valuesKey: BUCKET_HOST
+    - targetPath: loki.storage.s3.secretAccessKey
+      kind: Secret
+      name: loki-bucket-v2
+      valuesKey: AWS_SECRET_ACCESS_KEY
+    - targetPath: loki.storage.s3.accessKeyId
+      kind: Secret
+      name: loki-bucket-v2
+      valuesKey: AWS_ACCESS_KEY_ID
   values:
     loki:
       # https://grafana.com/docs/loki/latest/installation/helm/reference/
@@ -209,30 +234,4 @@ spec:
         enabled: false
     test:
       enabled: false
-
-  valuesFrom:
-    - targetPath: loki.storage.bucketNames.chunks
-      kind: Secret
-      name: loki-bucket-v2
-      valuesKey: BUCKET_NAME
-    - targetPath: loki.storage.bucketNames.ruler
-      kind: Secret
-      name: loki-bucket-v2
-      valuesKey: BUCKET_NAME
-    - targetPath: loki.storage.bucketNames.admin
-      kind: Secret
-      name: loki-bucket-v2
-      valuesKey: BUCKET_NAME
-    - targetPath: loki.storage.s3.endpoint
-      kind: Secret
-      name: loki-bucket-v2
-      valuesKey: BUCKET_HOST
-    - targetPath: loki.storage.s3.secretAccessKey
-      kind: Secret
-      name: loki-bucket-v2
-      valuesKey: AWS_SECRET_ACCESS_KEY
-    - targetPath: loki.storage.s3.accessKeyId
-      kind: Secret
-      name: loki-bucket-v2
-      valuesKey: AWS_ACCESS_KEY_ID
 

@@ -1,15 +1,11 @@
 ---
-#
 # Sources
-#
 sources:
 
   vector_metrics:
     type: internal_metrics
 
-#
 # Sinks
-#
 sinks:
   prom_exporter:
     type: prometheus_exporter

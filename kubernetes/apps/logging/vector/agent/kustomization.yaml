@@ -12,13 +12,17 @@ configMapGenerator:
     files:
       - vector.yaml=./config/vector.yaml
 
-  - name: k3s-pipeline
+  - name: elastic-agent
     files:
-      - k3s.yaml=./pipelines/k3s.yaml
+      - elastic.yaml=./pipelines/elastic.yaml
 
-  - name: vector-metrics-pipeline-agent
+  - name: vector-metrics-agent
     files:
-      - vector_metrics.yaml=./pipelines/vector_metrics.yaml
+      - vector-metrics.yaml=./pipelines/vector-metrics.yaml
+
+  - name: loki-agent
+    files:
+      - loki.yaml=./pipelines/loki.yaml
 
   #- name: journal-pipeline
   #  files:
