@@ -40,7 +40,7 @@ spec:
       # config
       - vector-agent
       # pipelines
-      - elastic-agent
+      #- elastic-agent
       - vector-metrics-agent
       - loki-agent
       #- journal-pipeline

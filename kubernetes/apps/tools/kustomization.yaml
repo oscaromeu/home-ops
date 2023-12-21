@@ -11,6 +11,6 @@ resources:
   #- ./microcks/ks.yaml
   - ./outline/ks.yaml
   - ./plane/ks.yaml
-  - ./redisui/ks.yaml
-  - ./redpanda/ks.yaml
+  #- ./redisui/ks.yaml
+  #- ./redpanda/ks.yaml
   #- ./semaphore/ks.yaml

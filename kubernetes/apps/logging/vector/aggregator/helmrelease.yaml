@@ -40,7 +40,7 @@ spec:
       # config
       - vector-aggregator
       # pipelines
-      - elastic-aggregator
+      #- elastic-aggregator
       - vector-metrics-aggregator
       - loki-aggregator
 
