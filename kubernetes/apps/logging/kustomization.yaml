@@ -6,6 +6,5 @@ resources:
   #- ./elastic-operator/ks.yaml
   #- ./elastic/ks.yaml
   #- ./elastic-exporter/ks.yaml
-  - ./redis-exporter/ks.yaml
   #- ./loki/ks.yaml
   #- ./vector/ks.yaml
