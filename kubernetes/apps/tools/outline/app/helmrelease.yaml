@@ -33,7 +33,7 @@ spec:
           - secretRef:
               name: outline-secret
     controller:
-      replicas: 1
+      replicas: 3
       strategy: RollingUpdate
       annotations:
         reloader.stakater.com/auto: "true"
@@ -73,9 +73,9 @@ spec:
     resources:
       requests:
         cpu: 10m
-        memory: 50Mi
+        memory: 400Mi
       limits:
-        memory: 500Mi
+        memory: 2Gi
     persistence:
       data:
         enabled: true
