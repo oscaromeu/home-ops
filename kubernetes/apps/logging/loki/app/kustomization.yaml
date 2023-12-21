@@ -4,5 +4,4 @@ kind: Kustomization
 namespace: logging
 resources:
   - ./objectbucketclaim.yaml
-  - ./externalsecret.yaml
   - ./helmrelease.yaml
