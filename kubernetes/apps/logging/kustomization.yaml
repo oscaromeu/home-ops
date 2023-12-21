@@ -7,5 +7,5 @@ resources:
   #- ./elastic/ks.yaml
   #- ./elastic-exporter/ks.yaml
   - ./redis-exporter/ks.yaml
-  - ./loki/ks.yaml
-  - ./vector/ks.yaml
+  #- ./loki/ks.yaml
+  #- ./vector/ks.yaml
