@@ -76,17 +76,17 @@ spec:
       cpuLimit: 200m
 
     env:
-    # MINIO settings
-    aws_region: "eu-west-1"
-    # DATA STORE
-    docstore_bucket: "uploads"
-    doc_upload_size_limit: "5242880" # 5MB
-    # # LOGIN/SIGNUP SETTINGS
-    enable_signup: 1
-    enable_email_password: 1
-    enable_magic_link_login: 0
-    # gunicorn
-    gunicorn_api_workers: 1
+      # MINIO settings
+      aws_region: "eu-west-1"
+      # DATA STORE
+      docstore_bucket: "uploads"
+      doc_upload_size_limit: "5242880" # 5MB
+      # # LOGIN/SIGNUP SETTINGS
+      enable_signup: 1
+      enable_email_password: 1
+      enable_magic_link_login: 0
+      # gunicorn
+      gunicorn_api_workers: 1
 
   valuesFrom:
     - targetPath: ingress.minioHost
