@@ -2,7 +2,7 @@
 # Sources
 sources:
 
-  k3s:
+  kafka:
     type: kafka
     bootstrap_servers: kafka-cluster-kafka-bootstrap.datahub.svc.cluster.local:9094
     topics:
@@ -24,7 +24,7 @@ sources:
 transforms:
   kubernetes_remap:
     type: remap
-    inputs: ["k3s"]
+    inputs: ["kafka"]
     source: |
       # Standardize 'app' index
       .custom_app_name = .pod_labels."app.kubernetes.io/name" || .pod_labels.app || .pod_labels."k8s-app" || "unknown"
