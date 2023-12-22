@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: influxdb-exporter
-  namespace: monitoring
+  namespace: observability
   labels:
     app.kubernetes.io/instance: influxdb-exporter
     app.kubernetes.io/name: influxdb-exporter

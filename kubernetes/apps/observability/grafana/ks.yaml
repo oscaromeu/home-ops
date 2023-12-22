@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: cluster-apps-kube-prometheus-stack
     #- name: cluster-apps-mimir
-  path: ./kubernetes/apps/monitoring/grafana/app
+  path: ./kubernetes/apps/observability/grafana/app
   prune: true
   sourceRef:
     kind: GitRepository

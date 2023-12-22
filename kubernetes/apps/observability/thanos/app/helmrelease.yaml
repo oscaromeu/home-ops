@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: thanos
-  namespace: monitoring
+  namespace: observability
 spec:
   interval: 5m
   chart:
@@ -28,7 +28,7 @@ spec:
 
   dependsOn:
     - name: kube-prometheus-stack
-      namespace: monitoring
+      namespace: observability
     - name: local-path-provisioner
       namespace: kube-system
     - name: rook-ceph-cluster
@@ -52,7 +52,7 @@ spec:
       dnsDiscovery:
         enabled: true
         sidecarsService: kube-prometheus-stack-thanos-discovery
-        sidecarsNamespace: monitoring
+        sidecarsnamespace: observability
       ingress:
         enabled: true
         hostname: "thanos.${SECRET_DOMAIN}"

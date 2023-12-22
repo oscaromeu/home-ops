@@ -7,7 +7,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-kube-prometheus-stack
-  path: ./kubernetes/apps/monitoring/speedtest-exporter/app
+  path: ./kubernetes/apps/observability/speedtest-exporter/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -25,7 +25,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-speedtest-exporter
-  path: ./kubernetes/apps/monitoring/speedtest-exporter/monitoring
+  path: ./kubernetes/apps/observability/speedtest-exporter/monitoring
   prune: true
   sourceRef:
     kind: GitRepository

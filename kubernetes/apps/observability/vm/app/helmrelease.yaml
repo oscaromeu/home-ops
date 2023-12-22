@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: victoria-metrics-single
-  namespace: monitoring
+  namespace: observability
 spec:
   interval: 5m
   chart:
@@ -28,7 +28,7 @@ spec:
 
   dependsOn:
     - name: kube-prometheus-stack
-      namespace: monitoring
+      namespace: observability
 
 
   values:

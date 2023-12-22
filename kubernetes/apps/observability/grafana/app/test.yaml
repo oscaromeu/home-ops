@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Secret
 metadata:
     name: grafana-admin-secret
-    namespace: monitoring
+    namespace: observability
 stringData:
     admin-password: ENC[AES256_GCM,data:xCsNdhGsZv6wKLWMKom7TF/e6ntqEYuT,iv:k9LPPBIMX4E6W1DvbqD4AjqxfocbqZPynDjHRJ8JqAA=,tag:jQ1YFYPd6Dvd45TcXNL3wg==,type:str]
     admin-user: ENC[AES256_GCM,data:kddS3K0=,iv:wM7rW0HdZ/8pqR48rX0ERTme0LkiLp0j2lVCkIzLACw=,tag:ALnpnIk91ypSOborehtHzQ==,type:str]

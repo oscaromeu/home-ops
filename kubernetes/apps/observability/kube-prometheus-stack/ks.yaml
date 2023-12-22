@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: cluster-apps-nginx-external
     - name: cluster-apps-external-secrets
-  path: ./kubernetes/apps/monitoring/kube-prometheus-stack/app
+  path: ./kubernetes/apps/observability/kube-prometheus-stack/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -24,7 +24,7 @@ metadata:
   name: cluster-apps-kube-prometheus-stack-monitoring
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/monitoring/kube-prometheus-stack/monitoring
+  path: ./kubernetes/apps/observability/kube-prometheus-stack/monitoring
   prune: true
   sourceRef:
     kind: GitRepository

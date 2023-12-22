@@ -6,18 +6,18 @@ resources:
   #- ./blackbox-exporter/ks.yaml
   #- ./gatus/ks.yaml
   #- ./goldilocks/ks.yaml
-  #- ./grafana/ks.yaml
-  #- ./influxdb-exporter/ks.yaml
-  #- ./k6s/ks.yaml
-  #- ./kube-prometheus-stack/ks.yaml
-  #- ./kubernetes-events-exporter/ks.yaml
-  #- ./node-problem-detector/ks.yaml
+  - ./grafana/ks.yaml
+  - ./influxdb-exporter/ks.yaml
+  - ./k6s/ks.yaml
+  - ./kube-prometheus-stack/ks.yaml
+  - ./kubernetes-events-exporter/ks.yaml
+  - ./node-problem-detector/ks.yaml
   #- ./prometheus-adapter/ks.yaml
-  #- ./promlens/ks.yaml
-  #- ./pyroscope/ks.yaml
-  #- ./sloth/ks.yaml
-  #- ./speedtest-exporter/ks.yaml
-  #- ./synthetix/ks.yaml
-  #- ./tempo/ks.yaml
-  #- ./thanos/ks.yaml
-  #- ./vpa/ks.yaml
+  - ./promlens/ks.yaml
+  - ./pyroscope/ks.yaml
+  - ./sloth/ks.yaml
+  - ./speedtest-exporter/ks.yaml
+  - ./synthetix/ks.yaml
+  - ./tempo/ks.yaml
+  - ./thanos/ks.yaml
+  - ./vpa/ks.yaml

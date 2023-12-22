@@ -5,7 +5,7 @@ metadata:
     prometheus: k8s
     role: loki-rules
   name: loki-rules
-  namespace: monitoring
+  namespace: observability
 spec:
   groups:
     - name: loki_rules

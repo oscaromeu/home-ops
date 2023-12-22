@@ -6,7 +6,7 @@
     #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
     #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
    name: influxdb
-   namespace: monitoring
+   namespace: observability
  spec:
    ingressClassName: internal
    rules:

@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: cluster-apps-kube-prometheus-stack
     #- name: cluster-apps-mimir
-  path: ./kubernetes/apps/monitoring/gatus/app
+  path: ./kubernetes/apps/observability/gatus/app
   prune: true
   sourceRef:
     kind: GitRepository

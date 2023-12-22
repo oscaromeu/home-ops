@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-kube-prometheus-stack
-  path: ./kubernetes/apps/monitoring/k6s/operator
+  path: ./kubernetes/apps/observability/k6s/operator
   prune: true
   sourceRef:
     kind: GitRepository
@@ -28,7 +28,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-k6s-operator
-  path: ./kubernetes/apps/monitoring/k6s/app
+  path: ./kubernetes/apps/observability/k6s/app
   prune: true
   sourceRef:
     kind: GitRepository

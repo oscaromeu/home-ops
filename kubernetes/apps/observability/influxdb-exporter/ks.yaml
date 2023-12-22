@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-kube-prometheus-stack
-  path: ./kubernetes/apps/monitoring/influxdb-exporter/app
+  path: ./kubernetes/apps/observability/influxdb-exporter/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -28,7 +28,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-kube-prometheus-stack
-  path: ./kubernetes/apps/monitoring/influxdb-exporter/monitoring
+  path: ./kubernetes/apps/observability/influxdb-exporter/monitoring
   prune: true
   sourceRef:
     kind: GitRepository

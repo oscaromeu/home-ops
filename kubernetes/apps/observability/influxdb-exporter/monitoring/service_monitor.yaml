@@ -3,7 +3,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: influxdb-exporter
-  namespace: monitoring
+  namespace: observability
   labels:
     app.kubernetes.io/name: influxdb-exporter
     app.kubernetes.io/instance: influxdb-exporter

@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-kube-prometheus-stack
-  path: ./kubernetes/apps/monitoring/kubernetes-events-exporter/app
+  path: ./kubernetes/apps/observability/kubernetes-events-exporter/app
   prune: true
   sourceRef:
     kind: GitRepository
