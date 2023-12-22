@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-nginx-internal
-  path: ./kubernetes/apps/dev/outline/app
+  path: ./kubernetes/apps/dev/outline-2/app
   prune: true
   sourceRef:
     kind: GitRepository
