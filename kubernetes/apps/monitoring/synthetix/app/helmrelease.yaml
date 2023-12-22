@@ -1,0 +1,175 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: synthetix
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://charts.bitnami.com/bitnami
+      chart: canary-checker
+      version: 1.0.143
+      sourceRef:
+        kind: HelmRepository
+        name: flanksource
+        namespace: flux-system
+      interval: 5m
+
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+
+  upgrade:
+    remediation:
+      retries: 5
+
+  dependsOn:
+    - name: kube-prometheus-stack
+      namespace: monitoring
+
+  values:
+
+  replicas: 1
+  image:
+    repository: docker.io/flanksource/canary-checker
+    ## Options: minimal | full
+    type: full
+    pullPolicy: IfNotPresent
+    tag: "v1.0.143"
+
+  dockerSocket: false
+  containerdSocket: false
+
+  # Set to true if you want to disable the postgrest service
+  disablePostgrest: false
+
+  serviceMonitor: true
+  grafanaDashboards: false
+
+  # Turn on pprof /debug endpoint
+  debug: false
+  logLevel: "-v"
+
+  # Leave blank to monitor all namespaces
+  canaryNamespace: ""
+
+  otel:
+    # OpenTelemetry gRPC collector endpoint in host:port format
+    collector: ""
+    serviceName: synthetix
+
+  db:
+    runMigrations: true
+    external:
+      enabled: true
+      create: false
+      secretKeyRef:
+        name: synthetix-secret
+        key: DB_URL
+      storageClass: "local-host"
+      storage: 20Gi
+
+  nameOverride: "synthetix"
+  pingMode: "unprivileged"
+  allowPrivilegeEscalation: false
+
+  prometheusURL: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
+
+  data:
+    defaultSearchWindow: 1h
+    cacheTimeoutDays: 90
+    checkStatusRetentionDays: 180
+    checkRetentionDays: 7
+    canaryRetentionDays: 7
+
+  upstream:
+    enabled: false
+    agentName: default-agent
+    host: ""
+    user: ""
+    password: ""
+    insecureSkipVerify: false
+    # Alternative to inlining values, secret must contain: UPSTREAM_NAME, UPSTREAM_USER, UPSTREAM_PASSWORD & UPSTREAM_HOST
+    secretKeyRef:
+      name:
+
+  ingress:
+    enabled: true
+    className: "internal"
+    annotations:
+        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hajimari.io/icon: simple-icons:grafana
+        hajimari.io/group: "Public"
+        #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
+        #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
+    hosts:
+      - &host "synthetix.${SECRET_DOMAIN}"
+    tls:
+      - hosts:
+          - *host
+  flanksource-ui:
+    enabled: true
+    nameOverride: "synthetix-ui"
+    fullnameOverride: "synthetix-ui"
+    oryKratosURL: ""
+    resources:
+      requests:
+        cpu: 10m
+        memory: 128Mi
+      limits:
+        memory: 512Mi
+    backendURL: "http://synthetix:8080"
+    ingress:
+      enabled: true
+      host: &host "synthetix-ui.local"
+      annotations:
+        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hajimari.io/icon: simple-icons:grafana
+        hajimari.io/group: "Public"
+        #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
+        #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
+      tls:
+        - hosts:
+            - *host
+
+  resources:
+    requests:
+      cpu: 200m
+      memory: 200Mi
+    limits:
+      memory: 2Gi
+
+  serviceAccount:
+    {}
+    # Configures extra annotations on the service account
+    # annotations:
+    #   some: annotation
+
+  disableChecks: {}
+
+  # a list of db properties to update on startup
+  properties: {}
+
+  # a map of extra arguments to the canary-checker cli
+  extraArgs: {}
+  extra:
+    # nodeSelector:
+    #   key: value
+    # tolerations:
+    #   - key: "key1"
+    #     operator: "Equal"
+    #     value: "value1"
+    #     effect: "NoSchedule"
+    # affinity:
+    #   nodeAffinity:
+    #       requiredDuringSchedulingIgnoredDuringExecution:
+    #         nodeSelectorTerms:
+    #         - matchExpressions:
+    #           - key: kubernetes.io/e2e-az-name
+    #             operator: In
+    #             values:
+    #             - e2e-az1
+    #             - e2e-az2

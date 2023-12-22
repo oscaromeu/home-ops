@@ -20,6 +20,7 @@ resources:
   - ./external-dns.yaml
   - ./external-secrets.yaml
   - ./fairwinds.yaml
+  - ./flanksource.yaml
   - ./gitea.yaml
   - ./grafana.yaml
   - ./hajimari.yaml
