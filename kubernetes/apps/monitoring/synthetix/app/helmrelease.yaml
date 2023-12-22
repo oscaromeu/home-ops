@@ -59,7 +59,7 @@ spec:
     otel:
       # OpenTelemetry gRPC collector endpoint in host:port format
       collector: ""
-      serviceName: synthetix
+      serviceName: canary-checker
 
     db:
       runMigrations: true
@@ -72,8 +72,8 @@ spec:
         storageClass: "local-host"
         storage: 20Gi
 
-    nameOverride: "synthetix"
-    pingMode: "unprivileged"
+    nameOverride: ""
+    pingMode: "privileged"
     allowPrivilegeEscalation: false
 
     prometheusURL: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
@@ -112,8 +112,8 @@ spec:
             - *host
     flanksource-ui:
       enabled: true
-      nameOverride: "synthetix-ui"
-      fullnameOverride: "synthetix-ui"
+      nameOverride: "canary-checker-ui"
+      fullnameOverride: "canary-checker-ui"
       oryKratosURL: ""
       resources:
         requests:
@@ -121,10 +121,10 @@ spec:
           memory: 128Mi
         limits:
           memory: 512Mi
-      backendURL: "http://synthetix:8080"
+      backendURL: "http://canary-checker-ui:8080"
       ingress:
         enabled: true
-        host: &host "synthetix-ui.local"
+        host: &host "synthetix-ui.${SECRET_DOMAIN}"
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           hajimari.io/icon: simple-icons:grafana

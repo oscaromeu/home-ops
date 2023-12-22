@@ -29,7 +29,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-synthetix
-  path: ./kubernetes/apps/monitoring/synthetix/app
+  path: ./kubernetes/apps/monitoring/synthetix/monitoring
   prune: true
   sourceRef:
     kind: GitRepository
