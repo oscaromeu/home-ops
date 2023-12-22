@@ -5,3 +5,5 @@ namespace: monitoring
 resources:
   - ./dashboards
   - ./rules
+  ### http checks
+  - ./http-check.yaml
