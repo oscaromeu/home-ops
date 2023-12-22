@@ -1,0 +1,25 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+    app.kubernetes.io/component: Aggregator
+    app.kubernetes.io/instance: vector-aggregator
+    app.kubernetes.io/name: vector
+    app.kubernetes.io/version: 0.31.0-debian
+  name: vector-aggregator
+  namespace: logging
+spec:
+  jobLabel: app.kubernetes.io/name
+  namespaceSelector:
+    matchNames:
+    - logging
+  podMetricsEndpoints:
+  - honorLabels: false
+    honorTimestamps: true
+    path: /metrics
+    port: prom-exporter
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: Aggregator
+      app.kubernetes.io/instance: vector-aggregator
+      app.kubernetes.io/name: vector
