@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app outline-dev
+  name: &app wiki
   namespace: dev
 spec:
   interval: 30m
@@ -56,7 +56,7 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/target: ingress.${SECRET_DOMAIN}
         hosts:
-          - host: &host docs-dev.${SECRET_DOMAIN}
+          - host: &host wiki.${SECRET_DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
