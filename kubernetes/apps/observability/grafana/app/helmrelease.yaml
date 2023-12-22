@@ -71,25 +71,25 @@ spec:
           #- name: Mimir
           #  type: prometheus
           #  access: proxy
-          #  url: http://mimir-nginx.monitoring.svc.cluster.local:80/prometheus
+          #  url: http://mimir-nginx.observability.svc.cluster.local:80/prometheus
           #  isDefault: false
 
           - name: Prometheus
             type: prometheus
             access: proxy
-            url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
+            url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
             isDefault: true
 
           - name: Thanos
             type: prometheus
             access: proxy
-            url: http://thanos-query-frontend.monitoring.svc.cluster.local:9090
+            url: http://thanos-query-frontend.observability.svc.cluster.local:9090
             isDefault: false
 
           #- name: Victoria-Metrics
           #  type: prometheus
           #  access: proxy
-          #  url: http://victoria-metrics-single-server.monitoring.svc.cluster.local:8428
+          #  url: http://victoria-metrics-single-server.observability.svc.cluster.local:8428
           #  isDefault: true
 
           - name: Loki
@@ -103,7 +103,7 @@ spec:
             type: tempo
             typeName: Tempo
             access: proxy
-            url: http://tempo.monitoring.svc.cluster.local:3100
+            url: http://tempo.observability.svc.cluster.local:3100
             password: ''
             user: ''
             database: ''
@@ -124,7 +124,7 @@ spec:
 
           - name: Pyroscope
             type: pyroscope
-            url: http://pyroscope-querier.monitoring.svc.cluster.local:4040
+            url: http://pyroscope-querier.observability.svc.cluster.local:4040
     sidecar:
       dashboards:
         enabled: true

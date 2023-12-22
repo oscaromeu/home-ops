@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: synthetix
+  name: canary-checker
   namespace: observability
 spec:
   interval: 5m
@@ -63,11 +63,15 @@ spec:
 
     db:
       runMigrations: true
+      embedded:
+        persist: true
+        storageClass: "local-path"
+        storage: 100Gi
       external:
-        enabled: true
+        enabled: false
         create: false
         secretKeyRef:
-          name: synthetix-secret
+          name: canary-checker-secret
           key: DB_URL
         storageClass: "local-host"
         storage: 20Gi
@@ -106,7 +110,7 @@ spec:
           #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
           #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
       hosts:
-        - &host "synthetix.${SECRET_DOMAIN}"
+        - &host "canary-checker.${SECRET_DOMAIN}"
       tls:
         - hosts:
             - *host
@@ -124,7 +128,7 @@ spec:
       backendURL: "http://canary-checker-ui:8080"
       ingress:
         enabled: true
-        host: &host "synthetix-ui.${SECRET_DOMAIN}"
+        host: &host "canary-checker-ui.${SECRET_DOMAIN}"
         annotations:
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           hajimari.io/icon: simple-icons:grafana
