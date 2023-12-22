@@ -9,4 +9,3 @@ spec:
       endpoint: https://prometheus.${SECRET_DOMAIN}
       thresholdMillis: 3000
       responseCodes: [201, 200, 301]
-      maxSSLExpiry: 7
