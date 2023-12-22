@@ -17,7 +17,7 @@ resources:
   - ./pyroscope/ks.yaml
   - ./sloth/ks.yaml
   - ./speedtest-exporter/ks.yaml
-  #- ./synthetix/ks.yaml
+  - ./synthetix/ks.yaml
   #- ./tempo/ks.yaml
   - ./thanos/ks.yaml
   - ./vpa/ks.yaml
