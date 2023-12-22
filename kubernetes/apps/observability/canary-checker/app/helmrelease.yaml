@@ -62,7 +62,7 @@ spec:
       serviceName: canary-checker
 
     db:
-      runMigrations: true
+      runMigrations: tru
       embedded:
         persist: true
         storageClass: "local-path"
@@ -80,7 +80,7 @@ spec:
     pingMode: "privileged"
     allowPrivilegeEscalation: false
 
-    prometheusURL: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
+    prometheusURL: "http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090"
 
     data:
       defaultSearchWindow: 1h
