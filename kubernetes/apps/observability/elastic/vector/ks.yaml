@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
     - name: cluster-apps-elastic
-  path: ./kubernetes/apps/logging/vector/aggregator
+  path: ./kubernetes/apps/observability/vector/aggregator
   prune: true
   sourceRef:
     kind: GitRepository
@@ -19,7 +19,7 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: vector-aggregator
-      namespace: logging
+      namespace: observability
   interval: 30m
   retryInterval: 1m
   timeout: 10m
@@ -34,7 +34,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-vector-aggregator
-  path: ./kubernetes/apps/logging/vector/agent
+  path: ./kubernetes/apps/observability/vector/agent
   prune: true
   sourceRef:
     kind: GitRepository
@@ -43,7 +43,7 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: vector-agent
-      namespace: logging
+      namespace: observability
   interval: 30m
   retryInterval: 1m
   timeout: 10m
@@ -58,7 +58,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-vector-aggregator
-  path: ./kubernetes/apps/logging/vector/monitoring
+  path: ./kubernetes/apps/observability/vector/monitoring
   prune: true
   sourceRef:
     kind: GitRepository
@@ -67,7 +67,7 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: vector-aggregator
-      namespace: logging
+      namespace: observability
   interval: 30m
   retryInterval: 1m
   timeout: 5m

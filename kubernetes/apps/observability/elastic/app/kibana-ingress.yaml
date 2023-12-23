@@ -12,7 +12,7 @@
    labels:
      app: elk
    name: kibana
-   namespace: logging
+   namespace: observability
  spec:
    ingressClassName: internal
    rules:

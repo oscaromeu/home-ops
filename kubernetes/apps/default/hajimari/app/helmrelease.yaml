@@ -45,7 +45,7 @@ spec:
           - monitoring
           - networking
           - rook-ceph
-          - logging
+          - observability
           - tools
     ingress:
       main:

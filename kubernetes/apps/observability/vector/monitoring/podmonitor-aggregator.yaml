@@ -7,12 +7,12 @@ metadata:
     app.kubernetes.io/name: vector
     app.kubernetes.io/version: 0.31.0-debian
   name: vector-aggregator
-  namespace: logging
+  namespace: observability
 spec:
   jobLabel: app.kubernetes.io/name
   namespaceSelector:
     matchNames:
-    - logging
+    - observability
   podMetricsEndpoints:
   - honorLabels: false
     honorTimestamps: true

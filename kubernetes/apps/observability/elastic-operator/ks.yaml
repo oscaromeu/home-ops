@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: cluster-apps-nginx-external
     - name: cluster-apps-external-secrets-stores
-  path: ./kubernetes/apps/logging/elastic-operator/app
+  path: ./kubernetes/apps/observability/elastic-operator/app
   prune: true
   sourceRef:
     kind: GitRepository

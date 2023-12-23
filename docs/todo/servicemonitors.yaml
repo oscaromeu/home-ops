@@ -17,7 +17,7 @@
     - port: http
     namespaceSelector:
       matchNames:
-      - logging
+      - observability
     selector:
       matchLabels:
         app: prometheus-elasticsearch-exporter
@@ -40,7 +40,7 @@
       port: redis-metrics
     namespaceSelector:
       matchNames:
-      - logging
+      - observability
     selector:
       matchLabels:
         app: redis-exporter

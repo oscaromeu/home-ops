@@ -3,7 +3,7 @@ apiVersion: elasticsearch.k8s.elastic.co/v1
 kind: Elasticsearch
 metadata:
   name: elk
-  namespace: logging
+  namespace: observability
 spec:
   version: 8.11.0
   volumeClaimDeletePolicy: DeleteOnScaledownOnly
@@ -30,7 +30,7 @@ spec:
           app.kubernetes.io/name: elk
           app.kubernetes.io/service: logging
           app.kubernetes.io/component: elasticsearch
-          app.kubernetes.io/namespace: logging
+          app.kubernetes.io/namespace: observability
         annotations:
           co.elastic.logs/enabled: "true"
       spec:
@@ -95,7 +95,7 @@ spec:
           app.kubernetes.io/name: elk
           app.kubernetes.io/service: logging
           app.kubernetes.io/component: elasticsearch
-          app.kubernetes.io/namespace: logging
+          app.kubernetes.io/namespace: observability
         annotations:
           co.elastic.logs/enabled: "true"
       spec:
@@ -145,7 +145,7 @@ apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
 metadata:
   name: elk
-  namespace: logging
+  namespace: observability
   labels:
     app: elk
 spec:
@@ -163,7 +163,7 @@ spec:
         app.kubernetes.io/name: elk
         app.kubernetes.io/service: logging
         app.kubernetes.io/component: kibana
-        app.kubernetes.io/namespace: logging
+        app.kubernetes.io/namespace: observability
       annotations:
         co.elastic.logs/enabled: "true"
     spec:

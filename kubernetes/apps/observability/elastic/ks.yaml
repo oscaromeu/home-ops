@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: cluster-apps-elastic-operator
     - name: cluster-apps-kube-prometheus-stack
-  path: ./kubernetes/apps/logging/elastic/app
+  path: ./kubernetes/apps/observability/elastic/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -29,7 +29,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-elastic
-  path: ./kubernetes/apps/logging/elastic/monitoring
+  path: ./kubernetes/apps/observability/elastic/monitoring
   prune: true
   sourceRef:
     kind: GitRepository

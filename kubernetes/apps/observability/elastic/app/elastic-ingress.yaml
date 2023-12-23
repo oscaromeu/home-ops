@@ -11,7 +11,7 @@
    labels:
      app: elk
    name: elastic
-   namespace: logging
+   namespace: observability
  spec:
    ingressClassName: internal
    rules:
