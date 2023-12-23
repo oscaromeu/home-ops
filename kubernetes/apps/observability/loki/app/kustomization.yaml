@@ -6,7 +6,7 @@ resources:
   - ./objectbucketclaim.yaml
   - ./helmrelease.yaml
 
-configMapGenerator:
-  - name: loki-alerting-rules
-    files:
-      - loki-alerting-rules.yaml=./rules/loki-alerting-rules.yaml
+#configMapGenerator:
+#  - name: loki-alerting-rules
+#    files:
+#      - loki-alerting-rules.yaml=./rules/loki-alerting-rules.yaml
