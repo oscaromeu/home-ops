@@ -11,6 +11,7 @@ resources:
   - ./k6s/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
+  - ./loki/ks.yaml
   - ./node-problem-detector/ks.yaml
   - ./prometheus-adapter/ks.yaml
   - ./promlens/ks.yaml
@@ -20,4 +21,5 @@ resources:
   - ./canary-checker/ks.yaml
   - ./tempo/ks.yaml
   - ./thanos/ks.yaml
+  - ./vector/ks.yaml
   - ./vpa/ks.yaml
