@@ -33,7 +33,7 @@ spec:
           - secretRef:
               name: outline-secret
     controller:
-      replicas: 1
+      replicas: 3
       strategy: RollingUpdate
       annotations:
         reloader.stakater.com/auto: "true"
