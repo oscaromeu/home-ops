@@ -34,7 +34,7 @@ spec:
               name: outline-secret
     controller:
       replicas: 1
-      strategy: RollingUpdate
+      strategy: Recreate
       annotations:
         reloader.stakater.com/auto: "true"
     image:
