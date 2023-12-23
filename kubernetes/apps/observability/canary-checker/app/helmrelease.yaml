@@ -62,7 +62,7 @@ spec:
       serviceName: canary-checker
 
     db:
-      runMigrations: tru
+      runMigrations: true
       embedded:
         persist: true
         storageClass: "local-path"
