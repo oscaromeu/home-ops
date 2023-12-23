@@ -10,7 +10,7 @@ spec:
   dependsOn:
     #- name: cluster-apps-nginx-external
     - name: cluster-apps-kube-prometheus-stack
-    - name: cluster-apps-minio
+    #- name: cluster-apps-minio
   path: ./kubernetes/apps/observability/loki/app
   prune: true
   sourceRef:
