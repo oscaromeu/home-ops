@@ -25,7 +25,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 25,
+  "id": 19,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -226,7 +226,7 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 2,
+        "w": 24,
         "x": 0,
         "y": 13
       },
@@ -245,9 +245,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "none"
+        "textMode": "none",
+        "wideLayout": true
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "10.2.2",
       "repeat": "Canary",
       "repeatDirection": "h",
       "targets": [
@@ -267,8 +268,8 @@
       "type": "stat"
     }
   ],
-  "schemaVersion": 37,
-  "style": "dark",
+  "refresh": "",
+  "schemaVersion": 38,
   "tags": [],
   "templating": {
     "list": [
@@ -276,7 +277,7 @@
         "current": {
           "selected": false,
           "text": "Prometheus",
-          "value": "Prometheus"
+          "value": "PBFA97CFB590B2093"
         },
         "hide": 0,
         "includeAll": false,
@@ -320,12 +321,12 @@
       {
         "current": {
           "selected": false,
-          "text": "mission-control",
-          "value": "mission-control"
+          "text": "observability",
+          "value": "observability"
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "prometheus"
+          "uid": "${Datasource}"
         },
         "definition": "label_values(canary_check_info, namespace)",
         "hide": 0,
@@ -346,13 +347,13 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Canary Checker Overview",
   "uid": "Wg8CmiuVz",
-  "version": 11,
+  "version": 1,
   "weekStart": ""
 }

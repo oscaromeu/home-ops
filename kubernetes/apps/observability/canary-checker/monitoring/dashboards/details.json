@@ -25,7 +25,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 26,
+  "id": 38,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -96,7 +96,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DataSource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -105,7 +105,9 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
             "inspect": false
           },
           "mappings": [],
@@ -133,7 +135,9 @@
       },
       "id": 2,
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": "",
           "reducer": [
             "sum"
@@ -142,12 +146,12 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DataSource}"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -197,6 +201,11 @@
           },
           "custom": {
             "fillOpacity": 70,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
             "lineWidth": 1
           },
           "mappings": [],
@@ -268,6 +277,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -281,6 +291,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -360,6 +371,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -373,6 +385,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -442,8 +455,8 @@
       "type": "timeseries"
     }
   ],
-  "schemaVersion": 37,
-  "style": "dark",
+  "refresh": "",
+  "schemaVersion": 38,
   "tags": [],
   "templating": {
     "list": [
@@ -451,7 +464,7 @@
         "current": {
           "selected": false,
           "text": "Prometheus",
-          "value": "Prometheus"
+          "value": "PBFA97CFB590B2093"
         },
         "hide": 0,
         "includeAll": false,
@@ -467,8 +480,8 @@
       {
         "current": {
           "selected": false,
-          "text": "mission-control",
-          "value": "mission-control"
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "type": "prometheus",
@@ -492,9 +505,9 @@
       },
       {
         "current": {
-          "selected": true,
-          "text": "Canary Checker",
-          "value": "Canary Checker"
+          "selected": false,
+          "text": "prometheus-http-check",
+          "value": "prometheus-http-check"
         },
         "datasource": {
           "type": "prometheus",
@@ -526,6 +539,6 @@
   "timezone": "",
   "title": "Canary Checker Details",
   "uid": "Phv2nmu4z",
-  "version": 4,
+  "version": 1,
   "weekStart": ""
 }
