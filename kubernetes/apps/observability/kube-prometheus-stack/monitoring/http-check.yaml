@@ -6,6 +6,6 @@ spec:
   interval: 30
   http:
     - name: http pass response 200 status code
-      endpoint: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
+      endpoint: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
       thresholdMillis: 3000
       responseCodes: [201, 200, 301]
