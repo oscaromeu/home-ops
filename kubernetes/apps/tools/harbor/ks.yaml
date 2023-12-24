@@ -9,6 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-nginx-external
+    - name: cluster-apps-nginx-internal
   path: ./kubernetes/apps/tools/harbor/app
   prune: true
   sourceRef:
