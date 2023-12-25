@@ -7,3 +7,6 @@ resources:
   - ./helmrelease.yaml
   - ./gitea-ssh-ingress.yaml
   #- ./pvc.yaml
+
+patchesStrategicMerge:
+  - ./patches/postgres.yaml
