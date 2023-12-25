@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: stackdriver-exporter
-  namespace: monitoring
+  namespace: observability
 spec:
   interval: 5m
   chart:
@@ -28,7 +28,7 @@ spec:
 
   dependsOn:
     - name: kube-prometheus-stack
-      namespace: monitoring
+      namespace: observability
 
   values:
 
@@ -42,7 +42,7 @@ spec:
 
     stackdriver:
       projectId: "refined-ensign-355816"
-      serviceAccountSecret: "stackdriver-credentials"
+      serviceAccountSecret: "stackdriver-secret"
 
       metrics:
         #typePrefixes: 'cloudsql.googleapis.com/database,storage.googleapis.com/'
@@ -50,4 +50,4 @@ spec:
 
     serviceMonitor:
       enabled: true
-      namespace: monitoring
+      namespace: observability
