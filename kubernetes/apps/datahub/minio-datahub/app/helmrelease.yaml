@@ -70,8 +70,8 @@ spec:
       metrics:
         enabled: true
       buckets:
-        - name: loki-bucket-v2
         - name: cnpg-bucket-v1
+        - name: gitea-bucket-v1
       ## List of secret names to use for generating MinIO users during tenant provisioning
       users:
         - name: admin-user-secret
@@ -82,7 +82,7 @@ spec:
         - name: PROMETHEUS_NAMESPACE
           value: "monitoring"
         - name: MINIO_PROMETHEUS_URL
-          value: "http://kube-prometheus-stack-prometheus.monitoring:9090"
+          value: "http://kube-prometheus-stack-prometheus.observability:9090"
         - name: MINIO_PROMETHEUS_AUTH_TYPE
           value: "public"
 
