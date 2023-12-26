@@ -45,11 +45,11 @@ spec:
               tag: 17.0.1@sha256:2f716593220fff9e61cd96f17b9676c040f2151423010038f180c27af7f6711e
             env:
               ATUIN_HOST: 0.0.0.0
-              ATUIN_PORT: &port 80
+              ATUIN_PORT: &port 8888
               ATUIN_OPEN_REGISTRATION: "true"
-              # ATUIN_METRICS_ENABLE: "true"
-              # ATUIN_METRICS_HOST: 0.0.0.0
-              # ATUIN_METRICS_PORT: &metricsPort 8080
+              ATUIN_METRICS_ENABLE: "true"
+              ATUIN_METRICS_HOST: 0.0.0.0
+              ATUIN_METRICS_PORT: &metricsPort 8080
             envFrom: *envFrom
             args: ["server", "start"]
             securityContext:
@@ -74,29 +74,25 @@ spec:
         ports:
           http:
             port: *port
-          # metrics:
-          #   port: *metricsPort
-    # serviceMonitor:
-    #   main:
-    #     enabled: true
-    #     endpoints:
-    #       - port: metrics
-    #         scheme: http
-    #         path: /metrics
-    #         interval: 1m
-    #         scrapeTimeout: 10s
+          metrics:
+            port: *metricsPort
+    serviceMonitor:
+      main:
+        enabled: true
+        endpoints:
+          - port: metrics
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
     ingress:
       main:
         enabled: true
         className: internal
+        annotations:
+          hajimari.io/icon: mdi:powershell
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  name: main
-                  port: http
-          - host: &customHost "sh.${SECRET_DOMAIN}"
+          - host: &host "sh.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
@@ -105,7 +101,6 @@ spec:
         tls:
           - hosts:
               - *host
-              - *customHost
     persistence:
       config:
         enabled: true
