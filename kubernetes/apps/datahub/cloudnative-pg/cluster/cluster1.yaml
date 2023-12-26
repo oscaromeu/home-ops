@@ -42,7 +42,7 @@ spec:
     retentionPolicy: 30d
     barmanObjectStore:
       destinationPath: s3://cloudnative-pg/
-      endpointURL: http://datahub-hl.datahub.svc.cluster.local:9000
+      endpointURL: https://s3.${SECRET_DOMAIN}
       serverName: &currentCluster postgres1-v1
       wal:
         compression: bzip2
