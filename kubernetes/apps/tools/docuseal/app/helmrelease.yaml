@@ -71,7 +71,7 @@ spec:
           - hosts:
               - *host
     persistence:
-      config:
+      data:
         enabled: true
         type: persistentVolumeClaim
         storageClass: local-path
