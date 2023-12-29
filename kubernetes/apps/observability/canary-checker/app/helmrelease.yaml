@@ -125,7 +125,7 @@ spec:
           memory: 128Mi
         limits:
           memory: 512Mi
-      backendURL: "http://canary-checker-ui:8080"
+      backendURL: "http://canary-checker.observability.svc.cluster.local:8080"
       ingress:
         enabled: true
         host: &host "canary-checker-ui.${SECRET_DOMAIN}"
