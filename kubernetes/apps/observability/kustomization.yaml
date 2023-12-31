@@ -19,4 +19,5 @@ resources:
   - ./canary-checker/ks.yaml
   - ./tempo/ks.yaml
   - ./thanos/ks.yaml
+  - ./uptime/ks.yaml
   - ./vector/ks.yaml
