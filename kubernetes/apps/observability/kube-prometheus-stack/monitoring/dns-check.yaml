@@ -1,0 +1,16 @@
+apiVersion: canaries.flanksource.com/v1
+kind: Canary
+metadata:
+  name: prometheus-dns-check
+spec:
+  interval: 60
+  dns:
+    - name: A record query
+      server: 10.43.0.10
+      port: 53
+      query: "kube-prometheus-stack-prometheus.observability.svc.cluster.local"
+      querytype: "A"
+      minrecords: 1
+      exactreply: ["kube-prometheus-stack-prometheus.observability.svc.cluster.local."]
+      timeout: 10
+      thresholdMillis: 1000
