@@ -11,6 +11,6 @@ spec:
       query: "kube-prometheus-stack-prometheus.observability.svc.cluster.local"
       querytype: "A"
       minrecords: 1
-      exactreply: ["kube-prometheus-stack-prometheus.observability.svc.cluster.local."]
+      exactreply: ["10.43.8.74"]
       timeout: 10
       thresholdMillis: 1000
