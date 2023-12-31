@@ -6,5 +6,5 @@ resources:
   - ./dashboards
   - ./rules
   ### checks
-  - ./http-check.yaml
-  - ./dns-check.yaml
+  #- ./http-check.yaml
+  #- ./dns-check.yaml
