@@ -33,6 +33,8 @@ spec:
             image:
               repository: ananthakumaran/paisa
               tag: v0.6.2
+            env:
+              PAISA_DEBUG: true
             resources:
               requests:
                 memory: 128Mi
@@ -43,7 +45,7 @@ spec:
       main:
         ports:
           http:
-            port: 7500
+            port: &port 7500
     ingress:
       main:
         enabled: true
@@ -60,10 +62,9 @@ spec:
         tls:
           - hosts:
               - *host
-
     persistence:
       data:
         enabled: true
-        mountPath: /var/lib/finances
-        existingClaim: storage-data
-        subPath: data
+        type: persistentVolumeClaim
+        storageClass: local-path
+        size: 1Gi
