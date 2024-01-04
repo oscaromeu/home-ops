@@ -1,8 +1,7 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: finances
+  name: actual
 spec:
   interval: 30m
   chart:
@@ -26,34 +25,42 @@ spec:
   values:
     controllers:
       main:
-        replicas: 1
-        strategy: RollingUpdate
+        annotations:
+          reloader.stakater.com/auto: "true"
         containers:
           main:
             image:
-              repository: ananthakumaran/paisa
-              tag: v0.6.2
-            env:
-              PAISA_DEBUG: true
+              repository: ghcr.io/actualbudget/actual-server
+              tag: 23.12.1
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
-                memory: 128Mi
-                cpu: 10m
+                cpu: 12m
+                memory: 128M
               limits:
-                memory: 512Mi
+                memory: 512M
+        pod:
+          enableServiceLinks: false
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            runAsNonRoot: true
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
     service:
       main:
         ports:
           http:
-            port: &port 7500
+            port: 5006
     ingress:
       main:
         enabled: true
         className: internal
-        annotations:
-          hajimari.io/icon: mdi:cash
         hosts:
-          - host: &host "finances.${SECRET_DOMAIN}"
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
@@ -63,8 +70,8 @@ spec:
           - hosts:
               - *host
     persistence:
-      data:
+      config:
         enabled: true
-        type: persistentVolumeClaim
-        storageClass: local-path
-        size: 1Gi
+        existingClaim: actual
+        globalMounts:
+          - path: /data

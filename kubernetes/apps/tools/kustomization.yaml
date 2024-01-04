@@ -11,7 +11,7 @@ resources:
   - ./harbor/ks.yaml
   - ./microcks/ks.yaml
   - ./outline/ks.yaml
-  #- ./paisa/ks.yaml
+  - ./actual/ks.yaml
   - ./plane/ks.yaml
   - ./redisui/ks.yaml
   #- ./redpanda/ks.yaml
