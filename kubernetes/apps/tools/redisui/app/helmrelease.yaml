@@ -32,7 +32,7 @@ spec:
     env:
       # - name: RITRUSTEDORIGINS
       #   value: https://redisui.${SECRET_DOMAIN}
-      RITRUSTEDORIGINS: "https://redisui.${SECRET_DOMAIN}"
+      RITRUSTEDORIGINS: "https://ryu.${SECRET_DOMAIN}"
       # RIHOST: "0.0.0.0"
       # RIPORT: "8001"
       # RIHOMEDIR: /db
@@ -43,7 +43,7 @@ spec:
         enabled: true
         ingressClassName: internal
         annotations:
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          #external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           hajimari.io/icon: simple-icons:redis
         hosts:
           - host: &host "ryu.${SECRET_DOMAIN}"
