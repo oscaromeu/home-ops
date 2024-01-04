@@ -13,6 +13,6 @@ resources:
   - ./outline/ks.yaml
   - ./paisa/ks.yaml
   - ./plane/ks.yaml
-  #- ./redisui/ks.yaml
+  - ./redisui/ks.yaml
   #- ./redpanda/ks.yaml
   - ./semaphore/ks.yaml
