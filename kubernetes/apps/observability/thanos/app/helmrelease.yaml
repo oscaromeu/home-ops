@@ -194,7 +194,7 @@ spec:
         requests: {}
       persistence:
         enabled: true
-        storageClass: "ceph-filesystem"
+        storageClass: "local-path"
         size: 10Gi
       ingress:
         enabled: true
