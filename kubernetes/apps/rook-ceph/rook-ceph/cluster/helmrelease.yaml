@@ -68,7 +68,7 @@ spec:
         useAllNodes: false
         useAllDevices: false
         config:
-          osdsPerDevice: "1"
+          osdsPerDevice: "2"
         nodes:
           - name: lbpkm1
             devices:
