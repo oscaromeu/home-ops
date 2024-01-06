@@ -9,7 +9,6 @@ resources:
   - ./docuseal/ks.yaml
   - ./gitea/ks.yaml
   - ./harbor/ks.yaml
-  - ./mealie/ks.yaml
   - ./microcks/ks.yaml
   - ./outline/ks.yaml
   - ./actual/ks.yaml
