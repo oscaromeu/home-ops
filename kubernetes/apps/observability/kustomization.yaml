@@ -13,8 +13,8 @@ resources:
   - ./prometheus-adapter/ks.yaml
   - ./promlens/ks.yaml
   - ./pyroscope/ks.yaml
-  - ./sloth/ks.yaml
-  - ./speedtest-exporter/ks.yaml
+  #- ./sloth/ks.yaml
+  #- ./speedtest-exporter/ks.yaml
   - ./stackdriver-exporter/ks.yaml
   - ./canary-checker/ks.yaml
   - ./tempo/ks.yaml

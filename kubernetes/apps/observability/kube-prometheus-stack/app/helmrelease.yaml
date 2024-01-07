@@ -33,7 +33,7 @@ spec:
       namespace: kube-system
   values:
     defaultRules:
-      create: true
+      create: false
     #fullnameOverride: kps
     cleanPrometheusOperatorObjectNames: true
     alertmanager:

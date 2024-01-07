@@ -3,5 +3,5 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./namespace.yaml
-  - ./json-fusion-exporter/ks.yaml
+  #- ./json-fusion-exporter/ks.yaml
   - ./spring-boot-app/ks.yaml
