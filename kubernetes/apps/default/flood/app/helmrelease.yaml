@@ -47,7 +47,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: external
+        ingressClassName: internal
         annotations:
           hajimari.io/icon: mdi:download
         hosts:

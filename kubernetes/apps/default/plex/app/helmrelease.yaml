@@ -125,6 +125,6 @@ spec:
         type: emptyDir
       media:
         type: hostPath
-        hostPathType: Directory
+        hostPathType: DirectoryOrCreate
         hostPath: /home/pi/Media
         mountPath: /media
