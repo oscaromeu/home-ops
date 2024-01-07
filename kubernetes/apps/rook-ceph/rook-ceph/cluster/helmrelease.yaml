@@ -72,7 +72,7 @@ spec:
         nodes:
           - name: lbpkm1
             devices:
-              - name: /dev/disk/by-id/ata-KIOXIA-EXCERIA_SATA_SSD_23OB80AAK0Z5
+              - name: /dev/disk/by-id/ata-KINGSTON_SA400S37480G_50026B7283215569
           - name: lbpkw1
             devices:
               - name: /dev/disk/by-id/ata-SSDPR-CL100-480-G3_GXE092715
