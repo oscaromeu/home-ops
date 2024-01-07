@@ -14,7 +14,7 @@ resources:
   - ./openweather/ks.yaml
   - ./overseerr/ks.yaml
   #- ./photoprism/ks.yaml
-  - ./plex/ks.yaml
+  #- ./plex/ks.yaml
   #- ./podinfo/ks.yaml
   - ./prowlarr/ks.yaml
   - ./qbittorrent/ks.yaml
