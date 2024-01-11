@@ -25,6 +25,7 @@ output.redis:
 
 
 logging.level: debug
+logging.selectors: ["*"]
 logging.to_files: true
 logging.to_syslog: false
 logging.files:
