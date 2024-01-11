@@ -76,4 +76,5 @@ spec:
         type: persistentVolumeClaim
         storageClass: local-path
         size: 1Gi
+        accessMode: ReadWriteOnce
 
