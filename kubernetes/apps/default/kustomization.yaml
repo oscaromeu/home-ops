@@ -9,7 +9,7 @@ resources:
   - ./hajimari/ks.yaml
   #- ./lidarr/ks.yaml
   - ./linkding/ks.yaml
-  - ./mealie/ks.yaml
+  #- ./mealie/ks.yaml
   #- ./navidrome/ks.yaml
   - ./openweather/ks.yaml
   - ./overseerr/ks.yaml
@@ -18,4 +18,4 @@ resources:
   #- ./podinfo/ks.yaml
   - ./prowlarr/ks.yaml
   - ./qbittorrent/ks.yaml
-  - ./sonarr/ks.yaml
+  #- ./sonarr/ks.yaml
