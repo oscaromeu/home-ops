@@ -4,7 +4,7 @@ sources:
 
   kafka:
     type: kafka
-    bootstrap_servers: kafka-cluster-kafka-bootstrap.datahub.svc.cluster.local:9094
+    bootstrap_servers: kafka-cluster-kafka-bootstrap.datahub.svc.cluster.local:9093
     topics:
       - k3s-logs-topic
     group_id: k3s-logs-group
@@ -15,7 +15,7 @@ sources:
       ca_file: /kafka-cluster-ca-cert/ca.crt
       verify_certificate: false
     sasl:
-      enabled: true
+      enabled: false
       mechanism: "SCRAM-SHA-512"
       password: "${KAFKA_PASS}"
       username: "${KAFKA_USER}"
