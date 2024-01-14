@@ -19,9 +19,9 @@ configMapGenerator:
     files:
       - vector-metrics.yaml=./pipelines/vector-metrics.yaml
 
-  - name: loki-aggregator
-    files:
-      - loki.yaml=./pipelines/loki.yaml
+  #- name: loki-aggregator
+  #  files:
+  #    - loki.yaml=./pipelines/loki.yaml
 
 generatorOptions:
   disableNameSuffixHash: true

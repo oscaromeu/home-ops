@@ -20,9 +20,9 @@ configMapGenerator:
     files:
       - vector-metrics.yaml=./pipelines/vector-metrics.yaml
 
-  - name: loki-agent
-    files:
-      - loki.yaml=./pipelines/loki.yaml
+  #- name: loki-agent
+  #  files:
+  #    - loki.yaml=./pipelines/loki.yaml
 
   #- name: journal-pipeline
   #  files:
