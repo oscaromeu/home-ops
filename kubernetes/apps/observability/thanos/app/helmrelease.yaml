@@ -41,11 +41,10 @@ spec:
       tag: v0.32.5
     objstoreConfig:
       type: s3
-      bucket: thanos-bucket-v2
-      endpoint: datahub-hl.datahub.svc.cluster.local:9000
       config:
         insecure: true
-
+        bucket: thanos-bucket-v2
+        endpoint: datahub-hl.datahub.svc.cluster.local:9000
     query:
       enabled: true
       replicaCount: 1
