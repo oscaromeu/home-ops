@@ -51,6 +51,8 @@ spec:
         org_role: "Viewer"
       dataproxy:
         max_idle_connections: 500
+      security:
+        allow_embedding: true
     #dashboardProviders:
     #  dashboardproviders.yaml:
     #    apiVersion: 1

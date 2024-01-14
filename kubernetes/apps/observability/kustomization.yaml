@@ -18,5 +18,5 @@ resources:
   - ./stackdriver-exporter/ks.yaml
   - ./canary-checker/ks.yaml
   - ./tempo/ks.yaml
-  #- ./thanos/ks.yaml
+  - ./thanos/ks.yaml
   - ./vector/ks.yaml
