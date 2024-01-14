@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   #- ./secret.sops.yaml
   #- ./objectbucketclaim.yaml
+  - ./externalsecret.yaml
   - ./helmrelease.yaml
   #- ./dashboards
 
