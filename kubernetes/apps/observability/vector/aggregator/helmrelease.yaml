@@ -29,7 +29,7 @@ spec:
 
   values:
 
-    replicas: 3
+    replicas: 6
 
     args:
       - --config-dir
@@ -133,7 +133,7 @@ spec:
 
     env:
       - name: VECTOR_LOG
-        value: "debug"
+        value: "info"
       #- name: VECTOR_SELF_NODE_NAME
       #  value: "$(VECTOR_AGGREGATOR_SERVICE_HOST)"
 
