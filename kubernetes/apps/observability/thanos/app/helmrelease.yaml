@@ -45,6 +45,7 @@ spec:
         insecure: true
     query:
       enabled: true
+      logLevel: debug
       replicaCount: 1
       # https://github.com/bitnami/charts/blob/main/bitnami/thanos/values.yaml#L170
       replicaLabel: ["__replica__"]
