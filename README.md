@@ -116,6 +116,7 @@ See my _awful_ commit [main history](https://github.com/oscaromeu/home-ops/commi
 ## :handshake:&nbsp; Gratitude and thanks
 
 Thanks all the people of [Home Operations](https://discord.gg/home-operations) Discord community who put a lot of effort and donate their time to the community. This people don't mess around, seriously. If there's something you want to learn, take a look. It will blow your mind.
+
 ---
 
 ## 🔏 License
