@@ -80,7 +80,7 @@ spec:
       login: true
       superuser: false
       createdb: true
-      createrole: false
+      createrole: true
       inherit: false
       replication: false
       bypassrls: false
@@ -97,7 +97,7 @@ spec:
       login: true
       superuser: false
       createdb: true
-      createrole: false
+      createrole: true
       inherit: false
       replication: false
       bypassrls: false
