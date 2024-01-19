@@ -17,6 +17,23 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
+  #patches:
+  #  - patch: |
+  #      - op: add
+  #        path: /spec/template/spec/containers/0/args/-
+  #        value: --concurrent=8
+  #      - op: add
+  #        path: /spec/template/spec/containers/0/args/-
+  #        value: --kube-api-qps=500
+  #      - op: add
+  #        path: /spec/template/spec/containers/0/args/-
+  #        value: --kube-api-burst=1000
+  #      - op: add
+  #        path: /spec/template/spec/containers/0/args/-
+  #        value: --requeue-dependency=5s
+  #    target:
+  #      kind: Deployment
+  #      name: (kustomize-controller|helm-controller|source-controller)
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
