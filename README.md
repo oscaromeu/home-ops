@@ -8,7 +8,7 @@ This project aims to achieve its goals while adhering to industry-standard best 
 
 ## ⛵ How to get started
 
-There is a template over at [onedr0p/flux-cluster-template](https://github.com/onedr0p/flux-cluster-template) if you want to try and follow along with some of the practices I use here. If the Devin's template repo is too hot to handle check out these following projects.
+There is a template over at [onedr0p/flux-cluster-template](https://github.com/onedr0p/flux-cluster-template) if you want to try and follow along with some of the practices I use here. If the Devin's template repo is too hot to handle check out these following projects:
 
 + [flux2-kustomize-helm-example](https://github.com/fluxcd/flux2-kustomize-helm-example) - _Start from scratch you can see my [legacy history](https://github.com/oscaromeu/home-ops/tree/d75a6360586de8b5b5c4ff6b553b7512cfea5007) to see an example_
 - [khuedoan/homelab](https://github.com/khuedoan/homelab) - _Modern self-hosting framework, fully automated from empty disk to operating services with a single command._
@@ -31,6 +31,8 @@ There is a template over at [onedr0p/flux-cluster-template](https://github.com/o
 ... and more!
 
 ## 🗄️ Hardware
+<details>
+  <summary>Click to see the summary!</summary>
 
 | Device             | Count | Specs                                                                                                                                                                                                                                                                                                          | OS                                                  | Purpose                |
 |--------------------|-------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|------------------------|
@@ -40,6 +42,7 @@ There is a template over at [onedr0p/flux-cluster-template](https://github.com/o
 | Turing Pi RK1      | 4     | **CPU** <br/>   - `8-core (Cortex-A76x4+ Cortex-A55x4)` <br/>     - `64 bit CPU` <br/>     - `@ 2.4Ghz` <br/> **GPU** `ARM Mali-G610MP4 4-core GPU` <br/> **NPU** `AI accelerator NPU 6TOPS` <br/> **RAM** `16GB` <br/> **M.2 SSD** `500GB` <br/> https://docs.turingpi.com/docs/turing-rk1-specs-and-io-ports | Ubuntu 22.04 LTS Server based on the BSP Linux 5.10 | Data Plane             |
 | Turing Pi Board V2 | 1     | **Switch** <br/>   - `1Gbps Switch (RTL8370MB-CG +)` <br/>   - VLAN Support <br/> **Storage Interfaces** <br/>   - `2x SATA 3 up to 6Gbps per port*` <br/>   - 4x M.2 Slots (2260 or 2280 NVMe drives) <br/> https://docs.turingpi.com/docs/turing-pi2-specs-and-io-ports                                      |                                                     |                        |
 | Unifi UDM Pro      | 1     | **CPU** `4-core ARM Cortex®-A57 @1.7GHz`  <br/> **System Memory** `4GB DDR4` <br/> **On-board storage**  `16 GB eMMC` <br/> **Networking interface** <br/>  - (8) LAN: `GbE RJ45 ports` <br/>  - (1) WAN: `GbE RJ45 port` <br/> **SFP+ interface** <br/>  - (1) LAN: `10G SFP+`  <br/>  - (1) WAN: `10G SFP+`  | Unify OS                                            | AIO (Router+Switch+FW) |
+</details>
 
 ## 📜 Changelog
 
