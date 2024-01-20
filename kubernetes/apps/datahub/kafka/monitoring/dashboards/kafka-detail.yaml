@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 114,
+  "id": 3,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -85,9 +85,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "repeatDirection": "h",
       "targets": [
         {
@@ -167,9 +168,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
@@ -247,9 +249,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
@@ -328,9 +331,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
@@ -408,9 +412,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
@@ -490,9 +495,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
@@ -572,9 +578,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
@@ -653,9 +660,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
@@ -675,7 +683,7 @@
       "collapsed": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "P5DCFC7561CCDE821"
+        "uid": "PBFA97CFB590B2093"
       },
       "gridPos": {
         "h": 1,
@@ -689,7 +697,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P5DCFC7561CCDE821"
+            "uid": "PBFA97CFB590B2093"
           },
           "refId": "A"
         }
@@ -734,7 +742,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -822,7 +830,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -884,6 +892,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -952,7 +961,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
@@ -1006,7 +1015,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1093,7 +1102,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1179,7 +1188,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1265,7 +1274,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1352,7 +1361,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1453,6 +1462,7 @@
         "y": 19
       },
       "id": 98,
+      "interval": "120s",
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -1467,9 +1477,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "repeatDirection": "h",
       "targets": [
         {
@@ -1477,7 +1488,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytesin_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__range]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytesin_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__rate_interval]))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -1540,6 +1551,7 @@
         "y": 19
       },
       "id": 99,
+      "interval": "120s",
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -1554,9 +1566,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "repeatDirection": "h",
       "targets": [
         {
@@ -1564,7 +1577,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytesout_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__range]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytesout_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__rate_interval]))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -1627,6 +1640,7 @@
         "y": 19
       },
       "id": 100,
+      "interval": "120",
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -1641,9 +1655,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "repeatDirection": "h",
       "targets": [
         {
@@ -1651,7 +1666,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_messagesin_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__range]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_messagesin_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__rate_interval]))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -1714,6 +1729,7 @@
         "y": 19
       },
       "id": 101,
+      "interval": "120",
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -1728,9 +1744,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "repeatDirection": "h",
       "targets": [
         {
@@ -1738,7 +1755,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_totalproducerequests_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__range]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_totalproducerequests_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__rate_interval]))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -1751,62 +1768,95 @@
       "type": "stat"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": {
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
       "description": "Byte rate",
-      "fill": 1,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
         "y": 23
       },
-      "hiddenSeries": false,
       "id": 44,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "hideEmpty": false,
-        "hideZero": false,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
+      "interval": "120",
       "links": [],
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "paceLength": 10,
-      "percentage": false,
-      "pluginVersion": "10.1.1",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytesin_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__range]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytesin_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__rate_interval]))",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -1820,7 +1870,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytesout_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__range]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_bytesout_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__rate_interval]))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -1829,38 +1879,8 @@
           "refId": "B"
         }
       ],
-      "thresholds": [],
-      "timeRegions": [],
       "title": "Byte Rate",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:162",
-          "format": "bytes",
-          "label": "",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "$$hashKey": "object:163",
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -1873,6 +1893,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -1928,6 +1949,7 @@
         "y": 23
       },
       "id": 58,
+      "interval": "120s",
       "links": [],
       "options": {
         "legend": {
@@ -1941,14 +1963,14 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_messagesin_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__range]))",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_messagesin_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__rate_interval]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Total Incoming Messages Rate",
@@ -1960,199 +1982,229 @@
       "type": "timeseries"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": {
+        "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
       "description": "Produce request rate",
-      "fill": 1,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
         "y": 31
       },
-      "hiddenSeries": false,
       "id": 50,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
+      "interval": "120s",
       "links": [],
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "paceLength": 10,
-      "percentage": false,
-      "pluginVersion": "10.1.1",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_totalproducerequests_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[1m]))",
+          "editorMode": "code",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_totalproducerequests_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__rate_interval]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Total Produce Request Rate",
+          "range": true,
           "refId": "A"
         },
         {
           "datasource": {
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_failedproducerequests_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[1m]))",
+          "editorMode": "code",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_failedproducerequests_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__rate_interval]))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
           "legendFormat": "Failed Produce Request Rate",
+          "range": true,
           "refId": "B"
         }
       ],
-      "thresholds": [],
-      "timeRegions": [],
       "title": "Produce Request Rate",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
+      "type": "timeseries"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": {
+        "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
       "description": "Fetch request rate",
-      "fill": 1,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
         "y": 31
       },
-      "hiddenSeries": false,
       "id": 56,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
+      "interval": "120s",
       "links": [],
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "paceLength": 10,
-      "percentage": false,
-      "pluginVersion": "10.1.1",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(irate(kafka_server_brokertopicmetrics_totalfetchrequests_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[1m]))",
+          "editorMode": "code",
+          "expr": "sum(irate(kafka_server_brokertopicmetrics_totalfetchrequests_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__rate_interval]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Fetch Request Rate",
+          "range": true,
           "refId": "A"
         },
         {
           "datasource": {
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "  sum(irate(kafka_server_brokertopicmetrics_failedfetchrequests_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[1m]))",
+          "editorMode": "code",
+          "expr": "  sum(irate(kafka_server_brokertopicmetrics_failedfetchrequests_total{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",topic=~\"$kafka_topic\",topic!=\"\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__rate_interval]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Failed Fetch Request Rate",
+          "range": true,
           "refId": "B"
         }
       ],
-      "thresholds": [],
-      "timeRegions": [],
       "title": "Fetch Request Rate",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
@@ -2191,7 +2243,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2278,7 +2330,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2330,58 +2382,95 @@
       }
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": {
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
       "description": "Disk writes",
-      "fill": 1,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 8,
         "w": 8,
         "x": 0,
         "y": 47
       },
-      "hiddenSeries": false,
       "id": 104,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
+      "interval": "120s",
       "links": [],
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "paceLength": 10,
-      "percentage": false,
-      "pluginVersion": "10.1.1",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(irate(kafka_server_kafkaserver_linux_disk_write_bytes{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__range])) by (kubernetes_pod_name)",
+          "expr": "sum(irate(kafka_server_kafkaserver_linux_disk_write_bytes{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__rate_interval])) by (kubernetes_pod_name)",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -2390,125 +2479,109 @@
           "refId": "A"
         }
       ],
-      "thresholds": [],
-      "timeRegions": [],
       "title": "Disk Writes",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:109",
-          "format": "bytes",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "$$hashKey": "object:110",
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
+      "type": "timeseries"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": {
+        "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
       "description": "Disk reads",
-      "fill": 1,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 8,
         "w": 8,
         "x": 8,
         "y": 47
       },
-      "hiddenSeries": false,
       "id": 105,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
+      "interval": "120s",
       "links": [],
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "paceLength": 10,
-      "percentage": false,
-      "pluginVersion": "10.1.1",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
             "uid": "${DS_PROMETHEUS}"
           },
-          "expr": "sum(irate(kafka_server_kafkaserver_linux_disk_read_bytes{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[1m])) by (kubernetes_pod_name)",
+          "editorMode": "code",
+          "expr": "sum(irate(kafka_server_kafkaserver_linux_disk_read_bytes{namespace=\"$kubernetes_namespace\",strimzi_io_cluster=\"$strimzi_cluster_name\",kubernetes_pod_name=~\"$strimzi_cluster_name-$kafka_broker\"}[$__rate_interval])) by (kubernetes_pod_name)",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
           "legendFormat": "{{kubernetes_pod_name}}",
+          "range": true,
           "refId": "A"
         }
       ],
-      "thresholds": [],
-      "timeRegions": [],
       "title": "Disk Reads",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "bytes",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
+      "type": "timeseries"
     },
     {
       "aliasColors": {},
@@ -2547,7 +2620,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2634,7 +2707,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "10.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2688,7 +2761,6 @@
   ],
   "refresh": "5s",
   "schemaVersion": 38,
-  "style": "dark",
   "tags": [
     "Strimzi",
     "Kafka"
@@ -2794,9 +2866,9 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
-          "text": "kafka-0",
-          "value": "kafka-0"
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "uid": "${DS_PROMETHEUS}"
@@ -2822,8 +2894,8 @@
         "allValue": ".+",
         "current": {
           "selected": false,
-          "text": "k3s-logs-topic",
-          "value": "k3s-logs-topic"
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": {
           "uid": "${DS_PROMETHEUS}"
@@ -2904,8 +2976,8 @@
     ]
   },
   "timezone": "",
-  "title": "Kafka Detail",
-  "uid": "86cc98e66c294b299b37102f0cc74eaz",
+  "title": "Strimzi Kafka",
+  "uid": "86cc98e66c294b299b37102f0cc74ead",
   "version": 1,
   "weekStart": ""
 }
