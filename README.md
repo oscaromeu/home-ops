@@ -53,9 +53,7 @@ See my _awful_ commit [main history](https://github.com/oscaromeu/home-ops/commi
 Thanks all the people of [Home Operations](https://discord.gg/home-operations) Discord community who put a lot of effort and donate their time to the community.
 
 ## 👉 Help
-
-- Make a post in this repository's Github [Discussions](https://github.com/onedr0p/flux-cluster-template/discussions).
-- Start a thread in the `#support` or `#flux-cluster-template` channels in the [Home Operations](https://discord.gg/home-operations) Discord server.
+- Start a thread in the `#support` channel in the [Home Operations](https://discord.gg/home-operations) Discord server.
 
 ## 🔏 License
 
