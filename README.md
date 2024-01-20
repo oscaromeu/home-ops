@@ -10,7 +10,7 @@ This project aims to achieve its goals while adhering to industry-standard best 
 
 There is a template over at [onedr0p/flux-cluster-template](https://github.com/onedr0p/flux-cluster-template) if you want to try and follow along with some of the practices I use here.
 
-## ⛵ Core Components
+## 🎨 Cluster components
 
 + [actions-runner-controller](https://github.com/actions/actions-runner-controller): Self-hosted Github runners
 + [cert-manager](https://cert-manager.io/docs/): Creates SSL certificates for services in my k3s cluster.
@@ -24,35 +24,16 @@ There is a template over at [onedr0p/flux-cluster-template](https://github.com/o
 
 ... and more!
 
-### Hardware
+## 🗄️ Hardware
 
-- 1 × MinisForum `um350`:
-    - CPU: `Intel i5-8279U (8) @ 4.100GHz`
-    - GPU: `Intel CoffeeLake-U GT3e [Iris Plus Graphics 655]`
-    - RAM: `32GB`
-    - M.2 SSD: `500GB`
-    - HDD SSD: `500GB`
-
-- 1 × MinisForum `um350`:
-    - CPU: `AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx (8) @ 2.100GHz`
-    - GPU: `AMD ATI Radeon Vega Series / Radeon Vega Mobile Series`
-    - RAM: `32GB`
-    - M.2 SSD: `500GB`
-    - HDD SSD: `500GB`
-
-- 1 × Minisforum `um560`:
-    - CPU: `AMD Ryzen 5 5600H with Radeon Graphics @ 12x 3.3GHz`
-    - GPU: `AMD ATI Radeon Vega Series / Radeon Vega Mobile Series`
-    - RAM: `32GB`
-    - M.2 SSD: `1TB`
-    - HDD SSD: `500Gb`
-
-- 4 x Turing Pi RK1
-    - CPU: `8-core (Cortex-A76x4+ Cortex-A55x4) 64-bit CPU @ 2.4 GHz`
-    - GPU: `ARM Mali-G610MP4 quad-core GPU and a dedicated AI accelerator NPU`
-    - NPU: `6TOPS`
-    - RAM: `16Gb`
-    - M.2 SSD: `500Gb`
+| Device                       | Count | Specs                                                                                                                                                                                                                                                                                    | OS                                                  | Purpose                |
+|------------------------------|-------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|------------------------|
+| **MinisForum um350 (Intel)** | 1     | **CPU** `Intel i5-8279U (8) @ 4.100GHz` <br/> **GPU** `Intel CoffeeLake-U GT3e [Iris Plus Graphics 655]` <br/> **RAM** `32GB` <br/> **M.2 SSD** `500GB` <br/> **HDD SSD** `500GB`                                                                                                            | Debian GNU/Linux 12 (bookworm)                      | Control Plane          |
+| **MinisForum um350 (AMD)**   | 1     | **CPU** `AMD Ryzen 5 3550H with Radeon Vega Mobile Gfx (8) @ 2.100GHz` <br/> **GPU** `AMD ATI Radeon Vega Series / Radeon Vega Mobile Series` <br/> **RAM** `32GB` <br/> **M.2 SSD** `500GB` <br/> **HDD SSD** `500GB`                                                                       | Debian GNU/Linux 12 (bookworm)                      | Control Plane          |
+| **Minisforum um560**         | 1     | **CPU** `AMD Ryzen 5 5600H with Radeon Graphics @ 12x 3.3GHz` <br/> **GPU** `AMD ATI Radeon Vega Series / Radeon Vega Mobile Series` <br/> **RAM** `32GB`  <br/> **M.2 SSD** `1TB` <br/> **HDD SSD** `500GB`                                                                                 | Debian GNU/Linux 12 (bookworm)                      | Control Plane          |
+| **Turing Pi RK1**            | 4     | **CPU** `8-core (Cortex-A76x4+ Cortex-A55x4) 64-bit CPU @ 2.4 GHz` <br/> **GPU** `ARM Mali-G610MP4 quad-core GPU and a dedicated AI accelerator NPU` <br/> **NPU** `6TOPS` <br/> **RAM** `16GB` <br/> **M.2 SSD** `500GB` <br/> https://docs.turingpi.com/docs/turing-rk1-specs-and-io-ports | Ubuntu 22.04 LTS Server based on the BSP Linux 5.10 | Data Plane             |
+| **Turing Pi Board V2**       | 1     | **Switch** `1Gbps Switch (RTL8370MB-CG +)` & VLAN Support <br/> **Storage Interfaces** `2x SATA 3 - Standard SATA 6 connectors, up to 6Gbps per port*` & 4x M.2 Slots (2260 or 2280 NVMe drives) <br/> https://docs.turingpi.com/docs/turing-pi2-specs-and-io-ports                          |                                                     |                        |
+| **Unifi UDM Pro**            | 1     | **CPU** `Quad-core ARM® Cortex®-A57 @ 1.7 GHz`  <br/> **System Memory** `4GB DDR4` <br/> **On-board storage**  `16 GB eMMC` <br/> **Networking interface** (8) LAN: `GbE RJ45 ports` & (1) WAN: `GbE RJ45 port` <br/> **SFP+ interface** (1) LAN: `10G SFP+` & (1) WAN: `10G SFP+`           | Unify OS                                            | AIO (Router+Switch+FW) |
 
 ## 📜 Changelog
 
