@@ -111,7 +111,13 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: sonarr
+        existingClaim: data-pvc
+        advancedMounts:
+          main:
+            main:
+            - path: /config
+              subPath: sonarr
+              readOnly: false
       pushover-notify:
         type: configMap
         name: sonarr-configmap
@@ -120,17 +126,12 @@ spec:
           - path: /scripts/pushover-notify.sh
             subPath: pushover-notify.sh
             readOnly: true
-      tmp:
-        type: emptyDir
-      downloads:
-        enabled: true
-        type: hostPath
-        hostPathType: DirectoryOrCreate
-        hostPath: /home/pi/Downloads/torrent/series
-        mountPath: /downloads/series
       media:
         enabled: true
-        type: hostPath
-        hostPathType: DirectoryOrCreate
-        hostPath: /home/pi/Downloads/series
-        mountPath: /tv
+        existingClaim: media-pvc
+        readOnly: false
+        globalMounts:
+        - path: /tv
+          subPath: series
+        - path: /downloads/series
+          subPath: downloads/series
