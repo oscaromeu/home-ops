@@ -113,7 +113,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: plex
+        existingClaim: data-pvc
       # Separate PVC for cache to avoid backing up cache files
       plex-cache:
         existingClaim: plex-cache
