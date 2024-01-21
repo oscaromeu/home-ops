@@ -87,14 +87,14 @@ spec:
       downloads-series:
         enabled: true
         type: hostPath
-        hostPathType: Directory
+        hostPathType: DirectoryOrCreate
         hostPath: /home/pi/Downloads/torrent/series
         mountPath: /downloads/series
       downloads-pelis:
         enabled: true
         type: hostPath
-        hostPathType: Directory
-        hostPath: /home/pi/Downloads/torrent/pelies
+        hostPathType: DirectoryOrCreate
+        hostPath: /home/pi/Downloads/torrent/pelis
         mountPath: /downloads/pelis
     #nodeSelector:
     #  kubernetes.io/hostname: "lbpkm1"
