@@ -18,4 +18,4 @@ resources:
   #- ./podinfo/ks.yaml
   - ./prowlarr/ks.yaml
   - ./qbittorrent/ks.yaml
-  - ./sonarr/ks.yaml
+  #- ./sonarr/ks.yaml
