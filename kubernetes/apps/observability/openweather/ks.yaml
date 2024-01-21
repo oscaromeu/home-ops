@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
     - name: cluster-apps-hajimari
-  path: ./kubernetes/apps/default/openweather/app
+  path: ./kubernetes/apps/observability/openweather/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -19,7 +19,7 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: openweathermap-exporter
-      namespace: default
+      namespace: observability
   interval: 30m
   retryInterval: 1m
   timeout: 3m
@@ -34,7 +34,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-openweather
-  path: ./kubernetes/apps/default/openweather/monitoring
+  path: ./kubernetes/apps/observability/openweather/monitoring
   prune: true
   sourceRef:
     kind: GitRepository

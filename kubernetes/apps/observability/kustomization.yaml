@@ -13,6 +13,7 @@ resources:
   - ./kubernetes-events-exporter/ks.yaml
   #- ./loki/ks.yaml
   #- ./node-problem-detector/ks.yaml
+  - ./openweather/ks.yaml
   - ./prometheus-adapter/ks.yaml
   - ./promlens/ks.yaml
   #- ./pyroscope/ks.yaml
