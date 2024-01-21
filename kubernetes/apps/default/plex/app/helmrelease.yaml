@@ -124,7 +124,11 @@ spec:
       transcode:
         type: emptyDir
       media:
-        type: hostPath
-        hostPathType: DirectoryOrCreate
-        hostPath: /home/pi/Media
-        mountPath: /media
+        enabled: true
+        existingClaim: media-pvc
+        readOnly: false
+        globalMounts:
+        - path: /tv
+          subPath: series
+        - path: /downloads/series
+          subPath: downloads/series
