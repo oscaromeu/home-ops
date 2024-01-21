@@ -10,7 +10,7 @@ spec:
       - ReadWriteMany
     resources:
       requests:
-        storage: 7Gi
+        storage: 30Gi
   source:
     http:
       url: "https://download.fedoraproject.org/pub/fedora/linux/releases/37/Cloud/x86_64/images/Fedora-Cloud-Base-37-1.7.x86_64.raw.xz"
