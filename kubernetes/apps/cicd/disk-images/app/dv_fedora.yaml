@@ -5,6 +5,8 @@ metadata:
   namespace: "cicd"
 spec:
   storage:
+    accessModes:
+      - ReadWriteMany
     resources:
       requests:
         storage: 5Gi
