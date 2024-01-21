@@ -10,6 +10,7 @@ resources:
   - ./glauth/ks.yaml
   - ./local-path-provisioner/ks.yaml
   - ./metrics-server/ks.yaml
+  - ./nfs-subdir-provisioner/ks.yaml
   - ./reloader/ks.yaml
   - ./snapshot-controller/ks.yaml
 

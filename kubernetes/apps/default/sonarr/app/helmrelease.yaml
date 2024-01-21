@@ -26,16 +26,7 @@ spec:
     - name: rook-ceph-cluster
       namespace: rook-ceph
   values:
-    defaultPodOptions:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: In
-                values:
-                - lbpkw2
+
     controllers:
       main:
         annotations:
@@ -131,8 +122,15 @@ spec:
             readOnly: true
       tmp:
         type: emptyDir
-      media:
+      downloads:
+        enabled: true
         type: hostPath
         hostPathType: DirectoryOrCreate
-        hostPath: /home/pi/Media
-        mountPath: /media
+        hostPath: /home/pi/Downloads/torrent/series
+        mountPath: /downloads/series
+      media:
+        enabled: true
+        type: hostPath
+        hostPathType: DirectoryOrCreate
+        hostPath: /home/pi/Downloads/series
+        mountPath: /tv
