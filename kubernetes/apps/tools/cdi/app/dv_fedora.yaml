@@ -5,6 +5,7 @@ metadata:
   namespace: "cicd"
 spec:
   storage:
+    storageClassName: "ceph-filesystem"
     accessModes:
       - ReadWriteMany
     resources:
