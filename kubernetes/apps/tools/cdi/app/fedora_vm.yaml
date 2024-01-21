@@ -37,6 +37,7 @@ spec:
           userData: |
             #cloud-config
             hostname: vm1
+            password: fedora
             ssh_pwauth: True
             disable_root: false
             ssh_authorized_keys:
