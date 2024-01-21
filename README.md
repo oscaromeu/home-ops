@@ -4,17 +4,9 @@
 
 This mono repository houses the infrastructure for my homelab. I try to adhere to Infrastructure as Code (IaC) and GitOps practices using tools like [Ansible](https://www.ansible.com/), [Terraform](https://www.terraform.io/), [Kubernetes](https://kubernetes.io/), [Flux](https://github.com/fluxcd/flux2), [Renovate](https://github.com/renovatebot/renovate) and [GitHub Actions](https://github.com/features/actions).
 
-This project aims to achieve its goals while adhering to industry-standard best practices and fostering continuous learning.
-
 ## ⛵ How to get started
 
-There is a template over at [onedr0p/flux-cluster-template](https://github.com/onedr0p/flux-cluster-template) if you want to try and follow along with some of the practices I use here. If the onedr0p's template repo is too hot or too cold to handle check out these following projects:
-
-+ [flux2-kustomize-helm-example](https://github.com/fluxcd/flux2-kustomize-helm-example) - _Start from scratch you can see my [legacy history](https://github.com/oscaromeu/home-ops/tree/d75a6360586de8b5b5c4ff6b553b7512cfea5007) to see an example_
-- [khuedoan/homelab](https://github.com/khuedoan/homelab) - _Modern self-hosting framework, fully automated from empty disk to operating services with a single command._
-- [danmanners/aws-argo-cluster-template](https://github.com/danmanners/aws-argo-cluster-template) - _A community opinionated template for deploying Kubernetes clusters on-prem and in AWS using Pulumi, SOPS, Sealed Secrets, GitHub Actions, Renovate, Cilium and more!_
-- [ricsanfre/pi-cluster](https://github.com/ricsanfre/pi-cluster) - _Pi Kubernetes Cluster. Homelab kubernetes cluster automated with Ansible and ArgoCD_
-- [techno-tim/k3s-ansible](https://github.com/techno-tim/k3s-ansible) - _The easiest way to bootstrap a self-hosted High Availability Kubernetes cluster. A fully automated HA k3s etcd install with kube-vip, MetalLB, and more_
+There is a template over at [onedr0p/flux-cluster-template](https://github.com/onedr0p/flux-cluster-template) if you want to try and follow along with some of the practices I use here.
 
 ## 🎨 Cluster components
 
@@ -51,9 +43,6 @@ See my _awful_ commit [main history](https://github.com/oscaromeu/home-ops/commi
 ## :handshake:&nbsp; Gratitude and thanks
 
 Thanks all the people of [Home Operations](https://discord.gg/home-operations) Discord community who put a lot of effort and donate their time to the community.
-
-## 👉 Help
-- Start a thread in the `#support` channel in the [Home Operations](https://discord.gg/home-operations) Discord server.
 
 ## 🔏 License
 
