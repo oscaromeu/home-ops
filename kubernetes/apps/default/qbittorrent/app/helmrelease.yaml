@@ -96,8 +96,8 @@ spec:
         hostPathType: Directory
         hostPath: /home/pi/Downloads/torrent/pelies
         mountPath: /downloads/pelis
-    nodeSelector:
-      kubernetes.io/hostname: "lbpkm1"
+    #nodeSelector:
+    #  kubernetes.io/hostname: "lbpkm1"
     resources:
       requests:
         cpu: 500m
