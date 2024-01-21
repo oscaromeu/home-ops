@@ -37,6 +37,9 @@ spec:
           userData: |
             #cloud-config
             hostname: vm1
-            password: fedora
             disable_root: false
+            user: fedora
+            password: fedora
+            chpasswd: { expire: False }
+            ssh_pwauth: True
         name: cloudinitdisk
