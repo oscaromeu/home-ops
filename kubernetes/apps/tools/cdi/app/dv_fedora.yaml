@@ -2,7 +2,7 @@ apiVersion: cdi.kubevirt.io/v1beta1
 kind: DataVolume
 metadata:
   name: "fedora"
-  namespace: "cicd"
+  namespace: "tools"
 spec:
   storage:
     storageClassName: "ceph-filesystem"
