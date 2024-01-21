@@ -92,20 +92,25 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: qbittorrent-config
-        mountPath: /config
-      downloads-series:
+        existingClaim: data-pvc
+        advancedMounts:
+          main:
+            main:
+            - path: /config
+              subPath: qbittorrent
+              readOnly: false
+      media:
         enabled: true
-        type: hostPath
-        hostPathType: DirectoryOrCreate
-        hostPath: /home/pi/Downloads/torrent/series
-        mountPath: /downloads/series
-      downloads-pelis:
-        enabled: true
-        type: hostPath
-        hostPathType: DirectoryOrCreate
-        hostPath: /home/pi/Downloads/torrent/pelis
-        mountPath: /downloads/pelis
+        existingClaim: media-pvc
+        advancedMounts:
+          main:
+            main:
+            - path: /downloads/movies
+              subPath: downloads/movies
+              readOnly: false
+            - path: /downloads/series
+              subPath: downloads/series
+              readOnly: false
     #nodeSelector:
     #  kubernetes.io/hostname: "lbpkm1"
     resources:
