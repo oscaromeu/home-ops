@@ -7,7 +7,7 @@ spec:
   storage:
     storageClassName: "ceph-filesystem"
     accessModes:
-      - ReadWriteMany
+      - ReadWriteOnce
     resources:
       requests:
         storage: 30Gi
