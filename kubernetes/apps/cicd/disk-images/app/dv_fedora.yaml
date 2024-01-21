@@ -5,6 +5,8 @@ metadata:
   namespace: "cicd"
 spec:
   storage:
+    accessModes:
+      - ReadWriteOnce
     storageClassName: "local-path"
     resources:
       requests:
