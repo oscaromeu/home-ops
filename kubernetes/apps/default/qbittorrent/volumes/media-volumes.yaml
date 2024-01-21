@@ -5,12 +5,12 @@ metadata:
 spec:
   storageClassName: nfs-client
   capacity:
-    storage: 400Gi
+    storage: 300Gi
   accessModes:
   - ReadWriteMany
   nfs:
     server: 192.168.1.34
-    path: /mnt/nfs_share/Video
+    path: /mnt/nfs_share/video
 ---
 
 apiVersion: v1
@@ -24,4 +24,4 @@ spec:
   - ReadWriteMany
   resources:
     requests:
-      storage: 400Gi
+      storage: 300Gi
