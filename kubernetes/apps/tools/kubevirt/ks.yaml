@@ -2,18 +2,20 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-logstash
+  name: cluster-apps-kubevirt
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  path: ./kubernetes/apps/logging/logstash/app
   dependsOn:
-    - name: cluster-apps-elastic
+    - name: cluster-apps-external-secrets-stores
+    - name: cluster-apps-cloudnative-pg
+    - name: cluster-apps-nginx-internal
+  path: ./kubernetes/apps/tools/kubevirt/operator
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
   interval: 30m
   retryInterval: 1m
-  timeout: 5m
+  timeout: 3m

@@ -5,6 +5,7 @@ metadata:
   name: postgres-v1
   namespace: datahub
 spec:
+  #logLevel: info
   instances: 3
   imageName: ghcr.io/cloudnative-pg/postgresql:16.1-6
   primaryUpdateStrategy: unsupervised

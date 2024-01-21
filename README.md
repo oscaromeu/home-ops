@@ -8,7 +8,7 @@ This project aims to achieve its goals while adhering to industry-standard best 
 
 ## ⛵ How to get started
 
-There is a template over at [onedr0p/flux-cluster-template](https://github.com/onedr0p/flux-cluster-template) if you want to try and follow along with some of the practices I use here. If the Devin's template repo is too hot to handle check out these following projects:
+There is a template over at [onedr0p/flux-cluster-template](https://github.com/onedr0p/flux-cluster-template) if you want to try and follow along with some of the practices I use here. If the onedr0p's template repo is too hot or too cold to handle check out these following projects:
 
 + [flux2-kustomize-helm-example](https://github.com/fluxcd/flux2-kustomize-helm-example) - _Start from scratch you can see my [legacy history](https://github.com/oscaromeu/home-ops/tree/d75a6360586de8b5b5c4ff6b553b7512cfea5007) to see an example_
 - [khuedoan/homelab](https://github.com/khuedoan/homelab) - _Modern self-hosting framework, fully automated from empty disk to operating services with a single command._
