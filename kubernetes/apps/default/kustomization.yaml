@@ -17,5 +17,5 @@ resources:
   #- ./plex/ks.yaml
   #- ./podinfo/ks.yaml
   - ./prowlarr/ks.yaml
-  #- ./qbittorrent/ks.yaml
+  - ./qbittorrent/ks.yaml
   - ./sonarr/ks.yaml
