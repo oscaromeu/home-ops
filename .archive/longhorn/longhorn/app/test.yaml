@@ -4,7 +4,6 @@ kind: Namespace
 metadata:
   name: testing-longhorn
   labels:
-    goldilocks.fairwinds.com/enabled: "true"
     kustomize.toolkit.fluxcd.io/prune: disabled
 ---
 apiVersion: v1
