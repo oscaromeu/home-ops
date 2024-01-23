@@ -38,7 +38,7 @@ There is a template over at [onedr0p/flux-cluster-template](https://github.com/o
 
 ## 📜 Changelog
 
-See my _awful_ commit [main history](https://github.com/oscaromeu/home-ops/commits/main) and [legacy history](https://github.com/oscaromeu/home-ops/commits/feature/legacy)
+See my _awful_ commit [main history](https://github.com/oscaromeu/home-ops/commits/main) and [legacy history](https://github.com/oscaromeu/home-ops/tree/d75a6360586de8b5b5c4ff6b553b7512cfea5007)
 
 ## :handshake:&nbsp; Gratitude and thanks
 
