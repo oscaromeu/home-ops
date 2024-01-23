@@ -8,4 +8,4 @@ spec:
   resources:
     requests:
       storage: 25Gi
-  storageClassName: ceph-block
+  storageClassName: local-path
