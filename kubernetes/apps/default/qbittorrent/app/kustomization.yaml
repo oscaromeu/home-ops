@@ -4,5 +4,4 @@ kind: Kustomization
 namespace: default
 resources:
   - ./jobs
-  - ./pvc.yaml
   - ./helmrelease.yaml
