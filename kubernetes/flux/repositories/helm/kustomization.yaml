@@ -2,19 +2,73 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - ./actions-runner-controller.yaml
+  - ./authelia.yaml
+  - ./backube.yaml
   - ./bitnami.yaml
   - ./bjw-s.yaml
+  - ./botkube.yaml
+  - ./calico.yaml
   - ./cilium.yaml
+  - ./cloudnative-pg.yaml
   - ./coredns.yaml
+  - ./crossplane.yaml
   - ./csi-driver-nfs.yaml
+  - ./ddosify.yaml
+  - ./deliveryhero.yaml
+  - ./descheduler.yaml
   - ./external-dns.yaml
+  - ./external-secrets.yaml
+  - ./fairwinds.yaml
+  - ./flanksource.yaml
+  - ./gitea.yaml
   - ./grafana.yaml
   - ./hajimari.yaml
+  - ./harbor.yaml
+  - ./influxdata.yaml
   - ./ingress-nginx.yaml
+  - ./intel.yaml
+  - ./istio.yaml
   - ./jetstack.yaml
+  - ./jupyter.yaml
   - ./k8s-gateway.yaml
+  - ./kafka-ui.yaml
+  - ./kafka.yaml
+  - ./keda.yaml
   - ./kubernetes-dashboard.yaml
+  - ./kustomization.yaml
+  - ./kyverno.yaml
+  - ./longhorn.yaml
+  - ./marketplane.yaml
+  - ./metallb.yaml
   - ./metrics-server.yaml
+  - ./microcks.yaml
+  - ./minio-operator.yaml
+  - ./minio.yaml
+  - ./mongodb.yaml
+  - ./nfs-subdir-external-provisioner.yaml
+  - ./node-feature-discovery.yaml
+  - ./nvidia-gpu-feature-discovery.yaml
+  - ./nvidia.yaml
+  - ./ot-helm.yaml
+  - ./passbolt.yaml
+  - ./piraeus.yaml
+  - ./podinfo.yaml
   - ./prometheus-community.yaml
+  - ./pyroscope.yaml
+  - ./questdb.yaml
+  - ./redpanda.yaml
+  - ./robusta.yaml
+  - ./rook-ceph.yaml
+  - ./runix.yaml
+  - ./sloth.yaml
   - ./stakater.yaml
+  - ./tf-controller.yaml
+  - ./timescale.yaml
+  - ./twuni.yaml
+  - ./vector.yaml
+  - ./vm.yaml
+  - ./vmware.yaml
   - ./weave-gitops.yaml
+  - ./wikijs.yaml
+  - ./woodpecker.yaml
