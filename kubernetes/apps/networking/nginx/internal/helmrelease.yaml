@@ -31,7 +31,7 @@ spec:
       service:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: "internal.${SECRET_DOMAIN}"
-          io.cilium/lb-ipam-ips: "192.168.1.122"
+          io.cilium/lb-ipam-ips: "10.69.3.122"
         externalTrafficPolicy: Cluster
       ingressClassResource:
         name: internal
@@ -45,7 +45,6 @@ spec:
               values: ["internal"]
       config:
         client-body-buffer-size: 100M
-        proxy-add-original-uri-header: "false"
         client-body-timeout: 120
         client-header-timeout: 120
         enable-brotli: "true"
@@ -72,7 +71,6 @@ spec:
             any: true
       extraArgs:
         default-ssl-certificate: "networking/${SECRET_DOMAIN/./-}-production-tls"
-        enable-ssl-passthrough: true
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
@@ -89,10 +87,3 @@ spec:
           memory: 500Mi
     defaultBackend:
       enabled: false
-    udp:
-      "9123": "monitoring/influxdb-exporter-udp:9123"
-    tcp:
-      "6379": "datahub/redis-standalone-master:6379"
-      "9200": "logging/elk-elasticsearch:9200"
-      "9095": "datahub/datahub-cluster-kafka-external-bootstrap:9095"
-      "22": "tools/gitea-ssh:22"
