@@ -133,7 +133,7 @@ spec:
 
     env:
       - name: VECTOR_LOG
-        value: "info"
+        value: "debug"
       #- name: VECTOR_SELF_NODE_NAME
       #  value: "$(VECTOR_AGGREGATOR_SERVICE_HOST)"
 
