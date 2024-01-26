@@ -44,10 +44,10 @@ spec:
               value: "10"
           resources:
             requests:
-              memory: 6Gi
+              memory: 7Gi
               cpu: 241m
             limits:
-              memory: 10Gi
+              memory: 7Gi
 
         #affinity:
         #  podAntiAffinity:
