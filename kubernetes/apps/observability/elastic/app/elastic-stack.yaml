@@ -48,7 +48,6 @@ spec:
             limits:
               memory: 10Gi
 
-
         #affinity:
         #  podAntiAffinity:
         #    preferredDuringSchedulingIgnoredDuringExecution:

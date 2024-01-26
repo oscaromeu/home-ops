@@ -115,4 +115,4 @@ spec:
 
     env:
       - name: VECTOR_LOG
-        value: "info"
+        value: "debug"
