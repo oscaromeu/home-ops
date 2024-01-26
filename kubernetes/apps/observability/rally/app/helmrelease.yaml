@@ -43,7 +43,7 @@ spec:
             args:
              - --track=dense_vector
              - --pipeline=benchmark-only
-             - --target-hosts=localhost:9200
+             - --target-hosts=elk-elasticsearch.observability.svc.cluster.local:9200
              - --client-options="use_ssl:true,verify_certs:false,basic_auth_user:'elastic',basic_auth_password:'${ELASTIC_PASSWORD}',http_compress:true"
             securityContext:
               allowPrivilegeEscalation: false
@@ -55,6 +55,8 @@ spec:
                 cpu: 10m
               limits:
                 memory: 512Mi
+        service:
+          enabled: false
         pod:
           securityContext:
             runAsUser: 568
