@@ -29,7 +29,7 @@ spec:
         replicas: 1
         type: cronjob
         cronjob:
-          schedule: "*/15 * * * *"
+          schedule: "* 2 * * *"
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -66,3 +66,7 @@ spec:
             runAsNonRoot: true
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
+    persistence:
+      config:
+        enabled: true
+        type: emptyDir
