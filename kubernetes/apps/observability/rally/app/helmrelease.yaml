@@ -66,6 +66,10 @@ spec:
             fsGroupChangePolicy: OnRootMismatch
     service:
       enabled: false
+      main:
+        ports:
+          http:
+            port: 8080
     persistence:
       config:
         enabled: true
