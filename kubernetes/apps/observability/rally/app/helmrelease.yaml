@@ -45,6 +45,8 @@ spec:
              - --pipeline=benchmark-only
              - --target-hosts=elk-elasticsearch.observability.svc.cluster.local:9200
              - --client-options="use_ssl:true,verify_certs:false,basic_auth_user:'elastic',basic_auth_password:'${ELASTIC_PASSWORD}',http_compress:true"
+             - --report-file=/tmp/report.csv
+             - --report-format=csv
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
