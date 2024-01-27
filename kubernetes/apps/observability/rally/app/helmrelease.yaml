@@ -56,9 +56,7 @@ spec:
                 memory: 128Mi
                 cpu: 10m
               limits:
-                memory: 512Mi
-        service:
-          enabled: false
+                memory: 6Gi
         pod:
           securityContext:
             runAsUser: 568
@@ -66,6 +64,8 @@ spec:
             runAsNonRoot: true
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
+    service:
+      enabled: false
     persistence:
       config:
         enabled: true
