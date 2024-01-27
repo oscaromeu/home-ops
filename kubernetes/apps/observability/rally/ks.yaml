@@ -9,8 +9,6 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-cloudnative-pg
-    - name: cluster-apps-nginx-internal
   path: ./kubernetes/apps/observability/rally/app
   prune: true
   sourceRef:
