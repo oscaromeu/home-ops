@@ -5,6 +5,7 @@ resources:
   - ./namespace.yaml
   - ./atuin/ks.yaml
   #- ./busybox/ks.yaml
+  - ./capacitor/ks.yaml
   - ./cdi/ks.yaml
   #- ./dnsutils/ks.yaml
   - ./docuseal/ks.yaml
