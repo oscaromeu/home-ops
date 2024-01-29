@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
   name: filbeat
-  namespace: logging
+  namespace: dev
   labels:
     app: "filebeat"
 resources:
@@ -13,16 +13,16 @@ resources:
 generatorOptions:
  disableNameSuffixHash: true
  labels:
-   namespace: logging
+   namespace: dev
 
 secretGenerator:
 - name: filebeatcfg
-  namespace: logging
+  namespace: dev
   files:
     - config/filebeat.yml
 
 - name: filebeatinputs
-  namespace: logging
+  namespace: dev
   files:
     - ./inputs.d/container.yml
     - ./inputs.d/docker.yml

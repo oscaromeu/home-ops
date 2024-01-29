@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: filebeat
-  namespace: logging
+  namespace: dev
   labels:
     k8s-app: filebeat
 spec:
@@ -28,11 +28,11 @@ spec:
         ]
         env:
         - name: ELASTICSEARCH_HOST
-          value: elk-es-http.logging.svc
+          value: elk-es-http.observability.svc
         - name: ELASTICSEARCH_PORT
           value: "9200"
         - name: REDIS_HOSTS
-          value: "['redis-master.datahub.svc:6379']"
+          value: "['redis.datahub.svc.cluster.local:6379']"
         - name: LOG_TYPE
           value: k3s_cluster
         - name: CLUSTER_NAME
