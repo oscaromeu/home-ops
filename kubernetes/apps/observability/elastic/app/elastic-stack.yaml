@@ -11,7 +11,7 @@ spec:
   - name: hot
     count: 1
     config:
-      logging.level: debug
+      logger.level: debug
       node.roles: ["master","data_hot","data_content", "remote_cluster_client"]
       node.attr.type: "hot"
       node.store.allow_mmap: false
@@ -104,7 +104,6 @@ spec:
           env:
             - name: ES_JAVA_OPTS
               value: "-Xms2g -Xmx2g"
-
           resources:
             requests:
               memory: 4Gi
