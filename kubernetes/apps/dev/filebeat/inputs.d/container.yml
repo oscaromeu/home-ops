@@ -12,11 +12,11 @@
         matchers:
         - logs_path:
             logs_path: "/var/log/containers/"
-    - drop_event:
-        when:
-          or:
-            - equals:
-                kubernetes.namespace: "dev"
+    #- drop_event:
+    #    when:
+    #      or:
+    #        - equals:
+    #            kubernetes.namespace: "dev"
   fields:
     k3s_cluster_name: ${CLUSTER_NAME}
     log_type: ${LOG_TYPE}
