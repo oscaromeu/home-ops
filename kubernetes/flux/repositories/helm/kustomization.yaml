@@ -35,7 +35,6 @@ resources:
   - ./kafka.yaml
   - ./keda.yaml
   - ./kubernetes-dashboard.yaml
-  - ./kustomization.yaml
   - ./kyverno.yaml
   - ./longhorn.yaml
   - ./marketplane.yaml
