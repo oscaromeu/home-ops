@@ -5,4 +5,3 @@ resources:
   - ./elastic.yaml
   - ./kubernetes-csi-addons.yaml
   - ./local-path-provisioner.yaml
-
