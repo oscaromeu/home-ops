@@ -6,7 +6,6 @@ resources:
   - ./authelia/ks.yaml
   - ./cilium/ks.yaml
   - ./coredns/ks.yaml
-  - ./external-dns/ks.yaml
   - ./glauth/ks.yaml
   - ./local-path-provisioner/ks.yaml
   - ./metrics-server/ks.yaml
