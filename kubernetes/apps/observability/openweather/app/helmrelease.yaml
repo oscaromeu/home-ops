@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://github.com/fluxcd-community/flux2-schemas/raw/main/helmrelease-helm-v2beta1.json
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -64,3 +64,6 @@ spec:
         enabled: true
         endpoints:
           - port: metrics
+
+    nodeSelector:
+      kubernetes.io/arch: amd64
