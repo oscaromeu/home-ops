@@ -4,8 +4,6 @@ kind: HelmRelease
 metadata:
   name: &app vector-aggregator
   namespace: observability
-  annotations:
-    reloader.stakater.com/auto: "true"
 spec:
   interval: 15m
   chart:
