@@ -45,11 +45,12 @@ spec:
               tag: 18.0.0@sha256:8a2913344e9f2e5786337d1c2570579bea44176dec0f24e2ef934f0dda7959fe
             env:
               ATUIN_HOST: 0.0.0.0
-              ATUIN_PORT: &port 8888
+              ATUIN_PORT: &port 80
               ATUIN_OPEN_REGISTRATION: "true"
               ATUIN_METRICS_ENABLE: "true"
               ATUIN_METRICS_HOST: 0.0.0.0
               ATUIN_METRICS_PORT: &metricsPort 8080
+              ATUIN_TLS__ENABLE: "false"
             envFrom: *envFrom
             args: ["server", "start"]
             securityContext:
