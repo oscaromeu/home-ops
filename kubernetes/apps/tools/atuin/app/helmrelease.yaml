@@ -50,8 +50,10 @@ spec:
               ATUIN_METRICS_ENABLE: "true"
               ATUIN_METRICS_HOST: 0.0.0.0
               ATUIN_METRICS_PORT: &metricsPort 8080
-              ATUIN_TLS__ENABLE: "false"
               RUST_LOG: info,atuin_server=debug
+              ATUIN_TLS__ENABLE: false
+              ATUIN_TLS__CERT_PATH: ""
+              ATUIN_TLS__PKEY_PATH: ""
             envFrom: *envFrom
             args: ["server", "start"]
             securityContext:
