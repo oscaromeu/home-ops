@@ -20,8 +20,8 @@ resources:
   #- ./rally/ks.yaml
   #- ./sloth/ks.yaml
   #- ./speedtest-exporter/ks.yaml
-  - ./stackdriver-exporter/ks.yaml
+  #- ./stackdriver-exporter/ks.yaml
   #- ./canary-checker/ks.yaml
   #- ./tempo/ks.yaml
   #- ./thanos/ks.yaml
-  #- ./vector/ks.yaml
+  - ./vector/ks.yaml
