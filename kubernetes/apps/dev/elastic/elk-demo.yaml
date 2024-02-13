@@ -24,14 +24,14 @@ spec:
           env:
           - name: ES_JAVA_OPTS
             value: "-Xms2g -Xmx2g"
-    #volumeClaimTemplates:
-    #- metadata:
-    #    name: elasticsearch-data # this name is required for the volume to be mounted
-    #  spec:
-    #    accessModes:
-    #    - ReadWriteOnce
-    #    resources:
-    #      requests:
-    #        storage: 10Gi
-    #    storageClassName: local-path
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data # this name is required for the volume to be mounted
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: local-path
     count: 1
