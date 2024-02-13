@@ -1,12 +1,27 @@
----
+# This sample sets up an Elasticsearch cluster with 3 nodes.
 apiVersion: elasticsearch.k8s.elastic.co/v1
 kind: Elasticsearch
 metadata:
-  name: quickstart
+  name: elasticsearch-sample
 spec:
-  version: 8.12.1
+  version: 8.11.1
   nodeSets:
   - name: default
-    count: 1
     config:
+      # most Elasticsearch configuration parameters are possible to set, e.g: node.attr.attr_name: attr_value
+      node.roles: ["master", "data", "ingest", "ml"]
+      # this allows ES to run on nodes even if their vm.max_map_count has not been increased, at a performance cost
       node.store.allow_mmap: false
+    podTemplate:
+      spec:
+        containers:
+        - name: elasticsearch
+          # specify resource limits and requests
+          resources:
+            limits:
+              memory: 4Gi
+              cpu: 1
+          env:
+          - name: ES_JAVA_OPTS
+            value: "-Xms2g -Xmx2g"
+    count: 3

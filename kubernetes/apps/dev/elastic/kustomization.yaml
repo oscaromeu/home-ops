@@ -4,3 +4,4 @@ kind: Kustomization
 namespace: dev
 resources:
   - ./elk-demo.yaml
+  - ./kibana-demo.yaml
