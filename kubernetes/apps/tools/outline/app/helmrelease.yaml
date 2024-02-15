@@ -33,7 +33,7 @@ spec:
           - secretRef:
               name: outline-secret
     controller:
-      replicas: 1
+      replicas: 3
       strategy: Recreate
       annotations:
         reloader.stakater.com/auto: "true"
@@ -78,7 +78,7 @@ spec:
         memory: 2Gi
     persistence:
       data:
-        enabled: true
+        enabled: false
         mountPath: /var/lib/outline
         existingClaim: storage-data
         subPath: data
