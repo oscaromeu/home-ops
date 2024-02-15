@@ -96,9 +96,8 @@ spec:
       limits:
         memory: 4Gi
 
-    workloadResourceAnnotations:
-      annotations:
-        reloader.stakater.com/auto: "true"
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: vector-aggregator
 
     service:
       enabled: true
