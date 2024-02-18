@@ -9,6 +9,7 @@ resources:
   - ./bjw-s.yaml
   - ./botkube.yaml
   - ./calico.yaml
+  - ./chaos-mesh.yaml
   - ./cilium.yaml
   - ./cloudnative-pg.yaml
   - ./coredns.yaml
