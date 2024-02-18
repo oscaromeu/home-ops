@@ -6,12 +6,12 @@ resources:
   - ./atuin/ks.yaml
   #- ./busybox/ks.yaml
   #- ./capacitor/ks.yaml
-  #- ./cdi/ks.yaml
+  - ./cdi/ks.yaml
   #- ./dnsutils/ks.yaml
   - ./docuseal/ks.yaml
   - ./gitea/ks.yaml
   #- ./harbor/ks.yaml
-  #- ./kubevirt/ks.yaml
+  - ./kubevirt/ks.yaml
   #- ./microcks/ks.yaml
   - ./outline/ks.yaml
   - ./actual/ks.yaml
