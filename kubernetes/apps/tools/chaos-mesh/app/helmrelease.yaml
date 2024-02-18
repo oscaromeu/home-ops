@@ -197,10 +197,10 @@ spec:
         ingressClassName: "internal"
 
     dnsServer:
-      create: true
+      create: false
       # image would be constructed by <registry>/<repository>:<tag>
       image:
-        registry: ""
+        registry: "ghcr.io" #?
         repository: chaos-mesh/chaos-coredns
         tag: "v0.2.6"
       # Image pull policy
