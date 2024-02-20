@@ -74,7 +74,7 @@ spec:
     count: 1
     config:
       logger.level: debug
-      node.roles: ["ingest"]
+      node.roles: ["ingest", "transform"]
       node.store.allow_mmap: false
       xpack.monitoring.collection.enabled: true
       xpack.monitoring.elasticsearch.collection.enabled: true
