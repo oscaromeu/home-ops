@@ -12,7 +12,7 @@ spec:
     count: 3
     config:
       logger.level: debug
-      node.roles: ["master","data_hot","data_content", "remote_cluster_client"]
+      node.roles: ["master","data_hot","data_content", "remote_cluster_client", "ingest"]
       node.attr.type: "hot"
       node.store.allow_mmap: false
       xpack.monitoring.collection.enabled: true
