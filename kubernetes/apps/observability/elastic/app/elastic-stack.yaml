@@ -12,7 +12,7 @@ spec:
     count: 3
     config:
       logger.level: debug
-      node.roles: ["master","data_hot","data_content", "remote_cluster_client","ingest", "transform"]
+      node.roles: ["master", "data","data_hot","data_content", "remote_cluster_client","ingest", "transform"]
       node.store.allow_mmap: false
       xpack.monitoring.collection.enabled: true
       xpack.monitoring.elasticsearch.collection.enabled: true
@@ -74,7 +74,7 @@ spec:
   - name: warm
     count: 2
     config:
-      node.roles: ["data_warm","data_content","remote_cluster_client","transform"]
+      node.roles: ["data_warm","data_content","remote_cluster_client","ingest","transform"]
       node.store.allow_mmap: false
       # XPack - Monitoring configuration
       xpack.monitoring.collection.enabled: true
