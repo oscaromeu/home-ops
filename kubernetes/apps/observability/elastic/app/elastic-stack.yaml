@@ -12,69 +12,7 @@ spec:
     count: 3
     config:
       logger.level: debug
-      node.roles: ["master","data_hot","data_content", "remote_cluster_client"]
-      node.store.allow_mmap: false
-      xpack.monitoring.collection.enabled: true
-      xpack.monitoring.elasticsearch.collection.enabled: true
-      xpack.monitoring.collection.cluster.stats.timeout: "10m"
-      xpack.monitoring.collection.index.recovery.active_only: "false"
-      xpack.monitoring.collection.index.recovery.timeout: "10m"
-      xpack.monitoring.collection.index.stats.timeout: "10m"
-      xpack.monitoring.collection.indices: "'*'"
-      xpack.monitoring.collection.interval: "60s"
-      xpack.monitoring.history.duration: "7d"
-    podTemplate:
-      metadata:
-        labels:
-          stack-monitoring.elastic.co/type: es
-          app.kubernetes.io/name: elk
-          app.kubernetes.io/service: logging
-          app.kubernetes.io/component: elasticsearch
-          app.kubernetes.io/namespace: observability
-        annotations:
-          co.elastic.logs/enabled: "true"
-      spec:
-        containers:
-        - name: elasticsearch
-          env:
-            - name: ES_JAVA_OPTS
-              value: "-Xms3g -Xmx3g"
-            - name: READINESS_PROBE_TIMEOUT
-              value: "10"
-          resources:
-            requests:
-              memory: 7Gi
-              cpu: 241m
-            limits:
-              memory: 7Gi
-
-        #affinity:
-        #  podAntiAffinity:
-        #    preferredDuringSchedulingIgnoredDuringExecution:
-        #    - weight: 100
-        #      podAffinityTerm:
-        #        labelSelector:
-        #          matchLabels:
-        #            elasticsearch.k8s.elastic.co/cluster-name: elk
-        #        topologyKey: kubernetes.io/hostname
-
-        nodeSelector:
-          kubernetes.io/arch: amd64
-    volumeClaimTemplates:
-    - metadata:
-        name: elasticsearch-data # this name is required for the volume to be mounted
-      spec:
-        accessModes:
-        - ReadWriteOnce
-        resources:
-          requests:
-            storage: 10Gi
-        storageClassName: local-path
-  - name: ingest
-    count: 1
-    config:
-      logger.level: debug
-      node.roles: ["ingest", "transform"]
+      node.roles: ["master","data_hot","data_content", "remote_cluster_client","ingest", "transform"]
       node.store.allow_mmap: false
       xpack.monitoring.collection.enabled: true
       xpack.monitoring.elasticsearch.collection.enabled: true
