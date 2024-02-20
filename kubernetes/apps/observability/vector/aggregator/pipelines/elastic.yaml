@@ -52,11 +52,11 @@ sinks:
       # https://www.elastic.co/guide/en/ecs/master/ecs-data_stream.html
       type: logs
       ### Uncomment lines 54-55 and commnent 58-59 to generate indices per namespace
-      #dataset: "k3s_prod"
-      #namespace: "{{ .kubernetes.pod_namespace }}"
+      dataset: "k3s_prod"
+      namespace: "{{ .kubernetes.pod_namespace }}"
       ### Comment lines 54-55 and uncommnent 58-59 to generate indices per cluster
-      dataset: "k3s"
-      namespace: "prod"
+      #dataset: "k3s"
+      #namespace: "prod"
     mode: "data_stream"
     bulk:
       action: "create"
