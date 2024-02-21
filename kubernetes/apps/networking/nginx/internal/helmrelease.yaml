@@ -61,6 +61,7 @@ spec:
           "http_user_agent": "$http_user_agent"}
         proxy-body-size: 0
         proxy-buffer-size: 16k
+        proxy-read-timeout: 2400 # Elastic reindexing testing
         ssl-protocols: TLSv1.3 TLSv1.2
       metrics:
         enabled: true
