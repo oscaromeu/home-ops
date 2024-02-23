@@ -5,7 +5,7 @@ resources:
   - ./namespace.yaml
   - ./atuin/ks.yaml
   #- ./busybox/ks.yaml
-  #- ./capacitor/ks.yaml
+  - ./capacitor/ks.yaml
   - ./cdi/ks.yaml
   #- ./chaos-mesh/ks.yaml
   #- ./dnsutils/ks.yaml
