@@ -21350,8 +21350,15 @@ spec:
       labels:
         app.kubernetes.io/name: argocd-applicationset-controller
     spec:
-      nodeSelector:
-        beta.kubernetes.io/arch: amd64
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
       containers:
       - args:
         - /usr/local/bin/argocd-applicationset-controller
@@ -21560,9 +21567,15 @@ spec:
       labels:
         app.kubernetes.io/name: argocd-dex-server
     spec:
-      nodeSelector:
-        beta.kubernetes.io/arch: amd64
       affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - podAffinityTerm:
@@ -21665,8 +21678,15 @@ spec:
       labels:
         app.kubernetes.io/name: argocd-notifications-controller
     spec:
-      nodeSelector:
-        beta.kubernetes.io/arch: amd64
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
       containers:
       - args:
         - /usr/local/bin/argocd-notifications
@@ -21751,9 +21771,15 @@ spec:
       labels:
         app.kubernetes.io/name: argocd-redis
     spec:
-      nodeSelector:
-        beta.kubernetes.io/arch: amd64
       affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - podAffinityTerm:
@@ -21809,9 +21835,15 @@ spec:
       labels:
         app.kubernetes.io/name: argocd-repo-server
     spec:
-      nodeSelector:
-        beta.kubernetes.io/arch: amd64
       affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - podAffinityTerm:
@@ -22121,9 +22153,15 @@ spec:
       labels:
         app.kubernetes.io/name: argocd-server
     spec:
-      nodeSelector:
-        beta.kubernetes.io/arch: amd64
       affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - podAffinityTerm:
@@ -22469,9 +22507,15 @@ spec:
       labels:
         app.kubernetes.io/name: argocd-application-controller
     spec:
-      nodeSelector:
-        beta.kubernetes.io/arch: amd64
       affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - podAffinityTerm:
