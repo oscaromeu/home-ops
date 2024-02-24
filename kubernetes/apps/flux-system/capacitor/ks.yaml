@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
     - name: cluster-apps-nginx-internal
-  path: ./kubernetes/apps/tools/capacitor/app
+  path: ./kubernetes/apps/flux-system/capacitor/app
   prune: true
   sourceRef:
     kind: GitRepository
