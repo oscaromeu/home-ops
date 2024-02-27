@@ -69,13 +69,13 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          - name: lbpkm1
+          - name: lphkm1
             devices:
               - name: /dev/disk/by-id/ata-KINGSTON_SA400S37480G_50026B7283215569
-          - name: lbpkm2
+          - name: lphkm2
             devices:
               - name: /dev/disk/by-id/ata-SSDPR-CL100-480-G3_GXE092715
-          - name: lbpkm3
+          - name: lphkm3
             devices:
               - name: /dev/disk/by-id/ata-SSDPR-CL100-480-G3_G0Z047886
       healthCheck:
