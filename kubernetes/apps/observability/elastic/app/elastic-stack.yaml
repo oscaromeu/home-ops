@@ -9,7 +9,7 @@ spec:
   volumeClaimDeletePolicy: DeleteOnScaledownOnly
   nodeSets:
   - name: hot
-    count: 3
+    count: 2
     config:
       logger.level: debug
       node.roles: ["master", "data","data_hot","data_content", "remote_cluster_client","ingest", "transform"]
@@ -72,7 +72,7 @@ spec:
         storageClassName: local-path
 
   - name: warm
-    count: 2
+    count: 1
     config:
       node.roles: ["data_warm","data_content","remote_cluster_client","ingest","transform"]
       node.store.allow_mmap: false
