@@ -25,8 +25,10 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    defaultPodOptions:
+      nodeSelector:
+        kubernetes.io/arch: amd64
     nameOverride: *app
-
     controllers:
       main:
         containers:
@@ -64,6 +66,3 @@ spec:
         enabled: true
         endpoints:
           - port: metrics
-
-    nodeSelector:
-      kubernetes.io/arch: amd64
