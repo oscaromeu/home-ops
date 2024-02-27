@@ -11,7 +11,7 @@ resources:
   - ./docuseal/ks.yaml
   - ./gitea/ks.yaml
   #- ./harbor/ks.yaml
-  - ./kubevirt/ks.yaml
+  #- ./kubevirt/ks.yaml
   #- ./microcks/ks.yaml
   - ./outline/ks.yaml
   - ./actual/ks.yaml
