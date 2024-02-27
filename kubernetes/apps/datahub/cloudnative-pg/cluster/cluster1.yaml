@@ -42,7 +42,7 @@ spec:
   backup:
     retentionPolicy: 30d
     barmanObjectStore:
-      destinationPath: s3://cloudnative-pg-v1/
+      destinationPath: gs://cloudnative-pg-v1/
       googleCredentials:
         applicationCredentials:
           name: backup-creds
