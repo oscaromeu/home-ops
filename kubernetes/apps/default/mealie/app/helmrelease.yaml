@@ -68,7 +68,7 @@ spec:
                   port: http
         tls:
           - hosts:
-              - "mealie.${SECRET_DOMAIN}"
+              - "meal.${SECRET_DOMAIN}"
 
     persistence:
       data:
