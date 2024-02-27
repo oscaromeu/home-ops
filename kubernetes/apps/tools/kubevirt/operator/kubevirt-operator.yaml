@@ -7447,17 +7447,14 @@ spec:
       name: virt-operator
     spec:
       affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: kubevirt.io
-                  operator: In
-                  values:
-                  - virt-operator
-              topologyKey: kubernetes.io/hostname
-            weight: 1
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
       containers:
       - args:
         - --port
