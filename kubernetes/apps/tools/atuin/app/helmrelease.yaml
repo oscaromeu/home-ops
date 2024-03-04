@@ -92,10 +92,9 @@ spec:
     ingress:
       main:
         enabled: true
-        className: external
+        className: internal
         annotations:
           hajimari.io/icon: mdi:powershell
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         hosts:
           - host: &host "sh.${SECRET_DOMAIN}"
             paths:
