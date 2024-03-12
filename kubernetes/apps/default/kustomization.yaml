@@ -5,5 +5,5 @@ resources:
   - ./namespace.yaml
   - ./excalidraw/ks.yaml
   - ./linkding/ks.yaml
-  - ./mealie/ks.yaml
+  #- ./mealie/ks.yaml
   - ./hajimari/ks.yaml
