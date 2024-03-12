@@ -4,6 +4,11 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./excalidraw/ks.yaml
-  - ./linkding/ks.yaml
-  #- ./mealie/ks.yaml
   - ./hajimari/ks.yaml
+  - ./linkding/ks.yaml
+  - ./mealie/ks.yaml
+  - ./overseer/ks.yaml
+  - ./plex/ks.yaml
+  - ./prowlarr/ks.yaml
+  - ./qbittorrent/ks.yaml
+
