@@ -10,5 +10,5 @@ resources:
   - ./overseerr/ks.yaml
   - ./plex/ks.yaml
   - ./prowlarr/ks.yaml
-  #- ./qbittorrent/ks.yaml
+  - ./qbittorrent/ks.yaml
 
