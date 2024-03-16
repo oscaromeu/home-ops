@@ -71,7 +71,6 @@ spec:
         cpu: 75m
         memory: 500Mi
 
-
     gitea:
       admin:
         username: 'gitea'
@@ -160,7 +159,6 @@ spec:
       #    groupClaimName: groups
       #    adminGroup: admins
       #    restrictedGroup: people
-
 
       metrics:
         enabled: true
