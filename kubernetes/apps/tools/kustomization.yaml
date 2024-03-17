@@ -17,4 +17,3 @@ resources:
   - ./actual/ks.yaml
   #- ./redisui/ks.yaml
   #- ./redpanda/ks.yaml
-  #- ./semaphore/ks.yaml
