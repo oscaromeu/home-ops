@@ -60,7 +60,7 @@ spec:
         enabled: true
         className: internal
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: &host "finances.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
