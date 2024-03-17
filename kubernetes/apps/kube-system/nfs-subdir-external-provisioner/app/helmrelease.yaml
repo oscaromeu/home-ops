@@ -24,7 +24,7 @@ spec:
   values:
     nfs:
       server: 10.69.1.31
-      path: /mnt/nfs_share/
+      path: /data
 
     storageClass:
       create: true
