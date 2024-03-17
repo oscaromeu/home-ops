@@ -1,16 +1,16 @@
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: data-pv
-spec:
-  storageClassName: nfs-client
-  capacity:
-    storage: 40Gi
-  accessModes:
-  - ReadWriteMany
-  nfs:
-    server: 10.69.1.31
-    path: /mnt/nfs_share/k8s_data
+#apiVersion: v1
+#kind: PersistentVolume
+#metadata:
+#  name: data-pv
+#spec:
+#  storageClassName: nfs-client
+#  capacity:
+#    storage: 40Gi
+#  accessModes:
+#  - ReadWriteMany
+#  nfs:
+#    server: 10.69.1.31
+#    path: /mnt/nfs_share/k8s_data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
