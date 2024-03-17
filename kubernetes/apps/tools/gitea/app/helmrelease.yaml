@@ -129,8 +129,8 @@ spec:
 
         storage:
           STORAGE_TYPE: minio
-          MINIO_USE_SSL: true
-          MINIO_INSECURE_SKIP_VERIFY: true
+          MINIO_USE_SSL: false
+          MINIO_INSECURE_SKIP_VERIFY: false
 
         actions:
           enabled: true
