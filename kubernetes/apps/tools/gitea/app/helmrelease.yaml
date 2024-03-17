@@ -129,8 +129,6 @@ spec:
 
         storage:
           STORAGE_TYPE: minio
-          MINIO_ENDPOINT: datahub-hl.datahub.svc.cluster.local:9000
-          MINIO_BUCKET: gitea-bucket-v1
           MINIO_USE_SSL: true
           MINIO_INSECURE_SKIP_VERIFY: true
 
@@ -204,11 +202,19 @@ spec:
       kind: Secret
       name: gitea-config
       valuesKey: host
+    - targetPath: gitea.config.storage.MINIO_BUCKET
+      kind: ConfigMap
+      name: gitea-bucket-v1
+      valuesKey: BUCKET_NAME
+    - targetPath: gitea.config.storage.MINIO_ENDPOINT
+      kind: ConfigMap
+      name: gitea-bucket-v1
+      valuesKey: BUCKET_HOST
     - targetPath: gitea.config.storage.MINIO_ACCESS_KEY_ID
       kind: Secret
-      name: gitea-config
-      valuesKey: aws_access_key_id
+      name: gitea-bucket-v1
+      valuesKey: AWS_ACCESS_KEY_ID
     - targetPath: gitea.config.storage.MINIO_SECRET_ACCESS_KEY
       kind: Secret
-      name: gitea-config
-      valuesKey: aws_secret_access_key
+      name: gitea-bucket-v1
+      valuesKey: AWS_SECRET_ACCESS_KEY
