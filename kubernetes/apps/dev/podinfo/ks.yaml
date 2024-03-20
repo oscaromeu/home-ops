@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-redis
-  path: ./kubernetes/apps/default/podinfo/app
+  path: ./kubernetes/apps/dev/podinfo/app
   prune: true
   sourceRef:
     kind: GitRepository
