@@ -14,6 +14,6 @@ resources:
   - ./kubevirt/ks.yaml
   #- ./microcks/ks.yaml
   - ./outline/ks.yaml
-  - ./actual/ks.yaml
+  #- ./actual/ks.yaml
   #- ./redisui/ks.yaml
   #- ./redpanda/ks.yaml
