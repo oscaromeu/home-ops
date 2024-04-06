@@ -635,7 +635,7 @@ vmstorage:
       # -- vmbackupmanager image repository
       repository: victoriametrics/vmbackupmanager
       # -- vmbackupmanager image tag
-      tag: v1.91.3-enterprise
+      tag: v1.100.0-enterprise
     # -- disable hourly backups
     disableHourly: false
     # -- disable daily backups
