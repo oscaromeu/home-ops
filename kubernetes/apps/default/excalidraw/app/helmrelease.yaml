@@ -32,7 +32,7 @@ spec:
     image:
       # https://github.com/excalidraw/excalidraw/pull/6143
       repository: ghcr.io/onedr0p/excalidraw
-      tag: latest@sha256:30cbbb9544cbc2ff87130b4f1706a7715b68fd262c852a2eba826c0c2198e348
+      tag: latest@sha256:bafe3a1e529aac9e9d536199e77133b60bfce4413458ee0a46e48fb07095d23b
     service:
       main:
         ports:
