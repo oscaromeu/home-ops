@@ -1,5 +1,5 @@
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cluster-apps-vector-aggregator
@@ -25,7 +25,7 @@ spec:
   retryInterval: 1m
   timeout: 10m
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cluster-apps-vector-agent
@@ -49,7 +49,7 @@ spec:
   retryInterval: 1m
   timeout: 10m
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cluster-apps-vector-monitoring
