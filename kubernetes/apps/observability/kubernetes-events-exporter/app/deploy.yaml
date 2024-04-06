@@ -68,7 +68,7 @@ spec:
       serviceAccountName: event-exporter
       containers:
         - name: event-exporter
-          image: ghcr.io/resmoio/kubernetes-event-exporter:v1.1
+          image: ghcr.io/resmoio/kubernetes-event-exporter:v1.7
           imagePullPolicy: IfNotPresent
           resources:
             limits:
