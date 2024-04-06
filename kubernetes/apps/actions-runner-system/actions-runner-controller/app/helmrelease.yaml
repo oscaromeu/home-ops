@@ -48,15 +48,6 @@ spec:
     certManagerEnabled: false
     authSecret:
       create: true
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: beta.kubernetes.io/instance-type
-                  operator: In
-                  values:
-                    - c3-standard-8
     securityContext:
       capabilities:
         drop:
@@ -71,27 +62,9 @@ spec:
     githubWebhookServer:
       enabled: true
       logFormat: json
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: beta.kubernetes.io/instance-type
-                    operator: In
-                    values:
-                      - c3-standard-8
     actionsMetrics:
       serviceMonitor:
         enabled: false
     actionsMetricsServer:
       enabled: true
       logFormat: json
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: beta.kubernetes.io/instance-type
-                    operator: In
-                    values:
-                      - c3-standard-8

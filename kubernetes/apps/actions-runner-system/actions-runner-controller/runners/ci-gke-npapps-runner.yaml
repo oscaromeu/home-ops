@@ -2,7 +2,7 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: ci-gke-npapps-runner
+  name: self-hosted
 spec:
   template:
     spec:
@@ -10,8 +10,8 @@ spec:
       image: summerwind/actions-runner-dind:latest
       dockerdWithinRunnerContainer: true
       ephemeral: false
-      repository: flanksio/flanks-api-actions
-      labels: ["gke-npapps-runner"] # Cluster Pre Flanks Systems
+      repository: oscaromeu/actions
+      labels: ["self-hosted"] # Cluster Pre Flanks Systems
       dockerVolumeMounts:
         - mountPath: /var/lib/docker
           name: docker
@@ -28,23 +28,14 @@ spec:
         - name: tmp
           emptyDir:
             medium: Memory
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: beta.kubernetes.io/instance-type
-                    operator: In
-                    values:
-                      - c3-standard-8
 ---
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: HorizontalRunnerAutoscaler
 metadata:
-  name: ci-gke-npapps-runner
+  name: self-hosted
 spec:
   scaleTargetRef:
-    name: ci-gke-npapps-runner
+    name: self-hosted
   scaleUpTriggers:
     - githubEvent:
         checkRun:
@@ -57,4 +48,4 @@ spec:
   metrics:
     - type: TotalNumberOfQueuedAndInProgressWorkflowRuns
       repositoryNames:
-        - flanksio/flanks-api-actions
+        - oscaromeu/actions
