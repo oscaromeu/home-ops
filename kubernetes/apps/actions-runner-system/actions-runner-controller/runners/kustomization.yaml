@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: actions-runner-system
 
 resources:
-  - ci-gke-npapps-runner.yaml
+  - runner-home-ops.yaml
