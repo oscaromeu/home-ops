@@ -1,0 +1,43 @@
+---
+  name: Run Aqua Security Trivy vulnerability scanner
+
+  on:
+    push:
+      branches:
+        - main
+    pull_request:
+
+  jobs:
+    trivy:
+      name: Trivy
+      runs-on: self-hosted
+      steps:
+        # https://github.com/marketplace/actions/harden-runner
+        - name: Harden Runner
+          uses: step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142 # v2.7.0
+          with:
+            egress-policy: audit
+
+        # https://github.com/marketplace/actions/checkout
+        - name: Checkout Repository
+          uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+        # https://github.com/marketplace/actions/aqua-security-trivy
+        - name: Run Trivy vulnerability scanner in IaC mode
+          uses: aquasecurity/trivy-action@d710430a6722f083d3b36b8339ff66b32f22ee55 # 0.19.0
+          with:
+            scan-type: config
+            hide-progress: false
+            format: sarif
+            output: trivy-results.sarif
+            exit-code: "1"
+            ignore-unfixed: true
+            severity: CRITICAL,HIGH
+            scan-ref: infra/terraform
+
+        # Upload the results to GitHub's code scanning dashboard.
+        # https://github.com/github/codeql-action
+        - name: Upload Trivy scan results to GitHub Security tab
+          uses: github/codeql-action/upload-sarif@4355270be187e1b672a7a1c7c7bae5afdc1ab94a # v3.24.10
+          with:
+            sarif_file: trivy-results.sarif
