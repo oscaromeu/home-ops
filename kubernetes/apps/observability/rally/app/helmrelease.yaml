@@ -36,7 +36,7 @@ spec:
           main:
             image:
               repository: elastic/rally
-              tag: 2.3.1
+              tag: 2.10.0
             envFrom: &envFrom
               - secretRef:
                   name: elastic-secret
