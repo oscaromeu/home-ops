@@ -7,4 +7,4 @@ resources:
   # Flux-Kustomizations
   #- ./gha-runner-scale-set-controller/ks.yaml
   #- ./gha-runner-large-scale-set/ks.yaml
-  #- ./actions-runner-controller/ks.yaml
+  - ./actions-runner-controller/ks.yaml

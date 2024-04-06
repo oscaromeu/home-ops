@@ -57,14 +57,14 @@ spec:
       runAsUser: 1000
     metrics:
       serviceMonitor:
-        enabled: false
+        enabled: true
     logFormat: json
     githubWebhookServer:
       enabled: true
       logFormat: json
     actionsMetrics:
       serviceMonitor:
-        enabled: false
+        enabled: true
     actionsMetricsServer:
       enabled: true
       logFormat: json
