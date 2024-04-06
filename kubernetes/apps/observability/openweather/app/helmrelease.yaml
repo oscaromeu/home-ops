@@ -35,7 +35,7 @@ spec:
           main:
             image:
               repository: billykwooten/openweather-exporter
-              tag: "v0.0.11"
+              tag: "v0.0.12"
             env:
               TZ: ${TIMEZONE}
               OW_DEGREES_UNIT: "C"
