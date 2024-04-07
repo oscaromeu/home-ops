@@ -43,6 +43,9 @@ spec:
             - key: ingress-class
               operator: In
               values: ["internal"]
+      opentelemetry:
+        enabled: true
+        resources: {}
       config:
         client-body-buffer-size: 100M
         client-body-timeout: 120
