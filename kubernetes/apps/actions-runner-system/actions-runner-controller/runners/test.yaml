@@ -44,6 +44,8 @@ spec:
               value: "false"
             - name: DOCKER_GROUP_GID
               value: "1001"
+            - name: DOCKER_HOST
+              value: unix:///run/docker/docker.sock
           volumeMounts:
             - name: docker-socket
               mountPath: /var/run/docker.sock
@@ -51,10 +53,6 @@ spec:
           resources:
             {}
         - name: docker
-          args:
-            - dockerd
-            - --host=unix:///var/run/docker.sock
-            - --group=$(DOCKER_GROUP_GID)
           env:
             - name: DOCKER_GROUP_GID
               value: "1001"
