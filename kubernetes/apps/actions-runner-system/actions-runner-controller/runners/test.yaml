@@ -1,6 +1,6 @@
 ---
 apiVersion: actions.summerwind.dev/v1alpha1
-kind: RunnerDeployment
+kind: RunnerSet
 metadata:
   name: home-ops
   namespace: actions-runner-system
