@@ -25,13 +25,12 @@ spec:
   replicas: 1
   repository: oscaromeu/fastapi-observability
   labels: ["self-hosted-cache"]
-  dockerdWithinRunnerContainer: true
+  dockerdWithinRunnerContainer: false
   selector:
     matchLabels:
       app: self-hosted-cache
   serviceName: self-hosted-cache
   template:
-    #image: summerwind/actions-runner-dind:latest
     metadata:
       labels:
         app: self-hosted-cache
@@ -46,46 +45,28 @@ spec:
             - name: DOCKER_GROUP_GID
               value: "1001"
           volumeMounts:
-            - name: var-lib-docker
-              mountPath: /var/lib/docker
+            - name: docker-socket
+              mountPath: /var/run/docker.sock
           image: summerwind/actions-runner:latest
           resources:
             {}
-            #limits:
-            #  #cpu: "4.0"
-            #  memory: "8Gi"
-            #requests:
-            #  cpu: "2.0"
-            #  memory: "4Gi"
         - name: docker
           args:
             - dockerd
-            - --host=$(DOCKER_HOST)
+            - --host=unix:///var/run/docker.sock
             - --group=$(DOCKER_GROUP_GID)
           env:
             - name: DOCKER_GROUP_GID
               value: "1001"
-            - name: DOCKER_HOST
-              value: unix:///run/docker/docker.sock
           image: docker:dind
           resources:
             {}
-            #limits:
-            #  #cpu: "4.0"
-            #  memory: "8Gi"
-            #requests:
-            #  cpu: "2.0"
-            #  memory: "4Gi"
           securityContext:
-          # Usually, the runner container's privileged field is derived from dockerdWithinRunnerContainer.
-          # But in the case where you need to run privileged job steps even if you don't use docker/don't need dockerd within the runner container,
-          # just specified `privileged: true` like this.
-          # See https://github.com/actions/actions-runner-controller/issues/1282
-          # Do note that specifying `privileged: false` while using dind is very likely to fail, even if you use some vm-based container runtimes
-          # like firecracker and kata. Basically they run containers within dedicated micro vms and so
-          # it's more like you can use `privileged: true` safer with those runtimes.
-          #
             privileged: true
+  volumes:
+    - name: docker-socket
+      hostPath:
+        path: /var/run/docker.sock
   volumeClaimTemplates:
     - metadata:
         name: var-lib-docker
