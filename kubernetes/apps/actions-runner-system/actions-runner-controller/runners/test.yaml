@@ -11,8 +11,8 @@ spec:
       imagePullPolicy: IfNotPresent
       dockerdWithinRunnerContainer: true
       ephemeral: true
-      repository: benwalio/home-ops
-      labels: ["self-hosted"]
+      repository: oscaromeu/home-ops
+      labels: ["self-hosted-cache"]
       nodeSelector:
         node-role.kubernetes.io/worker: "true"
       volumeMounts:
