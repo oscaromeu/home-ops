@@ -6,7 +6,7 @@ metadata:
 spec:
   replicas: 1
   labels: ["example"]
-  repository: flanksio/flanks-api-actions
+  repository: oscaromeu/fastapi-observability
   # Other mandatory fields from StatefulSet
   selector:
     matchLabels:
