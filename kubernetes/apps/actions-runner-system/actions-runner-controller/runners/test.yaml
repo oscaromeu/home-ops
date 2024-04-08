@@ -5,13 +5,13 @@ metadata:
   name: home-ops
   namespace: actions-runner-system
 spec:
+  repository: oscaromeu/home-ops
+  labels: ["self-hosted-cache"]
+  dockerdWithinRunnerContainer: true
   template:
     spec:
       image: ghcr.io/actions/actions-runner-controller/actions-runner-dind:v2.299.1-ubuntu-22.04
       imagePullPolicy: IfNotPresent
-      dockerdWithinRunnerContainer: true
-      repository: oscaromeu/home-ops
-      labels: ["self-hosted-cache"]
       nodeSelector:
         node-role.kubernetes.io/worker: "true"
       containers:
