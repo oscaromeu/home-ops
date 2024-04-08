@@ -10,7 +10,6 @@ spec:
       image: ghcr.io/actions/actions-runner-controller/actions-runner-dind:v2.299.1-ubuntu-22.04
       imagePullPolicy: IfNotPresent
       dockerdWithinRunnerContainer: true
-      ephemeral: false
       repository: oscaromeu/home-ops
       labels: ["self-hosted-cache"]
       nodeSelector:
