@@ -2,6 +2,24 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerSet
 metadata:
+  name: example
+spec:
+  replicas: 1
+  labels: ["example"]
+  repository: flanksio/flanks-api-actions
+  # Other mandatory fields from StatefulSet
+  selector:
+    matchLabels:
+      app: example
+  serviceName: example
+  template:
+    metadata:
+      labels:
+        app: example
+---
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerSet
+metadata:
   name: self-hosted-cache
 spec:
   replicas: 1
