@@ -2,31 +2,67 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerSet
 metadata:
-  name: home-ops
-  namespace: actions-runner-system
+  name: self-hosted-cache
 spec:
-  repository: oscaromeu/home-ops
+  replicas: 1
+  repository: oscaromeu/fastapi-observability
   labels: ["self-hosted-cache"]
-  dockerdWithinRunnerContainer: true
+  #dockerdWithinRunnerContainer: true
+  selector:
+    matchLabels:
+      app: self-hosted-cache
+  serviceName: self-hosted-cache
   template:
+    #image: summerwind/actions-runner-dind:latest
+    metadata:
+      labels:
+        app: self-hosted-cache
     spec:
-      image: ghcr.io/actions/actions-runner-controller/actions-runner-dind:v2.299.1-ubuntu-22.04
-      imagePullPolicy: IfNotPresent
-      nodeSelector:
-        node-role.kubernetes.io/worker: "true"
       containers:
-      - name: runner
-        volumeMounts:
-        - name: var-lib-docker
-          mountPath: /var/lib/docker
+        - name: runner
+          env:
+            - name: DOCKER_ENABLED
+              value: "true"
+            - name: DOCKERD_IN_RUNNER
+              value: "false"
+            - name: DOCKER_HOST
+              value: unix:///run/docker.sock
+          volumeMounts:
+            - name: var-lib-docker
+              mountPath: /var/lib/docker
+          image: summerwind/actions-runner:latest
+          resources:
+            {}
+            #limits:
+            #  #cpu: "4.0"
+            #  memory: "8Gi"
+            #requests:
+            #  cpu: "2.0"
+            #  memory: "4Gi"
+        - name: docker
+          args:
+            - dockerd
+            - --host=unix:///run/docker.sock
+            - --group=$(DOCKER_GROUP_GID)
+          env:
+            - name: DOCKER_GROUP_GID
+              value: "1001"
+          image: docker:dind
+          resources:
+            {}
+            #limits:
+            #  #cpu: "4.0"
+            #  memory: "8Gi"
+            #requests:
+            #  cpu: "2.0"
+            #  memory: "4Gi"
   volumeClaimTemplates:
-  - metadata:
-      name: var-lib-docker
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: 10Gi
-      storageClassName: local-path
-
+    - metadata:
+        name: var-lib-docker
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 3Gi
+        storageClassName: local-path
