@@ -42,7 +42,7 @@ spec:
             - name: DOCKER_ENABLED
               value: "true"
             - name: DOCKERD_IN_RUNNER
-              value: "true"
+              value: "false"
             - name: DOCKER_GROUP_GID
               value: "1001"
           volumeMounts:
