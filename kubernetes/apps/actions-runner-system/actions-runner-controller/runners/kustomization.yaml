@@ -4,4 +4,4 @@ namespace: actions-runner-system
 
 resources:
   - runner-home-ops.yaml
-  - test.yaml
+  #- test.yaml
