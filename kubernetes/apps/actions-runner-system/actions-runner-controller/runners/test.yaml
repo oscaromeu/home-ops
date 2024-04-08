@@ -42,11 +42,13 @@ spec:
         - name: docker
           args:
             - dockerd
-            - --host=unix:///run/docker.sock
+            - --host=$(DOCKER_HOST)
             - --group=$(DOCKER_GROUP_GID)
           env:
             - name: DOCKER_GROUP_GID
               value: "1001"
+            - name: DOCKER_HOST
+              value: unix:///run/docker/docker.sock
           image: docker:dind
           resources:
             {}
