@@ -61,9 +61,6 @@ spec:
             {}
           securityContext:
             privileged: true
-          volumeMounts:
-            - name: docker-socket
-              mountPath: /var/run/docker.sock
   volumeClaimTemplates:
     - metadata:
         name: var-lib-docker
