@@ -42,11 +42,9 @@ spec:
             - name: DOCKER_ENABLED
               value: "true"
             - name: DOCKERD_IN_RUNNER
-              value: "false"
+              value: "true"
             - name: DOCKER_GROUP_GID
               value: "1001"
-            - name: DOCKER_HOST
-              value: unix:///run/docker.sock
           volumeMounts:
             - name: var-lib-docker
               mountPath: /var/lib/docker
