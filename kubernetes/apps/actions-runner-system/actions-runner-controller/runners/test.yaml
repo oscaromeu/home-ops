@@ -7,7 +7,7 @@ spec:
   replicas: 1
   repository: oscaromeu/fastapi-observability
   labels: ["self-hosted-cache"]
-  #dockerdWithinRunnerContainer: true
+  dockerdWithinRunnerContainer: true
   selector:
     matchLabels:
       app: self-hosted-cache
