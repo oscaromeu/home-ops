@@ -15,10 +15,19 @@ spec:
       labels: ["self-hosted-cache"]
       nodeSelector:
         node-role.kubernetes.io/worker: "true"
-      volumeMounts:
-        - name: cache-volume
-          mountPath: /cache
-      volumes:
-        - name: cache-volume
-          persistentVolumeClaim:
-            claimName: actions-runner-controller-cache
+      containers:
+      - name: runner
+        volumeMounts:
+        - name: var-lib-docker
+          mountPath: /var/lib/docker
+  volumeClaimTemplates:
+  - metadata:
+      name: var-lib-docker
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi
+      storageClassName: local-path
+
