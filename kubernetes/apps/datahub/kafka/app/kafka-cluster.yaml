@@ -9,11 +9,11 @@ spec:
     replicas: 3
     logging:
       type: inline
-      loggers:
-        kafka.root.logger.level: DEBUG
-        log4j.logger.kafka.coordinator.transaction: TRACE
-        log4j.logger.kafka.log.LogCleanerManager: DEBUG
-        log4j.logger.kafka.request.logger: DEBUG
+      #loggers:
+      #  kafka.root.logger.level: DEBUG
+      #  log4j.logger.kafka.coordinator.transaction: TRACE
+      #  log4j.logger.kafka.log.LogCleanerManager: DEBUG
+      #  log4j.logger.kafka.request.logger: DEBUG
     template:
       pod:
         tolerations:
