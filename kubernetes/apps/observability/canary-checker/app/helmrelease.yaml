@@ -38,7 +38,7 @@ spec:
       ## Options: minimal | full
       type: full
       pullPolicy: IfNotPresent
-      tag: "v1.0.143"
+      tag: "v1.0.259"
 
     dockerSocket: false
     containerdSocket: false
