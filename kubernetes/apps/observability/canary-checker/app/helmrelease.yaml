@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.bitnami.com/bitnami
       chart: canary-checker
-      version: 1.0.143
+      version: 1.0.259
       sourceRef:
         kind: HelmRepository
         name: flanksource
