@@ -23,7 +23,7 @@ There is a template over at [onedr0p/flux-cluster-template](https://github.com/o
 ... and more!
 
 ## 🗄️ Hardware
-<details open>
+<details>
 
 ## Production Nodes
 
@@ -37,7 +37,7 @@ There is a template over at [onedr0p/flux-cluster-template](https://github.com/o
 
 | Device             | Count | Specs                                                                                                                                                                                                                                                                                                          | OS                                                  | Purpose |
 |--------------------|-------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|---------|
-| Turing Pi RK1      | 3     | <br/> **RAM** `16GB` <br/> **M.2 SSD** `500GB`| Ubuntu 22.04 LTS |   Development & Staging      |
+| Turing Pi RK1      | 3     | **RAM** `16GB` <br/> **M.2 SSD** `500GB`| Ubuntu 22.04 LTS |   Development & Staging      |
 
 ## Infrastructure
 
@@ -46,8 +46,8 @@ There is a template over at [onedr0p/flux-cluster-template](https://github.com/o
 | Turing Pi RK1      | 1    | **RAM** `16GB` <br/> **M.2 SSD** `500GB` <br/> **HDD** `1TB` | -  | DNS Server |
 | Turing Pi Board V2 | 1     | -   |   -       |     -    |
 | Unifi UDM Pro      | 1     | - | - |    10Gb Core Switch + Router + FW    |
-| Unifi Lite 8 PoE     | 1     | Switch | - |    TBD    |
-| Mac Mini     | 1     | <br/> **RAM** `8GB` <br/> **M.2 SSD** `256GB` | - |    TBD    |
+| Unifi Lite 8 PoE     | 1     | - | - |    Switch    |
+| Mac Mini     | 1     | **RAM** `8GB` <br/> **M.2 SSD** `256GB` | - |    TBD    |
 
 
 </details>
