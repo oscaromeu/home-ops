@@ -28,7 +28,7 @@ spec:
     initContainers:
       init-db:
         image: oscaromeu/postgres-init:16.2
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         envFrom:
           - secretRef:
               name: outline-secret
