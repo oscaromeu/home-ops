@@ -29,23 +29,26 @@ There is a template over at [onedr0p/flux-cluster-template](https://github.com/o
 
 | Device             | Count | Specs                                                                                                                                                                                                                                                                                                          | OS                                                  | Purpose |
 |--------------------|-------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|---------|
-| MinisForum um350   | 1     | **RAM** `32GB` <br/> **M.2 SSD** `500GB` <br/> **HDD SSD** `500GB`                                                                                                                                                       | Ubuntu 22.04.4 LTS (Jammy Jellyfish)                    |         |
-| MinisForum um350   | 1     | **RAM** `32GB` <br/> **M.2 SSD** `500GB` <br/> **HDD SSD** `500GB`                                                                                                                                                     | Ubuntu 22.04.4 LTS (Jammy Jellyfish)                      |         |
-| Minisforum um560   | 1     | **RAM** `32GB`  <br/> **M.2 SSD** `1TB` <br/> **HDD SSD** `500GB`                                                                                                                                                    | Ubuntu 22.04.4 LTS (Jammy Jellyfish)                      |         |
+| MinisForum um350   | 1     | **RAM** `32GB` <br/> **M.2 SSD** `500GB` <br/> **HDD SSD** `500GB`                                                                                                                                                       | Ubuntu 22.04.4 LTS (Jammy Jellyfish)                    |  Control Plane       |
+| MinisForum um350   | 1     | **RAM** `32GB` <br/> **M.2 SSD** `500GB` <br/> **HDD SSD** `500GB`                                                                                                                                                     | Ubuntu 22.04.4 LTS (Jammy Jellyfish)                      |  Data Plane       |
+| Minisforum um560   | 1     | **RAM** `32GB`  <br/> **M.2 SSD** `1TB` <br/> **HDD SSD** `500GB`                                                                                                                                                    | Ubuntu 22.04.4 LTS (Jammy Jellyfish)                      |    Data Plane     |
 
 ## Staging Nodes
 
 | Device             | Count | Specs                                                                                                                                                                                                                                                                                                          | OS                                                  | Purpose |
 |--------------------|-------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|---------|
-| Turing Pi RK1      | 3     | <br/> **RAM** `16GB` <br/> **M.2 SSD** `500GB`| Ubuntu 22.04 LTS Server based on the BSP Linux 5.10 |         |
+| Turing Pi RK1      | 3     | <br/> **RAM** `16GB` <br/> **M.2 SSD** `500GB`| Ubuntu 22.04 LTS Server based on the BSP Linux 5.10 |   Development & Staging      |
 
 ## Infrastructure
 
 | Device             | Count | Specs                                                                                                                                                                                                                                                                                                         | OS       | Purpose |
 |--------------------|-------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|---------|
-| Turing Pi RK1      | 1    | **RAM** `16GB` <br/> **M.2 SSD** `500GB` <br/> **HDD** `1TB` <br/>[RK1 Specs](https://docs.turingpi.com/docs/turing-rk1-specs-and-io-ports) | Ubuntu 22.04 LTS Server based on the BSP Linux 5.10 |         |
-| Turing Pi Board V2 | 1     | **Switch** <br/>   - `1Gbps Switch (RTL8370MB-CG +)` <br/>   - VLAN Support <br/> **Storage Interfaces** <br/>   - `2x SATA 3 up to 6Gbps per port*` <br/>   - 4x M.2 Slots (2260 or 2280 NVMe drives)      |          |         |
-| Unifi UDM Pro      | 1     | **Networking interface** <br/>  - (8) LAN: `GbE RJ45 ports` <br/>  - (1) WAN: `GbE RJ45 port` <br/> **SFP+ interface** <br/>  - (1) LAN: `10G SFP+`  <br/>  - (1) WAN: `10G SFP+` | Unify OS |         |
+| Turing Pi RK1      | 1    | **RAM** `16GB` <br/> **M.2 SSD** `500GB` <br/> **HDD** `1TB` | DNS Server      |
+| Turing Pi Board V2 | 1     | -   |   -       |     -    |
+| Unifi UDM Pro      | 1     | - | - |    10Gb Core Switch + Router + FW    |
+| Unifi Lite 8 PoE     | 1     | Switch | - |    TBD    |
+| Mac Mini     | 1     | <br/> **RAM** `8GB` <br/> **M.2 SSD** `256GB` | - |    TBD    |
+
 
 </details>
 
