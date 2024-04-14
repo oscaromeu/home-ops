@@ -38,7 +38,7 @@ There is a template over at [onedr0p/flux-cluster-template](https://github.com/o
 
 | Device             | Count | Specs                                                                                                                                                                                                                                                                                                          | OS                                                  |
 |--------------------|-------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
-| Turing Pi RK1      | 4     | **CPU** <br/>   - 8× | 4× ARM Cortex-A76 | 4× ARM Cortex-A55 | DynamIQ<br/> **GPU** `ARM Mali-G610MP4 4-core GPU` <br/> **NPU** `AI accelerator NPU 6TOPS` <br/> **RAM** `16GB` <br/> **M.2 SSD** `500GB` <br/> [RK1 Specs](https://docs.turingpi.com/docs/turing-rk1-specs-and-io-ports) | Ubuntu 22.04 LTS Server based on the BSP Linux 5.10 |
+| Turing Pi RK1      | 4     | **CPU** <br/>   - 8× || 4× ARM Cortex-A76 \| 4× ARM Cortex-A55 \| DynamIQ <br/> **GPU** `ARM Mali-G610MP4 4-core GPU` <br/> **NPU** `AI accelerator NPU 6TOPS` <br/> **RAM** `16GB` <br/> **M.2 SSD** `500GB` <br/> [RK1 Specs](https://docs.turingpi.com/docs/turing-rk1-specs-and-io-ports) | Ubuntu 22.04 LTS Server based on the BSP Linux 5.10 |
 
 ## Networking
 
