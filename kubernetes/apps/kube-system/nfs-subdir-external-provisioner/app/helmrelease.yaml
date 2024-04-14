@@ -23,7 +23,7 @@ spec:
       retries: 3
   values:
     nfs:
-      server: 10.69.1.31
+      server: 10.69.3.31
       path: /data
 
     storageClass:

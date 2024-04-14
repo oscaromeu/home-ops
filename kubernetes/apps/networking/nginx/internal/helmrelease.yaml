@@ -31,21 +31,21 @@ spec:
       service:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: "internal.${SECRET_DOMAIN}"
-          io.cilium/lb-ipam-ips: "10.69.1.122"
+          io.cilium/lb-ipam-ips: "10.69.3.122"
         externalTrafficPolicy: Cluster
       ingressClassResource:
         name: internal
         default: true
         controllerValue: k8s.io/internal
+      opentelemetry:
+        enabled: true
+        resources: {}
       admissionWebhooks:
         objectSelector:
           matchExpressions:
             - key: ingress-class
               operator: In
               values: ["internal"]
-      opentelemetry:
-        enabled: true
-        resources: {}
       config:
         client-body-buffer-size: 100M
         client-body-timeout: 120
