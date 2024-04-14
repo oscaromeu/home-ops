@@ -9,7 +9,7 @@
 #  accessModes:
 #  - ReadWriteMany
 #  nfs:
-#    server: 10.69.1.31
+#    server: 10.69.3.31
 #    path: /mnt/nfs_share/k8s_data
 ---
 apiVersion: v1
