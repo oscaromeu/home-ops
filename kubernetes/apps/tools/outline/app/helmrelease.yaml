@@ -29,9 +29,9 @@ spec:
       init-db:
         image: ghcr.io/onedr0p/postgres-initdb:16.2
         imagePullPolicy: IfNotPresent
-        envFrom:
-          - secretRef:
-              name: outline-secret
+        #envFrom:
+        #  - secretRef:
+        #      name: outline-secret
     controller:
       replicas: 3
       strategy: Recreate
