@@ -32,7 +32,7 @@ spec:
 
     image:
       repository: gitea/gitea
-      tag: 1.21.1
+      tag: 1.21.11
       rootless: true
 
     replicaCount: 1
