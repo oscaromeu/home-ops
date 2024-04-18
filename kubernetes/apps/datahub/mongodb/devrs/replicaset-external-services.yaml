@@ -2,7 +2,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: mongodb-devrs01-externalsvc
+  name: mongodb-devrs01
   namespace: datahub
 spec:
   type: LoadBalancer
@@ -18,7 +18,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: mongodb-devrs02-externalsvc
+  name: mongodb-devrs02
   namespace: datahub
 spec:
   type: LoadBalancer
@@ -33,7 +33,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: mongodb-devrs03-externalsvc
+  name: mongodb-devrs03
   namespace: datahub
 spec:
   type: LoadBalancer
