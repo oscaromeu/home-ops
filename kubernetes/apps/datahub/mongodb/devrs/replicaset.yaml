@@ -3,7 +3,7 @@ apiVersion: mongodbcommunity.mongodb.com/v1
 kind: MongoDBCommunity
 metadata:
   name: mongodb-devrs
-  namespace: databases
+  namespace: datahub
 spec:
   members: 3
   type: ReplicaSet
