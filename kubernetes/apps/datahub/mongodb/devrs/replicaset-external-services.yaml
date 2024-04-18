@@ -5,7 +5,7 @@ metadata:
   name: mongodb-devrs01-externalsvc
   namespace: datahub
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: mongodb-devrs-svc
     statefulset.kubernetes.io/pod-name: mongodb-devrs-0
@@ -21,7 +21,7 @@ metadata:
   name: mongodb-devrs02-externalsvc
   namespace: datahub
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: mongodb-devrs-svc
     statefulset.kubernetes.io/pod-name: mongodb-devrs-1
@@ -36,7 +36,7 @@ metadata:
   name: mongodb-devrs03-externalsvc
   namespace: datahub
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: mongodb-devrs-svc
     statefulset.kubernetes.io/pod-name: mongodb-devrs-2
