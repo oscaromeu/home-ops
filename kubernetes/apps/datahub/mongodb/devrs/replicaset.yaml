@@ -14,7 +14,7 @@ spec:
     - horizon: mongodb-devrs03.${SECRET_DOMAIN}:31183
   security:
     tls:
-      enabled: true
+      enabled: false
       certificateKeySecretRef:
         name: mongodb-devrs-tls
       caCertificateSecretRef:
