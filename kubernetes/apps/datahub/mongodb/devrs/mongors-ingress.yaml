@@ -1,0 +1,50 @@
+ apiVersion: networking.k8s.io/v1
+ kind: Ingress
+ metadata:
+   annotations:
+    #external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+    #nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    hajimari.io/enable: "true"
+    hajimari.io/icon: simple-icons:mongodb
+    #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
+    #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
+   name: mongodb-devrs-ingress
+   namespace: datahub
+ spec:
+   ingressClassName: internal
+   rules:
+   - host: "mongodb-devrs01.${SECRET_DOMAIN}"
+     http:
+       paths:
+       - backend:
+           service:
+             name: mongodb-devrs-svc
+             port:
+               number: 27017
+         path: /
+         pathType: Prefix
+   - host: "mongodb-devrs02.${SECRET_DOMAIN}"
+     http:
+       paths:
+       - backend:
+           service:
+             name: mongodb-devrs-svc
+             port:
+               number: 27017
+         path: /
+         pathType: Prefix
+   - host: "mongodb-devrs03.${SECRET_DOMAIN}"
+     http:
+       paths:
+       - backend:
+           service:
+             name: mongodb-devrs-svc
+             port:
+               number: 27017
+         path: /
+         pathType: Prefix
+   tls:
+   - hosts:
+     - "mongodb-devrs01.${SECRET_DOMAIN}"
+     - "mongodb-devrs02.${SECRET_DOMAIN}"
+     - "mongodb-devrs03.${SECRET_DOMAIN}"

@@ -6,4 +6,5 @@ resources:
   - ./externalsecret.yaml
   - ./replicaset.yaml
   - ./replicaset-certificate.yaml
+  - ./mongors-ingress.yaml
   - ./replicaset-external-services.yaml
