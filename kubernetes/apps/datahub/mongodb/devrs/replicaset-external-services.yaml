@@ -1,0 +1,46 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mongodb-devrs01-externalsvc
+  namespace: datahub
+spec:
+  type: NodePort
+  selector:
+    app: mongodb-devrs-svc
+    statefulset.kubernetes.io/pod-name: mongodb-devrs-0
+  ports:
+    - protocol: TCP
+      nodePort: 31181
+      port: 31181
+      targetPort: 27017
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mongodb-devrs02-externalsvc
+  namespace: datahub
+spec:
+  type: NodePort
+  selector:
+    app: mongodb-devrs-svc
+    statefulset.kubernetes.io/pod-name: mongodb-devrs-1
+  ports:
+    - nodePort: 31182
+      port: 31182
+      targetPort: 27017
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mongodb-devrs03-externalsvc
+  namespace: datahub
+spec:
+  type: NodePort
+  selector:
+    app: mongodb-devrs-svc
+    statefulset.kubernetes.io/pod-name: mongodb-devrs-2
+  ports:
+    - nodePort: 31183
+      port: 31183
+      targetPort: 27017
