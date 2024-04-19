@@ -20,6 +20,6 @@ spec:
     encoding: PKCS1
     size: 4096
   issuerRef:
-    name: ${SECRET_DOMAIN}-io-ca
+    name: ${SECRET_DOMAIN/./-}-ca
     kind: ClusterIssuer
     group: cert-manager.io

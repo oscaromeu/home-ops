@@ -2,13 +2,13 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: ${SECRET_DOMAIN}-io-ca
+  name: ${SECRET_DOMAIN/./-}-ca
   namespace: cert-manager
 spec:
   isCA: true
   duration: 43800h # 5 years
   commonName: "${SECRET_DOMAIN}"
-  secretName: ${SECRET_DOMAIN/./-}-key-pair
+  secretName: letsencrypt-production
   privateKey:
     algorithm: ECDSA
     size: 256
