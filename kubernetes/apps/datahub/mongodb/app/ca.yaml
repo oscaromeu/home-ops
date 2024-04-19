@@ -8,7 +8,7 @@ spec:
   isCA: true
   duration: 43800h # 5 years
   commonName: "${SECRET_DOMAIN}"
-  secretName: ${SECRET_DOMAIN}-io-key-pair
+  secretName: ${SECRET_DOMAIN/./-}-key-pair
   privateKey:
     algorithm: ECDSA
     size: 256
