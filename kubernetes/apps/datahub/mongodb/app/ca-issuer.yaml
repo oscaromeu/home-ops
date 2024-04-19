@@ -5,4 +5,4 @@ metadata:
   name: ${SECRET_DOMAIN}-io-ca
 spec:
   ca:
-    secretName: ${SECRET_DOMAIN}-io-key-pair
+    secretName: ${SECRET_DOMAIN/./-}-key-pair
