@@ -7,7 +7,7 @@ metadata:
 spec:
   isCA: true
   duration: 43800h # 5 years
-  commonName: ${SECRET_DOMAIN}
+  commonName: "${SECRET_DOMAIN}"
   secretName: ${SECRET_DOMAIN}-io-key-pair
   privateKey:
     algorithm: ECDSA
@@ -15,4 +15,6 @@ spec:
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
-    group: cert-manager.io
+  dnsNames:
+    - "${SECRET_DOMAIN}"
+    - "*.${SECRET_DOMAIN}"
