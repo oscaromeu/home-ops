@@ -5,24 +5,6 @@ metadata:
   name: mongodb-devrs-certificate
   namespace: datahub
 spec:
-  secretName: mongodb-devrs-tls
-  issuerRef:
-    name: mongodb-issuer
-    kind: Issuer
-  commonName: "*.mongodb-devrs-svc.datahub.svc.cluster.local"
-  dnsNames:
-    - "*.mongodb-devrs-svc.datahub.svc.cluster.local"
-    - mongodb-devrs01.${SECRET_DOMAIN}
-    - mongodb-devrs02.${SECRET_DOMAIN}
-    - mongodb-devrs03.${SECRET_DOMAIN}
-
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: mongodb-devrs-certificate
-  namespace: datahub
-spec:
   isCA: false
   duration: 2160h # 90d
   renewBefore: 360h # 15d

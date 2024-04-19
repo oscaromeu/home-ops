@@ -3,7 +3,6 @@ apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: ${SECRET_DOMAIN}-io-ca
-  namespace: datahub
 spec:
   ca:
     secretName: ${SECRET_DOMAIN/./-}-key-pair
