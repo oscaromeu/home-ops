@@ -14,11 +14,11 @@ spec:
     - horizon: mongodb-devrs03.${SECRET_DOMAIN}:31183
   security:
     tls:
-      enabled: false
+      enabled: true
       certificateKeySecretRef:
-        name: mongodb-devrs-tls
+        name: mongodb-key-pair
       caCertificateSecretRef:
-        name: mongodb-ca-root-certificate
+        name: mongodb-key-pair
     authentication:
       modes: ["SCRAM", "SCRAM-SHA-1"]
   users:

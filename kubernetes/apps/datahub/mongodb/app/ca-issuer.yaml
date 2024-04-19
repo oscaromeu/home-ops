@@ -1,8 +1,8 @@
 ---
 apiVersion: cert-manager.io/v1
-kind: Issuer
+kind: ClusterIssuer
 metadata:
-  name: mongodb-issuer
+  name: ${SECRET_DOMAIN}-io-ca
 spec:
   ca:
-    secretName: mongodb-ca-key-pair
+    secretName: ${SECRET_DOMAIN}-io-key-pair
