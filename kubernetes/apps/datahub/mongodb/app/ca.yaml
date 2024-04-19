@@ -13,8 +13,9 @@ spec:
     algorithm: ECDSA
     size: 256
   issuerRef:
-    name: letsencrypt-production
+    name: selfsigned
     kind: ClusterIssuer
+    group: cert-manager.io
   dnsNames:
     - "${SECRET_DOMAIN}"
     - "*.${SECRET_DOMAIN}"
