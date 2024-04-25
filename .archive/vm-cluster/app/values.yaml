@@ -274,7 +274,7 @@ vminsert:
     # -- Image repository
     repository: victoriametrics/vminsert
     # -- Image tag
-    tag: v1.100.0-cluster
+    tag: v1.101.0-cluster
     # -- Image pull policy
     pullPolicy: IfNotPresent
   # -- Name of Priority Class
