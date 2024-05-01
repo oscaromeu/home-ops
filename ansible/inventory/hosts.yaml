@@ -3,14 +3,20 @@ kubernetes:
   children:
     master:
       hosts:
-        uphkm1:
+        lphkm1:
           ansible_user: oscar
-          ansible_host: 10.69.3.26
+          ansible_host: 10.69.1.29
+        lphkm2:
+          ansible_user: oscar
+          ansible_host: 10.69.1.30
+        lphkm3:
+          ansible_user: oscar
+          ansible_host: 10.69.1.54
     worker:
       hosts:
-        uphkw1:
+        lphkw1:
           ansible_user: oscar
-          ansible_host: 10.69.3.27
-        uphkw2:
+          ansible_host: 10.69.1.26
+        lphkw2:
           ansible_user: oscar
-          ansible_host: 10.69.3.28
+          ansible_host: 10.69.1.27
