@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: ingress-nginx
-      version: 4.7.1
+      version: 4.10.0
       sourceRef:
         kind: HelmRepository
         name: ingress-nginx
@@ -37,6 +37,9 @@ spec:
         name: internal
         default: true
         controllerValue: k8s.io/internal
+      opentelemetry:
+        enabled: true
+        resources: {}
       admissionWebhooks:
         objectSelector:
           matchExpressions:
@@ -61,6 +64,7 @@ spec:
           "http_user_agent": "$http_user_agent"}
         proxy-body-size: 0
         proxy-buffer-size: 16k
+        proxy-read-timeout: 2400 # Elastic reindexing testing
         ssl-protocols: TLSv1.3 TLSv1.2
       metrics:
         enabled: true
@@ -87,3 +91,8 @@ spec:
           memory: 500Mi
     defaultBackend:
       enabled: false
+    tcp:
+      #"6379": "datahub/redis-standalone-master:6379"
+      "9200": "observability/elk-elasticsearch:9200"
+      #"9095": "datahub/datahub-cluster-kafka-external-bootstrap:9095"
+      "22": "tools/gitea-ssh:22"
