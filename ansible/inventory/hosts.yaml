@@ -6,12 +6,6 @@ kubernetes:
         lphkm1:
           ansible_user: oscar
           ansible_host: 10.69.1.29
-        lphkm2:
-          ansible_user: oscar
-          ansible_host: 10.69.1.30
-        lphkm3:
-          ansible_user: oscar
-          ansible_host: 10.69.1.54
     worker:
       hosts:
         lphkw1:
