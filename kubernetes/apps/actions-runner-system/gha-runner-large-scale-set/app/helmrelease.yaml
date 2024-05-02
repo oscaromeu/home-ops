@@ -44,7 +44,7 @@ spec:
           beta.kubernetes.io/instance-type: c3d-standard-30
         containers:
           - name: runner
-            image: ghcr.io/actions/actions-runner:2.315.0
+            image: ghcr.io/actions/actions-runner:2.316.1
             command: ["/home/runner/run.sh"]
             #volumeMounts:
             #  - name: cache-volume
