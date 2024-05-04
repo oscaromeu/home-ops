@@ -5,16 +5,12 @@ kubernetes:
       hosts:
         lphkm1:
           ansible_user: oscar
-          ansible_host: 10.69.1.29
+          ansible_host: 10.69.3.25
     worker:
       hosts:
         lphkw1:
           ansible_user: oscar
-          ansible_host: 10.69.1.26
-          ceph_drives:
-            - /dev/disk/by-id/ata-KINGSTON_SA400S37480G_50026B7283215569
+          ansible_host: 10.69.3.26
         lphkw2:
           ansible_user: oscar
-          ansible_host: 10.69.1.27
-          ceph_drives:
-            - /dev/disk/by-id/ata-SSDPR-CL100-480-G3_G0Z047886
+          ansible_host: 10.69.3.27
