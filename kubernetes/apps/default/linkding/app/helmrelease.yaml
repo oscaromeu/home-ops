@@ -86,7 +86,7 @@ spec:
                 spec:
                   initContainers:
                     - name: init-db
-                      image: oscaromeu/postgres-init:14.10
+                      image: oscaromeu/postgres-init:16.2
                       envFrom:
                         - secretRef:
                             name: *app

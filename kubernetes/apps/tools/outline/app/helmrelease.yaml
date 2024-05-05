@@ -27,7 +27,7 @@ spec:
   values:
     initContainers:
       init-db:
-        image: oscaromeu/postgres-init:14.10
+        image: oscaromeu/postgres-init:16.2
         imagePullPolicy: Always
         envFrom:
           - secretRef:
