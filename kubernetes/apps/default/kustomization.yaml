@@ -4,5 +4,5 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./excalidraw/ks.yaml
-  - ./linkding/ks.yaml
+  #- ./linkding/ks.yaml
   - ./hajimari/ks.yaml
