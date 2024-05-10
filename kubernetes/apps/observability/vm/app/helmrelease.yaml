@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.bitnami.com/bitnami
       chart: victoria-metrics-single
-      version: 0.9.9
+      version: 0.9.20
       sourceRef:
         kind: HelmRepository
         name: vm
