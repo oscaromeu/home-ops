@@ -3,20 +3,14 @@ kubernetes:
   children:
     master:
       hosts:
-        lphkm1:
-          ansible_user: oscar
-          ansible_host: 10.69.3.25
-          ceph_drives:
-            - /dev/disk/by-id/ata-SSDPR-CL100-480-G3_GXE092715
-    worker:
-      hosts:
-        lphkw1:
+        lpkm1:
           ansible_user: oscar
           ansible_host: 10.69.3.26
-          ceph_drives:
-            - /dev/disk/by-id/ata-KINGSTON_SA400S37480G_50026B7283215569
-        lphkw2:
+    worker:
+      hosts:
+        lpkw1:
           ansible_user: oscar
-          ansible_host: 10.69.3.27
-          ceph_drives:
-            - /dev/disk/by-id/ata-SSDPR-CL100-480-G3_G0Z047886
+          ansible_host: 10.69.3.26
+        lpkw2:
+          ansible_user: oscar
+          ansible_host: 10.69.3.25
