@@ -6,7 +6,7 @@ resources:
   - ./atuin/ks.yaml
   #- ./busybox/ks.yaml
   #- ./dnsutils/ks.yaml
-  - ./docuseal/ks.yaml
+  #- ./docuseal/ks.yaml
   #- ./gitea/ks.yaml
   - ./kubernetes-dashboard/ks.yaml
   #- ./harbor/ks.yaml
