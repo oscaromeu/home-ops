@@ -9,7 +9,6 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-cloudnative-pg
     - name: cluster-apps-nginx-internal
   path: ./kubernetes/apps/tools/atuin/app
   prune: true
