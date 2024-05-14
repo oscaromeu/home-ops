@@ -4,7 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./podinfo/ks.yaml
-  #- ./elastic
-  #- ./json-fusion-exporter/ks.yaml
-  #- ./filebeat
-  #- ./spring-boot-app/ks.yaml
+  - ./spring-boot-app/ks.yaml
