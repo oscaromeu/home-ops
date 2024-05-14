@@ -8,7 +8,7 @@ resources:
   #- ./elastic-operator/ks.yaml
   - ./gatus/ks.yaml
   - ./grafana/ks.yaml
-  #- ./k6s/ks.yaml
+  - ./k6s/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
   #- ./loki/ks.yaml
