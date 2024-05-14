@@ -71,7 +71,7 @@ spec:
       config:
         existingClaim: *app
       downloads:
-        type: nfs-client
+        type: nfs
         server: 10.69.1.31
         path: temp
         globalMounts:
