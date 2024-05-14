@@ -1,7 +1,17 @@
 ---
-apiVersion: kustomize.config.k8s.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
-resources:
-  - ./helmrelease.yaml
-  #- ../../../../templates/gatus/guarded
-  #- ../../../../templates/volsync
+metadata:
+  name: cluster-apps-metube
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+spec:
+  path: ./kubernetes/apps/downloads/metube/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
