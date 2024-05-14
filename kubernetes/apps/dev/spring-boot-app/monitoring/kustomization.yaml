@@ -3,7 +3,6 @@ kind: Kustomization
 namespace: dev
 
 resources:
-  - ./rules
   - ./servicemonitor.yaml
 
 configMapGenerator:
