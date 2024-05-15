@@ -59,3 +59,14 @@ spec:
       master:
         persistence:
           enabled: false
+    ingress:
+      enabled: true
+      className: internal
+      hosts:
+        - host: &host fleet.{SECRET_DOMAIN}
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+      tls:
+        - hosts:
+            - *host
