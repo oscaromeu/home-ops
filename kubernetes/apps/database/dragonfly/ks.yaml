@@ -9,7 +9,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/main/apps/database/dragonfly/app
+  path: ./kubernetes/apps/database/dragonfly/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -32,7 +32,7 @@ spec:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: cluster-apps-dragonfly
-  path: ./kubernetes/main/apps/database/dragonfly/cluster
+  path: ./kubernetes/apps/database/dragonfly/cluster
   prune: true
   sourceRef:
     kind: GitRepository
