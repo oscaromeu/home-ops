@@ -63,7 +63,7 @@ spec:
       enabled: true
       className: internal
       hosts:
-        - host: &host fleet.{SECRET_DOMAIN}
+        - host: &host fleet.${SECRET_DOMAIN}
           paths:
             - path: /
               pathType: ImplementationSpecific
