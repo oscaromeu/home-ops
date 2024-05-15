@@ -1,0 +1,2056 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../01-how-to-guides/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.23">
+    
+    
+      
+        <title>Index - Oscar's Homelab</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,700,700i%7CUbuntu+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Ubuntu";--md-code-font:"Ubuntu Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#shortlinks" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Oscar&#39;s Homelab" class="md-header__button md-logo" aria-label="Oscar's Homelab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Oscar's Homelab
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Index
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Oscar&#39;s Homelab" class="md-nav__button md-logo" aria-label="Oscar's Homelab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Oscar's Homelab
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00-getting-started/about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../01-how-to-guides/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    How-to guides
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            How-to guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Documentation
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Flow & Policy Logging
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Flow & Policy Logging
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-docs/logs/index.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    None
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Ops & Sec Metrics
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Ops & Sec Metrics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-docs/metrics/index.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    None
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="./" class="md-nav__link md-nav__link--active">
+              
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<p>Elasticsearch cheatsheet</p>
+<h1 id="shortlinks">Shortlinks:</h1>
+<ul>
+<li><a href="#cluster-health">Cluster Health</a></li>
+<li><a href="#cluster-health-index-level">Index Level</a></li>
+<li><a href="#cluster-health-shard-level">Shard Level</a></li>
+<li><a href="#nodes-overview">Nodes Overview</a></li>
+<li><a href="#indices-overview">Indices Overview</a></li>
+<li><a href="#cluster-maintenance">Cluster Maintenance</a></li>
+<li><a href="">Settings</a></li>
+<li><a href="#cluster-settings">Cluster Settings</a></li>
+<li><a href="#ingest-documents-into-elasticsearch">Ingest</a></li>
+<li><a href="#mapping">Mapping</a></li>
+<li><a href="#check-fields-in-mappings">Check Fields in Mappings</a></li>
+<li><a href="#open--close-api">Close API</a></li>
+<li><a href="#searching">Search</a></li>
+<li><a href="#using-the-search-api">Using the Search API</a></li>
+<li><a href="#query">Query</a></li>
+<li><a href="#query-by-match">Query by Match</a></li>
+<li><a href="#query-with-bool">Query with Bool</a></li>
+<li><a href="#other-examples-of-query">Other Examples with Query</a></li>
+<li><a href="#sort">Sort</a></li>
+<li><a href="">Aggregate</a></li>
+<li><a href="#delete">Delete</a></li>
+<li><a href="#snapshots">Snapshots</a></li>
+<li><a href="#elasticsearch-s3-snapshot-repo">Create Snapshot Repository on S3</a></li>
+<li><a href="#elasticsearch-snapshots">Create a Snapshot</a></li>
+<li><a href="#elasticsearch-restore">Restore from a Snapshot</a></li>
+</ul>
+<h1 id="resources">Resources</h1>
+<ul>
+<li>https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html</li>
+<li>https://www.elastic.co/guide/en/elasticsearch/reference/current/docs.html</li>
+<li>https://www.elastic.co/blog/managing-time-based-indices-efficiently</li>
+<li>http://joelabrahamsson.com/elasticsearch-101/</li>
+<li>https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started.html</li>
+<li>https://chatbots.network/logstash-exclude-bots-from-result/</li>
+</ul>
+<h1 id="overview">Overview</h1>
+<h2 id="cluster-health">Cluster Health:</h2>
+<p>Resource:
+- https://www.elastic.co/guide/en/elasticsearch/guide/current/_cluster_health.html</p>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/_cluster/health?pretty
+{
+  &quot;cluster_name&quot; : &quot;docker-cluster&quot;,
+  &quot;status&quot; : &quot;green&quot;,
+  &quot;timed_out&quot; : false,
+  &quot;number_of_nodes&quot; : 5,
+  &quot;number_of_data_nodes&quot; : 5,
+  &quot;active_primary_shards&quot; : 11,
+  &quot;active_shards&quot; : 22,
+  &quot;relocating_shards&quot; : 0,
+  &quot;initializing_shards&quot; : 0,
+  &quot;unassigned_shards&quot; : 0,
+  &quot;delayed_unassigned_shards&quot; : 0,
+  &quot;number_of_pending_tasks&quot; : 0,
+  &quot;number_of_in_flight_fetch&quot; : 0,
+  &quot;task_max_waiting_in_queue_millis&quot; : 0,
+  &quot;active_shards_percent_as_number&quot; : 100.0
+}
+</code></pre></div>
+<h2 id="cluster-health-index-level">Cluster Health: Index Level:</h2>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/_cluster/health?level=indices&amp;pretty&#39;
+{
+  &quot;cluster_name&quot; : &quot;swarm-elasticsearch&quot;,
+  &quot;status&quot; : &quot;red&quot;,
+  &quot;timed_out&quot; : false,
+  &quot;number_of_nodes&quot; : 5,
+  &quot;number_of_data_nodes&quot; : 5,
+  &quot;active_primary_shards&quot; : 44,
+  &quot;active_shards&quot; : 44,
+  &quot;relocating_shards&quot; : 0,
+  &quot;initializing_shards&quot; : 0,
+  &quot;unassigned_shards&quot; : 64,
+  &quot;delayed_unassigned_shards&quot; : 0,
+  &quot;number_of_pending_tasks&quot; : 0,
+  &quot;number_of_in_flight_fetch&quot; : 0,
+  &quot;task_max_waiting_in_queue_millis&quot; : 0,
+  &quot;active_shards_percent_as_number&quot; : 40.74074074074074,
+  &quot;indices&quot; : {
+    &quot;test&quot; : {
+      &quot;status&quot; : &quot;yellow&quot;,
+      &quot;number_of_shards&quot; : 5,
+      &quot;number_of_replicas&quot; : 1,
+      &quot;active_primary_shards&quot; : 5,
+      &quot;active_shards&quot; : 5,
+      &quot;relocating_shards&quot; : 0,
+      &quot;initializing_shards&quot; : 0,
+      &quot;unassigned_shards&quot; : 5
+    }
+  }
+}
+</code></pre></div>
+<h2 id="cluster-health-shard-level">Cluster Health: Shard Level:</h2>
+<div class="highlight"><pre><span></span><code>curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/_cluster/health?level=shards&amp;pretty&#39;
+{
+  &quot;cluster_name&quot; : &quot;swarm-elasticsearch&quot;,
+  &quot;status&quot; : &quot;red&quot;,
+  &quot;timed_out&quot; : false,
+  &quot;number_of_nodes&quot; : 5,
+  &quot;number_of_data_nodes&quot; : 5,
+  &quot;active_primary_shards&quot; : 44,
+  &quot;active_shards&quot; : 44,
+  &quot;relocating_shards&quot; : 0,
+  &quot;initializing_shards&quot; : 0,
+  &quot;unassigned_shards&quot; : 64,
+  &quot;delayed_unassigned_shards&quot; : 0,
+  &quot;number_of_pending_tasks&quot; : 0,
+  &quot;number_of_in_flight_fetch&quot; : 0,
+  &quot;task_max_waiting_in_queue_millis&quot; : 0,
+  &quot;active_shards_percent_as_number&quot; : 40.74074074074074,
+  &quot;indices&quot; : {
+    &quot;test&quot; : {
+      &quot;status&quot; : &quot;yellow&quot;,
+      &quot;number_of_shards&quot; : 5,
+      &quot;number_of_replicas&quot; : 1,
+      &quot;active_primary_shards&quot; : 5,
+      &quot;active_shards&quot; : 5,
+      &quot;relocating_shards&quot; : 0,
+      &quot;initializing_shards&quot; : 0,
+      &quot;unassigned_shards&quot; : 5,
+      &quot;shards&quot; : {
+        &quot;0&quot; : {
+          &quot;status&quot; : &quot;yellow&quot;,
+          &quot;primary_active&quot; : true,
+          &quot;active_shards&quot; : 1,
+          &quot;relocating_shards&quot; : 0,
+          &quot;initializing_shards&quot; : 0,
+          &quot;unassigned_shards&quot; : 1
+        },
+        &quot;1&quot; : {
+          &quot;status&quot; : &quot;yellow&quot;,
+          &quot;primary_active&quot; : true,
+          &quot;active_shards&quot; : 1,
+          &quot;relocating_shards&quot; : 0,
+          &quot;initializing_shards&quot; : 0,
+          &quot;unassigned_shards&quot; : 1
+        },
+        &quot;2&quot; : {
+          &quot;status&quot; : &quot;yellow&quot;,
+          &quot;primary_active&quot; : true,
+          &quot;active_shards&quot; : 1,
+          &quot;relocating_shards&quot; : 0,
+          &quot;initializing_shards&quot; : 0,
+          &quot;unassigned_shards&quot; : 1
+        },
+        &quot;3&quot; : {
+          &quot;status&quot; : &quot;yellow&quot;,
+          &quot;primary_active&quot; : true,
+          &quot;active_shards&quot; : 1,
+          &quot;relocating_shards&quot; : 0,
+          &quot;initializing_shards&quot; : 0,
+          &quot;unassigned_shards&quot; : 1
+        },
+        &quot;4&quot; : {
+          &quot;status&quot; : &quot;yellow&quot;,
+          &quot;primary_active&quot; : true,
+          &quot;active_shards&quot; : 1,
+          &quot;relocating_shards&quot; : 0,
+          &quot;initializing_shards&quot; : 0,
+          &quot;unassigned_shards&quot; : 1
+        }
+      }
+    }
+  }
+}
+</code></pre></div>
+<h2 id="nodes-overview">Nodes Overview:</h2>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/_cat/nodes?v
+ip        heap.percent ram.percent cpu load_1m load_5m load_15m node.role master name
+10.0.2.28           21          92   2    0.55    0.45     0.38 mdi       -      ea1q921
+10.0.2.24           27          95   5    0.17    0.24     0.22 mdi       -      rNDYCtL
+10.0.2.27           20          93  12    0.18    0.20     0.24 mdi       -      bDWFHuw
+10.0.2.18           12          93  12    0.18    0.20     0.24 mdi       *      mstWlao
+10.0.2.22           27          92   2    0.55    0.45     0.38 mdi       -      ifgr6ym
+</code></pre></div>
+<h2 id="who-is-master">Who is Master:</h2>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/_cat/master?v
+id                     host      ip        node
+mstWlaoyTM69xhSt-_rZAA 10.0.2.18 10.0.2.18 mstWlao
+</code></pre></div>
+<h2 id="indices-overview">Indices Overview:</h2>
+<p>View all your indices in your cluster:</p>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/_cat/indices?v
+health status index                         uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   ruan-test                     CrQZB2L4SaaYCkvYPx5vUA   5   1         38            0    131.9kb         78.6kb
+</code></pre></div>
+<p>View one index:</p>
+<div class="highlight"><pre><span></span><code>$ curl -XGET &#39;http://127.0.0.1:9200/_cat/indices/index-name-2018.01.01?v&#39;
+health status index                   uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   index-name-2018.01.01 Nk8SMQvRSIaNm854bc3Zjg   5   1     395552            0    755.6mb        377.8mb
+</code></pre></div>
+<p>View a range of indices:</p>
+<div class="highlight"><pre><span></span><code>$ curl -XGET &#39;https://http://127.0.0.1:9200/_cat/indices/index-name-2018.01*?v&#39;
+health status index                   uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   index-name-2018.01.19 Vp1EBoeMQkS-a_upLzedhQ   5   1       1220            0      2.6mb          1.3mb
+green  open   index-name-2018.01.17 hSJMzFJIQrePifCfgb1rOA   5   1       2875            0      3.8mb          1.9mb
+</code></pre></div>
+<p>View only the index name header:</p>
+<div class="highlight"><pre><span></span><code>$ curl -XGET &#39;http://127.0.0.1:9200/_cat/indices/*2018.03.*?v&amp;h=index&#39;
+index
+index-name-2018.03.01
+index-name-2018.03.02
+</code></pre></div>
+<h2 id="how-many-documents-in-the-es-cluster-across-all-indices">How Many Documents in the ES Cluster (Across all Indices):</h2>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/_cat/count?v
+epoch      timestamp count
+1502288579 14:22:59  38
+</code></pre></div>
+<h2 id="shards-info-per-index">Shards Info per Index:</h2>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/_cat/shards/ruan-test?v
+index     shard prirep state   docs  store ip        node
+ruan-test 3     r      STARTED   10  6.9kb 10.0.2.28 ea1q921
+ruan-test 3     p      STARTED   10  6.9kb 10.0.2.24 rNDYCtL
+ruan-test 1     r      STARTED    9 22.7kb 10.0.2.28 ea1q921
+ruan-test 1     p      STARTED    9 22.7kb 10.0.2.18 mstWlao
+ruan-test 4     r      STARTED    3  6.6kb 10.0.2.22 ifgr6ym
+ruan-test 4     p      STARTED    3  6.6kb 10.0.2.18 mstWlao
+ruan-test 2     p      STARTED   12 29.2kb 10.0.2.27 bDWFHuw
+ruan-test 2     r      STARTED   12  3.9kb 10.0.2.24 rNDYCtL
+ruan-test 0     p      STARTED    4 12.9kb 10.0.2.22 ifgr6ym
+ruan-test 0     r      STARTED    4 12.9kb 10.0.2.27 bDWFHuw
+</code></pre></div>
+<h2 id="shard-allocation-per-node">Shard Allocation per Node:</h2>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/_cat/allocation?v
+shards disk.indices disk.used disk.avail disk.total disk.percent host      ip        node
+     4       60.6mb    15.7gb     29.9gb     45.7gb           34 10.0.2.24 10.0.2.24 rNDYCtL
+     4       48.3kb    16.7gb     28.9gb     45.7gb           36 10.0.2.18 10.0.2.18 mstWlao
+     4      248.8kb    15.5gb     30.1gb     45.7gb           34 10.0.2.28 10.0.2.28 ea1q921
+     5       54.6mb    16.7gb     28.9gb     45.7gb           36 10.0.2.27 10.0.2.27 bDWFHuw
+     5        3.1mb    15.5gb     30.1gb     45.7gb           34 10.0.2.22 10.0.2.22 ifgr6ym
+</code></pre></div>
+<h1 id="cluster-maintenance">Cluster Maintenance:</h1>
+<h2 id="decomission-node-from-shard-allocation">Decomission Node from Shard Allocation</h2>
+<p>This will move shards from the mentioned node</p>
+<div class="highlight"><pre><span></span><code>$ curl -XPUT &#39;localhost:9200/_cluster/settings?pretty&#39; -d&#39;
+{
+  &quot;transient&quot; : {
+    &quot;cluster.routing.allocation.exclude._ip&quot; : &quot;10.0.0.1&quot;
+  }
+}
+&#39;
+</code></pre></div>
+<h2 id="recovery-resources">Recovery Resources:</h2>
+<ul>
+<li>https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-recovery.html</li>
+</ul>
+<h2 id="recovering-from-node-failure">Recovering from Node Failure:</h2>
+<p>At the moment one of the nodes were down, and up again:</p>
+<div class="highlight"><pre><span></span><code>$ curl -XGET http://127.0.0.1:9200/_cat/allocation?v
+shards disk.indices disk.used disk.avail disk.total disk.percent host        ip          node
+   290       54.1mb       1gb       20mb        1gb           98 10.79.2.193 10.79.2.193 es01
+   151       43.5mb       1gb     11.9gb       13gb            8 10.79.3.171 10.79.3.171 es02
+   139                                                                                   UNASSIGNED
+</code></pre></div>
+<h2 id="recovery-api">Recovery API:</h2>
+<div class="highlight"><pre><span></span><code>$ curl -XGET http://127.0.0.1:9200/_cat/recovery?v
+index                     shard time   type       stage source_host target_host repository snapshot files files_percent bytes  bytes_percent total_files total_bytes translog translog_percent total_translog
+sysadmins-2017.06.19      0     1512   replica    done  10.79.2.193 10.79.3.171 n/a        n/a      31    100.0%        340020 100.0%        31          340020      0        100.0%           0
+sysadmins-2017.06.19      0     7739   store      done  10.79.2.193 10.79.2.193 n/a        n/a      0     100.0%        0      100.0%        31          340020      0        100.0%           0
+sysadmins-2017.06.19      1     2592   relocation done  10.79.2.193 10.79.3.171 n/a        n/a      13    100.0%        246229 100.0%        13          246229      0        100.0%           0
+sysadmins-2017.06.19      1     613    replica    done  10.79.3.171 10.79.2.193 n/a        n/a      0     0.0%          0      0.0%          0           0           0        100.0%           0
+</code></pre></div>
+<h2 id="pending-tasks">Pending Tasks:</h2>
+<div class="highlight"><pre><span></span><code>$ curl -XGET http://127.0.0.1:9200/_cat/pending_tasks?v
+insertOrder timeInQueue priority source
+       1736        1.8s URGENT   shard-started ([sysadmins-2017.06.02][2], node[WR3y31g1TnuufpNyrJnQtg], [R], v[91], s[INITIALIZING], a[id=wVTDn4nFSKKxvi07cU0uCg], unassigned_info[[reason=CLUSTER_RECOVERED], at[2017-08-11T07:50:56.550Z]]), reason [after recovery (replica) from node [{es01}{6ND8sZ_rTqaL42VdlxyW7Q}{10.79.2.193}{10.79.2.193:9300}]]
+       1737        1.3s URGENT   shard-started ([sysadmins-2017.06.02][3], node[WR3y31g1TnuufpNyrJnQtg], [R], v[91], s[INITIALIZING], a[id=JmrtwtYURMyQF6LspeJXLg], unassigned_info[[reason=CLUSTER_RECOVERED], at[2017-08-11T07:50:56.550Z]]), reason [after recovery (replica) from node [{es01}{6ND8sZ_rTqaL42VdlxyW7Q}{10.79.2.193}{10.79.2.193:9300}]]
+</code></pre></div>
+<h2 id="clear-cache">Clear Cache:</h2>
+<div class="highlight"><pre><span></span><code>$  curl -XGET http://127.0.0.1:9200/_cache/clear
+{&quot;_shards&quot;:{&quot;total&quot;:21,&quot;successful&quot;:15,&quot;failed&quot;:0}}
+</code></pre></div>
+<h1 id="settings">Settings</h1>
+<h2 id="cluster-settings">Cluster Settings</h2>
+<p>Search Timeout:</p>
+<p>Global Search Timeout, that applies to all search queries across the entire cluster -&gt; search.default_search_timeout:</p>
+<div class="highlight"><pre><span></span><code>PUT /_cluster/settings
+{
+    &quot;persistent&quot; : {
+        &quot;search.default_search_timeout&quot; : &quot;50&quot;
+    }
+}
+</code></pre></div>
+<h1 id="index-info-shards-replicas-allocation">Index Info (Shards, Replicas, Allocation):</h1>
+<h2 id="create-index">Create Index:</h2>
+<p>When you create an Index, 5 Primary Shards and 1 Replica Shard will assigned to the Index by Default.</p>
+<div class="highlight"><pre><span></span><code>$ curl -XPUT http://elasticsearch:9200/my2ndindex
+{&quot;acknowledged&quot;:true,&quot;shards_acknowledged&quot;:true}
+</code></pre></div>
+<p>To verify the behavior:</p>
+<div class="highlight"><pre><span></span><code>curl -XGET -u http://elasticsearch:9200/_cat/indices?v
+health status index                         uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   my2ndindex                    V32G9IOoTF6uq0DuNUIAMA   5   1          0            0      1.2kb           650b
+green  open   ruan-test                     CrQZB2L4SaaYCkvYPx5vUA   5   1         38            0    131.9kb         78.6kb
+</code></pre></div>
+<p>From here on, we can increase the number of replica shards, but NOT the primary shards.
+You can ONLY set the number primary shards on index creation.</p>
+<h2 id="shard-info-on-our-new-index">Shard info on our new index:</h2>
+<p>While having 5 prmary shards and 1 replica shard, let's have a look at it:</p>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/_cat/shards/my2ndindex?v
+index      shard prirep state   docs store ip        node
+my2ndindex 3     p      STARTED    0  130b 10.0.2.22 ifgr6ym
+my2ndindex 3     r      STARTED    0  130b 10.0.2.27 bDWFHuw
+my2ndindex 1     r      STARTED    0  130b 10.0.2.22 ifgr6ym
+my2ndindex 1     p      STARTED    0  130b 10.0.2.18 mstWlao
+my2ndindex 4     r      STARTED    0  130b 10.0.2.18 mstWlao
+my2ndindex 4     p      STARTED    0  130b 10.0.2.27 bDWFHuw
+my2ndindex 2     r      STARTED    0  130b 10.0.2.28 ea1q921
+my2ndindex 2     p      STARTED    0  130b 10.0.2.24 rNDYCtL
+my2ndindex 0     p      STARTED    0  130b 10.0.2.28 ea1q921
+my2ndindex 0     r      STARTED    0  130b 10.0.2.24 rNDYCtL
+</code></pre></div>
+<h2 id="increase-the-replica-shard-number">Increase the Replica Shard Number:</h2>
+<p>Let's change the replica shard number to 2, meaning each primary shard will have 2 replica shards:</p>
+<div class="highlight"><pre><span></span><code>$ curl -XPUT http://elasticsearch:9200/my2ndindex/_settings -d &#39;{&quot;settings&quot;: {&quot;index&quot;: {&quot;number_of_replicas&quot;: 2}}}&#39;
+{&quot;acknowledged&quot;:true}
+</code></pre></div>
+<p>Let's have a look at the shard info after we have increased the replica shard number:</p>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/_cat/shards/my2ndindex?v
+index      shard prirep state   docs store ip        node
+my2ndindex 3     r      STARTED    0  130b 10.0.2.28 ea1q921
+my2ndindex 3     p      STARTED    0  130b 10.0.2.22 ifgr6ym
+my2ndindex 3     r      STARTED    0  130b 10.0.2.27 bDWFHuw
+my2ndindex 2     r      STARTED    0  130b 10.0.2.28 ea1q921
+my2ndindex 2     r      STARTED    0  130b 10.0.2.22 ifgr6ym
+my2ndindex 2     p      STARTED    0  130b 10.0.2.24 rNDYCtL
+my2ndindex 4     r      STARTED    0  130b 10.0.2.28 ea1q921
+my2ndindex 4     r      STARTED    0  130b 10.0.2.18 mstWlao
+my2ndindex 4     p      STARTED    0  130b 10.0.2.27 bDWFHuw
+my2ndindex 1     r      STARTED    0  130b 10.0.2.22 ifgr6ym
+my2ndindex 1     p      STARTED    0  130b 10.0.2.18 mstWlao
+my2ndindex 1     r      STARTED    0  130b 10.0.2.24 rNDYCtL
+my2ndindex 0     r      STARTED    0  130b 10.0.2.18 mstWlao
+my2ndindex 0     p      STARTED    0  130b 10.0.2.27 bDWFHuw
+my2ndindex 0     r      STARTED    0  130b 10.0.2.24 rNDYCtL
+</code></pre></div>
+<h2 id="create-a-index">Create a Index:</h2>
+<p>Create a Index with Default Settings:</p>
+<div class="highlight"><pre><span></span><code>$ curl -XPUT -H &#39;Content-Type: application/json&#39; &#39;http://127.0.0.1:9200/ruan-test-2018.03.12&#39;
+</code></pre></div>
+<p>View the settings of the created index:</p>
+<div class="highlight"><pre><span></span><code>$ curl -XGET &#39;http://127.0.0.1:9200/ruan-test-2018.03.12/_settings?pretty&#39;
+{
+  &quot;ruan-test-2018.03.12&quot; : {
+    &quot;settings&quot; : {
+      &quot;index&quot; : {
+        &quot;creation_date&quot; : &quot;1520929659349&quot;,
+        &quot;number_of_shards&quot; : &quot;5&quot;,
+        &quot;number_of_replicas&quot; : &quot;1&quot;,
+        &quot;uuid&quot; : &quot;EwGz6y7XQkK0ZI08u8qdrQ&quot;,
+        &quot;version&quot; : {
+          &quot;created&quot; : &quot;6000199&quot;
+        },
+        &quot;provided_name&quot; : &quot;ruan-test-2018.03.12&quot;
+      }
+    }
+  }
+}
+</code></pre></div>
+<p>Remember that primary shard number can only be set on index creation. Change the settings of the index, let's update the index to: 2 replica shards, and the total_fields limit to: 2000</p>
+<div class="highlight"><pre><span></span><code>$ curl -XPUT -H &#39;Content-Type: application/json&#39; &#39;http://127.0.0.1:9200/ruan-test-2018.03.12/_settings&#39; -d &#39;{&quot;number_of_replicas&quot;: 0, &quot;index.mapping.total_fields.limit&quot;: 2000}&#39;
+</code></pre></div>
+<p>View the changes:</p>
+<div class="highlight"><pre><span></span><code>$ curl -XGET &#39;http://127.0.0.1:9200/ruan-test-2018.03.12/_settings?pretty&#39;
+{
+  &quot;ruan-test-2018.03.12&quot; : {
+    &quot;settings&quot; : {
+      &quot;index&quot; : {
+        &quot;mapping&quot; : {
+          &quot;total_fields&quot; : {
+            &quot;limit&quot; : &quot;2000&quot;
+          }
+        },
+        &quot;number_of_shards&quot; : &quot;5&quot;,
+        &quot;provided_name&quot; : &quot;ruan-test-2018.03.12&quot;,
+        &quot;creation_date&quot; : &quot;1520929659349&quot;,
+        &quot;number_of_replicas&quot; : &quot;0&quot;,
+        &quot;uuid&quot; : &quot;EwGz6y7XQkK0ZI08u8qdrQ&quot;,
+        &quot;version&quot; : {
+          &quot;created&quot; : &quot;6000199&quot;
+        }
+      }
+    }
+  }
+}
+</code></pre></div>
+<p>Now, to set the settings on Index Creation:</p>
+<div class="highlight"><pre><span></span><code>$ curl -XPUT -H &#39;Content-Type: application/json&#39; &#39;http://127.0.0.1:9200/ruan-test-2018.03.13&#39; -d &#39;{&quot;settings&quot;: {&quot;number_of_replicas&quot;: 1, &quot;number_of_shards&quot;: 2, &quot;index.mapping.total_fields.limit&quot;: 2000}}&#39;
+</code></pre></div>
+<p>Verifying our settings:</p>
+<div class="highlight"><pre><span></span><code>$ curl -XGET &#39;http://127.0.0.1:9200/ruan-test-2018.03.13/_settings?pretty&#39;
+{
+  &quot;ruan-test-2018.03.13&quot; : {
+    &quot;settings&quot; : {
+      &quot;index&quot; : {
+        &quot;mapping&quot; : {
+          &quot;total_fields&quot; : {
+            &quot;limit&quot; : &quot;2000&quot;
+          }
+        },
+        &quot;number_of_shards&quot; : &quot;2&quot;,
+        &quot;provided_name&quot; : &quot;ruan-test-2018.03.13&quot;,
+        &quot;creation_date&quot; : &quot;1520929638792&quot;,
+        &quot;number_of_replicas&quot; : &quot;1&quot;,
+        &quot;uuid&quot; : &quot;hEY8HrlRTFuiYLwKVDAraQ&quot;,
+        &quot;version&quot; : {
+          &quot;created&quot; : &quot;6000199&quot;
+        }
+      }
+    }
+  }
+}
+</code></pre></div>
+<p>Viewing our indexes:</p>
+<div class="highlight"><pre><span></span><code>$ curl -XGET &#39;http://127.0.0.1:9200/_cat/indices/ruan-test-*?v&#39;
+health status index                uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   ruan-test-2018.03.12 EwGz6y7XQkK0ZI08u8qdrQ   5   1          2            0     15.7kb          7.8kb
+green  open   ruan-test-2018.03.13 hEY8HrlRTFuiYLwKVDAraQ   2   1          0            0       932b           466b
+</code></pre></div>
+<h2 id="ingest-document-into-elasticsearch">Ingest Document into Elasticsearch:</h2>
+<p>Let's ingest one docuemnt into Elasticsearch, and in this case we will specify the document id as <code>1</code></p>
+<div class="highlight"><pre><span></span><code>$ curl -XPUT http://elasticsearch:9200/my2ndindex/docs/1 -d &#39;{&quot;identity&quot;: {&quot;name&quot;: &quot;ruan&quot;, &quot;surname&quot;: &quot;bekker&quot;}}&#39;
+{&quot;_index&quot;:&quot;my2ndindex&quot;,&quot;_type&quot;:&quot;docs&quot;,&quot;_id&quot;:&quot;1&quot;,&quot;_version&quot;:1,&quot;result&quot;:&quot;created&quot;,&quot;_shards&quot;:{&quot;total&quot;:3,&quot;successful&quot;:3,&quot;failed&quot;:0},&quot;created&quot;:true}
+</code></pre></div>
+<p>View the index info:</p>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/_cat/indices/my*?v&#39;
+health status index      uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   my2ndindex V32G9IOoTF6uq0DuNUIAMA   5   2          1            0       13kb          4.3kb
+</code></pre></div>
+<p>View the Shard information on our Index:</p>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/_cat/shards/my2ndindex?v
+index      shard prirep state   docs store ip        node
+my2ndindex 3     r      STARTED    1 3.9kb 10.0.2.28 ea1q921
+my2ndindex 3     p      STARTED    1 3.9kb 10.0.2.22 ifgr6ym
+my2ndindex 3     r      STARTED    1 3.9kb 10.0.2.27 bDWFHuw
+my2ndindex 1     r      STARTED    0  130b 10.0.2.22 ifgr6ym
+my2ndindex 1     p      STARTED    0  130b 10.0.2.18 mstWlao
+my2ndindex 1     r      STARTED    0  130b 10.0.2.24 rNDYCtL
+my2ndindex 4     r      STARTED    0  130b 10.0.2.28 ea1q921
+my2ndindex 4     r      STARTED    0  130b 10.0.2.18 mstWlao
+my2ndindex 4     p      STARTED    0  130b 10.0.2.27 bDWFHuw
+my2ndindex 2     r      STARTED    0  130b 10.0.2.28 ea1q921
+my2ndindex 2     r      STARTED    0  130b 10.0.2.22 ifgr6ym
+my2ndindex 2     p      STARTED    0  130b 10.0.2.24 rNDYCtL
+my2ndindex 0     r      STARTED    0  130b 10.0.2.18 mstWlao
+my2ndindex 0     p      STARTED    0  130b 10.0.2.27 bDWFHuw
+my2ndindex 0     r      STARTED    0  130b 10.0.2.24 rNDYCtL
+</code></pre></div>
+<h2 id="some-info-on-yellow-status">Some info on Yellow Status:</h2>
+<p>In elasticsearch, a replica shard of its primary shard, will never appear on the same node as the other shards.</p>
+<p>As we have 5 nodes in our cluster, meaning if we create 5 replica shards, our index will consist of 5 primary shards,
+each primary shard having 5 replica shards, as a result in a yellow status es cluster.</p>
+<p>The reasoning for this is that if we take <code>primary shard id 0</code>:</p>
+<ul>
+<li>primary shard   - node 1</li>
+<li>replica shard 1 - node 2</li>
+<li>replica shard 2 - node 3</li>
+<li>replica shard 3 - node 4</li>
+<li>replica shard 4 - node 5</li>
+<li>replica shard 5 - UNASSIGNED</li>
+</ul>
+<p>The 5th replica shard for the mentioned primary shard will be unassigned, as there is no node available where the
+primary shard's replicas already reside on.</p>
+<p>To get the status back to green:</p>
+<ul>
+<li>add a data node</li>
+<li>reduce the replica number</li>
+</ul>
+<h2 id="lets-see-the-yellow-status-in-action">Let's see the YELLOW Status in action:</h2>
+<p>Increase the replica shards to <code>5</code>:</p>
+<div class="highlight"><pre><span></span><code>$ curl -XPUT http://elasticsearch:9200/my2ndindex/_settings -d &#39;{&quot;settings&quot;: {&quot;number_of_replicas&quot;: 5}}&#39;
+{&quot;acknowledged&quot;:true}
+</code></pre></div>
+<p>Verify the Indices Overview:</p>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/_cat/indices/my*?v&#39;
+health status index      uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+yellow open   my2ndindex V32G9IOoTF6uq0DuNUIAMA   5   5          1            0     22.2kb          4.4kb
+</code></pre></div>
+<p>We can see that we have a YELLOW status, for more info let's have a look at the shards overview:</p>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/_cat/shards/my2ndindex?v
+index      shard prirep state      docs store ip        node
+my2ndindex 3     r      STARTED       1 3.9kb 10.0.2.28 ea1q921
+my2ndindex 3     p      STARTED       1 3.9kb 10.0.2.22 ifgr6ym
+my2ndindex 3     r      STARTED       1 3.9kb 10.0.2.18 mstWlao
+my2ndindex 3     r      STARTED       1 3.9kb 10.0.2.27 bDWFHuw
+my2ndindex 3     r      STARTED       1 3.9kb 10.0.2.24 rNDYCtL
+my2ndindex 3     r      UNASSIGNED
+my2ndindex 2     r      STARTED       0  130b 10.0.2.28 ea1q921
+my2ndindex 2     r      STARTED       0  130b 10.0.2.22 ifgr6ym
+my2ndindex 2     r      STARTED       0  130b 10.0.2.18 mstWlao
+my2ndindex 2     r      STARTED       0  130b 10.0.2.27 bDWFHuw
+my2ndindex 2     p      STARTED       0  130b 10.0.2.24 rNDYCtL
+my2ndindex 2     r      UNASSIGNED
+my2ndindex 4     r      STARTED       0  130b 10.0.2.28 ea1q921
+my2ndindex 4     r      STARTED       0  130b 10.0.2.22 ifgr6ym
+my2ndindex 4     r      STARTED       0  130b 10.0.2.18 mstWlao
+my2ndindex 4     p      STARTED       0  130b 10.0.2.27 bDWFHuw
+my2ndindex 4     r      STARTED       0  130b 10.0.2.24 rNDYCtL
+my2ndindex 4     r      UNASSIGNED
+my2ndindex 1     r      STARTED       0  130b 10.0.2.28 ea1q921
+my2ndindex 1     r      STARTED       0  130b 10.0.2.22 ifgr6ym
+my2ndindex 1     p      STARTED       0  130b 10.0.2.18 mstWlao
+my2ndindex 1     r      STARTED       0  130b 10.0.2.27 bDWFHuw
+my2ndindex 1     r      STARTED       0  130b 10.0.2.24 rNDYCtL
+my2ndindex 1     r      UNASSIGNED
+my2ndindex 0     p      STARTED       0  130b 10.0.2.28 ea1q921
+my2ndindex 0     r      STARTED       0  130b 10.0.2.22 ifgr6ym
+my2ndindex 0     r      STARTED       0  130b 10.0.2.18 mstWlao
+my2ndindex 0     r      STARTED       0  130b 10.0.2.27 bDWFHuw
+my2ndindex 0     r      STARTED       0  130b 10.0.2.24 rNDYCtL
+my2ndindex 0     r      UNASSIGNED
+</code></pre></div>
+<p>Also, when we look at the allocation api, we can see that we have 5 shards that is unassigned:</p>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/_cat/allocation?v
+shards disk.indices disk.used disk.avail disk.total disk.percent host      ip        node
+     9       59.2kb    16.8gb     28.8gb     45.7gb           36 10.0.2.18 10.0.2.18 mstWlao
+    10       61.2mb    16.8gb     28.8gb     45.7gb           36 10.0.2.27 10.0.2.27 bDWFHuw
+     9      275.5kb    15.6gb     30.1gb     45.7gb           34 10.0.2.28 10.0.2.28 ea1q921
+     9       64.2mb    15.7gb     29.9gb     45.7gb           34 10.0.2.24 10.0.2.24 rNDYCtL
+    10        3.4mb    15.6gb     30.1gb     45.7gb           34 10.0.2.22 10.0.2.22 ifgr6ym
+     5                                                                               UNASSIGNED
+</code></pre></div>
+<h2 id="create-index-with-10-primary-shards">Create Index with 10 Primary Shards:</h2>
+<p>Let's create an index with 10 primary shards and a replica count of 2:</p>
+<div class="highlight"><pre><span></span><code>$ curl -XPUT http://elasticsearch:9200/my3rdindex -d &#39;{&quot;settings&quot;: {&quot;index&quot;: {&quot;number_of_shards&quot;: 10, &quot;number_of_replicas&quot;: 2}}}&#39;
+{&quot;acknowledged&quot;:true,&quot;shards_acknowledged&quot;:true}/ #
+</code></pre></div>
+<p>Verify:</p>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/_cat/indices/my*?v&#39;
+health status index      uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   my3rdindex ljovpse0RzCB5INxUBLBYg  10   2          0            0      2.4kb           650b
+green  open   my2ndindex V32G9IOoTF6uq0DuNUIAMA   5   2          1            0     13.3kb          4.4kb
+</code></pre></div>
+<p>View the shard info on our index:</p>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/_cat/shards/my3rdindex?v
+index      shard prirep state   docs store ip        node
+my3rdindex 8     r      STARTED    0  130b 10.0.2.28 ea1q921
+my3rdindex 8     p      STARTED    0  130b 10.0.2.22 ifgr6ym
+my3rdindex 8     r      STARTED    0  130b 10.0.2.24 rNDYCtL
+my3rdindex 7     r      STARTED    0  130b 10.0.2.18 mstWlao
+my3rdindex 7     r      STARTED    0  130b 10.0.2.27 bDWFHuw
+my3rdindex 7     p      STARTED    0  130b 10.0.2.24 rNDYCtL
+my3rdindex 4     r      STARTED    0  130b 10.0.2.28 ea1q921
+my3rdindex 4     r      STARTED    0  130b 10.0.2.22 ifgr6ym
+my3rdindex 4     p      STARTED    0  130b 10.0.2.27 bDWFHuw
+my3rdindex 2     r      STARTED    0  130b 10.0.2.18 mstWlao
+my3rdindex 2     r      STARTED    0  130b 10.0.2.27 bDWFHuw
+my3rdindex 2     p      STARTED    0  130b 10.0.2.24 rNDYCtL
+my3rdindex 5     p      STARTED    0  130b 10.0.2.28 ea1q921
+my3rdindex 5     r      STARTED    0  130b 10.0.2.22 ifgr6ym
+my3rdindex 5     r      STARTED    0  130b 10.0.2.27 bDWFHuw
+my3rdindex 6     r      STARTED    0  130b 10.0.2.28 ea1q921
+my3rdindex 6     p      STARTED    0  130b 10.0.2.18 mstWlao
+my3rdindex 6     r      STARTED    0  130b 10.0.2.27 bDWFHuw
+my3rdindex 1     r      STARTED    0  130b 10.0.2.28 ea1q921
+my3rdindex 1     r      STARTED    0  130b 10.0.2.22 ifgr6ym
+my3rdindex 1     p      STARTED    0  130b 10.0.2.18 mstWlao
+my3rdindex 3     p      STARTED    0  130b 10.0.2.22 ifgr6ym
+my3rdindex 3     r      STARTED    0  130b 10.0.2.18 mstWlao
+my3rdindex 3     r      STARTED    0  130b 10.0.2.24 rNDYCtL
+my3rdindex 9     r      STARTED    0  130b 10.0.2.22 ifgr6ym
+my3rdindex 9     p      STARTED    0  130b 10.0.2.27 bDWFHuw
+my3rdindex 9     r      STARTED    0  130b 10.0.2.24 rNDYCtL
+my3rdindex 0     p      STARTED    0  130b 10.0.2.28 ea1q921
+my3rdindex 0     r      STARTED    0  130b 10.0.2.18 mstWlao
+my3rdindex 0     r      STARTED    0  130b 10.0.2.24 rNDYCtL
+</code></pre></div>
+<p>Take note, with the configuration as above your index that you created will have 30 shards in your cluster:</p>
+<div class="highlight"><pre><span></span><code>$ curl -s -XGET &#39;http://elasticsearch:9200/_cat/shards/my3rdindex?v&#39;  | grep -v &#39;node&#39; | wc -l
+30
+</code></pre></div>
+<p>Number of Primary Shards per Node:</p>
+<div class="highlight"><pre><span></span><code>$ curl -s -XGET &#39;http://elasticsearch:9200/_cat/shards/my3rdindex?v&#39; | grep &#39;p      STARTED&#39; | awk &#39;{print $7}&#39; | sort | uniq -c
+      2 10.0.2.18
+      3 10.0.2.22
+      1 10.0.2.24
+      1 10.0.2.27
+      3 10.0.2.28
+</code></pre></div>
+<h1 id="ingest-documents-into-elasticsearch">Ingest Documents into Elasticsearch:</h1>
+<h2 id="structure">Structure:</h2>
+<p>In Elasticsearch we have <code>Indices</code>, 'Types<code>, and</code>Documents`. In a Relational Database you can think of it like, Database, Tables, Records:</p>
+<ul>
+<li>Indices =&gt; Databases</li>
+<li>Types =&gt; Tables</li>
+<li>Documents =&gt; Records</li>
+</ul>
+<h2 id="ingest-a-document-and-specify-the-id">Ingest a Document and Specify the ID:</h2>
+<p>When you do a <code>PUT</code> request, you need to specify the <code>id</code> of the document:</p>
+<ul>
+<li>"_id": 1</li>
+<li>"_id": "james"</li>
+</ul>
+<p>Let's ingest a simple document with a random string as the document id:</p>
+<div class="highlight"><pre><span></span><code>$ curl -XPUT http://elasticsearch:9200/people/users/abcd -d &#39;{&quot;name&quot;, &quot;james&quot;, &quot;age&quot;: 28}&#39;
+{&quot;_index&quot;:&quot;people&quot;,&quot;_type&quot;:&quot;users&quot;,&quot;_id&quot;:&quot;abcd&quot;,&quot;_version&quot;:1,&quot;result&quot;:&quot;created&quot;,&quot;_shards&quot;:{&quot;total&quot;:2,&quot;successful&quot;:2,&quot;failed&quot;:0},&quot;created&quot;:true}
+</code></pre></div>
+<p>If we have to repeat the same request with the same <code>id</code>, the docuement will be overwritten, ES will create a new document if
+the <code>id</code> is not present.</p>
+<div class="highlight"><pre><span></span><code>$ curl -XPUT http://elasticsearch:9200/people/users/abcd -d &#39;{&quot;name&quot;: &quot;james&quot;, &quot;age&quot;: 28}&#39;
+{&quot;_index&quot;:&quot;people&quot;,&quot;_type&quot;:&quot;users&quot;,&quot;_id&quot;:&quot;abcd&quot;,&quot;_version&quot;:2,&quot;result&quot;:&quot;updated&quot;,&quot;_shards&quot;:{&quot;total&quot;:2,&quot;successful&quot;:2,&quot;failed&quot;:0},&quot;created&quot;:false}
+</code></pre></div>
+<h2 id="ingeest-a-document-and-let-es-generate-a-id">Ingeest a Document and Let ES generate a ID:</h2>
+<p>When you do a <code>POST</code> request, the service will automatically assign a <code>id</code> for your docuemt:</p>
+<div class="highlight"><pre><span></span><code>$ curl -XPOST http://elasticsearch:9200/people/users/ -d &#39;{&quot;name&quot;: &quot;susan&quot;, &quot;age: 30}&#39;
+{&quot;_index&quot;:&quot;people&quot;,&quot;_type&quot;:&quot;users&quot;,&quot;_id&quot;:&quot;AV3H_9q6AH1phg1wCfDW&quot;,&quot;_version&quot;:1,&quot;result&quot;:&quot;created&quot;,&quot;_shards&quot;:{&quot;total&quot;:2,&quot;successful&quot;:2,&quot;failed&quot;:0},&quot;created&quot;:true}
+</code></pre></div>
+<h2 id="bulk-ingest">Bulk Ingest</h2>
+<p>Our Sample Data: <code>info.json</code>:</p>
+<div class="highlight"><pre><span></span><code>{&quot;index&quot;:{&quot;_index&quot;:&quot;info&quot;,&quot;_type&quot;:&quot;feed&quot;,&quot;_id&quot;:1}}
+{&quot;user_id&quot;:james4,&quot;handle_name&quot;:&quot;james&quot;,&quot;category&quot;:&quot;sport&quot;,&quot;socialmedia_src&quot;:&quot;twitter&quot;,&quot;text&quot;:&quot;manchester united lost&quot;,&quot;country&quot;:&quot;south africa&quot;}
+{&quot;index&quot;:{&quot;_index&quot;:&quot;info&quot;,&quot;_type&quot;:&quot;feed&quot;,&quot;_id&quot;:2}}
+{&quot;user_id&quot;:pete09,&quot;handle_name&quot;:&quot;pete&quot;,&quot;category&quot;:&quot;politics&quot;,&quot;socialmedia_src&quot;:&quot;facebook&quot;,&quot;text&quot;:&quot;new mayor selected&quot;,&quot;country&quot;:&quot;new zealand&quot;}
+</code></pre></div>
+<p>Ingest using the Bulk Api:</p>
+<div class="highlight"><pre><span></span><code>curl -XPOST &#39;http://elasticsearch:9200/info/_bulk?pretty&#39; --data-binary @info.json
+</code></pre></div>
+<h1 id="mapping">Mapping</h1>
+<h2 id="create-mapping">Create Mapping</h2>
+<h2 id="view-mappings">View Mappings</h2>
+<h2 id="check-fields-in-mappings">Check Fields in Mappings:</h2>
+<p>Check if a field exisists in your mapping:</p>
+<div class="highlight"><pre><span></span><code>$ curl -XGET &#39;http://127.0.0.1:9200/index-name-2018.03.01/_mapping/docs/field/company?pretty&#39;
+{
+  &quot;index-name-2018.03.01&quot; : {
+    &quot;mappings&quot; : {
+      &quot;docs&quot; : {
+        &quot;company&quot; : {
+          &quot;full_name&quot; : &quot;company&quot;,
+          &quot;mapping&quot; : {
+            &quot;company&quot; : {
+              &quot;type&quot; : &quot;text&quot;,
+              &quot;fields&quot; : {
+                &quot;keyword&quot; : {
+                  &quot;type&quot; : &quot;keyword&quot;,
+                  &quot;ignore_above&quot; : 256
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre></div>
+<h1 id="open-close-api">Open / Close API:</h1>
+<ul>
+<li>https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-open-close.html</li>
+</ul>
+<h2 id="close-index">Close Index:</h2>
+<div class="highlight"><pre><span></span><code>$ curl -XPOST http://elasticsearch:9200/people/_close
+{&quot;acknowledged&quot;:true}
+</code></pre></div>
+<p>Trying to ingest while the index is closed:</p>
+<div class="highlight"><pre><span></span><code>$ curl -XPOST http://elasticsearch:9200/people/users/ -d &#39;{&quot;name&quot;: &quot;susan&quot;, &quot;age&quot;: 30}&#39;
+{&quot;error&quot;:{&quot;root_cause&quot;:[{&quot;type&quot;:&quot;index_closed_exception&quot;,&quot;reason&quot;:&quot;closed&quot;,&quot;index_uuid&quot;:&quot;Yt31-EAwTOa-a6duElYRsQ&quot;,&quot;index&quot;:&quot;people&quot;}],&quot;type&quot;:&quot;index_closed_exception&quot;,&quot;reason&quot;:&quot;closed&quot;,&quot;index_uuid&quot;:&quot;Yt31-EAwTOa-a6duElYRsQ&quot;,&quot;index&quot;:&quot;people&quot;},&quot;status&quot;:403}
+</code></pre></div>
+<h2 id="open-index">Open Index:</h2>
+<div class="highlight"><pre><span></span><code>$ curl -XPOST http://elasticsearch:9200/people/_open
+</code></pre></div>
+<h1 id="searching">Searching</h1>
+<h2 id="get-a-document-by-id">Get a Document by ID:</h2>
+<p>We can get the document by passing the document <code>id</code>:</p>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/people/users/abcd?pretty
+{
+  &quot;_index&quot; : &quot;people&quot;,
+  &quot;_type&quot; : &quot;users&quot;,
+  &quot;_id&quot; : &quot;abcd&quot;,
+  &quot;_version&quot; : 2,
+  &quot;found&quot; : true,
+  &quot;_source&quot; : {
+    &quot;name&quot; : &quot;james&quot;,
+    &quot;age&quot; : 28
+  }
+}
+</code></pre></div>
+<h2 id="determine-which-shard-a-document-reside-on">Determine which Shard a Document Reside on:</h2>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/people/users/_search?q=age:28&amp;explain&amp;pretty&#39;
+{
+  &quot;took&quot; : 73,
+  &quot;timed_out&quot; : false,
+  &quot;_shards&quot; : {
+    &quot;total&quot; : 5,
+    &quot;successful&quot; : 5,
+    &quot;failed&quot; : 0
+  },
+  &quot;hits&quot; : {
+    &quot;total&quot; : 1,
+    &quot;max_score&quot; : 1.0,
+    &quot;hits&quot; : [
+      {
+        &quot;_shard&quot; : &quot;[people][2]&quot;,
+        &quot;_node&quot; : &quot;ea1q921TQWyNiyiRXzfXZQ&quot;,
+        &quot;_index&quot; : &quot;people&quot;,
+        &quot;_type&quot; : &quot;users&quot;,
+        &quot;_id&quot; : &quot;abcd&quot;,
+        &quot;_score&quot; : 1.0,
+        &quot;_source&quot; : {
+          &quot;name&quot; : &quot;james&quot;,
+          &quot;age&quot; : 28
+        },
+        &quot;_explanation&quot; : {
+          &quot;value&quot; : 1.0,
+          &quot;description&quot; : &quot;age:[28 TO 28], product of:&quot;,
+          &quot;details&quot; : [
+            {
+              &quot;value&quot; : 1.0,
+              &quot;description&quot; : &quot;boost&quot;,
+              &quot;details&quot; : [ ]
+            },
+            {
+              &quot;value&quot; : 1.0,
+              &quot;description&quot; : &quot;
+              Norm&quot;,
+              &quot;details&quot; : [ ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+</code></pre></div>
+<h2 id="search-api">Search API:</h2>
+<ul>
+<li>https://www.elastic.co/guide/en/elasticsearch/reference/current/search.html</li>
+</ul>
+<p>Lets do a search on our index:</p>
+<div class="highlight"><pre><span></span><code>$ curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/people/_search?pretty
+{
+  &quot;took&quot; : 29,
+  &quot;timed_out&quot; : false,
+  &quot;_shards&quot; : {
+    &quot;total&quot; : 5,
+    &quot;successful&quot; : 5,
+    &quot;failed&quot; : 0
+  },
+  &quot;hits&quot; : {
+    &quot;total&quot; : 2,
+    &quot;max_score&quot; : 1.0,
+    &quot;hits&quot; : [
+      {
+        &quot;_index&quot; : &quot;people&quot;,
+        &quot;_type&quot; : &quot;users&quot;,
+        &quot;_id&quot; : &quot;abcd&quot;,
+        &quot;_score&quot; : 1.0,
+        &quot;_source&quot; : {
+          &quot;name&quot; : &quot;james&quot;,
+          &quot;age&quot; : 28
+        }
+      },
+      {
+        &quot;_index&quot; : &quot;people&quot;,
+        &quot;_type&quot; : &quot;users&quot;,
+        &quot;_id&quot; : &quot;AV3H_9q6AH1phg1wCfDW&quot;,
+        &quot;_score&quot; : 1.0,
+        &quot;_source&quot; : {
+          &quot;name&quot; : &quot;susan&quot;,
+          &quot;age&quot; : 30
+        }
+      }
+    ]
+  }
+}
+</code></pre></div>
+<p>By default the Search API returns 10 items, which can be changed using <code>size</code></p>
+<div class="highlight"><pre><span></span><code>curl -sSL -u &quot;$ES_USER&quot;:&quot;$ES_PASS&quot; &quot;$ES_URL/shakespeare/_search?size=3&amp;pretty&#39;
+{
+  &quot;took&quot; : 25,
+  &quot;timed_out&quot; : false,
+  &quot;_shards&quot; : {
+    &quot;total&quot; : 5,
+    &quot;successful&quot; : 5,
+    &quot;failed&quot; : 0
+  },
+  &quot;hits&quot; : {
+    &quot;total&quot; : 111396,
+    &quot;max_score&quot; : 1.0,
+    &quot;hits&quot; : [
+      {
+        &quot;_index&quot; : &quot;shakespeare&quot;,
+        &quot;_type&quot; : &quot;act&quot;,
+        &quot;_id&quot; : &quot;0&quot;,
+        &quot;_score&quot; : 1.0,
+        &quot;_source&quot; : {
+          &quot;line_id&quot; : 1,
+          &quot;play_name&quot; : &quot;Henry IV&quot;,
+          &quot;speech_number&quot; : &quot;&quot;,
+          &quot;line_number&quot; : &quot;&quot;,
+          &quot;speaker&quot; : &quot;&quot;,
+          &quot;text_entry&quot; : &quot;ACT I&quot;
+        }
+      },
+      {
+        &quot;_index&quot; : &quot;shakespeare&quot;,
+        &quot;_type&quot; : &quot;line&quot;,
+        &quot;_id&quot; : &quot;14&quot;,
+        &quot;_score&quot; : 1.0,
+        &quot;_source&quot; : {
+          &quot;line_id&quot; : 15,
+          &quot;play_name&quot; : &quot;Henry IV&quot;,
+          &quot;speech_number&quot; : 1,
+          &quot;line_number&quot; : &quot;1.1.12&quot;,
+          &quot;speaker&quot; : &quot;KING HENRY IV&quot;,
+          &quot;text_entry&quot; : &quot;Did lately meet in the intestine shock&quot;
+        }
+      },
+      {
+        &quot;_index&quot; : &quot;shakespeare&quot;,
+        &quot;_type&quot; : &quot;line&quot;,
+        &quot;_id&quot; : &quot;19&quot;,
+        &quot;_score&quot; : 1.0,
+        &quot;_source&quot; : {
+          &quot;line_id&quot; : 20,
+          &quot;play_name&quot; : &quot;Henry IV&quot;,
+          &quot;speech_number&quot; : 1,
+          &quot;line_number&quot; : &quot;1.1.17&quot;,
+          &quot;speaker&quot; : &quot;KING HENRY IV&quot;,
+          &quot;text_entry&quot; : &quot;The edge of war, like an ill-sheathed knife,&quot;
+        }
+      }
+    ]
+  }
+}
+</code></pre></div>
+<p>View the latest indexed document (this will only work if theres a @timestmap field):</p>
+<p><div class="highlight"><pre><span></span><code>curl -H &#39;content-type: application/json&#39; -XPOST http://elasticsearch:9200/&lt;timestamped-index&gt;/_search?pretty -d &#39;{&quot;size&quot;: 1, &quot;sort&quot;: { &quot;@timestamp&quot;: &quot;desc&quot;}, &quot;query&quot;: {&quot;match_all&quot;: {} }}&#39;
+ ```
+
+## Query
+
+Query our index for people with the age of 28:
+</code></pre></div>
+curl -sSL -u "$ES_USER":"$ES_PASS" "$ES_URL/people/_search?q=age:30&amp;pretty'
+{
+  "took" : 25,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 5,
+    "successful" : 5,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : 1,
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "people",
+        "_type" : "users",
+        "_id" : "AV3H_9q6AH1phg1wCfDW",
+        "_score" : 1.0,
+        "_source" : {
+          "name" : "susan",
+          "age" : 30
+        }
+      }
+    ]
+  }
+}
+<div class="highlight"><pre><span></span><code>#### Query by Term and limit results by 2:
+</code></pre></div>
+$ curl -XGET http://127.0.0.1:9200/scrape-sysadmins/_search?pretty -d '
+{
+  "query": {
+    "term": {
+      "title": "traefik"
+    }
+  },
+  "size": 2
+}
+'
+<div class="highlight"><pre><span></span><code>#### Query by Match:
+</code></pre></div>
+$ curl -XGET http://127.0.0.1:9200/scrape-sysadmins/_search?pretty -d '
+{
+  "query": {
+    "match": {
+      "title": "traefik"
+    }
+  },
+  "size": 10
+}
+'
+<div class="highlight"><pre><span></span><code>#### Query with Bool:
+
+- Check if field exists in index:
+</code></pre></div>
+$ curl http://127.0.0.1:9200/test4/_search?pretty -d '
+{
+  "query": {
+    "bool": {
+      "must": [{
+        "exists": {
+      "field": "name"
+    }
+      }]
+    }
+  }
+}'</p>
+<p>{
+  "took" : 7,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 5,
+    "successful" : 5,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : 1,
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "test4",
+        "_type" : "docs",
+        "_id" : "2",
+        "_score" : 1.0,
+        "_source" : {
+          "id" : "2",
+          "name" : "ruan"
+        }
+      }
+    ]
+  }
+}
+<div class="highlight"><pre><span></span><code>#### Other Examples of Query:
+
+Match:
+</code></pre></div>
+{
+  "query": {
+    "match": {
+      "title": "something"
+    }
+  }
+}
+<div class="highlight"><pre><span></span><code>Multi match with boost on title:
+</code></pre></div></p>
+<h1 id="boosts-the-score-4-times-on-title">^ boosts the score 4 times on title</h1>
+<p>{
+  "query": {
+    "multi_match": {
+      "query": "something",
+      "fields": ["title^4", "plot"]
+    }
+  }
+}
+<div class="highlight"><pre><span></span><code>Match phrase:
+</code></pre></div>
+{
+  "query": {
+    "match_phrase": {
+      "title": "somethings got to give"
+    }
+  }
+}
+<div class="highlight"><pre><span></span><code>Common terms:
+</code></pre></div>
+{
+  "query": {
+    "common": {
+      "title": {
+        "query": "the something word"
+      }
+    }
+  }
+}
+<div class="highlight"><pre><span></span><code>Query string:
+</code></pre></div>
+{
+  "query": {
+    "query_string": {
+      "query": "the something AND (gives OR gave)"
+    }
+  }
+}
+<div class="highlight"><pre><span></span><code>Simple query string:
+</code></pre></div>
+{
+  "query": {
+    "simple_query_string": {
+      "query": "\"give got to\"~4 | *thing~2",
+      "fields": ["title"]
+    }
+  }
+}
+<div class="highlight"><pre><span></span><code>More info on above:
+</code></pre></div>
++    -&gt; Acts as the AND operator
+|    -&gt; Acts as the OR operator
+*    -&gt; Acts as a wildcard.
+""   -&gt; Wraps several terms into a phrase.
+()   -&gt; Wraps a clause for precedence.
+~n   -&gt; When used after a term (e.g. thign~3), sets fuzziness. When used after a phrase, sets slop. See Options.
+-    -&gt; Negates the term.
+<div class="highlight"><pre><span></span><code>Match all:
+</code></pre></div>
+{
+  "query": {
+    "match_all": {}
+  }
+}
+<div class="highlight"><pre><span></span><code>Match none:
+</code></pre></div>
+{
+  "query": {
+    "match_none": {}
+  }
+}
+<div class="highlight"><pre><span></span><code>- https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html
+
+## Sort
+- https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
+
+Sort Per Field:
+
+Ingest a couple of example documents:
+</code></pre></div>
+$ curl -XPUT http://elasticsearch:9200/products/items/1 -d '{"product": "chocolate", "price": [20, 4]}'
+$ curl -XPUT http://elasticsearch:9200/products/items/2 -d '{"product": "apples", "price": [28, 6]}'
+$ curl -XPUT http://elasticsearch:9200/products/items/3 -d '{"product": "bananas", "price": [28, 22, 23, 20]}'
+$ curl -XPUT http://elasticsearch:9200/products/items/4 -d '{"product": "chips", "price": [14, 24, 22, 12]}'
+<div class="highlight"><pre><span></span><code>Run a Sort Query on the term `bananas`, and show the `average` price. We can also use `min, max, avg, sum`:
+</code></pre></div>
+$ curl -XPOST http://elasticsearch:9200/products/_search?pretty -d '
+{
+  "query" : {
+    "term" : {
+      "product" : "bananas"
+    }
+  },
+  "sort" : [{
+    "price" : {
+      "order" : "asc",
+      "mode" : "avg"
+    }
+  }]
+}'</p>
+<p>{
+  "took" : 9,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 5,
+    "successful" : 5,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : 1,
+    "max_score" : null,
+    "hits" : [
+      {
+        "_index" : "products",
+        "_type" : "items",
+        "_id" : "3",
+        "_score" : null,
+        "_source" : {
+          "product" : "bananas",
+          "price" : [
+            28,
+            22,
+            23,
+            20
+          ]
+        },
+        "sort" : [
+          23
+        ]
+      }
+    ]
+  }
+}
+<div class="highlight"><pre><span></span><code>Running the same, but wanting to see the sum of all the prices:
+</code></pre></div>
+$ curl -XPOST http://elasticsearch:9200/products/_search?pretty -d '
+{
+  "query" : {
+    "term" : {
+      "product" : "bananas"
+    }
+  },
+  "sort" : [{
+    "price" : {
+      "order" : "asc",
+      "mode" : "sum"
+    }
+  }]
+}'</p>
+<p>{
+  "took" : 34,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 5,
+    "successful" : 5,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : 1,
+    "max_score" : null,
+    "hits" : [
+      {
+        "_index" : "products",
+        "_type" : "items",
+        "_id" : "3",
+        "_score" : null,
+        "_source" : {
+          "product" : "bananas",
+          "price" : [
+            28,
+            22,
+            23,
+            20
+          ]
+        },
+        "sort" : [
+          93
+        ]
+      }
+    ]
+  }
+}
+<div class="highlight"><pre><span></span><code># Delete
+
+References:
+
+- [Delete API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html)
+- [Delete by Query](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/docs-delete-by-query.html)
+
+## Delete Index:
+</code></pre></div>
+$ curl -XDELETE http://elasticsearch:9200/myindex
+<div class="highlight"><pre><span></span><code>## Delete Documents on Query:
+
+We would like to delete all documents that has `&quot;os_name&quot;: &quot;Windows 10&quot;`
+</code></pre></div>
+curl -XPOST 'http://elasticsearch:9200/weblogs/_delete_by_query?pretty' -d '
+{
+  "query": {
+    "match": {
+      "os_name": "Windows 10"
+    }
+  }
+}'</p>
+<p>{
+  "took" : 1217,
+  "timed_out" : false,
+  "total" : 48,
+  "deleted" : 48,
+  "batches" : 1,
+  "version_conflicts" : 0,
+  "noops" : 0,
+  "retries" : {
+    "bulk" : 0,
+    "search" : 0
+  },
+  "throttled_millis" : 0,
+  "requests_per_second" : -1.0,
+  "throttled_until_millis" : 0,
+  "failures" : [ ]
+}
+<div class="highlight"><pre><span></span><code>If routing is provided, then the routing is copied to the scroll query, limiting the process to the shards that match that routing value:
+</code></pre></div>
+$ curl -XPOST 'http://elasticsearch:9200/people/_delete_by_query?routing=1
+{
+  "query": {
+    "range" : {
+        "age" : {
+           "gte" : 10
+        }
+    }
+  }
+}
+<div class="highlight"><pre><span></span><code>By default _delete_by_query uses scroll batches of 1000. You can change the batch size with the scroll_size URL parameter:
+</code></pre></div>
+$ curl -XPOST 'http://elasticsearch:9200/weblogs/_delete_by_query?scroll_size=5000
+{
+  "query": {
+    "term": {
+      "category": "docker"
+    }
+  }
+}
+<div class="highlight"><pre><span></span><code>## Delete Stats:
+</code></pre></div>
+$ curl -XGET 'elasticsearch:9200/_tasks?detailed=true&amp;actions=*/delete/byquery&amp;pretty'
+{
+  "nodes" : {
+    "s5A2CoRWrwKf512z6NEscF" : {
+      "name" : "r4A5VoT",
+      "transport_address" : "127.0.0.1:9300",
+      "host" : "127.0.0.1",
+      "ip" : "127.0.0.1:9300",
+      "attributes" : {
+        "testattr" : "test",
+        "portsfile" : "true"
+      },
+      "tasks" : {
+        "s5A2CoRWrwKf512z6NEscF" : {
+          "node" : "s5A2CoRWrwKf512z6NEscF",
+          "id" : 36619,
+          "type" : "transport",
+          "action" : "indices:data/write/delete/byquery",
+          "status" : {
+            "total" : 6154,
+            "updated" : 0,
+            "created" : 0,
+            "deleted" : 3500,
+            "batches" : 36,
+            "version_conflicts" : 0,
+            "noops" : 0,
+            "retries": 0,
+            "throttled_millis": 0
+          },
+          "description" : ""
+        }
+      }
+    }
+  }
+}
+<div class="highlight"><pre><span></span><code># Snapshots
+
+## Elasticsearch S3 Snapshot Repo
+
+Setup the [S3 Snapshot Repository](https://sysadmins.co.za/aws-elasticsearch-register-s3-repository-for-snapshots-using-the-cli/?rbas_source=gist.github.com?rbas_sourcepage=cheatsheet-elasticsearch.md)
+
+List the Snapshot Repositories:
+</code></pre></div>
+$ curl -XGET 'http://127.0.0.1:9200/_cat/repositories?v'
+id            type
+foo-bacups    s3
+bar-backups   s3
+<div class="highlight"><pre><span></span><code>View the Snapshot Repository:
+</code></pre></div>
+$ curl -sSL -u "$ES_USER":"$ES_PASS" "$ES_URL/_snapshot/bar-backups?pretty'
+{
+  "bar-backups" : {
+    "type" : "s3",
+    "settings" : {
+      "bucket" : "my-es-snapshot-bucket",
+      "region" : "eu-west-1",
+      "role_arn" : "arn:aws:iam::0123456789012:role/elasticsearch-snapshot-role"
+    }
+  }
+}
+<div class="highlight"><pre><span></span><code>## Elasticsearch Snapshots
+
+Create a Snapshot named `mysnapshot_ruan-test-2018-05-24_1` of the index: `ruan-test-2018-05-24` and return the exit when the snapshot is done:
+</code></pre></div>
+$ curl -XPUT -H 'Content-Type: application/json' \
+  'http://elasticsearch:9200/_snapshot/bar-backups/mysnapshot_ruan-test-2018-05-24_1?wait_for_completion=true&amp;pretty=true' -d '
+{
+    "indices": "ruan-test-2018-05-24",
+    "ignore_unavailable": true,
+    "include_global_state": false
+}
+'</p>
+<p>{
+  "snapshot" : {
+    "snapshot" : "mysnapshot_ruan-test-2018-05-24_1",
+    "uuid" : "YRTE5922QCeqyEaMxPqb1A",
+    "version_id" : 6000199,
+    "version" : "6.0.1",
+    "indices" : [ "ruan-test-2018-05-24" ],
+    "state" : "SUCCESS",
+    "start_time" : "2018-05-25T13:20:11.497Z",
+    "start_time_in_millis" : 1527254411497,
+    "end_time" : "2018-05-25T13:20:11.886Z",
+    "end_time_in_millis" : 1527254411886,
+    "duration_in_millis" : 389,
+    "failures" : [ ],
+    "shards" : {
+      "total" : 5,
+      "failed" : 0,
+      "successful" : 5
+    }
+  }
+}
+<div class="highlight"><pre><span></span><code>Verify the Snapshot:
+</code></pre></div>
+$ curl -sSL -u "$ES_USER":"$ES_PASS" "$ES_URL/<em>cat/snapshots/bar-backups?v&amp;s=id'
+id                                      status start_epoch start_time end_epoch  end_time duration indices successful_shards failed_shards total_shards
+mysnapshot_ruan-test-2018-05-24_1      SUCCESS 1527254411  06:20:11   1527254411 06:20:11    389ms       1                 5             0            5
+<div class="highlight"><pre><span></span><code>## Elasticsearch Restore
+
+Get the Metadata of the Snapshot:
+</code></pre></div>
+$ curl -sSL -u "$ES_USER":"$ES_PASS" "$ES_URL/_snapshot/bar-backups/mysnapshot_ruan-test-2018-05-24_1?pretty'
+{
+  "snapshots" : [ {
+    "snapshot" : "mysnapshot_ruan-test-2018-05-24_1",
+    "uuid" : "YRTE5922QCeqyEaMxPqb1A",
+    "version_id" : 6000199,
+    "version" : "6.0.1",
+    "indices" : [ "ruan-test-2018-05-24" ],
+    "state" : "SUCCESS",
+    "start_time" : "2018-05-25T13:20:11.497Z",
+    "start_time_in_millis" : 1527254411497,
+    "end_time" : "2018-05-25T13:20:11.886Z",
+    "end_time_in_millis" : 1527254411886,
+    "duration_in_millis" : 389,
+    "failures" : [ ],
+    "shards" : {
+      "total" : 5,
+      "failed" : 0,
+      "successful" : 5
+    }
+  } ]
+}
+<div class="highlight"><pre><span></span><code>Inspect the Snapshot on S3:
+</code></pre></div>
+$ aws s3 --profile es ls s3://my-es-snapshot-bucket/ | grep VRTF2942QCeqyEaMxPgb1B
+2018-05-25 15:20:12         90 meta-VRTF2942QCeqyEaMxPgb1B.dat
+2018-05-25 15:20:12        258 snap-VRTF2942QCeqyEaMxPgb1B.dat
+<div class="highlight"><pre><span></span><code>Execute the Restore:
+</code></pre></div>
+$ curl -XPOST -H 'Content-Type: application/json' 'http://elasticsearch:9200/_snapshot/bar-backups/mysnapshot_ruan-test-2018-05-24_1/_restore -d '
+{
+  "indices": "ruan-test-2018-05-24",
+  "ignore_unavailable": true,
+  "include_global_state": false,
+  "rename_pattern": "index</em>(.+)",
+  "rename_replacement": "restored_index_$1"
+}
+'
+```</p>
+<p>or leave out the body for normal restore</p>
+<h2 id="elasticsearch-snapshot-resources">Elasticsearch Snapshot Resources:</h2>
+<ul>
+<li>https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html</li>
+<li>https://www.youtube.com/watch?v=Otl-IcmbiDE</li>
+<li>https://recology.info/2015/02/elasticsearch-backup-restore/</li>
+<li>https://medium.com/@rcdexta/periodic-snapshotting-of-elasticsearch-indices-f6b6ca221a0c</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.sections", "navigation.indexes", "navigation.top", "search.highlight", "search.suggest", "search.share", "content.code.annotate", "header.autohide", "announce.dismiss", "toc.follow"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ebd0bdb7.min.js"></script>
+      
+    
+  </body>
+</html>

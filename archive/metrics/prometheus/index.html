@@ -1,0 +1,1402 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.23">
+    
+    
+      
+        <title>Prometheus - Oscar's Homelab</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,700,700i%7CUbuntu+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Ubuntu";--md-code-font:"Ubuntu Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Oscar&#39;s Homelab" class="md-header__button md-logo" aria-label="Oscar's Homelab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Oscar's Homelab
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Prometheus
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Oscar&#39;s Homelab" class="md-nav__button md-logo" aria-label="Oscar's Homelab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Oscar's Homelab
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-getting-started/about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../01-how-to-guides/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    How-to guides
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            How-to guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Documentation
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Flow & Policy Logging
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Flow & Policy Logging
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-docs/logs/index.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    None
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Ops & Sec Metrics
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Ops & Sec Metrics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-docs/metrics/index.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    None
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../03-tools/elastic/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metrics-ingestion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metrics Ingestion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Metrics Ingestion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scrape-frequency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scrape frequency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default-targets-scraped" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default Targets scraped
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics-collected-from-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metrics collected from targets
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k3s-services-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      k3s services monitoring
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitoring
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alerting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alerting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Prometheus</h1>
+
+<h2 id="introduction">Introduction</h2>
+<p>This document explains the metrics ingestion pipeline in a Kubernetes cluster using the Prometheus Operator and its related custom resources, ServiceMonitors and PodMonitors.</p>
+<h2 id="deployment">Deployment</h2>
+<p>TBD</p>
+<h2 id="metrics-ingestion">Metrics Ingestion</h2>
+<h3 id="scrape-frequency">Scrape frequency</h3>
+<p>The default scrape frequency for all default targets and scrapes is 60s</p>
+<h3 id="default-targets-scraped">Default Targets scraped</h3>
+<p>These jobs involve scraping metrics from the core components of the k3s cluster. There are additional jobs that haven't been listed here, as they aren't deemed critical to the cluster's overall functionality.</p>
+<p>To retrieve the available jobs in the cluster, you can use the following query:</p>
+<div class="highlight"><pre><span></span><code><span class="k">sum</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="p">(</span><span class="n">job</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">up</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li>
+<p><code>apiserver</code> (<code>{job="apiserver"}</code>)</p>
+</li>
+<li>
+<p><code>kube-controller-manager</code> (<code>{job="kube-controller-manager"}</code>)</p>
+</li>
+<li>
+<p><code>kube-scheduler</code> (<code>{job="kube-scheduler"}</code>)</p>
+</li>
+<li>
+<p><code>kubelet</code> (<code>{job="kubelet"}</code>)</p>
+</li>
+<li>
+<p><code>kube-state-metrics</code> (<code>{job="kube-state-metrics"}</code>)</p>
+</li>
+<li>
+<p><code>coredns</code> (<code>{job="coredns"}</code>)</p>
+</li>
+<li>
+<p><code>prometheus-alertmanager</code> (<code>{job="prometheus-alertmanager"}</code>)</p>
+</li>
+<li>
+<p><code>prometheus-operator</code> (<code>{job="prometheus-operator"}</code>)</p>
+</li>
+<li>
+<p><code>prometheus</code> (<code>{job="prometheus-prometheus"}</code>)</p>
+</li>
+</ul>
+<h3 id="metrics-collected-from-targets">Metrics collected from targets</h3>
+<p>The metrics gathered by default from each standard target are listed here, while all other metrics are discarded using relabeling rules. To obtain the metrics from these standard targets, for example, <code>job="kubelet"</code> you can execute the following:</p>
+<div class="highlight"><pre><span></span><code><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="err">{</span><span class="n">job</span><span class="o">=</span><span class="ss">&quot;kubelet&quot;</span><span class="err">}</span><span class="p">)</span>
+</code></pre></div>
+<details>
+<summary>apiserver (click to expand)</summary>
+<ul>
+<li><code>apiserver_admission_controller_admission_duration_seconds_bucket</code></li>
+<li><code>apiserver_admission_controller_admission_duration_seconds_count</code></li>
+<li><code>apiserver_admission_controller_admission_duration_seconds_sum</code></li>
+<li><code>apiserver_admission_step_admission_duration_seconds_bucket</code></li>
+<li><code>apiserver_admission_step_admission_duration_seconds_count</code></li>
+<li><code>apiserver_admission_step_admission_duration_seconds_sum</code></li>
+<li><code>apiserver_admission_step_admission_duration_seconds_summary</code></li>
+<li><code>apiserver_admission_step_admission_duration_seconds_summary_count</code></li>
+<li><code>apiserver_admission_step_admission_duration_seconds_summary_sum</code></li>
+<li><code>apiserver_admission_webhook_admission_duration_seconds_bucket</code></li>
+<li><code>apiserver_admission_webhook_admission_duration_seconds_count</code></li>
+<li><code>apiserver_admission_webhook_admission_duration_seconds_sum</code></li>
+<li><code>apiserver_admission_webhook_fail_open_count</code></li>
+<li><code>apiserver_admission_webhook_rejection_count</code></li>
+<li><code>apiserver_admission_webhook_request_total</code></li>
+<li><code>apiserver_audit_event_total</code></li>
+<li><code>apiserver_audit_requests_rejected_total</code></li>
+<li><code>apiserver_current_inflight_requests</code></li>
+<li><code>apiserver_current_inqueue_requests</code></li>
+<li><code>apiserver_delegated_authn_request_duration_seconds_bucket</code></li>
+<li><code>apiserver_delegated_authn_request_duration_seconds_count</code></li>
+<li><code>apiserver_delegated_authn_request_duration_seconds_sum</code></li>
+<li><code>apiserver_delegated_authn_request_total</code></li>
+<li><code>apiserver_delegated_authz_request_duration_seconds_bucket</code></li>
+<li><code>apiserver_delegated_authz_request_duration_seconds_count</code></li>
+<li><code>apiserver_delegated_authz_request_duration_seconds_sum</code></li>
+<li><code>apiserver_delegated_authz_request_total</code></li>
+<li><code>apiserver_init_events_total</code></li>
+<li><code>apiserver_longrunning_requests</code></li>
+<li><code>apiserver_request_aborts_total</code></li>
+<li><code>apiserver_request_duration_seconds_count</code></li>
+<li><code>apiserver_request_duration_seconds_sum</code></li>
+<li><code>apiserver_request_filter_duration_seconds_bucket</code></li>
+<li><code>apiserver_request_filter_duration_seconds_count</code></li>
+<li><code>apiserver_request_filter_duration_seconds_sum</code></li>
+<li><code>apiserver_request_post_timeout_total</code></li>
+<li><code>apiserver_request_sli_duration_seconds_count</code></li>
+<li><code>apiserver_request_sli_duration_seconds_sum</code></li>
+<li><code>apiserver_request_slo_duration_seconds_count</code></li>
+<li><code>apiserver_request_slo_duration_seconds_sum</code></li>
+<li><code>apiserver_request_terminations_total</code></li>
+<li><code>apiserver_request_timestamp_comparison_time_bucket</code></li>
+<li><code>apiserver_request_timestamp_comparison_time_count</code></li>
+<li><code>apiserver_request_timestamp_comparison_time_sum</code></li>
+<li><code>apiserver_request_total</code></li>
+<li><code>apiserver_requested_deprecated_apis</code></li>
+<li><code>apiserver_response_sizes_count</code></li>
+<li><code>apiserver_response_sizes_sum</code></li>
+<li><code>apiserver_selfrequest_total</code></li>
+<li><code>apiserver_storage_db_total_size_in_bytes</code></li>
+<li><code>apiserver_storage_list_evaluated_objects_total</code></li>
+<li><code>apiserver_storage_list_fetched_objects_total</code></li>
+<li><code>apiserver_storage_list_returned_objects_total</code></li>
+<li><code>apiserver_storage_list_total</code></li>
+<li><code>apiserver_storage_objects</code></li>
+<li><code>apiserver_tls_handshake_errors_total</code></li>
+<li><code>apiserver_watch_events_sizes_count</code></li>
+<li><code>apiserver_watch_events_sizes_sum</code></li>
+<li><code>apiserver_watch_events_total</code></li>
+<li><code>count:up</code></li>
+<li><code>scrape_duration_seconds</code></li>
+<li><code>scrape_samples_post_metric_relabeling</code></li>
+<li><code>scrape_samples_scraped</code></li>
+<li><code>scrape_series_added</code></li>
+<li><code>up</code></li>
+</ul>
+</details>
+<details>
+<summary>kube-controller-manager" (click to expand)</summary>
+<ul>
+<li><code>apiserver_audit_event_total</code></li>
+<li><code>apiserver_audit_requests_rejected_total</code></li>
+<li><code>apiserver_client_certificate_expiration_seconds_bucket</code></li>
+<li><code>apiserver_client_certificate_expiration_seconds_count</code></li>
+<li><code>apiserver_client_certificate_expiration_seconds_sum</code></li>
+<li><code>apiserver_delegated_authn_request_duration_seconds_bucket</code></li>
+<li><code>apiserver_delegated_authn_request_duration_seconds_count</code></li>
+<li><code>apiserver_delegated_authn_request_duration_seconds_sum</code></li>
+<li><code>apiserver_delegated_authn_request_total</code></li>
+<li><code>apiserver_delegated_authz_request_duration_seconds_bucket</code></li>
+<li><code>apiserver_delegated_authz_request_duration_seconds_count</code></li>
+<li><code>apiserver_delegated_authz_request_duration_seconds_sum</code></li>
+<li><code>apiserver_delegated_authz_request_total</code></li>
+<li><code>apiserver_envelope_encryption_dek_cache_fill_percent</code></li>
+<li><code>apiserver_storage_data_key_generation_duration_seconds_bucket</code></li>
+<li><code>apiserver_storage_data_key_generation_duration_seconds_count</code></li>
+<li><code>apiserver_storage_data_key_generation_duration_seconds_sum</code></li>
+<li><code>apiserver_storage_data_key_generation_failures_total</code></li>
+<li><code>apiserver_storage_db_total_size_in_bytes</code></li>
+<li><code>apiserver_storage_envelope_transformation_cache_misses_total</code></li>
+<li><code>apiserver_storage_list_evaluated_objects_total</code></li>
+<li><code>apiserver_storage_list_fetched_objects_total</code></li>
+<li><code>apiserver_storage_list_returned_objects_total</code></li>
+<li><code>apiserver_storage_list_total</code></li>
+<li><code>apiserver_storage_objects</code></li>
+<li><code>apiserver_webhooks_x509_insecure_sha_total</code></li>
+<li><code>apiserver_webhooks_x509_missing_san_total</code></li>
+<li><code>attachdetach_controller_forced_detaches</code></li>
+<li><code>attachdetach_controller_total_volumes</code></li>
+<li><code>authenticated_user_requests</code></li>
+<li><code>authentication_attempts</code></li>
+<li><code>authentication_duration_seconds_bucket</code></li>
+<li><code>authentication_duration_seconds_count</code></li>
+<li><code>authentication_duration_seconds_sum</code></li>
+<li><code>authentication_token_cache_active_fetch_count</code></li>
+<li><code>authentication_token_cache_fetch_total</code></li>
+<li><code>authentication_token_cache_request_duration_seconds_bucket</code></li>
+<li><code>authentication_token_cache_request_duration_seconds_count</code></li>
+<li><code>authentication_token_cache_request_duration_seconds_sum</code></li>
+<li><code>authentication_token_cache_request_total</code></li>
+<li><code>count:up</code></li>
+<li><code>cronjob_controller_job_creation_skew_duration_seconds_bucket</code></li>
+<li><code>cronjob_controller_job_creation_skew_duration_seconds_count</code></li>
+<li><code>cronjob_controller_job_creation_skew_duration_seconds_sum</code></li>
+<li><code>disabled_metric_total</code></li>
+<li><code>endpoint_slice_controller_changes</code></li>
+<li><code>endpoint_slice_controller_desired_endpoint_slices</code></li>
+<li><code>endpoint_slice_controller_endpoints_added_per_sync_bucket</code></li>
+<li><code>endpoint_slice_controller_endpoints_added_per_sync_count</code></li>
+<li><code>endpoint_slice_controller_endpoints_added_per_sync_sum</code></li>
+<li><code>endpoint_slice_controller_endpoints_desired</code></li>
+<li><code>endpoint_slice_controller_endpoints_removed_per_sync_bucket</code></li>
+<li><code>endpoint_slice_controller_endpoints_removed_per_sync_count</code></li>
+<li><code>endpoint_slice_controller_endpoints_removed_per_sync_sum</code></li>
+<li><code>endpoint_slice_controller_endpointslices_changed_per_sync_bucket</code></li>
+<li><code>endpoint_slice_controller_endpointslices_changed_per_sync_count</code></li>
+<li><code>endpoint_slice_controller_endpointslices_changed_per_sync_sum</code></li>
+<li><code>endpoint_slice_controller_num_endpoint_slices</code></li>
+<li><code>endpoint_slice_controller_syncs</code></li>
+<li><code>endpoint_slice_mirroring_controller_addresses_skipped_per_sync_bucket</code></li>
+<li><code>endpoint_slice_mirroring_controller_addresses_skipped_per_sync_count</code></li>
+<li><code>endpoint_slice_mirroring_controller_addresses_skipped_per_sync_sum</code></li>
+<li><code>endpoint_slice_mirroring_controller_changes</code></li>
+<li><code>endpoint_slice_mirroring_controller_desired_endpoint_slices</code></li>
+<li><code>endpoint_slice_mirroring_controller_endpoints_added_per_sync_bucket</code></li>
+<li><code>endpoint_slice_mirroring_controller_endpoints_added_per_sync_count</code></li>
+<li><code>endpoint_slice_mirroring_controller_endpoints_added_per_sync_sum</code></li>
+<li><code>endpoint_slice_mirroring_controller_endpoints_desired</code></li>
+<li><code>endpoint_slice_mirroring_controller_endpoints_removed_per_sync_bucket</code></li>
+<li><code>endpoint_slice_mirroring_controller_endpoints_removed_per_sync_count</code></li>
+<li><code>endpoint_slice_mirroring_controller_endpoints_removed_per_sync_sum</code></li>
+<li><code>endpoint_slice_mirroring_controller_endpoints_sync_duration_bucket</code></li>
+<li><code>endpoint_slice_mirroring_controller_endpoints_sync_duration_count</code></li>
+<li><code>endpoint_slice_mirroring_controller_endpoints_sync_duration_sum</code></li>
+<li><code>endpoint_slice_mirroring_controller_endpoints_updated_per_sync_bucket</code></li>
+<li><code>endpoint_slice_mirroring_controller_endpoints_updated_per_sync_count</code></li>
+<li><code>endpoint_slice_mirroring_controller_endpoints_updated_per_sync_sum</code></li>
+<li><code>endpoint_slice_mirroring_controller_num_endpoint_slices</code></li>
+<li><code>ephemeral_volume_controller_create_failures_total</code></li>
+<li><code>ephemeral_volume_controller_create_total</code></li>
+<li><code>garbagecollector_controller_resources_sync_error_total</code></li>
+<li><code>go_cgo_go_to_c_calls_calls_total</code></li>
+<li><code>go_gc_cycles_automatic_gc_cycles_total</code></li>
+<li><code>go_gc_cycles_forced_gc_cycles_total</code></li>
+<li><code>go_gc_cycles_total_gc_cycles_total</code></li>
+<li><code>go_gc_duration_seconds</code></li>
+<li><code>go_gc_duration_seconds_count</code></li>
+<li><code>go_gc_duration_seconds_sum</code></li>
+<li><code>go_gc_heap_allocs_by_size_bytes_bucket</code></li>
+<li><code>go_gc_heap_allocs_by_size_bytes_count</code></li>
+<li><code>go_gc_heap_allocs_by_size_bytes_sum</code></li>
+<li><code>go_gc_heap_allocs_bytes_total</code></li>
+<li><code>go_gc_heap_allocs_objects_total</code></li>
+<li><code>go_gc_heap_frees_by_size_bytes_bucket</code></li>
+<li><code>go_gc_heap_frees_by_size_bytes_count</code></li>
+<li><code>go_gc_heap_frees_by_size_bytes_sum</code></li>
+<li><code>go_gc_heap_frees_bytes_total</code></li>
+<li><code>go_gc_heap_frees_objects_total</code></li>
+<li><code>go_gc_heap_goal_bytes</code></li>
+<li><code>go_gc_heap_objects_objects</code></li>
+<li><code>go_gc_heap_tiny_allocs_objects_total</code></li>
+<li><code>go_gc_limiter_last_enabled_gc_cycle</code></li>
+<li><code>go_gc_pauses_seconds_bucket</code></li>
+<li><code>go_gc_pauses_seconds_count</code></li>
+<li><code>go_gc_pauses_seconds_sum</code></li>
+<li><code>go_gc_stack_starting_size_bytes</code></li>
+<li><code>go_goroutines</code></li>
+<li><code>go_info</code></li>
+<li><code>go_memory_classes_heap_free_bytes</code></li>
+<li><code>go_memory_classes_heap_objects_bytes</code></li>
+<li><code>go_memory_classes_heap_released_bytes</code></li>
+<li><code>go_memory_classes_heap_stacks_bytes</code></li>
+<li><code>go_memory_classes_heap_unused_bytes</code></li>
+<li><code>go_memory_classes_metadata_mcache_free_bytes</code></li>
+<li><code>go_memory_classes_metadata_mcache_inuse_bytes</code></li>
+<li><code>go_memory_classes_metadata_mspan_free_bytes</code></li>
+<li><code>go_memory_classes_metadata_mspan_inuse_bytes</code></li>
+<li><code>go_memory_classes_metadata_other_bytes</code></li>
+<li><code>go_memory_classes_os_stacks_bytes</code></li>
+<li><code>go_memory_classes_other_bytes</code></li>
+<li><code>go_memory_classes_profiling_buckets_bytes</code></li>
+<li><code>go_memory_classes_total_bytes</code></li>
+<li><code>go_memstats_alloc_bytes</code></li>
+<li><code>go_memstats_alloc_bytes_total</code></li>
+<li><code>go_memstats_buck_hash_sys_bytes</code></li>
+<li><code>go_memstats_frees_total</code></li>
+<li><code>go_memstats_gc_sys_bytes</code></li>
+<li><code>go_memstats_heap_alloc_bytes</code></li>
+<li><code>go_memstats_heap_idle_bytes</code></li>
+<li><code>go_memstats_heap_inuse_bytes</code></li>
+<li><code>go_memstats_heap_objects</code></li>
+<li><code>go_memstats_heap_released_bytes</code></li>
+<li><code>go_memstats_heap_sys_bytes</code></li>
+<li><code>go_memstats_last_gc_time_seconds</code></li>
+<li><code>go_memstats_lookups_total</code></li>
+<li><code>go_memstats_mallocs_total</code></li>
+<li><code>go_memstats_mcache_inuse_bytes</code></li>
+<li><code>go_memstats_mcache_sys_bytes</code></li>
+<li><code>go_memstats_mspan_inuse_bytes</code></li>
+<li><code>go_memstats_mspan_sys_bytes</code></li>
+<li><code>go_memstats_next_gc_bytes</code></li>
+<li><code>go_memstats_other_sys_bytes</code></li>
+<li><code>go_memstats_stack_inuse_bytes</code></li>
+<li><code>go_memstats_stack_sys_bytes</code></li>
+<li><code>go_memstats_sys_bytes</code></li>
+<li><code>go_sched_gomaxprocs_threads</code></li>
+<li><code>go_sched_goroutines_goroutines</code></li>
+<li><code>go_sched_latencies_seconds_bucket</code></li>
+<li><code>go_sched_latencies_seconds_count</code></li>
+<li><code>go_sched_latencies_seconds_sum</code></li>
+<li><code>go_threads</code></li>
+<li><code>hidden_metric_total</code></li>
+<li><code>job_controller_job_pods_finished_total</code></li>
+<li><code>job_controller_job_sync_duration_seconds_bucket</code></li>
+<li><code>job_controller_job_sync_duration_seconds_count</code></li>
+<li><code>job_controller_job_sync_duration_seconds_sum</code></li>
+<li><code>job_controller_job_syncs_total</code></li>
+<li><code>job_controller_jobs_finished_total</code></li>
+<li><code>job_controller_terminated_pods_tracking_finalizer_total</code></li>
+<li><code>kubernetes_build_info</code></li>
+<li><code>kubernetes_feature_enabled</code></li>
+<li><code>node_collector_evictions_total</code></li>
+<li><code>node_collector_unhealthy_nodes_in_zone</code></li>
+<li><code>node_collector_zone_health</code></li>
+<li><code>node_collector_zone_size</code></li>
+<li><code>node_ipam_controller_cidrset_allocation_tries_per_request_bucket</code></li>
+<li><code>node_ipam_controller_cidrset_allocation_tries_per_request_count</code></li>
+<li><code>node_ipam_controller_cidrset_allocation_tries_per_request_sum</code></li>
+<li><code>node_ipam_controller_cidrset_cidrs_allocations_total</code></li>
+<li><code>node_ipam_controller_cidrset_usage_cidrs</code></li>
+<li><code>process_cpu_seconds_total</code></li>
+<li><code>process_max_fds</code></li>
+<li><code>process_open_fds</code></li>
+<li><code>process_resident_memory_bytes</code></li>
+<li><code>process_start_time_seconds</code></li>
+<li><code>process_virtual_memory_bytes</code></li>
+<li><code>process_virtual_memory_max_bytes</code></li>
+<li><code>pv_collector_bound_pv_count</code></li>
+<li><code>pv_collector_bound_pvc_count</code></li>
+<li><code>pv_collector_total_pv_count</code></li>
+<li><code>registered_metric_total</code></li>
+<li><code>replicaset_controller_sorting_deletion_age_ratio_bucket</code></li>
+<li><code>replicaset_controller_sorting_deletion_age_ratio_count</code></li>
+<li><code>replicaset_controller_sorting_deletion_age_ratio_sum</code></li>
+<li><code>rest_client_exec_plugin_certificate_rotation_age_bucket</code></li>
+<li><code>rest_client_exec_plugin_certificate_rotation_age_count</code></li>
+<li><code>rest_client_exec_plugin_certificate_rotation_age_sum</code></li>
+<li><code>rest_client_exec_plugin_ttl_seconds</code></li>
+<li><code>rest_client_rate_limiter_duration_seconds_bucket</code></li>
+<li><code>rest_client_rate_limiter_duration_seconds_count</code></li>
+<li><code>rest_client_rate_limiter_duration_seconds_sum</code></li>
+<li><code>rest_client_request_duration_seconds_count</code></li>
+<li><code>rest_client_request_duration_seconds_sum</code></li>
+<li><code>rest_client_request_size_bytes_bucket</code></li>
+<li><code>rest_client_request_size_bytes_count</code></li>
+<li><code>rest_client_request_size_bytes_sum</code></li>
+<li><code>rest_client_requests_total</code></li>
+<li><code>rest_client_response_size_bytes_bucket</code></li>
+<li><code>rest_client_response_size_bytes_count</code></li>
+<li><code>rest_client_response_size_bytes_sum</code></li>
+<li><code>retroactive_storageclass_errors_total</code></li>
+<li><code>retroactive_storageclass_total</code></li>
+<li><code>root_ca_cert_publisher_sync_duration_seconds_bucket</code></li>
+<li><code>root_ca_cert_publisher_sync_duration_seconds_count</code></li>
+<li><code>root_ca_cert_publisher_sync_duration_seconds_sum</code></li>
+<li><code>root_ca_cert_publisher_sync_total</code></li>
+<li><code>running_managed_controllers</code></li>
+<li><code>scrape_duration_seconds</code></li>
+<li><code>scrape_samples_post_metric_relabeling</code></li>
+<li><code>scrape_samples_scraped</code></li>
+<li><code>scrape_series_added</code></li>
+<li><code>storage_count_attachable_volumes_in_use</code></li>
+<li><code>storage_operation_duration_seconds_bucket</code></li>
+<li><code>storage_operation_duration_seconds_count</code></li>
+<li><code>storage_operation_duration_seconds_sum</code></li>
+<li><code>ttl_after_finished_controller_job_deletion_duration_seconds_bucket</code></li>
+<li><code>ttl_after_finished_controller_job_deletion_duration_seconds_count</code></li>
+<li><code>ttl_after_finished_controller_job_deletion_duration_seconds_sum</code></li>
+<li><code>up</code></li>
+<li><code>volume_operation_total_seconds_bucket</code></li>
+<li><code>volume_operation_total_seconds_count</code></li>
+<li><code>volume_operation_total_seconds_sum</code></li>
+<li><code>workqueue_adds_total</code></li>
+<li><code>workqueue_depth</code></li>
+<li><code>workqueue_longest_running_processor_seconds</code></li>
+<li><code>workqueue_queue_duration_seconds_bucket</code></li>
+<li><code>workqueue_queue_duration_seconds_count</code></li>
+<li><code>workqueue_queue_duration_seconds_sum</code></li>
+<li><code>workqueue_retries_total</code></li>
+<li><code>workqueue_unfinished_work_seconds</code></li>
+<li><code>workqueue_work_duration_seconds_bucket</code></li>
+<li><code>workqueue_work_duration_seconds_count</code></li>
+<li><code>workqueue_work_duration_seconds_sum</code></li>
+</ul>
+</details>
+<details>
+<summary>cAdvisor (click to expand)</summary>
+<ul>
+<li><code>container_cpu_cfs_periods_total</code></li>
+<li><code>container_cpu_cfs_throttled_periods_total</code></li>
+<li><code>container_cpu_cfs_throttled_seconds_total</code></li>
+<li><code>container_cpu_usage_seconds_total</code></li>
+<li><code>container_memory_rss</code></li>
+<li><code>container_memory_usage_bytes</code></li>
+<li><code>container_memory_working_set_bytes</code></li>
+<li><code>container_network_receive_bytes_total</code></li>
+<li><code>container_network_transmit_bytes_total</code></li>
+<li><code>container_network_receive_packets_total</code></li>
+<li><code>container_network_transmit_packets_total</code></li>
+<li><code>container_network_receive_packets_dropped_total</code></li>
+<li><code>container_network_transmit_packets_dropped_total</code></li>
+<li><code>container_oom_events_total</code></li>
+<li><code>container_fs_reads_total</code></li>
+<li><code>container_fs_writes_total</code></li>
+<li><code>container_fs_reads_bytes_total</code></li>
+<li><code>container_fs_writes_bytes_total</code></li>
+</ul>
+<p>Check the following table in the <a href="https://github.com/google/cadvisor/blob/master/docs/storage/prometheus.md">cAdvisor documentation</a> in case there is any doubt regards the type of the metric, what it is his purpose or the units</p>
+</details>
+<details>
+<summary>kubelet (click to expand)</summary>
+<ul>
+<li><code>kubelet_node_name</code></li>
+<li><code>kubelet_running_pods</code></li>
+<li><code>kubelet_running_pod_count</code></li>
+<li><code>kubelet_running_sum_containers</code></li>
+<li><code>kubelet_running_container_count</code></li>
+<li><code>volume_manager_total_volumes</code></li>
+<li><code>kubelet_node_config_error</code></li>
+<li><code>kubelet_runtime_operations_total</code></li>
+<li><code>kubelet_runtime_operations_errors_total</code></li>
+<li><code>kubelet_runtime_operations_duration_seconds_bucket</code></li>
+<li><code>kubelet_runtime_operations_duration_seconds_sum</code></li>
+<li><code>kubelet_runtime_operations_duration_seconds_count</code></li>
+<li><code>kubelet_pod_start_duration_seconds_bucket</code></li>
+<li><code>kubelet_pod_start_duration_seconds_sum</code></li>
+<li><code>kubelet_pod_start_duration_seconds_count</code></li>
+<li><code>kubelet_pod_worker_duration_seconds_bucket</code></li>
+<li><code>kubelet_pod_worker_duration_seconds_sum</code></li>
+<li><code>kubelet_pod_worker_duration_seconds_count</code></li>
+<li><code>storage_operation_duration_seconds_bucket</code></li>
+<li><code>storage_operation_duration_seconds_sum</code></li>
+<li><code>storage_operation_duration_seconds_count</code></li>
+<li><code>storage_operation_errors_total</code></li>
+<li><code>kubelet_cgroup_manager_duration_seconds_bucket</code></li>
+<li><code>kubelet_cgroup_manager_duration_seconds_sum</code></li>
+<li><code>kubelet_cgroup_manager_duration_seconds_count</code></li>
+<li><code>kubelet_pleg_relist_interval_seconds_bucket</code></li>
+<li><code>kubelet_pleg_relist_interval_seconds_count</code></li>
+<li><code>kubelet_pleg_relist_interval_seconds_sum</code></li>
+<li><code>kubelet_pleg_relist_duration_seconds_bucket</code></li>
+<li><code>kubelet_pleg_relist_duration_seconds_count</code></li>
+<li><code>kubelet_pleg_relist_duration_seconds_sum</code></li>
+<li><code>rest_client_requests_total</code></li>
+<li><code>rest_client_request_duration_seconds_bucket</code></li>
+<li><code>rest_client_request_duration_seconds_sum</code></li>
+<li><code>rest_client_request_duration_seconds_count</code></li>
+<li><code>process_resident_memory_bytes</code></li>
+<li><code>process_cpu_seconds_total</code></li>
+<li><code>go_goroutines</code></li>
+<li><code>kubernetes_build_info</code></li>
+</ul>
+</details>
+<details>
+<summary>node-exporter</summary>
+<ul>
+<li><code>node_memory_MemTotal_bytes</code></li>
+<li><code>node_cpu_seconds_total</code></li>
+<li><code>node_memory_MemAvailable_bytes</code></li>
+<li><code>node_memory_Buffers_bytes</code></li>
+<li><code>node_memory_Cached_bytes</code></li>
+<li><code>node_memory_MemFree_bytes</code></li>
+<li><code>node_memory_Slab_bytes</code></li>
+<li><code>node_filesystem_avail_bytes</code></li>
+<li><code>node_filesystem_size_bytes</code></li>
+<li><code>node_time_seconds</code></li>
+<li><code>node_exporter_build_info</code></li>
+<li><code>node_load1</code></li>
+<li><code>node_vmstat_pgmajfault</code></li>
+<li><code>node_network_receive_bytes_total</code></li>
+<li><code>node_network_transmit_bytes_total</code></li>
+<li><code>node_network_receive_drop_total</code></li>
+<li><code>node_network_transmit_drop_total</code></li>
+<li><code>node_disk_io_time_seconds_total</code></li>
+<li><code>node_disk_io_time_weighted_seconds_total</code></li>
+<li><code>node_load5</code></li>
+<li><code>node_load15</code></li>
+<li><code>node_disk_read_bytes_total</code></li>
+<li><code>node_disk_written_bytes_total</code></li>
+<li><code>node_uname_info</code></li>
+</ul>
+<p>Check the following documentation of <a href="https://docs.splunk.com/Observability/gdi/prometheus-node/prometheus-node.html#metrics">prometheus node exporter in splunk</a></p>
+</details>
+<details>
+<summary>kube-state-metrics</summary>
+<ul>
+<li><code>kube_pod_owner</code></li>
+<li><code>kube_pod_container_resource_requests</code></li>
+<li><code>kube_pod_status_phase</code></li>
+<li><code>kube_pod_container_resource_limits</code></li>
+<li><code>kube_pod_info</code></li>
+<li><code>kube_pod_labels</code></li>
+<li><code>kube_pod_container_info</code></li>
+<li><code>kube_pod_container_status_waiting</code></li>
+<li><code>kube_pod_container_status_waiting_reason</code></li>
+<li><code>kube_pod_container_status_running</code></li>
+<li><code>kube_pod_container_status_terminated</code></li>
+<li><code>kube_pod_container_status_terminated_reason</code></li>
+<li><code>kube_pod_container_status_restarts_total</code></li>
+<li><code>kube_replicaset_owner</code></li>
+<li><code>kube_resourcequota</code></li>
+<li><code>kube_namespace_created</code></li>
+<li><code>kube_namespace_status_phase</code></li>
+<li><code>kube_node_spec_unschedulable</code></li>
+<li><code>kube_node_status_allocatable</code></li>
+<li><code>kube_node_status_capacity</code></li>
+<li><code>kube_node_info</code></li>
+<li><code>kube_node_status_condition</code></li>
+<li><code>kube_node_spec_taint</code></li>
+<li><code>kube_daemonset_created</code></li>
+<li><code>kube_daemonset_status_current_number_scheduled</code></li>
+<li><code>kube_daemonset_status_desired_number_scheduled</code></li>
+<li><code>kube_daemonset_status_number_available</code></li>
+<li><code>kube_daemonset_status_number_ready</code></li>
+<li><code>kube_daemonset_status_number_unavailable</code></li>
+<li><code>kube_daemonset_labels</code></li>
+<li><code>kube_deployment_labels</code></li>
+<li><code>kube_deployment_spec_replicas</code></li>
+<li><code>kube_deployment_status_replicas_available</code></li>
+<li><code>kube_deployment_status_replicas_unavailable</code></li>
+<li><code>kube_deployment_status_replicas_updated</code></li>
+<li><code>kube_statefulset_labels</code></li>
+<li><code>kube_statefulset_status_replicas_available</code></li>
+<li><code>kube_statefulset_status_replicas</code></li>
+<li><code>kube_statefulset_status_replicas_current</code></li>
+<li><code>kube_job_status_start_time</code></li>
+<li><code>kube_job_status_active</code></li>
+<li><code>kube_job_failed</code></li>
+<li><code>kube_horizontalpodautoscaler_status_desired_replicas</code></li>
+<li><code>kube_horizontalpodautoscaler_status_current_replicas</code></li>
+<li><code>kube_horizontalpodautoscaler_spec_min_replicas</code></li>
+<li><code>kube_horizontalpodautoscaler_spec_max_replicas</code></li>
+<li><code>kubernetes_build_info</code></li>
+</ul>
+</details>
+<h2 id="k3s-services-monitoring">k3s services monitoring</h2>
+<p>The <a href="https://kubernetes.io/docs/concepts/cluster-administration/system-metrics/">kubernetes Documentation on System Metrics</a> outlines the components that expose metrics in Prometheus format:</p>
+<ul>
+<li>kube-controller-manager (TCP 10257 metrics endpoint)</li>
+<li>kube-proxy (TCP 10249 /metrics endpoint)</li>
+<li>kube-apiserver (TCP 6443 /metrics at Kubernetes API port)</li>
+<li>kube-scheduler (TCP 10259 /metrics endpoint)</li>
+<li>kubelet (TCP 10250 /metrics, /metrics/cadvisor, /metrics/resource, and /metrics/probes endpoints)</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>TCP port numbers for kube-scheduler and kube-controller-manager changed in Kubernetes release 1.22 (from 10251/10252 to 10257/10259). Additionally, an HTTPS authenticated connection is now required, so a Kubernetes authorized service account is needed to access the metrics service. Only the kube-proxy endpoint still uses HTTP; the rest now use HTTPS.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>By default, K3S components (Scheduler, Controller Manager, and Proxy) do not expose their endpoints for metric collection. Their /metrics endpoints are bound to 127.0.0.1, only exposing them to localhost and preventing remote queries. To change this behavior, provide the following K3S installation arguments:</p>
+<div class="highlight"><pre><span></span><code>--kube-controller-manager-arg &#39;bind-address=0.0.0.0&#39;
+--kube-proxy-arg &#39;metrics-bind-address=0.0.0.0&#39;
+--kube-scheduler-arg &#39;bind-address=0.0.0.0&#39;
+</code></pre></div>
+</div>
+<p>kube-prometheus-stack creates the kubernetes resources needed to scrape metrics from all k8S components in a standard Kubernetes distribution, but these objects are not valid for a K3S cluster. K3S has a unique behavior related to metrics exposure. It deploys one process on each cluster node: <code>k3s-server</code> on master nodes or <code>k3s-agent</code> on worker nodes.</p>
+<p>All Kubernetes components running on a node share the same memory, and k3s emits the same metrics at all <code>/metrics</code> endpoints available on a node: <code>api-server</code>, <code>kubelet</code> (<code>TCP 10250</code>), <code>kube-proxy</code> (<code>TCP 10249</code>), <code>kube-scheduler</code> (<code>TCP 10251</code>), and <code>kube-controller-manager</code> (<code>TCP 10257</code>). When polling a Kubernetes component's metrics endpoint, metrics from other components are not filtered out.</p>
+<p>A k3s master running all Kubernetes components, emits the same metrics on all ports. On the other hand, k3s workers running only <code>kubelet</code> and <code>kube-proxy</code>, emit the same metrics on <code>TCP 10250</code> and <code>10249</code> ports.</p>
+<p>Enabling scraping of all different metrics TCP ports (<code>10249</code>, <code>10250</code>, <code>10251</code>, <code>10257</code>, and <code>apiserver</code>) causes ingestion of duplicate metrics. To reduce memory and CPU consumption, Prometheus should avoid duplicate metrics. On the other hand, kubelet's additional metrics endpoints (<code>/metrics/cadvisor</code>, <code>/metrics/resource</code>, and <code>/metrics/probes</code>) are only available at <code>TCP 10250</code>.</p>
+<p>Therefore, the solution is to scrape only the metrics endpoints available on the kubelet port (<code>TCP 10250</code>): <code>/metrics</code>, <code>/metrics/cadvisor</code>, <code>/metrics/resource</code>, and <code>/metrics/probes</code>.</p>
+<p>To avoid duplicates, reduce memory consumption and minimize costs the following configuration are applied:</p>
+<ul>
+<li>
+<p><a href="https://github.com/oscaromeu/home-ops/blob/main/kubernetes/apps/monitoring/kube-prometheus-stack/app/helmrelease.yaml#L57-L82"><code>apiserver</code> (<code>{job="apiserver"}</code>)</a></p>
+</li>
+<li>
+<p><a href="https://github.com/oscaromeu/home-ops/blob/main/kubernetes/apps/monitoring/kube-prometheus-stack/app/helmrelease.yaml#L107-L120"><code>kube-controller-manager</code> (<code>{job="kube-controller-manager"}</code>)</a></p>
+</li>
+<li>
+<p><a href="https://github.com/oscaromeu/home-ops/blob/main/kubernetes/apps/monitoring/kube-prometheus-stack/app/helmrelease.yaml#L123-L131"><code>kube-scheduler</code> (<code>{job="kube-scheduler"}</code>)</a></p>
+</li>
+<li>
+<p><a href="https://github.com/oscaromeu/home-ops/blob/main/kubernetes/apps/monitoring/kube-prometheus-stack/app/helmrelease.yaml#L84-L104"><code>kubelet</code> (<code>{job="kubelet"}</code>)</a></p>
+</li>
+<li>
+<p><a href="https://github.com/oscaromeu/home-ops/blob/main/kubernetes/apps/monitoring/kube-prometheus-stack/app/helmrelease.yaml#L145-L154"><code>kube-state-metrics</code> (<code>{job="kube-state-metrics"}</code>)</a></p>
+</li>
+<li>
+<p><a href="https://github.com/oscaromeu/home-ops/blob/main/kubernetes/apps/monitoring/kube-prometheus-stack/app/helmrelease.yaml#L133-L141"><code>kube-proxy</code> (<code>{job="kube-proxy"}</code>)</a></p>
+</li>
+</ul>
+<h2 id="monitoring">Monitoring</h2>
+<h2 id="alerting">Alerting</h2>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://tanmay-bhat.github.io/posts/how-to-prevent-metrics-explosion-in-prometheus/">Prevent metrics explosion</a></p>
+</li>
+<li>
+<p><a href="https://runbooks.prometheus-operator.dev">kube-prometheus-runbooks</a></p>
+</li>
+<li>
+<p><a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-onboard-amg.html">Amazon Managed Prometheus</a></p>
+</li>
+<li>
+<p><a href="https://docs.datadoghq.com/integrations/kube_apiserver_metrics/">Kubernetes API server metrics</a></p>
+</li>
+<li>
+<p><a href="https://kubernetes.io/docs/reference/instrumentation/metrics/">Kubernetes Metrics reference</a></p>
+</li>
+<li>
+<p><a href="https://promlabs.com/blog/2020/12/17/promql-queries-for-exploring-your-metrics/">PromQL Queries for Exploring Your Metrics</a></p>
+</li>
+<li>
+<p><a href="https://hackernoon.com/my-prometheus-is-overwhelmed-help-qi1937xj">My Prometheus is overwhelmed</a></p>
+</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.sections", "navigation.indexes", "navigation.top", "search.highlight", "search.suggest", "search.share", "content.code.annotate", "header.autohide", "announce.dismiss", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.ebd0bdb7.min.js"></script>
+      
+    
+  </body>
+</html>
