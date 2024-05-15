@@ -1,0 +1,61 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: fleet
+  namespace: dev
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: fleet
+      version: v6.0.2
+      sourceRef:
+        kind: HelmRepository
+        name: fleet
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    hostName: fleet.${SECRET_DOMAIN}
+    replicas: 1
+    # manifest version unsupported by kube-arch-scheduler
+    nodeSelector:
+      kubernetes.io/arch: amd64
+    fleet:
+      autoApplySQLMigrations: true
+      logging:
+        json: true
+      tls:
+        enabled: false
+    database:
+      address: fleet-mysql:3306
+      secretName: fleet
+    mysql:
+      enabled: true
+      auth:
+        database: fleet
+        username: fleet
+        existingSecret: fleet
+      primary:
+        persistence:
+          size: 1Gi
+    cache:
+      address: fleet-redis-master:6379
+    redis:
+      enabled: true
+      auth:
+        enabled: false
+      architecture: standalone
+      # https://fleetdm.com/docs/deploy/deploy-fleet-on-kubernetes#redis
+      master:
+        persistence:
+          enabled: false

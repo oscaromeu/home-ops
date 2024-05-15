@@ -21,6 +21,7 @@ resources:
   - ./external-secrets.yaml
   - ./fairwinds.yaml
   - ./flanksource.yaml
+  - ./fleet.yaml
   - ./gitea.yaml
   - ./grafana.yaml
   - ./hajimari.yaml
