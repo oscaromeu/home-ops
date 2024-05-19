@@ -2,13 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-redpanda-console
+  name: redpanda-console
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-nginx-external
+    - name: nginx-external
   path: ./kubernetes/apps/tools/redpanda/app
   prune: true
   sourceRef:

@@ -2,13 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-cloudnative-pg
+  name: cloudnative-pg
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-external-secrets-stores
+    - name: external-secrets-stores
   path: ./kubernetes/apps/datahub/cloudnative-pg/app
   prune: true
   sourceRef:
@@ -26,14 +26,14 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-cloudnative-pg-cluster
+  name: cloudnative-pg-cluster
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-cloudnative-pg
-    - name: cluster-apps-external-secrets-stores
+    - name: cloudnative-pg
+    - name: external-secrets-stores
   path: ./kubernetes/apps/datahub/cloudnative-pg/cluster
   prune: true
   sourceRef:
@@ -47,13 +47,13 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-cloudnative-pg-cluster-monitoring
+  name: cloudnative-pg-cluster-monitoring
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "false"
 spec:
   dependsOn:
-    - name: cluster-apps-cloudnative-pg-cluster
+    - name: cloudnative-pg-cluster
   path: ./kubernetes/apps/datahub/cloudnative-pg/monitoring
   prune: true
   sourceRef:

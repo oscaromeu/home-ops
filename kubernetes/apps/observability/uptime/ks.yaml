@@ -2,12 +2,12 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-uptime
+  name: uptime
   namespace: flux-system
 spec:
   dependsOn:
-    - name: cluster-apps-kube-prometheus-stack
-    #- name: cluster-apps-mimir
+    - name: kube-prometheus-stack
+    #- name: mimir
   path: ./kubernetes/apps/observability/uptime/app
   prune: true
   sourceRef:

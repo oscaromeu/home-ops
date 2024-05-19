@@ -2,14 +2,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-authelia
+  name: authelia
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-redis
+    - name: external-secrets-stores
+    - name: redis
   path: ./kubernetes/apps/kube-system/authelia/app
   prune: true
   sourceRef:

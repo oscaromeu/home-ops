@@ -2,12 +2,12 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-grafana
+  name: grafana
   namespace: flux-system
 spec:
   dependsOn:
-    - name: cluster-apps-kube-prometheus-stack
-    #- name: cluster-apps-mimir
+    - name: kube-prometheus-stack
+    #- name: mimir
   path: ./kubernetes/apps/observability/grafana/app
   prune: true
   sourceRef:

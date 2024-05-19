@@ -2,13 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-mongodb
+  name: mongodb
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-cert-manager
+    - name: cert-manager
   path: ./kubernetes/apps/datahub/mongodb/app
   prune: true
   sourceRef:
@@ -21,13 +21,13 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-mongodb-devrs
+  name: mongodb-devrs
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-mongodb
+    - name: mongodb
   path: ./kubernetes/apps/datahub/mongodb/devrs
   prune: true
   sourceRef:

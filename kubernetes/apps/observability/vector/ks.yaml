@@ -2,15 +2,15 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-vector-aggregator
+  name: vector-aggregator
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-kafka-cluster
-    #- name: cluster-apps-elastic
+    - name: external-secrets-stores
+    - name: kafka-cluster
+    #- name: elastic
   path: ./kubernetes/apps/observability/vector/aggregator
   prune: true
   sourceRef:
@@ -28,13 +28,13 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-vector-agent
+  name: vector-agent
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-vector-aggregator
+    - name: vector-aggregator
   path: ./kubernetes/apps/observability/vector/agent
   prune: true
   sourceRef:
@@ -52,13 +52,13 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-vector-monitoring
+  name: vector-monitoring
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-vector-aggregator
+    - name: vector-aggregator
   path: ./kubernetes/apps/observability/vector/monitoring
   prune: true
   sourceRef:

@@ -2,13 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-plane
+  name: plane
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-nginx-internal
+    - name: nginx-internal
   path: ./kubernetes/apps/tools/plane/app
   prune: true
   sourceRef:

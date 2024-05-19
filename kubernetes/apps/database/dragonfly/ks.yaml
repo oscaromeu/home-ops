@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: &app cluster-apps-dragonfly
+  name: &app dragonfly
   namespace: flux-system
 spec:
   targetNamespace: database
@@ -23,7 +23,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: &app cluster-apps-dragonfly-cluster
+  name: &app dragonfly-cluster
   namespace: flux-system
 spec:
   targetNamespace: database
@@ -31,7 +31,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: cluster-apps-dragonfly
+    - name: dragonfly
   path: ./kubernetes/apps/database/dragonfly/cluster
   prune: true
   sourceRef:

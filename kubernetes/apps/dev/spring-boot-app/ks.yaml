@@ -2,15 +2,15 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-spring-boot-app-a
+  name: spring-boot-app-a
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-nginx-external
-    - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-k6s
+    - name: nginx-external
+    - name: external-secrets-stores
+    - name: k6s
   path: ./kubernetes/apps/dev/spring-boot-app/app-a
   prune: true
   sourceRef:
@@ -28,13 +28,13 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-spring-boot-app-b
+  name: spring-boot-app-b
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-spring-boot-app-a
+    - name: spring-boot-app-a
   path: ./kubernetes/apps/dev/spring-boot-app/app-b
   prune: true
   sourceRef:
@@ -52,13 +52,13 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-spring-boot-app-c
+  name: spring-boot-app-c
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-spring-boot-app-a
+    - name: spring-boot-app-a
   path: ./kubernetes/apps/dev/spring-boot-app/app-c
   prune: true
   sourceRef:
@@ -76,13 +76,13 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-spring-boot-app-monitoring
+  name: spring-boot-app-monitoring
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-spring-boot-app-a
+    - name: spring-boot-app-a
   path: ./kubernetes/apps/dev/spring-boot-app/monitoring
   prune: true
   sourceRef:
@@ -95,13 +95,13 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-spring-boot-app-test
+  name: spring-boot-app-test
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-spring-boot-app-a
+    - name: spring-boot-app-a
   path: ./kubernetes/apps/dev/spring-boot-app/test
   prune: true
   sourceRef:

@@ -2,13 +2,13 @@
 #apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 #kind: Kustomization
 #metadata:
-#  name: cluster-apps-json-fusion-exporter
+#  name: json-fusion-exporter
 #  namespace: flux-system
 #  labels:
 #    substitution.flux.home.arpa/enabled: "false"
 #spec:
 #  dependsOn:
-#    - name: cluster-apps-external-secrets-stores
+#    - name: external-secrets-stores
 #  path: ./kubernetes/apps/dev/json-fusion-exporter/app
 #  prune: true
 #  sourceRef:
@@ -26,13 +26,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-json-fusion-exporter-raw
+  name: json-fusion-exporter-raw
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "false"
 spec:
   dependsOn:
-    - name: cluster-apps-external-secrets-stores
+    - name: external-secrets-stores
   path: ./kubernetes/apps/dev/json-fusion-exporter/plain
   prune: true
   sourceRef:

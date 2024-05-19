@@ -6,7 +6,7 @@
     generation: 1
     labels:
       app: prometheus-elasticsearch-exporter
-      kustomize.toolkit.fluxcd.io/name: cluster-apps-elastic-exporter
+      kustomize.toolkit.fluxcd.io/name: elastic-exporter
       kustomize.toolkit.fluxcd.io/namespace: flux-system
     name: prometheus-elasticsearch-exporter-monitor
     namespace: logging
@@ -28,7 +28,7 @@
     generation: 1
     labels:
       app: redis-exporter
-      kustomize.toolkit.fluxcd.io/name: cluster-apps-redis-exporter
+      kustomize.toolkit.fluxcd.io/name: redis-exporter
       kustomize.toolkit.fluxcd.io/namespace: flux-system
     name: redis-exporter
     namespace: logging
@@ -120,7 +120,7 @@
       app.kubernetes.io/instance: influxdb-exporter
       app.kubernetes.io/name: influxdb-exporter
       app.kubernetes.io/version: v0.11.4
-      kustomize.toolkit.fluxcd.io/name: cluster-apps-influxdb-exporter-monitoring
+      kustomize.toolkit.fluxcd.io/name: influxdb-exporter-monitoring
       kustomize.toolkit.fluxcd.io/namespace: flux-system
     name: influxdb-exporter
     namespace: monitoring

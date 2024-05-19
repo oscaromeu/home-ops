@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-fsa-test-app
+  name: fsa-test-app
   namespace: flux-system
   annotations:
     metadata.weave.works/flamingo-default-app: "https://localhost:8080/applications/argocd/default-app?view=tree"
@@ -18,4 +18,4 @@ spec:
     name: fsa-home-ops
     namespace: flux-system
   dependsOn:
-  - name: cluster-apps-fsa
+  - name: fsa

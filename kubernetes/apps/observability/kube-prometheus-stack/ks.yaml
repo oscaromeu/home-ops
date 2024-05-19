@@ -2,12 +2,12 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-kube-prometheus-stack
+  name: kube-prometheus-stack
   namespace: flux-system
 spec:
   dependsOn:
-    - name: cluster-apps-nginx-external
-    - name: cluster-apps-external-secrets
+    - name: nginx-external
+    - name: external-secrets
   path: ./kubernetes/apps/observability/kube-prometheus-stack/app
   prune: true
   sourceRef:
@@ -38,7 +38,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-kube-prometheus-stack-monitoring
+  name: kube-prometheus-stack-monitoring
   namespace: flux-system
 spec:
   path: ./kubernetes/apps/observability/kube-prometheus-stack/monitoring

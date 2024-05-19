@@ -2,13 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app kubelet-csr-approver
+  name: kubelet-csr-approver
   namespace: flux-system
 spec:
   targetNamespace: kube-system
   commonMetadata:
     labels:
-      app.kubernetes.io/name: *app
+      app.kubernetes.io/name: kubelet-csr-approver
   path: ./kubernetes/apps/kube-system/kubelet-csr-approver/app
   prune: false # never should be deleted
   sourceRef:

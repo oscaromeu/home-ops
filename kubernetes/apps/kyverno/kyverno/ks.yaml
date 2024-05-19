@@ -2,12 +2,12 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-kyverno
+  name: kyverno
   namespace: flux-system
 spec:
   dependsOn:
-    - name: cluster-apps-nginx-external
-    - name: cluster-apps-external-secrets-stores
+    - name: nginx-external
+    - name: external-secrets-stores
   path: ./kubernetes/apps/kyverno/kyverno/app
   prune: true
   sourceRef:
@@ -25,11 +25,11 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-cluster-policies
+  name: cluster-policies
   namespace: flux-system
 spec:
   dependsOn:
-    - name: cluster-apps-kyverno
+    - name: kyverno
   path: ./kubernetes/apps/kyverno/kyverno/policies
   prune: true
   sourceRef:

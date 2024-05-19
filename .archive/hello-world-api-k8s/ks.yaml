@@ -2,13 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-hello-world-api-k8s
+  name: hello-world-api-k8s
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-external-secrets-stores
+    - name: external-secrets-stores
   path: ./kubernetes/apps/dev/hello-world-api-k8s/app
   prune: true
   sourceRef:

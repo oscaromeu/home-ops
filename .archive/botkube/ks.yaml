@@ -2,13 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-botkube
+  name: botkube
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-kube-prometheus-stack
+    - name: kube-prometheus-stack
   path: ./kubernetes/apps/monitoring/botkube/app
   prune: true
   sourceRef:
@@ -26,13 +26,13 @@ spec:
 #apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 #kind: Kustomization
 #metadata:
-#  name: cluster-apps-botkube-test
+#  name: botkube-test
 #  namespace: flux-system
 #  labels:
 #    substitution.flux.home.arpa/enabled: "false"
 #spec:
 #  dependsOn:
-#    - name: cluster-apps-botkube
+#    - name: botkube
 #  path: ./kubernetes/apps/monitoring/botkube/test
 #  prune: true
 #  sourceRef:

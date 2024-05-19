@@ -2,14 +2,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-atuin
+  name: atuin
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-nginx-internal
+    - name: external-secrets-stores
+    - name: nginx-internal
   path: ./kubernetes/apps/tools/atuin/app
   prune: true
   sourceRef:

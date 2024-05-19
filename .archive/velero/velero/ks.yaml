@@ -2,14 +2,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-velero
+  name: velero
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-nginx-external
-    - name: cluster-apps-external-secrets-stores
+    - name: nginx-external
+    - name: external-secrets-stores
   path: ./kubernetes/apps/velero/velero/app
   prune: true
   sourceRef:
@@ -27,13 +27,13 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-velero-schedules
+  name: velero-schedules
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-velero
+    - name: velero
   path: ./kubernetes/apps/velero/velero/app/schedules
   prune: true
   sourceRef:

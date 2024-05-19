@@ -2,13 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-minio-monitoring-tenant
+  name: minio-monitoring-tenant
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-ingress-nginx
+    - name: ingress-nginx
   path: ./kubernetes/apps/minio/monitoring-tenant/app
   prune: true
   sourceRef:

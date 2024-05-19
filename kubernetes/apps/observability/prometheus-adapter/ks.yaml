@@ -2,13 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-prometheus-adapter
+  name: prometheus-adapter
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "false"
 spec:
   dependsOn:
-    - name: cluster-apps-kube-prometheus-stack
+    - name: kube-prometheus-stack
   path: ./kubernetes/apps/observability/prometheus-adapter/app
   prune: true
   sourceRef:

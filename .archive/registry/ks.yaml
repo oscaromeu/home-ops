@@ -2,14 +2,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-registry
+  name: registry
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-nginx-internal
-    - name: cluster-apps-external-secrets-stores
+    - name: nginx-internal
+    - name: external-secrets-stores
   path: ./kubernetes/apps/tools/registry/app
   prune: true
   sourceRef:

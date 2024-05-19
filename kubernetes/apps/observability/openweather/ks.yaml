@@ -2,14 +2,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-openweather
+  name: openweather
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-hajimari
+    - name: external-secrets-stores
+    - name: hajimari
   path: ./kubernetes/apps/observability/openweather/app
   prune: true
   sourceRef:
@@ -27,13 +27,13 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-openweather-monitoring
+  name: openweather-monitoring
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "false"
 spec:
   dependsOn:
-    - name: cluster-apps-openweather
+    - name: openweather
   path: ./kubernetes/apps/observability/openweather/monitoring
   prune: true
   sourceRef:

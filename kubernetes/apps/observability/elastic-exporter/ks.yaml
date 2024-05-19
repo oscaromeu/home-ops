@@ -2,14 +2,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: cluster-apps-elastic-exporter
+  name: elastic-exporter
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   path: ./kubernetes/apps/observability/elastic-exporter/app
   dependsOn:
-    - name: cluster-apps-elastic
+    - name: elastic
   prune: true
   sourceRef:
     kind: GitRepository
