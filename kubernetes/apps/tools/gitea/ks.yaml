@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cloudnative-pg-cluster
-    - name: nginx-internal
+    - name: ingress-nginx-internal
     - name: external-secrets-stores
   path: ./kubernetes/apps/tools/gitea/app
   prune: true

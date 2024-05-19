@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: external-secrets-stores
-    - name: nginx-internal
+    - name: ingress-nginx-internal
   path: ./kubernetes/apps/datahub/kafka/operator
   prune: true
   sourceRef:

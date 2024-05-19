@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: external-secrets-stores
     - name: cloudnative-pg
-    - name: nginx-internal
+    - name: ingress-nginx-internal
   path: ./kubernetes/apps/tools/docuseal/app
   prune: true
   sourceRef:

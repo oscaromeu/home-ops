@@ -8,7 +8,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: nginx-internal
+    - name: ingress-nginx-internal
     - name: external-secrets-stores
   path: ./kubernetes/apps/tools/registry/app
   prune: true

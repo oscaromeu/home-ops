@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: ingress-nginx-external
-    - name: nginx-internal
+    - name: ingress-nginx-internal
   path: ./kubernetes/apps/tools/harbor/app
   prune: true
   sourceRef:
