@@ -27,7 +27,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "false"
 spec:
   dependsOn:
-    #- name: nginx-external
+    #- name: ingress-nginx-external
     - name: external-secrets-stores
   path: ./kubernetes/apps/datahub/clickhouse/app
   prune: true
@@ -47,7 +47,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "false"
 spec:
   dependsOn:
-    #- name: nginx-external
+    #- name: ingress-nginx-external
     - name: external-secrets-stores
   path: ./kubernetes/apps/datahub/clickhouse/monitoring
   prune: true

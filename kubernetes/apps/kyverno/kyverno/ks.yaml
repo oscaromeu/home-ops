@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: nginx-external
+    - name: ingress-nginx-external
     - name: external-secrets-stores
   path: ./kubernetes/apps/kyverno/kyverno/app
   prune: true

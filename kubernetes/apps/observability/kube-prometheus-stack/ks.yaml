@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: nginx-external
+    - name: ingress-nginx-external
     - name: external-secrets
   path: ./kubernetes/apps/observability/kube-prometheus-stack/app
   prune: true

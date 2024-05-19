@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: nginx-external
+    - name: ingress-nginx-external
   path: ./kubernetes/apps/default/lidarr/app
   prune: true
   sourceRef:
