@@ -2,8 +2,9 @@
 apiVersion:  source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: external-dns
+  name: minio-operator
   namespace: flux-system
 spec:
   interval: 1h
-  url: https://kubernetes-sigs.github.io/external-dns
+  url: https://operator.min.io/
+

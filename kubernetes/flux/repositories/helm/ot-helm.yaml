@@ -2,8 +2,9 @@
 apiVersion:  source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: external-dns
+  name: ot-helm
   namespace: flux-system
 spec:
-  interval: 1h
-  url: https://kubernetes-sigs.github.io/external-dns
+  interval: 2h
+  url: "https://ot-container-kit.github.io/helm-charts/"
+  timeout: 3m

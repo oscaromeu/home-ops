@@ -2,8 +2,9 @@
 apiVersion:  source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: external-dns
+  name: jupyterhub
   namespace: flux-system
 spec:
-  interval: 1h
-  url: https://kubernetes-sigs.github.io/external-dns
+  interval: 24h
+  url: https://jupyterhub.github.io/helm-chart/
+  timeout: 3m
