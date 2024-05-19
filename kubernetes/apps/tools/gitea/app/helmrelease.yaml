@@ -176,7 +176,7 @@ spec:
       enabled: true
       accessModes: ["ReadWriteOnce"]
       size: 10Gi
-      storageClass: local-path
+      storageClass: openebs-hostpath
 
     nodeSelector:
       kubernetes.io/arch: amd64

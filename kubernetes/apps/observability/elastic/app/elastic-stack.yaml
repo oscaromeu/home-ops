@@ -69,7 +69,7 @@ spec:
         resources:
           requests:
             storage: 10Gi
-        storageClassName: local-path
+        storageClassName: openebs-hostpath
 
   - name: warm
     count: 1
@@ -128,7 +128,7 @@ spec:
         resources:
           requests:
             storage: 10Gi
-        storageClassName: local-path
+        storageClassName: openebs-hostpath
   monitoring:
     metrics:
       elasticsearchRefs:

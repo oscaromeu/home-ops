@@ -152,7 +152,7 @@ spec:
             - *host
     persistence:
       enabled: true
-      storageClassName: local-path
+      storageClassName: openebs-hostpath
     testFramework:
       enabled: false
 

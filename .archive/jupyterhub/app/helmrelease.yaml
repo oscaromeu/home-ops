@@ -32,7 +32,7 @@ spec:
         kubernetes.io/arch: amd64
       db:
         pvc:
-          storageClassName: local-path
+          storageClassName: openebs-hostpath
       resources:
         requests:
           cpu: 0.5
@@ -86,7 +86,7 @@ spec:
         type: dynamic
         capacity: 3Gi
         dynamic:
-          storageClass: local-path
+          storageClass: openebs-hostpath
       cpu:
         guarantee: 0.5
       memory:
@@ -141,4 +141,4 @@ spec:
     storage:
       capacity: 5Gi
       dynamic:
-        storageClass: local-path
+        storageClass: openebs-hostpath

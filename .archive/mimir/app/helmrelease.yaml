@@ -33,7 +33,7 @@ spec:
       clusterDomain: cluster.local
     alertmanager:
       persistentVolume:
-        storageClass: local-path
+        storageClass: openebs-hostpath
         enabled: true
       replicas: 1
       resources:
@@ -48,7 +48,7 @@ spec:
     compactor:
       persistentVolume:
         size: 20Gi
-        storageClass: local-path
+        storageClass: openebs-hostpath
       resources:
         limits:
           memory: 2.1Gi
@@ -68,7 +68,7 @@ spec:
     ingester:
       persistentVolume:
         size: 50Gi
-        storageClass: local-path
+        storageClass: openebs-hostpath
       replicas: 3
       resources:
         limits:
@@ -159,7 +159,7 @@ spec:
       replicas: 1
       persistentVolume:
         size: 10Gi
-        storageClass: local-path
+        storageClass: openebs-hostpath
       resources:
         limits:
           memory: 2.1Gi

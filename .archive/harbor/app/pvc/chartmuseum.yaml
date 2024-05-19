@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: harbor-chartmuseum
     app.kubernetes.io/instance: harbor
 spec:
-  storageClassName: local-path
+  storageClassName: openebs-hostpath
   accessModes:
     - ReadWriteOnce
   resources:

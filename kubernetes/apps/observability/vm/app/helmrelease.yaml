@@ -73,5 +73,5 @@ spec:
         enabled: true
         accessModes:
           - ReadWriteOnce
-        storageClass: local-path
+        storageClass: openebs-hostpath
         size: 200Gi

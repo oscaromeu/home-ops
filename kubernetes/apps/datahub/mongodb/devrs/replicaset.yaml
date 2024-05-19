@@ -47,7 +47,7 @@ spec:
             resources:
               requests:
                 storage: 30Gi
-            storageClassName: local-path
+            storageClassName: openebs-hostpath
         - metadata:
             name: logs-volume
           spec:
@@ -55,4 +55,4 @@ spec:
             resources:
               requests:
                 storage: 10Gi
-            storageClassName: local-path
+            storageClassName: openebs-hostpath

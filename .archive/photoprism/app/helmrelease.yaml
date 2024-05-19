@@ -52,7 +52,7 @@ spec:
       config:
         enabled: true
         mountPath: /photoprism/storage
-        storageClass: local-path
+        storageClass: openebs-hostpath
         size: 1Gi
         accessMode: ReadWriteOnce
 

@@ -33,5 +33,5 @@ spec:
         resources:
           requests:
             storage: 10Gi
-        storageClassName: local-path
+        storageClassName: openebs-hostpath
     count: 1

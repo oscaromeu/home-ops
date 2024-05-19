@@ -79,7 +79,7 @@ spec:
       volumeSize: 2Gi
       # Unless you uncomment following line and set class, persistent volume claim is created
       # with no storage class and relies on cluster default one.
-      storageClassName: local-path
+      storageClassName: openebs-hostpath
 
       username: admin
       # Unless you uncomment following line, admin password will be randomly generated.

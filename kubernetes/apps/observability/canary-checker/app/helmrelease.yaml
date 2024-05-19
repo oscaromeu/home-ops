@@ -65,7 +65,7 @@ spec:
       runMigrations: true
       embedded:
         persist: true
-        storageClass: "local-path"
+        storageClass: "openebs-hostpath"
         storage: 100Gi
       external:
         enabled: false

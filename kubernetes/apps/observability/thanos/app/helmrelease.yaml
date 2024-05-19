@@ -29,7 +29,7 @@ spec:
   dependsOn:
     - name: kube-prometheus-stack
       namespace: observability
-    - name: local-path-provisioner
+    - name: openebs-hostpath-provisioner
       namespace: kube-system
     - name: rook-ceph-cluster
       namespace: rook-ceph
@@ -148,14 +148,14 @@ spec:
       persistence:
         enabled: true
         size: 10Gi
-        storageClass: "local-path"
+        storageClass: "openebs-hostpath"
 
     storegateway:
       enabled: true
       replicaCount: 2
       persistence:
         enabled: true
-        storageClass: local-path
+        storageClass: openebs-hostpath
         size: 10Gi
       extraFlags:
         - |-
@@ -194,7 +194,7 @@ spec:
         requests: {}
       persistence:
         enabled: true
-        storageClass: "local-path"
+        storageClass: "openebs-hostpath"
         size: 10Gi
       ingress:
         enabled: true

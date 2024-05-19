@@ -32,7 +32,7 @@ spec:
           servers: 5
           volumesPerServer: 5
           size: 10Gi
-          storageClassName: local-path
+          storageClassName: openebs-hostpath
 
       buckets:
         - name: metrics

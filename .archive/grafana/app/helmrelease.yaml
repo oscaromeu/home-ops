@@ -120,7 +120,7 @@ spec:
 
     persistence:
       enabled: false
-      storageClassName: local-path
+      storageClassName: openebs-hostpath
       accessModes:
         - ReadWriteOnce
       size: 5Gi
