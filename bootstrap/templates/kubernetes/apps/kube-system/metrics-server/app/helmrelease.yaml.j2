@@ -1,9 +1,8 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: metrics-server
-  namespace: kube-system
 spec:
   interval: 30m
   chart:
@@ -14,7 +13,6 @@ spec:
         kind: HelmRepository
         name: metrics-server
         namespace: flux-system
-  maxHistory: 2
   install:
     remediation:
       retries: 3
@@ -22,14 +20,14 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
-  uninstall:
-    keepHistory: false
   values:
     args:
-      - --kubelet-insecure-tls
       - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
       - --kubelet-use-node-status-port
       - --metric-resolution=15s
+      #% if bootstrap_distribution in ["k3s"] %#
+      - --kubelet-insecure-tls
+      #% endif %#
     metrics:
       enabled: true
     serviceMonitor:

@@ -1,16 +1,12 @@
 ---
 creation_rules:
+  - # IMPORTANT: This rule MUST be above the others
+    path_regex: talos/.*\.sops\.ya?ml
+    key_groups:
+      - age:
+          - "age1ptththqpxnx0zuzmq0peq9x30vqgdedjsdlsuzxr5gfc36mnwqlsylrpr8"
   - path_regex: kubernetes/.*\.sops\.ya?ml
     encrypted_regex: "^(data|stringData)$"
-    key_groups:
-      - age:
-          - "age1ptththqpxnx0zuzmq0peq9x30vqgdedjsdlsuzxr5gfc36mnwqlsylrpr8"
-  - path_regex: ansible/.*\.sops\.ya?ml
-    key_groups:
-      - age:
-          - "age1ptththqpxnx0zuzmq0peq9x30vqgdedjsdlsuzxr5gfc36mnwqlsylrpr8"
-  # https://github.com/ansible-collections/community.sops/issues/153
-  - path_regex: /dev/stdin
     key_groups:
       - age:
           - "age1ptththqpxnx0zuzmq0peq9x30vqgdedjsdlsuzxr5gfc36mnwqlsylrpr8"

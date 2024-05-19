@@ -6,9 +6,13 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
+  url: "#{ bootstrap_github_address }#"
+  #% if bootstrap_github_private_key %#
+  secretRef:
+    name: github-deploy-key
+  #% endif %#
   ref:
-    branch: {{ bootstrap_github_repository_branch }}
-  url: "https://github.com/{{ bootstrap_github_username }}/{{ bootstrap_github_repository_name }}.git"
+    branch: "#{ bootstrap_github_branch|default('main', true) }#"
   ignore: |
     # exclude all
     /*

@@ -1,7 +1,6 @@
-#jinja2: trim_blocks: True, lstrip_blocks: True
 ---
 - name: Cluster Installation
-  hosts: all
+  hosts: kubernetes
   become: true
   gather_facts: true
   any_errors_fatal: true
@@ -22,6 +21,40 @@
         k3s_server_manifests_templates: []
         k3s_server_manifests_urls: []
 
+    - name: Prevent downgrades
+      when: k3s_installed.stat.exists
+      ansible.builtin.include_tasks: tasks/version-check.yaml
+
+    - name: Ensure that the /opt/cni directory exists
+      ansible.builtin.file:
+        path: /opt/cni
+        mode: '755'
+        state: directory
+    - name: Ensure that the /opt/cni/bin is a link to /var/lib/rancher/k3s/data/current/bin
+      ansible.builtin.file:
+        src: /var/lib/rancher/k3s/data/current/bin
+        dest: /opt/cni/bin
+        follow: false
+        force: true
+        state: link
+
+    - name: Ensure that the /etc/cni directory exists
+      ansible.builtin.file:
+        path: /etc/cni
+        mode: '755'
+        state: directory
+    - name: Ensure that the /var/lib/rancher/k3s/agent/etc/cni/net.d directory exists
+      ansible.builtin.file:
+        path: /var/lib/rancher/k3s/agent/etc/cni/net.d
+        mode: '755'
+        state: directory
+    - name: Ensure that the /etc/cni/net.d is a link to /var/lib/rancher/k3s/agent/etc/cni/net.d
+      ansible.builtin.file:
+        src: /var/lib/rancher/k3s/agent/etc/cni/net.d
+        dest: /etc/cni/net.d
+        force: true
+        state: link
+
     - name: Install Kubernetes
       ansible.builtin.include_role:
         name: xanmanning.k3s
@@ -39,27 +72,15 @@
             or k3s_server_manifests_urls | length > 0)
       kubernetes.core.k8s_info:
         kubeconfig: /etc/rancher/k3s/k3s.yaml
-        kind: "{% raw %}{{ item.kind }}{% endraw %}"
-        name: "{% raw %}{{ item.name }}{% endraw %}"
-        namespace: "{% raw %}{{ item.namespace | default('') }}{% endraw %}"
+        kind: "{{ item.kind }}"
+        name: "{{ item.name }}"
+        namespace: "{{ item.namespace | default('') }}"
         wait: true
         wait_sleep: 10
         wait_timeout: 360
       loop:
         - { name: cilium, kind: HelmChart, namespace: kube-system }
-        - { name: coredns, kind: HelmChart, namespace: kube-system }
-        {% if not bootstrap_ipv6_enabled | default(false) %}
-        - { name: policy, kind: CiliumL2AnnouncementPolicy }
-        - { name: pool, kind: CiliumLoadBalancerIPPool }
-        {% endif %}
-        - { name: podmonitors.monitoring.coreos.com, kind: CustomResourceDefinition }
-        - { name: prometheusrules.monitoring.coreos.com, kind: CustomResourceDefinition }
-        - { name: scrapeconfigs.monitoring.coreos.com, kind: CustomResourceDefinition }
-        - { name: servicemonitors.monitoring.coreos.com, kind: CustomResourceDefinition }
-
-    - name: Coredns
-      when: k3s_primary_control_node
-      ansible.builtin.include_tasks: tasks/coredns.yaml
+        - { name: kube-vip, kind: DaemonSet, namespace: kube-system }
 
     - name: Cilium
       when: k3s_primary_control_node
@@ -68,8 +89,3 @@
     - name: Cruft
       when: k3s_primary_control_node
       ansible.builtin.include_tasks: tasks/cruft.yaml
-
-    - name: Stale Containers
-      ansible.builtin.include_tasks: tasks/stale_containers.yaml
-      vars:
-        stale_containers_state: enabled

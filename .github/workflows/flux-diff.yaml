@@ -1,36 +1,66 @@
 ---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: "Flux Diff"
 
 on:
   pull_request:
     branches: ["main"]
-    paths: ["kubernetes/**.yaml"]
+    paths: ["kubernetes/**"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   flux-diff:
     name: Flux Diff
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       pull-requests: write
     strategy:
       matrix:
-        path: ["kubernetes"]
-        resource: ["helmrelease", "kustomization"]
+        paths: ["kubernetes"]
+        resources: ["helmrelease", "kustomization"]
     steps:
-      - name: Diff Resources
-        uses: allenporter/flux-local/action/diff@e630daec1a1bcd24dc80f5100c6e1c7b6a091153 # 4.3.1
-        id: diff
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          sources: home-kubernetes
-          path: "${{ matrix.path }}"
-          resource: "${{ matrix.resource }}"
+          path: pull
+
+      - name: Checkout Default Branch
+        uses: actions/checkout@v4
+        with:
+          ref: "${{ github.event.repository.default_branch }}"
+          path: default
+
+      - name: Diff Resources
+        uses: docker://ghcr.io/allenporter/flux-local:main
+        with:
+          args: >-
+            diff ${{ matrix.resources }}
+            --unified 6
+            --path /github/workspace/pull/${{ matrix.paths }}/flux
+            --path-orig /github/workspace/default/${{ matrix.paths }}/flux
+            --strip-attrs "helm.sh/chart,checksum/config,app.kubernetes.io/version,chart"
+            --limit-bytes 10000
+            --all-namespaces
+            --sources "home-kubernetes"
+            --output-file diff.patch
+
+      - name: Generate Diff
+        id: diff
+        run: |
+          cat diff.patch
+          echo "diff<<EOF" >> $GITHUB_OUTPUT
+          cat diff.patch >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - if: ${{ steps.diff.outputs.diff != '' }}
         name: Add comment
-        uses: mshick/add-pr-comment@b8f338c590a895d50bcbfa6c5859251edc8952fc # v2.8.2
+        uses: mshick/add-pr-comment@v2
         with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          message-id: "${{ github.event.pull_request.number }}/${{ matrix.path }}/${{ matrix.resource }}"
+          message-id: "${{ github.event.pull_request.number }}/${{ matrix.paths }}/${{ matrix.resources }}"
           message-failure: Diff was not successful
           message: |
             ```diff
