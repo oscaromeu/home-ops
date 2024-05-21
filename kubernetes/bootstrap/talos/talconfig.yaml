@@ -41,6 +41,19 @@ nodes:
             gateway: "10.69.3.1"
         vip:
           ip: "10.69.3.154"
+    patches:
+      - &kubelet_extra_mounts |-
+        machine:
+          kubelet:
+            extraMounts:
+              - destination: /var/mnt/sata
+                type: bind
+                source: /var/mnt/sata
+                options:
+                  - rbind
+                  - rshared
+                  - rw
+
   - hostname: "lpkw1"
     ipAddress: "10.69.3.27"
     installDiskSelector:
@@ -61,6 +74,9 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: "10.69.3.1"
+    patches:
+      - *kubelet_extra_mounts
+
   - hostname: "lpkw2"
     ipAddress: "10.69.3.25"
     installDiskSelector:
@@ -81,6 +97,8 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: "10.69.3.1"
+    patches:
+      - *kubelet_extra_mounts
 
 patches:
   # Configure containerd
