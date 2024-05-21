@@ -16,9 +16,15 @@ spec:
       volumeMounts:
          - name: dev
            mountPath: /dev
+         - name: sata
+           mountPath: /var/mnt/sata
   volumes:
     - name: dev
       hostPath:
         path: /dev
+        type: Directory
+    - name: sata
+      hostPath:
+        path: /var/mnt/sata
         type: Directory
   restartPolicy: Never
