@@ -15,7 +15,6 @@ resources:
   #- ./node-problem-detector/ks.yaml
   - ./openweather/ks.yaml
   - ./prometheus-adapter/ks.yaml
-  - ./promlens/ks.yaml
   #- ./pyroscope/ks.yaml
   #- ./rally/ks.yaml
   #- ./sloth/ks.yaml
