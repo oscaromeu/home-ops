@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wipe-disk-pod-lpkw2
+  namespace: default
+spec:
+  nodeName: "lpkw2"
+  containers:
+    - name: wipe-disk-container
+      image: ubuntu:latest
+      command: ["/bin/bash", "-c"]
+      args:
+        - apt-get update && apt-get install -y gdisk util-linux parted dmsetup;
+      securityContext:
+        privileged: true
+  restartPolicy: Never

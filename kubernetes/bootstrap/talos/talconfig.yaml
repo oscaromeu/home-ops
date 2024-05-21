@@ -23,6 +23,10 @@ nodes:
     ipAddress: "10.69.3.26"
     installDiskSelector:
       serial: "S649NL0TC70241T"
+    machineDisks:
+      - device: /dev/disk/by-id/ata-KINGSTON_SA400S37480G_50026B7283215569
+        partitions:
+          - mountpoint: /var/mnt/sata
     talosImageURL: factory.talos.dev/installer/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba
     controlPlane: true
     networkInterfaces:
@@ -41,6 +45,10 @@ nodes:
     ipAddress: "10.69.3.27"
     installDiskSelector:
       serial: "50026B7381956EDD"
+    machineDisks:
+      - device: /dev/disk/by-id/ata-SSDPR-CL100-480-G3_G0Z047886
+        partitions:
+          - mountpoint: /var/mnt/sata
     talosImageURL: factory.talos.dev/installer/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba
     controlPlane: false
     networkInterfaces:
@@ -57,6 +65,10 @@ nodes:
     ipAddress: "10.69.3.25"
     installDiskSelector:
       serial: "S649NL0TC64476T"
+    machineDisks:
+      - device: /dev/disk/by-id/ata-SSDPR-CL100-480-G3_GXE092715
+        partitions:
+          - mountpoint: /var/mnt/sata
     talosImageURL: factory.talos.dev/installer/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba
     controlPlane: false
     networkInterfaces:
