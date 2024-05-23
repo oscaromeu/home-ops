@@ -41,18 +41,6 @@ nodes:
             gateway: "10.69.3.1"
         vip:
           ip: "10.69.3.154"
-    patches:
-      - &kubelet_extra_mounts |-
-        machine:
-          kubelet:
-            extraMounts:
-              - destination: /var/mnt/sata
-                type: bind
-                source: /var/mnt/sata
-                options:
-                  - rbind
-                  - rshared
-                  - rw
 
   - hostname: "lpkw1"
     ipAddress: "10.69.3.27"
@@ -74,8 +62,6 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: "10.69.3.1"
-    patches:
-      - *kubelet_extra_mounts
 
   - hostname: "lpkw2"
     ipAddress: "10.69.3.25"
@@ -97,8 +83,6 @@ nodes:
         routes:
           - network: 0.0.0.0/0
             gateway: "10.69.3.1"
-    patches:
-      - *kubelet_extra_mounts
 
 patches:
   # Configure containerd
@@ -164,7 +148,7 @@ patches:
         net.core.rmem_max: "2500000"
         net.core.wmem_max: "2500000"
 
-  # Mount openebs-hostpath in kubelet
+  # Mount openebs-hostpath and sata drives in kubelet
   - |-
     machine:
       kubelet:
@@ -173,6 +157,13 @@ patches:
             type: bind
             source: /var/openebs/local
             options: ["bind", "rshared", "rw"]
+          - destination: /var/mnt/sata
+            type: bind
+            source: /var/mnt/sata
+            options:
+              - rbind
+              - rshared
+              - rw
 
 
 
