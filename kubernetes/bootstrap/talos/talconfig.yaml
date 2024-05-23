@@ -160,12 +160,7 @@ patches:
           - destination: /var/mnt/sata
             type: bind
             source: /var/mnt/sata
-            options:
-              - rbind
-              - rshared
-              - rw
-
-
+            options: ["bind", "rshared", "rw"]
 
 controlPlane:
   patches:
