@@ -41,7 +41,7 @@ spec:
         enabled: true
         urlPrefix: /
         ssl: false
-        prometheusEndpoint: http://kube-prometheus-stack.observability.svc.cluster.local:8481/select/0/prometheus
+        prometheusEndpoint: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
       mgr:
         modules:
           - name: pg_autoscaler
