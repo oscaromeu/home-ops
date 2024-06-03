@@ -75,5 +75,5 @@ spec:
         server: 10.69.1.31
         path: temp
         globalMounts:
-        - path: /downloads
+        - path: /mnt/downloads
           subPath: metube
