@@ -70,10 +70,9 @@ spec:
     persistence:
       config:
         existingClaim: *app
-      downloads:
+      output:
+        existingClaim: metube-output
         type: nfs
         server: 10.69.1.31
-        path: temp
         globalMounts:
-        - path: /mnt/downloads
-          subPath: metube
+          - path: "/downloads"
