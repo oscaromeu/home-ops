@@ -69,7 +69,10 @@ spec:
               port: http
     persistence:
       config:
-        existingClaim: metube-config
+        type: persistentVolumeClaim
+        size: 1Gi
+        storageClass: openebs-hostpath
+        accessMode: ReadWriteOnce
         globalMounts:
           - path: "/config"
       output:
