@@ -69,7 +69,9 @@ spec:
               port: http
     persistence:
       config:
-        existingClaim: *app
+        existingClaim: metube-config
+        globalMounts:
+          - path: "/config"
       output:
         existingClaim: metube-output
         globalMounts:
