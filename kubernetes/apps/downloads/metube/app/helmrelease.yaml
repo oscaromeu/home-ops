@@ -72,7 +72,5 @@ spec:
         existingClaim: *app
       output:
         existingClaim: metube-output
-        type: nfs
-        server: 10.69.1.31
         globalMounts:
           - path: "/downloads"
