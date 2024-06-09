@@ -40,9 +40,9 @@ spec:
       # config
       - vector-aggregator
       # pipelines
-      - elastic-aggregator
+      #- elastic-aggregator
       - vector-metrics-aggregator
-      #- loki-aggregator
+      - loki-aggregator
 
     ingress:
       enabled: false
