@@ -5,11 +5,11 @@ metadata:
   name: &app dragonfly
   namespace: flux-system
 spec:
-  targetNamespace: database
+  targetNamespace: datahub
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/database/dragonfly/app
+  path: ./kubernetes/apps/datahub/dragonfly/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -26,13 +26,13 @@ metadata:
   name: &app dragonfly-cluster
   namespace: flux-system
 spec:
-  targetNamespace: database
+  targetNamespace: datahub
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: dragonfly
-  path: ./kubernetes/apps/database/dragonfly/cluster
+  path: ./kubernetes/apps/datahub/dragonfly/cluster
   prune: true
   sourceRef:
     kind: GitRepository
