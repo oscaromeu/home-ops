@@ -6,6 +6,6 @@ resources:
   - ./metrics-config.yaml
   - ./zookeeper-metrics.yaml
   - ./externalsecret.yaml
-  - ./kafka-cluster.yaml
+  - ./kafka-single.yaml
   - ./kafka-user.yaml
   - ./topic.yaml
