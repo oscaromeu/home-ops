@@ -83,9 +83,9 @@ spec:
         controller: minio
         ports:
           http:
-            port: &http 9001
+            port: 9001
           s3:
-            port: &s3 9000
+            port: 9000
     ingress:
       app:
         enabled: true
@@ -96,15 +96,15 @@ spec:
               - path: /
                 service:
                   identifier: app
-                  port: *http
+                  port: http
           - host: &s3Host s3.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
                   identifier: app
-                  port: *s3
-        tls:
-          - hosts: [*host, *s3Host]
+                  port: s3
+        #tls:
+        #  - hosts: [*host, *s3Host]
     persistence:
       data:
         existingClaim: minio-data
