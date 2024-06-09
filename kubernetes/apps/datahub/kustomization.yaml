@@ -5,6 +5,6 @@ resources:
   - ./namespace.yaml
   #- ./cloudnative-pg/ks.yaml
   #- ./kafka/ks.yaml
-  - ./minio
+  - ./minio/ks.yaml
   #- ./mongodb/ks.yaml
   - ./redis/ks.yaml
