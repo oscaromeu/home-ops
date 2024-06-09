@@ -4,7 +4,7 @@ metadata:
   name: wipe-disk-pod-lpkw2
   namespace: default
 spec:
-  nodeName: "lpkm1"
+  nodeName: "lpkw2"
   containers:
     - name: wipe-disk-container
       image: ubuntu:latest
@@ -16,15 +16,10 @@ spec:
       volumeMounts:
          - name: dev
            mountPath: /dev
-         - name: sata
-           mountPath: /var/mnt/sata
   volumes:
     - name: dev
       hostPath:
         path: /dev
         type: Directory
-    - name: sata
-      hostPath:
-        path: /var/mnt/sata
-        type: Directory
   restartPolicy: Never
+
