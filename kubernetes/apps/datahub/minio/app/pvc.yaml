@@ -6,7 +6,7 @@ metadata:
     kustomize.toolkit.fluxcd.io/prune: disabled
   name: minio-data
 spec:
-  storageClass: openebs-hostpath
+  storageClassName: openebs-hostpath
   accessModes: ["ReadWriteOnce"]
   resources:
     requests:
