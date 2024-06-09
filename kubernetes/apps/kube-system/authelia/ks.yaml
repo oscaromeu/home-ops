@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: external-secrets-stores
-    - name: redis
+    - name: dragonfly-cluster
   path: ./kubernetes/apps/kube-system/authelia/app
   prune: true
   sourceRef:
