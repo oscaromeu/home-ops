@@ -5,6 +5,7 @@ metadata:
   name: minio
   namespace: flux-system
 spec:
+  targetNamespace: datahub
   dependsOn:
     - name: ingress-nginx-internal
   path: ./kubernetes/apps/datahub/minio/app
