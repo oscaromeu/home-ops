@@ -9,8 +9,8 @@ metadata:
 spec:
   targetNamespace: datahub
   dependsOn:
-    - name: cluster-apps-nginx-internal
-    - name: cluster-apps-external-secrets
+    - name: ingress-nginx-internal
+    - name: external-secrets
   path: ./kubernetes/apps/datahub/minio/operator/app
   prune: true
   sourceRef:
