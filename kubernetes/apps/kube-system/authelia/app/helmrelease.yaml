@@ -26,8 +26,6 @@ spec:
   dependsOn:
     - name: glauth
       namespace: kube-system
-    - name: redis
-      namespace: datahub
   values:
     controllers:
       main:
