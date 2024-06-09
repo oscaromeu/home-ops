@@ -6,6 +6,6 @@ resources:
   #- ./cloudnative-pg/ks.yaml
   - ./dragonfly/ks.yaml
   #- ./kafka/ks.yaml
-  - ./minio/
+  #- ./minio/
   #- ./mongodb/ks.yaml
   #- ./redis/ks.yaml
