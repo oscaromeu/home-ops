@@ -89,7 +89,7 @@ spec:
     ingress:
       app:
         enabled: true
-        className: ingress
+        className: internal
         hosts:
           - host: &host console.${SECRET_DOMAIN}
             paths:
