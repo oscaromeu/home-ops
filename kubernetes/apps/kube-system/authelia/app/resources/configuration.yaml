@@ -36,15 +36,15 @@ session:
   redis:
     host: redis.datahub.svc.cluster.local
     database_index: 14
-    high_availability:
-      sentinel_name: redis-master
-      nodes:
-        - host: redis-node-0.redis-headless.datahub.svc.cluster.local
-          port: 26379
-        - host: redis-node-1.redis-headless.datahub.svc.cluster.local
-          port: 26379
-        - host: redis-node-2.redis-headless.datahub.svc.cluster.local
-          port: 26379
+    #high_availability:
+    #  sentinel_name: redis-master
+    #  nodes:
+    #    - host: redis-node-0.redis-headless.datahub.svc.cluster.local
+    #      port: 26379
+    #    - host: redis-node-1.redis-headless.datahub.svc.cluster.local
+    #      port: 26379
+    #    - host: redis-node-2.redis-headless.datahub.svc.cluster.local
+    #      port: 26379
 
 regulation:
   max_retries: 3
