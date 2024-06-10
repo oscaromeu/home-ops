@@ -5,7 +5,7 @@ namespace: datahub
 resources:
   - ./metrics-config.yaml
   - ./zookeeper-metrics.yaml
-  #- ./externalsecret.yaml
+  - ./externalsecret.yaml
   - ./kafka-single.yaml
   - ./kafka-user.yaml
   - ./topic.yaml
