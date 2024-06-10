@@ -30,6 +30,8 @@ spec:
                   operator: In
                   values:
                   - "kafka-broker"
+    authorization:
+      type: simple
     listeners:
       - name: plain
         port: 9092
