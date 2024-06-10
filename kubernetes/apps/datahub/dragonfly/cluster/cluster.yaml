@@ -3,7 +3,7 @@
 apiVersion: dragonflydb.io/v1alpha1
 kind: Dragonfly
 metadata:
-  name: redis
+  name: dragonfly
 spec:
   image: ghcr.io/dragonflydb/dragonfly:v1.18.0
   replicas: 3
