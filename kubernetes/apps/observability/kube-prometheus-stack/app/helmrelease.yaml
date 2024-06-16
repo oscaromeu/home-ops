@@ -190,7 +190,7 @@ spec:
             profiles.grafana.com/goroutine.port: "9090"
         scrapeInterval: 60s
         externalLabels:
-          cluster: "prod"
+          cluster: "apps"
         retention: 30d
         #retentionSize: 8GB
         #thanos:
