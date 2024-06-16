@@ -42,7 +42,7 @@ spec:
       # pipelines
       #- elastic-agent
       - vector-metrics-agent
-      #- loki-agent
+      - loki-agent
       #- journal-pipeline
 
     ingress:
