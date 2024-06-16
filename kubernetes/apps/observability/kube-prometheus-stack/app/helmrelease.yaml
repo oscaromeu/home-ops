@@ -190,7 +190,7 @@ spec:
             profiles.grafana.com/goroutine.port: "9090"
         scrapeInterval: 60s
         externalLabels:
-          cluster: "apps"
+          cluster: "prod"
         retention: 30d
         #retentionSize: 8GB
         #thanos:
@@ -207,18 +207,17 @@ spec:
                 requests:
                   storage: 200Gi
 
-        #remoteWrite:
-        #  - url:
-        #  #- url: "http://mimir-nginx.monitoring.svc.cluster.local:80/api/v1/push"
-        #  - url: "http://victoria-metrics-single-server.monitoring.svc.cluster.local:8428/api/v1/write"
-        #    #queue_config:
-        #    #max_samples_per_send: 10000
-        #    #capacity: 20000
-        #    #max_shards: 30
-        #    #write_relabel_configs:
-        #    #- source_labels: [__name__]
-        #    #  target_label: __name__
-        #    #  regex: "(.*)"
+        remoteWrite:
+          #- url: "http://mimir-nginx.monitoring.svc.cluster.local:80/api/v1/push"
+          - url: "http://victoria-metrics-single-server.monitoring.svc.cluster.local:8428/api/v1/write"
+            queue_config:
+            max_samples_per_send: 10000
+            capacity: 20000
+            max_shards: 30
+            write_relabel_configs:
+            - source_labels: [__name__]
+              target_label: __name__
+              regex: "(.*)"
         #  - url: "https://prometheus-prod-01-eu-west-0.grafana.net/api/prom/push"
         #    basicAuth:
         #      username:
