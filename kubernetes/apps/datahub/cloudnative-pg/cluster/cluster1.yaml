@@ -39,18 +39,18 @@ spec:
   monitoring:
     enablePodMonitor: true
 
-  backup:
-    retentionPolicy: 30d
-    barmanObjectStore:
-      destinationPath: gs://cloudnative-pg-v1/
-      googleCredentials:
-        applicationCredentials:
-          name: backup-creds
-          key: gcsCredentials
-      serverName: &currentCluster postgres1-v1
-      wal:
-        compression: bzip2
-        maxParallel: 8
+  #backup:
+  #  retentionPolicy: 30d
+  #  barmanObjectStore:
+  #    destinationPath: gs://cloudnative-pg-v1/
+  #    googleCredentials:
+  #      applicationCredentials:
+  #        name: backup-creds
+  #        key: gcsCredentials
+  #    serverName: &currentCluster postgres1-v1
+  #    wal:
+  #      compression: bzip2
+  #      maxParallel: 8
 
   # Note: externalClusters is needed when recovering from an existing cnpg cluster
   #externalClusters:
@@ -69,40 +69,3 @@ spec:
   #        secretAccessKey:
   #          name: cloudnative-pg-secret
   #          key: AWS_SECRET_ACCESS_KEY
-
-  managed:
-    roles:
-    - name: gitea
-      ensure: present
-      comment: gitea role
-      login: true
-      superuser: false
-      createdb: true
-      createrole: true
-      inherit: false
-      replication: false
-      bypassrls: false
-      connectionLimit: 100
-      validUntil: "2053-04-12T15:04:05Z"
-      inRoles:
-        - pg_monitor
-        - pg_signal_backend
-      passwordSecret:
-        name: gitea-secret
-    - name: harbor
-      ensure: present
-      comment: harbor role
-      login: true
-      superuser: false
-      createdb: true
-      createrole: true
-      inherit: false
-      replication: false
-      bypassrls: false
-      connectionLimit: 100
-      validUntil: "2053-04-12T15:04:05Z"
-      inRoles:
-        - pg_monitor
-        - pg_signal_backend
-      passwordSecret:
-        name: harbor-secret

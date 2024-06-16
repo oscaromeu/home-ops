@@ -12,15 +12,8 @@ resources:
   - ./kube-prometheus-stack/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
   - ./loki/ks.yaml
-  #- ./node-problem-detector/ks.yaml
   - ./openweather/ks.yaml
   - ./prometheus-adapter/ks.yaml
-  #- ./pyroscope/ks.yaml
-  #- ./rally/ks.yaml
-  #- ./sloth/ks.yaml
-  #- ./speedtest-exporter/ks.yaml
-  #- ./stackdriver-exporter/ks.yaml
-  #- ./canary-checker/ks.yaml
-  #- ./tempo/ks.yaml
-  #- ./thanos/ks.yaml
+  - ./tempo/ks.yaml
   - ./vector/ks.yaml
+  - ./vm/ks.yaml
