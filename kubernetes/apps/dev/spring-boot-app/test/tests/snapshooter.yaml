@@ -3,7 +3,6 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: app-a-test-1-cron
-  namespace: monitoring
 spec:
   schedule: "*/30 * * * *"
   #schedule: "0 0 * * *"
