@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: spring-boot-app-a
+  name: fastapi-observability-a
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
@@ -11,7 +11,7 @@ spec:
     - name: ingress-nginx-external
     - name: external-secrets-stores
     - name: k6s
-  path: ./kubernetes/apps/dev/spring-boot-app/app-a
+  path: ./kubernetes/apps/dev/fastapi-observability/app-a
   prune: true
   sourceRef:
     kind: GitRepository
@@ -28,14 +28,14 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: spring-boot-app-b
+  name: fastapi-observability-b
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: spring-boot-app-a
-  path: ./kubernetes/apps/dev/spring-boot-app/app-b
+    - name: fastapi-observability-a
+  path: ./kubernetes/apps/dev/fastapi-observability/app-b
   prune: true
   sourceRef:
     kind: GitRepository
@@ -52,14 +52,14 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: spring-boot-app-c
+  name: fastapi-observability-c
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: spring-boot-app-a
-  path: ./kubernetes/apps/dev/spring-boot-app/app-c
+    - name: fastapi-observability-a
+  path: ./kubernetes/apps/dev/fastapi-observability/app-c
   prune: true
   sourceRef:
     kind: GitRepository
@@ -76,14 +76,14 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: spring-boot-app-monitoring
+  name: fastapi-observability-monitoring
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: spring-boot-app-a
-  path: ./kubernetes/apps/dev/spring-boot-app/monitoring
+    - name: fastapi-observability-a
+  path: ./kubernetes/apps/dev/fastapi-observability/monitoring
   prune: true
   sourceRef:
     kind: GitRepository
@@ -95,14 +95,14 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: spring-boot-app-test
+  name: fastapi-observability-test
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: spring-boot-app-a
-  path: ./kubernetes/apps/dev/spring-boot-app/test
+    - name: fastapi-observability-a
+  path: ./kubernetes/apps/dev/fastapi-observability/test
   prune: true
   sourceRef:
     kind: GitRepository
