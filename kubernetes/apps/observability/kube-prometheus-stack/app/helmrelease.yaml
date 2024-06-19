@@ -168,6 +168,7 @@ spec:
         dashboards:
           annotations:
             grafana_folder: Kubernetes
+            home_ops: Kubernetes
           multicluster:
             etcd:
               enabled: true
