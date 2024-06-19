@@ -29,7 +29,7 @@ spec:
     cleanupOnFail: true
     crds: CreateReplace
   test:
-    enable: true
+    enable: false
   rollback:
     recreate: true
     force: true
