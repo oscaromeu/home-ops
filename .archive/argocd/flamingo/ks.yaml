@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: argocd
-  path: ./kubernetes/apps/argocd/flamingo/app
+  path: ./kubernetes/main/apps/argocd/flamingo/app
   prune: true
   sourceRef:
     kind: GitRepository

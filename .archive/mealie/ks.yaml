@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: ingress-nginx-internal
     - name: external-secrets-stores
-  path: ./kubernetes/apps/default/mealie/app
+  path: ./kubernetes/main/apps/default/mealie/app
   prune: true
   sourceRef:
     kind: GitRepository

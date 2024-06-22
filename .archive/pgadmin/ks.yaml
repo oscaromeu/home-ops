@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: ingress-nginx-internal
     - name: external-secrets-stores
-  path: ./kubernetes/apps/datahub/pgadmin/app
+  path: ./kubernetes/main/apps/datahub/pgadmin/app
   prune: true
   sourceRef:
     kind: GitRepository

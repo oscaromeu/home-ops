@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: ingress-nginx-internal
-  path: ./kubernetes/apps/tools/plane/app
+  path: ./kubernetes/main/apps/tools/plane/app
   prune: true
   sourceRef:
     kind: GitRepository

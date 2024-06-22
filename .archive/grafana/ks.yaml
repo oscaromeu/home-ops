@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: cloudflare-operator-tunnels
     - name: kube-prometheus-stack
-  path: ./kubernetes/apps/monitoring/grafana/app
+  path: ./kubernetes/main/apps/monitoring/grafana/app
   prune: true
   sourceRef:
     kind: GitRepository

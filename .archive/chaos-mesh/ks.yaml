@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: ingress-nginx-internal
-  path: ./kubernetes/apps/tools/chaos-mesh/app
+  path: ./kubernetes/main/apps/tools/chaos-mesh/app
   prune: true
   sourceRef:
     kind: GitRepository

@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: kube-prometheus-stack
-  path: ./kubernetes/apps/dev/demo-service/app
+  path: ./kubernetes/main/apps/dev/demo-service/app
   prune: true
   sourceRef:
     kind: GitRepository

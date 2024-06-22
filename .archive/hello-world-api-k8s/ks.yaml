@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: external-secrets-stores
-  path: ./kubernetes/apps/dev/hello-world-api-k8s/app
+  path: ./kubernetes/main/apps/dev/hello-world-api-k8s/app
   prune: true
   sourceRef:
     kind: GitRepository

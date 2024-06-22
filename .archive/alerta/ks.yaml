@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: ingress-nginx-external
     - name: external-secrets-stores
-  path: ./kubernetes/apps/dev/alerta/app
+  path: ./kubernetes/main/apps/dev/alerta/app
   prune: true
   sourceRef:
     kind: GitRepository

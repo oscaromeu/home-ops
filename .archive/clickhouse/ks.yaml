@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: external-secrets-stores
-  path: ./kubernetes/apps/datahub/clickhouse/operator
+  path: ./kubernetes/main/apps/datahub/clickhouse/operator
   prune: true
   sourceRef:
     kind: GitRepository
@@ -29,7 +29,7 @@ spec:
   dependsOn:
     #- name: ingress-nginx-external
     - name: external-secrets-stores
-  path: ./kubernetes/apps/datahub/clickhouse/app
+  path: ./kubernetes/main/apps/datahub/clickhouse/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -49,7 +49,7 @@ spec:
   dependsOn:
     #- name: ingress-nginx-external
     - name: external-secrets-stores
-  path: ./kubernetes/apps/datahub/clickhouse/monitoring
+  path: ./kubernetes/main/apps/datahub/clickhouse/monitoring
   prune: true
   sourceRef:
     kind: GitRepository

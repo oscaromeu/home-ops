@@ -9,7 +9,7 @@
 #spec:
 #  dependsOn:
 #    - name: external-secrets-stores
-#  path: ./kubernetes/apps/dev/json-fusion-exporter/app
+#  path: ./kubernetes/main/apps/dev/json-fusion-exporter/app
 #  prune: true
 #  sourceRef:
 #    kind: GitRepository
@@ -33,7 +33,7 @@ metadata:
 spec:
   dependsOn:
     - name: external-secrets-stores
-  path: ./kubernetes/apps/dev/json-fusion-exporter/plain
+  path: ./kubernetes/main/apps/dev/json-fusion-exporter/plain
   prune: true
   sourceRef:
     kind: GitRepository

@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: external-secrets-stores
-  path: ./kubernetes/apps/dev/fastapi-app/app-a
+  path: ./kubernetes/main/apps/dev/fastapi-app/app-a
   prune: true
   sourceRef:
     kind: GitRepository
@@ -33,7 +33,7 @@ metadata:
 spec:
   dependsOn:
     - name: external-secrets-stores
-  path: ./kubernetes/apps/dev/fastapi-app/app-b
+  path: ./kubernetes/main/apps/dev/fastapi-app/app-b
   prune: true
   sourceRef:
     kind: GitRepository
@@ -57,7 +57,7 @@ metadata:
 spec:
   dependsOn:
     - name: external-secrets-stores
-  path: ./kubernetes/apps/dev/fastapi-app/app-c
+  path: ./kubernetes/main/apps/dev/fastapi-app/app-c
   prune: true
   sourceRef:
     kind: GitRepository
@@ -81,7 +81,7 @@ metadata:
 spec:
   dependsOn:
     - name: external-secrets-stores
-  path: ./kubernetes/apps/dev/fastapi-app/monitoring
+  path: ./kubernetes/main/apps/dev/fastapi-app/monitoring
   prune: true
   sourceRef:
     kind: GitRepository

@@ -1,0 +1,83 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: kafka-operator
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+spec:
+  dependsOn:
+    - name: external-secrets-stores
+    - name: ingress-nginx-internal
+  path: ./kubernetes/main/apps/datahub/kafka/operator
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: kafka-operator
+      namespace: datahub
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: kafka-cluster
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+spec:
+  dependsOn:
+    - name: kafka-operator
+  path: ./kubernetes/main/apps/datahub/kafka/cluster
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: kafka-cluster-monitoring
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+spec:
+  dependsOn:
+    - name: kafka-cluster
+  path: ./kubernetes/main/apps/datahub/kafka/monitoring
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m
+---
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: kafka-cluster-tools
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+spec:
+  dependsOn:
+    - name: kafka-cluster-monitoring
+  path: ./kubernetes/main/apps/datahub/kafka/tools
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  interval: 30m
+  retryInterval: 1m
+  timeout: 3m

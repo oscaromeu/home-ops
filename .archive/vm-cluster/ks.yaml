@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: kube-prometheus-stack
-  path: ./kubernetes/apps/monitoring/vm/app
+  path: ./kubernetes/main/apps/monitoring/vm/app
   prune: true
   sourceRef:
     kind: GitRepository

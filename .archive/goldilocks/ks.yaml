@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: vpa
     - name: kube-prometheus-stack
-  path: ./kubernetes/apps/observability/goldilocks/app
+  path: ./kubernetes/main/apps/observability/goldilocks/app
   prune: true
   sourceRef:
     kind: GitRepository

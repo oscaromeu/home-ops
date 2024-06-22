@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: kube-prometheus-stack
-  path: ./kubernetes/apps/monitoring/botkube/app
+  path: ./kubernetes/main/apps/monitoring/botkube/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -33,7 +33,7 @@ spec:
 #spec:
 #  dependsOn:
 #    - name: botkube
-#  path: ./kubernetes/apps/monitoring/botkube/test
+#  path: ./kubernetes/main/apps/monitoring/botkube/test
 #  prune: true
 #  sourceRef:
 #    kind: GitRepository

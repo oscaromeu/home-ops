@@ -11,7 +11,7 @@ spec:
     - name: external-secrets-stores
     - name: cloudnative-pg
     - name: ingress-nginx-internal
-  path: ./kubernetes/apps/tools/docuseal/app
+  path: ./kubernetes/main/apps/tools/docuseal/app
   prune: true
   sourceRef:
     kind: GitRepository

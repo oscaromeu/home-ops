@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: external-secrets-stores
-  path: ./kubernetes/apps/kube-system/lldap/app
+  path: ./kubernetes/main/apps/kube-system/lldap/app
   prune: true
   sourceRef:
     kind: GitRepository
