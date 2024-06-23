@@ -9,12 +9,12 @@ resources:
   - ./gatus/ks.yaml
   - ./grafana/ks.yaml
   - ./k6s/ks.yaml
-  - ./kube-prometheus-stack/ks.yaml
+  #- ./kube-prometheus-stack/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
   - ./loki/ks.yaml
   - ./openweather/ks.yaml
   - ./prometheus-adapter/ks.yaml
-  - ./prometheus-operator-crds/ks.yaml
+  #- ./prometheus-operator-crds/ks.yaml
   - ./tempo/ks.yaml
   - ./vector/ks.yaml
   - ./vm/ks.yaml
