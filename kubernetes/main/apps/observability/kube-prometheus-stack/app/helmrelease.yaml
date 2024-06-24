@@ -16,7 +16,7 @@ spec:
         name: prometheus-community
         namespace: flux-system
   install:
-    crds: Skip
+    crds: CreateReplace
     remediation:
       retries: 3
   upgrade:
