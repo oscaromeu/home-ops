@@ -10,6 +10,9 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+      app.kubernetes.io/managed-by: helm
+      meta.helm.sh/release-name: prometheus-operator-crds
+      meta.helm.sh/release-namespace: observability
   path: ./kubernetes/main/apps/observability/prometheus-operator-crds/app
   prune: false # never should be deleted
   sourceRef:
