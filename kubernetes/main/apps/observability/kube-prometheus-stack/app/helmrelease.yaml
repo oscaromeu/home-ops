@@ -21,28 +21,24 @@ spec:
       retries: 3
   upgrade:
     cleanupOnFail: true
-    crds: Skip
+    crds: CreateReplace
     remediation:
       strategy: rollback
       retries: 3
   dependsOn:
-    - name: prometheus-operator-crds
-      namespace: observability
     - name: openebs
       namespace: openebs-system
-    - name: thanos
-      namespace: observability
   values:
     crds:
-      enabled: false
+      enabled: true
     cleanPrometheusOperatorObjectNames: true
     alertmanager:
       ingress:
         enabled: true
         annotations:
-          external-dns.alpha.kubernetes.io/target: internal.devbu.io
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
         ingressClassName: internal
-        hosts: ["alertmanager.devbu.io"]
+        hosts: ["alertmanager.${SECRET_DOMAIN}"]
         pathType: Prefix
       alertmanagerSpec:
         replicas: 2
@@ -94,7 +90,7 @@ spec:
       ingress:
         enabled: true
         ingressClassName: internal
-        hosts: ["prometheus.${SECRET_DOMAIN}.io"]
+        hosts: ["prometheus.${SECRET_DOMAIN}"]
         pathType: Prefix
       thanosService:
         enabled: false
