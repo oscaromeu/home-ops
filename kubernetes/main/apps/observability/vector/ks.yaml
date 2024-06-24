@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: external-secrets-stores
-    - name: kafka-cluster
+    #- name: kafka-cluster
     #- name: elastic
   path: ./kubernetes/main/apps/observability/vector/aggregator
   prune: true
