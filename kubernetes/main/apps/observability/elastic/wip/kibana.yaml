@@ -1,0 +1,36 @@
+---
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: kibana
+  namespace: observability
+spec:
+  version: 8.14.3
+  count: 1
+  elasticsearchRef:
+    name: elk
+  config:
+    server:
+      publicBaseUrl: "https://kibana.flanks.ts.net"
+  podTemplate:
+    metadata:
+      labels:
+        stack-monitoring.elastic.co/type: es
+        app.kubernetes.io/name: elk
+        app.kubernetes.io/service: analytics
+        app.kubernetes.io/component: kibana
+      annotations:
+        co.elastic.logs/enabled: "true"
+    spec:
+      containers:
+      - name: kibana
+        resources:
+          requests:
+            cpu: 50m
+            memory: 1.6Gi
+          limits:
+            memory: 3Gi
+            #cpu: 1
+
+  #nodeSelector:
+  #  kubernetes.io/arch: amd64
