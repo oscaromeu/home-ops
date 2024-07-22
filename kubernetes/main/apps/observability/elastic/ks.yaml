@@ -41,7 +41,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: elastic-monitoring
+  name: elastic-wip
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
