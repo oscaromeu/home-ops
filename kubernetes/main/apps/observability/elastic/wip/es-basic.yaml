@@ -10,7 +10,7 @@ spec:
   nodeSets:
   - name: default
     config:
-      logger.level: debug
+      logger.level: info
       node.roles: ["master", "data", "ingest", "ml"]
       node.store.allow_mmap: false
       xpack.monitoring.collection.enabled: true
@@ -76,7 +76,7 @@ spec:
         resources:
           requests:
             storage: 1Gi
-        storageClassName: local-path
+        storageClassName: openebs-hostpath
   monitoring:
     metrics:
       elasticsearchRefs:
