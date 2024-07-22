@@ -77,10 +77,10 @@ spec:
           requests:
             storage: 1Gi
         storageClassName: local-path
-    monitoring:
-      metrics:
-        elasticsearchRefs:
-          - name: elk
-      logs:
-        elasticsearchRefs:
-          - name: elk
+  monitoring:
+    metrics:
+      elasticsearchRefs:
+        - name: elk
+    logs:
+      elasticsearchRefs:
+        - name: elk
