@@ -58,14 +58,6 @@ spec:
               value: "-Xms3g -Xmx3g"
             - name: READINESS_PROBE_TIMEOUT
               value: "10"
-        topologySpreadConstraints:
-          - maxSkew: 1
-            topologyKey: topology.kubernetes.io/zone
-            whenUnsatisfiable: DoNotSchedule
-            labelSelector:
-              matchLabels:
-                elasticsearch.k8s.elastic.co/cluster-name: elk
-                elasticsearch.k8s.elastic.co/statefulset-name: elk-es-default
     count: 3
     volumeClaimTemplates:
     - metadata:
