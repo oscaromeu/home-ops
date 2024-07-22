@@ -82,3 +82,6 @@ spec:
           memory: 500Mi
     defaultBackend:
       enabled: false
+    tcp:
+      9200: observability/elk-es-http:9200
+      5601: observability/kibana-kb-http:5601
