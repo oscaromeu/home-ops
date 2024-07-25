@@ -17,6 +17,9 @@ spec:
     mode: enabled
   timeout: 15m
   values:
+    defaultPodOptions:
+      nodeSelector:
+        kubernetes.io/hostname: lpkw2
     controllers:
       stable-diffusion-webui:
         containers:
@@ -50,8 +53,6 @@ spec:
           terminationGracePeriodSeconds: 1
           securityContext:
             fsGroup: 1000
-        nodeSelector:
-          kubernetes.io/hostname: lpkw2
 
     service:
       stable-diffusion-webui:
