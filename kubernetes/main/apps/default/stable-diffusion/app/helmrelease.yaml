@@ -29,9 +29,12 @@ spec:
               tag: 1.9.4@sha256:dad9f06132d2b4569664f6aff0a0d7c6b832654ace1d1a435bbfbbc7fc7621ce
               pullPolicy: IfNotPresent
             args:
-              - --medvram-sdxl
-              - --xformers
-              - --skip-torch-cuda-test
+              #- --skip-torch-cuda-test
+              - --no-half
+              - --precision full
+              - --allow-code
+              - --enable-insecure-extension-access
+              - --api
             env:
               TZ: Europe/Madrid
               IIB_ACCESS_CONTROL_ALLOWED_PATHS: /app/outputs
