@@ -7,4 +7,4 @@ resources:
   - ./hajimari/ks.yaml
   - ./linkding/ks.yaml
   - ./metube/ks.yaml
-  #- ./stable-diffusion/ks.yaml
+  - ./stable-diffusion/ks.yaml
