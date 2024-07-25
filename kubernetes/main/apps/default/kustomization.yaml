@@ -6,5 +6,5 @@ resources:
   - ./excalidraw/ks.yaml
   - ./hajimari/ks.yaml
   - ./linkding/ks.yaml
-  - ./metube/ks.yaml
+  #- ./metube/ks.yaml
   #- ./stable-diffusion/ks.yaml
