@@ -37,6 +37,9 @@ spec:
         limits:
           memory: 64M
     worker:
+      config:
+        core:
+          sources: [custom, pci, usb]
       resources:
         requests:
           cpu: 15m
