@@ -35,6 +35,8 @@ spec:
               TZ: Europe/Madrid
               IIB_ACCESS_CONTROL_ALLOWED_PATHS: /app/outputs
             resources:
+              requests:
+                memory: 3Gi
               limits:
                 #nvidia.com/gpu: "1"
                 memory: "14Gi"
