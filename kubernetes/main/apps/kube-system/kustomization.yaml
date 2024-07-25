@@ -11,6 +11,7 @@ resources:
   - ./kubelet-csr-approver/ks.yaml
   - ./metrics-server/ks.yaml
   - ./nfs-subdir-external-provisioner/ks.yaml
+  - ./node-feature-discovery/ks.yaml
   - ./reloader/ks.yaml
   - ./snapshot-controller/ks.yaml
   - ./spegel/ks.yaml
