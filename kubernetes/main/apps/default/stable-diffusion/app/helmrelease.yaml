@@ -9,7 +9,6 @@ spec:
     spec:
       chart: app-template
       version: 3.2.1
-      reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
         namespace: flux-system
@@ -31,11 +30,11 @@ spec:
               - --medvram-sdxl
               - --xformers
             env:
-              TZ: America/Chicago
+              TZ: Europe/Madrid
               IIB_ACCESS_CONTROL_ALLOWED_PATHS: /app/outputs
             resources:
               limits:
-                nvidia.com/gpu: "1"
+                #nvidia.com/gpu: "1"
                 memory: "14Gi"
             probes:
               startup:
@@ -48,17 +47,9 @@ spec:
               readiness:
                 enabled: true
         pod:
-          runtimeClassName: nvidia
-          tolerations:
-            - key: gabe565.com/gpu
-              operator: Equal
-              value: nvidia
-              effect: NoSchedule
+          #runtimeClassName: nvidia
           nodeSelector:
-            gabe565.com/gpu: nvidia
-          labels:
-            policy.gabe565.com/egress-world: "true"
-            policy.gabe565.com/ingress-ingress: "true"
+            kubernetes.io/hostname: lpkm1
           terminationGracePeriodSeconds: 1
           securityContext:
             fsGroup: 1000
@@ -73,7 +64,7 @@ spec:
     persistence:
       data:
         enabled: true
-        storageClass: local-path
+        storageClass: openebs-hostpath
         accessMode: ReadWriteOnce
         size: 32Gi
         retain: true
