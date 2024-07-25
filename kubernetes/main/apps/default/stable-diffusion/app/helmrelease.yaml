@@ -47,8 +47,8 @@ spec:
                 enabled: true
         pod:
           #runtimeClassName: nvidia
-          nodeSelector:
-            kubernetes.io/hostname: lpkw2
+          #nodeSelector:
+          #  kubernetes.io/hostname: lpkw2
           terminationGracePeriodSeconds: 1
           securityContext:
             fsGroup: 1000
