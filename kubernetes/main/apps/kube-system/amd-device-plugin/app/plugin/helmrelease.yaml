@@ -1,0 +1,92 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.dmfrey.com/helm.toolkit.fluxcd.io/helmrelease_v2beta2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app amd-device-plugin
+  namespace: system
+
+spec:
+
+  interval: 15m
+
+  chart:
+    spec:
+      chart: app-template
+      version: 3.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  
+  maxHistory: 2
+  
+  install:
+    remediation:
+      retries: 3
+  
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  
+  uninstall:
+    keepHistory: false
+  
+  values:
+    
+    defaultPodOptions:
+      tolerations:
+        - key: CriticalAddonsOnly
+          operator: Exists
+      nodeSelector:
+        feature.node.kubernetes.io/pci-0300_1002.present: "true"
+        kubernetes.io/arch: amd64
+      priorityClassName: system-node-critical
+    
+    controllers:
+      amd-device-plugin:
+        type: daemonset
+        
+        containers:
+          app:
+            image:
+              repository: docker.io/rocm/k8s-device-plugin
+              tag: 1.25.2.8@sha256:f3835498cf2274e0a07c32b38c166c05a876f8eb776d756cc06805e599a3ba5f
+            
+            workingDir: /root
+            
+            command: ["./k8s-device-plugin"]
+            
+            args: ["-logtostderr=true", "-stderrthreshold=INFO", "-v=5"]
+            
+            env:
+              TZ: ${TIMEZONE}
+            
+            resources:
+              requests:
+                cpu: 10m
+                memory: 10Mi
+              limits:
+                memory: 100Mi
+            
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop: ["ALL"]
+    
+    service:
+      app:
+        enabled: false
+        controller: amd-device-plugin
+    
+    persistence:
+      sys:
+        enabled: true
+        type: hostPath
+        hostPath: /sys
+      
+      device-plugins:
+        enabled: true
+        type: hostPath
+        hostPath: /var/lib/kubelet/device-plugins
