@@ -58,7 +58,7 @@ spec:
     ingress:
       main:
         enabled: true
-        className: internal
+        className: external
         annotations:
           hajimari.io/icon: mdi:file-document-edit
         hosts:
