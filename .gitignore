@@ -14,6 +14,7 @@ talosconfig
 .bin
 # Ansible
 .venv*
+authorized_keys
 # Taskfile
 .task
 # Brew

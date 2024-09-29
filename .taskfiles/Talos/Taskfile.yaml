@@ -3,7 +3,7 @@
 version: "3"
 
 vars:
-  TALOS_DIR: "{{.KUBERNETES_DIR}}/main/bootstrap/talos"
+  TALOS_DIR: "{{.KUBERNETES_DIR}}/bootstrap/talos"
   TALHELPER_SECRET_FILE: "{{.TALOS_DIR}}/talsecret.sops.yaml"
   TALHELPER_CONFIG_FILE: "{{.TALOS_DIR}}/talconfig.yaml"
 
