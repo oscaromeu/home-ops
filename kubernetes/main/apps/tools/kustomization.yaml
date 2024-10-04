@@ -8,7 +8,7 @@ resources:
   #- ./dnsutils/ks.yaml
   - ./docuseal/ks.yaml
   #- ./gitea/ks.yaml
-  - ./kubernetes-dashboard/ks.yaml
+  #- ./kubernetes-dashboard/ks.yaml
   #- ./harbor/ks.yaml
   #- ./kubevirt/ks.yaml
   #- ./microcks/ks.yaml
