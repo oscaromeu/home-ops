@@ -12,7 +12,7 @@ resources:
   #- ./harbor/ks.yaml
   #- ./kubevirt/ks.yaml
   #- ./microcks/ks.yaml
-  - ./outline/ks.yaml
+  jj- ./outline/ks.yaml
   - ./actual/ks.yaml
   #- ./redisui/ks.yaml
   #- ./redpanda/ks.yaml
