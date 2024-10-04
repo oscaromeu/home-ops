@@ -61,7 +61,8 @@
             mode: '0644'
             dest: /etc/resolv.conf
             content: |
-              search .
+              nameserver 8.8.8.8
+              nameserver 8.8.4.4
 
     - name: System Configuration
       notify: Reboot
