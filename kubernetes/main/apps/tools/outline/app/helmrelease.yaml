@@ -25,13 +25,13 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    initContainers:
-      init-db:
-        image: oscaromeu/postgres-init:14.10
-        imagePullPolicy: Always
-        envFrom:
-          - secretRef:
-              name: outline-secret
+    #initContainers:
+    #  init-db:
+    #    image: oscaromeu/postgres-init:14.10
+    #    imagePullPolicy: Always
+    #    envFrom:
+    #      - secretRef:
+    #          name: outline-secret
     controller:
       replicas: 3
       strategy: Recreate
