@@ -10,7 +10,7 @@ spec:
   resources:
     requests:
       storage: 100Mi
-  storageClassName: longhorn
+  storageClassName: openebs-hostpath
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -22,5 +22,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 100Gi
-  storageClassName: longhorn
+      storage: 400Gi
+  storageClassName: nfs-client
