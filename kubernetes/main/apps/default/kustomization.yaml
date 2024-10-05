@@ -5,8 +5,9 @@ resources:
   - ./namespace.yaml
   #- ./excalidraw/ks.yaml
   - ./hajimari/ks.yaml
+  - ./jellyfin/ks.yaml
   - ./linkding/ks.yaml
-  #- ./metube/ks.yaml
+  - ./metube/ks.yaml
   - ./navidrome/ks.yaml
   - ./overseerr/ks.yaml
   - ./prowlarr/ks.yaml
