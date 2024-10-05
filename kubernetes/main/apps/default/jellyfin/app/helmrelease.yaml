@@ -23,7 +23,7 @@ spec:
       retries: 3
   dependsOn:
     - name: volsync
-      namespace: volsync-system
+      namespace: volsync
   values:
     controllers:
       jellyfin:
