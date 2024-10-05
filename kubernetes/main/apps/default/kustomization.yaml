@@ -8,6 +8,6 @@ resources:
   - ./linkding/ks.yaml
   #- ./metube/ks.yaml
   - ./navidrome/ks.yaml
-  - ./overseer/ks.yaml
+  - ./overseerr/ks.yaml
   - ./prowlarr/ks.yaml
-  - ./qbittorrent/ks.yaml
+  - ./qbittorrent/ks.yamlº
