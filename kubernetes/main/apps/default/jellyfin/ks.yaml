@@ -1,0 +1,24 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: &app jellyfin
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+spec:
+  targetNamespace: default
+  path: ./kubernetes/main/apps/default/jellyfin/app
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  prune: true
+  wait: false
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+  #postBuild:
+  #  substitute:
+  #    APP: *app
+  #    CAPACITY: 5Gi
+  #    GATUS_PATH: /System/Ping
