@@ -82,6 +82,7 @@ spec:
         type: nfs
         enabled: true
         path: /data/data1/Media/Library/Music
+        server: "10.69.3.25"
         globalMounts:
           - path: /music
             readOnly: true
