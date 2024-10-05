@@ -10,4 +10,4 @@ resources:
   - ./navidrome/ks.yaml
   - ./overseerr/ks.yaml
   - ./prowlarr/ks.yaml
-  - ./qbittorrent/ks.yamlº
+  - ./qbittorrent/ks.yaml
