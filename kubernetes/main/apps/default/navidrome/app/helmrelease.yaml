@@ -28,13 +28,13 @@ spec:
   values:
     image:
       repository: ghcr.io/navidrome/navidrome
-      tag: 0.49.3
+      tag: 0.53.1
     env:
       TZ: "${TIMEZONE}"
-      ND_DATAFOLDER: /config
+      #ND_DATAFOLDER: /config
       ND_ENABLEGRAVATAR: "true"
       ND_LOGLEVEL: info
-      ND_MUSICFOLDER: /mnt/storage/music/Artistes
+      #ND_MUSICFOLDER: /mnt/storage/music/Artistes
       ND_PORT: &port 8080
       ND_PROMETHEUS_ENABLED: "true"
       ND_REVERSEPROXYUSERHEADER: "Remote-User"
@@ -79,11 +79,12 @@ spec:
         enabled: true
         existingClaim: navidrome-config
       music:
+        type: nfs
         enabled: true
-        existingClaim: navidrome-data
-        path: /mnt/storage/music
-        mountPath: /mnt/storage/music
-        readOnly: true
+        path: /data/data1/Media/Library/Music
+        globalMounts:
+          - path: /music
+            readOnly: true
     resources:
       requests:
         cpu: 10m

@@ -11,16 +11,3 @@ spec:
     requests:
       storage: 100Mi
   storageClassName: openebs-hostpath
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: navidrome-data
-  namespace: default
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 400Gi
-  storageClassName: nfs-client
