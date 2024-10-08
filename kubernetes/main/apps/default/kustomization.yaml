@@ -11,4 +11,4 @@ resources:
   - ./navidrome/ks.yaml
   - ./overseerr/ks.yaml
   - ./prowlarr/ks.yaml
-  - ./qbittorrent/ks.yaml
+  #- ./qbittorrent/ks.yaml
