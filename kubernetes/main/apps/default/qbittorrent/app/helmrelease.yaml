@@ -51,7 +51,7 @@ spec:
       QBT_BitTorrent__Session__InterfaceName: eth0
       QBT_Preferences__WebUI__AuthSubnetWhitelistEnabled: true
       QBT_Preferences__WebUI__AuthSubnetWhitelist: |-
-        10.42.3.0/24, 10.42.0.0/24, 10.42.2.0/24, 10.42.1.0/24, 192.168.42.0/24, 192.168.1.0/24
+        10.69.2.0/24, 10.69.1.0/24, 10.69.0.0/24
     service:
       main:
         ports:
