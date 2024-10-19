@@ -10,6 +10,6 @@ resources:
   - ./metube/ks.yaml
   - ./navidrome/ks.yaml
   - ./overseerr/ks.yaml
-  #- ./pinchflat/ks.yaml
   - ./prowlarr/ks.yaml
+  - ./pinchflat/ks.yaml
   - ./qbittorrent/ks.yaml
