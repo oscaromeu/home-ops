@@ -36,7 +36,7 @@ spec:
           app:
             image:
               repository: ghcr.io/kieraneglin/pinchflat
-              tag: v2024.10.2@sha256:78cdb8887b5a52026b8cab150b65577fc97c4c41d8da340f2e4e70ed79bd15f8
+              tag: v2024.9.12@sha256:135b0b270b3050579fbb20740e7307a721821dac79da228b5ba8d4f3d0e290df
             env:
               TZ: Europe/Madrid
               TZ_DATA_DIR: /tmp/elixir_tz_data
