@@ -94,7 +94,7 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: pinchflat
+        existingClaim: pinchflat-config
       downloads:
         type: emptyDir
       tmp:
