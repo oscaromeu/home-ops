@@ -2,12 +2,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pinchflat-config
-  namespace: default
+  name: pinchflat-output
 spec:
+  storageClassName: nfs-client
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   resources:
     requests:
-      storage: 100Mi
-  storageClassName: openebs-hostpath
+      storage: 10Gi

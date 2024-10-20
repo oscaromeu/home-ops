@@ -65,7 +65,7 @@ spec:
                 memory: 4Gi
     defaultPodOptions:
       securityContext:
-        runAsNonRoot: true
+        runAsNonRoot: false
         runAsUser: 568
         runAsGroup: 568
         fsGroup: 568
@@ -95,12 +95,7 @@ spec:
         existingClaim: pinchflat-config
       tmp:
         type: emptyDir
-      media:
-        type: nfs
-        server: 10.69.3.25
-        path: /data/data1/Media/Library/Videos
-        advancedMounts:
-          pinchflat:
-            app:
-              - path: /downloads
-                subPath: Library/Main/Youtube
+      output:
+        existingClaim: pinchflat-output
+        globalMounts:
+          - path: "/downloads"
