@@ -90,9 +90,9 @@ spec:
             port: *port
     ingress:
       app:
-        className: external
+        className: internal
         annotations:
-          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
         hosts:
           - host: jellyfin.${SECRET_DOMAIN}
             paths:
