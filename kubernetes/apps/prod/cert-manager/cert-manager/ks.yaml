@@ -32,7 +32,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: cert-manager
+    - name: cluster-apps-cert-manager
   path: ./kubernetes/apps/prod/cert-manager/cert-manager/issuers
   prune: true
   sourceRef:
