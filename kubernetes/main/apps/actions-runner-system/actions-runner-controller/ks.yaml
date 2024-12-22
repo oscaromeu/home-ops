@@ -5,6 +5,7 @@ metadata:
   name: &app actions-runner-controller
   namespace: flux-system
 spec:
+  suspend: true
   targetNamespace: actions-runner-system
   commonMetadata:
     labels:
