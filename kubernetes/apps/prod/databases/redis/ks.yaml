@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: redis
+  name: &app cluster-app-sredis
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
@@ -20,14 +20,14 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: redis-monitoring
+  name: cluster-apps-redis-monitoring
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   suspend: true
   dependsOn:
-    - name: redis
+    - name: cluster-apps-redis
   path: ./kubernetes/apps/prod/databases/redis/monitoring
   prune: true
   sourceRef:
@@ -37,7 +37,7 @@ spec:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: redis
-      namespace: datahub
+      namespace: databases
   interval: 30m
   retryInterval: 1m
   timeout: 5m

@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app ingress-nginx-certificates
+  name: &app cluster-apps-ingress-nginx-certificates
   namespace: flux-system
 spec:
   suspend: true
@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: cert-manager-issuers
+    - name: &app cluster-apps-cert-manager-issuers
   path: ./kubernetes/apps/prod/network/ingress-nginx/certificates
   prune: true
   sourceRef:
@@ -25,7 +25,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app ingress-nginx-internal
+  name: &app cluster-apps-ingress-nginx-internal
   namespace: flux-system
 spec:
   suspend: true
@@ -34,7 +34,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: ingress-nginx-certificates
+    - name: &app cluster-apps-ingress-nginx-certificates
   path: ./kubernetes/apps/prod/network/ingress-nginx/internal
   prune: true
   sourceRef:
@@ -48,7 +48,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app ingress-nginx-external
+  name: &app cluster-apps-ingress-nginx-external
   namespace: flux-system
 spec:
   suspend: true
@@ -57,7 +57,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: ingress-nginx-certificates
+    - name: &app cluster-apps-ingress-nginx-certificates
   path: ./kubernetes/apps/prod/network/ingress-nginx/external
   prune: true
   sourceRef:

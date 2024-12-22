@@ -2,12 +2,12 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: glauth
+  name: &app cluster-apps-glauth
   namespace: flux-system
 spec:
   suspend: true
   dependsOn:
-    - name: external-secrets-stores
+    - name: cluster-apps-external-secrets-stores
   path: ./kubernetes/apps/prod/kube-system/glauth/app
   prune: true
   sourceRef:

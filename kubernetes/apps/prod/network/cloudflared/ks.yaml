@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app cloudflared
+  name: &app cluster-apps-cloudflared
   namespace: flux-system
 spec:
   suspend: true
@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: external-dns
+    - name: &app cluster-apps-external-dns
   path: ./kubernetes/apps/prod/network/cloudflared/app
   prune: true
   sourceRef:

@@ -2,16 +2,16 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: loki
+  name: &app cluster-apps-loki
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   suspend: true
   dependsOn:
-    #- name: ingress-nginx-external
-    - name: kube-prometheus-stack
-    #- name: minio
+    #- name: cluster-apps-ingress-nginx-external
+    - name: cluster-apps-kube-prometheus-stack
+    #- name: cluster-apps-minio
   path: ./kubernetes/apps/prod/observability/loki/app
   prune: true
   sourceRef:
@@ -29,13 +29,13 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: loki-monitoring
+  name: &app cluster-apps-loki-monitoring
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: loki
+    - name: cluster-apps-loki
   path: ./kubernetes/apps/prod/observability/loki/monitoring
   prune: true
   sourceRef:

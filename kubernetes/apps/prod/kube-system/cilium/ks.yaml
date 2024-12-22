@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app cilium
+  name: &app cluster-apps-cilium
   namespace: flux-system
 spec:
   suspend: true
@@ -23,7 +23,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app cilium-config
+  name: &app cluster-apps-cilium-config
   namespace: flux-system
 spec:
   suspend: true
@@ -32,7 +32,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: cilium
+    - name: cluster-apps-cilium
   path: ./kubernetes/apps/prod/kube-system/cilium/config
   prune: false # never should be deleted
   sourceRef:

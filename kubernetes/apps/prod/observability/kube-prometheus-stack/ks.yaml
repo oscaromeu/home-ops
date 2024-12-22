@@ -2,13 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: kube-prometheus-stack
+  name: &app cluster-apps-kube-prometheus-stack
   namespace: flux-system
 spec:
   suspend: true
   dependsOn:
-    - name: ingress-nginx-external
-    - name: external-secrets
+    - name: cluster-apps-ingress-nginx-external
+    - name: cluster-apps-external-secrets
   path: ./kubernetes/apps/prod/observability/kube-prometheus-stack/app
   prune: true
   sourceRef:
@@ -39,7 +39,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: kube-prometheus-stack-monitoring
+  name: &app cluster-apps-kube-prometheus-stack-monitoring
   namespace: flux-system
 spec:
   suspend: true

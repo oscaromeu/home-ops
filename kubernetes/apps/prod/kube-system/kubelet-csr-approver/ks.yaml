@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app kubelet-csr-approver
+  name: &app cluster-apps-kubelet-csr-approver
   namespace: flux-system
 spec:
   suspend: true

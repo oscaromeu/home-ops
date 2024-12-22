@@ -2,14 +2,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: kubernetes-events-exporter
+  name: &app cluster-apps-kubernetes-events-exporter
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   suspend: true
   dependsOn:
-    - name: kube-prometheus-stack
+    - name: cluster-apps-kube-prometheus-stack
   path: ./kubernetes/apps/prod/observability/kubernetes-events-exporter/app
   prune: true
   sourceRef:

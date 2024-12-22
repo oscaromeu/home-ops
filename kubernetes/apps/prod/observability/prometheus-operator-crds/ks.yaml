@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: &app prometheus-operator-crds
+  name: &app cluster-apps-prometheus-operator-crds
   namespace: flux-system
 spec:
   suspend: true

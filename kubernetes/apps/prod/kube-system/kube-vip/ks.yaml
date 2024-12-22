@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app kube-vip
+  name: &app cluster-apps-kube-vip
   namespace: flux-system
 spec:
   suspend: true

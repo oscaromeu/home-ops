@@ -2,15 +2,15 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: fastapi-observability-a
+  name: &app cluster-apps-fastapi-observability-a
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: ingress-nginx-external
-    - name: external-secrets-stores
-    - name: k6s
+    - name: cluster-apps-ingress-nginx-external
+    - name: cluster-apps-external-secrets-stores
+    - name: cluster-apps-k6s
   path: ./kubernetes/apps/prod/dev/fastapi-observability/app-a
   prune: true
   sourceRef:
@@ -28,7 +28,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: fastapi-observability-b
+  name: cluster-apps-fastapi-observability-b
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
@@ -52,7 +52,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: fastapi-observability-c
+  name: cluster-apps-fastapi-observability-c
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
@@ -76,7 +76,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: fastapi-observability-monitoring
+  name: cluster-apps-fastapi-observability-monitoring
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
@@ -95,7 +95,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: fastapi-observability-test
+  name: cluster-apps-fastapi-observability-test
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"

@@ -2,13 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: overseerr
+  name: &app cluster-apps-overseerr
   namespace: flux-system
 spec:
   suspend: true
   dependsOn:
-    - name: ingress-nginx-external
-    - name: external-secrets-stores
+    - name: cluster-apps-ingress-nginx-external
+    - name: cluster-apps-external-secrets-stores
   path: ./kubernetes/apps/prod/default/overseerr/app
   prune: true
   sourceRef:
