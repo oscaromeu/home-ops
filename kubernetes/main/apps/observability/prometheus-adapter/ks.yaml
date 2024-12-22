@@ -7,6 +7,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "false"
 spec:
+  suspend: true
   dependsOn:
     - name: kube-prometheus-stack
   path: ./kubernetes/main/apps/observability/prometheus-adapter/app

@@ -5,6 +5,7 @@ metadata:
   name: csi-addons-controller-manager
   namespace: flux-system
 spec:
+  suspend: true
   path: ./deploy/controller
   prune: true
   sourceRef:

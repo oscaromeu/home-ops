@@ -5,6 +5,7 @@ metadata:
   name: kube-prometheus-stack
   namespace: flux-system
 spec:
+  suspend: true
   dependsOn:
     - name: ingress-nginx-external
     - name: external-secrets

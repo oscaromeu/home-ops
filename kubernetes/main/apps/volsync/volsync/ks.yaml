@@ -5,6 +5,7 @@ metadata:
   name: volsync
   namespace: flux-system
 spec:
+  suspend: true
   dependsOn:
     - name: snapshot-controller
   path: ./kubernetes/main/apps/volsync/volsync/app

@@ -27,6 +27,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  suspend: true
   dependsOn:
     - name: elastic
   path: ./kubernetes/main/apps/observability/elastic/monitoring

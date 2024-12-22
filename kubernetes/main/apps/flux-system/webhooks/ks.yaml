@@ -5,6 +5,7 @@ metadata:
   name: &app flux-webhooks
   namespace: flux-system
 spec:
+  suspend: true
   targetNamespace: flux-system
   commonMetadata:
     labels:

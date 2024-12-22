@@ -5,6 +5,7 @@ metadata:
   name: &app openebs
   namespace: flux-system
 spec:
+  suspend: true
   targetNamespace: openebs-system
   commonMetadata:
     labels:

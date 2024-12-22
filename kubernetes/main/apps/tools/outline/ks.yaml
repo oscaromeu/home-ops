@@ -7,6 +7,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  suspend: true
   targetNamespace: tools
   commonMetadata:
     labels:

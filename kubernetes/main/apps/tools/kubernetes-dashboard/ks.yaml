@@ -5,6 +5,7 @@ metadata:
   name: kubernetes-dashboard
   namespace: flux-system
 spec:
+  suspend: true
   path: ./kubernetes/main/apps/tools/kubernetes-dashboard/app
   prune: true
   sourceRef:

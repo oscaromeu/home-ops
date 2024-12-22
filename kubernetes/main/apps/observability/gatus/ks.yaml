@@ -5,6 +5,7 @@ metadata:
   name: gatus
   namespace: flux-system
 spec:
+  suspend: true
   dependsOn:
     - name: kube-prometheus-stack
     #- name: mimir

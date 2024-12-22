@@ -5,6 +5,7 @@ metadata:
   name: semaphore
   namespace: flux-system
 spec:
+  suspend: true
   dependsOn:
     - name: cloudnative-pg
     - name: external-secrets-stores

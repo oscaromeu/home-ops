@@ -7,6 +7,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  suspend: true
   dependsOn:
     - name: external-secrets-stores
   path: ./kubernetes/main/apps/observability/rally/app

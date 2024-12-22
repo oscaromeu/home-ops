@@ -6,6 +6,7 @@ metadata:
   name: &app pinchflat
   namespace: flux-system
 spec:
+  suspend: true
   targetNamespace: default
   commonMetadata:
     labels:

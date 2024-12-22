@@ -5,6 +5,7 @@ metadata:
   name: &app ingress-nginx-certificates
   namespace: flux-system
 spec:
+  suspend: true
   targetNamespace: network
   commonMetadata:
     labels:
@@ -27,6 +28,7 @@ metadata:
   name: &app ingress-nginx-internal
   namespace: flux-system
 spec:
+  suspend: true
   targetNamespace: network
   commonMetadata:
     labels:

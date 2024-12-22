@@ -5,6 +5,7 @@ metadata:
   name: overseerr
   namespace: flux-system
 spec:
+  suspend: true
   dependsOn:
     - name: ingress-nginx-external
     - name: external-secrets-stores

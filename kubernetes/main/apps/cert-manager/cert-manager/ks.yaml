@@ -5,6 +5,7 @@ metadata:
   name: &app cert-manager
   namespace: flux-system
 spec:
+  suspend: true
   targetNamespace: cert-manager
   commonMetadata:
     labels:

@@ -5,6 +5,7 @@ metadata:
   name: glauth
   namespace: flux-system
 spec:
+  suspend: true
   dependsOn:
     - name: external-secrets-stores
   path: ./kubernetes/main/apps/kube-system/glauth/app

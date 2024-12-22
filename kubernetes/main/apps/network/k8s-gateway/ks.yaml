@@ -5,6 +5,7 @@ metadata:
   name: &app k8s-gateway
   namespace: flux-system
 spec:
+  suspend: true
   targetNamespace: network
   commonMetadata:
     labels:

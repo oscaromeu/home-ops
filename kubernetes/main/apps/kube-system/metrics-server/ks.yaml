@@ -5,6 +5,7 @@ metadata:
   name: &app metrics-server
   namespace: flux-system
 spec:
+  suspend: true
   targetNamespace: kube-system
   commonMetadata:
     labels:

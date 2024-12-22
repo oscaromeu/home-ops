@@ -7,6 +7,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  suspend: true
   dependsOn:
     - name: ingress-nginx-external
   path: ./kubernetes/main/apps/tools/redpanda/app

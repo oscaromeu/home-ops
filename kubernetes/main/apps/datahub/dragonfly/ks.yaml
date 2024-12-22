@@ -5,6 +5,7 @@ metadata:
   name: &app dragonfly
   namespace: flux-system
 spec:
+  suspend: true
   targetNamespace: datahub
   commonMetadata:
     labels:
@@ -26,6 +27,7 @@ metadata:
   name: &app dragonfly-cluster
   namespace: flux-system
 spec:
+  suspend: true
   targetNamespace: datahub
   commonMetadata:
     labels:
