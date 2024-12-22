@@ -23,7 +23,7 @@ metadata:
 spec:
   suspend: false
   interval: 30m
-  path: ./kubernetes/main/clusters
+  path: ./kubernetes/prod/clusters
   prune: true
   wait: false
   sourceRef:
