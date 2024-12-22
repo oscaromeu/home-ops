@@ -7,7 +7,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  suspend: true
+  suspend: false
   targetNamespace: default
   path: ./kubernetes/apps/prod/default/metube/app
   prune: true

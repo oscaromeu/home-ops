@@ -5,7 +5,7 @@ metadata:
   name: &app cluster-apps-prowlarr
   namespace: flux-system
 spec:
-  suspend: true
+  suspend: false
   dependsOn:
     - name: cloudnative-pg-cluster
     - name: external-secrets-stores

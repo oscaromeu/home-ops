@@ -5,7 +5,7 @@ metadata:
   name: &app cluster-apps-reloader
   namespace: flux-system
 spec:
-  suspend: true
+  suspend: false
   targetNamespace: kube-system
   commonMetadata:
     labels:

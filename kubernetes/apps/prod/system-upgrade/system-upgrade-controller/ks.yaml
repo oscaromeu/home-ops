@@ -5,7 +5,7 @@ metadata:
   name: &app cluster-apps-system-upgrade-controller
   namespace: flux-system
 spec:
-  suspend: true
+  suspend: false
   targetNamespace: system-upgrade
   commonMetadata:
     labels:

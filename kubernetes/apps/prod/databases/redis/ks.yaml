@@ -2,12 +2,12 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: &app cluster-app-sredis
+  name: &app cluster-app-redis
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  suspend: true
+  suspend: false
   path: ./kubernetes/apps/prod/databases/redis/app
   prune: true
   sourceRef:
@@ -25,7 +25,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  suspend: true
+  suspend: false
   dependsOn:
     - name: cluster-apps-redis
   path: ./kubernetes/apps/prod/databases/redis/monitoring

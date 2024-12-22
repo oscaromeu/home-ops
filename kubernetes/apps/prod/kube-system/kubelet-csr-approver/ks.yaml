@@ -5,7 +5,7 @@ metadata:
   name: &app cluster-apps-kubelet-csr-approver
   namespace: flux-system
 spec:
-  suspend: true
+  suspend: false
   targetNamespace: kube-system
   commonMetadata:
     labels:

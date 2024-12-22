@@ -5,7 +5,7 @@ metadata:
   name: &app cluster-apps-cert-manager
   namespace: flux-system
 spec:
-  suspend: true
+  suspend: false
   targetNamespace: cert-manager
   commonMetadata:
     labels:
@@ -26,7 +26,7 @@ metadata:
   name: &app cluster-apps-cert-manager-issuers
   namespace: flux-system
 spec:
-  suspend: true
+  suspend: false
   targetNamespace: cert-manager
   commonMetadata:
     labels:

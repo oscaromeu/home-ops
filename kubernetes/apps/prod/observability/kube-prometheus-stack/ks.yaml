@@ -5,7 +5,7 @@ metadata:
   name: &app cluster-apps-kube-prometheus-stack
   namespace: flux-system
 spec:
-  suspend: true
+  suspend: false
   dependsOn:
     - name: cluster-apps-ingress-nginx-external
     - name: cluster-apps-external-secrets
@@ -42,7 +42,7 @@ metadata:
   name: &app cluster-apps-kube-prometheus-stack-monitoring
   namespace: flux-system
 spec:
-  suspend: true
+  suspend: false
   path: ./kubernetes/apps/prod/observability/kube-prometheus-stack/monitoring
   prune: true
   sourceRef:

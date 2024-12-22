@@ -5,7 +5,7 @@ metadata:
   name: &app cluster-apps-semaphore
   namespace: flux-system
 spec:
-  suspend: true
+  suspend: false
   dependsOn:
     - name: cluster-apps-cloudnative-pg
     - name: cluster-apps-external-secrets-stores

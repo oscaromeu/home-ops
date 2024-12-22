@@ -5,7 +5,7 @@ metadata:
   name: &app cluster-apps-gha-runner-large-scale-set
   namespace: flux-system
 spec:
-  suspend: true
+  suspend: false
   targetNamespace: actions-runner-system
   commonMetadata:
     labels:

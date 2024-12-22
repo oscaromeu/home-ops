@@ -7,7 +7,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  suspend: true
+  suspend: false
   dependsOn:
     - name: cluster-apps-external-secrets-stores
     #- name: cluster-apps-kafka-cluster
@@ -34,7 +34,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  suspend: true
+  suspend: false
   dependsOn:
     - name: cluster-apps-vector-aggregator
   path: ./kubernetes/apps/prod/observability/vector/agent
@@ -59,7 +59,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  suspend: true
+  suspend: false
   dependsOn:
     - name: cluster-apps-vector-aggregator
   path: ./kubernetes/apps/prod/observability/vector/monitoring

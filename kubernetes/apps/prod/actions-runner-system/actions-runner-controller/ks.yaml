@@ -5,7 +5,7 @@ metadata:
   name: &app cluster-apps-actions-runner-controller
   namespace: flux-system
 spec:
-  suspend: true
+  suspend: false
   targetNamespace: actions-runner-system
   commonMetadata:
     labels:
@@ -26,7 +26,7 @@ metadata:
   name: &app cluster-apps-actions-runners
   namespace: flux-system
 spec:
-  suspend: true
+  suspend: false
   targetNamespace: actions-runner-system
   commonMetadata:
     labels:

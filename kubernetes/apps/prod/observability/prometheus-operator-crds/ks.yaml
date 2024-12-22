@@ -6,7 +6,7 @@ metadata:
   name: &app cluster-apps-prometheus-operator-crds
   namespace: flux-system
 spec:
-  suspend: true
+  suspend: false
   targetNamespace: observability
   commonMetadata:
     labels:

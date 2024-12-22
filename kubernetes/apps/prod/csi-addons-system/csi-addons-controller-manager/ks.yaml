@@ -5,7 +5,7 @@ metadata:
   name: cluster-apps-csi-addons-controller-manager
   namespace: flux-system
 spec:
-  suspend: true
+  suspend: false
   path: ./deploy/controller
   prune: true
   sourceRef:

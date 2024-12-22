@@ -7,7 +7,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  suspend: true
+  suspend: false
   dependsOn:
     - name: external-secrets-stores
   path: ./kubernetes/apps/prod/databases/cloudnative-pg/app
@@ -32,7 +32,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  suspend: true
+  suspend: false
   dependsOn:
     - name: cloudnative-pg
     - name: external-secrets-stores
@@ -54,7 +54,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "false"
 spec:
-  suspend: true
+  suspend: false
   dependsOn:
     - name: cloudnative-pg-cluster
   path: ./kubernetes/apps/prod/databases/cloudnative-pg/monitoring
