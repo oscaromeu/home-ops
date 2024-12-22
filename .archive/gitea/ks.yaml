@@ -11,7 +11,7 @@ spec:
     - name: cloudnative-pg-cluster
     - name: ingress-nginx-internal
     - name: external-secrets-stores
-  path: ./kubernetes/main/apps/tools/gitea/app
+  path: ./kubernetes/apps/prod/tools/gitea/app
   prune: true
   sourceRef:
     kind: GitRepository

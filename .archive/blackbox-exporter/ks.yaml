@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: kube-prometheus-stack
-  path: ./kubernetes/main/apps/observability/blackbox-exporter/app
+  path: ./kubernetes/apps/prod/observability/blackbox-exporter/app
   prune: true
   sourceRef:
     kind: GitRepository

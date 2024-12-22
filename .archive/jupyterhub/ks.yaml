@@ -10,7 +10,7 @@ spec:
   dependsOn:
     #- name: ingress-nginx-external
     - name: external-secrets-stores
-  path: ./kubernetes/main/apps/default/jupyterhub/app
+  path: ./kubernetes/apps/prod/default/jupyterhub/app
   prune: true
   sourceRef:
     kind: GitRepository

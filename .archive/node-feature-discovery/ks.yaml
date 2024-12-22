@@ -5,7 +5,7 @@ metadata:
   name: node-feature-discovery
   namespace: flux-system
 spec:
-  path: ./kubernetes/main/apps/kube-system/node-feature-discovery/app
+  path: ./kubernetes/apps/prod/kube-system/node-feature-discovery/app
   prune: true
   sourceRef:
     kind: GitRepository

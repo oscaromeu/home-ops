@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: ingress-nginx-external
     - name: external-secrets-stores
-  path: ./kubernetes/main/apps/kyverno/kyverno/app
+  path: ./kubernetes/apps/prod/kyverno/kyverno/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -30,7 +30,7 @@ metadata:
 spec:
   dependsOn:
     - name: kyverno
-  path: ./kubernetes/main/apps/kyverno/kyverno/policies
+  path: ./kubernetes/apps/prod/kyverno/kyverno/policies
   prune: true
   sourceRef:
     kind: GitRepository

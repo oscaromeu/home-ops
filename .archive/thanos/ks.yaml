@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: external-secrets
-  path: ./kubernetes/main/apps/observability/thanos/app
+  path: ./kubernetes/apps/prod/observability/thanos/app
   prune: true
   sourceRef:
     kind: GitRepository

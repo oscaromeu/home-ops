@@ -5,7 +5,7 @@ metadata:
   name: dragonfly-operator
   namespace: flux-system
 spec:
-  path: ./kubernetes/main/apps/datahub/dragonfly/operator
+  path: ./kubernetes/apps/prod/databases/dragonfly/operator
   prune: true
   sourceRef:
     kind: GitRepository
@@ -22,7 +22,7 @@ metadata:
 spec:
   dependsOn:
     - name: dragonfly-operator
-  path: ./kubernetes/main/apps/datahub/dragonfly/app
+  path: ./kubernetes/apps/prod/databases/dragonfly/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -41,7 +41,7 @@ metadata:
 spec:
   dependsOn:
     - name: dragonfly
-  path: ./kubernetes/main/apps/datahub/dragonfly/monitoring
+  path: ./kubernetes/apps/prod/databases/dragonfly/monitoring
   prune: true
   sourceRef:
     kind: GitRepository

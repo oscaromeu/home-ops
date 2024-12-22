@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: ingress-nginx-external
     - name: external-secrets-stores
-  path: ./kubernetes/main/apps/default/qbittorrent/app
+  path: ./kubernetes/apps/prod/default/qbittorrent/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -37,7 +37,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: default
-  path: ./kubernetes/main/apps/default/qbittorrent/volumes
+  path: ./kubernetes/apps/prod/default/qbittorrent/volumes
   prune: true
   sourceRef:
     kind: GitRepository

@@ -7,7 +7,7 @@ metadata:
 spec:
   dependsOn:
     - name: ingress-nginx-internal
-  path: ./kubernetes/main/apps/datahub/redpanda/operator
+  path: ./kubernetes/apps/prod/databases/redpanda/operator
   prune: true
   sourceRef:
     kind: GitRepository
@@ -26,7 +26,7 @@ metadata:
 spec:
   dependsOn:
     - name: redpanda-operator
-  path: ./kubernetes/main/apps/datahub/redpanda/app
+  path: ./kubernetes/apps/prod/databases/redpanda/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -45,7 +45,7 @@ spec:
 #spec:
 #  dependsOn:
 #    - name: redpanda
-#  path: ./kubernetes/main/apps/datahub/redpanda/monitoring
+#  path: ./kubernetes/apps/prod/databases/redpanda/monitoring
 #  prune: true
 #  sourceRef:
 #    kind: GitRepository

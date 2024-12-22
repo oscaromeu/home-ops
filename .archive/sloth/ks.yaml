@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: kube-prometheus-stack
-  path: ./kubernetes/main/apps/observability/sloth/app
+  path: ./kubernetes/apps/prod/observability/sloth/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -33,7 +33,7 @@ metadata:
 spec:
   dependsOn:
     - name: sloth
-  path: ./kubernetes/main/apps/observability/sloth/monitoring
+  path: ./kubernetes/apps/prod/observability/sloth/monitoring
   prune: true
   sourceRef:
     kind: GitRepository

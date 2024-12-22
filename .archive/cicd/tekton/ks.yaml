@@ -7,7 +7,7 @@ metadata:
 spec:
   dependsOn:
     - name: tekton
-  path: ./kubernetes/main/apps/cicd/tekton/tasks
+  path: ./kubernetes/apps/prod/cicd/tekton/tasks
   prune: true
   sourceRef:
     kind: GitRepository
@@ -25,7 +25,7 @@ metadata:
 spec:
   dependsOn:
     - name: tekton-tasks
-  path: ./kubernetes/main/apps/cicd/tekton/pipeline
+  path: ./kubernetes/apps/prod/cicd/tekton/pipeline
   prune: true
   sourceRef:
     kind: GitRepository
@@ -43,7 +43,7 @@ metadata:
 spec:
   dependsOn:
     - name: tekton-pipeline
-  path: ./kubernetes/main/apps/cicd/tekton/pipeline/run
+  path: ./kubernetes/apps/prod/cicd/tekton/pipeline/run
   prune: true
   sourceRef:
     kind: GitRepository

@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: ingress-nginx
-  path: ./kubernetes/main/apps/minio/monitoring-tenant/app
+  path: ./kubernetes/apps/prod/minio/monitoring-tenant/app
   prune: true
   sourceRef:
     kind: GitRepository

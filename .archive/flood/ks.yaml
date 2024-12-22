@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: qbittorrent
-  path: ./kubernetes/main/apps/default/flood/app
+  path: ./kubernetes/apps/prod/default/flood/app
   prune: true
   sourceRef:
     kind: GitRepository

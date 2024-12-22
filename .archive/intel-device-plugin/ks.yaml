@@ -8,7 +8,7 @@ metadata:
 spec:
   dependsOn:
     - name: node-feature-discovery
-  path: ./kubernetes/main/apps/kube-system/intel-device-plugin/app
+  path: ./kubernetes/apps/prod/kube-system/intel-device-plugin/app
   prune: true
   sourceRef:
     kind: GitRepository

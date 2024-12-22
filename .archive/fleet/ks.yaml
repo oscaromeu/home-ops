@@ -7,7 +7,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  path: ./kubernetes/main/apps/dev/fleet/app
+  path: ./kubernetes/apps/prod/dev/fleet/app
   prune: true
   sourceRef:
     kind: GitRepository

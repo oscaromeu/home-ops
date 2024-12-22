@@ -1,0 +1,26 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: minio-operator
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+spec:
+  targetNamespace: datahub
+  dependsOn:
+    - name: ingress-nginx-internal
+    - name: external-secrets
+  path: ./kubernetes/apps/prod/databases/minio/operator/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      name: operator
+      namespace: datahub
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m

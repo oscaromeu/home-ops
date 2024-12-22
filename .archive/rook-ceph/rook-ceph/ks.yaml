@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: snapshot-controller
     - name: volsync
-  path: ./kubernetes/main/apps/rook-ceph/rook-ceph/app
+  path: ./kubernetes/apps/prod/rook-ceph/rook-ceph/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -26,7 +26,7 @@ metadata:
 spec:
   dependsOn:
     - name: rook-ceph
-  path: ./kubernetes/main/apps/rook-ceph/rook-ceph/cluster
+  path: ./kubernetes/apps/prod/rook-ceph/rook-ceph/cluster
   prune: true
   sourceRef:
     kind: GitRepository
@@ -44,7 +44,7 @@ metadata:
 spec:
   dependsOn:
     - name: rook-ceph-cluster
-  path: ./kubernetes/main/apps/rook-ceph/rook-ceph/monitoring
+  path: ./kubernetes/apps/prod/rook-ceph/rook-ceph/monitoring
   prune: true
   sourceRef:
     kind: GitRepository

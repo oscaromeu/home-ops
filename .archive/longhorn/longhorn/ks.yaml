@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: ingress-nginx-internal
-  path: ./kubernetes/main/apps/longhorn/longhorn/app
+  path: ./kubernetes/apps/prod/longhorn/longhorn/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -33,7 +33,7 @@ metadata:
 spec:
   dependsOn:
     - name: longhorn
-  path: ./kubernetes/main/apps/longhorn/longhorn/monitoring
+  path: ./kubernetes/apps/prod/longhorn/longhorn/monitoring
   prune: true
   sourceRef:
     kind: GitRepository

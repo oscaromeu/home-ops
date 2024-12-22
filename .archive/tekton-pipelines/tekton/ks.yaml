@@ -7,7 +7,7 @@ metadata:
 spec:
   dependsOn:
     - name: ingress-nginx-internal
-  path: ./kubernetes/main/apps/tekton-pipelines/tekton/app
+  path: ./kubernetes/apps/prod/tekton-pipelines/tekton/app
   prune: true
   sourceRef:
     kind: GitRepository
