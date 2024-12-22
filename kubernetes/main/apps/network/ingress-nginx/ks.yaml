@@ -51,6 +51,7 @@ metadata:
   name: &app ingress-nginx-external
   namespace: flux-system
 spec:
+  suspend: true
   targetNamespace: network
   commonMetadata:
     labels:

@@ -37,6 +37,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  suspend: true
   targetNamespace: default
   path: ./kubernetes/main/apps/default/qbittorrent/volumes
   prune: true

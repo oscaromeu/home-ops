@@ -42,6 +42,7 @@ metadata:
   name: kube-prometheus-stack-monitoring
   namespace: flux-system
 spec:
+  suspend: true
   path: ./kubernetes/main/apps/observability/kube-prometheus-stack/monitoring
   prune: true
   sourceRef:
