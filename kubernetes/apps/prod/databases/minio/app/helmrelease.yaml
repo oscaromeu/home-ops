@@ -97,6 +97,7 @@ spec:
               key: token
     ingress:
       app:
+        enabled: true
         className: internal
         annotations:
           hajimari.io/icon: mdi:pail
@@ -108,6 +109,7 @@ spec:
                   identifier: app
                   port: http
       s3:
+        enabled: true
         className: internal
         annotations:
           hajimari.io/enable: "false"
