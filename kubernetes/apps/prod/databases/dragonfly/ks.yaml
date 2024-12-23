@@ -33,7 +33,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: dragonfly
+    - name: cluster-apps-dragonfly
   path: ./kubernetes/apps/prod/databases/dragonfly/cluster
   prune: true
   sourceRef:
