@@ -37,14 +37,14 @@ spec:
               MINIO_UPDATE: "off"
               MINIO_PROMETHEUS_URL: http://kube-prometheus-stack-prometheus.observability:9090
               MINIO_PROMETHEUS_JOB_ID: minio
-              MINIO_BROWSER_REDIRECT_URL: https://minio.${CLUSTER_DOMAIN}
-              MINIO_SERVER_URL: https://s3.${CLUSTER_DOMAIN}
-              MINIO_API_CORS_ALLOW_ORIGIN: https://minio.${CLUSTER_DOMAIN},https://s3.${CLUSTER_DOMAIN}
-              # MINIO_IDENTITY_OPENID_CONFIG_URL: "https://auth.${CLUSTER_DOMAIN}/.well-known/openid-configuration"
+              MINIO_BROWSER_REDIRECT_URL: https://minio.${SECRET_DOMAIN}
+              MINIO_SERVER_URL: https://s3.${SECRET_DOMAIN}
+              MINIO_API_CORS_ALLOW_ORIGIN: https://minio.${SECRET_DOMAIN},https://s3.${SECRET_DOMAIN}
+              # MINIO_IDENTITY_OPENID_CONFIG_URL: "https://auth.${SECRET_DOMAIN}/.well-known/openid-configuration"
               # MINIO_IDENTITY_OPENID_CLIENT_ID: minio
               # MINIO_IDENTITY_OPENID_CLIENT_SECRET: "${SECRET_MINIO_OAUTH_CLIENT_SECRET}"
               # MINIO_IDENTITY_OPENID_SCOPES: "openid,profile,email,groups"
-              # MINIO_IDENTITY_OPENID_REDIRECT_URI: "https://minio.${CLUSTER_DOMAIN}/oauth_callback"
+              # MINIO_IDENTITY_OPENID_REDIRECT_URI: "https://minio.${SECRET_DOMAIN}/oauth_callback"
             envFrom:
               - secretRef:
                   name: *app
@@ -102,7 +102,7 @@ spec:
         annotations:
           hajimari.io/icon: mdi:pail
         hosts:
-          - host: "{{ .Release.Name }}.${CLUSTER_DOMAIN}"
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
@@ -119,7 +119,7 @@ spec:
           nginx.ingress.kubernetes.io/configuration-snippet: |
             chunked_transfer_encoding off;
         hosts:
-          - host: s3.${CLUSTER_DOMAIN}
+          - host: s3.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
