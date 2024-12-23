@@ -2,6 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: observability
 resources:
-  - svc_elasticsearch-exporter.yaml
-  - svcmon-elasticsearch-exporter.yaml
-  - dp_elasticsearch_exporter.yaml
+  - svc.yaml
+  - svc-mon.yaml
+  - dpyaml
