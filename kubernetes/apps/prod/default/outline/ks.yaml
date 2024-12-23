@@ -8,7 +8,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   suspend: false
-  targetNamespace: tools
+  targetNamespace: default
   commonMetadata:
     labels:
       app.kubernetes.io/name: outline
