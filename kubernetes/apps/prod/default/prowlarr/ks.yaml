@@ -7,8 +7,8 @@ metadata:
 spec:
   suspend: false
   dependsOn:
-    - name: cloudnative-pg-cluster
-    - name: external-secrets-stores
+    - name: cluster-apps-cloudnative-pg-cluster
+    - name: cluster-apps-external-secrets-stores
   path: ./kubernetes/apps/prod/default/prowlarr/app
   prune: true
   sourceRef:
