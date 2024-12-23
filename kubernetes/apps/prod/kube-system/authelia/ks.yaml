@@ -9,8 +9,8 @@ metadata:
 spec:
   suspend: false
   dependsOn:
-    - name: external-secrets-stores
-    - name: dragonfly-cluster
+    - name: cluster-apps-external-secrets-stores
+    - name: cluster-apps-dragonfly-cluster
   path: ./kubernetes/apps/prod/kube-system/authelia/app
   prune: true
   sourceRef:
