@@ -10,7 +10,7 @@ spec:
   suspend: false
   dependsOn:
     - name: cluster-apps-external-secrets-stores
-  path: ./kubernetes/apps/prod/tools/dnsutils/app
+  path: ./kubernetes/apps/prod/default/dnsutils/app
   prune: true
   sourceRef:
     kind: GitRepository

@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: ingress-nginx-external
-  path: ./kubernetes/apps/prod/tools/wikijs/app
+  path: ./kubernetes/apps/prod/default/wikijs/app
   prune: true
   sourceRef:
     kind: GitRepository

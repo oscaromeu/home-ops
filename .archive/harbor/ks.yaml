@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: ingress-nginx-external
     - name: ingress-nginx-internal
-  path: ./kubernetes/apps/prod/tools/harbor/app
+  path: ./kubernetes/apps/prod/default/harbor/app
   prune: true
   sourceRef:
     kind: GitRepository

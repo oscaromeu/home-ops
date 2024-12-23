@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: external-secrets-stores
-  path: ./kubernetes/apps/prod/tools/cdi/operator
+  path: ./kubernetes/apps/prod/default/cdi/operator
   prune: true
   sourceRef:
     kind: GitRepository
@@ -27,7 +27,7 @@ spec:
   dependsOn:
     - name: external-secrets-stores
     - name: cdi-operator
-  path: ./kubernetes/apps/prod/tools/cdi/app
+  path: ./kubernetes/apps/prod/default/cdi/app
   prune: true
   sourceRef:
     kind: GitRepository

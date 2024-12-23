@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: ingress-nginx-internal
     - name: external-secrets-stores
-  path: ./kubernetes/apps/prod/tools/registry/app
+  path: ./kubernetes/apps/prod/default/registry/app
   prune: true
   sourceRef:
     kind: GitRepository
