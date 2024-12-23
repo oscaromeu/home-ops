@@ -7,7 +7,7 @@ metadata:
 spec:
   suspend: false
   dependsOn:
-    - name: cluster-app-kube-prometheus-stack
+    - name: cluster-apps-kube-prometheus-stack
     #- name: mimir
   path: ./kubernetes/apps/prod/observability/gatus/app
   prune: true
