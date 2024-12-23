@@ -9,8 +9,8 @@ metadata:
 spec:
   suspend: false
   dependsOn:
-    - name: ingress-nginx-external
-    - name: external-secrets-stores
+    - name: cluster-apps-ingress-nginx-external
+    - name: cluster-apps-external-secrets-stores
   path: ./kubernetes/apps/prod/default/qbittorrent/app
   prune: true
   sourceRef:
