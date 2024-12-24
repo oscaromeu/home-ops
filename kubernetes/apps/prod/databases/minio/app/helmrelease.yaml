@@ -108,9 +108,9 @@ spec:
                 service:
                   identifier: app
                   port: http
-        tls:
-          - hosts:
-              - *host
+        #tls:
+        #  - hosts:
+        #      - *host
       s3:
         enabled: true
         className: internal
@@ -128,9 +128,9 @@ spec:
                 service:
                   identifier: app
                   port: api
-        tls:
-          - hosts:
-              - *host
+        #tls:
+        #  - hosts:
+        #      - *host
     persistence:
       data:
         type: nfs
