@@ -45,9 +45,9 @@ spec:
               # MINIO_IDENTITY_OPENID_CLIENT_SECRET: "${SECRET_MINIO_OAUTH_CLIENT_SECRET}"
               # MINIO_IDENTITY_OPENID_SCOPES: "openid,profile,email,groups"
               # MINIO_IDENTITY_OPENID_REDIRECT_URI: "https://minio.${SECRET_DOMAIN}/oauth_callback"
-            envFrom:
-              - secretRef:
-                  name: *app
+            #envFrom:
+            #  - secretRef:
+            #      name: *app
             args: ["server", "/data", "--console-address", ":9001"]
             probes:
               liveness: &probes
