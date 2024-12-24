@@ -102,7 +102,6 @@ spec:
         annotations:
           hajimari.io/icon: mdi:pail
           nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-          nginx.ingress.kubernetes.io/backend-protocol: HTTPS
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
