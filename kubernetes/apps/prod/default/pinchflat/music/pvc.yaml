@@ -11,18 +11,18 @@ spec:
     requests:
       storage: 100Mi
   storageClassName: openebs-hostpath
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: pinchflat-music-output
-spec:
-  storageClassName: nfs-client
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Gi
-  nfs:
-    server: 10.69.3.25
-    path: /data/data1/music
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: pinchflat-music-output
+#spec:
+#  storageClassName: nfs-client
+#  accessModes:
+#  - ReadWriteOnce
+#  resources:
+#    requests:
+#      storage: 100Gi
+#  nfs:
+#    server: 10.69.3.25
+#    path: /data/data1/music
