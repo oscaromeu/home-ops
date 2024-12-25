@@ -36,6 +36,7 @@ spec:
           name: pool-0
           volumesPerServer: 1
           size: 100Gi
+          storageClassName: nfs-client
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
