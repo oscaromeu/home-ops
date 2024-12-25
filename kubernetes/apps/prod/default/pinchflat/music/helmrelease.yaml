@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: pinchflat
+  name: pinchflat-music
 spec:
   interval: 30m
   chart:
@@ -29,7 +29,7 @@ spec:
   #    namespace: volsync-system
   values:
     controllers:
-      pinchflat:
+      pinchflat-music:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -74,7 +74,7 @@ spec:
         seccompProfile: { type: RuntimeDefault }
     service:
       app:
-        controller: pinchflat
+        controller: pinchflat-music
         ports:
           http:
             port: *port
@@ -92,10 +92,10 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: pinchflat-config
+        existingClaim: pinchflat-music-config
       tmp:
         type: emptyDir
       output:
-        existingClaim: pinchflat-output
+        existingClaim: pinchflat-music-output
         globalMounts:
           - path: "/downloads"

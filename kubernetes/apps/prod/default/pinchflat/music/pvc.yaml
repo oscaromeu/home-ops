@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pinchflat-config
+  name: pinchflat-music-config
   namespace: default
 spec:
   accessModes:
@@ -15,7 +15,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pinchflat-output
+  name: pinchflat-music-output
 spec:
   storageClassName: nfs-client
   accessModes:
@@ -23,3 +23,6 @@ spec:
   resources:
     requests:
       storage: 100Gi
+  nfs:
+    server: 10.69.3.25
+    path: /data/data1/music
