@@ -29,8 +29,8 @@ spec:
         repository: quay.io/minio/minio
         tag: RELEASE.2024-08-17T01-24-54Z
         pullPolicy: IfNotPresent
-      configuration:
-        name: minio-env-configuration
+      #configuration:
+      #  name: minio-env-configuration
       pools:
         - servers: 1
           name: pool-0
