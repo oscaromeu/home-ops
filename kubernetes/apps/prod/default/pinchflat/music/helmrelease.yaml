@@ -96,6 +96,11 @@ spec:
       tmp:
         type: emptyDir
       output:
-        existingClaim: pinchflat-music-output
-        globalMounts:
-          - path: "/downloads"
+        type: nfs
+        server: 10.69.3.25
+        path: /data/data1/music
+        advancedMounts:
+          pinchflat:
+            app:
+              - path: /music
+                subPath: Library/Main/Youtube
