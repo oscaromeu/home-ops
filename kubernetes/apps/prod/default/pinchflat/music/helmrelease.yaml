@@ -29,7 +29,7 @@ spec:
   #    namespace: volsync-system
   values:
     controllers:
-      pinchflat-music:
+      pinchflat:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -74,7 +74,7 @@ spec:
         seccompProfile: { type: RuntimeDefault }
     service:
       app:
-        controller: pinchflat-music
+        controller: pinchflat
         ports:
           http:
             port: *port
