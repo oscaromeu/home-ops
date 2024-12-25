@@ -23,7 +23,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - cluster-apps-minio-operator
+    - name: cluster-apps-minio-operator
   targetNamespace: databases
   path: ./kubernetes/apps/prod/databases/minio/tenant
   prune: true
