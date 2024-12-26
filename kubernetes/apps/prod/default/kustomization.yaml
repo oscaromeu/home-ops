@@ -10,7 +10,7 @@ resources:
   #- ./docuseal/ks.yaml
   - ./outline/ks.yaml
   #- ./hajimari/ks.yaml
-  - ./jellyfin/ks.yaml
+  #- ./jellyfin/ks.yaml
   - ./linkding/ks.yaml
   - ./metube/ks.yaml
   #- ./navidrome/ks.yaml
