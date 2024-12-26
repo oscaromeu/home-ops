@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: pinchflat-music
+  name: pinchflat
 spec:
   interval: 30m
   chart:
@@ -92,12 +92,12 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: pinchflat-music-config
+        existingClaim: pinchflat-config
       tmp:
         type: emptyDir
       output:
         type: nfs
         server: 10.69.3.25
-        path: /data/data1/music
+        path: /data/data1/Media/Library/Videos
         globalMounts:
           - path: "/downloads"
