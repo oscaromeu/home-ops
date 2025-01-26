@@ -76,7 +76,7 @@ spec:
       output:
         type: nfs
         server: 10.69.3.25
-        path: /mnt/k8s/media
+        path: /mnt/k8s/data
         globalMounts:
         - path: /downloads
           subPath: metube
