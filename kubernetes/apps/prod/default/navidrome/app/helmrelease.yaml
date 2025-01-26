@@ -76,11 +76,13 @@ spec:
       music:
         type: nfs
         enabled: true
-        path: /mnt/k8s/data/Library/Music
+        path: /mnt/k8s/data
         server: "10.69.3.25"
-        globalMounts:
-          - path: /music
-            readOnly: true
+        advancedMounts:
+          main:
+            app:
+              - path: /music
+                subPath: Library/Music
     resources:
       requests:
         cpu: 10m
