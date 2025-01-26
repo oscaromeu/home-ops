@@ -16,7 +16,7 @@ resources:
   - ./jellyfin/ks.yaml
   - ./linkding/ks.yaml
   - ./metube/ks.yaml
-  - ./navidrome/ks.yaml
+  #- ./navidrome/ks.yaml
   #- ./overseerr/ks.yaml
   #- ./prowlarr/ks.yaml
   - ./pinchflat/ks.yaml
