@@ -76,7 +76,7 @@ spec:
       music:
         type: nfs
         enabled: true
-        path: /mnt/k8s/data/music
+        path: /mnt/k8s/data/Library/Music
         server: "10.69.3.25"
         globalMounts:
           - path: /music
