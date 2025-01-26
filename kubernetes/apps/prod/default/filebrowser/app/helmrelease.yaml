@@ -66,5 +66,8 @@ spec:
         type: nfs
         server: 10.69.3.25
         path: /mnt/k8s/data
-        globalMounts:
-          - path: /data
+        advancedMounts:
+          main:
+            app:
+              - path: /media
+                subPath: Library/
