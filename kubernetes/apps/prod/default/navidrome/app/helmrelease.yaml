@@ -25,6 +25,15 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
+  valuesFrom:
+    - targetPath: env.ND_LASTFM_APIKEY
+      kind: Secret
+      name: navidrome-external-ingregrations
+      valuesKey: LASTFM_APIKEY
+    - targetPath: env.ND_LASTFM_SECRET
+      kind: Secret
+      name: navidrome-external-ingregrations
+      valuesKey: LASTFM_SECRET
   values:
     image:
       repository: ghcr.io/navidrome/navidrome
@@ -39,7 +48,7 @@ spec:
       ND_PROMETHEUS_ENABLED: "true"
       ND_REVERSEPROXYUSERHEADER: "Remote-User"
       ND_REVERSEPROXYWHITELIST: "0.0.0.0/0"
-      ND_SCANSCHEDULE: "@every 1h"
+      ND_SCANSCHEDULE: "@every 5m"
       ND_SESSIONTIMEOUT: 24h
     service:
       main:
