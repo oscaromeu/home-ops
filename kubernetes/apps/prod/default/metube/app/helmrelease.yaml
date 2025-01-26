@@ -78,7 +78,7 @@ spec:
         server: 10.69.3.25
         path: /mnt/k8s/data
         advancedMounts:
-          pinchflat:
+          metube:
             app:
               - path: /downloads
                 subPath: Library/Metube
