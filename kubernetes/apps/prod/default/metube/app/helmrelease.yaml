@@ -77,6 +77,8 @@ spec:
         type: nfs
         server: 10.69.3.25
         path: /mnt/k8s/data
-        globalMounts:
-        - path: /downloads
-          subPath: metube
+        advancedMounts:
+          pinchflat:
+            app:
+              - path: /downloads
+                subPath: Library/Metube
