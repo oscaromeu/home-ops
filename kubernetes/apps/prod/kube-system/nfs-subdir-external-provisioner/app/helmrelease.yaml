@@ -25,7 +25,7 @@ spec:
   values:
     nfs:
       server: 10.69.3.25
-      path: /mnt/timeless/shares
+      path: /mnt/k8s/data
 
     storageClass:
       create: true
