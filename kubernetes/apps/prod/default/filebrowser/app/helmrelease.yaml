@@ -65,6 +65,6 @@ spec:
       data:
         type: nfs
         server: 10.69.3.25
-        path: /mnt/k8s/data
+        path: /mnt/k8s/data/Library
         globalMounts:
-          - path: /mnt/k8s/data
+          - path: /data
