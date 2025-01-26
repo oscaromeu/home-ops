@@ -74,6 +74,9 @@ spec:
         globalMounts:
           - path: "/config"
       output:
-        existingClaim: metube-output
+        type: nfs
+        server: 10.69.3.25
+        path: /mnt/k8s/media
         globalMounts:
-          - path: "/downloads"
+        - path: /downloads
+          subPath: metube
