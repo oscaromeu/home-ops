@@ -39,7 +39,7 @@ spec:
         controller: main
         ports:
           http:
-            port: 80
+            port: 8001
     ingress:
       main:
         className: internal
