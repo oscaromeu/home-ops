@@ -110,7 +110,7 @@ spec:
       media:
         type: nfs
         server: 10.69.3.25
-        path: /data/data1/Media/Library/Videos
+        path: /mnt/k8s/data/Library/Videos
         globalMounts:
           - path: /videos
             readOnly: true
