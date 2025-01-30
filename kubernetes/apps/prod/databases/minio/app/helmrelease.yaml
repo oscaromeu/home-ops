@@ -119,7 +119,7 @@ spec:
                   identifier: app
                   port: api
     persistence:
-      data:
+      minio:
         type: nfs
         enabled: true
         path: /mnt/k8s/data/k8s
