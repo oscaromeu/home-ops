@@ -7,16 +7,15 @@ resources:
   #- ./busybox/ks.yaml
   #- ./dnsutils/ks.yaml
   #- ./docuseal/ks.yaml
-  - ./excalidraw/ks.yaml
+  #- ./excalidraw/ks.yaml
   - ./filebrowser/ks.yaml
-  - ./gossa/ks.yaml
   - ./outline/ks.yaml
-  - ./hajimari/ks.yaml
+  #- ./hajimari/ks.yaml
   - ./jellyfin/ks.yaml
   - ./linkding/ks.yaml
   - ./metube/ks.yaml
   - ./navidrome/ks.yaml
-  - ./overseerr/ks.yaml
-  - ./prowlarr/ks.yaml
+  #- ./overseerr/ks.yaml
+  #- ./prowlarr/ks.yaml
   - ./pinchflat/ks.yaml
-  - ./qbittorrent/ks.yaml
+  #- ./qbittorrent/ks.yaml
