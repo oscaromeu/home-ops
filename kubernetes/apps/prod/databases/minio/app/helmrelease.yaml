@@ -125,7 +125,7 @@ spec:
         path: /mnt/k8s/data/k8s
         server: "10.69.3.25"
         advancedMounts:
-          main:
+          minio:
             app:
               - path: /data
                 subPath: Library/Minio
