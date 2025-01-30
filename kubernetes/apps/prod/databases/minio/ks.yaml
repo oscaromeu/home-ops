@@ -5,8 +5,6 @@ metadata:
   name: &app cluster-apps-minio
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: cluster-apps-minio-operator
   targetNamespace: databases
   path: ./kubernetes/apps/prod/databases/minio/app
   prune: true
