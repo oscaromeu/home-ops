@@ -63,12 +63,6 @@ spec:
                 cpu: 50m
               limits:
                 memory: 750Mi
-        pod:
-          securityContext:
-            runAsUser: 103
-            runAsGroup: 103
-            fsGroup: 103
-            fsGroupChangePolicy: OnRootMismatch
     service:
       app:
         controller: minio
