@@ -122,5 +122,10 @@ spec:
       data:
         type: nfs
         enabled: true
-        path: /data/data1/minio/k8s
+        path: /mnt/k8s/data/k8s
         server: "10.69.3.25"
+        advancedMounts:
+          main:
+            app:
+              - path: /data
+                subPath: Library/Minio
