@@ -2,30 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app cluster-apps-minio-operator
-  namespace: flux-system
-spec:
-  targetNamespace: databases
-  path: ./kubernetes/apps/prod/databases/minio/operator
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: home-kubernetes
-  wait: true
-  interval: 30m
-  retryInterval: 1m
-  timeout: 5m
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
   name: &app cluster-apps-minio-tenant
   namespace: flux-system
 spec:
   dependsOn:
     - name: cluster-apps-minio-operator
   targetNamespace: databases
-  path: ./kubernetes/apps/prod/databases/minio/tenant
+  path: ./kubernetes/apps/prod/databases/minio/app
   prune: true
   sourceRef:
     kind: GitRepository
