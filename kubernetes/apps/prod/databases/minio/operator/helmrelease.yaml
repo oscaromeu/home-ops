@@ -1,0 +1,38 @@
+---
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app dragonfly-operator
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: operator
+      version: 7.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: minio
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    pullPolicy: IfNotPresent
+
+    env:
+      - name: OPERATOR_STS_ENABLED
+        value: "on"
+
+    replicaCount: 2
+
+    resources:
+      requests:
+        cpu: 20m
+        memory: 50Mi
+        ephemeral-storage: 500Mi
