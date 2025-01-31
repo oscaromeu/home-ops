@@ -28,6 +28,8 @@ spec:
     env:
       - name: OPERATOR_STS_ENABLED
         value: "on"
+      - name: CLUSTER_DOMAIN
+        value: "${SECRET_DOMAIN}"
 
     replicaCount: 2
 
