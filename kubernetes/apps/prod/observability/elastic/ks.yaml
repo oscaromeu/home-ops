@@ -7,6 +7,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  targetNamespace: observability
   path: ./kubernetes/apps/prod/observability/elastic/operator
   prune: true
   sourceRef:
@@ -24,6 +25,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  targetNamespace: observability
   dependsOn:
     - name: cluster-apps-elastic-operator
   path: ./kubernetes/apps/prod/observability/elastic/cluster-d
@@ -43,6 +45,7 @@ spec:
 #  labels:
 #    substitution.flux.home.arpa/enabled: "true"
 #spec:
+#  targetNamespace: observability
 #  suspend: false
 #  dependsOn:
 #    - name: &app cluster-apps-elastic
