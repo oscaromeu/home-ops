@@ -1,0 +1,26 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "minio-cert"
+spec:
+  secretName: "minio-cert"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "minio.${SECRET_DOMAIN}"
+  dnsNames:
+    - "minio.${SECRET_DOMAIN}"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "minio-console-cert"
+spec:
+  secretName: "minio-console-cert"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "s3.${SECRET_DOMAIN}"
+  dnsNames:
+    - "s3.${SECRET_DOMAIN}"
