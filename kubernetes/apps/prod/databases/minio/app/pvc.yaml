@@ -30,7 +30,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: minio
+  storageClassName: nfs
   resources:
     requests:
       storage: 1Mi
