@@ -52,6 +52,8 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchLabels:
+                    app.kubernetes.io/name: elasticsearch-data
+                    app.kubernetes.io/cluster: data
                     elasticsearch.k8s.elastic.co/cluster-name: data
                 topologyKey: kubernetes.io/hostname
     volumeClaimTemplates:
