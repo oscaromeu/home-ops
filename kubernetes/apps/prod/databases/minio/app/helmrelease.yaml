@@ -49,16 +49,10 @@ spec:
       ingressClassName: internal
       hosts:
         - minio.${SECRET_DOMAIN}
-      tls:
-        - hosts:
-            - minio.${SECRET_DOMAIN}
     consoleIngress:
       enabled: true
       hosts:
         - s3.${SECRET_DOMAIN}
-      tls:
-        - hosts:
-            - s3.${SECRET_DOMAIN}
     securityContext:
       enabled: false
     resources:
