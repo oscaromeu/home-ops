@@ -43,6 +43,7 @@ resources:
   - ./metrics-server.yaml
   - ./microcks.yaml
   - ./minio-operator.yaml
+  - ./minio.yaml
   - ./mongodb.yaml
   - ./nfs-subdir-external-provisioner.yaml
   - ./node-feature-discovery.yaml
