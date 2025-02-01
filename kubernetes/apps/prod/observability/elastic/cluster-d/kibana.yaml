@@ -3,9 +3,7 @@ apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
 metadata:
   name: data
-  namespace: observability
   labels:
-    stack-monitoring.elastic.co/type: es
     app.kubernetes.io/name: kibana-data
     app.kubernetes.io/cluster: logging
     elasticsearch.k8s.elastic.co/cluster-name: data
@@ -20,11 +18,9 @@ spec:
   podTemplate:
     metadata:
       labels:
-        stack-monitoring.elastic.co/type: es
-        app.kubernetes.io/name: elk
-        app.kubernetes.io/service: logging
-        app.kubernetes.io/component: kibana
-        app.kubernetes.io/namespace: observability
+        app.kubernetes.io/name: kibana-data
+        app.kubernetes.io/cluster: data
+        elasticsearch.k8s.elastic.co/cluster-name: data
       annotations:
         co.elastic.logs/enabled: "true"
     spec:

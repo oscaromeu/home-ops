@@ -7,12 +7,10 @@
     hajimari.io/icon: simple-icons:kibana
     hajimari.io/group: "Public"
    labels:
-      stack-monitoring.elastic.co/type: es
       app.kubernetes.io/name: kibana-data
       app.kubernetes.io/cluster: data
       elasticsearch.k8s.elastic.co/cluster-name: data
    name: kibana
-   namespace: observability
  spec:
    ingressClassName: internal
    rules:
@@ -21,7 +19,7 @@
        paths:
        - backend:
            service:
-             name: elk-kb-http
+             name: data-kb-http
              port:
                number: 5601
          path: /

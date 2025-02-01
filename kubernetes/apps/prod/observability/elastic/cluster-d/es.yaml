@@ -2,8 +2,7 @@
 apiVersion: elasticsearch.k8s.elastic.co/v1
 kind: Elasticsearch
 metadata:
-  name: es
-  namespace: observability
+  name: data
 spec:
   version: 8.11.0
   volumeClaimDeletePolicy: DeleteOnScaledownOnly
@@ -26,7 +25,6 @@ spec:
     podTemplate:
       metadata:
         labels:
-          stack-monitoring.elastic.co/type: es
           app.kubernetes.io/name: elasticsearch-data
           app.kubernetes.io/cluster: data
           elasticsearch.k8s.elastic.co/cluster-name: data

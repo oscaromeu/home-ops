@@ -4,8 +4,6 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./elastic/ks.yaml
-  #- ./elastic-exporter/ks.yaml
-  #- ./elastic-operator/ks.yaml
   - ./gatus/ks.yaml
   - ./grafana/ks.yaml
   #- ./k6s/ks.yaml
