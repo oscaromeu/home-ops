@@ -8,7 +8,6 @@ metadata:
     hajimari.io/icon: simple-icons:elasticsearch
     hajimari.io/group: "Public"
   labels:
-    stack-monitoring.elastic.co/type: es
     app.kubernetes.io/name: elasticsearch-data
     app.kubernetes.io/cluster: data
     elasticsearch.k8s.elastic.co/cluster-name: data

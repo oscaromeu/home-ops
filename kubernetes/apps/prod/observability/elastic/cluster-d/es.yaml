@@ -11,7 +11,7 @@ spec:
     count: 3
     config:
       logger.level: info
-      node.roles: ["master", "data","data_content", "remote_cluster_client","transform"]
+      node.roles: ["master", "data","data_content","ingest","remote_cluster_client","transform"]
       #node.store.allow_mmap: false
       xpack.monitoring.collection.enabled: true
       xpack.monitoring.elasticsearch.collection.enabled: true
