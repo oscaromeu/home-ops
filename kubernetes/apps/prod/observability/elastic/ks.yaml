@@ -25,7 +25,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: elastic-operator
+    - name: cluster-apps-elastic-operator
   path: ./kubernetes/apps/prod/observability/elastic/cluster-d
   prune: true
   sourceRef:
