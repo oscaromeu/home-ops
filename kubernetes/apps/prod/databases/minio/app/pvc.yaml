@@ -6,6 +6,8 @@ metadata:
   namespace: kube-system
 spec:
   storageClassName: nfs
+  capacity:
+    storage: 1Mi
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
