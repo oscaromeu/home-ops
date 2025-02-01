@@ -7,12 +7,12 @@ spec:
   version: 8.11.0
   volumeClaimDeletePolicy: DeleteOnScaledownOnly
   nodeSets:
-  - name: data
+  - name: default
     count: 3
     config:
       logger.level: info
       node.roles: ["master", "data","data_content", "remote_cluster_client","transform"]
-      node.store.allow_mmap: false
+      #node.store.allow_mmap: false
       xpack.monitoring.collection.enabled: true
       xpack.monitoring.elasticsearch.collection.enabled: true
       xpack.monitoring.collection.cluster.stats.timeout: "10m"
@@ -31,6 +31,12 @@ spec:
         annotations:
           co.elastic.logs/enabled: "true"
       spec:
+        initContainers:
+        - name: sysctl
+          securityContext:
+            privileged: true
+            runAsUser: 0
+          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
         containers:
         - name: elasticsearch
           env:
@@ -44,7 +50,6 @@ spec:
               cpu: 250m
             limits:
               memory: 8Gi
-
         affinity:
           podAntiAffinity:
             preferredDuringSchedulingIgnoredDuringExecution:
@@ -52,8 +57,6 @@ spec:
               podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app.kubernetes.io/name: elasticsearch-data
-                    app.kubernetes.io/cluster: data
                     elasticsearch.k8s.elastic.co/cluster-name: data
                 topologyKey: kubernetes.io/hostname
     volumeClaimTemplates:
@@ -64,7 +67,7 @@ spec:
         - ReadWriteOnce
         resources:
           requests:
-            storage: 10Gi
+            storage: 50Gi
         storageClassName: openebs-hostpath
   monitoring:
     metrics:
