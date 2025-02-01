@@ -20,7 +20,7 @@ spec:
       paths:
       - backend:
           service:
-            name: data-elasticsearch
+            name: data-es-http
             port:
               number: 9200
         path: /
