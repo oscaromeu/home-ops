@@ -2,15 +2,15 @@
  kind: Ingress
  metadata:
    annotations:
-    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
     nginx.ingress.kubernetes.io/backend-protocol: HTTPS
     hajimari.io/enable: "true"
     hajimari.io/icon: simple-icons:kibana
     hajimari.io/group: "Public"
-    #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
-    #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
    labels:
-     app: elk
+      stack-monitoring.elastic.co/type: es
+      app.kubernetes.io/name: kibana-data
+      app.kubernetes.io/cluster: data
+      elasticsearch.k8s.elastic.co/cluster-name: data
    name: kibana
    namespace: observability
  spec:
@@ -29,4 +29,3 @@
    tls:
    - hosts:
      - *host
-     #secretName: kibana-tls

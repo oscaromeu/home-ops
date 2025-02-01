@@ -1,36 +1,13 @@
-#---
-#apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-#kind: Kustomization
-#metadata:
-#  name: elastic
-#  namespace: flux-system
-#  labels:
-#    substitution.flux.home.arpa/enabled: "true"
-#spec:
-#  dependsOn:
-#    - name: elastic-operator
-#    - name: kube-prometheus-stack
-#  path: ./kubernetes/apps/prod/observability/elastic/app
-#  prune: true
-#  sourceRef:
-#    kind: GitRepository
-#    name: home-kubernetes
-#  interval: 30m
-#  retryInterval: 1m
-#  timeout: 5m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: &app cluster-apps-elastic-monitoring
+  name: &app cluster-apps-elastic-operator
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  suspend: false
-  dependsOn:
-    - name: &app cluster-apps-elastic
-  path: ./kubernetes/apps/prod/observability/elastic/monitoring
+  path: ./kubernetes/apps/prod/observability/elastic/operator
   prune: true
   sourceRef:
     kind: GitRepository
@@ -38,3 +15,42 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: &app cluster-apps-elastic-data
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+spec:
+  dependsOn:
+    - name: elastic-operator
+  path: ./kubernetes/apps/prod/observability/elastic/cluster-d
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+#---
+#apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+#kind: Kustomization
+#metadata:
+#  name: &app cluster-apps-elastic-monitoring
+#  namespace: flux-system
+#  labels:
+#    substitution.flux.home.arpa/enabled: "true"
+#spec:
+#  suspend: false
+#  dependsOn:
+#    - name: &app cluster-apps-elastic
+#  path: ./kubernetes/apps/prod/observability/elastic/monitoring
+#  prune: true
+#  sourceRef:
+#    kind: GitRepository
+#    name: home-kubernetes
+#  interval: 30m
+#  retryInterval: 1m
+#  timeout: 5m
