@@ -8,10 +8,10 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   suspend: false
-  dependsOn:
-    - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-cloudnative-pg
-    - name: cluster-apps-ingress-nginx-internal
+  #dependsOn:
+  #  - name: cluster-apps-external-secrets-stores
+  #  - name: cluster-apps-cloudnative-pg
+  #  - name: cluster-apps-ingress-nginx-internal
   path: ./kubernetes/apps/prod/default/docuseal/app
   prune: true
   sourceRef:
