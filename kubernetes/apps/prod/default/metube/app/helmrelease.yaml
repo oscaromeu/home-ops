@@ -75,7 +75,7 @@ spec:
           - path: "/config"
       output:
         type: nfs
-        server: 10.69.3.25
+        server: 10.69.1.157
         path: /mnt/k8s/data
         advancedMounts:
           metube:

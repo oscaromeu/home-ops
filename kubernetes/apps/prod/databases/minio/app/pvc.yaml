@@ -12,7 +12,7 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 10.69.3.25
+    server: 10.69.1.157
     path: /mnt/k8s/data/Minio
   mountOptions:
     - nfsvers=4.1
