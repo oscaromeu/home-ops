@@ -98,6 +98,9 @@ spec:
       output:
         type: nfs
         server: 10.69.1.157
-        path: /data/data1/Media/Library/Videos
-        globalMounts:
-          - path: "/downloads"
+        path: /mnt/k8s/data
+        advancedMounts:
+          metube:
+            app:
+              - path: /downloads
+                subPath: Library/UTube
