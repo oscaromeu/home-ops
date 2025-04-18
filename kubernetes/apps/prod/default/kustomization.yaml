@@ -16,5 +16,5 @@ resources:
   - ./navidrome/ks.yaml
   #- ./overseerr/ks.yaml
   #- ./prowlarr/ks.yaml
-  - ./pinchflat/ks.yaml
+  #- ./pinchflat/ks.yaml
   #- ./qbittorrent/ks.yaml
