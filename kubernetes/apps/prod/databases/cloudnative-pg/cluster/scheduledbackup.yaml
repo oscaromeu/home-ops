@@ -3,7 +3,6 @@ apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
   name: postgres-backup
-  namespace: datahub
 spec:
   schedule: "@daily"
   immediate: true
