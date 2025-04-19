@@ -100,7 +100,7 @@ spec:
         server: 10.69.1.157
         path: /mnt/k8s/data
         advancedMounts:
-          metube:
+          pinchflat:
             app:
               - path: /downloads
                 subPath: Library/UTube
