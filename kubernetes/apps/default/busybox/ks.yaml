@@ -10,7 +10,7 @@ spec:
   suspend: false
   dependsOn:
     - name: cluster-apps-external-secrets-stores
-  path: ./kubernetes/apps/prod/default/busybox/app
+  path: ./kubernetes/apps/default/busybox/app
   prune: true
   sourceRef:
     kind: GitRepository

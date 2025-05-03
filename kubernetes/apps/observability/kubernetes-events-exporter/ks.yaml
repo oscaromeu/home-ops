@@ -10,7 +10,7 @@ spec:
   suspend: false
   dependsOn:
     - name: cluster-apps-kube-prometheus-stack
-  path: ./kubernetes/apps/prod/observability/kubernetes-events-exporter/app
+  path: ./kubernetes/apps/observability/kubernetes-events-exporter/app
   prune: true
   sourceRef:
     kind: GitRepository

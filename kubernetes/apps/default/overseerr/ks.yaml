@@ -9,7 +9,7 @@ spec:
   dependsOn:
     - name: cluster-apps-ingress-nginx-external
     - name: cluster-apps-external-secrets-stores
-  path: ./kubernetes/apps/prod/default/overseerr/app
+  path: ./kubernetes/apps/default/overseerr/app
   prune: true
   sourceRef:
     kind: GitRepository

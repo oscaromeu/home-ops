@@ -7,7 +7,7 @@ metadata:
 spec:
   dependsOn:
     - name: node-feature-discovery
-  path: ./kubernetes/apps/prod/kube-system/amd-device-plugin/app
+  path: ./kubernetes/apps/kube-system/amd-device-plugin/app
   prune: true
   sourceRef:
     kind: GitRepository

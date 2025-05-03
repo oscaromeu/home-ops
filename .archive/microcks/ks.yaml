@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: external-secrets-stores
-  path: ./kubernetes/apps/prod/default/microcks/app
+  path: ./kubernetes/apps/default/microcks/app
   prune: true
   sourceRef:
     kind: GitRepository

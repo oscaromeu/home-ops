@@ -11,7 +11,7 @@ spec:
   dependsOn:
     - name: cluster-apps-ingress-nginx-external
     - name: cluster-apps-external-secrets-stores
-  path: ./kubernetes/apps/prod/default/navidrome/app
+  path: ./kubernetes/apps/default/navidrome/app
   prune: true
   sourceRef:
     kind: GitRepository

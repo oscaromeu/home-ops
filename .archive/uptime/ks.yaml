@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: kube-prometheus-stack
     #- name: mimir
-  path: ./kubernetes/apps/prod/observability/uptime/app
+  path: ./kubernetes/apps/observability/uptime/app
   prune: true
   sourceRef:
     kind: GitRepository

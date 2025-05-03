@@ -10,7 +10,7 @@ spec:
   suspend: false
   dependsOn:
     - name: cluster-apps-kube-prometheus-stack
-  path: ./kubernetes/apps/prod/observability/k6s/operator
+  path: ./kubernetes/apps/observability/k6s/operator
   prune: true
   sourceRef:
     kind: GitRepository
@@ -30,7 +30,7 @@ spec:
   suspend: false
   dependsOn:
     - name: cluster-apps-k6s-operator
-  path: ./kubernetes/apps/prod/observability/k6s/app
+  path: ./kubernetes/apps/observability/k6s/app
   prune: true
   sourceRef:
     kind: GitRepository

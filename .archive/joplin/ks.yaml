@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: external-secrets-stores
-  path: ./kubernetes/apps/prod/default/joplin/app
+  path: ./kubernetes/apps/default/joplin/app
   prune: true
   sourceRef:
     kind: GitRepository

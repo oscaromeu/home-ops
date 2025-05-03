@@ -8,7 +8,7 @@ spec:
   suspend: false
   dependsOn:
     - name: cluster-apps-kube-prometheus-stack
-  path: ./kubernetes/apps/prod/observability/vm/app
+  path: ./kubernetes/apps/observability/vm/app
   prune: true
   sourceRef:
     kind: GitRepository

@@ -7,7 +7,7 @@ metadata:
 spec:
   dependsOn:
     - name: minio-operator
-  path: ./kubernetes/apps/prod/databases/minio/app
+  path: ./kubernetes/apps/databases/minio/app
   prune: true
   sourceRef:
     kind: GitRepository

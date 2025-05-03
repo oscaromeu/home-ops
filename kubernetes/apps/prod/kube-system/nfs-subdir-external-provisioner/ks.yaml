@@ -7,7 +7,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   suspend: false
-  path: ./kubernetes/apps/prod/kube-system/nfs-subdir-external-provisioner/app
+  path: ./kubernetes/apps/kube-system/nfs-subdir-external-provisioner/app
   prune: true
   sourceRef:
     kind: GitRepository

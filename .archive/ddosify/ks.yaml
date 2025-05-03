@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: kube-prometheus-stack
-  path: ./kubernetes/apps/prod/monitoring/ddosify/app
+  path: ./kubernetes/apps/monitoring/ddosify/app
   prune: true
   sourceRef:
     kind: GitRepository

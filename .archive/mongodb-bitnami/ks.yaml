@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: external-secrets-stores
-  path: ./kubernetes/apps/prod/dev/mongodb/app
+  path: ./kubernetes/apps/dev/mongodb/app
   prune: true
   sourceRef:
     kind: GitRepository

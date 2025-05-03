@@ -9,7 +9,7 @@ spec:
     - name: cloudnative-pg
     - name: external-secrets-stores
     - name: ingress-nginx-internal
-  path: ./kubernetes/apps/prod/default/semaphore/app
+  path: ./kubernetes/apps/default/semaphore/app
   prune: true
   sourceRef:
     kind: GitRepository

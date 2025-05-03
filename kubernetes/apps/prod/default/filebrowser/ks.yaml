@@ -8,7 +8,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: &ns default
-  path: ./kubernetes/apps/prod/default/filebrowser/app
+  path: ./kubernetes/apps/default/filebrowser/app
   prune: true
   sourceRef:
     kind: GitRepository

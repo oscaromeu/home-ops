@@ -10,7 +10,7 @@ spec:
   suspend: false
   dependsOn:
     - name: cluster-apps-external-secrets-stores
-  path: ./kubernetes/apps/prod/observability/rally/app
+  path: ./kubernetes/apps/observability/rally/app
   prune: true
   sourceRef:
     kind: GitRepository

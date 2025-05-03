@@ -11,7 +11,7 @@ spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
     - name: cluster-apps-dragonfly-cluster
-  path: ./kubernetes/apps/prod/kube-system/authelia/app
+  path: ./kubernetes/apps/kube-system/authelia/app
   prune: true
   sourceRef:
     kind: GitRepository

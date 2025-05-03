@@ -8,7 +8,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   suspend: false
-  path: ./kubernetes/apps/prod/databases/redis/app
+  path: ./kubernetes/apps/databases/redis/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -28,7 +28,7 @@ spec:
   suspend: false
   dependsOn:
     - name: cluster-apps-redis
-  path: ./kubernetes/apps/prod/databases/redis/monitoring
+  path: ./kubernetes/apps/databases/redis/monitoring
   prune: true
   sourceRef:
     kind: GitRepository

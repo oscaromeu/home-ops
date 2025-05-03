@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: external-secrets-stores
     - name: cloudflare-operator-tunnels
-  path: ./kubernetes/apps/prod/default/vaultwarden/app
+  path: ./kubernetes/apps/default/vaultwarden/app
   prune: true
   sourceRef:
     kind: GitRepository

@@ -8,7 +8,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   targetNamespace: observability
-  path: ./kubernetes/apps/prod/observability/elastic/operator
+  path: ./kubernetes/apps/observability/elastic/operator
   prune: true
   sourceRef:
     kind: GitRepository
@@ -28,7 +28,7 @@ spec:
   targetNamespace: observability
   dependsOn:
     - name: cluster-apps-elastic-operator
-  path: ./kubernetes/apps/prod/observability/elastic/cluster-d
+  path: ./kubernetes/apps/observability/elastic/cluster-d
   prune: true
   sourceRef:
     kind: GitRepository
@@ -49,7 +49,7 @@ spec:
 #  suspend: false
 #  dependsOn:
 #    - name: &app cluster-apps-elastic
-#  path: ./kubernetes/apps/prod/observability/elastic/monitoring
+#  path: ./kubernetes/apps/observability/elastic/monitoring
 #  prune: true
 #  sourceRef:
 #    kind: GitRepository

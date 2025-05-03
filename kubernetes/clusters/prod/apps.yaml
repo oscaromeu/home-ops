@@ -7,7 +7,7 @@ metadata:
 spec:
   suspend: false
   interval: 30m
-  path: ./kubernetes/apps/prod
+  path: ./kubernetes/apps
   prune: false
   sourceRef:
     kind: GitRepository

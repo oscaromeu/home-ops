@@ -6,7 +6,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  path: ./kubernetes/apps/prod/default/stable-diffusion/app
+  path: ./kubernetes/apps/default/stable-diffusion/app
   prune: true
   sourceRef:
     kind: GitRepository

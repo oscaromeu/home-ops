@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: kube-prometheus-stack
-  path: ./kubernetes/apps/prod/observability/node-problem-detector/app
+  path: ./kubernetes/apps/observability/node-problem-detector/app
   prune: true
   sourceRef:
     kind: GitRepository

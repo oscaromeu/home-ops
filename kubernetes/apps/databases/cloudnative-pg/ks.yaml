@@ -11,7 +11,7 @@ spec:
   suspend: false
   dependsOn:
     - name: cluster-apps-external-secrets-stores
-  path: ./kubernetes/apps/prod/databases/cloudnative-pg/app
+  path: ./kubernetes/apps/databases/cloudnative-pg/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -38,7 +38,7 @@ spec:
   dependsOn:
     - name: cluster-apps-cloudnative-pg
     - name: cluster-apps-external-secrets-stores
-  path: ./kubernetes/apps/prod/databases/cloudnative-pg/cluster
+  path: ./kubernetes/apps/databases/cloudnative-pg/cluster
   prune: true
   sourceRef:
     kind: GitRepository
@@ -60,7 +60,7 @@ spec:
   suspend: false
   dependsOn:
     - name: cluster-apps-cloudnative-pg-cluster
-  path: ./kubernetes/apps/prod/databases/cloudnative-pg/monitoring
+  path: ./kubernetes/apps/databases/cloudnative-pg/monitoring
   prune: true
   sourceRef:
     kind: GitRepository

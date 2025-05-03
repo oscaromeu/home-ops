@@ -10,7 +10,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/prod/actions-runner-system/gha-runner-large-scale-set/app
+  path: ./kubernetes/apps/actions-runner-system/gha-runner-large-scale-set/app
   prune: true
   sourceRef:
     kind: GitRepository

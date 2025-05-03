@@ -12,7 +12,7 @@ spec:
     - name: cluster-apps-external-secrets-stores
     #- name: cluster-apps-kafka-cluster
     #- name: cluster-apps-elastic
-  path: ./kubernetes/apps/prod/observability/vector/aggregator
+  path: ./kubernetes/apps/observability/vector/aggregator
   prune: true
   sourceRef:
     kind: GitRepository
@@ -37,7 +37,7 @@ spec:
   suspend: false
   dependsOn:
     - name: cluster-apps-vector-aggregator
-  path: ./kubernetes/apps/prod/observability/vector/agent
+  path: ./kubernetes/apps/observability/vector/agent
   prune: true
   sourceRef:
     kind: GitRepository
@@ -62,7 +62,7 @@ spec:
   suspend: false
   dependsOn:
     - name: cluster-apps-vector-aggregator
-  path: ./kubernetes/apps/prod/observability/vector/monitoring
+  path: ./kubernetes/apps/observability/vector/monitoring
   prune: true
   sourceRef:
     kind: GitRepository

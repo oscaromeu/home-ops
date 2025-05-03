@@ -11,7 +11,7 @@ spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
     - name: cluster-apps-ingress-nginx-internal
-  path: ./kubernetes/apps/prod/default/actual/app
+  path: ./kubernetes/apps/default/actual/app
   prune: true
   sourceRef:
     kind: GitRepository

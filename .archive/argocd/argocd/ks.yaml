@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: ingress-nginx-internal
-  path: ./kubernetes/apps/prod/argocd/argocd/app
+  path: ./kubernetes/apps/argocd/argocd/app
   prune: true
   sourceRef:
     kind: GitRepository

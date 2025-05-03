@@ -11,7 +11,7 @@ spec:
     - name: cluster-apps-ingress-nginx-external
     - name: cluster-apps-external-secrets-stores
     - name: cluster-apps-k6s
-  path: ./kubernetes/apps/prod/dev/fastapi-observability/app-a
+  path: ./kubernetes/apps/dev/fastapi-observability/app-a
   prune: true
   sourceRef:
     kind: GitRepository
@@ -35,7 +35,7 @@ metadata:
 spec:
   dependsOn:
     - name: fastapi-observability-a
-  path: ./kubernetes/apps/prod/dev/fastapi-observability/app-b
+  path: ./kubernetes/apps/dev/fastapi-observability/app-b
   prune: true
   sourceRef:
     kind: GitRepository
@@ -59,7 +59,7 @@ metadata:
 spec:
   dependsOn:
     - name: fastapi-observability-a
-  path: ./kubernetes/apps/prod/dev/fastapi-observability/app-c
+  path: ./kubernetes/apps/dev/fastapi-observability/app-c
   prune: true
   sourceRef:
     kind: GitRepository
@@ -83,7 +83,7 @@ metadata:
 spec:
   dependsOn:
     - name: fastapi-observability-a
-  path: ./kubernetes/apps/prod/dev/fastapi-observability/monitoring
+  path: ./kubernetes/apps/dev/fastapi-observability/monitoring
   prune: true
   sourceRef:
     kind: GitRepository
@@ -102,7 +102,7 @@ metadata:
 spec:
   dependsOn:
     - name: fastapi-observability-a
-  path: ./kubernetes/apps/prod/dev/fastapi-observability/test
+  path: ./kubernetes/apps/dev/fastapi-observability/test
   prune: true
   sourceRef:
     kind: GitRepository

@@ -8,7 +8,7 @@ spec:
   suspend: false
   dependsOn:
     - name: cluster-apps-external-secrets-stores
-  path: ./kubernetes/apps/prod/kube-system/glauth/app
+  path: ./kubernetes/apps/kube-system/glauth/app
   prune: true
   sourceRef:
     kind: GitRepository

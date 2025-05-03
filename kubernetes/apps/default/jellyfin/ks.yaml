@@ -9,7 +9,7 @@ metadata:
 spec:
   suspend: false
   targetNamespace: default
-  path: ./kubernetes/apps/prod/default/jellyfin/app
+  path: ./kubernetes/apps/default/jellyfin/app
   sourceRef:
     kind: GitRepository
     name: home-kubernetes

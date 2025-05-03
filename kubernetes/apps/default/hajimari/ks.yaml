@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   suspend: false
-  path: ./kubernetes/apps/prod/default/hajimari/app
+  path: ./kubernetes/apps/default/hajimari/app
   prune: true
   sourceRef:
     kind: GitRepository

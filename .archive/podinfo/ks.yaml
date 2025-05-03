@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: ingress-nginx-external
     - name: external-secrets-stores
-  path: ./kubernetes/apps/prod/default/podinfo/app
+  path: ./kubernetes/apps/default/podinfo/app
   prune: true
   sourceRef:
     kind: GitRepository

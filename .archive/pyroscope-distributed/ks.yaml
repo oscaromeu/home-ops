@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: kube-prometheus-stack
     #- name: mimir
-  path: ./kubernetes/apps/prod/monitoring/pyroscope/app
+  path: ./kubernetes/apps/monitoring/pyroscope/app
   prune: true
   sourceRef:
     kind: GitRepository

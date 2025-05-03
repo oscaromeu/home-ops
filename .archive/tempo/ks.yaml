@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-kube-prometheus-stack
-  path: ./kubernetes/apps/prod/observability/tempo/app
+  path: ./kubernetes/apps/observability/tempo/app
   prune: true
   sourceRef:
     kind: GitRepository

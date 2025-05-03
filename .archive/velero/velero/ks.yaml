@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: ingress-nginx-external
     - name: external-secrets-stores
-  path: ./kubernetes/apps/prod/velero/velero/app
+  path: ./kubernetes/apps/velero/velero/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -34,7 +34,7 @@ metadata:
 spec:
   dependsOn:
     - name: velero
-  path: ./kubernetes/apps/prod/velero/velero/app/schedules
+  path: ./kubernetes/apps/velero/velero/app/schedules
   prune: true
   sourceRef:
     kind: GitRepository

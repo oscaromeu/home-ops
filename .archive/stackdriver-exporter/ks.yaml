@@ -9,7 +9,7 @@ metadata:
 spec:
   dependsOn:
     - name: kube-prometheus-stack
-  path: ./kubernetes/apps/prod/observability/stackdriver-exporter/app
+  path: ./kubernetes/apps/observability/stackdriver-exporter/app
   prune: true
   sourceRef:
     kind: GitRepository

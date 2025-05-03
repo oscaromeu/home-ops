@@ -10,7 +10,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/prod/network/echo-server/app
+  path: ./kubernetes/apps/network/echo-server/app
   prune: true
   sourceRef:
     kind: GitRepository

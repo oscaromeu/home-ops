@@ -11,7 +11,7 @@ spec:
   dependsOn:
     - name: cluster-apps-ingress-nginx-external
     - name: cluster-apps-external-secrets-stores
-  path: ./kubernetes/apps/prod/default/excalidraw/app
+  path: ./kubernetes/apps/default/excalidraw/app
   prune: true
   sourceRef:
     kind: GitRepository

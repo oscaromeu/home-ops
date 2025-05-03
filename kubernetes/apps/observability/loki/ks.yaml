@@ -12,7 +12,7 @@ spec:
     #- name: cluster-apps-ingress-nginx-external
     - name: cluster-apps-kube-prometheus-stack
     #- name: cluster-apps-minio
-  path: ./kubernetes/apps/prod/observability/loki/app
+  path: ./kubernetes/apps/observability/loki/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -36,7 +36,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-loki
-  path: ./kubernetes/apps/prod/observability/loki/monitoring
+  path: ./kubernetes/apps/observability/loki/monitoring
   prune: true
   sourceRef:
     kind: GitRepository

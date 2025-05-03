@@ -11,7 +11,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/prod/default/pinchflat/app
+  path: ./kubernetes/apps/default/pinchflat/app
   prune: true
   sourceRef:
     kind: GitRepository

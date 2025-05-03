@@ -11,7 +11,7 @@ spec:
   dependsOn:
     - name: cluster-apps-external-secrets-stores
     - name: cluster-apps-hajimari
-  path: ./kubernetes/apps/prod/observability/openweather/app
+  path: ./kubernetes/apps/observability/openweather/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -35,7 +35,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-openweather
-  path: ./kubernetes/apps/prod/observability/openweather/monitoring
+  path: ./kubernetes/apps/observability/openweather/monitoring
   prune: true
   sourceRef:
     kind: GitRepository

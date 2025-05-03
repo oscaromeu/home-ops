@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: kube-prometheus-stack
     - name: minio-monitoring-tenant
-  path: ./kubernetes/apps/prod/monitoring/mimir/app
+  path: ./kubernetes/apps/monitoring/mimir/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -26,7 +26,7 @@ spec:
 #spec:
 #  dependsOn:
 #    - name: mimir
-#  path: ./kubernetes/apps/prod/monitoring/mimir/monitoring
+#  path: ./kubernetes/apps/monitoring/mimir/monitoring
 #  prune: true
 #  sourceRef:
 #    kind: GitRepository

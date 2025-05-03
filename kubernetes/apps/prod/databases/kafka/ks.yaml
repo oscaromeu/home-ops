@@ -10,7 +10,7 @@ spec:
   dependsOn:
     - name: external-secrets-stores
     - name: ingress-nginx-internal
-  path: ./kubernetes/apps/prod/databases/kafka/operator
+  path: ./kubernetes/apps/databases/kafka/operator
   prune: true
   sourceRef:
     kind: GitRepository
@@ -34,7 +34,7 @@ metadata:
 spec:
   dependsOn:
     - name: kafka-operator
-  path: ./kubernetes/apps/prod/databases/kafka/cluster
+  path: ./kubernetes/apps/databases/kafka/cluster
   prune: true
   sourceRef:
     kind: GitRepository
@@ -53,7 +53,7 @@ metadata:
 spec:
   dependsOn:
     - name: kafka-cluster
-  path: ./kubernetes/apps/prod/databases/kafka/monitoring
+  path: ./kubernetes/apps/databases/kafka/monitoring
   prune: true
   sourceRef:
     kind: GitRepository
@@ -72,7 +72,7 @@ metadata:
 spec:
   dependsOn:
     - name: kafka-cluster-monitoring
-  path: ./kubernetes/apps/prod/databases/kafka/tools
+  path: ./kubernetes/apps/databases/kafka/tools
   prune: true
   sourceRef:
     kind: GitRepository

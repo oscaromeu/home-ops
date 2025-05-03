@@ -11,7 +11,7 @@ spec:
     - name: external-secrets-stores
     - name: cloudnative-pg
     - name: ingress-nginx-internal
-  path: ./kubernetes/apps/prod/default/kubevirt/operator
+  path: ./kubernetes/apps/default/kubevirt/operator
   prune: true
   sourceRef:
     kind: GitRepository
