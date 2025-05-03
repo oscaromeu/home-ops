@@ -1,0 +1,151 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app vector-aggregator
+  namespace: observability
+spec:
+  interval: 15m
+  chart:
+    spec:
+      # renovate: registryUrl=https://helm.vector.dev
+      chart: vector
+      version: 0.22.0
+      sourceRef:
+        kind: HelmRepository
+        name: vector
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+
+  values:
+
+    replicas: 3
+
+    args:
+      - --config-dir
+      - "/etc/vector"
+
+    dataDir: /vector-data-dir
+    existingConfigMaps:
+      # config
+      - vector-aggregator
+      # pipelines
+      #- elastic-aggregator
+      - vector-metrics-aggregator
+      - loki-aggregator
+
+    ingress:
+      enabled: false
+      #ClassName: nginx
+      #annotations:
+      #  hajimari.io/appName: "vector-aggregator"
+      #  hajimari.io/enable: "true"
+      #  hajimari.io/icon: "alarm-light-outline"
+      #hosts:
+      #  - hosts: vector.${SECRET_DOMAIN}
+      #    paths:
+      #      - path: /
+      #        pathType: ImplementationSpecific
+      #        port:
+      #          name: api
+      #          number: 8686
+      #tls:
+      #  - hosts:
+      #      - vector.${SECRET_DOMAIN}
+
+
+    containerPorts:
+      - name: vector
+        containerPort: 6000
+        protocol: TCP
+      - name: prom-exporter
+        containerPort: 9090
+        protocol: TCP
+      - name: kubernetes
+        containerPort: 6010
+        protocol: TCP
+
+    extraVolumeMounts:
+      - name: kafka-cluster-ca-cert
+        mountPath: /kafka-cluster-ca-cert
+
+    extraVolumes:
+      - name: kafka-cluster-ca-cert
+        secret:
+          secretName: kafka-cluster-ca-cert
+
+    image:
+      repository: timberio/vector
+      tag: 0.31.0-debian
+      pullPolicy: IfNotPresent
+
+    resources:
+      requests:
+        cpu: 18m
+        memory: 129Mi
+      limits:
+        memory: 4Gi
+
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: vector-aggregator
+
+    service:
+      enabled: true
+      ports:
+        - name: api
+          port: 8686
+          protocol: TCP
+        - name: vector
+          port: 6000
+          protocol: TCP
+        - name: prom-exporter
+          port: 9090
+          protocol: TCP
+        - name: kubernetes
+          port: 6010
+          protocol: TCP
+
+    serviceHeadless:
+      enabled: true
+      ports:
+        - name: vector
+          port: 6000
+          protocol: TCP
+        - name: prom-exporter
+          port: 9090
+          protocol: TCP
+        - name: kubernetes
+          port: 6010
+          protocol: TCP
+
+    podMonitor:
+      enabled: false
+
+    env:
+      - name: VECTOR_LOG
+        value: "debug"
+      #- name: VECTOR_SELF_NODE_NAME
+      #  value: "$(VECTOR_AGGREGATOR_SERVICE_HOST)"
+
+      - name: ELASTICSEARCH_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            key: ELASTICSEARCH_PASSWORD
+            name: es-ingestion-credentials
+
+      - name: ELASTICSEARCH_NAME
+        valueFrom:
+          secretKeyRef:
+            key: ELASTICSEARCH_NAME
+            name: es-ingestion-credentials
+

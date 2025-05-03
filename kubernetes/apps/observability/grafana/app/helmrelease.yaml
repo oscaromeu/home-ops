@@ -1,0 +1,157 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: grafana
+  namespace: observability
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: grafana
+      version: 8.0.2
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    admin:
+      existingSecret: grafana-admin-secret
+    replicas: 1
+    env:
+      GF_EXPLORE_ENABLED: true
+      GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"
+      GF_FEATURE_TOGGLES_ENABLE: flameGraph
+      GF_AUTH_ANONYMOUS_ENABLED: true
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+      GF_DIAGNOSTICS_PROFILING_ENABLED: true
+      GF_DIAGNOSTICS_PROFILING_ADDR: 0.0.0.0
+      GF_DIAGNOSTICS_PROFILING_PORT: 6060
+    grafana.ini:
+      analytics:
+        check_for_updates: false
+        check_for_plugin_updates: false
+      auth.anonymous:
+        enabled: true
+        org_name: "Main Org."
+        org_role: "Viewer"
+      dataproxy:
+        max_idle_connections: 500
+      security:
+        allow_embedding: true
+    #dashboardProviders:
+    #  dashboardproviders.yaml:
+    #    apiVersion: 1
+    #    providers:
+    #      - name: default
+    #        orgId: 1
+    #        folder: ""
+    #        type: file
+    #        disableDeletion: false
+    #        editable: true
+    #        options:
+    #          path: /var/lib/grafana/dashboards/default
+    datasources:
+      datasources.yaml:
+        apiVersion: 1
+        datasources:
+
+          #- name: Mimir
+          #  type: prometheus
+          #  access: proxy
+          #  url: http://mimir-nginx.observability.svc.cluster.local:80/prometheus
+          #  isDefault: false
+
+          - name: Prometheus
+            type: prometheus
+            access: proxy
+            url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
+            isDefault: true
+          - name: Victoria-Metrics
+            type: prometheus
+            access: proxy
+            url: http://victoria-metrics-single-server.observability.svc.cluster.local:8428
+            isDefault: false
+          - name: Loki
+            type: loki
+            access: proxy
+            url: http://loki-gateway.observability.svc.cluster.local:80
+            jsonData:
+              maxLines: 250
+          - name: Tempo
+            type: tempo
+            typeName: Tempo
+            access: proxy
+            url: http://tempo.observability.svc.cluster.local:3100
+            password: ''
+            user: ''
+            database: ''
+            basicAuth: false
+            isDefault: false
+            jsonData:
+            nodeGraph:
+               enabled: true
+            tracesToLogs:
+               datasourceUid: loki
+               filterBySpanID: false
+               filterByTraceID: true
+               mapTagNamesEnabled: false
+               tags:
+                  - compose_service
+            readOnly: false
+            editable: true
+          - name: Pyroscope
+            type: pyroscope
+            url: http://pyroscope-querier.observability.svc.cluster.local:4040
+    sidecar:
+      dashboards:
+        enabled: true
+        searchNamespace: ALL
+        label: home_ops
+      datasources:
+        enabled: true
+        searchNamespace: ALL
+      provider:
+        allowUiUpdates: true
+    serviceMonitor:
+      enabled: true
+    ingress:
+      enabled: true
+      ingressClassName: internal
+      annotations:
+        external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+        hajimari.io/icon: simple-icons:grafana
+        hajimari.io/group: "Public"
+        #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
+        #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
+      hosts:
+        - &host "grafana.${SECRET_DOMAIN}"
+      tls:
+        - hosts:
+            - *host
+    persistence:
+      enabled: true
+      storageClassName: openebs-hostpath
+    testFramework:
+      enabled: false
+    plugins:
+      - digrich-bubblechart-panel
+      - grafana-clock-panel
+      - redis-datasource
+      - marcusolsson-hexmap-panel
+      - grafana-polystat-panel
+      - pyroscope-panel
+      - flant-statusmap-panel
+      - marcusolsson-csv-datasource
+      - redis-datasource

@@ -1,0 +1,30 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    hajimari.io/enable: "true"
+    hajimari.io/icon: simple-icons:elasticsearch
+    hajimari.io/group: "Public"
+  labels:
+    app.kubernetes.io/name: elasticsearch-data
+    app.kubernetes.io/cluster: data
+    elasticsearch.k8s.elastic.co/cluster-name: data
+  name: elastic
+spec:
+  ingressClassName: internal
+  rules:
+  - host: "elastic.${SECRET_DOMAIN}"
+    http:
+      paths:
+      - backend:
+          service:
+            name: data-es-http
+            port:
+              number: 9200
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - "elastic.${SECRET_DOMAIN}"

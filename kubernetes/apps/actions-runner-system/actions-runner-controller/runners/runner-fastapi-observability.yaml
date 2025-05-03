@@ -1,0 +1,30 @@
+---
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: fastapi-observability
+spec:
+  template:
+    spec:
+      #imagePullPolicy: Always
+      image: summerwind/actions-runner-dind:latest
+      dockerdWithinRunnerContainer: true
+      ephemeral: false
+      repository: oscaromeu/fastapi-observability
+      labels: ["fastapi-observability"] # Cluster Pre Flanks Systems
+      dockerVolumeMounts:
+        - mountPath: /var/lib/docker
+          name: docker
+      volumeMounts:
+        - mountPath: /tmp
+          name: tmp
+      volumes:
+        - name: docker
+          emptyDir:
+            medium: Memory
+        - name: work
+          emptyDir:
+            medium: Memory
+        - name: tmp
+          emptyDir:
+            medium: Memory

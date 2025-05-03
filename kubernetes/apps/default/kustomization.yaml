@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./namespace.yaml
+  - ./atuin/ks.yaml
+  #- ./busybox/ks.yaml
+  #- ./dnsutils/ks.yaml
+  #- ./excalidraw/ks.yaml
+  - ./filebrowser/ks.yaml
+  - ./outline/ks.yaml
+  #- ./hajimari/ks.yaml
+  - ./jellyfin/ks.yaml
+  - ./linkding/ks.yaml
+  - ./metube/ks.yaml
+  - ./navidrome/ks.yaml
+  #- ./overseerr/ks.yaml
+  #- ./prowlarr/ks.yaml
+  #- ./pinchflat/ks.yaml
+  #- ./qbittorrent/ks.yaml

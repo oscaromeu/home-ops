@@ -1,0 +1,111 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app qbittorrent
+  namespace: default
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    image:
+      repository: ghcr.io/onedr0p/qbittorrent
+      tag: 5.0.0@sha256:1cc1878d06fafe6a1a1294f1547203634e729e3386324b7a63c8fde68554d705
+    env:
+      TZ: ${TIMEZONE}
+      QBITTORRENT__PORT: &port 8080
+      QBITTORRENT__BT_PORT: &port-bt 58462
+      QBT_BitTorrent__Session__Interface: eth0
+      QBT_BitTorrent__Session__InterfaceAddress:
+        valueFrom:
+          fieldRef:
+            fieldPath: status.podIP
+      QBT_BitTorrent__Session__InterfaceName: eth0
+      QBT_Preferences__WebUI__AuthSubnetWhitelistEnabled: true
+      QBT_Preferences__WebUI__AuthSubnetWhitelist: |-
+        10.69.2.0/24, 10.69.1.0/24, 10.69.0.0/24
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+      bittorent:
+        enabled: true
+        type: LoadBalancer
+        annotations:
+          io.cilium/lb-ipam-ips: 10.69.1.118
+        ports:
+          bittorrent:
+            enabled: true
+            port: *port-bt
+            protocol: TCP
+            targetPort: *port-bt
+        externalTrafficPolicy: Local
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: internal
+        annotations:
+          hajimari.io/icon: mdi:download
+        hosts:
+          - host: &host qbittorrent.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups: [10000]
+    persistence:
+      config:
+        enabled: true
+        existingClaim: data-pvc
+        advancedMounts:
+          main:
+            main:
+            - path: /config
+              subPath: qbittorrent
+              readOnly: false
+      media:
+        enabled: true
+        existingClaim: media-pvc
+        advancedMounts:
+          main:
+            main:
+            - path: /downloads/movies
+              subPath: downloads/movies
+              readOnly: false
+            - path: /downloads/series
+              subPath: downloads/series
+              readOnly: false
+    #nodeSelector:
+    #  kubernetes.io/hostname: "lbpkm1"
+    resources:
+      requests:
+        cpu: 500m
+        memory: 1Gi
+      limits:
+        memory: 8Gi

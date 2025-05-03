@@ -1,0 +1,100 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app navidrome
+  namespace: default
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  valuesFrom:
+    - targetPath: env.ND_LASTFM_APIKEY
+      kind: Secret
+      name: navidrome-external-ingregrations
+      valuesKey: LASTFM_APIKEY
+    - targetPath: env.ND_LASTFM_SECRET
+      kind: Secret
+      name: navidrome-external-ingregrations
+      valuesKey: LASTFM_SECRET
+  values:
+    image:
+      repository: ghcr.io/navidrome/navidrome
+      tag: 0.54.4
+    env:
+      TZ: "${TIMEZONE}"
+      ND_DATAFOLDER: /config
+      ND_ENABLEGRAVATAR: "true"
+      ND_LOGLEVEL: info
+      #ND_MUSICFOLDER: /data/data1/Media/Library/Music
+      ND_PORT: &port 8080
+      ND_PROMETHEUS_ENABLED: "true"
+      ND_REVERSEPROXYUSERHEADER: "Remote-User"
+      ND_REVERSEPROXYWHITELIST: "0.0.0.0/0"
+      ND_SCANSCHEDULE: "@every 5m"
+      ND_SESSIONTIMEOUT: 24h
+    service:
+      main:
+        ports:
+          http:
+            port: *port
+    serviceMonitor:
+      main:
+        enabled: true
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: external
+        annotations:
+          hajimari.io/icon: mdi:music
+          hajimari.io/group: "media"
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
+          #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
+        hosts:
+          - host: &host navidrome.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      config:
+        enabled: true
+        existingClaim: navidrome-config
+        globalMounts:
+          - path: /data
+      music:
+        type: nfs
+        enabled: true
+        path: /mnt/k8s/data
+        server: "10.69.1.157"
+        advancedMounts:
+          main:
+            app:
+              - path: /music
+                subPath: Library/Music
+    resources:
+      requests:
+        cpu: 10m
+        memory: 250Mi
+      limits:
+        memory: 750Mi

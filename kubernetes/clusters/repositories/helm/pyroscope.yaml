@@ -1,0 +1,8 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: pyroscope-io
+  namespace: flux-system
+spec:
+  interval: 30m
+  url: https://pyroscope-io.github.io/helm-chart

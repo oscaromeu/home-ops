@@ -1,0 +1,29 @@
+ apiVersion: networking.k8s.io/v1
+ kind: Ingress
+ metadata:
+   annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    hajimari.io/enable: "true"
+    hajimari.io/icon: simple-icons:kibana
+    hajimari.io/group: "Public"
+   labels:
+      app.kubernetes.io/name: kibana-data
+      app.kubernetes.io/cluster: data
+      elasticsearch.k8s.elastic.co/cluster-name: data
+   name: kibana
+ spec:
+   ingressClassName: internal
+   rules:
+   - host: &host "kibana.${SECRET_DOMAIN}"
+     http:
+       paths:
+       - backend:
+           service:
+             name: data-kb-http
+             port:
+               number: 5601
+         path: /
+         pathType: Prefix
+   tls:
+   - hosts:
+     - *host

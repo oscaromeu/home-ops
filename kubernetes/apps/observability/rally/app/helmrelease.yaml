@@ -1,0 +1,76 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: rally
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      main:
+        replicas: 1
+        type: cronjob
+        cronjob:
+          schedule: "5 * * * *"
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: elastic/rally
+              tag: 2.3.1
+            envFrom: &envFrom
+              - secretRef:
+                  name: elastic-secret
+            args:
+             - --track=dense_vector
+             - --pipeline=benchmark-only
+             - --target-hosts=elk-elasticsearch.observability.svc.cluster.local:9200
+             - --client-options="use_ssl:true,verify_certs:false,basic_auth_user:'elastic',basic_auth_password:'${ELASTIC_PASSWORD}',http_compress:true"
+             - --report-file=/report/report.csv
+             - --report-format=csv
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                memory: 128Mi
+                cpu: 10m
+              limits:
+                memory: 6Gi
+        pod:
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            runAsNonRoot: true
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+    service:
+      enabled: false
+      main:
+        ports:
+          http:
+            port: 8080
+    persistence:
+      report:
+        enabled: true
+        type: emptyDir

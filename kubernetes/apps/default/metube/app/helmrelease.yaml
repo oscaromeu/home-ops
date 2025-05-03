@@ -1,0 +1,84 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app metube
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  #dependsOn:
+  #- name: volsync
+  #  namespace: storage
+  values:
+    controllers:
+      metube:
+        labels:
+          nfsMount: "true"
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/alexta69/metube
+              tag: "2025-04-16@sha256:778404b09ccbc38f3bdbaa4bab9b6cccc53bb1d4dee3ebf07d33caeaa68d2a1e"
+            env:
+              DOWNLOAD_DIR: "/downloads"
+              STATE_DIR: "/config"
+              YTDL_OPTIONS: '{"http_headers":{"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0"}}'
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups: [10000]
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: 8081
+    ingress:
+      app:
+        className: internal
+        hosts:
+        - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          paths:
+          - path: /
+            service:
+              identifier: app
+              port: http
+    persistence:
+      config:
+        type: persistentVolumeClaim
+        size: 1Gi
+        storageClass: openebs-hostpath
+        accessMode: ReadWriteOnce
+        globalMounts:
+          - path: "/config"
+      output:
+        type: nfs
+        server: 10.69.1.157
+        path: /mnt/k8s/data
+        advancedMounts:
+          metube:
+            app:
+              - path: /downloads
+                subPath: Library/Metube

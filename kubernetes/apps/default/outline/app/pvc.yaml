@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: storage-data
+  labels:
+    app.kubernetes.io/name: &name outline
+    app.kubernetes.io/instance: *name
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: openebs-hostpath
+  resources:
+    requests:
+      storage: 50Gi

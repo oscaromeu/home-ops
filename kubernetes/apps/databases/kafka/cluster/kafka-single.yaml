@@ -1,0 +1,134 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: Kafka
+metadata:
+  name: kafka-cluster
+spec:
+  kafka:
+    version: 3.7.0
+    replicas: 1
+    logging:
+      type: inline
+      #loggers:
+      #  kafka.root.logger.level: DEBUG
+      #  log4j.logger.kafka.coordinator.transaction: TRACE
+      #  log4j.logger.kafka.log.LogCleanerManager: DEBUG
+      #  log4j.logger.kafka.request.logger: DEBUG
+    template:
+      pod:
+        tolerations:
+        - key: "app.stateful/component"
+          operator: "Equal"
+          value: "kafka-broker"
+          effect: NoSchedule
+        affinity:
+          nodeAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                - key: "app.stateful/component"
+                  operator: In
+                  values:
+                  - "kafka-broker"
+    authorization:
+      type: simple
+    listeners:
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+      - name: tls
+        port: 9093
+        type: internal
+        tls: true
+      - name: sha
+        port: 9094
+        type: internal
+        tls: true
+        authentication:
+          type: scram-sha-512
+    config:
+      offsets.topic.replication.factor: 1
+      transaction.state.log.replication.factor: 1
+      transaction.state.log.min.isr: 1
+      default.replication.factor: 1
+      min.insync.replicas: 1
+      inter.broker.protocol.version: "3.7"
+    storage:
+      type: jbod
+      volumes:
+      - id: 0
+        type: persistent-claim
+        size: 100Gi
+        deleteClaim: false
+    metricsConfig:
+      type: jmxPrometheusExporter
+      valueFrom:
+        configMapKeyRef:
+          name: metrics-config
+          key: kafka-metrics-config.yml
+  kafkaExporter:
+    topicRegex: ".*"
+    groupRegex: ".*"
+    template:
+      pod:
+        metadata:
+          annotations:
+            prometheus.io/path: /metrics
+            prometheus.io/port: "9404"
+            prometheus.io/scrape: "true"
+  zookeeper:
+    template:
+      pod:
+        affinity:
+          nodeAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                - key: "app.stateful/component"
+                  operator: In
+                  values:
+                  - "zookeeper"
+    replicas: 1
+    resources:
+      requests:
+        memory: 2560Mi
+        cpu: 1000m
+      limits:
+        memory: 2560Mi
+        cpu: 2000m
+    jvmOptions:
+      -Xms: 2048m
+      -Xmx: 2048m
+    storage:
+      type: persistent-claim
+      size: 100Gi
+      deleteClaim: false
+  entityOperator:
+    tlsSidecar:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          #cpu: 500m
+          memory: 128Mi
+    topicOperator:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 512Mi
+        limits:
+          cpu: 500m
+          memory: 512Mi
+    userOperator:
+      resources:
+        requests:
+          cpu: 500m
+          ephemeral-storage: 1Gi
+          memory: 2Gi
+        limits:
+          cpu: 500m
+          ephemeral-storage: 1Gi
+          memory: 2Gi

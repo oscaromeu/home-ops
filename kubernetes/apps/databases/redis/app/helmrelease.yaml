@@ -1,0 +1,77 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: redis
+  namespace: datahub
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: redis
+      version: 18.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+      interval: 5m
+  values:
+    auth:
+      enabled: false
+      sentinel: false
+    commonConfiguration: |-
+      # Enable AOF https://redis.io/topics/persistence#append-only-file
+      appendonly no
+      # Disable RDB persistence, AOF persistence already enabled.
+      save ""
+    master:
+      disableCommands: []
+      #- FLUSHDB
+      #- FLUSHALL
+      resources:
+        requests:
+          cpu: 36m
+          memory: 138Mi
+        limits:
+          #cpu:
+          memory: 10Gi
+      persistence:
+        enabled: false
+    replica:
+      replicaCount: 1
+      persistence:
+        enabled: false
+      resources:
+        requests:
+          cpu: 36m
+          memory: 138Mi
+        limits:
+          #cpu:
+          memory: 10Gi
+    sentinel:
+      enabled: true
+      masterSet: redis-master
+      getMasterTimeout: 10
+      startupProbe:
+        initialDelaySeconds: 10
+        failureThreshold: 2
+        timeoutSeconds: 10
+      livenessProbe:
+        initialDelaySeconds: 10
+        failureThreshold: 2
+        timeoutSeconds: 10
+      readinessProbe:
+        initialDelaySeconds: 10
+        failureThreshold: 2
+        timeoutSeconds: 10
+      persistence:
+        enabled: false
+    metrics:
+      enabled: false
+      serviceMonitor:
+        enabled: false
+        namespace: "datahub"
+      extraEnvVars:
+        - name: REDIS_EXPORTER_CHECK_KEYS
+          value: "*" # Check all keys
+

@@ -1,0 +1,28 @@
+
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: metric-server
+    app.kubernetes.io/name: metrics-server
+    app.kubernetes.io/component: metrics-server
+    app.kubernetes.io/version: 0.6.4
+  name: metrics-server
+  namespace: kube-system
+spec:
+  endpoints:
+  - interval: 1m
+    path: /metrics
+    port: https
+    scheme: https
+    scrapeTimeout: 10s
+    tlsConfig:
+      insecureSkipVerify: true
+  jobLabel: metrics-server
+  namespaceSelector:
+    matchNames:
+    - kube-system
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: metrics-server
+      app.kubernetes.io/name: metrics-server
