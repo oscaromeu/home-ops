@@ -1,6 +1,6 @@
 ---
 apiVersion: k6.io/v1alpha1
-kind: K6
+kind: Testrun
 metadata:
   name: app-a-test-1
 spec:
