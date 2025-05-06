@@ -74,7 +74,7 @@ spec:
       rules:
         searchNamespace: ALL
     singleBinary:
-      replicas: 2
+      replicas: 1
       persistence:
         enabled: true
         storageClass: openebs-hostpath
