@@ -15,7 +15,7 @@ spec:
       meta.helm.sh/release-name: prometheus-operator-crds
       meta.helm.sh/release-namespace: observability
   path: ./kubernetes/apps/observability/prometheus-operator-crds/app
-  prune: false # never should be deleted
+  prune: true # never should be deleted
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
