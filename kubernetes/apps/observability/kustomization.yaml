@@ -5,6 +5,7 @@ resources:
   - ./namespace.yaml
   - ./gatus/ks.yaml
   - ./grafana/ks.yaml
+  - ./elastic/ks.yaml
   #- ./k6s/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   #- ./kubernetes-events-exporter/ks.yaml
