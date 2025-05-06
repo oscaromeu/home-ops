@@ -4,9 +4,9 @@ kind: Kustomization
 namespace: observability
 
 resources:
-  - app-a-test-1.yaml
+  #- app-a-test-1.yaml
   # Scheduled test
-  - ./cm.yaml
+  #- ./cm.yaml
   - ./snapshooter.yaml
 
 configMapGenerator:
