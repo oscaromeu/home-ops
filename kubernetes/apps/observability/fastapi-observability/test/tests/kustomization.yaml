@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: observability
+
+resources:
+  # Basic test
+  #- cm.yaml
+  #- k6s.yaml
+  # Scheduled test
+  - ./cm.yaml
+  - ./snapshooter.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: app-a-test-1
+    files:
+      - app-a-test-1.yaml

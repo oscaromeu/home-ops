@@ -1,0 +1,65 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: app-b
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    image:
+      repository: ghcr.io/oscaromeu/fastapi-observability
+      tag: v0.1.0
+    env:
+      TARGET_ONE_HOST: app-b
+      TARGET_TWO_HOST: app-c
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo.observability.svc.cluster.local:4317
+      OTEL_RESOURCE_ATTRIBUTES: "service.name=app-b,compose_service=app-b"
+      OTEL_METRICS_EXPORTER: none
+      MANAGEMENT_METRICS_TAGS_APPLICATION: app-b
+    service:
+      main:
+        ports:
+          http:
+            port: &port 8000
+
+    serviceMonitor:
+      main:
+        enabled: false
+        endpoints:
+          - port: http
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
+
+    ingress:
+      main:
+        enabled: false
+        ingressClassName: internal
+        annotations:
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+        hosts:
+          - host: &host app-b.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host

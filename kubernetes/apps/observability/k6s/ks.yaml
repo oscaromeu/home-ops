@@ -1,0 +1,26 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app cluster-infrastructure-k6s-operator
+  namespace: flux-system
+  labels:
+    substitution.flux.home.arpa/enabled: "true"
+    kustomize.toolkit.fluxcd.io/prune: enabled
+spec:
+  dependsOn:
+    - name: cluster-infrastructure-kube-prometheus-stack
+  targetNamespace: observability
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
+  path: ./kubernetes/apps/observability/k6s/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flanks-infra
+    namespace: flux-system
+  wait: true
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m

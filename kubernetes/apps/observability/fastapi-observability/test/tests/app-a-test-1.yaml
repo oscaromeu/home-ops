@@ -1,0 +1,11 @@
+---
+apiVersion: k6.io/v1alpha1
+kind: K6
+metadata:
+  name: app-a-test-1
+spec:
+  parallelism: 4
+  script:
+    configMap:
+      name: app-a-test-config
+      file: app-a-test-1.js
