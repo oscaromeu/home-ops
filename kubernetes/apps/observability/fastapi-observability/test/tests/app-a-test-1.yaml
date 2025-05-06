@@ -8,4 +8,4 @@ spec:
   script:
     configMap:
       name: app-a-test-1
-      file: app-a-test-1.js
+      file: app-a-1.js
