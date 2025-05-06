@@ -61,7 +61,7 @@ spec:
     chunksCache:
       enabled: false
     gateway:
-      replicas: 0
+      replicas: 2
     lokiCanary:
       enabled: false
     read:
@@ -74,7 +74,7 @@ spec:
       rules:
         searchNamespace: ALL
     singleBinary:
-      replicas: 1
+      replicas: 2
       persistence:
         enabled: true
         storageClass: openebs-hostpath
