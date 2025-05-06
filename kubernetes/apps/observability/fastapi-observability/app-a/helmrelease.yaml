@@ -30,6 +30,7 @@ spec:
     env:
       TARGET_ONE_HOST: app-b
       TARGET_TWO_HOST: app-c
+      APP_NAME: app-a
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo.observability.svc.cluster.local:4317
       OTEL_RESOURCE_ATTRIBUTES: service.name=app-a,compose_service=app-a
       OTEL_METRICS_EXPORTER: none
@@ -42,7 +43,7 @@ spec:
 
     serviceMonitor:
       main:
-        enabled: false
+        enabled: true
         endpoints:
           - port: http
             scheme: http
