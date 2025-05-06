@@ -9,7 +9,7 @@ metadata:
     kustomize.toolkit.fluxcd.io/prune: enabled
 spec:
   dependsOn:
-    - name: cluster-infrastructure-kube-prometheus-stack
+    - name: cluster-apps-kube-prometheus-stack
   targetNamespace: observability
   commonMetadata:
     labels:
