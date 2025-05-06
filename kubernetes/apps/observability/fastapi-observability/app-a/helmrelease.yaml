@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: app-a
-  namespace: default
+  namespace: observability
 spec:
   interval: 15m
   chart:
@@ -27,7 +27,6 @@ spec:
     image:
       repository: ghcr.io/oscaromeu/fastapi-observability/app
       tag: latest@sha256:7a8d4c77ce1fbaf338507f5fe8dfaa71280f52e60d91de25b89e01f514020696
-
     env:
       TARGET_ONE_HOST: app-b
       TARGET_TWO_HOST: app-c

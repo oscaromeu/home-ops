@@ -2,10 +2,10 @@
 apiVersion: k6.io/v1alpha1
 kind: TestRun
 metadata:
-  name: app-a-test-1
+  name: app-a-test
 spec:
-  parallelism: 4
+  parallelism: 1
   script:
     configMap:
-      name: app-a-test-1
-      file: app-a-1.js
+      name: app-a-test
+      file: test.js
