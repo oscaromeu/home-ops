@@ -7,18 +7,18 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  targetNamespace: default
-  path: ./kubernetes/apps/default/fastapi-observability/app-a
+  targetNamespace: observability
+  path: ./kubernetes/apps/observability/fastapi-observability/app-a
   prune: true
   sourceRef:
     kind: GitRepository
-    name: flanks-infra
+    name: home-kubernetes
     namespace: flux-system
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: app-a
-      namespace: default
+      namespace: observability
   interval: 30m
   retryInterval: 1m
   timeout: 3m
@@ -33,17 +33,17 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-fastapi-observability-a
-  path: ./kubernetes/apps/default/fastapi-observability/app-b
+  path: ./kubernetes/apps/observability/fastapi-observability/app-b
   prune: true
   sourceRef:
     kind: GitRepository
-    name: flanks-infra
+    name: home-kubernetes
     namespace: flux-system
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: app-b
-      namespace: default
+      namespace: observability
   interval: 30m
   retryInterval: 1m
   timeout: 3m
@@ -58,17 +58,17 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-fastapi-observability-b
-  path: ./kubernetes/apps/default/fastapi-observability/app-c
+  path: ./kubernetes/apps/observability/fastapi-observability/app-c
   prune: true
   sourceRef:
     kind: GitRepository
-    name: flanks-infra
+    name: home-kubernetes
     namespace: flux-system
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: app-c
-      namespace: default
+      namespace: observability
   interval: 30m
   retryInterval: 1m
   timeout: 3m
@@ -85,11 +85,11 @@ spec:
     - name: cluster-apps-fastapi-observability-a
     - name: cluster-apps-fastapi-observability-b
     - name: cluster-apps-fastapi-observability-c
-  path: ./kubernetes/apps/default/fastapi-observability/monitoring
+  path: ./kubernetes/apps/observability/fastapi-observability/monitoring
   prune: true
   sourceRef:
     kind: GitRepository
-    name: flanks-infra
+    name: home-kubernetes
     namespace: flux-system
   interval: 30m
   retryInterval: 1m
@@ -105,11 +105,11 @@ spec:
 #spec:
 #  dependsOn:
 #    - name: cluster-apps-fastapi-observability-a
-#  path: ./kubernetes/gke-eu-west4/apps/prod/default/fastapi-observability/test
+#  path: ./kubernetes/apps/observability/fastapi-observability/test
 #  prune: true
 #  sourceRef:
 #    kind: GitRepository
-#    name: flanks-infra
+#    name: home-kubernetes
 #    namespace: flux-system
 #  interval: 30m
 #  retryInterval: 1m
