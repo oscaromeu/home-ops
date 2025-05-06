@@ -14,7 +14,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/observability/tempo/app
+  path: ./kubernetes/apps/observability/tempo/app
   prune: true
   sourceRef:
     kind: GitRepository
