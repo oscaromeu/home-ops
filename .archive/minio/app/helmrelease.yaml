@@ -2,125 +2,73 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: datahub-tenant
-  namespace: datahub
+  name: minio
+  namespace: databases
 spec:
   interval: 5m
-  maxHistory: 2
   chart:
     spec:
-      chart: tenant
-      version: 5.0.8
+      # renovate: registryUrl=https://charts.min.io/
+      chart: minio
+      version: 5.4.0
       sourceRef:
         kind: HelmRepository
-        name: minio-operator
+        name: minio
         namespace: flux-system
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
-  uninstall:
-    keepHistory: false
+      interval: 5m
   values:
-    secrets:
-      existingSecret: datahub-tenant-env-configuration
-    tenant:
-      name: datahub
-      configuration:
-        name: datahub-tenant-env-configuration
-      pools:
-        - servers: 2
-          name: pool-0
-          storageClassName: openebs-hostpath
-          volumesPerServer: 2
-          volumeClaimTemplate:
-            metadata:
-              name: data
-            spec:
-              accessModes:
-                - ReadWriteOnce
-              resources:
-                requests:
-                  storage: 200Gi
-                  cpu: 500m
-                  memory: 1Gi
-                limits:
-                  memory: 2Gi
-          containerSecurityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            runAsNonRoot: true
-          affinity:
-            podAntiAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-              - labelSelector:
-                  matchExpressions:
-                  - key: v1.min.io/tenant
-                    operator: In
-                    values:
-                    - test
-                  - key: v1.min.io/pool
-                    operator: In
-                    values:
-                    - pool-0
-                topologyKey: kubernetes.io/hostname
-      metrics:
-        enabled: true
-      buckets:
-        - name: cnpg-bucket-v1
-        - name: gitea-bucket-v1
-      ## List of secret names to use for generating MinIO users during tenant provisioning
-      users:
-        - name: admin-user-secret
-
-      prometheusOperator: true
-
-      env:
-        - name: PROMETHEUS_NAMESPACE
-          value: "monitoring"
-        - name: MINIO_PROMETHEUS_URL
-          value: "http://kube-prometheus-stack-prometheus.observability:9090"
-        - name: MINIO_PROMETHEUS_AUTH_TYPE
-          value: "public"
-
-      exposeServices:
-        console: true
-        minio: true
-
+    image:
+      repository: quay.io/minio/minio
+      tag: RELEASE.2025-01-20T14-49-07Z@sha256:ed9be66eb5f2636c18289c34c3b725ddf57815f2777c77b5938543b78a44f144
+      pullPolicy: IfNotPresent
+    mcImage:
+      repository: quay.io/minio/mc
+      tag: RELEASE.2023-01-11T03-14-16Z
+      pullPolicy: IfNotPresent
+    mode: standalone
+    rootUser: ${MINIO_ROOT_USER}
+    rootPassword: ${MINIO_ROOT_PASSWORD}
+    users:
+    #- accessKey: ${SECRET_THANOS_S3_ACCESS_KEY}
+    #  secretKey: ${SECRET_THANOS_S3_SECRET_KEY}
+    #  policy: readwrite
+    #- accessKey: ${SECRET_VOLSYNC_MINIO_ACCESS_KEY}
+    #  secretKey: ${SECRET_VOLSYNC_MINIO_SECRET_KEY}
+    #  policy: readwrite
+    #- accessKey: ${SECRET_CNPG_MINIO_ACCESS_KEY}
+    #  secretKey: ${SECRET_CNPG_MINIO_SECRET_KEY}
+    #  policy: readWrite
+    #- accessKey: ${SECRET_FORGEJO_MINIO_ACCESS_KEY}
+    #  secretKey: ${SECRET_FORGEJO_MINIO_SECRET_KEY}
+    #  policy: readWrite
+    persistence:
+      enabled: true
+      existingClaim: "nfs-minio-pvc"
     ingress:
-      api:
+      enabled: true
+      ingressClassName: internal
+      hosts:
+        - minio.${SECRET_DOMAIN}
+      tls:
+        - secretName: minio-cert
+          hosts:
+            - minio.${SECRET_DOMAIN}
+    consoleIngress:
+      enabled: true
+      hosts:
+        - s3.${SECRET_DOMAIN}
+      tls:
+        - secretName: minio-console-cert
+          hosts:
+            - s3.${SECRET_DOMAIN}
+    securityContext:
+      enabled: false
+    resources:
+      requests:
+        memory: 350Mi
+        cpu: 25m
+      limits:
+        memory: 1500Mi
+    metrics:
+      serviceMonitor:
         enabled: true
-        ingressClassName: internal
-        annotations:
-          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-          hajimari.io/icon: simple-icons:minio
-          nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-          nginx.ingress.kubernetes.io/backend-protocol: HTTPS
-          #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
-          #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
-        host: &host "s3.${SECRET_DOMAIN}"
-        tls:
-          - hosts:
-              - *host
-        path: /
-        pathType: Prefix
-      console:
-        enabled: true
-        ingressClassName: internal
-        annotations:
-          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-          hajimari.io/icon: simple-icons:minio
-          nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-          nginx.ingress.kubernetes.io/backend-protocol: HTTPS
-          #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
-          #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
-        host: &host "console.${SECRET_DOMAIN}"
-        tls:
-          - hosts:
-              - *host
-        path: /
-        pathType: Prefix
-

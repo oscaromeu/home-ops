@@ -5,5 +5,4 @@ resources:
   - ./namespace.yaml
   - ./cloudnative-pg/ks.yaml
   - ./dragonfly/ks.yaml
-  #- ./minio/ks.yaml
   - ./redis/ks.yaml
