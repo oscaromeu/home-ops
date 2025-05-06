@@ -4,17 +4,14 @@ kind: Kustomization
 namespace: observability
 
 resources:
-  # Basic test
-  #- cm.yaml
-  #- k6s.yaml
+  - app-a-test-1.yaml
   # Scheduled test
   - ./cm.yaml
   - ./snapshooter.yaml
 
-generatorOptions:
-  disableNameSuffixHash: true
-
 configMapGenerator:
   - name: app-a-test-1
     files:
-      - app-a-test-1.yaml
+      - app-a-1.js=./test/app-a-1.js
+generatorOptions:
+  disableNameSuffixHash: true
