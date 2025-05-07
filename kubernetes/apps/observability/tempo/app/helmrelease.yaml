@@ -67,6 +67,7 @@ spec:
         size: 10Gi
 
     tempoQuery:
+      enabled: true
       ingress:
         enabled: true
         annotations:
