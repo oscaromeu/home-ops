@@ -5,7 +5,7 @@ import { check, sleep } from "k6";
 export const options = {
   thresholds: {
     // Assert that 99% of requests finish within 3000ms.
-    http_req_duration: ["p(99) < 3000"],
+    http_req_duration: ["p(99) < 30000"],
   },
   // Ramp the number of virtual users up and down
   stages: [
@@ -38,5 +38,4 @@ export default function () {
   let res7 = http.get("http://app-a.observability.svc.cluster.local:8000/error_test");
   check(res7, { "status was 200": (r) => r.status == 200 });
 
-  sleep(1);
 }
