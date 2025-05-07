@@ -3,12 +3,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - helmrelease.yaml
+  - cm.yaml
   - test.yaml
   - snapshooter.yaml
-
-configMapGenerator:
-  - name: app-a-test
-    files:
-      - test.js=./test.js
-generatorOptions:
-  disableNameSuffixHash: true
