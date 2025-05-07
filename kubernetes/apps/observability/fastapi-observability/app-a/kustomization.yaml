@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - helmrelease.yaml
   - test.yaml
+  - snapshooter.yaml
 
 configMapGenerator:
   - name: app-a-test
