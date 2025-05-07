@@ -68,11 +68,11 @@ spec:
 
     tempoQuery:
       ingress:
-        enabled: false
+        enabled: true
         annotations:
           hajimari.io/icon: simple-icons:prometheus
         hosts:
-          - &host "tempo-query.flanks.ts.net"
+          - &host "tempo-query.${SECRET_DOMAIN}"
         tls:
           - hosts:
               - *host
