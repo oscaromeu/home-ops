@@ -26,8 +26,8 @@ export default function () {
   let res3 = http.get("http://app-a.observability.svc.cluster.local:8000/cpu_task");
   check(res3, { "status was 200": (r) => r.status == 200 });
 
-  let res4 = http.get("http://app-a.observability.svc.cluster.local:8000/random_sleep");
-  check(res4, { "status was 200": (r) => r.status == 200 });
+  //let res4 = http.get("http://app-a.observability.svc.cluster.local:8000/random_sleep");
+  //check(res4, { "status was 200": (r) => r.status == 200 });
 
   let res5 = http.get("http://app-a.observability.svc.cluster.local:8000/random_status");
   check(res5, { "status was 200": (r) => r.status == 200 });
