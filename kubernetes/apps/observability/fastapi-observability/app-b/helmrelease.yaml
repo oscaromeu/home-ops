@@ -27,8 +27,9 @@ spec:
       repository: ghcr.io/oscaromeu/fastapi-observability/app
       tag: latest@sha256:7a8d4c77ce1fbaf338507f5fe8dfaa71280f52e60d91de25b89e01f514020696
     env:
-      TARGET_ONE_HOST: app-b
+      TARGET_ONE_HOST: app-a
       TARGET_TWO_HOST: app-c
+      APP_NAME: app-b
       OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo.observability.svc.cluster.local:4317
       OTEL_RESOURCE_ATTRIBUTES: "service.name=app-b,compose_service=app-b"
       OTEL_METRICS_EXPORTER: none
