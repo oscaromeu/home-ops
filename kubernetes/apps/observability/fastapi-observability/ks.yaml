@@ -57,6 +57,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  targetNamespace: observability
   dependsOn:
     - name: cluster-apps-fastapi-observability-b
   path: ./kubernetes/apps/observability/fastapi-observability/app-c
