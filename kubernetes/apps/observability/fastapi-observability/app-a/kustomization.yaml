@@ -9,6 +9,6 @@ resources:
 configMapGenerator:
   - name: app-a-test
     files:
-      - test.yaml=./test.js
+      - cm.yaml
 generatorOptions:
   disableNameSuffixHash: true
