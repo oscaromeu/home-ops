@@ -20,10 +20,8 @@ export default function () {
   let res1 = http.get("http://app-a.observability.svc.cluster.local:8000");
   check(res1, { "status was 200": (r) => r.status == 200 });
 
-
   let res2 = http.get("http://app-a.observability.svc.cluster.local:8000/io_task");
   check(res2, { "status was 200": (r) => r.status == 200 });
-
 
   let res3 = http.get("http://app-a.observability.svc.cluster.local:8000/cpu_task");
   check(res3, { "status was 200": (r) => r.status == 200 });
@@ -39,9 +37,6 @@ export default function () {
 
   let res7 = http.get("http://app-a.observability.svc.cluster.local:8000/error_test");
   check(res7, { "status was 200": (r) => r.status == 200 });
-
-  let res8 = http.get("http://app-a.observability.svc.cluster.local:8000/actuator/prometheus");
-  check(res8, { "status was 200": (r) => r.status == 200 });
 
   sleep(1);
 }
