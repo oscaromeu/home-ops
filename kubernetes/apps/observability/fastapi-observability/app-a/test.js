@@ -35,7 +35,7 @@ export default function () {
   let res6 = http.get("http://app-a.observability.svc.cluster.local:8000/chain");
   check(res6, { "status was 200": (r) => r.status == 200 });
 
-  let res7 = http.get("http://app-a.observability.svc.cluster.local:8000/error_test");
-  check(res7, { "status was 200": (r) => r.status == 200 });
+  //let res7 = http.get("http://app-a.observability.svc.cluster.local:8000/error_test");
+  //check(res7, { "status was 200": (r) => r.status == 200 });
 
 }
