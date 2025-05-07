@@ -89,6 +89,12 @@ spec:
             url: http://loki-headless.observability.svc.cluster.local:3100
             jsonData:
               maxLines: 250
+            derivedFields:
+              - datasourceUid: tempo
+                matcherRegex: (?:trace_id)=(\w+)
+                name: TraceID
+                url: $${__value.raw}
+                # Use $$ (double-dollar sign) when your configuration needs a literal dollar sign.
           - name: Tempo
             type: tempo
             typeName: Tempo
@@ -108,7 +114,7 @@ spec:
                filterByTraceID: true
                mapTagNamesEnabled: false
                tags:
-                  - compose_service
+                  - service_name
             readOnly: false
             editable: true
           - name: Pyroscope
