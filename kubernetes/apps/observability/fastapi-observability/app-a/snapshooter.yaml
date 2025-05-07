@@ -23,9 +23,8 @@ spec:
                 - -c
                 #- 'kubectl delete -f /tmp/app-a-test.yaml; kubectl apply -f /tmp/app-a-test.yaml'
                 - 'ls -ltrah /tmp'
-                - 'kubectl get testruns -n observability'
           restartPolicy: OnFailure
           volumes:
             - name: k6-yaml
               configMap:
-                name: app-a-test
+                name: app-a-config
