@@ -21,7 +21,8 @@ spec:
                 - /bin/bash
               args:
                 - -c
-                - 'kubectl delete -f /tmp/test.js; kubectl apply -f /tmp/test.js'
+                #- 'kubectl delete -f /tmp/test.yaml; kubectl apply -f /tmp/test.yaml'
+                - 'ls -ltrah /tmp'
           restartPolicy: OnFailure
           volumes:
             - name: k6-yaml
