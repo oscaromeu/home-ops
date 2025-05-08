@@ -97,6 +97,9 @@ spec:
             basicAuth: false
             isDefault: false
             jsonData:
+              httpMethod: GET
+              serviceMap:
+                datasourceUid: 'Prometheus'
             nodeGraph:
                enabled: true
             tracesToLogs:
