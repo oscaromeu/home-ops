@@ -32,7 +32,7 @@ spec:
       reportingEnabled: false
       metricsGenerator:
         enabled: true
-        remoteWriteUrl: "http://prometheus-operated.observability.svc.cluster.local:9090/api/v1/write"
+        remoteWriteUrl: "http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/write"
 
       storage:
         trace:
