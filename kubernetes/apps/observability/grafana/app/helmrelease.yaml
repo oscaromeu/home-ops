@@ -89,12 +89,15 @@ spec:
             url: http://loki-headless.observability.svc.cluster.local:3100
             jsonData:
               maxLines: 250
-            derivedFields:
-              - datasourceUid: tempo
-                matcherRegex: (?:trace_id)=(\w+)
-                name: TraceID
-                url: $${__value.raw}
-                # Use $$ (double-dollar sign) when your configuration needs a literal dollar sign.
+              derivedFields:
+                - datasourceUid: tempo
+                  matcherRegex: (?:trace_id)=(\w+)
+                  name: TraceID
+                  # url will be interpreted as query for the datasource
+                  # Use $$ (double-dollar sign) when your configuration needs a literal dollar sign.
+                  url: $${__value.raw}
+                  # optional for URL Label to set a custom display label for the link.
+                  urlDisplayLabel: 'View Trace'
           - name: Tempo
             type: tempo
             typeName: Tempo
