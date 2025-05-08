@@ -12,5 +12,5 @@ resources:
   - ./kubernetes-events-exporter/ks.yaml
   - ./loki/ks.yaml
   #- ./prometheus-adapter/ks.yaml
-  - ./tempo/ks.yaml
+  #- ./tempo/ks.yaml
   - ./vector/ks.yaml
