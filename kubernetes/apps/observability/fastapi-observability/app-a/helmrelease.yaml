@@ -25,16 +25,16 @@ spec:
   values:
 
     image:
-      repository: ghcr.io/blueswen/fastapi-observability/app
-      tag: latest@sha256:18785e39617635315687a0eb5c0b01f07c8e129b23eb3ffff16a22c4c546675b
+      repository: ghcr.io/oscaromeu/fastapi-observability/app
+      tag: latest@sha256:7a8d4c77ce1fbaf338507f5fe8dfaa71280f52e60d91de25b89e01f514020696
     env:
-      #TARGET_ONE_HOST: app-b
-      #TARGET_TWO_HOST: app-c
+      TARGET_ONE_HOST: app-b
+      TARGET_TWO_HOST: app-c
       APP_NAME: app-a
-      #OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo.observability.svc.cluster.local:4317
-      #OTEL_RESOURCE_ATTRIBUTES: service.name=app-a
-      #OTEL_METRICS_EXPORTER: none
-      #MANAGEMENT_METRICS_TAGS_APPLICATION: app-a
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo.observability.svc.cluster.local:4317
+      OTEL_RESOURCE_ATTRIBUTES: service.name=app-a
+      OTEL_METRICS_EXPORTER: none
+      MANAGEMENT_METRICS_TAGS_APPLICATION: app-a
     service:
       main:
         ports:
