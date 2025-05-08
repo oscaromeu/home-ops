@@ -11,7 +11,7 @@ spec:
       dockerdWithinRunnerContainer: true
       ephemeral: false
       repository: oscaromeu/fastapi-observability
-      labels: ["fastapi-observability"] # Cluster Pre Flanks Systems
+      labels: ["fastapi-observability"]
       dockerVolumeMounts:
         - mountPath: /var/lib/docker
           name: docker
