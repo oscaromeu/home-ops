@@ -88,5 +88,5 @@ spec:
           memory: 1Gi
 
     serviceMonitor:
-      enabled: false
+      enabled: true
 
