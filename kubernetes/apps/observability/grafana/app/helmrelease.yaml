@@ -79,7 +79,7 @@ spec:
               maxLines: 250
               derivedFields:
                 - datasourceUid: tempo
-                  matcherRegex: (?:trace_id)=(\w+)
+                  matcherRegex: traceID=(\\w+)
                   name: TraceID
                   # url will be interpreted as query for the datasource
                   # Use $$ (double-dollar sign) when your configuration needs a literal dollar sign.
