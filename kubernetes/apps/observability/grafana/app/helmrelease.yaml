@@ -66,23 +66,11 @@ spec:
       datasources.yaml:
         apiVersion: 1
         datasources:
-
-          #- name: Mimir
-          #  type: prometheus
-          #  access: proxy
-          #  url: http://mimir-nginx.observability.svc.cluster.local:80/prometheus
-          #  isDefault: false
-
           - name: Prometheus
             type: prometheus
             access: proxy
             url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
             isDefault: true
-          - name: Victoria-Metrics
-            type: prometheus
-            access: proxy
-            url: http://victoria-metrics-single-server.observability.svc.cluster.local:8428
-            isDefault: false
           - name: Loki
             type: loki
             access: proxy
