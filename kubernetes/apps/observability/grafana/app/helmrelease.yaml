@@ -103,7 +103,7 @@ spec:
             nodeGraph:
                enabled: true
             tracesToLogs:
-               datasourceUid: Loki
+               datasourceUid: loki
                filterBySpanID: false
                filterByTraceID: true
                mapTagNamesEnabled: false
