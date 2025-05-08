@@ -34,7 +34,7 @@ spec:
         enabled: true
         remoteWriteUrl: "http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/write"
 
-      retention: 14d
+      retention: 24h
       overrides:
         defaults:
           metrics_generator:
