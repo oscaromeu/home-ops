@@ -27,7 +27,7 @@ spec:
     keepHistory: false
 
   values:
-    replicas: 2
+    replicas: 1
     tempo:
       reportingEnabled: false
       metricsGenerator:
