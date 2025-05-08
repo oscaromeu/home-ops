@@ -31,7 +31,8 @@ spec:
     tempo:
       reportingEnabled: false
       metricsGenerator:
-        enabled: false
+        enabled: true
+        remoteWriteURL: "http://prometheus.observability:9090/api/v1/write"
 
       storage:
         trace:
