@@ -11,7 +11,7 @@ spec:
       dockerdWithinRunnerContainer: true
       ephemeral: false
       repository: oscaromeu/grafana-tempo-loki-tracing
-      labels: ["grafana-tempo-loki-tracing"]
+      labels: ["runner-homeops"]
       dockerVolumeMounts:
         - mountPath: /var/lib/docker
           name: docker
