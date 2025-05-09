@@ -4,4 +4,4 @@ namespace: actions-runner-system
 
 resources:
   #- ./runner-home-ops.yaml
-  - ./runner-fastapi-observability.yaml
+  - ./runner-grafana-tempo-loki-tracing.yaml

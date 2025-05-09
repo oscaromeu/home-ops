@@ -10,8 +10,8 @@ spec:
       image: summerwind/actions-runner-dind:latest
       dockerdWithinRunnerContainer: true
       ephemeral: false
-      repository: oscaromeu/fastapi-observability
-      labels: ["fastapi-observability"]
+      repository: oscaromeu/grafana-tempo-loki-tracing
+      labels: ["grafana-tempo-loki-tracing"]
       dockerVolumeMounts:
         - mountPath: /var/lib/docker
           name: docker
