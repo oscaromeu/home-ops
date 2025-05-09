@@ -2,7 +2,7 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: fastapi-observability
+  name: runner-grafana-tempo-loki-tracing
 spec:
   template:
     spec:
