@@ -2,7 +2,7 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: self-hosted
+  name: runner-homeops
 spec:
   template:
     spec:
@@ -10,8 +10,8 @@ spec:
       image: summerwind/actions-runner-dind:latest
       dockerdWithinRunnerContainer: true
       ephemeral: false
-      repository: oscaromeu/home-ops
-      labels: ["self-hosted"]
+      repository: oscaromeu/grafana-tempo-loki-tracing
+      labels: ["runner-homeops"]
       dockerVolumeMounts:
         - mountPath: /var/lib/docker
           name: docker
