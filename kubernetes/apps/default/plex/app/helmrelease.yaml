@@ -30,7 +30,7 @@ spec:
               repository: ghcr.io/home-operations/plex
               tag: 1.41.6.9685@sha256:37d36646471fb905a0080daaaa1f09ad3370b06149ed5f94dad73ead591cad0e
             env:
-              PLEX_ADVERTISE_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}:443,http://${LOAD_BALANCER_IP_PLEX}:32400"
+              PLEX_ADVERTISE_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}:443,https://${LOAD_BALANCER_IP_PLEX}:32400"
               #ADVERTISE_IP: "https://plex.${SECRET_DOMAIN},http://${LOAD_BALANCER_IP_PLEX}:32400"
               TZ: "${TIMEZONE}"
             probes:
