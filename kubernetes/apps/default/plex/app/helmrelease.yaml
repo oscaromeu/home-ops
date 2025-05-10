@@ -27,15 +27,14 @@ spec:
         containers:
           app:
             image:
-              repository: plexinc/pms-docker
-              tag: latest
+              repository: ghcr.io/home-operations/plex
+              tag: 1.41.6.9685@sha256:37d36646471fb905a0080daaaa1f09ad3370b06149ed5f94dad73ead591cad0e
             env:
-              PLEX_ADVERTISE_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}:443"
-              ADVERTISE_IP: "https://plex.${SECRET_DOMAIN},http://${LOAD_BALANCER_IP_PLEX}:32400"
+              PLEX_ADVERTISE_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}:443,http://${LOAD_BALANCER_IP_PLEX}:32400,https://plex-local.rafaribe.com:443"
               TZ: "${TIMEZONE}"
-            envFrom:
-              - secretRef:
-                  name: plex-claim-secret
+            #envFrom:
+            #  - secretRef:
+            #      name: plex-claim-secret
             probes:
               liveness: &probes
                 enabled: true
@@ -62,7 +61,7 @@ spec:
                   - ALL
     defaultPodOptions:
       securityContext:
-        runAsNonRoot: false
+        runAsNonRoot: true
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
@@ -87,6 +86,17 @@ spec:
         tls:
           - hosts:
               - *host
+      local:
+        className: internal
+        annotations:
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+        hosts:
+          - host: "plex-local.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
     persistence:
       config:
         existingClaim: plex-config-v1
