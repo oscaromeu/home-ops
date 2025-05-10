@@ -33,7 +33,7 @@ spec:
               PLEX_ADVERTISE_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}:443"
               ADVERTISE_IP: "https://plex.${SECRET_DOMAIN},http://${LOAD_BALANCER_IP_PLEX}:32400"
               TZ: "${TIMEZONE}"
-              PLEX_CLAIM: "${PLEX_CLAIM}"
+              PLEX_CLAIM: random
             probes:
               liveness: &probes
                 enabled: true
