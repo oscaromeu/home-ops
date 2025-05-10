@@ -17,4 +17,4 @@ resources:
   #- ./overseerr/ks.yaml
   #- ./prowlarr/ks.yaml
   #- ./pinchflat/ks.yaml
-  #- ./qbittorrent/ks.yaml
+  - ./qbittorrent/ks.yaml
