@@ -61,7 +61,7 @@ spec:
                   - ALL
     defaultPodOptions:
       securityContext:
-        runAsNonRoot: false
+        runAsNonRoot: true
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
@@ -96,12 +96,10 @@ spec:
       media:
         type: nfs
         server: ${NAS_SERVER_IP}
-        path: ${NAS_SERVER_MEDIA_PATH}
-        advancedMounts:
-          plex:
-            app:
-              - path: /media
-                subPath: Library/Media
+        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media
+        globalMounts:
+          - path: /media
+            readOnly: true
       tmp:
         type: emptyDir
       transcode:
