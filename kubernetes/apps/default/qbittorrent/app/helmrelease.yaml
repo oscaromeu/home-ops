@@ -101,7 +101,7 @@ spec:
         advancedMounts:
           qbittorrent:
             app:
-              - path: /downloads
+              - path: /config/Downloads
                 subPath: Library/Downloads
       tmp:
         type: emptyDir
