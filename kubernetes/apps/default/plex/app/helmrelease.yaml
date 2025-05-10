@@ -30,11 +30,8 @@ spec:
               repository: ghcr.io/home-operations/plex
               tag: 1.41.6.9685@sha256:37d36646471fb905a0080daaaa1f09ad3370b06149ed5f94dad73ead591cad0e
             env:
-              PLEX_ADVERTISE_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}:443,http://${LOAD_BALANCER_IP_PLEX}:32400,https://plex-local.rafaribe.com:443"
+              PLEX_ADVERTISE_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}:443,http://${LOAD_BALANCER_IP_PLEX}:32400,https://plex-local.${SECRET_DOMAIN}:443"
               TZ: "${TIMEZONE}"
-            #envFrom:
-            #  - secretRef:
-            #      name: plex-claim-secret
             probes:
               liveness: &probes
                 enabled: true
@@ -106,12 +103,26 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /config/Library/Application Support/Plex Media Server/Logs
-      media:
+      videos:
         type: nfs
         server: ${NAS_SERVER_IP}
-        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media
+        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Videos
         globalMounts:
-          - path: /media
+          - path: /videos
+            readOnly: true
+      music:
+        type: nfs
+        server: ${NAS_SERVER_IP}
+        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Music
+        globalMounts:
+          - path: /music
+            readOnly: true
+      turntablism:
+        type: nfs
+        server: ${NAS_SERVER_IP}
+        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Turntablism
+        globalMounts:
+          - path: /turntablism
             readOnly: true
       tmp:
         type: emptyDir
