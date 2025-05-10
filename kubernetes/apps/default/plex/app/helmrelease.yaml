@@ -30,10 +30,8 @@ spec:
               repository: ghcr.io/home-operations/plex
               tag: 1.41.6.9685@sha256:37d36646471fb905a0080daaaa1f09ad3370b06149ed5f94dad73ead591cad0e
             env:
-              # PLEX_ADVERTISE_URL: https://{{ .Release.Name }}.${SECRET_DOMAIN}:443
-              ADVERTISE_IP: "https://plex.${SECRET_DOMAIN},http://${PLEX_IP}:32400"
-              NVIDIA_DRIVER_CAPABILITIES: all
-              NVIDIA_VISIBLE_DEVICES: all
+              PLEX_ADVERTISE_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}:443,http://${LOAD_BALANCER_IP_PLEX}:32400"
+              #ADVERTISE_IP: "https://plex.${SECRET_DOMAIN},http://${LOAD_BALANCER_IP_PLEX}:32400"
               TZ: "${TIMEZONE}"
             probes:
               liveness: &probes
@@ -71,7 +69,7 @@ spec:
           - 65537
     ingress:
       app:
-        className: external
+        className: internal
         annotations:
           gatus.io/path: *path
           hajimari.io/icon: mdi:plex
