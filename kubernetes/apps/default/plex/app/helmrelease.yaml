@@ -32,8 +32,10 @@ spec:
             env:
               PLEX_ADVERTISE_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}:443"
               ADVERTISE_IP: "https://plex.${SECRET_DOMAIN},http://${LOAD_BALANCER_IP_PLEX}:32400"
-              ALLOWED_NETWORKS: "10.69.1.0/24,10.69.2.0/24,10.69.3.0/24,10.96.0.0/16"
               TZ: "${TIMEZONE}"
+            envFrom:
+              - secretRef:
+                  name: plex-claim-secret
             probes:
               liveness: &probes
                 enabled: true
