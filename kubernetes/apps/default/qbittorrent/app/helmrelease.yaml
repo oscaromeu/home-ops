@@ -98,9 +98,11 @@ spec:
         type: nfs
         server: ${NAS_SERVER_IP}
         path: /mnt/k8s/data
-        globalMounts:
-          - path: /downloads
-            subPath: Library/Downloads
+        advancedMounts:
+          qbittorrent:
+            app:
+              - path: /downloads
+                subPath: Library/Downloads
       tmp:
         type: emptyDir
       incomplete:
