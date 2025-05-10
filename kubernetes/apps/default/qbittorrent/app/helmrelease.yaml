@@ -97,9 +97,10 @@ spec:
       media:
         type: nfs
         server: ${NAS_SERVER_IP}
-        path: /mnt/k8s/data/Library/Downloads
+        path: /mnt/k8s/data
         globalMounts:
-          - path: /data
+          - path: /downloads
+            subPath: Library/Downloads
       tmp:
         type: emptyDir
       incomplete:
