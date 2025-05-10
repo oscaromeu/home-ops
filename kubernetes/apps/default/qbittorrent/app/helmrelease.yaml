@@ -64,7 +64,7 @@ spec:
       app:
         controller: qbittorrent
         type: LoadBalancer
-        loadBalancerIP: 10.96.16.48
+        loadBalancerIP: 10.69.1.115
         ports:
           http:
             primary: true
