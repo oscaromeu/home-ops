@@ -69,17 +69,18 @@ spec:
           - 65537
     ingress:
       app:
-        className: internal
+        className: external
         annotations:
           gatus.io/path: *path
           hajimari.io/icon: mdi:plex
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           nginx.ingress.kubernetes.io/backend-protocol: HTTPS
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
-                  identifier: *app
+                  identifier: app
                   port: http
         tls:
           - hosts:
@@ -110,7 +111,6 @@ spec:
         type: LoadBalancer
         annotations:
           io.cilium/lb-ipam-ips: ${LOAD_BALANCER_IP_PLEX}
-        externalTrafficPolicy: Cluster
         ports:
           http:
             port: *port
