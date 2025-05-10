@@ -89,6 +89,8 @@ spec:
     persistence:
       config:
         existingClaim: plex-config-v1
+        globalMounts:
+          - path: /config/Library/Application Support/Plex Media Server
       logs:
         type: emptyDir
         globalMounts:
