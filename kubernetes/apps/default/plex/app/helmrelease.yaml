@@ -97,9 +97,6 @@ spec:
         type: nfs
         server: ${NAS_SERVER_IP}
         path: ${NAS_SERVER_MEDIA_PATH}
-        globalMounts:
-          - path: /media
-            readOnly: true
         advancedMounts:
           plex:
             app:
