@@ -74,7 +74,6 @@ spec:
           gatus.io/path: *path
           hajimari.io/icon: mdi:plex
           external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-          nginx.ingress.kubernetes.io/backend-protocol: HTTPS
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
