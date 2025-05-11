@@ -4,7 +4,7 @@ kind: CronJob
 metadata:
   name: app-b-cron
 spec:
-  schedule: '*/2 * * * *'
+  schedule: '*/5 * * * *'
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:

@@ -4,7 +4,7 @@ kind: TestRun
 metadata:
   name: app-b-test
 spec:
-  parallelism: 4
+  parallelism: 1
   script:
     configMap:
       name: app-b-test
