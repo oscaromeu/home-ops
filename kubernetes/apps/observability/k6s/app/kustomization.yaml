@@ -6,7 +6,7 @@ resources:
   - https://raw.githubusercontent.com/grafana/k6-operator/main/bundle.yaml
   - ./crb.yaml
   - ./sa.yaml
-  - ./test.yaml
+  #- ./test.yaml
 
 configMapGenerator:
   - name: test
