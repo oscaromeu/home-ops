@@ -127,6 +127,10 @@ spec:
               resources:
                 requests:
                   storage: 20Gi
+        additionalRulesForClusterRole:
+          - apiGroups: [ "" ]
+            resources: [ "services/k6-operator-controller-manager-metrics-service" ]
+            verbs: [ "get", "list", "watch" ]
     nodeExporter:
       enabled: true
     prometheus-node-exporter:
