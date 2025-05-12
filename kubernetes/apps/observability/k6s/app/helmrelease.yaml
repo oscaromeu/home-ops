@@ -45,7 +45,7 @@ spec:
       enabled: true
 
     authProxy:
-      enabled: false
+      enabled: true
       image:
         registry: quay.io
         repository: brancz/kube-rbac-proxy
