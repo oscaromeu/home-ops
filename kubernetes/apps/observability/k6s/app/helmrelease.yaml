@@ -42,10 +42,10 @@ spec:
         #honorLabels: false
 
     service:
-      enabled: true
+      enabled: false
 
     authProxy:
-      enabled: true
+      enabled: false
       image:
         registry: quay.io
         repository: brancz/kube-rbac-proxy

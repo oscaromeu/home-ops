@@ -4,6 +4,8 @@ kind: Kustomization
 namespace: observability
 resources:
   - helmrelease.yaml
+  - service.yaml
+  - servicemonitor.yaml
   #- ./test.yaml
 
 configMapGenerator:
