@@ -6,7 +6,7 @@ resources:
   - helmrelease.yaml
   - service.yaml
   - servicemonitor.yaml
-  #- ./test.yaml
+  - ./test.yaml
 
 configMapGenerator:
   - name: test
