@@ -31,31 +31,19 @@ spec:
       create: false
     metrics:
       serviceMonitor:
-        enabled: true
-        #jobLabel: "k6s"
+        enabled: false
         interval: "1m"
-        #scrapeTimeout: ""
-        #relabelings: []
-        #metricRelabelings: []
-        #selector: {}
-        #labels: {}
-        #honorLabels: false
 
     service:
       enabled: false
 
     authProxy:
-      enabled: false
+      enabled: true
       image:
         registry: quay.io
         repository: brancz/kube-rbac-proxy
         tag: v0.18.2
         pullPolicy: IfNotPresent
-
-      resources: {}
-      livenessProbe: {}
-      readinessProbe: {}
-      containerSecurityContext: {}
 
     manager:
       replicas: 1
@@ -68,19 +56,9 @@ spec:
         tag: controller-v0.0.21
         pullPolicy: IfNotPresent
 
-      livenessProbe: {}
-      readinessProbe: {}
-
-      env: []
-
-      envFrom: []
-
       resources:
         limits:
           memory: 100Mi
         requests:
           cpu: 100m
           memory: 50Mi
-
-      containerSecurityContext: {}
-      podSecurityContext: {}
