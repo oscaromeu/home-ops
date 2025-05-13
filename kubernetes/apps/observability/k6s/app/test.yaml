@@ -5,7 +5,19 @@ metadata:
   name: test
 spec:
   parallelism: 1
+  runner:
+    image: grafana/k6:1.0.0-with-browser
+    resources:
+      requests:
+        cpu: "250m"
+      limits:
+        memory: "1Gi"
+    env:
+      name: K6_PROMETHEUS_RW_SERVER_URL
+      value: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/write
+  arguments: -o -o experimental-prometheus-rw
   script:
     configMap:
       name: test
       file: test.js
+
