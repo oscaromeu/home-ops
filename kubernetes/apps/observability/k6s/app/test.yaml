@@ -13,8 +13,8 @@ spec:
       limits:
         memory: "1Gi"
     env:
-      name: K6_PROMETHEUS_RW_SERVER_URL
-      value: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/write
+      - name: K6_PROMETHEUS_RW_SERVER_URL
+        value: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/write
   arguments: -o -o experimental-prometheus-rw
   script:
     configMap:
