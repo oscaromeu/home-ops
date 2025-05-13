@@ -111,8 +111,8 @@ spec:
           - auto-gomemlimit
           - memory-snapshot-on-shutdown
           - new-service-discovery-manager
-        enableRemoteWriteReceiver: false
-        retention: 2d
+        enableRemoteWriteReceiver: true
+        retention: 14d
         retentionSize: 15GB
         externalLabels:
           cluster: apps
