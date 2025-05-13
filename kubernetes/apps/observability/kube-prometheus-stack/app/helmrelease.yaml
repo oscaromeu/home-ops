@@ -111,6 +111,7 @@ spec:
           - auto-gomemlimit
           - memory-snapshot-on-shutdown
           - new-service-discovery-manager
+        enableRemoteWriteReceiver: false
         retention: 2d
         retentionSize: 15GB
         externalLabels:
