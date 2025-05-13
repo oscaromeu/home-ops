@@ -9,7 +9,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/default/netshoot/app
+  path: ./kubernetes/apps/default/charmander/app
   prune: true
   sourceRef:
     kind: GitRepository
