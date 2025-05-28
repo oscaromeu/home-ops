@@ -51,7 +51,7 @@ data:
     exporters:
       otlp/2:
           endpoint: "tempo.observability.svc.cluster.local:4317"
-          tls
+          tls:
             insecure: true
     service:
       pipelines:
