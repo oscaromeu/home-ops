@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: otel-collector-daemonset
+spec:
+  selector:
+    matchLabels:
+      name: otel-collector
+  template:
+    metadata:
+      labels:
+        name: otel-collector
+        app: otel-collector
+    spec:
+      containers:
+      - name: otelcol
+        args:
+        - --config=/conf/collector.yaml
+        image: otel/opentelemetry-collector-contrib:0.40.0
+        volumeMounts:
+        - mountPath: /conf
+          name: otel-collector-config-volume
+      volumes:
+      - configMap:
+          items:
+          - key: collector.yaml
+            path: collector.yaml
+          name: otel-collector-config
+        name: otel-collector-config-volume
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: otel-collector
+  labels:
+    name: otel-collector
+    app: otel-collector
+spec:
+  selector:
+    name: otel-collector
+  ports:
+    - port: 4317
+      protocol: TCP
+      name: tcp
+      targetPort: 4317
