@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./sa.yaml # k6s - app-.*
-  #- ./fastapi-observability/ks.yaml
+  - ./fastapi-observability/ks.yaml
   - ./gatus/ks.yaml
   - ./grafana/ks.yaml
   - ./k6s/ks.yaml
