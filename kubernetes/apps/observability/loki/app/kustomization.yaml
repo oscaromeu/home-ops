@@ -6,8 +6,10 @@ resources:
   - ./helmrelease.yaml
 
 configMapGenerator:
-  - name: loki-values
+  - name: loki
     files:
       - base-values.yaml=values.yaml
+generatorOptions:
+  disableNameSuffixHash: true
 configurations:
   - kustomizeconfig.yaml
