@@ -4,3 +4,10 @@ kind: Kustomization
 namespace: observability
 resources:
   - ./helmrelease.yaml
+
+configMapGenerator:
+  - name: loki-values
+    files:
+      - base-values.yaml=values.yaml
+configurations:
+  - kustomizeconfig.yaml
