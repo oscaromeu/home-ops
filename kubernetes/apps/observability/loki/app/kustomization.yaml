@@ -4,12 +4,3 @@ kind: Kustomization
 namespace: observability
 resources:
   - ./helmrelease.yaml
-
-configMapGenerator:
-  - name: loki
-    files:
-      - base-values.yaml=values.yaml
-generatorOptions:
-  disableNameSuffixHash: true
-configurations:
-  - kustomizeconfig.yaml
