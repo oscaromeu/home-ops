@@ -28,5 +28,5 @@ spec:
   timeout: 20m
   valuesFrom:
     - kind: ConfigMap
-      name: loki-values
+      name: loki
       valuesKey: base-values.yaml
