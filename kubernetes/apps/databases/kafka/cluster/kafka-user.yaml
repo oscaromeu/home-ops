@@ -1,0 +1,31 @@
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaUser
+metadata:
+  name: gkep-eu-west4-logs-tls
+  labels:
+    strimzi.io/cluster: kafka-cluster
+spec:
+  authentication:
+    type: tls
+  authorization:
+    type: simple
+    acls:
+      # Example ACL rules for creating, describing, consuming and producing from my-topic using consumer group my-group
+      - resource:
+          type: topic
+          name: gkep-eu-west4-logs
+          patternType: literal
+        operations:
+          - Read
+          - Describe
+          - Write
+          - Create
+        host: "*"
+      - resource:
+          type: group
+          name: gkep-eu-west4-logs
+          patternType: literal
+        operations:
+          - Read
+        host: "*"

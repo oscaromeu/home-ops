@@ -1,0 +1,33 @@
+# strimzi-kafka-operator helm values (base)
+---
+logVolume: co-config-volume
+logConfigMap: kafka-cluster-operator
+logConfiguration: ""
+logLevel: ${env:STRIMZI_LOG_LEVEL:-INFO}
+fullReconciliationIntervalMs: 120000
+operationTimeoutMs: 300000
+kubernetesServiceDnsDomain: cluster.local
+featureGates: ""
+tmpDirSizeLimit: 1Mi
+dashboards:
+  enabled: false
+resources:
+  limits:
+    memory: 384Mi
+    #cpu: 1000m
+  requests:
+    memory: 384Mi
+    cpu: 200m
+livenessProbe:
+  initialDelaySeconds: 10
+  periodSeconds: 30
+readinessProbe:
+  initialDelaySeconds: 10
+  periodSeconds: 30
+# strimzi-kafka-operator helm values (prod overlay)
+---
+dashboards:
+  enabled: true
+  namespace: ~
+  label: grafana_dashboard        # this is the default value from the grafana chart
+  labelValue: "1"                 # this is the default value from the grafana chart

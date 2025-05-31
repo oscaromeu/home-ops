@@ -1,0 +1,10 @@
+- op: replace
+  path: /spec/chart/spec/version
+  value: 0.46.0
+
+- op: add
+  path: /spec/valuesFrom/-
+  value:
+    kind: ConfigMap
+    name: kafka-operator-helm-values
+    valuesKey: overlay-values.yaml
