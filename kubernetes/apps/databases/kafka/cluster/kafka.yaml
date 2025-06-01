@@ -15,10 +15,10 @@ spec:
     volumes:
       - id: 0
         type: persistent-claim
-        size: 100Gi
+        size: 10Gi
         kraftMetadata: shared
         deleteClaim: false
-        class: standard
+        class: local-path
 ---
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
