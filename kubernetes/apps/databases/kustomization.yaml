@@ -5,4 +5,5 @@ resources:
   - ./namespace.yaml
   - ./cloudnative-pg/ks.yaml
   - ./dragonfly/ks.yaml
+  - ./kafka/ks.yaml
   - ./redis/ks.yaml

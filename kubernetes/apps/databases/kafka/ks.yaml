@@ -9,7 +9,7 @@ metadata:
     kustomize.toolkit.fluxcd.io/prune: enabled
 spec:
   targetNamespace: databases
-  path: ./kubernetes/gke-eu-west4/infrastructure/prod/databases/kafka/operator
+  path: ./kubernetes/apps/databases/kafka/operator
   prune: true
   sourceRef:
     kind: GitRepository
@@ -31,7 +31,7 @@ spec:
   dependsOn:
     - name: cluster-infrastructure-kafka-operator
   targetNamespace: databases
-  path: ./kubernetes/gke-eu-west4/infrastructure/prod/databases/kafka/cluster
+  path: ./kubernetes/apps/databases/kafka/cluster
   prune: true
   sourceRef:
     kind: GitRepository
@@ -53,7 +53,7 @@ spec:
   dependsOn:
     - name: cluster-infrastructure-kafka-operator
   targetNamespace: databases
-  path: ./kubernetes/gke-eu-west4/infrastructure/prod/databases/kafka/tools
+  path: ./kubernetes/apps/databases/kafka/tools
   prune: true
   sourceRef:
     kind: GitRepository
