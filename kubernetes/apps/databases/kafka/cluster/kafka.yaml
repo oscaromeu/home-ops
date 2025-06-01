@@ -18,7 +18,7 @@ spec:
         size: 10Gi
         kraftMetadata: shared
         deleteClaim: false
-        class: local-path
+        class: openebs-hostpath
 ---
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
