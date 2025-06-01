@@ -8,3 +8,6 @@ configMapGenerator:
   - name: kafka-operator-helm-values
     files:
       - values.yaml=values.yaml
+
+configurations:
+  - kustomizeconfig.yaml
