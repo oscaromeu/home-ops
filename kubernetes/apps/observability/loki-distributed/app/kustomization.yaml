@@ -5,4 +5,4 @@ namespace: observability
 resources:
   - ./secret.sops.yaml
   - ./helmrelease.yaml
-  - ./job.yaml
+  #- ./job.yaml
