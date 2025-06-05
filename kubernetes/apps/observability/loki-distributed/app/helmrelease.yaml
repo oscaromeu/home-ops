@@ -35,7 +35,7 @@ spec:
         chunk_encoding: snappy
       storage:
         bucketNames:
-          chunks: bucket-loki-chunks
+          chunks: loki-bucket-e64cfa3fd59e32df57003c7401f48c99
           #ruler: bucket-loki-ruler
           #admin: bucket-loki-admin
         type: gcs
