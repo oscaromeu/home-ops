@@ -38,7 +38,7 @@ spec:
           chunks: bucket-loki-chunks
           #ruler: bucket-loki-ruler
           #admin: bucket-loki-admin
-        type: s3
+        type: gcs
         gcs:
           chunkBufferSize: 0
           enableHttp2: true
