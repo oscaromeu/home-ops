@@ -100,7 +100,7 @@ spec:
     gateway:
       replicas: 2
       image:
-        registry: ghcr.io
+        registry: docker.io
       ingress:
         enabled: true
         ingressClassName: internal
