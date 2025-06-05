@@ -31,12 +31,13 @@ spec:
       ingester:
         chunk_encoding: snappy
       storage:
-        type: gcs
+        type: s3
         gcs:
           chunkBufferSize: 0
           requestTimeout: "0s"
           enableHttp2: true
       object_store:
+        type: gcs
         gcs:
           bucket_name: loki-bucket-e64cfa3fd59e32df57003c7401f48c99
           service_account: null
