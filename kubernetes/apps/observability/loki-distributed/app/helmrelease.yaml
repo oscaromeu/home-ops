@@ -26,6 +26,7 @@ spec:
       strategy: rollback
       retries: 3
   values:
+    fullnameOverride: loki-distributed
     deploymentMode: SimpleScalable
     loki:
       ingester:
