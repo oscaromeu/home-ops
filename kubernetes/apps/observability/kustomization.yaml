@@ -11,7 +11,7 @@ resources:
   - ./kube-prometheus-stack/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
   - ./loki/ks.yaml
-  #- ./loki-distributed/ks.yaml
+  - ./loki-distributed/ks.yaml
   #- ./otel
   #- ./prometheus-adapter/ks.yaml
   - ./tempo/ks.yaml
