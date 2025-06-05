@@ -41,7 +41,6 @@ spec:
         type: s3
         gcs:
           chunkBufferSize: 0
-          requestTimeout: "0s"
           enableHttp2: true
       object_store:
         type: gcs
@@ -52,7 +51,7 @@ spec:
         configs:
           - from: "2024-04-01" # quote
             store: tsdb
-            object_store: s3
+            object_store: gcs
             schema: v13
             index:
               prefix: loki_index_
