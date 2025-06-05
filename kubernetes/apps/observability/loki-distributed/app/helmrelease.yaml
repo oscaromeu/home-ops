@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: loki-distributed
+  name: loki
 spec:
   interval: 30m
   timeout: 15m
@@ -26,9 +26,9 @@ spec:
       strategy: rollback
       retries: 3
   values:
-    fullnameOverride: loki-distributed
-    configObjectName: loki-distributed
-    generatedConfigObjectName: loki-distributed
+    #fullnameOverride: loki-distributed
+    #configObjectName: loki-distributed
+    #generatedConfigObjectName: loki-distributed
     deploymentMode: SimpleScalable
     loki:
       ingester:
