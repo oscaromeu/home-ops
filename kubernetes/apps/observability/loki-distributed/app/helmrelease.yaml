@@ -94,6 +94,9 @@ spec:
           reporting_enabled: false
     backend:
       replicas: 2
+      persistence:
+        size: 20Gi
+        storageClass: openebs-hostpath
     gateway:
       replicas: 2
       image:
@@ -132,6 +135,9 @@ spec:
         - name: google-cloud-key
           secret:
             secretName: loki-gcs-secret
+      persistence:
+        size: 20Gi
+        storageClass: openebs-hostpath
     chunksCache:
       allocatedMemory: 3072
     sidecar:
