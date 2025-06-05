@@ -9,7 +9,7 @@ spec:
       restartPolicy: Never
       containers:
         - name: gcs-tester
-          image: google/cloud-sdk:slim
+          image: google/cloud-sdk:alpine
           command:
             - /bin/bash
             - -c
