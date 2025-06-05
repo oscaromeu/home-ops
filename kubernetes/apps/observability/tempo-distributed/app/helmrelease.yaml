@@ -1,0 +1,101 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: tempo
+  namespace: observability
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: tempo
+      version: 1.21.1
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+
+  values:
+    replicas: 1
+    tempo:
+      reportingEnabled: false
+      metricsGenerator:
+        enabled: true
+        remoteWriteUrl: "http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/write"
+
+      retention: 24h
+      overrides:
+        defaults:
+          metrics_generator:
+            processors:
+              - service-graphs
+              - span-metrics
+
+
+      storage:
+        trace:
+          backend: local
+          local:
+            path: /var/tempo/traces
+          #gcs:
+          #  insecure: true  # optional. enable if endpoint is http
+
+      resources:
+        requests:
+          cpu: 1000m
+          memory: 500Mi
+        limits:
+          #cpu: 2000m
+          memory: 2Gi
+
+      #extraEnvFrom:
+      #  - tempo-objstore
+
+      #extraVolumeMounts:
+      #  - name: tempo-objstore
+      #    mountPath: /mnt/tempo-objstore
+      #    readOnly: true
+      #    existingClaim: tempo-gcs
+
+
+      persistence:
+        enabled: true
+        # storageClassName: openebs-hostpath
+        accessModes:
+          - ReadWriteOnce
+        size: 10Gi
+
+    tempoQuery:
+      enabled: true
+      ingress:
+        enabled: true
+        annotations:
+          hajimari.io/icon: simple-icons:prometheus
+        hosts:
+          - &host "tempo-query.${SECRET_DOMAIN}"
+        tls:
+          - hosts:
+              - *host
+
+      resources:
+        requests:
+          cpu: 1000m
+          memory: 500Mi
+        limits:
+          #cpu: 2000m
+          memory: 1Gi
+
+    serviceMonitor:
+      enabled: true
+
