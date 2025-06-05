@@ -27,6 +27,8 @@ spec:
       retries: 3
   values:
     fullnameOverride: loki-distributed
+    configObjectName: loki-distributed
+    generatedConfigObjectName: loki-distributed
     deploymentMode: SimpleScalable
     loki:
       ingester:
