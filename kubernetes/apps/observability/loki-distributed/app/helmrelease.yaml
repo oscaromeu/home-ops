@@ -46,7 +46,6 @@ spec:
         type: gcs
         gcs:
           bucket_name: loki-bucket-e64cfa3fd59e32df57003c7401f48c99
-          service_account: null
       schemaConfig:
         configs:
           - from: "2024-04-01" # quote
