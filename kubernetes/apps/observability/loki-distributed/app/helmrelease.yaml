@@ -111,16 +111,6 @@ spec:
       persistence:
         size: 20Gi
         storageClass: openebs-hostpath
-      extraEnv:
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /var/secrets/google/key.json
-      extraVolumeMounts:
-        - name: google-cloud-key
-          mountPath: /var/secrets/google
-      extraVolumes:
-        - name: google-cloud-key
-          secret:
-            secretName: loki-gcs-secret
     gateway:
       replicas: 2
       image:
@@ -137,28 +127,8 @@ spec:
           - hosts: [*host]
     read:
       replicas: 2
-      extraEnv:
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /var/secrets/google/key.json
-      extraVolumeMounts:
-        - name: google-cloud-key
-          mountPath: /var/secrets/google
-      extraVolumes:
-        - name: google-cloud-key
-          secret:
-            secretName: loki-gcs-secret
     write:
       replicas: 2
-      extraEnv:
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /var/secrets/google/key.json
-      extraVolumeMounts:
-        - name: google-cloud-key
-          mountPath: /var/secrets/google
-      extraVolumes:
-        - name: google-cloud-key
-          secret:
-            secretName: loki-gcs-secret
       persistence:
         size: 20Gi
         storageClass: openebs-hostpath
