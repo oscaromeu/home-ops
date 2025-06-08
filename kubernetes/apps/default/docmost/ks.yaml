@@ -10,7 +10,7 @@ metadata:
 spec:
   dependsOn:
     - name: cluster-apps-cloudnative-pg-cluster
-  targetNamespace: observability
+  targetNamespace: default
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
