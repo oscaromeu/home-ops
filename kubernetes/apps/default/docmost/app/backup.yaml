@@ -8,7 +8,7 @@ spec:
   sourcePVC: docmost-data
   trigger:
     # Take a backup every 30 minutes
-    schedule: "*/30 * * * *"
+    schedule: "*/5 * * * *"
   restic:
     cacheAccessModes: ["ReadWriteOnce"]
     cacheCapacity: "2Gi"
