@@ -26,7 +26,7 @@ spec:
       yearly: 1
     # Clone the source volume prior to taking a backup to ensure a
     # point-in-time image.
-    copyMethod: Clone
+    copyMethod: Direct
     # The StorageClass to use when creating the PiT copy (same as source PVC if omitted)
     #storageClassName: my-sc-name
     # The VSC to use if the copy method is Snapshot (default if omitted)
