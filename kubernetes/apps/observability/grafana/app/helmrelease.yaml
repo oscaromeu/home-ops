@@ -141,7 +141,7 @@ spec:
         - hosts:
             - *host
     persistence:
-      enabled: true
+      enabled: false
       storageClassName: openebs-hostpath
     testFramework:
       enabled: false

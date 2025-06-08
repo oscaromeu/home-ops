@@ -6,7 +6,7 @@ resources:
   - ./sa.yaml # k6s - app-.*
   #- ./fastapi-observability/ks.yaml
   - ./gatus/ks.yaml
-  - ./grafana/ks.yaml
+  #- ./grafana/ks.yaml
   - ./k6s/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
