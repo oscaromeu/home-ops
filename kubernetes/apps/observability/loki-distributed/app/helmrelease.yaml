@@ -55,8 +55,9 @@ spec:
   values:
     deploymentMode: SimpleScalable
     loki:
-      image: grafana/loki
-      tag: 3.5.1
+      image:
+        repository: grafana/loki
+        tag: 3.5.1
       ingester:
         chunk_encoding: snappy
       storage:
