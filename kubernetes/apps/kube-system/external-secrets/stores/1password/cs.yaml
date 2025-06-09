@@ -7,9 +7,9 @@ metadata:
 spec:
   provider:
     onepassword:
-      connectHost: http://onepassword-connect.security.svc.cluster.local
+      connectHost: http://onepassword-connect.security.svc.cluster.local:8080
       vaults:
-        Homelab: 1
+        homeops: 1
       auth:
         secretRef:
           connectTokenSecretRef:
