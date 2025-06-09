@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: cloudnative-pg
-      version: 0.20.2
+      version: 0.24.0
       sourceRef:
         kind: HelmRepository
         name: cloudnative-pg
@@ -32,10 +32,6 @@ spec:
 
     crds:
       create: true
-
-    config:
-      data:
-        INHERITED_ANNOTATIONS: kyverno.io/ignore
 
     additionalArgs:
       - "leaseDuration=30s"
