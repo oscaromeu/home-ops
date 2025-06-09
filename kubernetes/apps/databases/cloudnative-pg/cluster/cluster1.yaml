@@ -2,23 +2,19 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: postgres-v1
+  name: postgres-v17
 spec:
   #logLevel: info
   instances: 3
-  imageName: ghcr.io/cloudnative-pg/postgresql:16.1-6
+  imageName: ghcr.io/cloudnative-pg/postgresql:17
   primaryUpdateStrategy: unsupervised
+  primaryUpdateMethod: switchover
   storage:
     size: 20Gi
     storageClass: openebs-hostpath
   superuserSecret:
     name: cloudnative-pg-secret
   enableSuperuserAccess: true
-
-  # Note: Bootstrap is needed when recovering from an existing cnpg cluster
-  #bootstrap:
-  #  recovery:
-  #    source: &previousCluster postgres-v5
 
   postgresql:
     parameters:
@@ -32,11 +28,31 @@ spec:
       cpu: "500m"
     limits:
       memory: "5Gi"
-    #pg_hba:
-    #  - host all all all trust
 
   monitoring:
     enablePodMonitor: true
+
+  backup:
+    retentionPolicy: 30d
+    barmanObjectStore: &barmanObjectStore
+      data:
+        compression: bzip2
+      wal:
+        compression: bzip2
+        maxParallel: 8
+      destinationPath: s3://cloudnative-pg/
+      endpointURL: https://${CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com
+      # Note: serverName version needs to be incremented
+      # when recovering from an existing cnpg cluster
+      serverName: &currentCluster postgres17-v1
+      s3Credentials:
+        accessKeyId:
+          name: cloudnative-pg-secret-backup
+          key: aws-access-key-id
+        secretAccessKey:
+          name: cloudnative-pg-secret-backup
+          key: aws-secret-access-key
+
 
   #backup:
   #  retentionPolicy: 30d
