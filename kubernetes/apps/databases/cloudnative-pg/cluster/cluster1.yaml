@@ -53,20 +53,6 @@ spec:
           name: cloudnative-pg-secret-backup
           key: aws-secret-access-key
 
-
-  #backup:
-  #  retentionPolicy: 30d
-  #  barmanObjectStore:
-  #    destinationPath: gs://cloudnative-pg-v1/
-  #    googleCredentials:
-  #      applicationCredentials:
-  #        name: backup-creds
-  #        key: gcsCredentials
-  #    serverName: &currentCluster postgres1-v1
-  #    wal:
-  #      compression: bzip2
-  #      maxParallel: 8
-
   # Note: externalClusters is needed when recovering from an existing cnpg cluster
   #externalClusters:
   #  - name: *previousCluster
