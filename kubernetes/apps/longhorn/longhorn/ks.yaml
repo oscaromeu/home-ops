@@ -2,13 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: longhorn
+  name: &app cluster-apps-longhorn
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   dependsOn:
-    - name: ingress-nginx-internal
+    - name: cluster-apps-ingress-nginx-internal
   path: ./kubernetes/apps/longhorn/longhorn/app
   prune: true
   sourceRef:
