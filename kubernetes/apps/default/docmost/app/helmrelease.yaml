@@ -84,6 +84,7 @@ spec:
                   port: http
     persistence:
       data:
+        enabled: false
         type: persistentVolumeClaim
         size: 20Gi
         storageClass: openebs-hostpath
