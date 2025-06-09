@@ -3,7 +3,7 @@
 apiVersion: external-secrets.io/v1beta1
 kind: ClusterSecretStore
 metadata:
-  name: op-credentials
+  name: onepassword-connect
 spec:
   provider:
     onepassword:
@@ -14,5 +14,5 @@ spec:
         secretRef:
           connectTokenSecretRef:
             key: token
-            name: onepassword-connect-secret
+            name: op-credentials
             namespace: security
