@@ -84,9 +84,9 @@ spec:
                   port: http
     persistence:
       data:
-        enabled: false
+        enabled: true
         type: persistentVolumeClaim
-        size: 20Gi
+        size: 5Gi
         storageClass: openebs-hostpath
         accessMode: ReadWriteOnce
         globalMounts:
