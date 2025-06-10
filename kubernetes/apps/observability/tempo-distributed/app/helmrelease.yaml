@@ -156,7 +156,7 @@ spec:
         backend: s3
         s3:
           insecure: true
-          forcepathstyle: true
+          forcepathstyle: false
 
     overrides:
       defaults:
