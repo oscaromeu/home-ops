@@ -46,7 +46,6 @@ jobs:
             --path /github/workspace/kubernetes/clusters
             --verbose
 
-            ```
   success:
     if: ${{ !cancelled() }}
     needs: ["test"]
