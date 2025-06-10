@@ -45,11 +45,12 @@ spec:
 
       storage:
         trace:
-          backend: local
-          local:
-            path: /var/tempo/traces
-          #gcs:
-          #  insecure: true  # optional. enable if endpoint is http
+          #backend: local
+          #local:
+          #  path: /var/tempo/traces
+          gcs:
+            insecure: true  # optional. enable if endpoint is http
+            bucket_name: tempo-bucket-4d186321c1a7f0f354b297e8914ab240
 
       resources:
         requests:
@@ -59,14 +60,16 @@ spec:
           #cpu: 2000m
           memory: 2Gi
 
-      #extraEnvFrom:
-      #  - tempo-objstore
-
-      #extraVolumeMounts:
-      #  - name: tempo-objstore
-      #    mountPath: /mnt/tempo-objstore
-      #    readOnly: true
-      #    existingClaim: tempo-gcs
+      extraEnv:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /var/secrets/google/key.json
+      extraVolumeMounts:
+        - name: google-cloud-key
+          mountPath: /var/secrets/google
+      extraVolumes:
+        - name: google-cloud-key
+          secret:
+            secretName: tempo-gcs-secret
 
 
       persistence:
