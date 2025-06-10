@@ -66,9 +66,9 @@ spec:
       extraArgs:
         - "-config.expand-env=true"
 
-      extraEnvFrom:
-        - secretRef:
-            name: tempo-s3-bucket
+      #extraEnvFrom:
+      #  - secretRef:
+      #      name: tempo-s3-bucket
 
       persistence:
         enabled: true
@@ -99,9 +99,9 @@ spec:
       extraArgs:
         - "-config.expand-env=true"
 
-      extraEnvFrom:
-        - secretRef:
-            name: tempo-s3-bucket
+      #extraEnvFrom:
+      #  - secretRef:
+      #      name: tempo-s3-bucket
 
       persistence:
         enabled: true
@@ -116,33 +116,33 @@ spec:
       extraArgs:
         - "-config.expand-env=true"
 
-      extraEnvFrom:
-        - secretRef:
-            name: tempo-s3-bucket
+      #extraEnvFrom:
+      #  - secretRef:
+      #      name: tempo-s3-bucket
 
     compactor:
       extraArgs:
         - "-config.expand-env=true"
 
-      extraEnvFrom:
-        - secretRef:
-            name: tempo-s3-bucket
+      #extraEnvFrom:
+      #  - secretRef:
+      #      name: tempo-s3-bucket
 
     querier:
       extraArgs:
         - "-config.expand-env=true"
 
-      extraEnvFrom:
-        - secretRef:
-            name: tempo-s3-bucket
+      #extraEnvFrom:
+      #  - secretRef:
+      #      name: tempo-s3-bucket
 
     queryFrontend:
       extraArgs:
         - "-config.expand-env=true"
 
-      extraEnvFrom:
-        - secretRef:
-            name: tempo-s3-bucket
+      #extraEnvFrom:
+      #  - secretRef:
+      #      name: tempo-s3-bucket
 
     traces:
       otlp:
