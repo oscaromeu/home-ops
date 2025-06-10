@@ -45,7 +45,7 @@ spec:
 
       storage:
         trace:
-          #backend: local
+          backend: gcs
           #local:
           #  path: /var/tempo/traces
           gcs:
