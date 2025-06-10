@@ -14,6 +14,6 @@ resources:
   - ./loki-distributed/ks.yaml
   #- ./otel
   #- ./prometheus-adapter/ks.yaml
-  - ./tempo/ks.yaml
+  - ./temp/ks.yaml
   #- ./tempo-distributed/ks.yaml
   - ./vector/ks.yaml
