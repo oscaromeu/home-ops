@@ -7,6 +7,7 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  targetNamespace: longhorn
   dependsOn:
     - name: cluster-apps-ingress-nginx-internal
   path: ./kubernetes/apps/longhorn/longhorn/app
