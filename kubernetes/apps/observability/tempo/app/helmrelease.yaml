@@ -66,10 +66,6 @@ spec:
       extraVolumeMounts:
         - name: google-cloud-key
           mountPath: /var/secrets/google
-      extraVolumes:
-        - name: google-cloud-key
-          secret:
-            secretName: tempo-gcs-secret
 
 
       persistence:
@@ -102,3 +98,7 @@ spec:
     serviceMonitor:
       enabled: true
 
+    extraVolumes:
+      - name: google-cloud-key
+        secret:
+          secretName: tempo-gcs-secret
