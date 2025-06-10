@@ -43,7 +43,7 @@ jobs:
             test
             --all-namespaces
             --enable-helm
-            --path /github/workspace/kubernetes/flux/cluster
+            --path /github/workspace/kubernetes/flux/clusters
             --verbose
 
   diff:
