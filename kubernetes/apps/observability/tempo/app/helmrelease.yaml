@@ -102,3 +102,6 @@ spec:
       - name: google-cloud-key
         secret:
           secretName: tempo-gcs-secret
+
+    serviceAccount:
+      create: false
