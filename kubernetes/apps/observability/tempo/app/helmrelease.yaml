@@ -45,12 +45,12 @@ spec:
 
       storage:
         trace:
-          backend: local
-          local:
-            path: /var/tempo/traces
-          #gcs:
-          #  insecure: true  # optional. enable if endpoint is http
-          #  bucket_name: tempo-bucket-4d186321c1a7f0f354b297e8914ab240
+          backend: gcs
+          #local:
+          #  path: /var/tempo/traces
+          gcs:
+            #insecure: true  # optional. enable if endpoint is http
+            bucket_name: tempo-bucket-4d186321c1a7f0f354b297e8914ab240
 
       resources:
         requests:
