@@ -21,3 +21,6 @@ spec:
   postBuild:
     substitute:
       DEPLOYMENT_NAME: "prueba"
+    substituteFrom:
+      - kind: ConfigMap
+        name: podinfo-configmap
