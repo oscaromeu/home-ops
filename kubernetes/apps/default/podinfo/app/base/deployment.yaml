@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ${DEPLOYMENT_NAME}
+  name: podinfo #${DEPLOYMENT_NAME}
 spec:
   minReadySeconds: 3
   revisionHistoryLimit: 5
@@ -12,14 +12,14 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: ${DEPLOYMENT_NAME}
+      app: podinfo #${DEPLOYMENT_NAME}
   template:
     metadata:
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "9797"
       labels:
-        app: ${DEPLOYMENT_NAME}
+        app: podinfo #${DEPLOYMENT_NAME}
     spec:
       containers:
       - name: podinfod
@@ -44,9 +44,9 @@ spec:
         - --level=info
         - --random-delay=false
         - --random-error=false
-        env:
-        - name: PODINFO_UI_COLOR
-          value: "${PODINFO_UI_COLOR}"
+        #env:
+        #- name: PODINFO_UI_COLOR
+        #  value: "${PODINFO_UI_COLOR}"
         livenessProbe:
           exec:
             command:
