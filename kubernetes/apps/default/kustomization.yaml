@@ -17,7 +17,7 @@ resources:
   - ./navidrome/ks.yaml
   #- ./overseerr/ks.yaml
   - ./plex/ks.yaml
-  - ./podinfo/ks.yaml
+  #- ./podinfo/ks.yaml
   #- ./prowlarr/ks.yaml
   #- ./pinchflat/ks.yaml
   - ./qbittorrent/ks.yaml
