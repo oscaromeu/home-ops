@@ -15,5 +15,5 @@ resources:
   #- ./otel
   #- ./prometheus-adapter/ks.yaml
   #- ./tempo/ks.yaml
-  - ./tempo-distributed/ks.yaml
+  #- ./tempo-distributed/ks.yaml
   - ./vector/ks.yaml
