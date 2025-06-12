@@ -87,7 +87,7 @@ spec:
               filter_by_status_error: false
 
           retry_after_on_resource_exhausted: '1s'
-          max_attribute_bytes: '2048'
+          #max_attribute_bytes: '2048'
         ingester_client:
             grpc_client_config:
                 grpc_compression: "snappy"
@@ -108,7 +108,7 @@ spec:
         query_frontend:
           search:
             max_duration: 168h
-            max_query_expression_size_bytes: 131072
+            #max_query_expression_size_bytes: 131072
         compactor:
           compaction:
             block_retention: 4380h
