@@ -10,9 +10,6 @@ metadata:
   name: tempo
   namespace: observability
 spec:
-  clusterIP: 10.96.145.162
-  clusterIPs:
-  - 10.96.145.162
   internalTrafficPolicy: Cluster
   ipFamilies:
   - IPv4
