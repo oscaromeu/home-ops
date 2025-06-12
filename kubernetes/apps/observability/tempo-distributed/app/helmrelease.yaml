@@ -60,24 +60,94 @@ spec:
 
     reportingEnabled: false
 
-    ingester:
-      replicas: 2
+    tempo:
+      image:
+        registry: docker.io
+        pullSecrets: []
+        repository: grafana/tempo
+        tag: null
+        pullPolicy: IfNotPresent
 
+      structuredConfig:
+        distributor:
+          receivers:
+            otlp:
+              protocols:
+                grpc:
+                http:
+
+          log_received_spans:
+            enabled: false
+            include_all_attributes: false
+            filter_by_status_error: false
+
+          log_discarded_spans:
+              enabled: true
+              include_all_attributes: false
+              filter_by_status_error: false
+
+          retry_after_on_resource_exhausted: '1s'
+          max_attribute_bytes: '2048'
+        ingester_client:
+            grpc_client_config:
+                grpc_compression: "snappy"
+        metrics_generator_client:
+            grpc_client_config:
+                grpc_compression: "snappy"
+        querier:
+            frontend_worker:
+                grpc_client_config:
+                    grpc_compression: "snappy"
+        ingester:        
+          trace_idle_period: '10s'
+          flush_check_period: '10s'
+          max_block_bytes: 524288000
+          max_block_duration: 30m
+          complete_block_timeout: 15m
+          flush_all_on_shutdown: false
+        query_frontend:
+          search:
+            max_duration: 168h
+            max_query_expression_size_bytes: 131072
+        compactor:
+          compaction:
+            block_retention: 4380h
+            compacted_block_retention: 1h
+            compaction_window: 1h
+            v2_in_buffer_bytes: 5242880
+            v2_out_buffer_bytes: 20971520
+            max_block_bytes: 107374182400
+            retention_concurrency: 10
+            v2_prefetch_traces_count: 1000
+            max_time_per_tenant: 5m
+            compaction_cycle: 30s
+
+    ingester:
+
+      replicas: 2
       extraArgs:
         - "-config.expand-env=true"
 
-      #extraEnvFrom:
-      #  - secretRef:
-      #      name: tempo-s3-bucket
+      #resources:
+      #  requests:
+      #    cpu: "500m"
+      #    memory: "1Gi"
+      #  limits:
+      #    memory: "2Gi"
 
       persistence:
         enabled: true
         storageClass: openebs-hostpath
-        size: 10Gi
+        size: 10Gi  
 
     metricsGenerator:
       enabled: true
-
+      #resources:
+      #  requests:
+      #    cpu: "500m"
+      #    memory: "1Gi"
+      #  limits:
+      #    memory: "2Gi"
       config:
         registry:
           collection_interval: 15s
@@ -99,50 +169,85 @@ spec:
       extraArgs:
         - "-config.expand-env=true"
 
-      #extraEnvFrom:
-      #  - secretRef:
-      #      name: tempo-s3-bucket
-
       persistence:
         enabled: true
         storageClass: openebs-hostpath
         size: 10Gi
 
     distributor:
-      config:
-        log_received_spans:
-          enabled: true
-
+      replicas: 2
+      #resources:
+      #  requests:
+      #    cpu: "500m"
+      #    memory: "1Gi"
+      #  limits:
+      #    memory: "2Gi"
       extraArgs:
         - "-config.expand-env=true"
-
-      #extraEnvFrom:
-      #  - secretRef:
-      #      name: tempo-s3-bucket
 
     compactor:
+      replicas: 1
+      #resources:
+      #  requests:
+      #    cpu: "500m"
+      #    memory: "1Gi"
+      #  limits:
+      #    memory: "2Gi"
       extraArgs:
         - "-config.expand-env=true"
+      extraEnv:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /var/secrets/google/key.json
+      extraVolumeMounts:
+        - name: google-cloud-key
+          mountPath: /var/secrets/google
+      extraVolumes:
+        - name: google-cloud-key
+          secret:
+            secretName: tempo-gcs-secret
 
-      #extraEnvFrom:
-      #  - secretRef:
-      #      name: tempo-s3-bucket
 
     querier:
       extraArgs:
         - "-config.expand-env=true"
-
-      #extraEnvFrom:
-      #  - secretRef:
-      #      name: tempo-s3-bucket
+      #resources:
+      #  requests:
+      #    cpu: "500m"
+      #    memory: "1Gi"
+      #  limits:
+      #    memory: "2Gi"
+      extraEnv:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /var/secrets/google/key.json
+      extraVolumeMounts:
+        - name: google-cloud-key
+          mountPath: /var/secrets/google
+      extraVolumes:
+        - name: google-cloud-key
+          secret:
+            secretName: tempo-gcs-secret
 
     queryFrontend:
+      replicas: 1
+      #resources:
+      #  requests:
+      #    cpu: "500m"
+      #    memory: "1Gi"
+      #  limits:
+      #    memory: "2Gi"
       extraArgs:
         - "-config.expand-env=true"
 
-      #extraEnvFrom:
-      #  - secretRef:
-      #      name: tempo-s3-bucket
+      extraEnv:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /var/secrets/google/key.json
+      extraVolumeMounts:
+        - name: google-cloud-key
+          mountPath: /var/secrets/google
+      extraVolumes:
+        - name: google-cloud-key
+          secret:
+            secretName: tempo-gcs-secret
 
     traces:
       otlp:
@@ -151,17 +256,12 @@ spec:
         grpc:
           enabled: true
 
-    minio:
-      enabled: true
     storage:
       trace:
-        backend: s3
-        s3:
-          access_key: 'grafana-tempo'
-          secret_key: 'supersecret'
-          bucket: 'tempo-traces'
-          endpoint: 'tempo-minio:9000'
-          insecure: true
+        backend: gcs
+        gcs:
+          #insecure: true  # optional. enable if endpoint is http
+          bucket_name: tempo-bucket-4d186321c1a7f0f354b297e8914ab240
 
     overrides:
       defaults:
@@ -174,6 +274,12 @@ spec:
     gateway:
       enabled: true
       replicas: 1
+      #resources:
+      #  requests:
+      #    cpu: "500m"
+      #    memory: "1Gi"
+      #  limits:
+      #    memory: "2Gi"
     metaMonitoring:
       serviceMonitor:
         enabled: true
