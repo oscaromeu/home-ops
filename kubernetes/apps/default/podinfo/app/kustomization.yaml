@@ -5,7 +5,7 @@ resources:
 
 configMapGenerator:
   - name: podinfo-configmap
-    files:
-      - podinfo.conf=./resources/podinfo.conf
+    envs:
+      - ./resources/podinfo.conf
 generatorOptions:
   disableNameSuffixHash: true
