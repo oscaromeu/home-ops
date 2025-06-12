@@ -18,39 +18,13 @@ spec:
   install:
     createNamespace: true
     remediation:
-      retries: 3
+      retries: 1
   upgrade:
     cleanupOnFail: true
     remediation:
       retries: 3
   uninstall:
     keepHistory: false
-
-  valuesFrom:
-    - targetPath: storage.trace.s3.bucket
-      kind: Secret
-      name: &s3-secret loki-s3-bucket
-      valuesKey: S3_BUCKET_NAME
-
-    - targetPath: storage.trace.s3.endpoint
-      kind: Secret
-      name: *s3-secret
-      valuesKey: S3_BUCKET_HOST
-
-    - targetPath: storage.trace.s3.region
-      kind: Secret
-      name: *s3-secret
-      valuesKey: S3_BUCKET_REGION
-
-    - targetPath: storage.trace.s3.access_key
-      kind: Secret
-      name: *s3-secret
-      valuesKey: S3_ACCESS_KEY_ID
-
-    - targetPath: storage.trace.s3.secret_key
-      kind: Secret
-      name: *s3-secret
-      valuesKey: S3_SECRET_ACCESS_KEY
 
   values:
     global:
@@ -125,15 +99,24 @@ spec:
     ingester:
 
       replicas: 2
-      extraArgs:
-        - "-config.expand-env=true"
-
       #resources:
       #  requests:
       #    cpu: "500m"
       #    memory: "1Gi"
       #  limits:
       #    memory: "2Gi"
+      extraArgs:
+        - "-config.expand-env=true"
+      extraEnv:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /var/secrets/google/key.json
+      extraVolumeMounts:
+        - name: google-cloud-key
+          mountPath: /var/secrets/google
+      extraVolumes:
+        - name: google-cloud-key
+          secret:
+            secretName: tempo-gcs-secret
 
       persistence:
         enabled: true
