@@ -29,11 +29,8 @@ spec:
   values:
     global:
       clusterDomain: 'cluster.local'
-
     useExternalConfig: false
-
     reportingEnabled: false
-
     tempo:
       image:
         registry: docker.io
@@ -43,19 +40,26 @@ spec:
         pullPolicy: IfNotPresent
 
       structuredConfig:
-        #distributor:
-          #log_received_spans:
-          #  enabled: false
-          #  include_all_attributes: false
-          #  filter_by_status_error: false
+        distributor:
+          receivers:
+            otlp:
+              protocols:
+                grpc:
+                  endpoint: 0.0.0.0:4317
+                http:
+                  endpoint: 0.0.0.0:4318
+          log_received_spans:
+            enabled: false
+            include_all_attributes: false
+            filter_by_status_error: false
 
-          #log_discarded_spans:
-          #    enabled: true
-          #    include_all_attributes: false
-          #    filter_by_status_error: false
+          log_discarded_spans:
+              enabled: true
+              include_all_attributes: false
+              filter_by_status_error: false
 
-          #retry_after_on_resource_exhausted: '1s'
-          #max_attribute_bytes: '2048'
+          retry_after_on_resource_exhausted: '1s'
+
         ingester_client:
             grpc_client_config:
                 grpc_compression: "snappy"
@@ -76,7 +80,6 @@ spec:
         query_frontend:
           search:
             max_duration: 4320h
-            #max_query_expression_size_bytes: 131072
           metrics:
             max_duration: 4320h
         compactor:
@@ -94,7 +97,7 @@ spec:
 
     ingester:
 
-      replicas: 2
+      replicas: 1
       #resources:
       #  requests:
       #    cpu: "500m"
@@ -164,7 +167,7 @@ spec:
         size: 10Gi
 
     distributor:
-      replicas: 2
+      replicas: 1
       #resources:
       #  requests:
       #    cpu: "500m"
