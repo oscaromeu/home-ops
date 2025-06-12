@@ -90,7 +90,7 @@ spec:
             type: tempo
             typeName: Tempo
             access: proxy
-            url: http://tempo.observability.svc.cluster.local:3100
+            url: http://tempo-gateway.observability.svc.cluster.local:80
             password: ''
             user: ''
             database: ''
