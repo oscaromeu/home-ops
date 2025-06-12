@@ -13,6 +13,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: ${DEPLOYMENT_NAME}
+                name: podinfo
                 port:
                   number: 9898

@@ -2,27 +2,23 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app cluster-apps-podinfo
+  name: &app cluster-apps-plex
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
-    kustomize.toolkit.fluxcd.io/prune: enabled
 spec:
   targetNamespace: default
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/gke-eu-west4/apps/prod/default/podinfo/app
+  path: ./kubernetes/apps/default/podinfo/app
   prune: true
   sourceRef:
     kind: GitRepository
-    name: flanks-infra
-    namespace: flux-system
-  wait: true
+    name: home-kubernetes
+  wait: false
   interval: 30m
   retryInterval: 1m
   timeout: 5m
-  postBuild:
-    substituteFrom:
-      - kind: ConfigMap
-        name: podinfo-config
+  #postBuild:
+  #  substitute:
+  #    APP: plex
+  #    GATUS_PATH: /web/index.html
