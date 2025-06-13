@@ -20,7 +20,7 @@ spec:
   timeout: 5m
   postBuild:
     substitute:
-      DEPLOYMENT_NAME: podinfo
+      DEPLOYMENT_NAME: dummy
       DEPLOYMENT_RESOURCES_REQUEST_CPU: 10m
       DEPLOYMENT_RESOURCES_REQUEST_MEMORY: 100Mi
       DEPLOYMENT_RESOURCES_LIMITS_MEMORY: 100Mi
