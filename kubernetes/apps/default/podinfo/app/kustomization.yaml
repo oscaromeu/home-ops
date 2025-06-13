@@ -4,8 +4,7 @@ resources:
 
 configMapGenerator:
   - name: podinfo-configmap
-    env:
-      - ./resources/podinfo.env
+    env: ./resources/podinfo.env
 
 configurations:
   - ./resources/kustomizeconfig.yaml
