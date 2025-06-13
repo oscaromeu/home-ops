@@ -65,7 +65,7 @@ spec:
           timeoutSeconds: 5
         resources:
           limits:
-            memory: "${DEPLOYMENT_RESOURCES_LIMITS_MEMORY:='100Mi'}"
+            memory: "${DEPLOYMENT_RESOURCES_LIMITS_MEMORY:=500Mi}"
           requests:
             cpu: "${DEPLOYMENT_RESOURCES_REQUEST_CPU:='100m'}"
             memory: "${DEPLOYMENT_RESOURCES_REQUEST_MEMORY:='200Mi'}"
