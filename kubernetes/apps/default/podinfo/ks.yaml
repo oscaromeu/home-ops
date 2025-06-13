@@ -39,22 +39,22 @@ spec:
             name: PDB_MIN_AVAILABLE
             value: "1"
         - op: add
-          path: /spec/template/spec/containers/0/env/-
+          path: /spec/template/spec/containers/1/env/-
           value:
             name: HPA_MIN_REPLICA_COUNT
             value: "200"
         - op: add
-          path: /spec/template/spec/containers/0/env/-
+          path: /spec/template/spec/containers/2/env/-
           value:
             name: HPA_SCALE_UP_PERIOD_SECONDS
             value: "900"
         - op: add
-          path: /spec/template/spec/containers/0/env/-
+          path: /spec/template/spec/containers/3/env/-
           value:
             name: HPA_SCALE_UP_VALUE
             value: "1000"
         - op: add
-          path: /spec/template/spec/containers/0/env/-
+          path: /spec/template/spec/containers/4/env/-
           value:
             name: HPA_PROMETHEUS_THRESHOLD
             value: "5"
