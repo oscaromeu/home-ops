@@ -5,7 +5,6 @@ resources:
 
 configMapGenerator:
   - name: podinfo-configmap
-    env: ./resources/podinfo.env
-
-configurations:
-  - ./resources/kustomizeconfig.yaml
+    env: ./resources/podinfo.conf
+generatorOptions:
+  disableNameSuffixHash: true
