@@ -22,6 +22,7 @@ spec:
     substitute:
       DEPLOYMENT_NAME: "prueba"
       RANDOM: "hola"
+      PODINFO_UI_COLOR: "'#34577c'"
     #substituteFrom:
     #  - kind: ConfigMap
     #    name: podinfo-configmap
