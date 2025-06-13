@@ -9,7 +9,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/default/podinfo/app/base
+  path: ./kubernetes/apps/default/podinfo/app/
   prune: true
   sourceRef:
     kind: GitRepository
@@ -19,6 +19,9 @@ spec:
   retryInterval: 1m
   timeout: 5m
   postBuild:
-    substitute:
-      DEPLOYMENT_NAME: "prueba"
-      PODINFO_UI_COLOR: "#34577c"
+    #substitute:
+    #  DEPLOYMENT_NAME: "prueba"
+    #  PODINFO_UI_COLOR: "#34577c"
+    substituteFrom:
+      - kind: ConfigMap
+        name: podinfo-configmap
