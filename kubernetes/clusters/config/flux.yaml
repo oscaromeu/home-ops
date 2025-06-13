@@ -49,9 +49,6 @@ spec:
         - op: add
           path: /spec/template/spec/containers/0/args/-
           value: --requeue-dependency=5s
-        - op: add
-          path: /spec/template/spec/containers/0/args/-
-          value: --log-level=debug
       target:
         kind: Deployment
         name: (kustomize-controller|helm-controller|source-controller)
