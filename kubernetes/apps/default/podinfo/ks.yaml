@@ -46,11 +46,6 @@ spec:
         - op: add
           path: /spec/template/spec/containers/0/env/-
           value:
-            name: HPA_MAX_REPLICA_COUNT
-            value: "10"
-        - op: add
-          path: /spec/template/spec/containers/0/env/-
-          value:
             name: HPA_SCALE_UP_PERIOD_SECONDS
             value: "900"
         - op: add
