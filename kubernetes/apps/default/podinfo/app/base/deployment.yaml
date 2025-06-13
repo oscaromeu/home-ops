@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "${DEPLOYMENT_NAME:=dummy}"
+  name: "${DEPLOYMENT_NAME}"
 spec:
   minReadySeconds: 3
   revisionHistoryLimit: 5
@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: podinfod
-        image: "${DEPLOYMENT_IMAGE:=ghcr.io/stefanprodan/podinfo:6.9.0}"
+        image: "${DEPLOYMENT_IMAGE}"
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -48,17 +48,17 @@ spec:
         - name: PODINFO_UI_COLOR
           value: "${PODINFO_UI_COLOR}"
         - name: PDB_MIN_AVAILABLE
-          value: "${PDB_MIN_AVAILABLE:=1}"
+          value: "${PDB_MIN_AVAILABLE}"
         - name: HPA_MIN_REPLICA_COUNT
-          value: "${HPA_MIN_REPLICA_COUNT:=1}"
+          value: "${HPA_MIN_REPLICA_COUNT}"
         - name: HPA_MAX_REPLICA_COUNT
-          value: "${HPA_MAX_REPLICA_COUNT:=20}"
+          value: "${HPA_MAX_REPLICA_COUNT}"
         - name: HPA_SCALE_UP_PERIOD_SECONDS
-          value: "${HPA_SCALE_UP_PERIOD_SECONDS:=90}"
+          value: "${HPA_SCALE_UP_PERIOD_SECONDS}"
         - name: HPA_SCALE_UP_VALUE
-          value: "${HPA_SCALE_UP_VALUE:=100}"
+          value: "${HPA_SCALE_UP_VALUE}"
         - name: HPA_PROMETHEUS_THRESHOLD
-          value: "${HPA_PROMETHEUS_THRESHOLD:=5}"
+          value: "${HPA_PROMETHEUS_THRESHOLD}"
         livenessProbe:
           exec:
             command:
@@ -79,10 +79,10 @@ spec:
           timeoutSeconds: 5
         resources:
           limits:
-            memory: "${DEPLOYMENT_RESOURCES_LIMITS_MEMORY:=100Mi}"
+            memory: "${DEPLOYMENT_RESOURCES_LIMITS_MEMORY}"
           requests:
-            cpu: "${DEPLOYMENT_RESOURCES_REQUEST_CPU:=10m}"
-            memory: "${DEPLOYMENT_RESOURCES_REQUEST_MEMORY:=100Mi}"
+            cpu: "${DEPLOYMENT_RESOURCES_REQUEST_CPU}"
+            memory: "${DEPLOYMENT_RESOURCES_REQUEST_MEMORY}"
         volumeMounts:
           - name: data
             mountPath: /data
