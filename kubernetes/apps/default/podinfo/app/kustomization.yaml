@@ -2,10 +2,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./base
+  - ./resources/configmap.yaml
 
-configMapGenerator:
-  - name: podinfo-configmap
-    envs:
-      - ./resources/podinfo.conf
-generatorOptions:
-  disableNameSuffixHash: true
+#configMapGenerator:
+#  - name: podinfo-configmap
+#    envs:
+#      - ./resources/podinfo.conf
+#generatorOptions:
+#  disableNameSuffixHash: true
