@@ -8,5 +8,5 @@ metadata:
   name: podinfo-configmap
   namespace: default
 data:
-  DEPLOYMENT_NAME: "podinfo"
+  DEPLOYMENT_NAME: random
   PODINFO_UI_COLOR: "#34577c"
