@@ -65,10 +65,10 @@ spec:
           timeoutSeconds: 5
         resources:
           limits:
-            memory: "${DEPLOYMENT_RESOURCES_LIMITS_MEMORY}"
+            memory: "${DEPLOYMENT_RESOURCES_LIMITS_MEMORY:='100Mi'}"
           requests:
-            cpu: "${DEPLOYMENT_RESOURCES_REQUEST_CPU}"
-            memory: "${DEPLOYMENT_RESOURCES_REQUEST_MEMORY}"
+            cpu: "${DEPLOYMENT_RESOURCES_REQUEST_CPU:='100m'}"
+            memory: "${DEPLOYMENT_RESOURCES_REQUEST_MEMORY:='100Mi'}"
         volumeMounts:
           - name: data
             mountPath: /data
