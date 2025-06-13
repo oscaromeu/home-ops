@@ -54,7 +54,7 @@ spec:
         name: (kustomize-controller|helm-controller|source-controller)
     - patch: |
         - op: replace
-          path: /spec/template/spec/containers/0/args/-
+          path: /spec/template/spec/containers/0/args/0
           value: --log-level=debug
       target:
         kind: Deployment
