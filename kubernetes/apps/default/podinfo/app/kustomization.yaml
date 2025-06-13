@@ -2,4 +2,39 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./base
-  - ./resources/configmap.yaml
+
+patches:
+  - patch: |
+      - op: add
+        path: /spec/template/spec/containers/0/env/-
+        value:
+          name: PDB_MIN_AVAILABLE
+          value: "1"
+      - op: add
+        path: /spec/template/spec/containers/0/env/-
+        value:
+          name: HPA_MIN_REPLICA_COUNT
+          value: "10"
+      - op: add
+        path: /spec/template/spec/containers/0/env/-
+        value:
+          name: HPA_MAX_REPLICA_COUNT
+          value: "200"
+      - op: add
+        path: /spec/template/spec/containers/0/env/-
+        value:
+          name: HPA_SCALE_UP_PERIOD_SECONDS
+          value: "900"
+      - op: add
+        path: /spec/template/spec/containers/0/env/-
+        value:
+          name: HPA_SCALE_UP_VALUE
+          value: "1000"
+      - op: add
+        path: /spec/template/spec/containers/0/env/-
+        value:
+          name: HPA_PROMETHEUS_THRESHOLD
+          value: "50"
+    target:
+      kind: Deployment
+      name: podinfo
