@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "${DEPLOYMENT_NAME}"
+  name: "podinfo"
 spec:
   minReadySeconds: 3
   revisionHistoryLimit: 5
@@ -44,9 +44,9 @@ spec:
         - --level=info
         - --random-delay=false
         - --random-error=false
-        #env:
-        #- name: PODINFO_UI_COLOR
-        #  value: "${PODINFO_UI_COLOR}"
+        env:
+        - name: PODINFO_UI_COLOR
+          value: "${PODINFO_UI_COLOR}"
         livenessProbe:
           exec:
             command:
