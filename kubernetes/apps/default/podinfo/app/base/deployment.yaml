@@ -44,21 +44,6 @@ spec:
         - --level=info
         - --random-delay=false
         - --random-error=false
-        env:
-        - name: PODINFO_UI_COLOR
-          value: "${PODINFO_UI_COLOR}"
-        - name: PDB_MIN_AVAILABLE
-          value: "${PDB_MIN_AVAILABLE}"
-        - name: HPA_MIN_REPLICA_COUNT
-          value: "${HPA_MIN_REPLICA_COUNT}"
-        - name: HPA_MAX_REPLICA_COUNT
-          value: "${HPA_MAX_REPLICA_COUNT}"
-        - name: HPA_SCALE_UP_PERIOD_SECONDS
-          value: "${HPA_SCALE_UP_PERIOD_SECONDS}"
-        - name: HPA_SCALE_UP_VALUE
-          value: "${HPA_SCALE_UP_VALUE}"
-        - name: HPA_PROMETHEUS_THRESHOLD
-          value: "${HPA_PROMETHEUS_THRESHOLD}"
         livenessProbe:
           exec:
             command:
