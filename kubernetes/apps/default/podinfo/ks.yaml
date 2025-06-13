@@ -31,24 +31,24 @@ spec:
       #HPA_SCALE_UP_PERIOD_SECONDS: "'900'"
       #HPA_SCALE_UP_VALUE: "'1000'"
       #HPA_PROMETHEUS_THRESHOLD: "'50'"
-    patches:
-      - patch: |
-          - op: add
-            path: /spec/template/spec/containers/0/env
-            value:
-              - name: PDB_MIN_AVAILABLE
-                value: "1"
-              - name: HPA_MIN_REPLICA_COUNT
-                value: "200"
-              - name: HPA_MAX_REPLICA_COUNT
-                value: "10"
-              - name: HPA_SCALE_UP_PERIOD_SECONDS
-                value: "900"
-              - name: HPA_SCALE_UP_VALUE
-                value: "1000"
-              - name: HPA_PROMETHEUS_THRESHOLD
-                value: "5"
-        target:
-          kind: Deployment
-          name: podinfo
-          namespace: apps
+  patches:
+    - patch: |
+        - op: add
+          path: /spec/template/spec/containers/0/env
+          value:
+            - name: PDB_MIN_AVAILABLE
+              value: "1"
+            - name: HPA_MIN_REPLICA_COUNT
+              value: "200"
+            - name: HPA_MAX_REPLICA_COUNT
+              value: "10"
+            - name: HPA_SCALE_UP_PERIOD_SECONDS
+              value: "900"
+            - name: HPA_SCALE_UP_VALUE
+              value: "1000"
+            - name: HPA_PROMETHEUS_THRESHOLD
+              value: "5"
+      target:
+        kind: Deployment
+        name: podinfo
+        namespace: apps
