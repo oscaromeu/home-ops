@@ -21,7 +21,7 @@ spec:
   postBuild:
     substitute:
       DEPLOYMENT_NAME: "prueba"
-      RANDOM: "#34577c"
+      RANDOM: "hola"
     #substituteFrom:
     #  - kind: ConfigMap
     #    name: podinfo-configmap
