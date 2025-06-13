@@ -68,7 +68,7 @@ spec:
             memory: "${DEPLOYMENT_RESOURCES_LIMITS_MEMORY:='100Mi'}"
           requests:
             cpu: "${DEPLOYMENT_RESOURCES_REQUEST_CPU:='100m'}"
-            memory: "${DEPLOYMENT_RESOURCES_REQUEST_MEMORY:='2S00Mi'}"
+            memory: "${DEPLOYMENT_RESOURCES_REQUEST_MEMORY:='200Mi'}"
         volumeMounts:
           - name: data
             mountPath: /data
