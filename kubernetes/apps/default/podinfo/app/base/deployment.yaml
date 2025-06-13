@@ -46,7 +46,7 @@ spec:
         - --random-error=false
         env:
         - name: PODINFO_UI_COLOR
-          value: "${DEPLOYMENT_NAME}"
+          value: "${RANDOM}"
         livenessProbe:
           exec:
             command:

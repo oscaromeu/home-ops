@@ -21,7 +21,7 @@ spec:
   postBuild:
     substitute:
       DEPLOYMENT_NAME: "prueba"
-      PODINFO_UI_COLOR: "#34577c"
+      RANDOM: "#34577c"
     #substituteFrom:
     #  - kind: ConfigMap
     #    name: podinfo-configmap
