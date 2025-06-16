@@ -5,7 +5,7 @@ metadata:
   name: &app cluster-apps-podinfo
   namespace: flux-system
 spec:
-  targetNamespace: default
+  targetNamespace: dev
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
