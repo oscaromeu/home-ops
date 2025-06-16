@@ -14,7 +14,7 @@ spec:
         scaleUp:
           policies:
           - type: Percent
-            value: 90
+            value: ${HPA_SCALE_UP_VALUE}
             periodSeconds: ${HPA_SCALE_UP_PERIOD_SECONDS}
   triggers:
   - type: prometheus
