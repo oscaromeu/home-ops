@@ -5,7 +5,7 @@ metadata:
   namespace: dev
 spec:
 # suspend: true
-  interval: 15m
+  interval: 1m
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
