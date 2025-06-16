@@ -22,7 +22,7 @@ spec:
     substitute:
       ####
       DEPLOYMENT_NAME: podinfo
-      DEPLOYMENT_PODINFO_IMAGE: ghcr.io/stefanprodan/charts/podinfo:6.9.0 # {"$imagepolicy": "dev:podinfo"}
+      DEPLOYMENT_PODINFO_IMAGE: ghcr.io/stefanprodan/podinfo:6.8.0 # {"$imagepolicy": "dev:podinfo"}
       DEPLOYMENT_RESOURCES_REQUEST_CPU: 10m
       DEPLOYMENT_RESOURCES_REQUEST_MEMORY: 100Mi
       DEPLOYMENT_RESOURCES_LIMITS_MEMORY: 100Mi
