@@ -5,6 +5,6 @@ metadata:
   name: podinfo
   namespace: dev
 spec:
-  image: ghcr.io/stefanprodan/charts/podinfo
+  image: ghcr.io/stefanprodan/podinfo
   interval: 15m
   provider: generic
