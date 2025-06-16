@@ -6,8 +6,8 @@ metadata:
 spec:
   scaleTargetRef:
     name: ${DEPLOYMENT_NAME:=dummy}
-  minReplicaCount: ${HPA_MIN_REPLICA_COUNT}
-  maxReplicaCount: ${HPA_MAX_REPLICA_COUNT}
+  minReplicaCount: 1
+  maxReplicaCount: 4
   advanced:
     horizontalPodAutoscalerConfig:
       behavior:
