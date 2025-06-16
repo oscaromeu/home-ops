@@ -5,6 +5,4 @@ resources:
   - ./deployment.yaml
   - ./service.yaml
   - ./ingress.yaml
-  - ./imagerepo.yaml
-  - ./imagepolicy.yaml
-  - ./imageupdate.yaml
+  - ./hpa.yaml
