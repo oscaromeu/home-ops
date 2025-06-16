@@ -23,10 +23,7 @@ spec:
     spec:
       containers:
       - name: podinfod
-        image: "${DEPLOYMENT_PODINFO_IMAGE}"
-        env:
-        - name: APP_WORKER_QUEUE
-          value: ${DEPLOYMENT_NAME:=dummy}
+        image: ${DEPLOYMENT_PODINFO_IMAGE}
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -47,6 +44,9 @@ spec:
         - --level=info
         - --random-delay=false
         - --random-error=false
+        env:
+        - name: PODINFO_UI_COLOR
+          value: "#34577c"
         livenessProbe:
           exec:
             command:
