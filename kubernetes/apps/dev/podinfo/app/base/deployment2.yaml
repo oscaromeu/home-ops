@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: podinfo
+  name: ${DEPLOYMENT_NAME:=dummy}
 spec:
   minReadySeconds: 3
   revisionHistoryLimit: 5
@@ -12,14 +12,14 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: podinfo
+      app: ${DEPLOYMENT_NAME:=dummy}
   template:
     metadata:
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "9797"
       labels:
-        app: podinfo
+        app: ${DEPLOYMENT_NAME:=dummy}
     spec:
       containers:
       - name: podinfod
@@ -67,11 +67,10 @@ spec:
           timeoutSeconds: 5
         resources:
           limits:
-            cpu: 2000m
-            memory: 512Mi
+            memory: "${DEPLOYMENT_RESOURCES_LIMITS_MEMORY:=500Mi}"
           requests:
-            cpu: 100m
-            memory: 64Mi
+            cpu: "${DEPLOYMENT_RESOURCES_REQUEST_CPU:=100m}"
+            memory: "${DEPLOYMENT_RESOURCES_REQUEST_MEMORY:=200Mi}"
         volumeMounts:
           - name: data
             mountPath: /data
