@@ -22,5 +22,5 @@ spec:
     push:
       branch: main
   update:
-    path: ./kubernetes/apps/dev/podinfo/app
+    path: ./kubernetes/apps/dev/podinfo/
     strategy: Setters
