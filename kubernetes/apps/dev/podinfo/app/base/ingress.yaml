@@ -1,18 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: podinfo-ingress
+  name: ${DEPLOYMENT_NAME}
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: podinfo.${SECRET_DOMAIN}
+    - host: "${DEPLOYMENT_NAME}.${SECRET_DOMAIN}
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: podinfo
+                name: ${DEPLOYMENT_NAME}
                 port:
                   number: 9898

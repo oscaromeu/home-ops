@@ -1,20 +1,25 @@
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
 metadata:
-  name: podinfo
+  name: ${DEPLOYMENT_NAME:=dummy}
 spec:
   scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: podinfo
-  minReplicas: 2
-  maxReplicas: 4
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        # scale up if usage is above
-        # 99% of the requested CPU (100m)
-        averageUtilization: 99
+    name: ${DEPLOYMENT_NAME:=dummy}
+  minReplicaCount: ${HPA_MIN_REPLICA_COUNT:='1'}
+  maxReplicaCount: ${HPA_MAX_REPLICA_COUNT:='20'}
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleUp:
+          policies:
+          - type: Percent
+            value: ${HPA_SCALE_UP_VALUE:='100'}
+            periodSeconds: ${HPA_SCALE_UP_PERIOD_SECONDS:='90'}
+  triggers:
+  - type: prometheus
+    metricType: Value
+    metadata:
+      query: rabbitmq_queue_messages{queue="${DEPLOYMENT_NAME:=dummy}",job="rabbitmq-exporter"}
+      serverAddress: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
+      threshold: "${HPA_PROMETHEUS_THRESHOLD:='5'}"

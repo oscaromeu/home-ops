@@ -1,0 +1,10 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: podinfo
+  namespace: dev
+spec:
+  image: ghcr.io/stefanprodan/charts/podinfo
+  interval: 15m
+  provider: generic

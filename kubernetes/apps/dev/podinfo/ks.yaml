@@ -20,14 +20,15 @@ spec:
   timeout: 5m
   postBuild:
     substitute:
-      #DEPLOYMENT_NAME: podinfo
+      ####
+      DEPLOYMENT_NAME: podinfo
+      DEPLOYMENT_PODINFO_IMAGE: ghcr.io/stefanprodan/charts/podinfo:6.5.2 # {"$imagepolicy": "dev:podinfo"}
       DEPLOYMENT_RESOURCES_REQUEST_CPU: 10m
-      #DEPLOYMENT_RESOURCES_REQUEST_MEMORY: 100Mi
-      #DEPLOYMENT_RESOURCES_LIMITS_MEMORY: 300Mi
-      DEPLOYMENT_IMAGE: ghcr.io/stefanprodan/podinfo:6.8.0
+      DEPLOYMENT_RESOURCES_REQUEST_MEMORY: 100Mi
+      DEPLOYMENT_RESOURCES_LIMITS_MEMORY: 100Mi
       PDB_MIN_AVAILABLE: "'1'"
-      HPA_MAX_REPLICA_COUNT: "'200'"
-      HPA_MIN_REPLICA_COUNT: "'10'"
-      HPA_SCALE_UP_PERIOD_SECONDS: "'900'"
-      HPA_SCALE_UP_VALUE: "'1000'"
-      HPA_PROMETHEUS_THRESHOLD: "'50'"
+      HPA_MIN_REPLICA_COUNT: "'1'"
+      HPA_MAX_REPLICA_COUNT: "'1'"
+      HPA_SCALE_UP_VALUE: "'100'"
+      HPA_SCALE_UP_PERIOD_SECONDS: "'100'"
+      HPA_PROMETHEUS_THRESHOLD: "'5'"
