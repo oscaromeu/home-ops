@@ -1,0 +1,33 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app cluster-apps-podinfo
+  namespace: flux-system
+spec:
+  targetNamespace: default
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
+  path: ./kubernetes/apps/dev/podinfo/app/
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: false
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
+  postBuild:
+    substitute:
+      #DEPLOYMENT_NAME: podinfo
+      DEPLOYMENT_RESOURCES_REQUEST_CPU: 10m
+      #DEPLOYMENT_RESOURCES_REQUEST_MEMORY: 100Mi
+      #DEPLOYMENT_RESOURCES_LIMITS_MEMORY: 300Mi
+      DEPLOYMENT_IMAGE: ghcr.io/stefanprodan/podinfo:6.8.0
+      PDB_MIN_AVAILABLE: "'1'"
+      HPA_MAX_REPLICA_COUNT: "'200'"
+      HPA_MIN_REPLICA_COUNT: "'10'"
+      HPA_SCALE_UP_PERIOD_SECONDS: "'900'"
+      HPA_SCALE_UP_VALUE: "'1000'"
+      HPA_PROMETHEUS_THRESHOLD: "'50'"
