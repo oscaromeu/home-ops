@@ -41,17 +41,17 @@ spec:
 
       structuredConfig:
         distributor:
-          log_received_spans:
-            enabled: false
-            include_all_attributes: false
-            filter_by_status_error: false
+        #  log_received_spans:
+        #    enabled: false
+        #    include_all_attributes: false
+        #    filter_by_status_error: false
 
-          log_discarded_spans:
-              enabled: true
-              include_all_attributes: false
-              filter_by_status_error: false
+        #  log_discarded_spans:
+        #      enabled: true
+        #      include_all_attributes: false
+        #      filter_by_status_error: false
 
-          retry_after_on_resource_exhausted: '1s'
+        #  retry_after_on_resource_exhausted: '1s'
 
         ingester_client:
             grpc_client_config:
