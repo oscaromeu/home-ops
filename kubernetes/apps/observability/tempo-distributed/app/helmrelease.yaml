@@ -40,7 +40,7 @@ spec:
         pullPolicy: IfNotPresent
 
       structuredConfig:
-        distributor:
+        #distributor:
         #  log_received_spans:
         #    enabled: false
         #    include_all_attributes: false
