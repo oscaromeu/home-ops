@@ -18,3 +18,4 @@ resources:
   #- ./tempo/ks.yaml
   - ./tempo-distributed/ks.yaml
   - ./vector/ks.yaml
+  - ./xk6-tracing/ks.yaml
