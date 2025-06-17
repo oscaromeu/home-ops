@@ -6,3 +6,11 @@ resources:
   - ./secret.sops.yaml
   - ./helmrelease.yaml
   - ./service-extra.yaml
+
+configMapGenerator:
+  - name: tempo-values
+    files:
+      - tempo.yaml=./values.yaml
+
+configurations:
+  - kustomizeconfig.yaml
