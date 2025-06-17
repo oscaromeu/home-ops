@@ -26,6 +26,12 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    extraInitContainers:
+      - name: 01-init-db
+        image: ghcr.io/home-operations/postgres-init:17
+        envFrom:
+          - secretRef:
+              name: &secret grafana-admin-secret
     admin:
       existingSecret: grafana-admin-secret
     replicas: 1
