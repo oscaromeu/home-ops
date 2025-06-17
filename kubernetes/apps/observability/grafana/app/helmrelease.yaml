@@ -33,7 +33,7 @@ spec:
           - secretRef:
               name: &secret grafana-admin-secret
     admin:
-      existingSecret: grafana-admin-secret
+      existingSecret: *secret
     replicas: 1
     env:
       GF_EXPLORE_ENABLED: true
@@ -44,6 +44,11 @@ spec:
       GF_DIAGNOSTICS_PROFILING_ENABLED: true
       GF_DIAGNOSTICS_PROFILING_ADDR: 0.0.0.0
       GF_DIAGNOSTICS_PROFILING_PORT: 6060
+      # Database
+      GF_DATABASE_SSL_MODE: disable
+      GF_DATABASE_TYPE: postgres
+    envFromSecrets:
+      - name: *secret
     grafana.ini:
       analytics:
         check_for_updates: false

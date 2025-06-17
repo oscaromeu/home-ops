@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: observability
 resources:
   - ./externalsecrets.yaml
-  #- ./helmrelease.yaml
+  - ./helmrelease.yaml
