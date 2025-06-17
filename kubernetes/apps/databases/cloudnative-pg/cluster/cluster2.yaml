@@ -1,0 +1,78 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres-v17-c2
+spec:
+  #logLevel: info
+  instances: 3
+  imageName: ghcr.io/cloudnative-pg/postgresql:17
+  primaryUpdateStrategy: unsupervised
+  primaryUpdateMethod: switchover
+  storage:
+    size: 20Gi
+    storageClass: openebs-hostpath
+  superuserSecret:
+    name: cloudnative-pg-secret
+  enableSuperuserAccess: true
+
+  postgresql:
+    parameters:
+      max_connections: 100
+      shared_buffers: 125MB
+      effective_cache_size: 375MB
+      maintenance_work_mem: 32000kB
+      checkpoint_completion_target: "0.9"
+      wal_buffers: 3840kB
+      default_statistics_target: 100
+      random_page_cost: 4
+      effective_io_concurrency: "2"
+      work_mem: 1185kB
+      huge_pages: off
+      min_wal_size: 1GB
+      max_wal_size: 4GB
+      max_worker_processes: "4"
+      max_parallel_workers_per_gather: "2"
+      max_parallel_workers: "4"
+      max_parallel_maintenance_workers: "2"
+
+  resources:
+    requests:
+      memory: "3Gi"
+      cpu: "500m"
+    limits:
+      memory: "5Gi"
+
+  monitoring:
+    enablePodMonitor: true
+
+  backup:
+    retentionPolicy: 30d
+    barmanObjectStore:
+      destinationPath: gs://cloudnative-pg-v1/
+      googleCredentials:
+        applicationCredentials:
+          name: backup-creds
+          key: gcsCredentials
+      serverName: &currentCluster postgres-v17-c2
+      wal:
+        compression: bzip2
+        maxParallel: 8
+
+  # Note: externalClusters is needed when recovering from an existing cnpg cluster
+  #externalClusters:
+  #  - name: *previousCluster
+  #    barmanObjectStore:
+  #      serverName: *previousCluster
+  #      wal:
+  #        compression: bzip2
+  #        maxParallel: 8
+  #      destinationPath: s3://cloudnative-pg-v1/
+  #      endpointURL: "http://default-hl.default.svc.cluster.local:9000"
+  #      s3Credentials:
+  #        accessKeyId:
+  #          name: cloudnative-pg-secret
+  #          key: AWS_ACCESS_KEY_ID
+  #        secretAccessKey:
+  #          name: cloudnative-pg-secret
+  #          key: AWS_SECRET_ACCESS_KEY
