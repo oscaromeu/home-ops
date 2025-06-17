@@ -1,0 +1,126 @@
+extraInitContainers:
+  - name: 01-init-db
+    image: ghcr.io/home-operations/postgres-init:17
+    envFrom:
+      - secretRef:
+          name: &secret grafana-admin-secret
+admin:
+  existingSecret: *secret
+replicas: 2
+env:
+  GF_EXPLORE_ENABLED: true
+  GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"
+  GF_FEATURE_TOGGLES_ENABLE: flameGraph
+  GF_AUTH_ANONYMOUS_ENABLED: true
+  GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+  GF_DIAGNOSTICS_PROFILING_ENABLED: true
+  GF_DIAGNOSTICS_PROFILING_ADDR: 0.0.0.0
+  GF_DIAGNOSTICS_PROFILING_PORT: 6060
+  # Database
+  GF_DATABASE_SSL_MODE: disable
+  GF_DATABASE_TYPE: postgres
+envFromSecrets:
+  - name: *secret
+grafana.ini:
+  analytics:
+    check_for_updates: false
+    check_for_plugin_updates: false
+  auth.anonymous:
+    enabled: true
+    org_name: "Main Org."
+    org_role: "Viewer"
+  dataproxy:
+    max_idle_connections: 500
+  security:
+    allow_embedding: true
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        access: proxy
+        url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
+        isDefault: true
+      - name: Loki
+        type: loki
+        access: proxy
+        url: http://loki-gateway.observability.svc.cluster.local:80
+        jsonData:
+          maxLines: 250
+          derivedFields:
+            - datasourceUid: Tempo
+              matcherRegex: (?:trace_id)=(\w+)
+              name: TraceID
+              # url will be interpreted as query for the datasource
+              # Use $$ (double-dollar sign) when your configuration needs a literal dollar sign.
+              url: '$${__value.raw}'
+              # optional for URL Label to set a custom display label for the link.
+              urlDisplayLabel: 'View Trace'
+      - name: Tempo
+        type: tempo
+        typeName: Tempo
+        access: proxy
+        url: http://tempo-gateway.observability.svc.cluster.local:80
+        password: ''
+        user: ''
+        database: ''
+        basicAuth: false
+        isDefault: false
+        jsonData:
+          httpMethod: GET
+          serviceMap:
+            datasourceUid: 'Prometheus'
+        nodeGraph:
+           enabled: true
+        tracesToLogs:
+           datasourceUid: loki
+           filterBySpanID: false
+           filterByTraceID: true
+           mapTagNamesEnabled: false
+           tags:
+              - service_name
+        readOnly: false
+        editable: true
+      - name: Pyroscope
+        type: pyroscope
+        url: http://pyroscope-querier.observability.svc.cluster.local:4040
+sidecar:
+  dashboards:
+    enabled: true
+    searchNamespace: ALL
+    label: home_ops
+  datasources:
+    enabled: true
+    searchNamespace: ALL
+  provider:
+    allowUiUpdates: true
+serviceMonitor:
+  enabled: true
+ingress:
+  enabled: true
+  ingressClassName: internal
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+    hajimari.io/icon: simple-icons:grafana
+    hajimari.io/group: "Public"
+  hosts:
+    - &host "grafana.${SECRET_DOMAIN}"
+  tls:
+    - hosts:
+        - *host
+persistence:
+  enabled: false
+  storageClassName: openebs-hostpath
+testFramework:
+  enabled: false
+plugins:
+  - digrich-bubblechart-panel
+  - grafana-clock-panel
+  - redis-datasource
+  - marcusolsson-hexmap-panel
+  - grafana-polystat-panel
+  - pyroscope-panel
+  - flant-statusmap-panel
+  - marcusolsson-csv-datasource
+  - redis-datasource

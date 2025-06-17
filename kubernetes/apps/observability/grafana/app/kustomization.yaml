@@ -4,4 +4,12 @@ kind: Kustomization
 namespace: observability
 resources:
   - ./externalsecrets.yaml
-  #- ./helmrelease.yaml
+  - ./helmrelease.yaml
+
+configMapGenerator:
+  - name: grafana-values
+    files:
+      - grafana.yaml=values.yaml
+
+configurations:
+  - kustomizeconfig.yaml
