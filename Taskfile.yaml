@@ -17,6 +17,7 @@ vars:
   PIP_REQUIREMENTS_FILE: "{{.ROOT_DIR}}/requirements.txt"
   # Binaries
   PYTHON_BIN: python3
+  #PYTHON_BIN: /opt/homebrew/bin/python3.11
 
 env:
   KUBECONFIG: "{{.KUBECONFIG_FILE}}"
