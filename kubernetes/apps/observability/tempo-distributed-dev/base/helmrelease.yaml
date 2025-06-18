@@ -39,16 +39,26 @@ spec:
         tag: null
         pullPolicy: IfNotPresent
       structuredConfig:
-        #distributor:
-        #  log_received_spans:
-        #    enabled: false
-        #    include_all_attributes: false
-        #    filter_by_status_error: false
-        #  log_discarded_spans:
-        #      enabled: true
-        #      include_all_attributes: false
-        #      filter_by_status_error: false
-        #  retry_after_on_resource_exhausted: '1s'
+        distributor:
+          log_received_spans:
+            enabled: false
+            include_all_attributes: false
+            filter_by_status_error: false
+          log_discarded_spans:
+              enabled: true
+              include_all_attributes: false
+              filter_by_status_error: false
+          receivers:
+            otlp:
+              protocols:
+                grpc:
+                  endpoint: 0.0.0.0:4317
+                http:
+                  endpoint: 0.0.0.0:4318
+          ring:
+            kvstore:
+              store: memberlist
+          retry_after_on_resource_exhausted: '1s'
         ingester_client:
             grpc_client_config:
                 grpc_compression: "snappy"
