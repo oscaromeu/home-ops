@@ -8,7 +8,7 @@ resources:
   - ../base
 
 configMapGenerator:
-  - name: tempo-values
+  - name: tempo-config
     behavior: merge
     files:
       - tempo.yaml=values.yaml

@@ -6,9 +6,12 @@ resources:
   - ./helmrelease.yaml
 
 configMapGenerator:
-  - name: tempo-values
+  - name: tempo-config
     files:
       - tempo-base.yaml=./values.yaml
 
 configurations:
   - kustomizeconfig.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
