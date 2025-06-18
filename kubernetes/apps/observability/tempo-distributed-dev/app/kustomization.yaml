@@ -12,6 +12,10 @@ configMapGenerator:
     behavior: merge
     files:
       - tempo.yaml=values.yaml
+    annotations:
+      app.kubernetes.io/managed-by: "helm"
+      meta.helm.sh/release-name: "tempo"
+      meta.helm.sh/release-namespace: "observability"
 
 patches:
 - target:

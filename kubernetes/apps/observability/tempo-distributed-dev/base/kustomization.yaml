@@ -9,6 +9,10 @@ configMapGenerator:
   - name: tempo-config
     files:
       - tempo-base.yaml=./values.yaml
+    annotations:
+      app.kubernetes.io/managed-by: "helm"
+      meta.helm.sh/release-name: "tempo"
+      meta.helm.sh/release-namespace: "observability"
 
 configurations:
   - kustomizeconfig.yaml
