@@ -1,6 +1,6 @@
 global:
   clusterDomain: 'cluster.local'
-useExternalConfig: false
+useExternalConfig: true
 reportingEnabled: false
 tempo:
   image:
