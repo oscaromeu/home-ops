@@ -19,3 +19,6 @@ patches:
     kind: HelmRelease
     name: grafana
   path: helm-patch.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
