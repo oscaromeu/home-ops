@@ -13,7 +13,6 @@ resources:
   - ./loki-distributed/ks.yaml
   #- ./otel
   #- ./prometheus-adapter/ks.yaml
-  #- ./tempo/ks.yaml
-  - ./tempo-distributed-dev/ks.yaml
+  - ./tempo-distributed/ks.yaml
   - ./vector/ks.yaml
   #- ./xk6-tracing/ks.yaml
