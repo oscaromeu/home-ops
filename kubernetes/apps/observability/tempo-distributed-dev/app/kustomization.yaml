@@ -8,12 +8,6 @@ resources:
   - ./configmap.yaml
   - ../base
 
-configMapGenerator:
-  - name: tempo-config
-    behavior: merge
-    files:
-      - tempo.yaml=values.yaml
-
 patches:
 - target:
     group: helm.toolkit.fluxcd.io
@@ -21,9 +15,6 @@ patches:
     name: grafana
   path: helm-patch.yaml
 
-generatorOptions:
-  disableNameSuffixHash: true
-  annotations:
-    app.kubernetes.io/managed-by: "helm"
-    meta.helm.sh/release-name: "tempo"
-    meta.helm.sh/release-namespace: "observability"
+- path: helm-patch.yaml
+  target:
+    kind: HelmRelease

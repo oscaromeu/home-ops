@@ -1,6 +1,31 @@
-- op: add
-  path: /spec/valuesFrom/-
-  value:
-    kind: ConfigMap
-    name: tempo-config
-    valuesKey: tempo.yaml
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: tempo
+  namespace: observability
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: tempo-distributed
+      version: 1.41.1
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 1
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+
+  values:
+    ingester:
+      replicas: 2

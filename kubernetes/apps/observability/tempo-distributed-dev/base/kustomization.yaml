@@ -4,14 +4,3 @@ kind: Kustomization
 namespace: observability
 resources:
   - ./helmrelease.yaml
-
-configMapGenerator:
-  - name: tempo-config
-    files:
-      - tempo-base.yaml=./values.yaml
-
-configurations:
-  - kustomizeconfig.yaml
-
-generatorOptions:
-  disableNameSuffixHash: true
