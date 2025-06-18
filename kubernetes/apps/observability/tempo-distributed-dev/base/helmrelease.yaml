@@ -28,5 +28,5 @@ spec:
 
   valuesFrom:
     - kind: ConfigMap
-      name: tempo-values
+      name: tempo-config
       valuesKey: tempo-base.yaml

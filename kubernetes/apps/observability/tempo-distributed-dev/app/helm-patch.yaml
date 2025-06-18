@@ -2,5 +2,5 @@
   path: /spec/valuesFrom/-
   value:
     kind: ConfigMap
-    name: tempo-values
+    name: tempo-config
     valuesKey: tempo.yaml
