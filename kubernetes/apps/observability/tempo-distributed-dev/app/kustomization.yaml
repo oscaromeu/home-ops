@@ -5,6 +5,7 @@ namespace: grafana
 resources:
   - ./secret.sops.yaml
   - ./service-extra.yaml
+  - ./configmap.yaml
   - ../base
 
 configMapGenerator:
