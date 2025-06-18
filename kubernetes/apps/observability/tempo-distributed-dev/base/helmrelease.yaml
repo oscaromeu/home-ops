@@ -3,7 +3,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: tempo
-  namespace: observability
 spec:
   interval: 15m
   chart:
@@ -36,7 +35,7 @@ spec:
         registry: docker.io
         pullSecrets: []
         repository: grafana/tempo
-        tag: null
+        tag: 2.8.0
         pullPolicy: IfNotPresent
       structuredConfig:
         distributor:
@@ -78,12 +77,12 @@ spec:
           flush_all_on_shutdown: false
         query_frontend:
           search:
-            max_duration: 4320h
+            max_duration: 168h
           metrics:
-            max_duration: 4320h
+            max_duration: 3h
         compactor:
           compaction:
-            block_retention: 4380h
+            block_retention: 336h
             compacted_block_retention: 1h
             compaction_window: 1h
             v2_in_buffer_bytes: 5242880
@@ -95,46 +94,14 @@ spec:
             compaction_cycle: 30s
     ingester:
       replicas: 1
-      #resources:
-      #  requests:
-      #    cpu: "500m"
-      #    memory: "1Gi"
-      #  limits:
-      #    memory: "2Gi"
       extraArgs:
         - "-config.expand-env=true"
-      extraEnv:
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /var/secrets/google/key.json
-      extraVolumeMounts:
-        - name: google-cloud-key
-          mountPath: /var/secrets/google
-      extraVolumes:
-        - name: google-cloud-key
-          secret:
-            secretName: tempo-gcs-secret
       persistence:
         enabled: true
         storageClass: openebs-hostpath
         size: 10Gi  
     metricsGenerator:
       enabled: true
-      #resources:
-      #  requests:
-      #    cpu: "500m"
-      #    memory: "1Gi"
-      #  limits:
-      #    memory: "2Gi"
-      extraEnv:
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /var/secrets/google/key.json
-      extraVolumeMounts:
-        - name: google-cloud-key
-          mountPath: /var/secrets/google
-      extraVolumes:
-        - name: google-cloud-key
-          secret:
-            secretName: tempo-gcs-secret
       config:
         registry:
           collection_interval: 15s
@@ -157,73 +124,16 @@ spec:
         size: 10Gi
     distributor:
       replicas: 1
-      #resources:
-      #  requests:
-      #    cpu: "500m"
-      #    memory: "1Gi"
-      #  limits:
-      #    memory: "2Gi"
       extraArgs:
         - "-config.expand-env=true"
     compactor:
       replicas: 1
-      #resources:
-      #  requests:
-      #    cpu: "500m"
-      #    memory: "1Gi"
-      #  limits:
-      #    memory: "2Gi"
       extraArgs:
         - "-config.expand-env=true"
-      extraEnv:
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /var/secrets/google/key.json
-      extraVolumeMounts:
-        - name: google-cloud-key
-          mountPath: /var/secrets/google
-      extraVolumes:
-        - name: google-cloud-key
-          secret:
-            secretName: tempo-gcs-secret
-    querier:
-      extraArgs:
-        - "-config.expand-env=true"
-      #resources:
-      #  requests:
-      #    cpu: "500m"
-      #    memory: "1Gi"
-      #  limits:
-      #    memory: "2Gi"
-      extraEnv:
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /var/secrets/google/key.json
-      extraVolumeMounts:
-        - name: google-cloud-key
-          mountPath: /var/secrets/google
-      extraVolumes:
-        - name: google-cloud-key
-          secret:
-            secretName: tempo-gcs-secret
     queryFrontend:
       replicas: 1
-      #resources:
-      #  requests:
-      #    cpu: "500m"
-      #    memory: "1Gi"
-      #  limits:
-      #    memory: "2Gi"
       extraArgs:
         - "-config.expand-env=true"
-      extraEnv:
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /var/secrets/google/key.json
-      extraVolumeMounts:
-        - name: google-cloud-key
-          mountPath: /var/secrets/google
-      extraVolumes:
-        - name: google-cloud-key
-          secret:
-            secretName: tempo-gcs-secret
     traces:
       otlp:
         http:
@@ -235,7 +145,7 @@ spec:
         backend: gcs
         gcs:
           #insecure: true  # optional. enable if endpoint is http
-          bucket_name: tempo-bucket-4d186321c1a7f0f354b297e8914ab240
+          bucket_name: "changeme"
     overrides:
       defaults:
         metrics_generator:
@@ -254,4 +164,4 @@ spec:
       #    memory: "2Gi"
     metaMonitoring:
       serviceMonitor:
-        enabled: true
+        enabled: false
