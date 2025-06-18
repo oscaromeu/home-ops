@@ -7,20 +7,18 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  dependsOn:
-    - name: cluster-apps-ingress-nginx-external
-    - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-k6s
-  path: ./kubernetes/apps/dev/fastapi-observability/app-a
+  targetNamespace: observability
+  path: ./kubernetes/apps/observability/fastapi-observability/app-a
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
+    namespace: flux-system
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: app-a
-      namespace: dev
+      namespace: observability
   interval: 30m
   retryInterval: 1m
   timeout: 3m
@@ -33,18 +31,20 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  targetNamespace: observability
   dependsOn:
-    - name: fastapi-observability-a
-  path: ./kubernetes/apps/dev/fastapi-observability/app-b
+    - name: cluster-apps-fastapi-observability-a
+  path: ./kubernetes/apps/observability/fastapi-observability/app-b
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
+    namespace: flux-system
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: app-b
-      namespace: dev
+      namespace: observability
   interval: 30m
   retryInterval: 1m
   timeout: 3m
@@ -57,18 +57,20 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  targetNamespace: observability
   dependsOn:
-    - name: fastapi-observability-a
-  path: ./kubernetes/apps/dev/fastapi-observability/app-c
+    - name: cluster-apps-fastapi-observability-b
+  path: ./kubernetes/apps/observability/fastapi-observability/app-c
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
+    namespace: flux-system
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2beta1
       kind: HelmRelease
       name: app-c
-      namespace: dev
+      namespace: observability
   interval: 30m
   retryInterval: 1m
   timeout: 3m
@@ -81,32 +83,17 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
+  targetNamespace: observability
   dependsOn:
-    - name: fastapi-observability-a
-  path: ./kubernetes/apps/dev/fastapi-observability/monitoring
+    - name: cluster-apps-fastapi-observability-a
+    - name: cluster-apps-fastapi-observability-b
+    - name: cluster-apps-fastapi-observability-c
+  path: ./kubernetes/apps/observability/fastapi-observability/monitoring
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  interval: 30m
-  retryInterval: 1m
-  timeout: 3m
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-kind: Kustomization
-metadata:
-  name: cluster-apps-fastapi-observability-test
-  namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
-spec:
-  dependsOn:
-    - name: fastapi-observability-a
-  path: ./kubernetes/apps/dev/fastapi-observability/test
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: home-kubernetes
+    namespace: flux-system
   interval: 30m
   retryInterval: 1m
   timeout: 3m

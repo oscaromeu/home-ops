@@ -4,11 +4,11 @@ kind: ServiceMonitor
 metadata:
   annotations:
     meta.helm.sh/release-name: app-a
-    meta.helm.sh/release-namespace: dev
+    meta.helm.sh/release-namespace: default
   labels:
     app.kubernetes.io/instance: app-a
   name: app-a
-  namespace: dev
+  namespace: default
 spec:
   endpoints:
   - interval: 1m
@@ -27,11 +27,11 @@ kind: ServiceMonitor
 metadata:
   annotations:
     meta.helm.sh/release-name: app-b
-    meta.helm.sh/release-namespace: dev
+    meta.helm.sh/release-namespace: default
   labels:
     app.kubernetes.io/instance: app-b
   name: app-b
-  namespace: dev
+  namespace: default
 spec:
   endpoints:
   - interval: 1m
@@ -50,11 +50,11 @@ kind: ServiceMonitor
 metadata:
   annotations:
     meta.helm.sh/release-name: app-c
-    meta.helm.sh/release-namespace: dev
+    meta.helm.sh/release-namespace: default
   labels:
     app.kubernetes.io/instance: app-c
   name: app-c
-  namespace: dev
+  namespace: default
 spec:
   endpoints:
   - interval: 1m

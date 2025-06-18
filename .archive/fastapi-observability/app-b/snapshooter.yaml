@@ -1,0 +1,29 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: app-b-cron
+spec:
+  schedule: '*/5 * * * *'
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccount: k6-observability
+          containers:
+            - name: kubectl
+              image: bitnami/kubectl
+              volumeMounts:
+                - name: k6-yaml
+                  mountPath: /tmp/
+              command:
+                - /bin/bash
+              args:
+                - -c
+                - 'kubectl delete -f /tmp/test.yaml; kubectl apply -f /tmp/test.yaml'
+          restartPolicy: OnFailure
+          volumes:
+            - name: k6-yaml
+              configMap:
+                name: app-b-config
