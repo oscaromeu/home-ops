@@ -22,9 +22,6 @@ spec:
       strategy: rollback
       retries: 3
   values:
-    defaultPodOptions:
-      nodeSelector:
-        kubernetes.io/hostname: mfw4
     controllers:
       plex:
         containers:
@@ -60,6 +57,8 @@ spec:
                 drop:
                   - ALL
     defaultPodOptions:
+      nodeSelector:
+        kubernetes.io/hostname: mfw4
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
