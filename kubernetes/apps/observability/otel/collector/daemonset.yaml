@@ -43,3 +43,7 @@ spec:
       protocol: TCP
       name: tcp
       targetPort: 4317
+    - port: 8888
+      protocol: TCP
+      name: metrics
+      targetPort: 8888
