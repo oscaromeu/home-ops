@@ -13,20 +13,28 @@ spec:
         app: otel-collector
     spec:
       containers:
-      - name: otelcol
-        args:
-        - --config=/conf/collector.yaml
-        image: otel/opentelemetry-collector-contrib:0.127.0
-        volumeMounts:
-        - mountPath: /conf
-          name: otel-collector-config-volume
+        - name: otelcol
+          image: otel/opentelemetry-collector-contrib:0.127.0
+          args:
+            - --config=/conf/collector.yaml
+          ports:
+            - containerPort: 4317
+              name: otlp
+              protocol: TCP
+            - containerPort: 8888
+              name: metrics
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /conf
+              name: otel-collector-config-volume
       volumes:
-      - configMap:
-          items:
-          - key: collector.yaml
-            path: collector.yaml
-          name: otel-collector-config
-        name: otel-collector-config-volume
+        - name: otel-collector-config-volume
+          configMap:
+            name: otel-collector-config
+            items:
+              - key: collector.yaml
+                path: collector.yaml
+
 ---
 apiVersion: v1
 kind: Service
