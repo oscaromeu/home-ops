@@ -58,7 +58,7 @@ spec:
                   - ALL
     defaultPodOptions:
       nodeSelector:
-        kubernetes.io/hostname: mfw4
+        kubernetes.io/arch: amd64
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
