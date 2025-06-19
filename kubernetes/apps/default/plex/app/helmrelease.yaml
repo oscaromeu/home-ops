@@ -22,6 +22,9 @@ spec:
       strategy: rollback
       retries: 3
   values:
+    defaultPodOptions:
+      nodeSelector:
+        kubernetes.io/hostname: mfw4
     controllers:
       plex:
         containers:
