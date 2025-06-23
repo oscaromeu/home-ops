@@ -18,3 +18,23 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app cluster-apps-grafana-operator
+  namespace: flux-system
+spec:
+  suspend: false
+  dependsOn:
+    - name: cluster-apps-kube-prometheus-stack
+    #- name: mimir
+  path: ./kubernetes/apps/observability/grafana/operator
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  wait: false # no flux ks dependents
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m

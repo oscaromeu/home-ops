@@ -2,14 +2,14 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: grafana-operator
+  name: grafana
   namespace: observability
 spec:
   interval: 30m
   chart:
     spec:
-      chart: grafana-operator
-      version: v5.18.0
+      chart: grafana
+      version: 9.2.2
       sourceRef:
         kind: HelmRepository
         name: grafana
@@ -25,5 +25,7 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  values:
-    replicas: 1
+  valuesFrom:
+    - kind: ConfigMap
+      name: grafana-values
+      valuesKey: grafana.yaml
