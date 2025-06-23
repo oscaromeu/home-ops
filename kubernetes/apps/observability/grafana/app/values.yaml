@@ -88,69 +88,9 @@ datasources:
       - name: Pyroscope
         type: pyroscope
         url: http://pyroscope-querier.observability.svc.cluster.local:4040
-dashboardProviders:
-  dashboardproviders.yaml:
-    apiVersion: 1
-    providers:
-      - name: default
-        disableDeletion: false
-        editable: true
-        folder: ""
-        options:
-          path: /var/lib/grafana/dashboards/default
-        orgId: 1
-        type: file
-      - name: applications
-        orgId: 1
-        folder: Applications
-        type: file
-        disableDeletion: false
-        editable: true
-        options:
-          path: /var/lib/grafana/dashboards/applications
-      - name: cicd
-        orgId: 1
-        folder: CI/CD
-        type: file
-        disableDeletion: false
-        editable: true
-        options:
-          path: /var/lib/grafana/dashboards/cicd
-      - name: databases
-        orgId: 1
-        folder: Databases
-        type: file
-        disableDeletion: false
-        editable: true
-        options:
-          path: /var/lib/grafana/dashboards/databases
-      - name: kubernetes
-        orgId: 1
-        folder: Kubernetes
-        type: file
-        disableDeletion: false
-        editable: true
-        options:
-          path: /var/lib/grafana/dashboards/kubernetes
-      - name: networking
-        orgId: 1
-        folder: Networking
-        type: file
-        disableDeletion: false
-        editable: true
-        options:
-          path: /var/lib/grafana/dashboards/networking
-      - name: observability
-        orgId: 1
-        folder: Observability
-        type: file
-        disableDeletion: false
-        editable: true
-        options:
-          path: /var/lib/grafana/dashboards/observability
 sidecar:
   dashboards:
-    enabled: true
+    enabled: false
     searchNamespace: ALL
     label: home_ops
     folderAnnotation: grafana_folder
