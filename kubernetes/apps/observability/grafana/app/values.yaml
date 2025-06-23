@@ -85,31 +85,12 @@ datasources:
       - name: Pyroscope
         type: pyroscope
         url: http://pyroscope-querier.observability.svc.cluster.local:4040
-dashboardProviders:
-  dashboardproviders.yaml:
-    apiVersion: 1
-    providers:
-      - name: default
-        disableDeletion: false
-        editable: true
-        folder: ""
-        options:
-          path: /var/lib/grafana/dashboards/default
-        orgId: 1
-        type: file
-      - name: applications
-        orgId: 1
-        folder: Applications
-        type: file
-        disableDeletion: false
-        editable: true
-        options:
-          path: /var/lib/grafana/dashboards/applications
 sidecar:
   dashboards:
     enabled: true
     searchNamespace: ALL
     label: home_ops
+    folderAnnotation: grafana_folder
   datasources:
     enabled: true
     searchNamespace: ALL
