@@ -8,8 +8,8 @@ spec:
   interval: 30m
   chart:
     spec:
-      chart: grafana-operator
-      version: v5.18.0
+      chart: grafana
+      version: 9.2.2
       sourceRef:
         kind: HelmRepository
         name: grafana
