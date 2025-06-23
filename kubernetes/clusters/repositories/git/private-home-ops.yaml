@@ -1,0 +1,18 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: private-home-kubernetes
+  namespace: flux-system
+spec:
+  interval: 30m
+  url: "ssh://git@github.com/oscaromeu/private-home-ops"
+  ref:
+    branch: "main"
+  secretRef:
+    name: github-deploy-key
+  ignore: |
+    # exclude all
+    /*
+    # include kubernetes directory
+    !/kubernetes
