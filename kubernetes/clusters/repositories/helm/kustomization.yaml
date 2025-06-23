@@ -24,6 +24,7 @@ resources:
   - ./flanksource.yaml
   - ./fleet.yaml
   - ./gitea.yaml
+  - ./grafana-operator.yaml
   - ./grafana.yaml
   - ./hajimari.yaml
   - ./harbor.yaml
