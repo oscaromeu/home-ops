@@ -25,7 +25,5 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  valuesFrom:
-    - kind: ConfigMap
-      name: grafana-values
-      valuesKey: grafana.yaml
+  values:
+    replicas: 1
