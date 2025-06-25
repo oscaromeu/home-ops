@@ -132,7 +132,7 @@ spec:
       trace:
         backend: s3
         s3:
-          #insecure: true  # optional. enable if endpoint is http
+          insecure: true  # optional. enable if endpoint is http
           bucket: tempo
           region: ''
     overrides:
