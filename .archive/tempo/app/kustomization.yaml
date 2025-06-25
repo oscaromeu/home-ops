@@ -4,5 +4,4 @@ kind: Kustomization
 namespace: observability
 resources:
   - ./secret.sops.yaml
-  #- ./volume.yaml
   - ./helmrelease.yaml

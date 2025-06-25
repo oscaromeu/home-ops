@@ -1,24 +1,26 @@
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app cluster-apps-tempo
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
+    kustomize.toolkit.fluxcd.io/prune: enabled
 spec:
   dependsOn:
     - name: cluster-apps-kube-prometheus-stack
+  targetNamespace: observability
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
   path: ./kubernetes/apps/observability/tempo/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      kind: HelmRelease
-      name: tempo
-      namespace: observability
+    namespace: flux-system
+  wait: true
   interval: 30m
   retryInterval: 1m
   timeout: 5m
