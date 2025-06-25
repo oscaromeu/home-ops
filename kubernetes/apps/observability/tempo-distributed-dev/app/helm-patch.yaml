@@ -133,7 +133,7 @@ spec:
         backend: s3
         s3:
           #insecure: true  # optional. enable if endpoint is http
-          bucket_name: tempo
+          bucket: tempo
           region: ''
     overrides:
       defaults:
