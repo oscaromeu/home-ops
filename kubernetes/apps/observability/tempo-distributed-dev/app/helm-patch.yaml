@@ -21,11 +21,11 @@ spec:
     - targetPath: storage.trace.s3.access_key
       kind: Secret
       name: tempo-s3-secret
-      valuesKey: access-key
+      valuesKey: access_key
     - targetPath: storage.trace.s3.secret_key
       kind: Secret
       name: tempo-s3-secret
-      valuesKey: secret-key
+      valuesKey: secret_key
   values:
     global:
       clusterDomain: 'cluster.local'
