@@ -142,10 +142,10 @@ spec:
           enabled: true
     storage:
       trace:
-        backend: gcs
-        gcs:
+        backend: s3
+        s3:
           #insecure: true  # optional. enable if endpoint is http
-          bucket_name: "changeme"
+          bucket_name: "tempo"
     overrides:
       defaults:
         metrics_generator:
