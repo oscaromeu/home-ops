@@ -41,12 +41,12 @@ spec:
       structuredConfig:
         query_frontend:
           search:
-            max_duration: 4380h
+            max_duration: 168h
           metrics:
-            max_duration: 4380h
+            max_duration: 168h
         compactor:
           compaction:
-            block_retention: 4380h
+            block_retention: 168h
     ingester:
       replicas: 2
       #resources:
