@@ -78,8 +78,11 @@ spec:
         query_frontend:
           search:
             max_duration: 168h
+            query_ingesters_until: 30m
+            query_backend_after: 30m
           metrics:
             max_duration: 3h
+            query_backend_after: 1h
         compactor:
           compaction:
             block_retention: 336h
