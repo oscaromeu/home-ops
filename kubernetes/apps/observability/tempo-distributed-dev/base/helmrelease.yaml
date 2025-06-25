@@ -145,7 +145,7 @@ spec:
         backend: s3
         s3:
           #insecure: true  # optional. enable if endpoint is http
-          bucket_name: "tempo"
+          bucket: "tempo"
     overrides:
       defaults:
         metrics_generator:
