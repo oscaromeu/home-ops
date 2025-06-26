@@ -156,14 +156,14 @@ spec:
     overrides:
       defaults:
         metrics_generator:
-          processor:
-            local_blocks:
-              filter_server_spans: false
-              flush_to_storage: true
           processors:
             - service-graphs
             - span-metrics
             - local-blocks
+          processor:
+            local-blocks:
+              filter_server_spans: false
+              flush_to_storage: true
     gateway:
       enabled: true
       replicas: 1
