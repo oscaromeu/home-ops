@@ -113,6 +113,7 @@ spec:
           path: /var/tempo/traces
         local_blocks:
           filter_server_spans: false
+          flush_to_storage: true
         metrics_ingestion_time_range_slack: 30s
     distributor:
       replicas: 1
