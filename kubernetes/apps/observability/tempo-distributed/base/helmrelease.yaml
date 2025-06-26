@@ -73,7 +73,7 @@ spec:
           max_block_bytes: 524288000
           max_block_duration: 30m
           complete_block_timeout: 15m
-          flush_all_on_shutdown: false
+          flush_all_on_shutdown: true
         query_frontend:
           search:
             max_duration: 168h
@@ -81,7 +81,7 @@ spec:
             query_backend_after: 30m
           metrics:
             max_duration: 3h
-            query_backend_after: 30m
+            query_backend_after: 3h
         compactor:
           compaction:
             block_retention: 336h
