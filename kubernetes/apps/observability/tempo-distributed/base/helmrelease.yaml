@@ -80,8 +80,8 @@ spec:
             query_ingesters_until: 30m
             query_backend_after: 30m
           metrics:
-            max_duration: 3h
-            query_backend_after: 3h
+            max_duration: 0
+            query_backend_after: 30m
         compactor:
           compaction:
             block_retention: 336h
