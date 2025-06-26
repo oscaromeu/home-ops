@@ -96,12 +96,6 @@ spec:
             compaction_cycle: 30s
     ingester:
       replicas: 1
-      extraArgs:
-        - "-config.expand-env=true"
-      persistence:
-        enabled: true
-        storageClass: openebs-hostpath
-        size: 10Gi  
     metricsGenerator:
       enabled: true
       config:
@@ -118,24 +112,12 @@ spec:
         traces_storage:
           path: /var/tempo/traces
         metrics_ingestion_time_range_slack: 30s
-      extraArgs:
-        - "-config.expand-env=true"
-      persistence:
-        enabled: true
-        storageClass: openebs-hostpath
-        size: 10Gi
     distributor:
       replicas: 1
-      extraArgs:
-        - "-config.expand-env=true"
     compactor:
       replicas: 1
-      extraArgs:
-        - "-config.expand-env=true"
     queryFrontend:
       replicas: 1
-      extraArgs:
-        - "-config.expand-env=true"
     traces:
       otlp:
         http:

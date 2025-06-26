@@ -55,15 +55,8 @@ spec:
       #    memory: "1Gi"
       #  limits:
       #    memory: "2Gi"
-      extraArgs:
-        - "-config.expand-env=true"
-      extraEnvFrom:
-        - secretRef:
-            name: tempo-s3-secret
-      persistence:
-        enabled: true
-        storageClass: openebs-hostpath
-        size: 10Gi  
+      #extraArgs:
+      #  - "-config.expand-env=true" 
     metricsGenerator:
       enabled: true
       #resources:
@@ -86,15 +79,11 @@ spec:
         traces_storage:
           path: /var/tempo/traces
         metrics_ingestion_time_range_slack: 30s
-      extraArgs:
-        - "-config.expand-env=true"
-      extraEnvFrom:
-        - secretRef:
-            name: tempo-s3-secret
-      persistence:
-        enabled: true
-        storageClass: openebs-hostpath
-        size: 10Gi
+      #extraArgs:
+      #  - "-config.expand-env=true"
+      #extraEnvFrom:
+      #  - secretRef:
+      #      name: tempo-s3-secret
     distributor:
       replicas: 1
       #resources:
@@ -103,11 +92,11 @@ spec:
       #    memory: "1Gi"
       #  limits:
       #    memory: "2Gi"
-      extraArgs:
-        - "-config.expand-env=true"
-      extraEnvFrom:
-        - secretRef:
-            name: tempo-s3-secret
+      #extraArgs:
+      #  - "-config.expand-env=true"
+      #extraEnvFrom:
+      #  - secretRef:
+      #      name: tempo-s3-secret
     compactor:
       replicas: 1
       #resources:
@@ -116,11 +105,11 @@ spec:
       #    memory: "1Gi"
       #  limits:
       #    memory: "2Gi"
-      extraArgs:
-        - "-config.expand-env=true"
-      extraEnvFrom:
-        - secretRef:
-            name: tempo-s3-secret
+      #extraArgs:
+      #  - "-config.expand-env=true"
+      #extraEnvFrom:
+      #  - secretRef:
+      #      name: tempo-s3-secret
     querier:
       extraArgs:
         - "-config.expand-env=true"
@@ -141,11 +130,11 @@ spec:
       #    memory: "1Gi"
       #  limits:
       #    memory: "2Gi"
-      extraArgs:
-        - "-config.expand-env=true"
-      extraEnvFrom:
-        - secretRef:
-            name: tempo-s3-secret
+      #extraArgs:
+      #  - "-config.expand-env=true"
+      #extraEnvFrom:
+      #  - secretRef:
+      #      name: tempo-s3-secret
     storage:
       trace:
         backend: s3
