@@ -150,9 +150,9 @@ spec:
             - span-metrics
             - local-blocks
           processor:
-            local-blocks:
+            local_blocks:
               filter_server_spans: false
-              flush_to_storage: true
+              #flush_to_storage: true
     gateway:
       enabled: true
       replicas: 1
