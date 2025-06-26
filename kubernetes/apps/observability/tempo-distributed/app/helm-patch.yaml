@@ -21,11 +21,11 @@ spec:
     - targetPath: storage.trace.s3.access_key
       kind: Secret
       name: tempo-s3-secret
-      valuesKey: access_key
+      valuesKey: AWS_ACCESS_KEY_ID
     - targetPath: storage.trace.s3.secret_key
       kind: Secret
       name: tempo-s3-secret
-      valuesKey: secret_key
+      valuesKey: AWS_SECRET_ACCESS_KEY
   values:
     global:
       clusterDomain: 'cluster.local'
@@ -57,6 +57,9 @@ spec:
       #    memory: "2Gi"
       extraArgs:
         - "-config.expand-env=true"
+      extraEnvFrom:
+        - secretRef:
+            name: tempo-s3-secret
       persistence:
         enabled: true
         storageClass: openebs-hostpath
@@ -85,6 +88,9 @@ spec:
         metrics_ingestion_time_range_slack: 30s
       extraArgs:
         - "-config.expand-env=true"
+      extraEnvFrom:
+        - secretRef:
+            name: tempo-s3-secret
       persistence:
         enabled: true
         storageClass: openebs-hostpath
@@ -99,6 +105,9 @@ spec:
       #    memory: "2Gi"
       extraArgs:
         - "-config.expand-env=true"
+      extraEnvFrom:
+        - secretRef:
+            name: tempo-s3-secret
     compactor:
       replicas: 1
       #resources:
@@ -109,9 +118,15 @@ spec:
       #    memory: "2Gi"
       extraArgs:
         - "-config.expand-env=true"
+      extraEnvFrom:
+        - secretRef:
+            name: tempo-s3-secret
     querier:
       extraArgs:
         - "-config.expand-env=true"
+      extraEnvFrom:
+        - secretRef:
+            name: tempo-s3-secret
       #resources:
       #  requests:
       #    cpu: "500m"
@@ -128,6 +143,9 @@ spec:
       #    memory: "2Gi"
       extraArgs:
         - "-config.expand-env=true"
+      extraEnvFrom:
+        - secretRef:
+            name: tempo-s3-secret
     storage:
       trace:
         backend: s3
