@@ -85,7 +85,7 @@ spec:
       #  - secretRef:
       #      name: tempo-s3-secret
     distributor:
-      replicas: 1
+      replicas: 2
       #resources:
       #  requests:
       #    cpu: "500m"
@@ -98,7 +98,7 @@ spec:
       #  - secretRef:
       #      name: tempo-s3-secret
     compactor:
-      replicas: 1
+      replicas: 2
       #resources:
       #  requests:
       #    cpu: "500m"
@@ -110,20 +110,20 @@ spec:
       #extraEnvFrom:
       #  - secretRef:
       #      name: tempo-s3-secret
-    querier:
-      extraArgs:
-        - "-config.expand-env=true"
-      extraEnvFrom:
-        - secretRef:
-            name: tempo-s3-secret
-      #resources:
-      #  requests:
-      #    cpu: "500m"
-      #    memory: "1Gi"
-      #  limits:
-      #    memory: "2Gi"
+    #querier:
+    #  extraArgs:
+    #    - "-config.expand-env=true"
+    #  extraEnvFrom:
+    #    - secretRef:
+    #        name: tempo-s3-secret
+    #  #resources:
+    #  #  requests:
+    #  #    cpu: "500m"
+    #  #    memory: "1Gi"
+    #  #  limits:
+    #  #    memory: "2Gi"
     queryFrontend:
-      replicas: 1
+      replicas: 2
       #resources:
       #  requests:
       #    cpu: "500m"
@@ -155,7 +155,7 @@ spec:
           #    #flush_to_storage: true
     gateway:
       enabled: true
-      replicas: 1
+      replicas: 2
       #resources:
       #  requests:
       #    cpu: "500m"
