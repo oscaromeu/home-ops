@@ -111,6 +111,8 @@ spec:
             - url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/write
         traces_storage:
           path: /var/tempo/traces
+        local_blocks:
+          filter_server_spans: false
         metrics_ingestion_time_range_slack: 30s
     distributor:
       replicas: 1
