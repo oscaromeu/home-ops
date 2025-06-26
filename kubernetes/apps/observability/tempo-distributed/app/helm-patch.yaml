@@ -27,6 +27,7 @@ spec:
       name: tempo-s3-secret
       valuesKey: AWS_SECRET_ACCESS_KEY
   values:
+    verboseLogging: true
     global:
       clusterDomain: 'cluster.local'
     useExternalConfig: false
