@@ -47,11 +47,6 @@ spec:
         compactor:
           compaction:
             block_retention: 168h
-        metrics_generator:
-          processor:
-            local_blocks:
-              filter_server_spans: false
-              flush_to_storage: true
     ingester:
       replicas: 2
       #resources:
@@ -161,6 +156,10 @@ spec:
     overrides:
       defaults:
         metrics_generator:
+          processor:
+            local_blocks:
+              filter_server_spans: false
+              flush_to_storage: true
           processors:
             - service-graphs
             - span-metrics
