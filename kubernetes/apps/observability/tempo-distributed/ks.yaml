@@ -14,7 +14,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/observability/tempo-distributed-dev/app
+  path: ./kubernetes/apps/observability/tempo-distributed/app
   prune: true
   sourceRef:
     kind: GitRepository
