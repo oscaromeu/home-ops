@@ -149,10 +149,10 @@ spec:
             - service-graphs
             - span-metrics
             - local-blocks
-          processor:
-            local_blocks:
-              filter_server_spans: false
-              #flush_to_storage: true
+          #processor:
+          #  local_blocks:
+          #    filter_server_spans: false
+          #    #flush_to_storage: true
     gateway:
       enabled: true
       replicas: 1
