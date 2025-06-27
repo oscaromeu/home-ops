@@ -37,7 +37,7 @@ spec:
         registry: docker.io
         pullSecrets: []
         repository: grafana/tempo
-        tag: 2.8.0
+        tag: main-c3def8f
         pullPolicy: IfNotPresent
       structuredConfig:
         query_frontend:
