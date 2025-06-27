@@ -169,7 +169,8 @@ spec:
           processor:
             local_blocks:
               #filter_server_spans: false
-              flush_to_storage: true
+              #flush_to_storage: true
+              trace_idle_period: 10s
           processors:
             - service-graphs
             - span-metrics
