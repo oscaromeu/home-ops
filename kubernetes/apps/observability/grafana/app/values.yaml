@@ -9,7 +9,7 @@ admin:
 replicas: 2
 image:
   registry: docker.io
-  repository: grafana/grafana
+  repository: grafana/grafana-dev
   tag: 12.1.0-250178
   pullPolicy: IfNotPresent
 env:
