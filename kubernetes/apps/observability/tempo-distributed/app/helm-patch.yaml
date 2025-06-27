@@ -57,7 +57,10 @@ spec:
       #  limits:
       #    memory: "2Gi"
       #extraArgs:
-      #  - "-config.expand-env=true" 
+      #  - "-config.expand-env=true"
+      extraEnvFrom:
+        - secretRef:
+            name: tempo-s3-secret
     metricsGenerator:
       enabled: true
       #resources:
@@ -82,9 +85,9 @@ spec:
         metrics_ingestion_time_range_slack: 30s
       #extraArgs:
       #  - "-config.expand-env=true"
-      #extraEnvFrom:
-      #  - secretRef:
-      #      name: tempo-s3-secret
+      extraEnvFrom:
+        - secretRef:
+            name: tempo-s3-secret
     distributor:
       replicas: 2
       #resources:
@@ -95,9 +98,9 @@ spec:
       #    memory: "2Gi"
       #extraArgs:
       #  - "-config.expand-env=true"
-      #extraEnvFrom:
-      #  - secretRef:
-      #      name: tempo-s3-secret
+      extraEnvFrom:
+        - secretRef:
+            name: tempo-s3-secret
     compactor:
       replicas: 2
       #resources:
@@ -108,21 +111,21 @@ spec:
       #    memory: "2Gi"
       #extraArgs:
       #  - "-config.expand-env=true"
-      #extraEnvFrom:
-      #  - secretRef:
-      #      name: tempo-s3-secret
-    #querier:
-    #  extraArgs:
-    #    - "-config.expand-env=true"
-    #  extraEnvFrom:
-    #    - secretRef:
-    #        name: tempo-s3-secret
-    #  #resources:
-    #  #  requests:
-    #  #    cpu: "500m"
-    #  #    memory: "1Gi"
-    #  #  limits:
-    #  #    memory: "2Gi"
+      extraEnvFrom:
+        - secretRef:
+            name: tempo-s3-secret
+    querier:
+      extraArgs:
+        - "-config.expand-env=true"
+      extraEnvFrom:
+        - secretRef:
+            name: tempo-s3-secret
+      #resources:
+      #  requests:
+      #    cpu: "500m"
+      #    memory: "1Gi"
+      #  limits:
+      #    memory: "2Gi"
     queryFrontend:
       replicas: 2
       #resources:
@@ -133,9 +136,9 @@ spec:
       #    memory: "2Gi"
       #extraArgs:
       #  - "-config.expand-env=true"
-      #extraEnvFrom:
-      #  - secretRef:
-      #      name: tempo-s3-secret
+      extraEnvFrom:
+        - secretRef:
+            name: tempo-s3-secret
     storage:
       trace:
         backend: s3
