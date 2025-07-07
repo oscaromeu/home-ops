@@ -5,6 +5,7 @@ metadata:
   name: cluster-apps-semaphore
   namespace: flux-system
 spec:
+  targetNamespace: default
   dependsOn:
     - name: cluster-apps-cloudnative-pg
     - name: cluster-apps-external-secrets
