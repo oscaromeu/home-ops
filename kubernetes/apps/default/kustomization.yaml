@@ -20,3 +20,4 @@ resources:
   #- ./prowlarr/ks.yaml
   #- ./pinchflat/ks.yaml
   - ./qbittorrent/ks.yaml
+  - ./semaphore/ks.yaml

@@ -37,8 +37,8 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       # https://github.com/ansible-semaphore/semaphore/issues/1149
-      repository: ghcr.io/onedr0p/semaphore
-      tag: v2.8.80
+      repository: semaphoreui/semaphore
+      tag: v2.15.0
     env:
       SEMAPHORE_LDAP_ACTIVATED: "no"
       SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
@@ -57,8 +57,6 @@ spec:
         ingressClassName: internal
         annotations:
           external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
-          #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
-          #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
