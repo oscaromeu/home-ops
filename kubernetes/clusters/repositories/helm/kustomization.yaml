@@ -54,6 +54,7 @@ resources:
   - ./openebs.yaml
   - ./ot-helm.yaml
   - ./passbolt.yaml
+  - ./percona.yaml
   - ./piraeus.yaml
   - ./podinfo.yaml
   - ./postfinance.yaml
