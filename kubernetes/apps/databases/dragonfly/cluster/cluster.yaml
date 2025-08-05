@@ -23,7 +23,7 @@ spec:
     limits:
       memory: 512Mi
   snapshot:
-    cron: '0 */4 * * *'
+    cron: '0 */5 * * *'
     persistentVolumeClaimSpec:
       accessModes:
       - ReadWriteOnce
