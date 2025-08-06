@@ -27,3 +27,8 @@ spec:
       labels: { }
     data:
       best-pokemon: "{{ index . \"best-pokemon-src\" | toString }}"
+  data:
+     - match:
+         secretKey: best-pokemon
+         remoteRef:
+           remoteKey: best-pokemon
