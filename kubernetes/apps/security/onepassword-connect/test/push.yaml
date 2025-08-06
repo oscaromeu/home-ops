@@ -5,7 +5,7 @@ kind: Secret
 metadata:
   name: pokedex-credentials
 stringData:
-  best-pokemon-src: "Pikachu"
+  best-pokemon-src: "Charmander"
 ---
 apiVersion: external-secrets.io/v1alpha1
 kind: PushSecret
