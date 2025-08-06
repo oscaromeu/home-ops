@@ -10,7 +10,7 @@ stringData:
 apiVersion: external-secrets.io/v1alpha1
 kind: PushSecret
 metadata:
-  name: pushsecret-example
+  name: &name pokedex-credentials
 spec:
   updatePolicy: Replace
   deletionPolicy: Delete
@@ -29,6 +29,7 @@ spec:
       best-pokemon: "{{ index . \"best-pokemon-src\" | toString }}"
   data:
      - match:
-         secretKey: best-pokemon
+         secretKey: &key best-pokemon
          remoteRef:
-           remoteKey: best-pokemon
+           remoteKey: *name
+           property: *key
