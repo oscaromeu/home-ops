@@ -25,15 +25,9 @@ spec:
     metadata:
       annotations: { }
       labels: { }
-    data:
-      # If the key source secret key has dashes, then it cannot be accessed directly,
-      # and the "index" function should be used.
-      best-pokemon: "{{ index . \"best-pokemon-src\" | toString | upper }} is the really best!"
   data:
-    - conversionStrategy: None # Also supports the ReverseUnicode strategy
-      match:
-        # The secretKey is used within PushSecret (it should match key under spec.template.data)
-        secretKey: best-pokemon
-        remoteRef:
-          remoteKey: destination-secret # The destination secret object name (where the secret is going to be pushed)
-          property: best-pokemon-dst # The key within the destination secret object.
+     - match:
+         secretKey: best-pokemon # Source Kubernetes secret key to be pushed
+         remoteRef:
+           remoteKey: my-first-parameter # Remote reference (where the secret is going to be pushed)
+           property: single-value-secret # the property to use to push into
