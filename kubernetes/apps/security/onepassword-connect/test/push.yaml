@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: source-secret
+  name: pokedex-credentials
 stringData:
   best-pokemon-src: "Pikachu"
 ---
