@@ -5,7 +5,7 @@ kind: Secret
 metadata:
   name: pokedex-credentials
 stringData:
-  best-pokemon: "Pikachu"
+  best-pokemon-src: "Pikachu"
 ---
 apiVersion: external-secrets.io/v1alpha1
 kind: PushSecret
@@ -25,6 +25,10 @@ spec:
     metadata:
       annotations: { }
       labels: { }
+    data:
+      # If the key source secret key has dashes, then it cannot be accessed directly,
+      # and the "index" function should be used.
+      best-pokemon: "{{ index . \"best-pokemon-src\" | toString | upper }} is the really best!"
   data:
      - match:
          secretKey: best-pokemon # Source Kubernetes secret key to be pushed
