@@ -32,7 +32,7 @@ By using Doppler as the centralized secrets provider, you can store and manage s
 + `doppler_cluster_store.yaml`: Defines a `ClusterSecretStore`. A `ClusterSecretStore` is a custom resource provided by the External Secrets Manager that defines the connection and authentication information needed to access an external secret management system i.e, Doppler API in this case. This resource acts as a centralized reference for other resources within the Kubernetes cluster when they need to access the secrets stored in the external system.
 
     ```yaml
-    apiVersion: external-secrets.io/v1beta1
+    apiVersion: external-secrets.io/v1
     kind: SecretStore
     metadata:
       name: doppler-auth-api
@@ -79,7 +79,7 @@ A ClusterSecretStore is suitable for scenarios where a single external secret pr
 #### Example
 
 ```yaml
-apiVersion: external-secrets.io/v1beta1
+apiVersion: external-secrets.io/v1
 kind: ClusterSecretStore
 metadata:
   name: doppler-cluster-wide-secret-store
@@ -101,7 +101,7 @@ A `SecretStore` is suitable for scenarios where different namespaces need to use
 #### Example
 
 ```yaml
-apiVersion: external-secrets.io/v1beta1
+apiVersion: external-secrets.io/v1
 kind: SecretStore
 metadata:
   name: doppler-namespace-scoped-secret-store
@@ -122,7 +122,7 @@ spec:
 
 ```yaml
 ---
-apiVersion: external-secrets.io/v1beta1
+apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
   name: auth-api-elasticsearch-ingestion-credentials
@@ -152,7 +152,7 @@ spec:
 
 ```yaml
 ---
-apiVersion: external-secrets.io/v1beta1
+apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
   name: auth-api-elasticsearch-ingestion-credentials

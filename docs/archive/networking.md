@@ -73,7 +73,7 @@ Follow the [getting started guide](https://github.com/adyanth/cloudflare-operato
 
     ```yaml
     # kubernetes/apps/networking/cloudflare-operator/app/externalsecrets.yaml
-    apiVersion: external-secrets.io/v1beta1
+    apiVersion: external-secrets.io/v1
     kind: ExternalSecret
     metadata:
       name: cloudflare-operator
