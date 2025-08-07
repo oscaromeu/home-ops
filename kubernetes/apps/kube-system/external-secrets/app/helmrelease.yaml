@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: external-secrets
-      version: 0.18.0
+      version: 0.19.0
       sourceRef:
         kind: HelmRepository
         name: external-secrets
@@ -17,10 +17,12 @@ spec:
   maxHistory: 3
   install:
     createNamespace: true
+    crds: CreateReplace
     remediation:
       retries: 3
   upgrade:
     cleanupOnFail: true
+    crds: CreateReplace
     remediation:
       retries: 3
   uninstall:
