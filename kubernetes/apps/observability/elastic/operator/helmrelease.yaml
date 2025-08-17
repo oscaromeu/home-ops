@@ -1,6 +1,6 @@
 ---
 # https://github.com/elastic/cloud-on-k8s/blob/main/deploy/eck-operator/values.yaml
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: eck-operator
