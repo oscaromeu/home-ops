@@ -25,4 +25,4 @@ patches:
     - op: replace
       path: /spec/thanos
       value:
-        image: "quay.io/thanos/thanos:v0.32.5"
+        image: "quay.io/thanos/thanos:v0.39.2"
