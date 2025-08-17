@@ -8,7 +8,7 @@ resources:
   - ./demo-service/ks.yaml
   - ./docmost/ks.yaml
   #- ./excalidraw/ks.yaml
-  #- ./filebrowser/ks.yaml
+  - ./filebrowser/ks.yaml
   - ./outline/ks.yaml
   #- ./hajimari/ks.yaml
   #- ./jellyfin/ks.yaml
