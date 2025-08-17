@@ -453,7 +453,7 @@ vmstorage:
     # -- Image repository
     repository: victoriametrics/vmstorage
     # -- Image tag
-    tag: v1.100.0-cluster
+    tag: v1.123.0-cluster
     # -- Image pull policy
     pullPolicy: IfNotPresent
   # -- Name of Priority Class
