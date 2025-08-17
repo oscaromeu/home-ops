@@ -86,7 +86,7 @@ spec:
 
     image:
       repository: timberio/vector
-      tag: 0.31.0-debian
+      tag: 0.49.0-debian
       pullPolicy: IfNotPresent
 
     resources:
