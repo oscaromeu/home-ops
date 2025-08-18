@@ -36,7 +36,7 @@ spec:
     image:
       # https://github.com/ansible-semaphore/semaphore/issues/1149
       repository: semaphoreui/semaphore
-      tag: v2.15.0
+      tag: v2.16.17
     env:
       SEMAPHORE_LDAP_ACTIVATED: "no"
       SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
