@@ -57,8 +57,8 @@ spec:
                 drop:
                   - ALL
     defaultPodOptions:
-      nodeSelector:
-        kubernetes.io/arch: amd64
+      #nodeSelector:
+      #  kubernetes.io/arch: amd64
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
