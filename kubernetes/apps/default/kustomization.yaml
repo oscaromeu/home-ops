@@ -8,7 +8,7 @@ resources:
   - ./demo-service/ks.yaml
   - ./docmost/ks.yaml
   #- ./excalidraw/ks.yaml
-  #- ./filebrowser/ks.yaml
+  - ./filebrowser/ks.yaml
   - ./outline/ks.yaml
   #- ./hajimari/ks.yaml
   #- ./jellyfin/ks.yaml
@@ -17,7 +17,7 @@ resources:
   - ./nas
   - ./navidrome/ks.yaml
   #- ./overseerr/ks.yaml
-  #- ./plex/ks.yaml
+  - ./plex/ks.yaml
   #- ./prowlarr/ks.yaml
   #- ./pinchflat/ks.yaml
   - ./qbittorrent/ks.yaml
