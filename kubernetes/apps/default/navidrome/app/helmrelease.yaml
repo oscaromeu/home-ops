@@ -43,7 +43,7 @@ spec:
       ND_DATAFOLDER: /config
       ND_ENABLEGRAVATAR: "true"
       ND_LOGLEVEL: info
-      #ND_MUSICFOLDER: /data/data1/Media/Library/Music
+      ND_DEFAULTTHEME: Spotify-ish
       ND_PORT: &port 8080
       ND_PROMETHEUS_ENABLED: "true"
       ND_REVERSEPROXYUSERHEADER: "Remote-User"
