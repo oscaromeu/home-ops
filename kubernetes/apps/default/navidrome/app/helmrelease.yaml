@@ -85,7 +85,7 @@ spec:
       music:
         type: nfs
         enabled: true
-        path: /mnt/k8s/data
+        path: /mnt/k8s/data/Library/Media/Music
         server: "10.69.1.157"
         advancedMounts:
           main:
