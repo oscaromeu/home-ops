@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: atuin
@@ -42,7 +42,7 @@ spec:
           main:
             image:
               repository: ghcr.io/atuinsh/atuin
-              tag: v18.1.0
+              tag: v18.8.0
             env:
               ATUIN_HOST: 0.0.0.0
               ATUIN_PORT: &port 80

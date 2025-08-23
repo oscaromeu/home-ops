@@ -28,7 +28,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/plex
-              tag: 1.41.6.9685@sha256:37d36646471fb905a0080daaaa1f09ad3370b06149ed5f94dad73ead591cad0e
+              tag: 1.42.1.10060@sha256:04563be281364ba2462285aacb2ca13d7ef7e1d0b19e1203f4c19b4a56840c5c
             env:
               PLEX_ADVERTISE_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}:443,http://${LOAD_BALANCER_IP_PLEX}:32400,https://plex-local.${SECRET_DOMAIN}:443"
               TZ: "${TIMEZONE}"
@@ -57,8 +57,8 @@ spec:
                 drop:
                   - ALL
     defaultPodOptions:
-      nodeSelector:
-        kubernetes.io/arch: amd64
+      #nodeSelector:
+      #  kubernetes.io/arch: amd64
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000

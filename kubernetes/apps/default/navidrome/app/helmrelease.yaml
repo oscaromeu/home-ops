@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app navidrome
@@ -37,13 +37,13 @@ spec:
   values:
     image:
       repository: ghcr.io/navidrome/navidrome
-      tag: 0.54.4
+      tag: 0.58.0
     env:
       TZ: "${TIMEZONE}"
       ND_DATAFOLDER: /config
       ND_ENABLEGRAVATAR: "true"
       ND_LOGLEVEL: info
-      #ND_MUSICFOLDER: /data/data1/Media/Library/Music
+      ND_DEFAULTTHEME: Spotify-ish
       ND_PORT: &port 8080
       ND_PROMETHEUS_ENABLED: "true"
       ND_REVERSEPROXYUSERHEADER: "Remote-User"
@@ -61,11 +61,11 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: external
+        ingressClassName: internal
         annotations:
           hajimari.io/icon: mdi:music
           hajimari.io/group: "media"
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
+          #external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
           #nginx.ingress.kubernetes.io/auth-url: http://authelia.kube-system.svc.cluster.local/api/verify
           #nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_DOMAIN}
         hosts:
@@ -85,7 +85,7 @@ spec:
       music:
         type: nfs
         enabled: true
-        path: /mnt/k8s/data
+        path: /mnt/k8s/data/Library/Media/Music
         server: "10.69.1.157"
         advancedMounts:
           main:

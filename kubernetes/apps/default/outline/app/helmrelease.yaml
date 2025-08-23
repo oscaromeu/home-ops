@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app outline
@@ -38,7 +38,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: docker.io/outlinewiki/outline
-      tag: 0.84.0
+      tag: 0.86.1
     envFrom:
       - secretRef:
           name: outline-secret

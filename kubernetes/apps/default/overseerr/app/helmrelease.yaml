@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: overseerr
@@ -29,7 +29,7 @@ spec:
       type: statefulset
     image:
       repository: ghcr.io/sct/overseerr
-      tag: 1.33.2
+      tag: 1.34.0
     env:
       TZ: Europe/Madrid
       LOG_LEVEL: "info"

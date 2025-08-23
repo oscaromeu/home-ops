@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: k6-operator
@@ -42,7 +42,7 @@ spec:
       image:
         registry: quay.io
         repository: brancz/kube-rbac-proxy
-        tag: v0.18.2
+        tag: v0.19.1
         pullPolicy: IfNotPresent
 
     manager:

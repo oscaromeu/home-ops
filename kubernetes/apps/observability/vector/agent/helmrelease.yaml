@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app vector-agent
@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: vector
-      version: 0.19.0
+      version: 0.45.0
       sourceRef:
         kind: HelmRepository
         name: vector
@@ -29,7 +29,7 @@ spec:
   values:
     image:
       repository: timberio/vector
-      tag: 0.27.0-debian
+      tag: 0.49.0-debian
     role: "Agent"
     args:
       - --config-dir

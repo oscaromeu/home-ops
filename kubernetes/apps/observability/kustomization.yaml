@@ -11,8 +11,8 @@ resources:
   - ./kubernetes-events-exporter/ks.yaml
   #- ./loki/ks.yaml
   - ./loki-distributed/ks.yaml
-  - ./otel
+  #- ./otel
   #- ./prometheus-adapter/ks.yaml
-  - ./tempo-distributed/ks.yaml
+  #- ./tempo-distributed/ks.yaml
   - ./vector/ks.yaml
-  - ./xk6-tracing/ks.yaml
+  #- ./xk6-tracing/ks.yaml

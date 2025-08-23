@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: exporter
-        image: danielqsj/kafka-exporter:v1.6.0
+        image: danielqsj/kafka-exporter:v1.9.0
         args:
         - --kafka.server=kafka-cluster-kafka-bootstrap.databases.svc.cluster.local:9092
         ports:

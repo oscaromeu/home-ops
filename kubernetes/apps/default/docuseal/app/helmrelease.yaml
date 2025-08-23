@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: docuseal
@@ -42,7 +42,7 @@ spec:
           main:
             image:
               repository: docuseal/docuseal
-              tag: 1.3.5
+              tag: 2.1.0
             envFrom: *envFrom
             resources:
               requests:
