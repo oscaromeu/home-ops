@@ -34,18 +34,8 @@ session:
       authelia_url: https://auth.${SECRET_DOMAIN}
       default_redirection_url: https://${SECRET_DOMAIN}
   redis:
-    host: redis.datahub.svc.cluster.local
+    host: dragonfly.databases.svc.cluster.local
     database_index: 14
-    #high_availability:
-    #  sentinel_name: redis-master
-    #  nodes:
-    #    - host: redis-node-0.redis-headless.datahub.svc.cluster.local
-    #      port: 26379
-    #    - host: redis-node-1.redis-headless.datahub.svc.cluster.local
-    #      port: 26379
-    #    - host: redis-node-2.redis-headless.datahub.svc.cluster.local
-    #      port: 26379
-
 regulation:
   max_retries: 3
   find_time: 2m
