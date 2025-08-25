@@ -28,6 +28,10 @@ spec:
   dependsOn:
     - name: openebs
       namespace: openebs-system
+  valuesFrom:
+  - kind: ConfigMap
+    name: flux-kube-state-metrics-config
+    valuesKey: kube-state-metrics-config.yaml
   values:
     crds:
       enabled: true

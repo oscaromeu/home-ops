@@ -11,18 +11,15 @@ configMapGenerator:
   - name: alertmanager-config-tpl
     files:
       - alertmanager.yaml=./config/alertmanager.yaml
+  - name: flux-kube-state-metrics-config
+    files:
+      - kube-state-metrics-config.yaml
+    options:
+      labels:
+        app.kubernetes.io/part-of: flux
+        app.kubernetes.io/component: monitoring
 generatorOptions:
   disableNameSuffixHash: true
 
-# kubectl patch prometheus kube-prometheus-stack  -n monitoring --type='json' -p='[{"op": "replace", "path": "/spec/thanos", "value": {"image": "quay.io/thanos/thanos:v0.32.5"}}]'
-patches:
-- target:
-    group: monitoring.coreos.com
-    version: v1
-    kind: Prometheus
-    name: kube-prometheus-stack
-  patch: |-
-    - op: replace
-      path: /spec/thanos
-      value:
-        image: "quay.io/thanos/thanos:v0.39.2"
+configurations:
+  - kustomizeconfig.yaml
