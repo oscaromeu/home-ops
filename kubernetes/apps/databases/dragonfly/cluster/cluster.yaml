@@ -22,11 +22,3 @@ spec:
       cpu: 100m
     limits:
       memory: 512Mi
-  snapshot:
-    cron: '0 */5 * * *'
-    persistentVolumeClaimSpec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: 10Gi
