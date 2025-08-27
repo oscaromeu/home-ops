@@ -15,7 +15,7 @@ kube-state-metrics:
           targetLabel: kubernetes_node
   collectors: [ ]
   extraArgs:
-    - --custom-resource-state-only=true
+    - --custom-resource-state-only=false
   rbac:
     extraRules:
       - apiGroups:
