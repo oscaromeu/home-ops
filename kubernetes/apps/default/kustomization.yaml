@@ -7,18 +7,18 @@ resources:
   - ./charmander/ks.yaml
   - ./demo-service/ks.yaml
   - ./docmost/ks.yaml
-  #- ./excalidraw/ks.yaml
+  - ./excalidraw/ks.yaml
   - ./filebrowser/ks.yaml
   - ./outline/ks.yaml
-  #- ./hajimari/ks.yaml
-  #- ./jellyfin/ks.yaml
+  - ./hajimari/ks.yaml
+  - ./jellyfin/ks.yaml
   - ./linkding/ks.yaml
   - ./metube/ks.yaml
   - ./nas
   - ./navidrome/ks.yaml
-  #- ./overseerr/ks.yaml
+  - ./overseerr/ks.yaml
   - ./plex/ks.yaml
-  #- ./prowlarr/ks.yaml
-  #- ./pinchflat/ks.yaml
+  - ./prowlarr/ks.yaml
+  - ./pinchflat/ks.yaml
   - ./qbittorrent/ks.yaml
   - ./semaphore/ks.yaml
