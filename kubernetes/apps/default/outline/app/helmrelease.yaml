@@ -32,7 +32,7 @@ spec:
     #      - secretRef:
     #          name: outline-secret
     controller:
-      replicas: 3
+      replicas: 1
       strategy: Recreate
       annotations:
         reloader.stakater.com/auto: "true"
