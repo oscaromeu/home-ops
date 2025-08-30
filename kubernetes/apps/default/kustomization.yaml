@@ -10,11 +10,11 @@ resources:
   - ./filebrowser/ks.yaml
   - ./outline/ks.yaml
   - ./hajimari/ks.yaml
-  - ./jellyfin/ks.yaml
+  #- ./jellyfin/ks.yaml
   - ./linkding/ks.yaml
   - ./metube/ks.yaml
   - ./nas
-  - ./navidrome/ks.yaml
+  #- ./navidrome/ks.yaml
   #- ./overseerr/ks.yaml
   - ./plex/ks.yaml
   #- ./prowlarr/ks.yaml
