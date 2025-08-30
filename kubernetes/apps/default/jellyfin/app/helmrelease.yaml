@@ -106,8 +106,8 @@ spec:
         type: emptyDir
       media:
         type: nfs
-        server: 10.69.1.157
-        path: /mnt/k8s/data/Library/Media/Videos
+        server: ${NAS_SERVER_IP}
+        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Turntablism
         globalMounts:
-          - path: /videos
+          - path: /turntablism
             readOnly: true
