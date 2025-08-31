@@ -40,6 +40,15 @@ spec:
                 memory: 411M
               limits:
                 memory: 411M
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups: [10000]
+        seccompProfile: { type: RuntimeDefault }
     service:
       main:
         controller: main
