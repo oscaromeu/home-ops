@@ -12,6 +12,7 @@ resources:
   - ./hajimari/ks.yaml
   #- ./jellyfin/ks.yaml
   - ./linkding/ks.yaml
+  - ./mediamtx/ks.yaml
   - ./metube/ks.yaml
   - ./nas
   #- ./navidrome/ks.yaml
