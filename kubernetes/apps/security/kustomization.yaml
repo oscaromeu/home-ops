@@ -4,4 +4,3 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./onepassword-connect/ks.yaml
-  - ./secret.sops.yaml
