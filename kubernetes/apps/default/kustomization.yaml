@@ -19,6 +19,6 @@ resources:
   #- ./overseerr/ks.yaml
   - ./plex/ks.yaml
   #- ./prowlarr/ks.yaml
-  #- ./pinchflat/ks.yaml
+  - ./pinchflat/ks.yaml
   - ./qbittorrent/ks.yaml
   - ./semaphore/ks.yaml

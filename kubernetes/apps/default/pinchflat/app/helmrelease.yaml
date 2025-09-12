@@ -96,10 +96,10 @@ spec:
         type: emptyDir
       output:
         type: nfs
-        server: 10.69.1.157
-        path: /mnt/k8s/data
+        server: ${NAS_SERVER_IP}
+        path: ${NAS_SERVER_MEDIA_PATH}/Downloads
         advancedMounts:
           pinchflat:
             app:
               - path: /downloads
-                subPath: Library/UTube
+                subPath: Downloads
