@@ -75,7 +75,7 @@ spec:
         existingClaim: filebrowser
       data:
         type: nfs
-        server: 10.69.1.32
-        path: /data/Library
+        server: ${NAS_SERVER_IP}
+        path: ${NAS_SERVER_MEDIA_PATH}/Library
         globalMounts:
           - path: /data
