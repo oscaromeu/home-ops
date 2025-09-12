@@ -97,9 +97,9 @@ spec:
       output:
         type: nfs
         server: ${NAS_SERVER_IP}
-        path: ${NAS_SERVER_MEDIA_PATH}/Downloads
+        path: ${NAS_SERVER_MEDIA_PATH}/Library/Downloads
         advancedMounts:
           pinchflat:
             app:
               - path: /downloads
-                subPath: Downloads
+                subPath: Library/Downloads
