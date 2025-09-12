@@ -56,10 +56,13 @@ spec:
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
-        runAsUser: 1001
-        runAsGroup: 1001
-        fsGroup: 1001
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups:
+          - 44
+          - 65537
     service:
       app:
         controller: qbittorrent
@@ -97,7 +100,7 @@ spec:
       media:
         type: nfs
         server: ${NAS_SERVER_IP}
-        path: /mnt/k8s/data
+        path: ${NAS_SERVER_MEDIA_PATH}
         advancedMounts:
           qbittorrent:
             app:
