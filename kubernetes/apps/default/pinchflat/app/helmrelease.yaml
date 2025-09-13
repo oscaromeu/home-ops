@@ -94,6 +94,10 @@ spec:
     persistence:
       config:
         existingClaim: pinchflat-config
+      yt-dlp:
+        type: emptyDir
+        globalMounts:
+          - path: /etc/yt-dlp
       tmp:
         type: emptyDir
       output:
