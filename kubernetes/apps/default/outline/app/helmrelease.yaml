@@ -62,6 +62,17 @@ spec:
         tls:
           - hosts:
               - *host
+      local:
+        enabled: true
+        ingressClassName: internal
+        hosts:
+          - host: &host docs-local.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
     topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: kubernetes.io/hostname
