@@ -4,13 +4,13 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./gatus/ks.yaml
-  - ./grafana/ks.yaml
-  - ./k6s/ks.yaml
-  - ./keda/ks.yaml
+  #- ./grafana/ks.yaml
+  #- ./k6s/ks.yaml
+  #- ./keda/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./kubernetes-events-exporter/ks.yaml
   #- ./loki/ks.yaml
-  - ./loki-distributed/ks.yaml
+  #- ./loki-distributed/ks.yaml
   #- ./otel
   #- ./prometheus-adapter/ks.yaml
   #- ./tempo-distributed/ks.yaml
