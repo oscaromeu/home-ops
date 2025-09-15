@@ -51,9 +51,9 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: internal
-        #annotations:
-        #  external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+        ingressClassName: external
+        annotations:
+          external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
         hosts:
           - host: &host docs.${SECRET_DOMAIN}
             paths:
