@@ -13,15 +13,7 @@ kubernetes:
           ansible_user: "oscar"
           ansible_host: "10.69.1.31"
           ansible_ssh_private_key_file: "./authorized_keys"
-        "rkw2":
-          ansible_user: "oscar"
-          ansible_host: "10.69.1.32"
-          ansible_ssh_private_key_file: "./authorized_keys"
         "rkw3":
           ansible_user: "oscar"
           ansible_host: "10.69.1.33"
-          ansible_ssh_private_key_file: "./authorized_keys"
-        "mfw4":
-          ansible_user: "oscar"
-          ansible_host: "10.69.1.246"
           ansible_ssh_private_key_file: "./authorized_keys"

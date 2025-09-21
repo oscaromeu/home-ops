@@ -4,18 +4,13 @@ kind: HelmRelease
 metadata:
   name: jellyfin
 spec:
-  interval: 30m
-  chart:
-    spec:
-      chart: app-template
-      version: 3.5.0
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: flux-system
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: jellyfin
   install:
     remediation:
-      retries: 3
+      retries: -1
   upgrade:
     cleanupOnFail: true
     remediation:
@@ -24,17 +19,6 @@ spec:
   values:
     controllers:
       jellyfin:
-        pod:
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 568
-            runAsGroup: 568
-            fsGroup: 568
-            fsGroupChangePolicy: OnRootMismatch
-            seccompProfile: { type: RuntimeDefault }
-            supplementalGroups:
-              - 44 # video
-              - 109 # render
         containers:
           app:
             image:
@@ -76,6 +60,17 @@ spec:
                 memory: 1Gi
               limits:
                 memory: 8Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups:
+          - 44
+          - 65537
+        seccompProfile: { type: RuntimeDefault }
     service:
       app:
         controller: jellyfin
@@ -99,15 +94,28 @@ spec:
                   port: http
     persistence:
       config:
-        existingClaim: jellyfin-config
-      cache:
-        type: emptyDir
-      transcode:
-        type: emptyDir
+        existingClaim: "{{ .Release.Name }}-config"
+        globalMounts:
+          - path: /config
+      config-metadata:
+        existingClaim: "{{ .Release.Name }}-metadata"
+        globalMounts:
+          - path: /config/metadata
       media:
         type: nfs
         server: ${NAS_SERVER_IP}
-        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Turntablism
+        path: ${NAS_SERVER_MEDIA_PATH}/Library/Videos
         globalMounts:
-          - path: /turntablism
+          - path: /videos
             readOnly: true
+      tmpfs:
+        type: emptyDir
+        advancedMounts:
+          jellyfin:
+            app:
+              - path: /config/cache
+                subPath: cache
+              - path: /config/log
+                subPath: log
+              - path: /tmp
+                subPath: tmp
