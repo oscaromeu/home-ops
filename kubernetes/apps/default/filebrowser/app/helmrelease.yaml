@@ -9,7 +9,7 @@ spec:
     spec:
       interval: 15m
       chart: app-template
-      version: 3.6.1
+      version: 3.7.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s
