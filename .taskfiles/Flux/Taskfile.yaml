@@ -4,7 +4,7 @@ version: "3"
 
 vars:
   # renovate: datasource=github-releases depName=prometheus-operator/prometheus-operator
-  PROMETHEUS_OPERATOR_VERSION: v0.85.0
+  PROMETHEUS_OPERATOR_VERSION: v0.86.1
   CLUSTER_SECRET_SOPS_FILE: "{{.KUBERNETES_DIR}}/clusters/prod/vars/cluster-secrets.sops.yaml"
   CLUSTER_SETTINGS_FILE: "{{.KUBERNETES_DIR}}/clusters/prod/vars/cluster-settings.yaml"
   GITHUB_DEPLOY_KEY_FILE: "{{.KUBERNETES_DIR}}/bootstrap/prod/github-deploy-key.sops.yaml"
