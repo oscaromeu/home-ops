@@ -47,7 +47,7 @@ spec:
         registry: docker.io
         pullSecrets: []
         repository: grafana/tempo
-        tag: 2.8.2
+        tag: 2.9.0
         pullPolicy: IfNotPresent
       structuredConfig:
         distributor:
