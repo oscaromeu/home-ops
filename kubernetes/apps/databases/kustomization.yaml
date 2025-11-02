@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./cloudnative-pg/ks.yaml
+  - ./crunchy-pg/ks.yaml
   - ./dragonfly/ks.yaml
   - ./kafka/ks.yaml
