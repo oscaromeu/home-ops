@@ -16,11 +16,6 @@ spec:
     remediation:
       strategy: rollback
       retries: 3
-  valuesFrom:
-    - targetPath: controllers.main.containers.main.env.MEMOS_DSN
-      kind: Secret
-      name: postgres-pguser-memo
-      valuesKey: uri
   values:
     controllers:
       main:
@@ -30,10 +25,19 @@ spec:
               repository: ghcr.io/usememos/memos
               tag: 0.25.2@sha256:240e34c9328b5206d534782a47b6d8164f19177eface64ffa44da93efcb929a0
             env:
-              MEMOS_PORT: "5230"
-              MEMOS_DRIVER: postgres
-              MEMOS_PUBLIC: false
-              MEMOS_PASSWORD_AUTH: false
+              - name: MEMOS_PORT
+                value: "5230"
+              - name: MEMOS_DRIVER
+                value: postgres
+              - name: MEMOS_PUBLIC
+                value: "false"
+              - name: MEMOS_PASSWORD_AUTH
+                value: "false"
+              - name: MEMOS_DSN
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-pguser-memo
+                    key: uri
             probes:
               liveness:
                 enabled: true
