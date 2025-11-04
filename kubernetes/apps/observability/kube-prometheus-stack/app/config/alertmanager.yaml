@@ -65,6 +65,6 @@ receivers:
         title: >-
           {{ "{{" }} .CommonLabels.alertname {{ "}}" }}
           [{{ "{{" }} .Status | toUpper {{ "}}" }}{{ "{{" }} if eq .Status "firing" {{ "}}" }}:{{ "{{" }} .Alerts.Firing | len {{ "}}" }}{{ "{{" }} end {{ "}}" }}]
-        token: "{{ .PUSHOVER__API_TOKEN }}"
+        token: "{{ .PUSHOVER_API_TOKEN }}"
         url_title: View in Alertmanager
-        user_key: "{{ .PUSHOVER__USER_KEY }}"
+        user_key: "{{ .PUSHOVER_USER_KEY }}"
