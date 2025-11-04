@@ -1,0 +1,59 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: memos
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: app-template
+      version: 4.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  valuesFrom:
+    - targetPath: controllers.main.containers.main.env.MEMOS_DSN
+      kind: Secret
+      name: postgres-pguser-memo
+      valuesKey: pgbouncer-uri
+  values:
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/usememos/memos
+              tag: 0.25.2@sha256:240e34c9328b5206d534782a47b6d8164f19177eface64ffa44da93efcb929a0
+            env:
+              MEMOS_PORT: "5230"
+              MEMOS_DRIVER: postgres
+              MEMOS_PUBLIC: false
+              MEMOS_PASSWORD_AUTH: false
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 5230
+    ingress:
+      main:
+        className: internal
+        hosts:
+          - host: &host memos.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
