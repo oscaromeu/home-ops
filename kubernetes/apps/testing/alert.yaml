@@ -4,6 +4,7 @@ apiVersion: notification.toolkit.fluxcd.io/v1beta3
 kind: Alert
 metadata:
   name: alertmanager
+  namespace: testing
 spec:
   providerRef:
     name: alertmanager
