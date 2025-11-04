@@ -4,13 +4,11 @@ kind: Kustomization
 namespace: observability
 resources:
   #- ./secret.sops.yaml
+  - ./alertmanagerconfig.yaml
   - ./externalsecret.yaml
   - ./helmrelease.yaml
 
 configMapGenerator:
-  - name: alertmanager-config-tpl
-    files:
-      - alertmanager.yaml=./config/alertmanager.yaml
   - name: flux-kube-state-metrics-config
     files:
       - kube-state-metrics-config.yaml

@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: kube-prometheus-stack
-      version: 78.3.0
+      version: 79.1.1
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
@@ -46,8 +46,8 @@ spec:
         pathType: Prefix
       alertmanagerSpec:
         replicas: 2
-        useExistingSecret: true
-        configSecret: alertmanager-secret
+        alertmanagerConfiguration:
+          name: alertmanager
         storage:
           volumeClaimTemplate:
             spec:
