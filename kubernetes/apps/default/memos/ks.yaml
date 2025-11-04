@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: &app cluster-apps-linkding
+  name: &app cluster-apps-memos
   namespace: flux-system
   labels:
     substitution.flux.home.arpa/enabled: "true"
