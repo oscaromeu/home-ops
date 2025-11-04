@@ -4,8 +4,8 @@ kind: Kustomization
 namespace: observability
 resources:
   - ./alertmanagerconfig.yaml
-  - ./externalsecret.yaml
-  #- ./helmrelease.yaml <= TODO
+  #- ./externalsecret.yaml  <= TODO
+  - ./helmrelease.yaml
   - ./secret.sops.yaml
 
 configMapGenerator:
