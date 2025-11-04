@@ -20,7 +20,7 @@ spec:
     - targetPath: controllers.main.containers.main.env.MEMOS_DSN
       kind: Secret
       name: postgres-pguser-memo
-      valuesKey: pgbouncer-uri
+      valuesKey: uri
   values:
     controllers:
       main:
