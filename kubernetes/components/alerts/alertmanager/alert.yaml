@@ -19,6 +19,8 @@ spec:
       name: "*"
     - kind: OCIRepository
       name: "*"
+    - kind: Receiver
+      name: "*"
   exclusionList:
     - error.*lookup.*github
     - dial.*tcp.*timeout
