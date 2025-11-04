@@ -73,6 +73,5 @@ resources:
   - ./vector.yaml
   - ./vm.yaml
   - ./vmware.yaml
-  - ./weave-gitops.yaml
   - ./wikijs.yaml
   - ./woodpecker.yaml
