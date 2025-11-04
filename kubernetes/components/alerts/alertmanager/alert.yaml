@@ -25,6 +25,9 @@ spec:
       name: "*"
     - kind: ImageUpdateAutomation
       name: "*"
+    - kind: ImageUpdateAutomation
+      name: "*"
+      namespace: testing
   exclusionList:
     - error.*lookup.*github
     - dial.*tcp.*timeout
