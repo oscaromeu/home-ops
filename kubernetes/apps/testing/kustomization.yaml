@@ -4,5 +4,6 @@ kind: Kustomization
 
 resources:
   - ./namespace.yaml
-  - ../../components/alerts/alertmanager
+  - ./alert.yaml
+  - ./provider.yaml
   - ./podinfo/ks.yaml
