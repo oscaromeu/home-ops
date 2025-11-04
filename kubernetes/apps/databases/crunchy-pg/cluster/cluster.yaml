@@ -54,6 +54,7 @@ spec:
       databases:
         - memo
       password: *password
+      options: CREATEDB
   #backups:
   #  pgbackrest:
   #    configuration: &backupConfig
