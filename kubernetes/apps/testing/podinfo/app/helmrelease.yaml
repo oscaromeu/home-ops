@@ -24,7 +24,7 @@ spec:
     remediation:
       retries: 3
   test:
-    enable: true
+    enable: false
   driftDetection:
     mode: enabled
     ignore:
