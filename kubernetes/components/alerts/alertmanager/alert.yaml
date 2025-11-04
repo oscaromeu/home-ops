@@ -19,7 +19,11 @@ spec:
       name: "*"
     - kind: OCIRepository
       name: "*"
-    - kind: Receiver
+    - kind: ImageRepository
+      name: "*"
+    - kind: ImagePolicy
+      name: "*"
+    - kind: ImageUpdateAutomation
       name: "*"
   exclusionList:
     - error.*lookup.*github
