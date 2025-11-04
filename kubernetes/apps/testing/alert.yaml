@@ -8,7 +8,7 @@ metadata:
 spec:
   providerRef:
     name: alertmanager
-  eventSeverity: warning
+  eventSeverity: error
   eventSources:
     - kind: GitRepository
       name: "*"
