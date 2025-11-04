@@ -8,6 +8,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   suspend: false
+  targetNamespace: default
   dependsOn:
     - name: cluster-apps-ingress-nginx-internal
   path: ./kubernetes/apps/default/memos/app
