@@ -33,3 +33,6 @@ spec:
         kind: Deployment
   values:
     replicaCount: 2
+    image:
+      repository: ghcr.io/stefanprodan/podinfo
+      tag: 6.0.2 # {"$imagepolicy": "flux-system:podinfo"}

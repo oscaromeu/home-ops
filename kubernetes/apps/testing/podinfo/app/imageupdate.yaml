@@ -16,7 +16,7 @@ spec:
     name: podinfo
   policy:
     semver:
-      range: 5.0.x
+      range: 6.0.x
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImageUpdateAutomation
@@ -33,7 +33,8 @@ spec:
       author:
         email: fluxcdbot@users.noreply.github.com
         name: fluxcdbot
+      messageTemplate: '{{range .Changed.Changes}}{{print .OldValue}} -> {{println .NewValue}}{{end}}'
     push:
       branch: main
   update:
-    path: ./
+    path: ./kubernetes/apps/testing/podinfo/app
