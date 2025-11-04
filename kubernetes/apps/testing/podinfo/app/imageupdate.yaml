@@ -23,7 +23,7 @@ kind: ImageUpdateAutomation
 metadata:
   name: podinfo-update
 spec:
-  interval: 30m
+  interval: 1m
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
