@@ -54,7 +54,7 @@ spec:
       databases:
         - memo
       password: *password
-      options: 'SUPERUSER CREATEDB CREATEROLE'
+      options: 'CREATEDB CREATEROLE'
   #backups:
   #  pgbackrest:
   #    configuration: &backupConfig
