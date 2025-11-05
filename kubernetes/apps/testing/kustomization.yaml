@@ -4,4 +4,4 @@ kind: Kustomization
 
 resources:
   - ./namespace.yaml
-  #- ./podinfo/ks.yaml
+  - ./podinfo/ks.yaml
