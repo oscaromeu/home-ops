@@ -131,21 +131,7 @@ spec:
     podMonitor:
       enabled: false
 
-    env:
-      - name: VECTOR_LOG
-        value: "debug"
-      #- name: VECTOR_SELF_NODE_NAME
-      #  value: "$(VECTOR_AGGREGATOR_SERVICE_HOST)"
-
-      - name: ELASTICSEARCH_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            key: ELASTICSEARCH_PASSWORD
-            name: es-ingestion-credentials
-
-      - name: ELASTICSEARCH_NAME
-        valueFrom:
-          secretKeyRef:
-            key: ELASTICSEARCH_NAME
-            name: es-ingestion-credentials
+    #env:
+    #  - name: VECTOR_LOG
+    #    value: "debug"
 
