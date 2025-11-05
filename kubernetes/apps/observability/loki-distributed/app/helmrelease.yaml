@@ -32,6 +32,11 @@ spec:
       name: &s3-secret loki-s3-bucket
       valuesKey: S3_BUCKET_NAME
 
+    - targetPath: loki.storage.bucketNames.ruler
+      kind: Secret
+      name: &s3-secret loki-s3-bucket
+      valuesKey: S3_BUCKET_NAME
+
     - targetPath: loki.storage.s3.endpoint
       kind: Secret
       name: *s3-secret
