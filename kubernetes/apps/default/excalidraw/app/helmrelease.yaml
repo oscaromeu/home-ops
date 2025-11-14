@@ -32,7 +32,7 @@ spec:
     image:
       # https://github.com/excalidraw/excalidraw/pull/6143
       repository: excalidraw/excalidraw
-      tag: latest@sha256:712cd4e7383509ffa50998e743d1a0d02b5aa8eeae714e4d073b7cfb7884f15c
+      tag: latest@sha256:67c6b93d6155fac09d30759ea5f28e5ce01b4e865a783fb418c878806bf5397d
     service:
       main:
         ports:
