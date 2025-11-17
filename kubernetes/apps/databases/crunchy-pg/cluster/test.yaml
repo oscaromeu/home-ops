@@ -57,7 +57,7 @@ spec:
       databases:
         - grafana
       password: *password
-      options: 'CREATEDB CREATEROLE'
+      options: 'SUPERUSER'
   #backups:
   #  pgbackrest:
   #    configuration: &backupConfig
