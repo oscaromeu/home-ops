@@ -67,9 +67,6 @@ resources:
   - ./sloth.yaml
   - ./spegel.yaml
   - ./stakater.yaml
-  - ./tf-controller.yaml
-  - ./timescale.yaml
-  - ./twuni.yaml
   - ./vector.yaml
   - ./vm.yaml
   - ./vmware.yaml
