@@ -26,3 +26,5 @@ wiki
 # Bootstrap
 /config.yaml
 /config-main.yaml
+# personal configs
+.archive
