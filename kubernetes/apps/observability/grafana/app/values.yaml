@@ -3,9 +3,9 @@ extraInitContainers:
     image: ghcr.io/home-operations/postgres-init:17
     envFrom:
       - secretRef:
-          name: grafana-admin-secret
+          name: postgres-test-pguser-grafana
 admin:
-  existingSecret: postgres-test-pguser-grafana
+  existingSecret: grafana-admin-secret
 replicas: 2
 image:
   registry: docker.io
