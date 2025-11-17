@@ -19,6 +19,7 @@ spec:
         synchronous_commit: "on"
         pg_hba:
           - hostssl all all all md5
+          - hostnossl all all all md5
         parameters:
           max_connections: 500
   instances:
