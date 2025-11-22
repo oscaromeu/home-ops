@@ -38,7 +38,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: docker.io/outlinewiki/outline
-      tag: 1.0.0
+      tag: 1.1.0
     envFrom:
       - secretRef:
           name: outline-secret
