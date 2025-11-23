@@ -42,7 +42,7 @@ spec:
           main:
             image:
               repository: docuseal/docuseal
-              tag: 2.1.1
+              tag: 2.2.2
             envFrom: *envFrom
             resources:
               requests:
