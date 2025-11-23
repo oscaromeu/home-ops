@@ -9,7 +9,7 @@ resources:
   - ./glauth/ks.yaml
   - ./kubelet-csr-approver/ks.yaml
   - ./metrics-server/ks.yaml
-  - ./nfs-subdir-external-provisioner/ks.yaml
+  #- ./nfs-subdir-external-provisioner/ks.yaml
   - ./reloader/ks.yaml
   - ./snapshot-controller/ks.yaml
   #- ./spegel/ks.yaml
