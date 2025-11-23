@@ -24,8 +24,8 @@ spec:
       retries: 3
   values:
     nfs:
-      server: 10.69.1.157
-      path: /mnt/k8s/data
+      server: ${NAS_SERVER_IP}
+      path: /data
 
     storageClass:
       create: true
