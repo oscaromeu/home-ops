@@ -55,6 +55,11 @@ spec:
         - memo
       password: *password
       options: 'CREATEDB CREATEROLE'
+    - name: vikunja
+      databases:
+        - vikunja
+      password: *password
+      options: 'CREATEDB CREATEROLE'
   #backups:
   #  pgbackrest:
   #    configuration: &backupConfig
