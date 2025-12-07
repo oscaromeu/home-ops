@@ -1,0 +1,70 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app vikunja
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  values:
+    controllers:
+      vikunja:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: vikunja/vikunja
+              tag: 0.24.6@sha256:ed1f3ed467fecec0b57e9de7bc6607f8bbcbb23ffced6a81f5dfefc794cdbe3b
+            envFrom:
+              - secretRef:
+                  name: vikunja-secret
+              - secretRef:
+                  name: vikunja-secret-postgres-superpass
+              - secretRef:
+                  name: vikunja-service-jwt-secret
+            env:
+              VIKUNJA_SERVICE_PUBLICURL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+              #VIKUNJA_MAILER_HOST: smtp-relay.default.svc.cluster.local.
+              #VIKUNJA_MAILER_PORT: "2525"
+              #VIKUNJA_MAILER_FROMEMAIL: Vikunja <vikunja@${SECRET_DOMAIN}>
+            resources:
+              requests:
+                cpu: 5m
+                memory: 10Mi
+              limits:
+                memory: 100Mi
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: &port 3456
+    ingress:
+      app:
+        className: internal
+        hosts:
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+    persistence:
+      config:
+        enabled: true
+        existingClaim: "${VOLSYNC_CLAIM}"
+        globalMounts:
+          - path: /app/vikunja/files
