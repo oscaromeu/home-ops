@@ -35,4 +35,4 @@ spec:
     replicaCount: 2
     image:
       repository: ghcr.io/stefanprodan/podinfo
-      tag: 6.9.3 # {"$imagepolicy": "testing:podinfo-policy"}
+      tag: 6.9.4 # {"$imagepolicy": "testing:podinfo-policy"}
