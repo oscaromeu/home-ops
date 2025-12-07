@@ -5,7 +5,6 @@ kind: Kustomization
 metadata:
   name: cluster-apps-vikunja-config
 spec:
-  targetNamespace: default
   components:
     #- ../../../../components/gatus/guarded
     - ../../../../components/volsync
@@ -31,7 +30,6 @@ kind: Kustomization
 metadata:
   name: cluster-apps-vikunja
 spec:
-  targetNamespace: default
   components:
     #- ../../../../components/gatus/guarded
     - ../../../../components/volsync
