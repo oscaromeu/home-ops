@@ -1,9 +1,9 @@
-#extraInitContainers:
-#  - name: 01-init-db
-#    image: ghcr.io/home-operations/postgres-init:18
-#    envFrom:
-#      - secretRef:
-#          name: postgres-test-pguser-grafana
+extraInitContainers:
+  - name: 01-init-db
+    image: ghcr.io/home-operations/postgres-init:18
+    envFrom:
+      - secretRef:
+          name: postgres-test-pguser-grafana
 admin:
   existingSecret: grafana-admin-secret
 replicas: 2
@@ -22,10 +22,10 @@ env:
   GF_DIAGNOSTICS_PROFILING_ADDR: 0.0.0.0
   GF_DIAGNOSTICS_PROFILING_PORT: 6060
   # Database
-  #GF_DATABASE_SSL_MODE: disable
-  #GF_DATABASE_TYPE: postgres
-#envFromSecrets:
-#  - name: postgres-test-pguser-grafana
+  GF_DATABASE_SSL_MODE: disable
+  GF_DATABASE_TYPE: postgres
+envFromSecrets:
+  - name: postgres-test-pguser-grafana
 grafana.ini:
   analytics:
     check_for_updates: false
@@ -113,7 +113,6 @@ ingress:
   enabled: true
   ingressClassName: internal
   annotations:
-    external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
     hajimari.io/icon: simple-icons:grafana
     hajimari.io/group: "Public"
   hosts:
