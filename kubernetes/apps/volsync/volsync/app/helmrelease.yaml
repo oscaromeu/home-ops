@@ -28,8 +28,5 @@ spec:
       namespace: kube-system
   values:
     manageCRDs: true
-    restic:
-      repository: *image
-      tag: *tag
     metrics:
       disableAuth: true
