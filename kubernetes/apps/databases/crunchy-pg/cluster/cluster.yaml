@@ -62,7 +62,7 @@ spec:
       databases:
         - vikunja
       password: *password
-      options: 'CREATEDB CREATEROLE'
+      options: 'SUPERUSER'
   #backups:
   #  pgbackrest:
   #    configuration: &backupConfig
