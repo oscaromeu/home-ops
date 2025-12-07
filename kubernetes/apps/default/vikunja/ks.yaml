@@ -38,7 +38,7 @@ metadata:
 spec:
   components:
     #- ../../../../components/gatus/guarded
-    - ../../../../components/volsync
+    - ../../../components/volsync
   interval: 1h
   path: ./kubernetes/apps/default/vikunja/app
   postBuild:
