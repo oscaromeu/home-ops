@@ -66,5 +66,7 @@ spec:
       config:
         enabled: true
         #existingClaim: "${VOLSYNC_CLAIM}"
+        size: 10Mi
+        storageClass: openebs-hostpath
         globalMounts:
           - path: /app/vikunja/files
