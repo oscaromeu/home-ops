@@ -62,11 +62,9 @@ spec:
                 service:
                   identifier: app
                   port: http
-    persistence:
-      config:
-        enabled: true
-        type: persistentVolumeClaim
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /app/vikunja/files
+        accessMode: ReadWriteOnce
         size: 1Gi
         storageClass: openebs-hostpath
-        globalMounts:
-          - path: /app/vikunja/files
