@@ -36,18 +36,18 @@ metadata:
   labels:
     substitution.flux.home.arpa/enabled: "true"
 spec:
-  components:
-    #- ../../../../components/gatus/guarded
-    - ../../../components/volsync
+  #components:
+  #  #- ../../../../components/gatus/guarded
+  #  - ../../../components/volsync
   interval: 1h
   path: ./kubernetes/apps/default/vikunja/app
-  postBuild:
-    substitute:
-      APP: vikunja
-      VOLSYNC_CAPACITY: 10Mi
-      VOLSYNC_CLAIM: vikunja-data
-      VOLSYNC_GID: "1000"
-      VOLSYNC_UID: "1000"
+  #postBuild:
+  #  substitute:
+  #    APP: vikunja
+  #    VOLSYNC_CAPACITY: 10Mi
+  #    VOLSYNC_CLAIM: vikunja-data
+  #    VOLSYNC_GID: "1000"
+  #    VOLSYNC_UID: "1000"
   prune: true
   sourceRef:
     kind: GitRepository
