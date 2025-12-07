@@ -38,8 +38,6 @@ spec:
             env:
               VIKUNJA_SERVICE_PUBLICURL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
               VIKUNJA_DATABASE_TYPE: postgres
-              VIKUNJA_AUTH_LOCAL: true
-              VIKUNJA_SERVICE_ENABLEREGISTRATION: true
               #VIKUNJA_MAILER_HOST: smtp-relay.default.svc.cluster.local.
               #VIKUNJA_MAILER_PORT: "2525"
               #VIKUNJA_MAILER_FROMEMAIL: Vikunja <vikunja@${SECRET_DOMAIN}>
