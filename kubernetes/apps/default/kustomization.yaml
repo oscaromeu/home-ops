@@ -23,4 +23,4 @@ resources:
   - ./pinchflat/ks.yaml
   - ./qbittorrent/ks.yaml
   #- ./semaphore/ks.yaml
-  - ./vikunja/ks.yaml
+  #- ./vikunja/ks.yaml
