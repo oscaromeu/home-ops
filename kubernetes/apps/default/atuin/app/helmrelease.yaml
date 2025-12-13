@@ -97,8 +97,7 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
-                  port: http
+                  port: *port
         tls:
           - hosts:
               - *host
