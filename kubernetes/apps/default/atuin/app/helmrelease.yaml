@@ -5,14 +5,10 @@ metadata:
   name: atuin
 spec:
   interval: 30m
-  chart:
-    spec:
-      chart: app-template
-      version: 3.7.3
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
   maxHistory: 2
   install:
     remediation:
@@ -33,8 +29,8 @@ spec:
         initContainers:
           init-db:
             image:
-              repository: ghcr.io/onedr0p/postgres-init
-              tag: 16
+              repository: ghcr.io/home-operations/postgres-init
+              tag: 18.1
             envFrom: &envFrom
               - secretRef:
                   name: atuin-secret
@@ -42,7 +38,7 @@ spec:
           main:
             image:
               repository: ghcr.io/atuinsh/atuin
-              tag: v18.10.0
+              tag: v18.10.0@sha256:4a29feda6f352581ece849807445fe1f50f2074b4643b7bfe62b27e23705b068
             env:
               ATUIN_HOST: 0.0.0.0
               ATUIN_PORT: &port 80
