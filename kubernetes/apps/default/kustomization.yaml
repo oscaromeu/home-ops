@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./atuin/ks.yaml
-  #- ./excalidraw/ks.yaml
+  - ./excalidraw/ks.yaml
   - ./filebrowser/ks.yaml
   - ./outline/ks.yaml
   - ./hajimari/ks.yaml
