@@ -5,14 +5,10 @@ metadata:
   name: &app outline
 spec:
   interval: 30m
-  chart:
-    spec:
-      chart: app-template
-      version: 3.7.3
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: flux-system
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
   maxHistory: 2
   install:
     remediation:
@@ -24,32 +20,28 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    #initContainers:
-    #  init-db:
-    #    image: oscaromeu/postgres-init:14.10
-    #    imagePullPolicy: Always
-    #    envFrom:
-    #      - secretRef:
-    #          name: outline-secret
     controller:
-      replicas: 1
-      strategy: Recreate
-      annotations:
-        reloader.stakater.com/auto: "true"
-    image:
-      repository: docker.io/outlinewiki/outline
-      tag: 1.1.0
-    envFrom:
-      - secretRef:
-          name: outline-secret
-    command: ["/bin/sh", "-c", "yarn db:migrate --env=production-ssl-disabled && yarn start --env=production-ssl-disabled"]
+      outline:
+        replicas: 1
+        strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: docker.io/outlinewiki/outline
+              tag: 1.1.0@sha256:51db3e893d3eabdbf9092712c9c8ed5362efb20e4c1d35b941ccacaed1c0f010
+            envFrom:
+              - secretRef:
+                  name: outline-secret
+            command: ["/bin/sh", "-c", "yarn db:migrate --env=production-ssl-disabled && yarn start --env=production-ssl-disabled"]
     service:
-      main:
+      app:
         ports:
           http:
             port: 80
     ingress:
-      main:
+      app:
         enabled: true
         ingressClassName: external
         annotations:
