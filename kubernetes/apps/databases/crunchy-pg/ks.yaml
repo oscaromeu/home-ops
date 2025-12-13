@@ -72,7 +72,7 @@ spec:
     kind: GitRepository
     name: home-kubernetes
     namespace: flux-system
-  healthChecks:
+  healthCheckExprs:
     - apiVersion: external-secrets.io/v1alpha1
       kind: PushSecret
       failed: status.conditions.filter(e, e.type == 'Synced').all(e, e.status == 'False')
