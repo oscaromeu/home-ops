@@ -72,6 +72,11 @@ spec:
     kind: GitRepository
     name: home-kubernetes
     namespace: flux-system
+  healthChecks:
+    - apiVersion: external-secrets.io/v1alpha1
+      kind: PushSecret
+      failed: status.conditions.filter(e, e.type == 'Synced').all(e, e.status == 'False')
+      current: status.conditions.filter(e, e.type == 'Synced').all(e, e.status == 'True')
   targetNamespace: databases
   timeout: 5m
   wait: false
