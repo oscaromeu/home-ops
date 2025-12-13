@@ -23,12 +23,14 @@ spec:
     keepHistory: false
   values:
     controller:
-      replicas: 1
-      strategy: RollingUpdate
-    image:
-      # https://github.com/excalidraw/excalidraw/pull/6143
-      repository: excalidraw/excalidraw
-      tag: latest@sha256:72a9834950460fd6a6c108a71605ac50a97963a455ec28acfbcf2385d3c42373
+      main:
+        replicas: 1
+        strategy: RollingUpdate
+      containers:
+        main:
+          image:
+            repository: excalidraw/excalidraw
+            tag: latest@sha256:72a9834950460fd6a6c108a71605ac50a97963a455ec28acfbcf2385d3c42373
     service:
       main:
         ports:
