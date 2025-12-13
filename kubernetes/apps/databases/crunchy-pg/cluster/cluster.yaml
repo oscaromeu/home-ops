@@ -62,12 +62,12 @@ spec:
       databases:
         - vikunja
       password: *password
-      options: 'SUPERUSER'
+      options: 'SUPERUSER' #TODO 'CREATEDB CREATEROLE'
     - name: atuin
       databases:
         - atuin
       password: *password
-      options: 'CREATEDB CREATEROLE'
+      options: 'SUPERUSER' #TODO 'CREATEDB CREATEROLE'
   #backups:
   #  pgbackrest:
   #    configuration: &backupConfig
