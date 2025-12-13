@@ -7,7 +7,6 @@ resources:
   - ./grafana/ks.yaml
   #- ./k6s/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
-  - ./kubernetes-events-exporter/ks.yaml
   #- ./prometheus-adapter/ks.yaml
   #- ./tempo-distributed/ks.yaml
   #- ./xk6-tracing/ks.yaml
