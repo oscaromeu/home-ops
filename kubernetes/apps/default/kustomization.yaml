@@ -9,7 +9,7 @@ resources:
   - ./outline/ks.yaml
   - ./hajimari/ks.yaml
   - ./jellyfin/ks.yaml
-  - ./linkding/ks.yaml
+  #- ./linkding/ks.yaml
   - ./memos/ks.yaml
   - ./metube/ks.yaml
   - ./nas
