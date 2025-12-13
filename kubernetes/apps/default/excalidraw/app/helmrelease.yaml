@@ -22,22 +22,45 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    controller:
-      main:
-        replicas: 1
+    controllers:
+      excalidraw:
+        replicas: 2
         strategy: RollingUpdate
-      containers:
-        main:
-          image:
-            repository: excalidraw/excalidraw
-            tag: latest@sha256:72a9834950460fd6a6c108a71605ac50a97963a455ec28acfbcf2385d3c42373
+        containers:
+          app:
+            image:
+              repository: mirror.gcr.io/excalidraw/excalidraw
+              # renovate: datasource=docker depName=docker.io/excalidraw/excalidraw
+              tag: latest@sha256:b2b642fdaca652cf23c20e07d3603bed5b22b2e1c88a15bec5f92e8a38d9041c
+              pullPolicy: IfNotPresent
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+            resources:
+              requests:
+                cpu: 5m
+                memory: 10Mi
+              limits:
+                memory: 50Mi
+        pod:
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: *app
     service:
-      main:
+      app:
+        controller: excalidraw
+        ipFamilyPolicy: PreferDualStack
         ports:
           http:
             port: 80
     ingress:
-      main:
+      app:
         enabled: true
         className: internal
         annotations:
@@ -54,16 +77,4 @@ spec:
         tls:
           - hosts:
               - *host
-    topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: DoNotSchedule
-        labelSelector:
-          matchLabels:
-            app.kubernetes.io/name: *app
-    resources:
-      requests:
-        cpu: 5m
-        memory: 10Mi
-      limits:
-        memory: 50Mi
+
