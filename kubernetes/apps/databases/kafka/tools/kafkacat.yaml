@@ -6,7 +6,7 @@ metadata:
 spec:
   containers:
   - name: kafkacat
-    image: confluentinc/cp-kcat:8.1.0
+    image: confluentinc/cp-kcat:8.1.1
     command: ["sh", "-c", "exec tail -f /dev/null"]
 ---
 apiVersion: v1
