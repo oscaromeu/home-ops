@@ -5,6 +5,9 @@ metadata:
   name: &app cluster-apps-glauth
   namespace: flux-system
 spec:
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
   suspend: false
   dependsOn:
     - name: cluster-apps-external-secrets-stores
