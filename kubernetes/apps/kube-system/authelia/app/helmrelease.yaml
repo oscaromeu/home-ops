@@ -25,7 +25,7 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      authelia:
         replicas: 1
         strategy: RollingUpdate
         annotations:
@@ -39,7 +39,7 @@ spec:
               - secretRef:
                   name: authelia-secret
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/authelia/authelia
               tag: v4.38.0-beta3@sha256:b48ae4d0ed9d1eee76efe382df60928bae550ec19e5663858dde6dc5f41cf285
@@ -97,14 +97,14 @@ spec:
                 matchLabels:
                   app.kubernetes.io/name: *app
     service:
-      main:
+      app:
         ports:
           http:
             port: *port
           metrics:
             port: 8080
     serviceMonitor:
-      main:
+      app:
         enabled: true
         endpoints:
           - port: metrics
