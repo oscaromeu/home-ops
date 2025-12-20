@@ -23,9 +23,6 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  dependsOn:
-    - name: glauth
-      namespace: kube-system
   values:
     controllers:
       main:
