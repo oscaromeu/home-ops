@@ -115,7 +115,7 @@ spec:
             interval: 1m
             scrapeTimeout: 10s
     ingress:
-      main:
+      app:
         enabled: true
         className: external
         annotations:
@@ -130,16 +130,12 @@ spec:
             paths:
               - path: /
                 service:
-                  name: main
-                  identifier: main
-                  port: *port
+                  port: http
           - host: &customHost auth.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
-                  name: main
-                  identifier: main
-                  port: *port
+                  port: http
         tls:
           - hosts:
               - *host
