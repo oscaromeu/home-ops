@@ -43,7 +43,7 @@ spec:
     ingress:
       app:
         enabled: true
-        ingressClassName: external
+        className: external
         annotations:
           external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
         hosts:
@@ -69,7 +69,11 @@ spec:
         memory: 2Gi
     persistence:
       data:
-        enabled: false
-        mountPath: /var/lib/outline
+        enabled: true
         existingClaim: storage-data
-        subPath: data
+        advancedMounts:
+          outline:
+            app:
+              - path: /var/lib/outline
+                subPath: data
+
