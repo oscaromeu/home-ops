@@ -20,7 +20,7 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    controller:
+    controllers:
       outline:
         replicas: 1
         strategy: Recreate
