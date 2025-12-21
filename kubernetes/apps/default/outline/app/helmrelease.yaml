@@ -69,7 +69,7 @@ spec:
         memory: 2Gi
     persistence:
       data:
-        enabled: true
+        enabled: false
         existingClaim: storage-data
         advancedMounts:
           outline:
