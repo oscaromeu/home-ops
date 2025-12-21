@@ -130,11 +130,15 @@ spec:
             paths:
               - path: /
                 service:
+                  name: main
+                  identifier: main
                   port: *port
           - host: &customHost auth.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
+                  name: main
+                  identifier: main
                   port: *port
         tls:
           - hosts:
