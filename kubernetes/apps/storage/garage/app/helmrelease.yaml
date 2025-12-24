@@ -9,6 +9,7 @@ spec:
   chartRef:
     kind: OCIRepository
     name: app-template
+    namespace: flux-system
   values:
     controllers:
       garage:
@@ -20,7 +21,7 @@ spec:
               repository: dxflrs/garage
               tag: v2.1.0@sha256:4c9b34c113e61358466e83fd6e7d66e6d18657ede14b776eb78a93ee8da7cf6a
             env:
-              TZ: Europe/Lisbon
+              TZ: Europe/Madrid
             envFrom:
               - secretRef:
                   name: garage
@@ -49,17 +50,21 @@ spec:
             port: &port 3900
           api:
             port: 3903
-    route:
+
+    ingress:
       app:
-        hostnames: ["s3.rafaribe.com"]
-        parentRefs:
-          - name: envoy-internal
-            namespace: network
-            sectionName: https
-        rules:
-          - backendRefs:
-              - name: *app
-                port: *port
+        className: internal
+        hosts:
+          - host: &host "s3.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: *app
+                  port: *port
+        tls:
+          - hosts:
+              - *host
+
     configMaps:
       config:
         data:
@@ -76,9 +81,9 @@ spec:
             rpc_public_addr = "127.0.0.1:3901"
 
             [s3_api]
-            s3_region = "us-east-1"
+            s3_region = "eu-west-4"
             api_bind_addr = "[::]:3900"
-            root_domain = ".s3.rafaribe.com"
+            root_domain = ".s3.${SECRET_DOMAIN}"
 
             [admin]
             api_bind_addr = "[::]:3903"
@@ -92,13 +97,13 @@ spec:
             subPath: configuration.toml
       data:
         type: nfs
-        server: truenas.rafaribe.com
-        path: /mnt/tank/garage/data
+        server: ${NAS_SERVER_IP}
+        path: ${NAS_SERVER_MEDIA_PATH}/garage/data
         globalMounts:
           - path: /data
       meta:
         type: nfs
-        server: truenas.rafaribe.com
-        path: /mnt/tank/garage/meta
+        server: ${NAS_SERVER_IP}
+        path: ${NAS_SERVER_MEDIA_PATH}/garage/meta
         globalMounts:
           - path: /meta
