@@ -59,8 +59,8 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: *app
-                  port: *port
+                  identifier: app
+                  port: api
         tls:
           - hosts:
               - *host
