@@ -96,14 +96,19 @@ spec:
   #      options:
   #      - --set=20250413-010004F_20250418-020004I
 
-  #dataSource:
-  #  pgbackrest:
-  #    stanza: "db"
-  #    configuration: *backupConfig
-  #    global: *backupFlag
-  #    repo:
-  #      name: "repo1"
-  #      s3: *minio
+  backups:
+    pgbackrest:
+      configuration:
+      - secret:
+          name: pgo-s3-creds
+      global:
+        repo1-path: /pgbackrest/storage/homeops-s3/grafana
+      repos:
+      - name: grafana
+        s3:
+          bucket: "postgres-test"
+          endpoint: "garage.storage.svc.cluster.local:3900"
+          region: "eu-west-4"
 
   monitoring:
     pgmonitor:
