@@ -13,7 +13,7 @@ spec:
       crunchy-userinit.ramblurr.github.com/superuser: postgres
   patroni: # turn on sync writes to at least 1 other replica
     dynamicConfiguration:
-      synchronous_mode: true
+      synchronous_mode: false
       postgresql:
         max_wal_size: 5GB
         synchronous_commit: "on"
