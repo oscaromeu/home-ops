@@ -102,9 +102,9 @@ spec:
       - secret:
           name: pgo-s3-creds
       global:
-        repo1-path: /pgbackrest/storage/postgres-test/grafana
+        repo1-path: /pgbackrest/storage/postgres-test/repo1
       repos:
-      - name: grafana
+      - name: repo1
         s3:
           bucket: "postgres-test"
           endpoint: "garage.storage.svc.cluster.local:3900"
