@@ -58,57 +58,39 @@ spec:
         - grafana
       password: *password
       options: 'SUPERUSER'
-  #backups:
-  #  pgbackrest:
-  #    configuration: &backupConfig
-  #      - secret:
-  #          name: crunchy-postgres-secret
-  #    global: &backupFlag
-  #      compress-type: bz2
-  #      compress-level: "9"
-  #      # Minio
-  #      repo1-block: y
-  #      repo1-bundle: y
-  #      repo1-path: /crunchy-pgo
-  #      repo1-retention-full: "30" # days
-  #      repo1-retention-full-type: time
-  #      repo1-s3-uri-style: path
-  #    manual:
-  #      repoName: repo1
-  #      options:
-  #        - --type=full
-  #    metadata:
-  #      labels:
-  #        app.kubernetes.io/name: crunchy-postgres-backup
-  #    repos:
-  #      - name: repo1 # Minio
-  #        s3: &minio
-  #          bucket: crunchy-postgres-operator
-  #          endpoint: "s3.${SECRET_INTERNAL_DOMAIN}"
-  #          region: us-east-1
-  #        schedules:
-  #          full: 0 1 * * 0 # Sunday at 01:00
-  #          differential: 0 1 * * 1-6 # Mon-Sat at 01:00
-  #          incremental: 0 2-23 * * * # Every hour except 01:00
-  #    restore:
-  #      enabled: true
-  #      repoName: repo1
-  #      options:
-  #      - --set=20250413-010004F_20250418-020004I
 
   backups:
     pgbackrest:
       configuration:
-      - secret:
-          name: pgo-s3-creds
-      global:
-        repo1-path: /pgbackrest/storage/postgres-test/repo1
+        - secret:
+            name: pgo-s3-creds
+      global: &backupFlag
+        compress-type: "bz2"
+        compress-level: "9"
+        # Minio
+        repo1-block: "y"
+        repo1-bundle: "y"
+        repo1-path: /crunchy-pgo
+        repo1-retention-full: "30" # days
+        repo1-retention-full-type: "time"
+        repo1-s3-uri-style: path
+      manual:
+        repoName: repo1
+        options:
+          - --type=full
+      metadata:
+        labels:
+          app.kubernetes.io/name: crunchy-postgres-backup
       repos:
-      - name: repo1
-        s3:
-          bucket: "postgres-test"
-          endpoint: "garage.storage.svc.cluster.local:3900"
-          region: "eu-west-4"
+        - name: repo1 # Minio
+          s3:
+            bucket: "postgres-test"
+            endpoint: "s3.${SECRET_DOMAIN}"
+            region: "eu-west-4"
+          schedules:
+            full: "0 1 * * 0" # Sunday at 01:00
+            differential: "0 1 * * 1-6" # Mon-Sat at 01:00
+            incremental: "0 2-23 * * *" # Every hour except 01:00
 
   monitoring:
     pgmonitor:
