@@ -53,7 +53,10 @@ spec:
 
     ingress:
       app:
-        className: internal
+        className: external
+        annotations:
+          hajimari.io/icon: mdi:powershell
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         hosts:
           - host: &host "s3.${SECRET_DOMAIN}"
             paths:
