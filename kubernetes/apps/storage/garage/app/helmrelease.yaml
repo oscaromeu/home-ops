@@ -63,7 +63,7 @@ spec:
               - path: /
                 service:
                   identifier: app
-                  port: api
+                  port: s3
         tls:
           - hosts:
               - *host
