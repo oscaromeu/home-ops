@@ -7,7 +7,7 @@ spec:
   interval: 1h
   chartRef:
     kind: OCIRepository
-    name: memos
+    name: app-template
     namespace: flux-system
   install:
     remediation:
