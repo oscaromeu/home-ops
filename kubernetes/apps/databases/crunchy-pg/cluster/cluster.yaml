@@ -68,38 +68,41 @@ spec:
         - atuin
       password: *password
       options: 'SUPERUSER' #TODO 'CREATEDB CREATEROLE'
-  #backups:
-  #  pgbackrest:
-  #    configuration: &backupConfig
-  #      - secret:
-  #          name: crunchy-postgres-secret
-  #    global: &backupFlag
-  #      compress-type: bz2
-  #      compress-level: "9"
-  #      # Minio
-  #      repo1-block: y
-  #      repo1-bundle: y
-  #      repo1-path: /crunchy-pgo
-  #      repo1-retention-full: "30" # days
-  #      repo1-retention-full-type: time
-  #      repo1-s3-uri-style: path
-  #    manual:
-  #      repoName: repo1
-  #      options:
-  #        - --type=full
-  #    metadata:
-  #      labels:
-  #        app.kubernetes.io/name: crunchy-postgres-backup
-  #    repos:
-  #      - name: repo1 # Minio
-  #        s3: &minio
-  #          bucket: crunchy-postgres-operator
-  #          endpoint: "s3.${SECRET_INTERNAL_DOMAIN}"
-  #          region: us-east-1
-  #        schedules:
-  #          full: 0 1 * * 0 # Sunday at 01:00
-  #          differential: 0 1 * * 1-6 # Mon-Sat at 01:00
-  #          incremental: 0 2-23 * * * # Every hour except 01:00
+
+  backups:
+    pgbackrest:
+      configuration: &backupConfig
+        - secret:
+            name: postgres-s3-creds
+      global: &backupFlag
+        compress-type: "bz2"
+        compress-level: "9"
+        # Minio
+        repo1-block: "y"
+        repo1-bundle: "y"
+        repo1-path: /crunchy-pgo/postgres
+        repo1-retention-full: "30" # days
+        repo1-retention-full-type: "time"
+        repo1-s3-uri-style: path
+        repo1-s3-region: us-east-1
+      manual:
+        repoName: repo1
+        options:
+          - --type=full
+      metadata:
+        labels:
+          app.kubernetes.io/name: postgres-backup
+      repos:
+        - name: repo1 # Minio
+          s3:
+            bucket: "postgres-backup"
+            endpoint: "s3.${SECRET_DOMAIN}"
+            region: "us-east-1"
+          schedules:
+            full: "0 1 * * 0" # Sunday at 01:00
+            differential: "0 1 * * 1-6" # Mon-Sat at 01:00
+            incremental: "0 2-23 * * *" # Every hour except 01:00
+
   #    restore:
   #      enabled: true
   #      repoName: repo1
