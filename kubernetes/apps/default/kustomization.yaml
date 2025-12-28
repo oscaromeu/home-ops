@@ -12,5 +12,5 @@ resources:
   - ./metube/ks.yaml
   - ./nas
   - ./plex/ks.yaml
-  - ./pinchflat/ks.yaml
+  #- ./pinchflat/ks.yaml
   - ./vikunja/ks.yaml
