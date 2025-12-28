@@ -3,10 +3,13 @@
 apiVersion: postgres-operator.crunchydata.com/v1beta1
 kind: PostgresCluster
 metadata:
-  name: &name postgres-test
+  name: &name postgres-test-restore
 spec:
+  dataSource:
+    postgresCluster:
+      clusterName: postgres-test
+      repoName: repo1
   postgresVersion: 17
-
   metadata:
     labels:
       crunchy-userinit.ramblurr.github.com/enabled: "true"
@@ -23,10 +26,10 @@ spec:
         parameters:
           max_connections: 500
   instances:
-    - name: postgres-test
+    - name: postgres-test-restore
       metadata:
         labels:
-          app.kubernetes.io/name: crunchy-postgres-test
+          app.kubernetes.io/name: crunchy-postgres-test-restore
       replicas: &replica 3
       dataVolumeClaimSpec:
         storageClassName: openebs-hostpath
@@ -42,7 +45,7 @@ spec:
           labelSelector:
             matchLabels:
               postgres-operator.crunchydata.com/cluster: *name
-              postgres-operator.crunchydata.com/data: postgres-test
+              postgres-operator.crunchydata.com/data: postgres-test-restore
 
   users:
     # Superuser
