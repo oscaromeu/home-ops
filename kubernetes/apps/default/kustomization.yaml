@@ -9,7 +9,7 @@ resources:
   - ./outline/ks.yaml
   #- ./linkding/ks.yaml
   - ./memos/ks.yaml
-  - ./metube/ks.yaml
+  #- ./metube/ks.yaml
   - ./nas
   - ./plex/ks.yaml
   - ./pinchflat/ks.yaml
