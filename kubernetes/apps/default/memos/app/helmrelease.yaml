@@ -8,6 +8,7 @@ spec:
   chartRef:
     kind: OCIRepository
     name: memos
+    namespace: flux-system
   install:
     remediation:
       retries: -1
