@@ -6,9 +6,20 @@ metadata:
   name: &name postgres-test-restore
 spec:
   dataSource:
-    postgresCluster:
-      clusterName: postgres-test
-      repoName: repo1
+    pgbackrest:
+      stanza: db
+      configuration:
+        - secret:
+            name: pgo-s3-creds
+      global:
+        repo1-path: /crunchy-pgo/postgres-test
+      repo:
+        name: repo1
+        s3:
+          bucket: 'postgres-test'
+          endpoint: 's3.${SECRET_DOMAIN}'
+          region: 'us-east-1'
+
   postgresVersion: 17
   metadata:
     labels:
@@ -73,7 +84,7 @@ spec:
         # Minio
         repo1-block: "y"
         repo1-bundle: "y"
-        repo1-path: /crunchy-pgo/postgres-test
+        repo1-path: /crunchy-pgo/postgres-test-restore
         repo1-retention-full: "30" # days
         repo1-retention-full-type: "time"
         repo1-s3-uri-style: path
