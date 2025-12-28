@@ -3,7 +3,7 @@ extraInitContainers:
     image: ghcr.io/home-operations/postgres-init:18
     envFrom:
       - secretRef:
-          name: postgres-test-pguser-grafana
+          name: postgres-test-restore-pguser-grafana
 admin:
   existingSecret: grafana-admin-secret
 replicas: 2
@@ -25,7 +25,7 @@ env:
   GF_DATABASE_SSL_MODE: disable
   GF_DATABASE_TYPE: postgres
 envFromSecrets:
-  - name: postgres-test-pguser-grafana
+  - name: postgres-test-restore-pguser-grafana
 grafana.ini:
   analytics:
     check_for_updates: false
