@@ -13,6 +13,7 @@ spec:
             name: pgo-s3-creds
       global:
         repo1-path: /crunchy-pgo/postgres-test
+        repo1-s3-uri-style: path
       repo:
         name: repo1
         s3:
