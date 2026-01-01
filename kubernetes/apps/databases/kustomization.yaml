@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: databases
 resources:
   - ./namespace.yaml
-  - ./dragonfly/ks.yaml
+  #- ./dragonfly/ks.yaml
