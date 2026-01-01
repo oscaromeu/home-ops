@@ -24,6 +24,7 @@ spec:
         metadata:
           name: _
         spec:
+          interval: 1h
           postBuild:
             substituteFrom:
               - name: cluster-secrets
