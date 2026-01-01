@@ -5,13 +5,7 @@ metadata:
   name: &app authelia
 spec:
   dependsOn:
-    - name: cluster-apps-external-secrets-stores
-    - name: cluster-apps-dragonfly-cluster
+    - name: onepassword
+    - name: dragonfly-cluster
   path: ./kubernetes/apps/kube-system/authelia/app
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: home-kubernetes
-  interval: 30m
-  retryInterval: 1m
-  timeout: 3m
+  targetNamespace: kube-system
