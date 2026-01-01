@@ -13,8 +13,6 @@ spec:
     controllers:
       dragonfly-operator:
         replicas: 1
-        serviceAccount:
-          identifier: *app
         strategy: RollingUpdate
         containers:
           app:
@@ -88,13 +86,3 @@ spec:
             scrapeTimeout: 10s
     serviceAccount:
       dragonfly-operator: {}
-  #postRenderers:
-  #  - kustomize:
-  #      patches:
-  #        - patch: |-
-  #            apiVersion: monitoring.coreos.com/v1
-  #            kind: ServiceMonitor
-  #            metadata:
-  #              name: dragonfly-operator
-  #            spec:
-  #              fallbackScrapeProtocol: PrometheusText1.0.0
