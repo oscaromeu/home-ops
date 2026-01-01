@@ -1,3 +1,0 @@
----
-providerRegex: ^(lpkm1|lpkw1|lpkw2)$
-bypassDnsResolution: true

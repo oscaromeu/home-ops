@@ -4,22 +4,10 @@ kind: HelmRelease
 metadata:
   name: spegel
 spec:
-  interval: 30m
-  chart:
-    spec:
-      chart: spegel
-      version: 0.5.1
-      sourceRef:
-        kind: HelmRepository
-        name: spegel
-        namespace: flux-system
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
+  chartRef:
+    kind: OCIRepository
+    name: spegel
+  interval: 1h
   values:
     spegel:
       containerdSock: /run/containerd/containerd.sock

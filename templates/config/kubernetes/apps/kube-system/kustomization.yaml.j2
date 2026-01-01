@@ -1,0 +1,17 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: kube-system
+
+components:
+  - ../../components/sops
+
+resources:
+  - ./namespace.yaml
+  - ./cilium/ks.yaml
+  - ./coredns/ks.yaml
+  - ./metrics-server/ks.yaml
+  - ./reloader/ks.yaml
+  #% if spegel_enabled %#
+  - ./spegel/ks.yaml
+  #% endif %#

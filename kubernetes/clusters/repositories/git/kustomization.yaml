@@ -1,8 +1,0 @@
----
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-  - ./elastic.yaml
-  - ./kubernetes-csi-addons.yaml
-  - ./local-path-provisioner.yaml
-  #- ./private-home-ops.yaml

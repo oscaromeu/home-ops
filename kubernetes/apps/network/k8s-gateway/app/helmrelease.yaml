@@ -4,22 +4,10 @@ kind: HelmRelease
 metadata:
   name: k8s-gateway
 spec:
-  interval: 30m
-  chart:
-    spec:
-      chart: k8s-gateway
-      version: 2.4.0
-      sourceRef:
-        kind: HelmRepository
-        name: k8s-gateway
-        namespace: flux-system
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
+  chartRef:
+    kind: OCIRepository
+    name: k8s-gateway
+  interval: 1h
   values:
     fullnameOverride: k8s-gateway
     domain: "${SECRET_DOMAIN}"
@@ -28,19 +16,6 @@ spec:
       type: LoadBalancer
       port: 53
       annotations:
-        io.cilium/lb-ipam-ips: "10.69.1.120"
+        lbipam.cilium.io/ips: "10.69.1.120"
       externalTrafficPolicy: Cluster
-    watchedResources: ["Ingress", "Service"]
-    replicaCount: 2
-    affinity:
-      podAntiAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                  - key: app.kubernetes.io/name
-                    operator: In
-                    values:
-                      - k8s-gateway
-              topologyKey: kubernetes.io/hostname
+    watchedResources: ["HTTPRoute", "Service"]

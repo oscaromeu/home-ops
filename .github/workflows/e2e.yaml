@@ -1,11 +1,12 @@
 ---
-# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: "e2e"
 
 on:
   workflow_dispatch:
   pull_request:
     branches: ["main"]
+    paths-ignore:
+      - kubernetes/**
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
@@ -20,89 +21,51 @@ jobs:
       fail-fast: false
       matrix:
         config-files:
-          - k3s-ipv4
-          - k3s-ipv6
-          - talos
+          - public
+          - private
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
-      - name: Setup Homebrew
-        id: setup-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
-
-      - name: Setup Python
-        uses: actions/setup-python@v6
-        id: setup-python
+      - name: Setup mise
+        uses: jdx/mise-action@146a28175021df8ca24f8ee1828cc2a60f980bd5 # v3.5.1
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
-          python-version: "3.14" # minimum supported version
+          cache: false
 
-      - name: Cache homebrew packages
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: actions/cache@v4
-        id: cache-homebrew-packages
-        with:
-          key: homebrew-${{ runner.os }}-${{ steps.setup-homebrew.outputs.gems-hash }}-${{ hashFiles('.taskfiles/Workstation/Brewfile') }}
-          path: /home/linuxbrew/.linuxbrew
+      - name: Run init task
+        run: task init
 
-      - name: Cache venv
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: actions/cache@v4
-        with:
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('requirements.txt', 'requirements.yaml') }}
-          path: .venv
-
-      - name: Setup Workflow Tools
-        if: ${{ github.event_name == 'pull_request' && steps.cache-homebrew-packages.outputs.cache-hit != 'true' }}
-        shell: bash
-        run: brew install go-task
-
-      - name: Run Workstation Brew tasks
-        if: ${{ github.event_name == 'pull_request' && steps.cache-homebrew-packages.outputs.cache-hit != 'true' }}
-        shell: bash
-        run: task workstation:brew
-
-      - name: Run Workstation venv tasks
-        shell: bash
-        run: task workstation:venv
-
-      - name: Run Workstation direnv tasks
-        shell: bash
-        run: task workstation:direnv
-
-      - name: Run Sops Age key task
-        shell: bash
-        run: task sops:age-keygen
-
-      - name: Run init tasks
-        shell: bash
+      - name: Prepare files
         run: |
-          task init
-          cp ./.github/tests/config-${{ matrix.config-files }}.yaml ./config.yaml
-          export BOOTSTRAP_AGE_PUBLIC_KEY=$(sed -n 's/# public key: //gp' age.key)
-          envsubst < ./config.yaml | sponge ./config.yaml
+          cp ./.github/tests/${{ matrix.config-files }}.yaml cluster.yaml
+          cp ./.github/tests/nodes.yaml nodes.yaml
+          echo '{"AccountTag":"fake","TunnelSecret":"fake","TunnelID":"fake"}' > cloudflare-tunnel.json
+          touch kubeconfig
 
       - name: Run configure task
-        shell: bash
         run: task configure --yes
 
-      - name: Run Talos tasks
-        if: ${{ startsWith(matrix.config-files, 'talos') }}
-        shell: bash
+      - name: Run generate talconfig task
         run: |
-          task talos:bootstrap-gensecret
-          task talos:bootstrap-genconfig
+          FILENAME=talos/talsecret.sops.yaml
+          talhelper gensecret | sops --filename-override $FILENAME --encrypt /dev/stdin > $FILENAME
+          task talos:generate-config
 
-      - name: Run Ansible tasks
-        if: ${{ startsWith(matrix.config-files, 'k3s') }}
-        shell: bash
-        run: |
-          task ansible:deps force=false
-          task ansible:lint
-          task ansible:list
+      - name: Run flux-local test
+        uses: docker://ghcr.io/allenporter/flux-local:v8.1.0@sha256:37c3c4309a351830b04f93c323adfcb0e28c368001818cd819cbce3e08828261
+        with:
+          args: test --enable-helm --all-namespaces --path /github/workspace/kubernetes/flux/cluster -v
 
-      - name: Run repo clean and reset tasks
-        shell: bash
-        run: |
-          task repository:clean
-          task repository:reset --yes
+      - name: Dry run bootstrap talos task
+        run: task bootstrap:talos --dry
+
+      - name: Dry run bootstrap apps task
+        run: task bootstrap:apps --dry
+
+      - name: Run reset task
+        run: task template:reset --yes
+
+      - name: Run cleanup task
+        run: task template:tidy --yes
