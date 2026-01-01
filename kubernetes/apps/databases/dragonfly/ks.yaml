@@ -6,13 +6,4 @@ metadata:
 spec:
   interval: 1h
   path: ./kubernetes/apps/databases/dragonfly/app
-  postBuild:
-    substituteFrom:
-      - name: cluster-secrets
-        kind: Secret
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
   targetNamespace: databases
