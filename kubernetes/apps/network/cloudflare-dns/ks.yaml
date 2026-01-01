@@ -4,16 +4,6 @@ kind: Kustomization
 metadata:
   name: cloudflare-dns
 spec:
-  interval: 1h
   path: ./kubernetes/apps/network/cloudflare-dns/app
-  postBuild:
-    substituteFrom:
-      - name: cluster-secrets
-        kind: Secret
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
   targetNamespace: network
   wait: true

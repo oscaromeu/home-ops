@@ -4,6 +4,5 @@ kind: Kustomization
 metadata:
   name: &app dragonfly
 spec:
-  interval: 1h
   path: ./kubernetes/apps/databases/dragonfly/app
   targetNamespace: databases

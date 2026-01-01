@@ -4,16 +4,5 @@ kind: Kustomization
 metadata:
   name: k8s-gateway
 spec:
-  interval: 1h
   path: ./kubernetes/apps/network/k8s-gateway/app
-  postBuild:
-    substituteFrom:
-      - name: cluster-secrets
-        kind: Secret
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
   targetNamespace: network
-  wait: false

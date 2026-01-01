@@ -4,16 +4,5 @@ kind: Kustomization
 metadata:
   name: coredns
 spec:
-  interval: 1h
   path: ./kubernetes/apps/kube-system/coredns/app
-  postBuild:
-    substituteFrom:
-      - name: cluster-secrets
-        kind: Secret
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
   targetNamespace: kube-system
-  wait: false

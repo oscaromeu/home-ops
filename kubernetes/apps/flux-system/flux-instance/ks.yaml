@@ -6,16 +6,5 @@ metadata:
 spec:
   dependsOn:
     - name: flux-operator
-  interval: 1h
   path: ./kubernetes/apps/flux-system/flux-instance/app
-  postBuild:
-    substituteFrom:
-      - name: cluster-secrets
-        kind: Secret
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
   targetNamespace: flux-system
-  wait: false
