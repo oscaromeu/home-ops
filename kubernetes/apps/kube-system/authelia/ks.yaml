@@ -6,6 +6,8 @@ metadata:
 spec:
   dependsOn:
     - name: onepassword
+      namespace: external-secrets
     - name: dragonfly-cluster
+      namespace: databases
   path: ./kubernetes/apps/kube-system/authelia/app
   targetNamespace: kube-system
