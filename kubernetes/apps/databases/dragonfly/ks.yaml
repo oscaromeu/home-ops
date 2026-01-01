@@ -5,6 +5,7 @@ metadata:
   name: &app dragonfly
 spec:
   path: ./kubernetes/apps/databases/dragonfly/app
+  targetNamespace: databases
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -12,3 +13,4 @@ metadata:
   name: &app dragonfly-cluster
 spec:
   path: ./kubernetes/apps/databases/dragonfly/cluster
+  targetNamespace: databases
