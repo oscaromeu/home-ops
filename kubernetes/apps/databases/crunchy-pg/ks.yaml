@@ -18,6 +18,8 @@ kind: Kustomization
 metadata:
   name: &app crunchy-postgres-cluster
 spec:
+  dependsOn:
+    - name: crunchy-postgres-operator
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
