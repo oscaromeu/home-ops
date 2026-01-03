@@ -3,7 +3,7 @@
 apiVersion: postgres-operator.crunchydata.com/v1beta1
 kind: PostgresCluster
 metadata:
-  name: &name postgres-v1
+  name: &name postgres-v17-1
 spec:
   dataSource:
     pgbackrest:
@@ -37,10 +37,10 @@ spec:
         parameters:
           max_connections: 500
   instances:
-    - name: postgres-v1
+    - name: postgres-v17-1
       metadata:
         labels:
-          app.kubernetes.io/name: crunchy-postgres-v1
+          app.kubernetes.io/name: crunchy-postgres-v17-1
       replicas: &replica 3
       dataVolumeClaimSpec:
         storageClassName: openebs-hostpath
@@ -56,7 +56,7 @@ spec:
           labelSelector:
             matchLabels:
               postgres-operator.crunchydata.com/cluster: *name
-              postgres-operator.crunchydata.com/data: postgres-v1
+              postgres-operator.crunchydata.com/data: postgres-v17-1
 
   users:
     # Superuser
@@ -94,7 +94,7 @@ spec:
         # Minio
         repo1-block: "y"
         repo1-bundle: "y"
-        repo1-path: /crunchy-pgo/postgres-v1
+        repo1-path: /crunchy-pgo/postgres-v17-1
         repo1-retention-full: "30" # days
         repo1-retention-full-type: "time"
         repo1-s3-uri-style: path
