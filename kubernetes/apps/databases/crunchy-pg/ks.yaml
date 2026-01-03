@@ -20,6 +20,8 @@ metadata:
 spec:
   dependsOn:
     - name: crunchy-postgres-operator
+    - name: openebs
+      namespace: openebs-system
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app

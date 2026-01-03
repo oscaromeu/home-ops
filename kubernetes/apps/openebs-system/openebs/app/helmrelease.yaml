@@ -1,0 +1,42 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: openebs
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: openebs
+  values:
+    engines:
+      local:
+        lvm:
+          enabled: false
+        zfs:
+          enabled: false
+      replicated:
+        mayastor:
+          enabled: false
+    openebs-crds:
+      csi:
+        volumeSnapshots:
+          enabled: false
+
+    loki:
+      enabled: false
+
+    alloy:
+      enabled: false
+
+    minio:
+      enabled: false
+
+    localpv-provisioner:
+      localpv:
+        image:
+          registry: quay.io/
+      hostpathClass:
+        enabled: true
+        name: openebs-hostpath
+        isDefaultClass: false
+        basePath: /var/openebs/local
