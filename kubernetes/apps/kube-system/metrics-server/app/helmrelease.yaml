@@ -7,7 +7,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: metrics-server
-  interval: 1h
   values:
     args:
       - --kubelet-insecure-tls

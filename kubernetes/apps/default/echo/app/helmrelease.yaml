@@ -7,7 +7,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: echo
-  interval: 1h
   values:
     controllers:
       echo:

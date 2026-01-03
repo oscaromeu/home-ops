@@ -7,7 +7,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: coredns
-  interval: 1h
   values:
     fullnameOverride: coredns
     image:

@@ -7,7 +7,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: cert-manager
-  interval: 1h
   values:
     crds:
       enabled: true

@@ -7,7 +7,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: flux-instance
-  interval: 1h
   values:
     instance:
       distribution:

@@ -8,7 +8,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: external-secrets
-  interval: 1h
   values:
     leaderElect: true
     serviceMonitor:

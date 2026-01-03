@@ -7,7 +7,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: cloudflare-tunnel
-  interval: 1h
   values:
     controllers:
       cloudflare-tunnel:

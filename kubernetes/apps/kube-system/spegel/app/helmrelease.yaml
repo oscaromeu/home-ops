@@ -7,7 +7,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: spegel
-  interval: 1h
   values:
     spegel:
       containerdSock: /run/containerd/containerd.sock

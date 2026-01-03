@@ -7,7 +7,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: cilium
-  interval: 1h
   values:
     autoDirectNodeRoutes: true
     bpf:
