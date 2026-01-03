@@ -5,7 +5,6 @@ kind: HelmRelease
 metadata:
   name: &app garage
 spec:
-  interval: 1h
   chartRef:
     kind: OCIRepository
     name: garage
