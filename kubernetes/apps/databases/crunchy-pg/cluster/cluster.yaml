@@ -110,7 +110,7 @@ spec:
         - name: repo1 # Minio
           s3:
             bucket: "postgres-backup"
-            endpoint: "garage.storage.svc.cluster.local:3900"
+            endpoint: "s3.${SECRET_DOMAIN}"
             region: "us-east-1"
           schedules:
             full: "0 1 * * 0" # Sunday at 01:00
