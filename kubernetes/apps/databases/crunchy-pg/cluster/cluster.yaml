@@ -67,6 +67,11 @@ spec:
         - atuin
       password: *password
       options: 'SUPERUSER' #TODO 'CREATEDB CREATEROLE'
+    - name: authentik
+      databases:
+        - authentik
+      password: *password
+      options: 'SUPERUSER' #TODO 'CREATEDB CREATEROLE'
 
   backups:
     pgbackrest:
