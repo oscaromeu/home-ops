@@ -8,7 +8,7 @@ components:
 
 resources:
   - ./namespace.yaml
-  #- ./authentik/ks.yaml
+  - ./authentik/ks.yaml
   - ./cilium/ks.yaml
   - ./coredns/ks.yaml
   - ./metrics-server/ks.yaml
