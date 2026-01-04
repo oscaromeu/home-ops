@@ -21,7 +21,7 @@ spec:
               tag: 18.1
             envFrom: &envFrom
               - secretRef:
-                  name: postgres-pguser-atuin
+                  name: postgres-${postgres_cluster_version}-pguser-atuin
         containers:
           app:
             image:

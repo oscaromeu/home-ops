@@ -9,6 +9,11 @@ spec:
       namespace: external-secrets
     - name: envoy-gateway
       namespace: network
+    - name: crunchy-postgres-cluster-secrets
+      namespace: databases
   path: ./kubernetes/apps/default/atuin/app
+  postBuild:
+    substitute:
+      postgres_cluster_version: "v17-1"
   targetNamespace: default
 
