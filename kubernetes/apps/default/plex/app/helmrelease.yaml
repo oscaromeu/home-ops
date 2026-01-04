@@ -60,7 +60,6 @@ spec:
         type: LoadBalancer
         annotations:
           io.cilium/lb-ipam-ips: ${PLEX_LB}
-        externalTrafficPolicy: Local
         ports:
           http:
             port: *port
