@@ -56,7 +56,7 @@ spec:
       databases:
         - memo
       password: *password
-      options: 'CREATEDB CREATEROLE'
+      options: SUPERUSER #'CREATEDB CREATEROLE'
     - name: vikunja
       databases:
         - vikunja
