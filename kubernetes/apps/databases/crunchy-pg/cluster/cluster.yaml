@@ -95,7 +95,7 @@ spec:
         - name: repo1 # Minio
           s3:
             bucket: "postgres-backup"
-            endpoint: "${S3_SERVER_IP}:3900"
+            endpoint: "s3.${SECRET_DOMAIN}"
             region: "eu-west-1"
           schedules:
             full: "0 1 * * 0" # Sunday at 01:00
