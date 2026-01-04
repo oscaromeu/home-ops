@@ -40,7 +40,9 @@ spec:
       initContainers:
         - name: init-db
           image: ghcr.io/home-operations/postgres-init:18
-          envFrom: &envFrom postgres-v17-1-pguser-authentik
+          envFrom:
+            - secretRef:
+                name: postgres-v17-1-pguser-authentik
       resources:
         requests:
           cpu: 50m
