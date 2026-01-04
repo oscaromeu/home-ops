@@ -5,8 +5,8 @@ authentication_backend:
   refresh_interval: 1m
 
   ldap:
+    address: "ldap://glauth.kube-system.svc.cluster.local:389"
     implementation: custom
-    url: "ldap://glauth.kube-system.svc.cluster.local:389"
     username_attribute: uid
     #additional_users_dn: ou=people
     #additional_groups_dn: ou=groups
