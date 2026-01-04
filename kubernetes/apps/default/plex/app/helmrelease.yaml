@@ -54,34 +54,26 @@ spec:
         supplementalGroups:
           - 44
           - 65537
-    ingress:
+    service:
       app:
-        className: external
+        type: LoadBalancer
         annotations:
-          gatus.io/path: *path
-          hajimari.io/icon: mdi:plex
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-        hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - *host
-      local:
-        className: internal
-        annotations:
-          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
-        hosts:
-          - host: "plex-local.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
+          io.cilium/lb-ipam-ips: ${PLEX_LB}
+        externalTrafficPolicy: Local
+        ports:
+          http:
+            port: *port
+    route:
+      app:
+        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-external
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
     persistence:
       config:
         existingClaim: plex-config-v1
@@ -123,12 +115,3 @@ spec:
         type: emptyDir
       transcode:
         type: emptyDir
-    service:
-      app:
-        controller: *app
-        type: LoadBalancer
-        annotations:
-          io.cilium/lb-ipam-ips: ${LOAD_BALANCER_IP_PLEX}
-        ports:
-          http:
-            port: *port
