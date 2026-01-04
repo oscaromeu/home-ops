@@ -12,3 +12,4 @@ resources:
   - ./echo/ks.yaml
   - ./filebrowser/ks.yaml
   - ./memos/ks.yaml
+  - ./outline/ks.yaml

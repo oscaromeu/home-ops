@@ -1,0 +1,15 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: outline
+spec:
+  dependsOn:
+    - name: onepassword
+      namespace: external-secrets
+    - name: envoy-gateway
+      namespace: network
+    - name: authelia
+      namespace: kube-system
+  path: ./kubernetes/apps/default/outline/app
+  targetNamespace: default
