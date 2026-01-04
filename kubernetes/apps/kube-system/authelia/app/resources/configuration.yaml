@@ -115,11 +115,3 @@ identity_providers:
       scopes: ["openid", "profile", "email", "offline_access"]
       redirect_uris: ["https://docs.${SECRET_DOMAIN}/auth/oidc.callback"]
       userinfo_signing_algorithm: none
-    - id: wiki
-      description: Outline
-      secret: "${OUTLINE_OAUTH_CLIENT_SECRET}"
-      public: false
-      authorization_policy: two_factor
-      scopes: ["openid", "profile", "email", "offline_access"]
-      redirect_uris: ["https://wiki.${SECRET_DOMAIN}/auth/oidc.callback"]
-      userinfo_signing_algorithm: none
