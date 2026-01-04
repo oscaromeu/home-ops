@@ -16,8 +16,9 @@ spec:
               repository: ghcr.io/home-operations/plex
               tag: 1.42.2.10156@sha256:9ad8a3506e1d8ebda873a668603c1a2c10e6887969564561be669efd65ae8871
             env:
-              PLEX_ADVERTISE_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}:443,http://${LOAD_BALANCER_IP_PLEX}:32400,https://plex-local.${SECRET_DOMAIN}:443"
+              PLEX_ADVERTISE_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}:443,http://${PLEX_LB}:32400,https://plex-local.${SECRET_DOMAIN}:443"
               TZ: "${TIMEZONE}"
+              PLEX_NO_AUTH_NETWORKS: "10.69.1.0/24"
             probes:
               liveness: &probes
                 enabled: true
@@ -68,6 +69,16 @@ spec:
         hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
         parentRefs:
           - name: envoy-external
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+      internal:
+        hostnames: ["{{ .Release.Name }}-local.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-internal
             namespace: network
             sectionName: https
         rules:
