@@ -13,3 +13,4 @@ resources:
   - ./filebrowser/ks.yaml
   - ./memos/ks.yaml
   - ./outline/ks.yaml
+  - ./plex/ks.yaml
