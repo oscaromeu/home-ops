@@ -9,5 +9,6 @@ spec:
       namespace: external-secrets
     - name: dragonfly-cluster
       namespace: databases
+    - name: glauth
   path: ./kubernetes/apps/kube-system/authelia/app
   targetNamespace: kube-system

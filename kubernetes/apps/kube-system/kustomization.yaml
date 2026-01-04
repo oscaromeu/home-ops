@@ -8,7 +8,7 @@ components:
 
 resources:
   - ./namespace.yaml
-  #- ./authelia/ks.yaml
+  - ./authelia/ks.yaml
   - ./cilium/ks.yaml
   - ./coredns/ks.yaml
   - ./glauth/ks.yaml
