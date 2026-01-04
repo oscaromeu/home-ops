@@ -18,7 +18,7 @@ spec:
             env:
               PLEX_ADVERTISE_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}:443"
               TZ: "${TIMEZONE}"
-              PLEX_NO_AUTH_NETWORKS: "10.69.1.0/24"
+              PLEX_NO_AUTH_NETWORKS: "10.69.1.0/24,10.42.0.0/16"
             probes:
               liveness: &probes
                 enabled: true
