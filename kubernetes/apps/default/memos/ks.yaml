@@ -11,7 +11,7 @@ spec:
       namespace: network
     - name: crunchy-postgres-cluster-secrets
       namespace: databases
-  path: ./kubernetes/apps/default/atuin/app
+  path: ./kubernetes/apps/default/memos/app
   postBuild:
     substitute:
       postgres_cluster_version: "v17-1"
