@@ -22,6 +22,9 @@ spec:
     - name: crunchy-postgres-operator
     - name: openebs
       namespace: openebs-system
+  postBuild:
+    substitute:
+      postgres_cluster_version: "v17-1"
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
@@ -39,6 +42,9 @@ spec:
       kind: PushSecret
       failed: status.conditions.filter(e, e.type == 'Synced').all(e, e.status == 'False')
       current: status.conditions.filter(e, e.type == 'Synced').all(e, e.status == 'True')
+  postBuild:
+    substitute:
+      postgres_cluster_version: "v17-1"
   dependsOn:
     - name: crunchy-postgres-cluster
   commonMetadata:
