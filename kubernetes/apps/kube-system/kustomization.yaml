@@ -11,6 +11,7 @@ resources:
   #- ./authelia/ks.yaml
   - ./cilium/ks.yaml
   - ./coredns/ks.yaml
+  - ./glauth/ks.yaml
   - ./metrics-server/ks.yaml
   - ./reloader/ks.yaml
   - ./spegel/ks.yaml
