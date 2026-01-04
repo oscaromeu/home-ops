@@ -1,0 +1,76 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app authentik
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: authentik
+  values:
+    global:
+      additionalLabels:
+        postgres: "true"
+      deploymentAnnotations:
+        reloader.stakater.com/auto: "true"
+      deploymentStrategy:
+        type: RollingUpdate
+      envFrom: &envFrom
+        - secretRef:
+            name: authentik
+        - secretRef:
+            name: postgres-v17-1-pguser-authentik
+    authentik:
+      log_level: info
+      #email:
+      #  host: smtp-relay.networking.svc.cluster.local
+      #  from: authentik@${SECRET_DOMAIN}
+      #  port: 2525
+      #  use_tls: false
+      error_reporting:
+        enabled: false
+        send_pii: false
+    server:
+      initContainers:
+        - name: init-db
+          image: ghcr.io/home-operations/postgres-init:18
+          envFrom: *envFrom
+      resources:
+        requests:
+          cpu: 50m
+          memory: 500Mi
+        limits:
+          memory: 800Mi
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+      route:
+        main:
+          enabled: true
+          hostnames: ["auth.${SECRET_DOMAIN}"]
+          annotations:
+            external-dns.alpha.kubernetes.io/target: auth.${SECRET_DOMAIN}
+          parentRefs:
+            - group: gateway.networking.k8s.io
+              kind: Gateway
+              name: envoy-external
+              namespace: networking
+              sectionName: https
+    worker:
+      replicas: 1
+      resources:
+        requests:
+          cpu: 5m
+          memory: 200Mi
+        limits:
+          memory: 750Mi
+      dnsConfig:
+        options:
+          - name: ndots
+            value: "2"
+    postgresql:
+      enabled: false
+    redis:
+      enabled: false
