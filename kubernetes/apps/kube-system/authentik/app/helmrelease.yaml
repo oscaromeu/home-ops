@@ -58,10 +58,8 @@ spec:
           annotations:
             external-dns.alpha.kubernetes.io/target: auth.${SECRET_DOMAIN}
           parentRefs:
-            - group: gateway.networking.k8s.io
-              kind: Gateway
-              name: envoy-external
-              namespace: networking
+            - name: envoy-external
+              namespace: network
               sectionName: https
     worker:
       replicas: 1
