@@ -1,0 +1,54 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: memos
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: memos
+  values:
+    controllers:
+      memos:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/usememos/memos
+              tag: 0.25.2@sha256:240e34c9328b5206d534782a47b6d8164f19177eface64ffa44da93efcb929a0
+            env:
+              - name: MEMOS_PORT
+                value: "5230"
+              - name: MEMOS_DRIVER
+                value: postgres
+              - name: MEMOS_PUBLIC
+                value: "false"
+              - name: MEMOS_PASSWORD_AUTH
+                value: "false"
+              - name: MEMOS_DSN
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres-${postgres_cluster_version}-pguser-memo
+                    key: uri
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+    service:
+      app:
+        ports:
+          http:
+            port: &port 5230
+    route:
+      app:
+        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-external
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port

@@ -11,3 +11,4 @@ resources:
   - ./atuin/ks.yaml
   - ./echo/ks.yaml
   - ./filebrowser/ks.yaml
+  - ./memos/ks.yaml
