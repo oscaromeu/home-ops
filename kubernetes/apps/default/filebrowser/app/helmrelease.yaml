@@ -1,0 +1,66 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: filebrowser
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: filebrowser
+  values:
+    controllers:
+      filebrowser:
+        containers:
+          app:
+            image:
+              repository: docker.io/filebrowser/filebrowser
+              tag: v2.49.0@sha256:e9ef7570b2e4110e9842f2e004f2aaac246e54e7fef2b3b9f4352a3a1bb04508
+            env:
+              FB_DATABASE: /config/filebrowser.db
+              FB_LOG: stdout
+              FB_NOAUTH: true
+              FB_ROOT: /data
+              TZ: ${TIMEZONE}
+            resources:
+              requests:
+                cpu: 15m
+                memory: 411M
+              limits:
+                memory: 411M
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups:
+          - 44
+          - 65537
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: app
+        ports:
+          http:
+            port: &port 80
+    route:
+      app:
+        hostnames: ["fb.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+    persistence:
+      config:
+        existingClaim: filebrowser
+      data:
+        type: nfs
+        server: ${NAS_SERVER_IP}
+        path: ${NAS_SERVER_MEDIA_PATH}/Library
+        globalMounts:
+          - path: /data

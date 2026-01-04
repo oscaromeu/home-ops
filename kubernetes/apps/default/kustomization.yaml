@@ -10,3 +10,4 @@ resources:
   - ./namespace.yaml
   - ./atuin/ks.yaml
   - ./echo/ks.yaml
+  - ./filebrowser/ks.yaml
