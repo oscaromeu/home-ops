@@ -10,7 +10,7 @@ spec:
       stanza: db
       configuration:
         - secret:
-            name: pgo-s3-creds
+            name: postgres-s3-creds
       global:
         repo1-path: /crunchy-pgo/postgres-backup
         repo1-s3-uri-style: path
