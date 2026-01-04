@@ -8,9 +8,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: authentik
-  valuesFrom:
-  - kind: Secret
-    name: authentik
   values:
     global:
       additionalLabels:
@@ -22,7 +19,6 @@ spec:
       envFrom:
         - secretRef:
             name: authentik-secret-key
-
     authentik:
       log_level: info
       #email:
@@ -31,8 +27,10 @@ spec:
       #  port: 2525
       #  use_tls: false
       postgresql:
-        name: "authentik"
-        user: "authentik"
+        port: 5432
+        name: ""
+        user: ""
+        password: ""
       error_reporting:
         enabled: false
         send_pii: false
