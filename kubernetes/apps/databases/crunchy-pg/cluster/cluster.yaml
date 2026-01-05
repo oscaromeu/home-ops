@@ -56,22 +56,22 @@ spec:
       databases:
         - memo
       password: *password
-      options: SUPERUSER #'CREATEDB CREATEROLE'
+      options: 'CREATEDB CREATEROLE'
     - name: vikunja
       databases:
         - vikunja
       password: *password
-      options: 'SUPERUSER' #TODO 'CREATEDB CREATEROLE'
+      options: 'CREATEDB CREATEROLE'
     - name: atuin
       databases:
         - atuin
       password: *password
-      options: 'SUPERUSER' #TODO 'CREATEDB CREATEROLE'
+      options: 'CREATEDB CREATEROLE'
     - name: authentik
       databases:
         - authentik
       password: *password
-      options: 'SUPERUSER' #TODO 'CREATEDB CREATEROLE'
+      options: 'CREATEDB CREATEROLE'
 
   backups:
     pgbackrest:
