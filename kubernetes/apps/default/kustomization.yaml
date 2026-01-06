@@ -13,5 +13,6 @@ resources:
   - ./echo/ks.yaml
   - ./filebrowser/ks.yaml
   - ./memos/ks.yaml
+  - ./metube/ks.yaml
   - ./outline/ks.yaml
   - ./plex/ks.yaml
