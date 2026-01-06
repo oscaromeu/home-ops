@@ -35,13 +35,13 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app crunchy-postgres-cluster-secrets
+  name: &app crunchy-postgres-cluster-pushsecrets
 spec:
   healthCheckExprs:
-    - apiVersion: external-secrets.io/v1alpha1
-      kind: PushSecret
-      failed: status.conditions.filter(e, e.type == 'Synced').all(e, e.status == 'False')
-      current: status.conditions.filter(e, e.type == 'Synced').all(e, e.status == 'True')
+    - apiVersion: external-secrets.io/v1
+      kind: ClusterExternalSecret
+      failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'False')
+      current: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'True')
   postBuild:
     substitute:
       postgres_cluster_version: "v17-1"
@@ -50,5 +50,27 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/databases/crunchy-pg/secrets
+  path: ./kubernetes/apps/databases/crunchy-pg/secrets/push
+  targetNamespace: databases
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app crunchy-postgres-cluster-pushsecrets
+spec:
+  healthCheckExprs:
+    - apiVersion: external-secrets.io/v1alpha1
+      kind: PushSecret
+      failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'False')
+      current: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'True')
+  postBuild:
+    substitute:
+      postgres_cluster_version: "v17-1"
+  dependsOn:
+    - name: crunchy-postgres-cluster
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
+  path: ./kubernetes/apps/databases/crunchy-pg/secrets/push
   targetNamespace: databases
