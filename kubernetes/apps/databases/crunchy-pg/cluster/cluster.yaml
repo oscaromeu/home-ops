@@ -79,11 +79,12 @@ spec:
         - secret:
             name: postgres-s3-creds
       global: &backupFlag
-        compress-type: "bz2"
-        compress-level: "9"
+        compress-type: "zst"
+        compress-level: "1"
+        process-max: "2"
         archive-timeout: 45m
         # Minio
-        repo1-block: "y"
+        repo1-block: "zst"
         repo1-bundle: "y"
         repo1-path: /crunchy-pgo/postgres-${postgres_cluster_version}
         repo1-retention-full: "30" # days
