@@ -59,6 +59,26 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: &app crunchy-postgres-cluster-password-generator
+spec:
+  healthCheckExprs:
+    - apiVersion: external-secrets.io/v1alpha1
+      kind: PushSecret
+      failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'False')
+      current: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'True')
+  postBuild:
+    substitute:
+      postgres_cluster_version: "v17-1"
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
+  path: ./kubernetes/apps/databases/crunchy-pg/secrets/generator
+  targetNamespace: databases
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: &app crunchy-postgres-cluster-clusterexternalsecrets
 spec:
   healthCheckExprs:
@@ -71,6 +91,7 @@ spec:
       postgres_cluster_version: "v17-1"
   dependsOn:
     - name: crunchy-postgres-cluster-pushsecrets
+    - name: crunchy-postgres-cluster-password-generator
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
