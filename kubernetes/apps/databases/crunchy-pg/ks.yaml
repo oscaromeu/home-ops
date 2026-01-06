@@ -72,5 +72,5 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/databases/crunchy-pg/secrets/push
+  path: ./kubernetes/apps/databases/crunchy-pg/secrets/cluster
   targetNamespace: databases
