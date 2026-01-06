@@ -46,6 +46,8 @@ spec:
     substitute:
       postgres_cluster_version: "v17-1"
   dependsOn:
+    - name: external-secrets
+      namespace: external-secrets
     - name: crunchy-postgres-cluster
   commonMetadata:
     labels:
@@ -68,7 +70,7 @@ spec:
     substitute:
       postgres_cluster_version: "v17-1"
   dependsOn:
-    - name: crunchy-postgres-cluster
+    - name: crunchy-postgres-cluster-pushsecrets
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app

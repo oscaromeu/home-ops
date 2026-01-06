@@ -5,11 +5,9 @@ metadata:
   name: &app atuin
 spec:
   dependsOn:
-    - name: external-secrets
-      namespace: external-secrets
     - name: envoy-gateway
       namespace: network
-    - name: crunchy-postgres-cluster-secrets
+    - name: crunchy-postgres-cluster-clusterexternalsecrets
       namespace: databases
   path: ./kubernetes/apps/default/atuin/app
   postBuild:

@@ -5,7 +5,7 @@ metadata:
   name: authentik
 spec:
   dependsOn:
-    - name: crunchy-postgres-cluster-secrets
+    - name: crunchy-postgres-cluster-clusterexternalsecrets
       namespace: databases
     - name: envoy-gateway
       namespace: network

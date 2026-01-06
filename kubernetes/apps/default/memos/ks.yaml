@@ -9,7 +9,7 @@ spec:
       namespace: external-secrets
     - name: envoy-gateway
       namespace: network
-    - name: crunchy-postgres-cluster-secrets
+    - name: crunchy-postgres-cluster-clusterexternalsecrets
       namespace: databases
   path: ./kubernetes/apps/default/memos/app
   postBuild:
