@@ -101,8 +101,6 @@ spec:
         globalMounts:
           - path: /data
       meta:
-        type: nfs
-        server: ${NAS_SERVER_IP}
-        path: ${NAS_SERVER_MEDIA_PATH}/garage/meta
+        existingClaim: *app
         globalMounts:
           - path: /meta
