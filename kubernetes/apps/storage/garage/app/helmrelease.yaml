@@ -70,6 +70,8 @@ spec:
             db_engine = "sqlite"
             metadata_auto_snapshot_interval = "6h"
 
+            block_size = 10MiB
+
             replication_factor = 1
             compression_level = 2
 
