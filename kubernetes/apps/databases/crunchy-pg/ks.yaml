@@ -71,7 +71,6 @@ spec:
       postgres_cluster_version: "v17-1"
   dependsOn:
     - name: crunchy-postgres-cluster-pushsecrets
-    - name: crunchy-postgres-cluster-password-generator
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
