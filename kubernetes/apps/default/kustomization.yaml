@@ -9,6 +9,7 @@ components:
 resources:
   - ./namespace.yaml
   - ./atuin/ks.yaml
+  - ./docmost/ks.yaml
   - ./echo/ks.yaml
   - ./filebrowser/ks.yaml
   - ./memos/ks.yaml
