@@ -28,7 +28,7 @@ spec:
               repository: docmost/docmost
               tag: 0.24.1
             env:
-              TZ: "Europe/Paris"
+              TZ: "${TZ}"
               APP_URL: "https://docmost.${SECRET_DOMAIN}"
               PORT: &port 3000
               REDIS_URL: "redis://dragonfly.databases.svc.cluster.local:6379"
