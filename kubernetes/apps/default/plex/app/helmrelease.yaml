@@ -105,20 +105,6 @@ spec:
         globalMounts:
           - path: /music
             readOnly: true
-      turntablism:
-        type: nfs
-        server: ${NAS_SERVER_IP}
-        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Turntablism
-        globalMounts:
-          - path: /turntablism
-            readOnly: true
-      practice:
-        type: nfs
-        server: ${NAS_SERVER_IP}
-        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Practice
-        globalMounts:
-          - path: /practice
-            readOnly: true
       tmp:
         type: emptyDir
       transcode:
