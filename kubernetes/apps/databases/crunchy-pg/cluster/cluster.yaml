@@ -72,6 +72,11 @@ spec:
         - authentik
       password: *password
       options: 'CREATEDB CREATEROLE'
+    - name: docmost
+      databases:
+        - docmost
+      password: *password
+      options: SUPERUSER #'CREATEDB CREATEROLE'
 
   #backups:
   #  pgbackrest:
