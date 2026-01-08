@@ -5,9 +5,14 @@ metadata:
   name: k6-operator
   namespace: observability
 spec:
-  chartRef:
-    kind: OCIRepository
-    name: k6
+  chart:
+    spec:
+      chart: k6-operator
+      version: '4.2.0'
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
   values:
     installCRDs: true
     namespace:
