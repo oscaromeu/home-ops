@@ -28,11 +28,6 @@ spec:
       serviceAccount:
         name: k6-operator-controller
         create: true
-      image:
-        registry: ghcr.io
-        repository: grafana/k6-operator
-        tag: controller-v0.0.21
-        pullPolicy: IfNotPresent
       resources:
         limits:
           memory: 100Mi
