@@ -1,0 +1,29 @@
+# snapshotter.yml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: test-cron
+spec:
+  schedule: '*/5 * * * *'
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccount: k6
+          containers:
+            - name: kubectl
+              image: bitnami/kubectl
+              volumeMounts:
+                - name: k6-yaml
+                  mountPath: /tmp/
+              command:
+                - /bin/bash
+              args:
+                - -c
+                - 'kubectl delete -f /tmp/test.yaml; kubectl apply -f /tmp/test.yaml'
+          restartPolicy: OnFailure
+          volumes:
+            - name: k6-yaml
+              configMap:
+                name: test-config
