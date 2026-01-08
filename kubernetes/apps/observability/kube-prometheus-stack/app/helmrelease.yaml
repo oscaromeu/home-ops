@@ -9,33 +9,43 @@ spec:
     kind: OCIRepository
     name: kube-prometheus-stack
   valuesFrom:
-  - kind: ConfigMap
-    name: flux-kube-state-metrics-config
-    valuesKey: kube-state-metrics-config.yaml
+    - kind: ConfigMap
+      name: alertmanager-config
+      valuesKey: values-alertmanager.yaml
+    - kind: ConfigMap
+      name: grafana-config
+      valuesKey: values-grafana.yaml
+    - kind: ConfigMap
+      name: kube-apiserver-config
+      valuesKey: values-kube-apiserver.yaml
+    - kind: ConfigMap
+      name: kube-controller-manager-config
+      valuesKey: values-kube-controller-manager.yaml
+    - kind: ConfigMap
+      name: kube-etcd-config
+      valuesKey: values-etcd.yaml
+    - kind: ConfigMap
+      name: kube-proxy-config
+      valuesKey: values-proxy.yaml
+    - kind: ConfigMap
+      name: kube-scheduler-config
+      valuesKey: values-scheduler.yaml
+    - kind: ConfigMap
+      name: kube-state-metrics-config
+      valuesKey: values-kube-state-metrics.yaml
+    - kind: ConfigMap
+      name: kubelet-config
+      valuesKey: values-kubelet.yaml
+    - kind: ConfigMap
+      name: node-exporter-config
+      valuesKey: values-node-exporter.yaml
+    - kind: ConfigMap
+      name: prometheus-node-exporter-config
+      valuesKey: values-prometheus-node-exporter.yaml
+    - kind: ConfigMap
+      name: prometheus-config
+      valuesKey: values-prometheus.yaml
   values:
     crds:
       enabled: true
     cleanPrometheusOperatorObjectNames: true
-
-
-
-
-
-
-
-
-
-
-    kubeStateMetrics:
-      enabled: true
-    grafana:
-      enabled: false
-      forceDeployDashboards: true
-      sidecar:
-        dashboards:
-          annotations:
-            grafana_folder: Kubernetes
-            home_ops: Kubernetes
-          multicluster:
-            etcd:
-              enabled: true

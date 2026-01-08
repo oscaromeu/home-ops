@@ -4,9 +4,11 @@ kind: Kustomization
 metadata:
   name: &app kube-prometheus-stack
 spec:
-  suspend: false
   dependsOn:
     - name: envoy-gateway
       namespace: network
     - name: external-secrets
       namespace: external-secrets
+  path: ./kubernetes/apps/observability/kube-prometheus-stack/app
+  targetNamespace: observability
+
