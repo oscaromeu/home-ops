@@ -8,7 +8,7 @@ resources:
 configMapGenerator:
   - name: test-2
     files:
-      - test.js=./test.js
+      - test-2.js=./test-2.js
   - name: test-2-config
     files:
       - test-2.yaml=./test-2.yaml
