@@ -4,7 +4,7 @@ kind: CronJob
 metadata:
   name: test-cron
 spec:
-  schedule: '*/5 * * * *'
+  schedule: '*/1 * * * *'
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
