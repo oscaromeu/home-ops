@@ -8,4 +8,5 @@ components:
 
 resources:
   - ./namespace.yaml
+  - ./k6s/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
