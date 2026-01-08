@@ -15,6 +15,6 @@ metadata:
   name: &app k6s-scenarios
 spec:
   dependsOn:
-    - name: kube-prometheus-stack
+    - name: k6s-operator
   targetNamespace: observability
   path: ./kubernetes/apps/observability/k6s/scenarios
