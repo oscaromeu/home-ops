@@ -1,0 +1,36 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: k6-observability
+rules:
+  - apiGroups:
+      - k6.io
+    resources:
+      - testruns
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: k6-observability
+roleRef:
+  kind: Role
+  name: k6-observability
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: k6-observability
+    namespace: observability
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: k6-observability
