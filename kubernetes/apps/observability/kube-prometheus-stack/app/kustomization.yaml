@@ -26,10 +26,10 @@ configMapGenerator:
       - values-kube-etcd.yaml
   - name: kube-proxy-config
     files:
-      - values-proxy.yaml
+      - values-kube-proxy.yaml
   - name: kube-scheduler-config
     files:
-      - values-scheduler.yaml
+      - values-kube-scheduler.yaml
   - name: kube-state-metrics-config
     files:
       - values-kube-state-metrics.yaml
