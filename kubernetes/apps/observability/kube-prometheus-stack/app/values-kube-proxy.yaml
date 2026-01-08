@@ -1,0 +1,2 @@
+kubeProxy:
+  enabled: false

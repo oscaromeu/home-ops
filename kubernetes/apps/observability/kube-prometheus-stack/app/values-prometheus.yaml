@@ -1,0 +1,42 @@
+prometheus:
+  route:
+    main:
+      enabled: true
+      hostnames:
+        - prometheus.${SECRET_DOMAIN}
+      parentRefs:
+        - name: envoy-internal
+          namespace: network
+  prometheusSpec:
+    replicas: 2
+    externalUrl: https://prometheus.${SECRET_DOMAIN}
+    replicaExternalLabelName: __replica__
+    scrapeInterval: 1m
+    ruleSelectorNilUsesHelmValues: false
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
+    scrapeConfigSelectorNilUsesHelmValues: false
+    enableAdminAPI: true
+    walCompression: true
+    enableRemoteWriteReceiver: true
+    retention: 14d
+    retentionSize: 15GB
+    externalLabels:
+      cluster: apps
+    resources:
+      requests:
+        cpu: 100m
+      limits:
+        memory: 1500Mi
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: openebs-hostpath
+          resources:
+            requests:
+              storage: 20Gi
+    additionalRulesForClusterRole:
+      - apiGroups: [ "" ]
+        resources: [ "services/k6-operator-controller-manager-metrics-service" ]
+        verbs: [ "get", "list", "watch" ]

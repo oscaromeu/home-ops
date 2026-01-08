@@ -1,0 +1,20 @@
+alertmanager:
+  route:
+    main:
+      enabled: true
+      hostnames:
+        - alertmanager.${SECRET_DOMAIN}
+      parentRefs:
+        - name: envoy-internal
+          namespace: network
+  alertmanagerSpec:
+    replicas: 2
+    alertmanagerConfiguration:
+      name: alertmanager
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: openebs-hostpath
+          resources:
+            requests:
+              storage: 1Gi
