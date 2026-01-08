@@ -23,13 +23,6 @@ spec:
         interval: "1m"
     service:
       enabled: false
-    authProxy:
-      enabled: true
-      image:
-        registry: quay.io
-        repository: brancz/kube-rbac-proxy
-        tag: v0.20.0
-        pullPolicy: IfNotPresent
     manager:
       replicas: 1
       serviceAccount:
