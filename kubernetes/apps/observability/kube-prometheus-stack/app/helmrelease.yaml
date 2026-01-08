@@ -23,13 +23,13 @@ spec:
       valuesKey: values-kube-controller-manager.yaml
     - kind: ConfigMap
       name: kube-etcd-config
-      valuesKey: values-etcd.yaml
+      valuesKey: values-kube-etcd.yaml
     - kind: ConfigMap
       name: kube-proxy-config
-      valuesKey: values-proxy.yaml
+      valuesKey: values-kube-proxy.yaml
     - kind: ConfigMap
       name: kube-scheduler-config
-      valuesKey: values-scheduler.yaml
+      valuesKey: values-kube-scheduler.yaml
     - kind: ConfigMap
       name: kube-state-metrics-config
       valuesKey: values-kube-state-metrics.yaml
