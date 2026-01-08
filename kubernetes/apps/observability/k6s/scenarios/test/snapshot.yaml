@@ -10,7 +10,7 @@ spec:
     spec:
       template:
         spec:
-          serviceAccount: k6
+          serviceAccount: k6-observability
           containers:
             - name: kubectl
               image: bitnami/kubectl
