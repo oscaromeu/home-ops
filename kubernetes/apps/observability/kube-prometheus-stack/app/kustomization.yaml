@@ -23,7 +23,7 @@ configMapGenerator:
       - values-kube-controller-manager.yaml
   - name: kube-etcd-config
     files:
-      - values-etcd.yaml
+      - values-kube-etcd.yaml
   - name: kube-proxy-config
     files:
       - values-proxy.yaml
