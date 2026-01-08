@@ -1,0 +1,16 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./test.yaml
+  - ./snapshot.yaml
+
+configMapGenerator:
+  - name: test-2
+    files:
+      - test.js=./test.js
+  - name: test-2-config
+    files:
+      - test-2.yaml=./test-2.yaml
+generatorOptions:
+  disableNameSuffixHash: true
