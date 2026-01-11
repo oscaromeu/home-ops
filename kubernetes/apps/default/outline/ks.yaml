@@ -9,7 +9,7 @@ spec:
       namespace: external-secrets
     - name: envoy-gateway
       namespace: network
-    - name: authelia
-      namespace: kube-system
+    #- name: authelia
+    #  namespace: kube-system
   path: ./kubernetes/apps/default/outline/app
   targetNamespace: default
