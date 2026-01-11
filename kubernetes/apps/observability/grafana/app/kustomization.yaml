@@ -1,0 +1,16 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: observability
+resources:
+  - ./helmrepo.yaml
+  - ./externalsecrets.yaml
+  - ./helmrelease.yaml
+
+configMapGenerator:
+  - name: grafana-values
+    files:
+      - grafana.yaml=values.yaml
+
+configurations:
+  - kustomizeconfig.yaml
