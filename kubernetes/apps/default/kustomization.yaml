@@ -12,6 +12,7 @@ resources:
   - ./docmost/ks.yaml
   - ./echo/ks.yaml
   - ./filebrowser/ks.yaml
+  - ./linkding/ks.yaml
   - ./memos/ks.yaml
   - ./metube/ks.yaml
   - ./outline/ks.yaml
