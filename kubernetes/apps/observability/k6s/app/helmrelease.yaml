@@ -12,7 +12,7 @@ spec:
       reconcileStrategy: ChartVersion
       sourceRef:
         kind: HelmRepository
-        name: grafana
+        name: k6
   values:
     installCRDs: true
     namespace:
