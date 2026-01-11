@@ -17,8 +17,8 @@ spec:
         max_wal_size: 5GB
         synchronous_commit: "on"
         pg_hba:
-          - hostssl all all all md5
-          - hostnossl all all all md5
+          - hostssl all all all md5 # TODO
+          - hostnossl all all all md5 # TODO
         parameters:
           max_connections: 500
   instances:
@@ -91,7 +91,7 @@ spec:
       databases:
         - grafana
       password: *password
-      options: 'SUPERUSER' #'CREATEDB CREATEROLE'
+      options: 'CREATEDB CREATEROLE'
 
   backups:
     pgbackrest:
