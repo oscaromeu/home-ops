@@ -9,5 +9,8 @@ spec:
       namespace: network
     - name: crunchy-postgres-cluster-clusterexternalsecrets
       namespace: databases
-  targetNamespace: default
+  postBuild:
+    substitute:
+      postgres_cluster_version: "v17-1"
   path: ./kubernetes/apps/default/linkding/app
+  targetNamespace: default
