@@ -81,7 +81,12 @@ spec:
       databases:
         - linkding
       password: *password
-      options: 'SUPERUSER' #'CREATEDB CREATEROLE'
+      options: 'CREATEDB CREATEROLE'
+    - name: outline
+      databases:
+        - outline
+      password: *password
+      options: 'CREATEDB CREATEROLE'
     - name: outline
       databases:
         - outline
