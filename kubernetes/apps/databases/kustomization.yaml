@@ -10,3 +10,4 @@ resources:
   - ./namespace.yaml
   - ./crunchy-pg/ks.yaml
   - ./dragonfly/ks.yaml
+  - ./pgadmin/ks.yaml
