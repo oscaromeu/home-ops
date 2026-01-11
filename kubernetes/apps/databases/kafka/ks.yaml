@@ -23,6 +23,6 @@ metadata:
   name: kafka-tools
 spec:
   dependsOn:
-    - name: cluster-apps-kafka-operator
+    - name: kafka-operator
   targetNamespace: databases
   path: ./kubernetes/apps/databases/kafka/tools

@@ -4,7 +4,6 @@ kind: HelmRelease
 metadata:
   name: kafka-operator
 spec:
-  interval: 5m
   chart:
     spec:
       chart: strimzi-kafka-operator
@@ -12,8 +11,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: strimzi
-        namespace: flux-system
-      interval: 5m
   valuesFrom:
     - kind: ConfigMap
       name: kafka-operator-helm-values
