@@ -76,7 +76,17 @@ spec:
       databases:
         - docmost
       password: *password
-      options: SUPERUSER #'CREATEDB CREATEROLE'
+      options: 'CREATEDB CREATEROLE'
+    - name: linkding
+      databases:
+        - linkding
+      password: *password
+      options: 'SUPERUSER' #'CREATEDB CREATEROLE'
+    - name: outline
+      databases:
+        - outline
+      password: *password
+      options: 'SUPERUSER' #'CREATEDB CREATEROLE'
 
   backups:
     pgbackrest:
