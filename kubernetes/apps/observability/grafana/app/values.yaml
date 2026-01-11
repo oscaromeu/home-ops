@@ -3,7 +3,7 @@ extraInitContainers:
     image: ghcr.io/home-operations/postgres-init:18
     envFrom:
       - secretRef:
-          name: postgres-test-restore-pguser-grafana
+          name: postgres-${postgres_cluster_version}-pguser-grafana
 admin:
   existingSecret: grafana-admin-secret
 replicas: 2
