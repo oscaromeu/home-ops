@@ -87,9 +87,9 @@ spec:
         - outline
       password: *password
       options: 'CREATEDB CREATEROLE'
-    - name: outline
+    - name: grafana
       databases:
-        - outline
+        - grafana
       password: *password
       options: 'SUPERUSER' #'CREATEDB CREATEROLE'
 
