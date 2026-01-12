@@ -56,9 +56,9 @@ spec:
             port: *port
     route:
       app:
-        hostnames: ["docmost.${SECRET_DOMAIN}"]
+        hostnames: ["notes.${SECRET_DOMAIN}"]
         parentRefs:
-          - name: envoy-external
+          - name: envoy-internal
             namespace: network
             sectionName: https
         rules:
