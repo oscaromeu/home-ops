@@ -5,4 +5,5 @@ kind: Kustomization
 metadata:
   name: victoria-logs
 spec:
+  targetNamespace: observability
   path: ./kubernetes/apps/observability/victoria-logs/app

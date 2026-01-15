@@ -5,6 +5,7 @@ kind: Kustomization
 metadata:
   name: fluentbit
 spec:
+  targetNamespace: observability
   dependsOn:
     - name: victoria-logs
   path: ./kubernetes/apps/observability/fluentbit/app
