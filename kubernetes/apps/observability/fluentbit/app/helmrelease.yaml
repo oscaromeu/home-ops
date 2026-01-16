@@ -20,3 +20,12 @@ spec:
     serviceMonitor:
       enabled: true
     logLevel: warn
+    extraVolumes:
+      - name: parsers
+        configMap:
+          defaultMode: 420
+          name: parsers
+    extraVolumeMounts: 
+      - name: parsers
+        mountPath: /fluent-bit/etc/conf/parsers.yaml
+        

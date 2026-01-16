@@ -7,5 +7,8 @@ configMapGenerator:
   - name: fluent-bit
     files:
       - fluent-bit.yaml=./fluent-bit.yaml
+  - name: parsers
+    files:
+      - parsers.yaml=./parsers.yaml
 generatorOptions:
   disableNameSuffixHash: true
