@@ -5,7 +5,7 @@ prometheus:
       hostnames:
         - prometheus.${SECRET_DOMAIN}
       parentRefs:
-        - name: envoy-internal
+        - name: envoy-external
           namespace: network
   prometheusSpec:
     replicas: 2
