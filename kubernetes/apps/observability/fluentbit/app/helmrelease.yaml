@@ -28,4 +28,5 @@ spec:
     extraVolumeMounts: 
       - name: parsers
         mountPath: /fluent-bit/etc/conf/parsers.yaml
+        subpath: parsers.yaml
         
