@@ -9,6 +9,7 @@ spec:
     kind: OCIRepository
     name: fluent-bit
   values:
+    config: ""
     image:
       repository: cr.fluentbit.io/fluent/fluent-bit
       tag: 4.2.2-debug
