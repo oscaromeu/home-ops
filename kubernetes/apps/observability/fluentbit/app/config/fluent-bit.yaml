@@ -2,7 +2,7 @@ service:
   daemon: false
   flush: 1
   log_level: warn
-  parsers_file: 
+  parsers: 
     - /fluent-bit/etc/parsers.conf
     - /fluent-bit/etc/conf/custom_parsers.conf
   http_server: true
