@@ -15,7 +15,7 @@ spec:
       tag: 4.2.2-debug
     args:
       - --workdir=/fluent-bit/etc
-      - --config=/fluent-bit/etc/conf/fluent-bit.yaml
+      - --config=/fluent-bit/etc/conf/fluentbit.yaml
     dashboards:
       enabled: true
     serviceMonitor:
