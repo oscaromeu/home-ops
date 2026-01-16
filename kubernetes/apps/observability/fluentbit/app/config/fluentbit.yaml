@@ -37,6 +37,7 @@ pipeline:
       k8s-logging.exclude: true
       namespace_labels: false
       annotations: false
+      buffer_size: 256k
     - name: nest
       match: kubernetes.*
       operation: lift
