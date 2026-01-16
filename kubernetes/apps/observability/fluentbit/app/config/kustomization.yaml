@@ -2,8 +2,10 @@
 # yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-resources:
-  - ./config
-  - ./helmrelease.yaml
-  - ./ocirepository.yaml
 
+configMapGenerator:
+  - name: fluent-bit
+    files:
+      - fluent-bit.yaml=./fluent-bit.yaml
+generatorOptions:
+  disableNameSuffixHash: true

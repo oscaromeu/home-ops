@@ -1,0 +1,86 @@
+apiVersion: v1
+data:
+  custom_parsers.conf: |
+    [PARSER]
+      name containerd
+      format regex
+      regex ^(?<time>[^ ]+) (?<stream>stdout|stderr) (?<logtag>[^ ]*) (?<log>.*)$
+      time_key time
+      time_format %Y-%m-%dT%H:%M:%S.%L%z
+  fluent-bit.conf: |
+    [SERVICE]
+      daemon off
+      flush 1
+      log_level warn
+      parsers_file /fluent-bit/etc/parsers.conf
+      parsers_file /fluent-bit/etc/conf/custom_parsers.conf
+      http_server on
+      http_listen 0.0.0.0
+      http_port 2020
+      health_check on
+    [INPUT]
+      name tail
+      alias kubernetes
+      path /var/log/containers/*.log
+      parser containerd
+      tag kubernetes.*
+      skip_empty_lines on
+      skip_long_lines on
+    [FILTER]
+      name kubernetes
+      match kubernetes.*
+      merge_log on
+      kube_tag_prefix kubernetes.var.log.containers.
+      k8s-logging.parser on
+      k8s-logging.exclude on
+      namespace_labels off
+      annotations off
+
+    [FILTER]
+      name nest
+      match kubernetes.*
+      operation lift
+      nested_under kubernetes
+      add_prefix k_
+
+    [FILTER]
+      name nest
+      match kubernetes.*
+      operation lift
+      nested_under k_labels
+      add_prefix k_labels_
+
+    [FILTER]
+      name modify
+      match kubernetes.*
+      rename k_labels_app.kubernetes.io/name app
+      rename k_labels_app app
+      rename k_labels_k8s-app app
+    [OUTPUT]
+      name http
+      match kubernetes.*
+      host victoria-logs-server.observability.svc.cluster.local
+      port 9428
+      uri /insert/jsonline?_stream_fields=stream,k_namespace_name,k_pod_name,app&_msg_field=log&_time_field=date
+      format json_lines
+      json_date_format iso8601
+      compress gzip
+      log_response_payload false
+kind: ConfigMap
+metadata:
+  annotations:
+    meta.helm.sh/release-name: fluent-bit
+    meta.helm.sh/release-namespace: observability
+  creationTimestamp: "2026-01-15T10:19:18Z"
+  labels:
+    app.kubernetes.io/instance: fluent-bit
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: fluent-bit
+    app.kubernetes.io/version: 4.1.1
+    helm.sh/chart: fluent-bit-0.54.1
+    helm.toolkit.fluxcd.io/name: fluent-bit
+    helm.toolkit.fluxcd.io/namespace: observability
+  name: fluent-bit
+  namespace: observability
+  resourceVersion: "13416046"
+  uid: e27b1b22-6e1a-421e-a580-fc19d2e351a7
