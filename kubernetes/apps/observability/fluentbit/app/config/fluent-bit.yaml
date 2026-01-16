@@ -2,7 +2,7 @@ service:
   daemon: false
   flush: 1
   log_level: warn
-  parsers: /fluent-bit/etc/parsers.yaml
+  parsers: /fluent-bit/etc/conf/parsers.d/parsers.yaml
   http_server: true
   http_listen: 0.0.0.0
   http_port: 2020
