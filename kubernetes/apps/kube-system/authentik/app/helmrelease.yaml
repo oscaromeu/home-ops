@@ -18,7 +18,7 @@ spec:
         type: RollingUpdate
       envFrom:
         - secretRef:
-            name: authentik-secret
+            name: postgres-${postgres_cluster_version}-pguser-authentik
     authentik:
       log_level: info
       #email:
