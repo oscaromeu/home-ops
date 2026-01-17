@@ -40,7 +40,7 @@ spec:
           image: ghcr.io/home-operations/postgres-init:18
           envFrom:
             - secretRef:
-                name: postgres-v17-1-pguser-authentik
+                name: postgres-${postgres_cluster_version}-pguser-authentik
       resources:
         requests:
           cpu: 50m

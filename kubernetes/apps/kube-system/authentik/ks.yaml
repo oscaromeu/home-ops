@@ -4,6 +4,9 @@ kind: Kustomization
 metadata:
   name: authentik
 spec:
+  postBuild:
+    substitute:
+      postgres_cluster_version: "v17-1"
   dependsOn:
     - name: crunchy-postgres-cluster-clusterexternalsecrets
       namespace: databases
