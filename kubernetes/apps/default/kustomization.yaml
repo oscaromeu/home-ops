@@ -13,6 +13,7 @@ resources:
   - ./echo/ks.yaml
   - ./filebrowser/ks.yaml
   - ./jellyfin/ks.yaml
+  - ./kavita/ks.yaml
   - ./linkding/ks.yaml
   - ./memos/ks.yaml
   - ./metube/ks.yaml
