@@ -30,10 +30,15 @@ spec:
         configMap:
           defaultMode: 420
           name: pipelines
+      - name: kafka-certs
+        secret:
+          secretName: kafka-cluster-client-certs
+          defaultMode: 420   # optional, controls permissions
     extraVolumeMounts: 
       - name: parsers
         mountPath: /fluent-bit/etc/conf/parsers.d/
       - name: pipelines
         mountPath: /fluent-bit/etc/conf/pipelines.d/
-
-        
+      - name: kafka-certs
+        mountPath: /fluent-bit/etc/secrets/
+        readOnly: true
