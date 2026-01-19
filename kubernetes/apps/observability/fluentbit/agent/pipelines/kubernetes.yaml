@@ -44,7 +44,7 @@ pipeline:
       log_response_payload: false
     - name: kafka
       match: '*'
-      host: kafka-cluster-kafka-bootstrap.databases.svc.cluster.local:9093
+      brokers: kafka-cluster-kafka-bootstrap.databases.svc.cluster.local:9093
       topics: cluster-apps-logs
       rdkafka.client.id: fluent-bit
       rdkafka.debug: all
