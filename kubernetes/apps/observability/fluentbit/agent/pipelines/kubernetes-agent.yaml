@@ -1,0 +1,33 @@
+pipeline:
+  inputs:
+    - name: tail
+      alias: kubernetes
+      path: /var/log/containers/*.log
+      parser: containerd
+      tag: kubernetes.*
+      skip_empty_lines: on
+      skip_long_lines: on
+  
+  filters:
+    - name: kubernetes
+      match: kubernetes.*
+      merge_log: true
+      kube_tag_prefix: kubernetes.var.log.containers.
+      k8s-logging.parser: true
+      k8s-logging.exclude: true
+      namespace_labels: false
+      annotations: false
+  
+  outputs:
+    - name: kafka
+      match: '*'
+      brokers: kafka-cluster-kafka-brokers.databases.svc.cluster.local:9093
+      topics: cluster-apps-logs
+      rdkafka.client.id: fluent-bit
+      rdkafka.enable.ssl.certificate.verification: true
+      rdkafka.ssl.certificate.location: /fluent-bit/etc/secrets/user.crt
+      rdkafka.ssl.key.location: /fluent-bit/etc/secrets/user.key
+      rdkafka.ssl.ca.location: /fluent-bit/etc/secrets/ca.crt
+      rdkafka.security.protocol: ssl
+      rdkafka.request.required.acks: 1
+      format: avro
