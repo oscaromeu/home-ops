@@ -1,3 +1,6 @@
+includes:
+  - /fluent-bit/etc/conf/pipelines.d/
+
 service:
   daemon: false
   flush: 1
@@ -7,8 +10,6 @@ service:
   http_listen: 0.0.0.0
   http_port: 2020
   health_check: true
-  includes:
-    - /fluent-bit/etc/conf/pipelines.d/
   # https://docs.fluentbit.io/manual/administration/buffering-and-storage#fluent-bit.yaml
   mem_buf_limit: 50MB
   storage.path: /var/log/fluentbit/storage
