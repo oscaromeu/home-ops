@@ -17,6 +17,7 @@ pipeline:
       k8s-logging.exclude: true
       namespace_labels: false
       annotations: false
+      buffer_size: 256k
 
   outputs:
     - name: kafka
@@ -30,4 +31,4 @@ pipeline:
       rdkafka.ssl.ca.location: /fluent-bit/etc/secrets/ca.crt
       rdkafka.security.protocol: ssl
       rdkafka.request.required.acks: 1
-      format: raw
+      format: json

@@ -9,7 +9,7 @@ pipeline:
       rdkafka.ssl.key.location: /fluent-bit/etc/secrets/user.key
       rdkafka.ssl.ca.location: /fluent-bit/etc/secrets/ca.crt
       rdkafka.security.protocol: ssl
-      #format: avro
+      format: json
 
   filters:
     - name: nest
