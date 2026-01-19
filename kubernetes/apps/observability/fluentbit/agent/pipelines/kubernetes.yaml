@@ -57,3 +57,4 @@ pipeline:
       rdkafka.log.connection.close: false
       format: avro
       rdkafka.log_level: 7
+      rdkafka.metadata.broker.list: kafka-cluster-kafka-bootstrap.databases.svc.cluster.local:9093
