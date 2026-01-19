@@ -1,5 +1,5 @@
 includes:
-  - /fluent-bit/etc/conf/pipelines.d/
+  - /fluent-bit/etc/conf/pipelines.d/kubenetes.yaml
 
 service:
   daemon: false
