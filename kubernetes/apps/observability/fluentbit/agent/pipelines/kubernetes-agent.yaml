@@ -7,7 +7,7 @@ pipeline:
       tag: kubernetes.*
       skip_empty_lines: on
       skip_long_lines: on
-  
+
   filters:
     - name: kubernetes
       match: kubernetes.*
@@ -17,7 +17,7 @@ pipeline:
       k8s-logging.exclude: true
       namespace_labels: false
       annotations: false
-  
+
   outputs:
     - name: kafka
       match: '*'
@@ -30,4 +30,4 @@ pipeline:
       rdkafka.ssl.ca.location: /fluent-bit/etc/secrets/ca.crt
       rdkafka.security.protocol: ssl
       rdkafka.request.required.acks: 1
-      format: avro
+      format: raw
