@@ -44,7 +44,7 @@ pipeline:
       log_response_payload: false
     - name: kafka
       match: '*'
-      brokers: kafka-cluster-kafka-bootstrap.databases.svc.cluster.local:9093
+      brokers: kafka-cluster-kafka-brokers.databases.svc.cluster.local:9093
       topics: cluster-apps-logs
       rdkafka.client.id: fluent-bit
       rdkafka.debug: all
@@ -57,4 +57,3 @@ pipeline:
       rdkafka.log.connection.close: false
       format: avro
       rdkafka.log_level: 7
-      rdkafka.metadata.broker.list: kafka-cluster-kafka-bootstrap.databases.svc.cluster.local:9093
