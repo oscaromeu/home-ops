@@ -3,7 +3,7 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
-  name: talos-prod-1-edge-apps
+  name: cluster-apps-logs
   labels:
     strimzi.io/cluster: kafka-cluster
 spec:

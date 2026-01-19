@@ -2,7 +2,7 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaUser
 metadata:
-  name: talos-prod-1-edge-apps
+  name: cluster-apps-logs
   labels:
     strimzi.io/cluster: kafka-cluster
 spec:
@@ -14,7 +14,7 @@ spec:
       # Example ACL rules for creating, describing, consuming and producing from my-topic using consumer group my-group
       - resource:
           type: topic
-          name: talos-prod-1-edge-apps
+          name: cluster-apps-logs
           patternType: literal
         operations:
           - Read
@@ -24,7 +24,7 @@ spec:
         host: "*"
       - resource:
           type: group
-          name: talos-prod-1-edge-apps
+          name: cluster-apps-logs
           patternType: literal
         operations:
           - Read
