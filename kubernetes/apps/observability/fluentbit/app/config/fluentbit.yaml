@@ -7,6 +7,8 @@ service:
   http_listen: 0.0.0.0
   http_port: 2020
   health_check: true
+  includes:
+    - /fluent-bit/etc/conf/pipelines.d/
   # https://docs.fluentbit.io/manual/administration/buffering-and-storage#fluent-bit.yaml
   mem_buf_limit: 50MB
   storage.path: /var/log/fluentbit/storage
@@ -19,48 +21,4 @@ service:
   storage.delete_irrecoverable_chunks: true
   storage.keep.rejected: on
   storage.rejected.path: rejected
-pipeline:
-  inputs:
-    - name: tail
-      alias: kubernetes
-      path: /var/log/containers/*.log
-      parser: containerd
-      tag: kubernetes.*
-      skip_empty_lines: on
-      skip_long_lines: on
-  filters:
-    - name: kubernetes
-      match: kubernetes.*
-      merge_log: true
-      kube_tag_prefix: kubernetes.var.log.containers.
-      k8s-logging.parser: true
-      k8s-logging.exclude: true
-      namespace_labels: false
-      annotations: false
-      buffer_size: 256k
-    - name: nest
-      match: kubernetes.*
-      operation: lift
-      nested_under: kubernetes
-      add_prefix: k_
-    - name: nest
-      match: kubernetes.*
-      operation: lift
-      nested_under: k_labels
-      add_prefix: k_labels_
-    - name: modify
-      match: kubernetes.*
-      rename: k_labels_app.kubernetes.io/name app
-      rename: k_labels_app app
-      rename: k_labels_k8s-app app
-  outputs:
-    - name: http
-      match: kubernetes.*
-      host: victoria-logs-server.observability.svc.cluster.local
-      port: 9428
-      uri: /insert/jsonline?_stream_fields=stream,k_namespace_name,k_pod_name,app&_msg_field=log&_time_field=date
-      format: json_lines
-      json_date_format: iso8601
-      compress: gzip
-      log_response_payload: false
 

@@ -26,7 +26,14 @@ spec:
         configMap:
           defaultMode: 420
           name: parsers
+      - name: pipelines
+        configMap:
+          defaultMode: 420
+          name: pipelines
     extraVolumeMounts: 
       - name: parsers
         mountPath: /fluent-bit/etc/conf/parsers.d/
+      - name: pipelines
+        mountPath: /fluent-bit/etc/conf/pipelines.d/
+
         
