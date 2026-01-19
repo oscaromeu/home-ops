@@ -46,3 +46,13 @@ spec:
     - name: kafka-cluster
   targetNamespace: databases
   path: ./kubernetes/apps/databases/kafka/secrets/cluster
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: kafka-cluster-monitoring
+spec:
+  dependsOn:
+    - name: kafka-cluster
+  targetNamespace: databases
+  path: ./kubernetes/apps/databases/kafka/monitoring
