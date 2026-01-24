@@ -22,7 +22,7 @@ spec:
               pullPolicy: IfNotPresent
             env:
               KAFKA_BROKERS: kafka-cluster-kafka-brokers.databases.svc.cluster.local:9093
-              KAFKA_TLS_ENABLED: true
+              KAFKA_TLS_ENABLED: false
               KAFKA_SASL_ENABLED: true
             envFrom:
               - secretRef:
