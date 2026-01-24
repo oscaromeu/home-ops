@@ -13,3 +13,4 @@ resources:
   - ./kafka/ks.yaml
   - ./pgadmin/ks.yaml
   - ./redis/ks.yaml
+  - ./redpanda/ks.yaml
