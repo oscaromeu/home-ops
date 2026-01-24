@@ -11,7 +11,6 @@ spec:
   authorization:
     type: simple
     acls:
-      # Example ACL rules for creating, describing, consuming and producing from my-topic using consumer group my-group
       - resource:
           type: topic
           name: cluster-apps-logs
@@ -25,6 +24,37 @@ spec:
       - resource:
           type: group
           name: cluster-apps-logs
+          patternType: literal
+        operations:
+          - Read
+        host: "*"
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaUser
+metadata:
+  name: redpanda-client
+  labels:
+    strimzi.io/cluster: kafka-cluster
+spec:
+  authentication:
+    type: scram-sha-512
+  authorization:
+    type: simple
+    acls:
+      # Topic access
+      - resource:
+          type: topic
+          name: cluster-apps-logs
+          patternType: literal
+        operations:
+          - Read
+          - Describe
+        host: "*"
+
+      # Consumer group
+      - resource:
+          type: group
+          name: redpanda-consumers
           patternType: literal
         operations:
           - Read
