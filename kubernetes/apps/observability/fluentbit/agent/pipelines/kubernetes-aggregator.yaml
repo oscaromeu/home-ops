@@ -12,6 +12,15 @@ pipeline:
       format: json
 
   filters:
+    - name: kubernetes
+      match: kubernetes.*
+      merge_log: true
+      kube_tag_prefix: kubernetes.var.log.containers.
+      k8s-logging.parser: true
+      k8s-logging.exclude: true
+      namespace_labels: false
+      annotations: false
+      buffer_size: 256k
     - name: nest
       match: '*'
       operation: lift

@@ -11,12 +11,12 @@ service:
   http_port: 2020
   health_check: true
   # https://docs.fluentbit.io/manual/administration/buffering-and-storage#fluent-bit.yaml
-  mem_buf_limit: 50MB
+  mem_buf_limit: 50MB # 300MB - 1GB
   storage.path: /var/log/fluentbit/storage
   storage.sync: full
   storage.checksum: true
-  storage.max_chunks_up: 128
-  storage.backlog.mem_limit: 5M
+  storage.max_chunks_up: 128 # 512
+  storage.backlog.mem_limit: 5M # 200M - 500M
   storage.backlog.flush_on_shutdown: true
   storage.metrics: true
   storage.delete_irrecoverable_chunks: true

@@ -7,17 +7,10 @@ pipeline:
       tag: kubernetes.*
       skip_empty_lines: on
       skip_long_lines: on
-
-  filters:
-    - name: kubernetes
-      match: kubernetes.*
-      merge_log: true
-      kube_tag_prefix: kubernetes.var.log.containers.
-      k8s-logging.parser: true
-      k8s-logging.exclude: true
-      namespace_labels: false
-      annotations: false
-      buffer_size: 256k
+      refresh_interval: 5
+      rotate_wait: 30
+      ignore_older: 1h
+      mem_buf_limit: 10MB #50MB - 100MB
 
   outputs:
     - name: kafka
@@ -30,5 +23,11 @@ pipeline:
       rdkafka.ssl.key.location: /fluent-bit/etc/secrets/user.key
       rdkafka.ssl.ca.location: /fluent-bit/etc/secrets/ca.crt
       rdkafka.security.protocol: ssl
-      rdkafka.request.required.acks: 1
+      rdkafka.request.required.acks: 1 # all
+      rdkafka.message.send.max.retries: 5 # 15-20
+      rdkafka.retry.backoff.ms: 300
+      rdkafka.queue.buffering.max.messages: 100000 # 500000
+      rdkafka.queue.buffering.max.kbytes: 262144   # 256MB -> 1Gb
+      rdkafka.batch.num.messages: 500 # 1000-5000
+      rdkafka.linger.ms: 2 # 5-10
       format: json
