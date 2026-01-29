@@ -10,7 +10,7 @@ pipeline:
       refresh_interval: 5
       rotate_wait: 30
       ignore_older: 1h
-      mem_buf_limit: 10MB #50MB - 100MB
+      mem_buf_limit: 50MB #50MB - 100MB
 
   filters:
     - name: modify
@@ -33,7 +33,7 @@ pipeline:
       rdkafka.retry.backoff.ms: 300
       rdkafka.message.max.bytes: 5242880          # 5MB
       rdkafka.queue.buffering.max.kbytes: 262144  # 256MB buffer
-  
+      rdkafka.compression.codec: gzip
       rdkafka.batch.num.messages: 500
       rdkafka.linger.ms: 2
       format: json
