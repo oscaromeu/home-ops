@@ -12,6 +12,11 @@ pipeline:
       ignore_older: 1h
       mem_buf_limit: 10MB #50MB - 100MB
 
+  filters:
+    - name: modify
+      match: '*'
+      copy: log _msg
+
   outputs:
     - name: kafka
       match: '*'
