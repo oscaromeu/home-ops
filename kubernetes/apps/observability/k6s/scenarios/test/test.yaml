@@ -15,7 +15,7 @@ spec:
     env:
       - name: K6_PROMETHEUS_RW_SERVER_URL
         value: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/write
-  arguments: -o experimental-prometheus-rw --summary-mode=full
+  arguments: -o experimental-prometheus-rw
   script:
     configMap:
       name: test
