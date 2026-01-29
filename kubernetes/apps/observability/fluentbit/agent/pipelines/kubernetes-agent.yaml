@@ -17,22 +17,24 @@ pipeline:
       match: '*'
       copy: log _msg
 
-  outputs:
-    - name: kafka
-      match: '*'
-      brokers: kafka-cluster-kafka-brokers.databases.svc.cluster.local:9093
-      topics: cluster-apps-logs
-      rdkafka.client.id: fluent-bit
-      rdkafka.enable.ssl.certificate.verification: true
-      rdkafka.ssl.certificate.location: /fluent-bit/etc/secrets/user.crt
-      rdkafka.ssl.key.location: /fluent-bit/etc/secrets/user.key
-      rdkafka.ssl.ca.location: /fluent-bit/etc/secrets/ca.crt
-      rdkafka.security.protocol: ssl
-      rdkafka.request.required.acks: 1 # all
-      rdkafka.message.send.max.retries: 5 # 15-20
-      rdkafka.retry.backoff.ms: 300
-      rdkafka.queue.buffering.max.messages: 100000 # 500000
-      rdkafka.queue.buffering.max.kbytes: 262144   # 256MB -> 1Gb
-      rdkafka.batch.num.messages: 500 # 1000-5000
-      rdkafka.linger.ms: 2 # 5-10
-      format: json
+outputs:
+  - name: kafka
+    match: '*'
+    brokers: kafka-cluster-kafka-brokers.databases.svc.cluster.local:9093
+    topics: cluster-apps-logs
+    rdkafka.client.id: fluent-bit
+    rdkafka.enable.ssl.certificate.verification: true
+    rdkafka.ssl.certificate.location: /fluent-bit/etc/secrets/user.crt
+    rdkafka.ssl.key.location: /fluent-bit/etc/secrets/user.key
+    rdkafka.ssl.ca.location: /fluent-bit/etc/secrets/ca.crt
+    rdkafka.security.protocol: ssl
+    rdkafka.request.required.acks: 1
+    rdkafka.message.send.max.retries: 5
+    rdkafka.retry.backoff.ms: 300
+    rdkafka.message.max.bytes: 5242880          # 5MB
+    rdkafka.queue.buffering.max.kbytes: 262144  # 256MB buffer
+
+    rdkafka.batch.num.messages: 500
+    rdkafka.linger.ms: 2
+    format: json
+
