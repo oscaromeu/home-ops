@@ -61,6 +61,16 @@ spec:
           - backendRefs:
               - identifier: app
                 port: *port
+      app-external:
+        hostnames: ["s3-ext.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-external
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
 
     configMaps:
       config:
