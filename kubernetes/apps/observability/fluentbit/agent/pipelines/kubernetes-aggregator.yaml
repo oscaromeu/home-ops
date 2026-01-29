@@ -3,13 +3,14 @@ pipeline:
     - name: kafka
       brokers: kafka-cluster-kafka-brokers.databases.svc.cluster.local:9093
       topics: cluster-apps-logs
+      group_id: fluent-bit-aggregator
       rdkafka.client.id: fluent-bit-aggregator
       rdkafka.enable.ssl.certificate.verification: true
       rdkafka.ssl.certificate.location: /fluent-bit/etc/secrets/user.crt
       rdkafka.ssl.key.location: /fluent-bit/etc/secrets/user.key
       rdkafka.ssl.ca.location: /fluent-bit/etc/secrets/ca.crt
       rdkafka.security.protocol: ssl
-      format: json
+      format: none
 
   filters:
     - name: kubernetes
