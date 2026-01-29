@@ -27,6 +27,7 @@ spec:
           patternType: literal
         operations:
           - Read
+          - Describe
         host: "*"
 ---
 apiVersion: kafka.strimzi.io/v1beta2
