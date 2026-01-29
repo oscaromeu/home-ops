@@ -37,6 +37,14 @@ spec:
           - Read
           - Describe
         host: "*"
+      - resource:
+          type: group
+          name: fluent-bit-aggregator
+          patternType: literal
+        operations:
+          - Read
+          - Describe
+        host: "*"
 ---
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaUser
