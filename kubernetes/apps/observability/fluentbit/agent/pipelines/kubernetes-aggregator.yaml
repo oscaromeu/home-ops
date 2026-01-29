@@ -42,6 +42,9 @@ pipeline:
       rename: k_labels_k8s-app app
 
   outputs:
+    - name: stdout
+      match: '*'
+      format: json    # just for debugging, remove later
     - name: http
       match: '*'
       host: victoria-logs-server.observability.svc.cluster.local
