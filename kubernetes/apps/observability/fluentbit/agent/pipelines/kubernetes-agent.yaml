@@ -14,10 +14,36 @@ pipeline:
       buffer_max_size: 128kb
       truncate_long_lines: true
 
+  #filters:
+  #  - name: modify
+  #    match: '*'
+  #    copy: log _msg
+
   filters:
+    - name: kubernetes
+      match: kubernetes.*
+      merge_log: true
+      kube_tag_prefix: kubernetes.var.log.containers.
+      k8s-logging.parser: true
+      k8s-logging.exclude: true
+      namespace_labels: false
+      annotations: false
+      buffer_size: 64kb
+    - name: nest
+      match: '*'
+      operation: lift
+      nested_under: kubernetes
+      add_prefix: k_
+    - name: nest
+      match: '*'
+      operation: lift
+      nested_under: k_labels
+      add_prefix: k_labels_
     - name: modify
       match: '*'
-      copy: log _msg
+      rename: k_labels_app.kubernetes.io/name app
+      rename: k_labels_app app
+      rename: k_labels_k8s-app app
 
   outputs:
     - name: kafka
