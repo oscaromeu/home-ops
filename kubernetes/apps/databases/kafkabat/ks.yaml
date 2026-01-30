@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: redpanda
+  name: kafkabat
 spec:
   targetNamespace: databases
-  path: ./kubernetes/apps/databases/redpanda/app
+  path: ./kubernetes/apps/databases/kafkabat/app
