@@ -10,7 +10,8 @@ pipeline:
       refresh_interval: 5
       rotate_wait: 30
       ignore_older: 1h
-      mem_buf_limit: 50MB #50MB - 100MB
+      buffer_chunk_size: 64kb
+      buffer_max_size: 128kb
 
   filters:
     - name: modify
@@ -31,8 +32,8 @@ pipeline:
       rdkafka.request.required.acks: 1
       rdkafka.message.send.max.retries: 5
       rdkafka.retry.backoff.ms: 300
-      rdkafka.message.max.bytes: 5242880          # 5MB
-      rdkafka.queue.buffering.max.kbytes: 262144  # 256MB buffer
+      #rdkafka.message.max.bytes: 5242880          # 5MB
+      #rdkafka.queue.buffering.max.kbytes: 262144  # 256MB buffer
       rdkafka.compression.codec: gzip
       rdkafka.batch.num.messages: 500
       rdkafka.linger.ms: 2

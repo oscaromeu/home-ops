@@ -10,9 +10,9 @@ pipeline:
       rdkafka.ssl.ca.location: /fluent-bit/etc/secrets/ca.crt
       rdkafka.security.protocol: ssl
       format: none
-      rdkafka.fetch.message.max.bytes: 5242880       # 5 MB, must match agent message.max.bytes
-      rdkafka.receive.message.max.bytes: 5242880
-      rdkafka.max.partition.fetch.bytes: 5242880     # 5 MB, also ensures partitions can fetch large messages
+      #rdkafka.fetch.message.max.bytes: 5242880       # 5 MB, must match agent message.max.bytes
+      #rdkafka.receive.message.max.bytes: 5242880
+      #rdkafka.max.partition.fetch.bytes: 5242880     # 5 MB, also ensures partitions can fetch large messages
 
 
   filters:
@@ -24,7 +24,7 @@ pipeline:
       k8s-logging.exclude: true
       namespace_labels: false
       annotations: false
-      buffer_size: 256k
+      buffer_size: 64kb
     - name: nest
       match: '*'
       operation: lift
