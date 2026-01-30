@@ -5,14 +5,14 @@ pipeline:
       path: /var/log/containers/*.log
       parser: containerd
       tag: kubernetes.*
-      skip_empty_lines: on
-      skip_long_lines: on
+      skip_empty_lines: true
+      skip_long_lines: true
       refresh_interval: 5
       rotate_wait: 30
       ignore_older: 1h
       buffer_chunk_size: 64kb
       buffer_max_size: 128kb
-      truncate_long_lines: true
+      #truncate_long_lines: true
 
   filters:
     - name: modify
