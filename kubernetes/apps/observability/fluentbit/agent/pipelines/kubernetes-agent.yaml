@@ -45,15 +45,7 @@ pipeline:
       rename: k_labels_app app
       rename: k_labels_k8s-app app
 
-    - name: rewrite_tag
-      match: '*'
-      rule: $._msg ^$ stdout_only false
-
   outputs:
-
-    - name: stdout
-      match: stdout_only
-      format: json
 
     - name: kafka
       match: '*'
