@@ -12,7 +12,7 @@ pipeline:
       ignore_older: 1h
       buffer_chunk_size: 64kb
       buffer_max_size: 128kb
-      #truncate_long_lines: true
+      truncate_long_lines: true
 
   filters:
     - name: modify
