@@ -22,9 +22,9 @@ spec:
               pullPolicy: IfNotPresent
             env:
               DYNAMIC_CONFIG_ENABLED: true
-            envFrom:
-              - secretRef:
-                  name: kafkabat
+            #envFrom:
+            #  - secretRef:
+            #      name: kafkabat
             resources:
               requests:
                 cpu: 10m
