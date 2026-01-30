@@ -39,6 +39,10 @@ spec:
       #  log4j.logger.kafka.log.LogCleanerManager: DEBUG
       #  log4j.logger.kafka.request.logger: DEBUG
     listeners:
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
       - name: tls
         port: 9093
         type: internal
