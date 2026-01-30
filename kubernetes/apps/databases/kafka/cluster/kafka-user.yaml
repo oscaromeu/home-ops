@@ -49,7 +49,7 @@ spec:
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaUser
 metadata:
-  name: redpanda-client
+  name: kafkabat
   labels:
     strimzi.io/cluster: kafka-cluster
 spec:
@@ -67,11 +67,10 @@ spec:
           - Read
           - Describe
         host: "*"
-
       # Consumer group
       - resource:
           type: group
-          name: redpanda-consumers
+          name: kafkabat-consumers
           patternType: literal
         operations:
           - Read
