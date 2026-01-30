@@ -14,11 +14,6 @@ pipeline:
       buffer_max_size: 128kb
       truncate_long_lines: true
 
-  #filters:
-  #  - name: modify
-  #    match: '*'
-  #    copy: log _msg
-
   filters:
     - name: kubernetes
       match: kubernetes.*
@@ -29,23 +24,37 @@ pipeline:
       namespace_labels: false
       annotations: false
       buffer_size: 64kb
+
+    # Lift kubernetes fields
     - name: nest
       match: '*'
       operation: lift
       nested_under: kubernetes
       add_prefix: k_
+
     - name: nest
       match: '*'
       operation: lift
       nested_under: k_labels
       add_prefix: k_labels_
+
+    # Normalize app label
     - name: modify
       match: '*'
       rename: k_labels_app.kubernetes.io/name app
       rename: k_labels_app app
       rename: k_labels_k8s-app app
 
+    - name: rewrite_tag
+      match: '*'
+      rule: $._msg ^$ stdout_only false
+
   outputs:
+
+    - name: stdout
+      match: stdout_only
+      format: json
+
     - name: kafka
       match: '*'
       brokers: kafka-cluster-kafka-brokers.databases.svc.cluster.local:9093
@@ -59,10 +68,7 @@ pipeline:
       rdkafka.request.required.acks: 1
       rdkafka.message.send.max.retries: 5
       rdkafka.retry.backoff.ms: 300
-      #rdkafka.message.max.bytes: 5242880          # 5MB
-      #rdkafka.queue.buffering.max.kbytes: 262144  # 256MB buffer
       rdkafka.compression.codec: gzip
       rdkafka.batch.num.messages: 500
       rdkafka.linger.ms: 2
       format: json
-
