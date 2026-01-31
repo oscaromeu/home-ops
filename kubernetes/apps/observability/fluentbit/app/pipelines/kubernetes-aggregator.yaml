@@ -16,13 +16,6 @@ pipeline:
       match: '*'
       operation: lift
       nested_under: payload
-    - name: modify
-      match: '*'
-      remove: topic
-      remove: partition
-      remove: offset
-
-
 
   outputs:
     - name: http
