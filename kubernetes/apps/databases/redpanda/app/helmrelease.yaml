@@ -22,9 +22,13 @@ spec:
               pullPolicy: IfNotPresent
             env:
               KAFKA_BROKERS: kafka-cluster-kafka-brokers.databases.svc.cluster.local:9092
-            #envFrom:
-            #  - secretRef:
-            #      name: redpanda
+              KAFKA_SASL_ENABLED: "true"
+              KAFKA_SASL_MECHANISM: "SCRAM-SHA-512"
+              KAFKA_SASL_USERNAME: "redpanda"
+              KAFKA_TLS_ENABLED: "false"
+            envFrom:
+              - secretRef:
+                  name: redpanda-credentials
             resources:
               requests:
                 cpu: 10m
