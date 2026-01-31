@@ -63,4 +63,5 @@ pipeline:
       rdkafka.compression.codec: gzip
       rdkafka.batch.num.messages: 500
       rdkafka.linger.ms: 5
-      format: json
+      format: raw
+      raw_log_key: "log"

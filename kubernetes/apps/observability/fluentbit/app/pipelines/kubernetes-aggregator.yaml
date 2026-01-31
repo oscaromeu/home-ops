@@ -9,27 +9,7 @@ pipeline:
       rdkafka.ssl.key.location: /fluent-bit/etc/secrets/user.key
       rdkafka.ssl.ca.location: /fluent-bit/etc/secrets/ca.crt
       rdkafka.security.protocol: ssl
-      format: json
-
-  filters:
-    - name: lua
-      match: '*'
-      #script: kafka.lua
-      call: modify_kafka_message
-      code: |
-        -- Recursive function to get the deepest payload
-        function flatten_payload(p)
-            while p.payload do
-                p = p.payload
-            end
-            return p
-        end
-
-        function modify_kafka_message(tag, timestamp, record)
-
-            local flat = flatten_payload(record)
-            return 1, timestamp, flat
-        end
+      format: none
 
   outputs:
     - name: http
