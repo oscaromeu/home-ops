@@ -26,7 +26,6 @@ pipeline:
         end
 
         function modify_kafka_message(tag, timestamp, record)
-            count = count + 1
 
             local flat = flatten_payload(record)
 
