@@ -11,6 +11,19 @@ pipeline:
       rdkafka.security.protocol: ssl
       format: json
 
+  filters:
+    - name: nest
+      match: '*'
+      operation: lift
+      nested_under: payload
+    - name: modify
+      match: '*'
+      remove: topic
+      remove: partition
+      remove: offset
+
+
+
   outputs:
     - name: http
       match: '*'
