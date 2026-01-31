@@ -10,36 +10,6 @@ pipeline:
       rdkafka.ssl.ca.location: /fluent-bit/etc/secrets/ca.crt
       rdkafka.security.protocol: ssl
       format: json
-      #rdkafka.fetch.message.max.bytes: 5242880       # 5 MB, must match agent message.max.bytes
-      #rdkafka.receive.message.max.bytes: 5242880
-      #rdkafka.max.partition.fetch.bytes: 5242880     # 5 MB, also ensures partitions can fetch large messages
-
-
-  #filters:
-  #  - name: kubernetes
-  #    match: kubernetes.*
-  #    merge_log: false
-  #    kube_tag_prefix: kubernetes.var.log.containers.
-  #    k8s-logging.parser: true
-  #    k8s-logging.exclude: true
-  #    namespace_labels: false
-  #    annotations: false
-  #    buffer_size: 256k
-  #  - name: nest
-  #    match: '*'
-  #    operation: lift
-  #    nested_under: kubernetes
-  #    add_prefix: k_
-  #  - name: nest
-  #    match: '*'
-  #    operation: lift
-  #    nested_under: k_labels
-  #    add_prefix: k_labels_
-  #  - name: modify
-  #    match: '*'
-  #    rename: k_labels_app.kubernetes.io/name app
-  #    rename: k_labels_app app
-  #    rename: k_labels_k8s-app app
 
   outputs:
     - name: http

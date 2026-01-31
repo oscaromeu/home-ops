@@ -6,12 +6,12 @@ pipeline:
       parser: containerd
       tag: kubernetes.*
       skip_empty_lines: true
-      skip_long_lines: true
+      skip_long_lines: false
       refresh_interval: 5
       rotate_wait: 30
       ignore_older: 1h
-      buffer_chunk_size: 64kb
-      buffer_max_size: 128kb
+      buffer_chunk_size: 128kb
+      buffer_max_size: 256kb
       truncate_long_lines: true
 
   filters:
@@ -23,7 +23,7 @@ pipeline:
       k8s-logging.exclude: true
       namespace_labels: false
       annotations: false
-      buffer_size: 64kb
+      buffer_size: 128kb
 
     # Lift kubernetes fields
     - name: nest
@@ -62,5 +62,5 @@ pipeline:
       rdkafka.retry.backoff.ms: 300
       rdkafka.compression.codec: gzip
       rdkafka.batch.num.messages: 500
-      rdkafka.linger.ms: 2
+      rdkafka.linger.ms: 5
       format: json
