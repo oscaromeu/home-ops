@@ -25,7 +25,6 @@ spec:
               KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-cluster-kafka-bootstrap.databases.svc.cluster.local:9092
               KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL: SASL_SSL
               KAFKA_CLUSTERS_0_PROPERTIES_SASL_MECHANISM: SCRAM-SHA-512
-              KAFKA_CLUSTERS_0_PROPERTIES_SASL_JAAS_CONFIG: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="admin" password="admin-secret";'
               DYNAMIC_CONFIG_ENABLED: true # not necessary for sasl auth, added for tests
             envFrom:
               - secretRef:
