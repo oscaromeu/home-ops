@@ -43,6 +43,8 @@ spec:
         port: 9092
         type: internal
         tls: false
+        authentication:
+          type: scram-sha-512
       - name: tls
         port: 9093
         type: internal
@@ -60,8 +62,8 @@ spec:
       log.retention.hours: 8
       log.segment.bytes: 1073741824
       log.retention.check.interval.ms: 300000
-      message.max.bytes: 5242880       # 5MB max message
-      replica.fetch.max.bytes: 5242880 # match max message
+      message.max.bytes: 52428800       # 5MB max message
+      replica.fetch.max.bytes: 52428800 # match max message
     metricsConfig:
       type: jmxPrometheusExporter
       valueFrom:
