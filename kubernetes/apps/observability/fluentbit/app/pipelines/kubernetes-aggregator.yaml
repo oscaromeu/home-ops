@@ -17,8 +17,6 @@ pipeline:
       #script: kafka.lua
       call: modify_kafka_message
       code: |
-        local count = 0
-
         -- Recursive function to get the deepest payload
         function flatten_payload(p)
             while p.payload do
@@ -30,14 +28,10 @@ pipeline:
         function modify_kafka_message(tag, timestamp, record)
             count = count + 1
 
-            -- Flatten the payload recursively
             local flat = flatten_payload(record)
 
-            -- Add status and topic at top level
-            flat.status = 'processed by fluent-bit, total records: '..tostring(count)
             flat.topic = record.topic or flat.topic
 
-            -- Return as the new record
             return 1, timestamp, flat
         end
 
