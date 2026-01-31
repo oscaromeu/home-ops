@@ -49,6 +49,7 @@ pipeline:
 
     - name: kafka
       match: '*'
+      timestamp_key: kafka_timestamp
       brokers: kafka-cluster-kafka-brokers.databases.svc.cluster.local:9093
       topics: cluster-apps-logs
       rdkafka.client.id: fluent-bit
