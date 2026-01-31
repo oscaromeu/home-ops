@@ -17,7 +17,7 @@ pipeline:
       #script: kafka.lua
       call: modify_kafka_message
       code: |
-        -- Recursive function to get the deepest payload and drop it
+        -- Recursive function to get the deepest payload
         function flatten_payload(p)
             while p.payload do
                 p = p.payload
@@ -28,7 +28,7 @@ pipeline:
         function modify_kafka_message(tag, timestamp, record)
 
             local flat = flatten_payload(record)
-            return 0, timestamp, flat
+            return 1, timestamp, flat
         end
 
   outputs:
