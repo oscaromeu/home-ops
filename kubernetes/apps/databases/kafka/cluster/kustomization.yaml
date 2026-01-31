@@ -5,4 +5,4 @@ resources:
   - ./kafka.yaml
   - ./metrics-config.yaml
   - ./kafka-user.yaml
-  - ./topic.yaml
+  #- ./topic.yaml
