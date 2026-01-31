@@ -58,3 +58,9 @@ spec:
           - Read
           - Describe
         host: "*"
+      - resource:
+          type: cluster
+          name: kafka-cluster
+        operations:
+          - Describe
+        host: "*"
