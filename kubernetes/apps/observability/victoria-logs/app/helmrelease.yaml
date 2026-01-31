@@ -16,6 +16,13 @@ spec:
         storageClassName: openebs-hostpath
         size: 20Gi
       retentionPeriod: 14d
+      extraArgs:
+        envflag.enable: true
+        envflag.prefix: VM_
+        loggerFormat: json
+        httpListenAddr: :9428
+        http.shutdownDelay: 15s
+        insert.maxLineSizeBytes: 500KB
       route:
         enabled: true
         hostnames:
