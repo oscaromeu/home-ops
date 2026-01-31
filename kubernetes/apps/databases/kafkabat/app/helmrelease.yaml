@@ -2,33 +2,35 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: redpanda
+  name: kafkabat
   namespace: database
 spec:
   chartRef:
     kind: OCIRepository
-    name: redpanda
+    name: kafkabat
   interval: 30m
   values:
     controllers:
-      redpanda:
+      kafkabat:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
-              repository: redpandadata/console
-              tag: v3.5.0
+              repository: kafbat/kafka-ui
+              tag: ee012ad
               pullPolicy: IfNotPresent
             env:
-              KAFKA_BROKERS: kafka-cluster-kafka-brokers.databases.svc.cluster.local:9092
-              KAFKA_SASL_ENABLED: "true"
-              KAFKA_SASL_MECHANISM: "SCRAM-SHA-512"
-              KAFKA_SASL_USERNAME: "redpanda"
-              KAFKA_TLS_ENABLED: "false"
+              DYNAMIC_CONFIG_ENABLED: true
+              KAFKA_CLUSTERS_0_NAME: local
+              KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-cluster-kafka-bootstrap.databases.svc.cluster.local:9092
+              KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL: SASL_SSL
+              KAFKA_CLUSTERS_0_PROPERTIES_SASL_MECHANISM: SCRAM-SHA-512
+              KAFKA_CLUSTERS_0_PROPERTIES_SASL_JAAS_CONFIG: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="admin" password="admin-secret";'
+              DYNAMIC_CONFIG_ENABLED: true # not necessary for sasl auth, added for tests
             envFrom:
               - secretRef:
-                  name: redpanda-credentials
+                  name: kafkabat-credentials
             resources:
               requests:
                 cpu: 10m
@@ -38,7 +40,7 @@ spec:
 
     service:
       app:
-        controller: redpanda
+        controller: kafkabat
         type: ClusterIP
         ports:
           http:
