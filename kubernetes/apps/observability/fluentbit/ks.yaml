@@ -8,4 +8,4 @@ spec:
   targetNamespace: observability
   dependsOn:
     - name: victoria-logs
-  path: ./kubernetes/apps/observability/fluentbit/agent
+  path: ./kubernetes/apps/observability/fluentbit/app
