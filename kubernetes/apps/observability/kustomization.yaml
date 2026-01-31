@@ -8,8 +8,8 @@ components:
 
 resources:
   - ./namespace.yaml
-  #- ./fluentbit/ks.yaml
+  - ./fluentbit/ks.yaml
   - ./grafana/ks.yaml
   #- ./k6s/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
-  #- ./victoria-logs/ks.yaml
+  - ./victoria-logs/ks.yaml
