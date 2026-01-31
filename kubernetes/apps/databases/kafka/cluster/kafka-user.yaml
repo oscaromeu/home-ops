@@ -23,23 +23,7 @@ spec:
         host: "*"
       - resource:
           type: group
-          name: cluster-apps-logs
-          patternType: literal
-        operations:
-          - Read
-          - Describe
-        host: "*"
-      - resource:
-          type: group
-          name: fluent-bit
-          patternType: literal
-        operations:
-          - Read
-          - Describe
-        host: "*"
-      - resource:
-          type: group
-          name: fluent-bit-aggregator
+          name: "*"
           patternType: literal
         operations:
           - Read
@@ -58,16 +42,14 @@ spec:
   authorization:
     type: simple
     acls:
-      # Topic access
       - resource:
           type: topic
-          name: cluster-apps-logs
+          name: "*"
           patternType: literal
         operations:
           - Read
           - Describe
         host: "*"
-      # Consumer group
       - resource:
           type: group
           name: "*"
