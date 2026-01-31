@@ -9,7 +9,7 @@ pipeline:
       rdkafka.ssl.key.location: /fluent-bit/etc/secrets/user.key
       rdkafka.ssl.ca.location: /fluent-bit/etc/secrets/ca.crt
       rdkafka.security.protocol: ssl
-      format: none
+      format: json
       #rdkafka.fetch.message.max.bytes: 5242880       # 5 MB, must match agent message.max.bytes
       #rdkafka.receive.message.max.bytes: 5242880
       #rdkafka.max.partition.fetch.bytes: 5242880     # 5 MB, also ensures partitions can fetch large messages
