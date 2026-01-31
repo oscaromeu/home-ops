@@ -17,7 +17,7 @@ pipeline:
   filters:
     - name: kubernetes
       match: kubernetes.*
-      merge_log: true
+      merge_log: false
       kube_tag_prefix: kubernetes.var.log.containers.
       k8s-logging.parser: true
       k8s-logging.exclude: true
