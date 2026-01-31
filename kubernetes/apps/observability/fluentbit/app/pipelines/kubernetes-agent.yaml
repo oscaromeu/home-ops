@@ -47,21 +47,31 @@ pipeline:
 
   outputs:
 
-    - name: kafka
+    - name: http
       match: '*'
-      timestamp_key: kafka_timestamp
-      brokers: kafka-cluster-kafka-brokers.databases.svc.cluster.local:9093
-      topics: cluster-apps-logs
-      rdkafka.client.id: fluent-bit
-      rdkafka.enable.ssl.certificate.verification: true
-      rdkafka.ssl.certificate.location: /fluent-bit/etc/secrets/user.crt
-      rdkafka.ssl.key.location: /fluent-bit/etc/secrets/user.key
-      rdkafka.ssl.ca.location: /fluent-bit/etc/secrets/ca.crt
-      rdkafka.security.protocol: ssl
-      rdkafka.request.required.acks: 1
-      rdkafka.message.send.max.retries: 5
-      rdkafka.retry.backoff.ms: 300
-      rdkafka.compression.codec: gzip
-      rdkafka.batch.num.messages: 500
-      rdkafka.linger.ms: 5
-      format: json
+      host: victoria-logs-server.observability.svc.cluster.local
+      port: 9428
+      uri: /insert/jsonline?_stream_fields=stream,k_namespace_name,k_pod_name,app&_msg_field=log&_time_field=date
+      format: json_lines
+      json_date_format: iso8601
+      compress: gzip
+      log_response_payload: false
+
+    #- name: kafka
+    #  match: '*'
+    #  timestamp_key: kafka_timestamp
+    #  brokers: kafka-cluster-kafka-brokers.databases.svc.cluster.local:9093
+    #  topics: cluster-apps-logs
+    #  rdkafka.client.id: fluent-bit
+    #  rdkafka.enable.ssl.certificate.verification: true
+    #  rdkafka.ssl.certificate.location: /fluent-bit/etc/secrets/user.crt
+    #  rdkafka.ssl.key.location: /fluent-bit/etc/secrets/user.key
+    #  rdkafka.ssl.ca.location: /fluent-bit/etc/secrets/ca.crt
+    #  rdkafka.security.protocol: ssl
+    #  rdkafka.request.required.acks: 1
+    #  rdkafka.message.send.max.retries: 5
+    #  rdkafka.retry.backoff.ms: 300
+    #  rdkafka.compression.codec: gzip
+    #  rdkafka.batch.num.messages: 500
+    #  rdkafka.linger.ms: 5
+    #  format: json
