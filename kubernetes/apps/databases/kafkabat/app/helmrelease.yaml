@@ -23,8 +23,8 @@ spec:
             env:
               KAFKA_CLUSTERS_0_NAME: local
               KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-cluster-kafka-bootstrap.databases.svc.cluster.local:9092
-              KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL: SASL_SSL
-              KAFKA_CLUSTERS_0_PROPERTIES_SASL_MECHANISM: SCRAM-SHA-512
+              KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL: SASL_PLAINTEXT
+              KAFKA_CLUSTERS_0_PROPERTIES_SASL_MECHANISM: PLAIN
               DYNAMIC_CONFIG_ENABLED: true # not necessary for sasl auth, added for tests
             envFrom:
               - secretRef:
