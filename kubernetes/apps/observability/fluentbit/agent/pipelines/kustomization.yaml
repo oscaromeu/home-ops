@@ -6,7 +6,7 @@ kind: Kustomization
 configMapGenerator:
   - name: pipelines
     files:
-      - kubernetes-agent.yaml=./kubernetes-agent.yaml
-      #- kubernetes-aggregator.yaml=./kubernetes-aggregator.yaml
+      #- kubernetes-agent.yaml=./kubernetes-agent.yaml
+      - kubernetes-aggregator.yaml=./kubernetes-aggregator.yaml
 generatorOptions:
   disableNameSuffixHash: true
