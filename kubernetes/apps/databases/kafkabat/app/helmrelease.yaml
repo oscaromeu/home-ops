@@ -21,7 +21,6 @@ spec:
               tag: ee012ad
               pullPolicy: IfNotPresent
             env:
-              DYNAMIC_CONFIG_ENABLED: true
               KAFKA_CLUSTERS_0_NAME: local
               KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-cluster-kafka-bootstrap.databases.svc.cluster.local:9092
               KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL: SASL_SSL
