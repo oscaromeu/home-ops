@@ -63,4 +63,5 @@ spec:
           name: kafka-cluster
         operations:
           - Describe
+          - DescribeConfigs
         host: "*"
