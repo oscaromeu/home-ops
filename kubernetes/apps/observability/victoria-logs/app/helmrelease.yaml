@@ -10,6 +10,7 @@ spec:
     name: victoria-logs
   values:
     fullnameOverride: victoria-logs
+    replicaCount: 2
     server:
       persistentVolume:
         enabled: true
