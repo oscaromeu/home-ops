@@ -22,7 +22,7 @@ spec:
             envFrom:
               - secretRef:
                   name: outline-secret
-            command: ["/bin/sh", "-c", "yarn db:migrate --env=production-ssl-disabled && yarn start --env=production-ssl-disabled"]
+            #command: ["/bin/sh", "-c", "yarn db:migrate --env=production-ssl-disabled && yarn start --env=production-ssl-disabled"]
     service:
       app:
         ports:
