@@ -18,7 +18,7 @@ spec:
           app:
             image:
               repository: redpandadata/console
-              tag: v3.5.0
+              tag: v3.5.1
               pullPolicy: IfNotPresent
             env:
               KAFKA_BROKERS: kafka-cluster-kafka-brokers.databases.svc.cluster.local:9092
