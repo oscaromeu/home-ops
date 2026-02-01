@@ -5,6 +5,7 @@ metadata:
   name: kube-prometheus-stack
 spec:
   interval: 15m
+  url: oci://ghcr.io/prometheus-community/charts/kube-prometheus-stack
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
