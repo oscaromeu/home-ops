@@ -1,0 +1,44 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: fluent-bit-agent
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: fluent-bit
+  values:
+    existingConfigMap: fluentbit
+    image:
+      repository: cr.fluentbit.io/fluent/fluent-bit
+      tag: 4.2.2-debug
+    args:
+      - --workdir=/fluent-bit/etc
+      - --config=/fluent-bit/etc/conf/fluentbit.yaml
+    dashboards:
+      enabled: true
+    serviceMonitor:
+      enabled: true
+    logLevel: warn
+    extraVolumes:
+      - name: parsers
+        configMap:
+          defaultMode: 420
+          name: parsers
+      - name: pipelines-agent
+        configMap:
+          defaultMode: 420
+          name: pipelines-agent
+      - name: topic-cluster-apps-logs-certs
+        secret:
+          secretName: topic-cluster-apps-logs-certs
+          defaultMode: 420   # optional, controls permissions
+    extraVolumeMounts:
+      - name: parsers
+        mountPath: /fluent-bit/etc/conf/parsers.d/
+      - name: pipelines-agent
+        mountPath: /fluent-bit/etc/conf/pipelines.d/
+      - name: topic-cluster-apps-logs-certs
+        mountPath: /fluent-bit/etc/secrets/
+        readOnly: true

@@ -1,0 +1,14 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+configMapGenerator:
+  - name: fluentbit
+    files:
+      - fluentbit.yaml=./fluentbit.yaml
+  - name: parsers
+    files:
+      - parsers.yaml=./parsers.yaml
+generatorOptions:
+  disableNameSuffixHash: true
