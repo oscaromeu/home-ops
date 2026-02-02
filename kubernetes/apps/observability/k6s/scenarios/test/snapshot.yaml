@@ -5,7 +5,7 @@ metadata:
   name: test-cron
 spec:
   schedule: '*/1 * * * *'
-  concurrencyPolicy: Forbid
+  concurrencyPolicy: Allow
   jobTemplate:
     spec:
       template:
