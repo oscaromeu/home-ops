@@ -16,9 +16,6 @@ spec:
               image: bitnami/kubectl
               tag: sha256-f79ebae1ff869758d46262ecb417e3526805669a2c61623e74ff6e4cf1d82bca
               imagePullPolicy: IfNotPresent
-              env:
-                - name: MY_HOSTNAME
-                  value: "ifconfig.me/all.json"
               volumeMounts:
                 - name: k6-yaml
                   mountPath: /tmp/
