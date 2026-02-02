@@ -13,4 +13,4 @@ configMapGenerator:
     files:
       - test.yaml=./test.yaml
 generatorOptions:
-  disableNameSuffixHash: true
+  disableNameSuffixHash: false
