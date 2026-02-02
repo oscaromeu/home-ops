@@ -18,7 +18,7 @@ spec:
               imagePullPolicy: IfNotPresent
               env:
                 - name: MY_HOSTNAME
-                  value: "https://ifconfig.me/all.json"
+                  value: "ifconfig.me/all.json"
               volumeMounts:
                 - name: k6-yaml
                   mountPath: /tmp/
