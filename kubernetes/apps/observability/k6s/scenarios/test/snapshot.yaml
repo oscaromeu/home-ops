@@ -16,7 +16,7 @@ spec:
               image: bitnami/kubectl:1.30.0
               imagePullPolicy: IfNotPresent
               env:
-                - name: HOSTNAME
+                - name: MY_HOSTNAME
                   value: "https://ifconfig.me/all.json"
               volumeMounts:
                 - name: k6-yaml
