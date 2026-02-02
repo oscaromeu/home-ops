@@ -13,7 +13,11 @@ spec:
           serviceAccount: k6-observability
           containers:
             - name: kubectl
-              image: bitnami/kubectl
+              image: bitnami/kubectl:1.30.0
+              imagePullPolicy: IfNotPresent
+              env:
+                - name: HOSTNAME
+                  value: "https://ifconfig.me/all.json"
               volumeMounts:
                 - name: k6-yaml
                   mountPath: /tmp/

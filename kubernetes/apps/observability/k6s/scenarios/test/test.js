@@ -5,7 +5,7 @@ import { Gauge } from 'k6/metrics';
 const ip_check = new Gauge('ip_check');
 
 export default function () {
-  const res = http.get('https://ifconfig.me/all.json');
+  const res = http.get('${__ENV.HOSTNAME}');
 
   check(res, {
     'status is 200': (r) => r.status === 200,
