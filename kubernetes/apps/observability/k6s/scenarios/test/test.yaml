@@ -15,10 +15,9 @@ spec:
     env:
       - name: K6_PROMETHEUS_RW_SERVER_URL
         value: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/write
-    envFrom:
-      - secretRef:
-          name: test-secret
-  arguments: -o experimental-prometheus-rw
+      - name: MY_HOSTNAME
+        value: "ifconfig.me/all.json"
+  arguments: -o experimental-prometheus-rw -o json=/dev/stdout
   script:
     configMap:
       name: test
