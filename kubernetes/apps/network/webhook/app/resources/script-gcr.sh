@@ -1,41 +1,33 @@
 #!/bin/sh
 #
-# script triggered by a webhook call coming from ACR hook
-# pull the new image with skopeo to fee the local harbor cache
+# script triggered by a webhook call coming from GCR push event
+# sync image from production GCR to pre-production GCR using skopeo
 
 set -euo pipefail
 
-#defaults
-[[ -z ${SRC_TLS} ]] && SRC_TLS=true
-[[ -z ${SCRIPT_DEBUG} ]] && SCRIPT_DEBUG=false
+# defaults
+[[ -z ${SCRIPT_DEBUG} ]] && SCRIPT_DEBUG=true
 
-if [[ ${SCRIPT_DEBUG} == "true" ]]; then
-  printf "\n"
-  printf "DEBUG Request ENV dump:\n"
-  printf "DEBUG  ACTION: ${ACTION}\n"
-  printf "DEBUG  REPO  : ${REPO}\n"
-  printf "DEBUG  TAG   : ${TAG}\n"
-  printf "DEBUG  DIGEST: ${DIGEST}\n"
-  #printf "DEBUG  ACRTOKEN: ${ACRTOKEN}\n"
-fi
+printf "\n"
+printf "====== GCR Webhook Trigger ======\n"
+printf "ACTION: ${ACTION:-not set}\n"
+printf "REPO  : ${REPO:-not set}\n"
+printf "TAG   : ${TAG:-not set}\n"
+printf "DIGEST: ${DIGEST:-not set}\n"
+printf "\nAll environment variables:\n"
+env | grep -E "^(ACTION|REPO|TAG|DIGEST|SRC_GCR|DST_GCR)" || true
+printf "================================\n\n"
 
-#Store script start time
+# Store script start time
 start_time=$(date +%s)
 
 if [[ ${ACTION} != "push" ]]; then
   printf "Error, ACTION is not push, exiting\n"
   exit 1
 else
-  TARGETDIR=$(mktemp -d)
-  if [[ ${SCRIPT_DEBUG} == "true" ]]; then
-    printf "DEBUG: executing command - skopeo copy --src-tls-verify=${SRC_TLS} docker://${HARBOR_URL}/${REPO}:${TAG} dir:${TARGETDIR}\n"
-  fi
-  printf "Pulling the image to feed the cache...........\n"
-  skopeo copy --src-tls-verify=${SRC_TLS} docker://${HARBOR_URL}/$REPO:$TAG dir:$TARGETDIR
-  if [[ ${SCRIPT_DEBUG} == "true" ]]; then
-    printf "DEBUG: executing command - rm -rf ${TARGETDIR}\n"
-  fi
-  rm -rf ${TARGETDIR}
+  printf "Syncing image from production to pre-production GCR...........\n"
+  skopeo copy --src-tls-verify=false "docker://${SRC_GCR}/${REPO}:${TAG}" "docker://${DST_GCR}/${REPO}:${TAG}"
+  printf "Image synced successfully: ${REPO}:${TAG}\n"
 fi
 # calculate and print elapsed time since start
 end_time=$(date +%s)

@@ -10,7 +10,7 @@ configMapGenerator:
   - name: webhook-configmap
     files:
       - hooks.yaml=./resources/hooks.yaml
-      - renovate-operator.sh=./resources/renovate-operator.sh
+      - script-gcr.sh=./resources/script-gcr.sh
 configurations:
   - ./resources/kustomizeconfig.yaml
 generatorOptions:
