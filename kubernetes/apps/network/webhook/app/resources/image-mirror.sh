@@ -56,6 +56,8 @@ printf "Mirroring image...........\n"
 printf "Source: ${IMAGE_REF}\n"
 printf "Dest  : ${DESTINATION_IMAGE}\n"
 printf "Command: skopeo copy --src-tls-verify=false docker://${IMAGE_REF} docker://${DESTINATION_IMAGE}\n"
+printf "Sleeping 10s to simulate long-running operation...\n"
+sleep 10
 #skopeo copy --src-tls-verify=false "docker://${IMAGE_REF}" "docker://${DESTINATION_IMAGE}"
 printf "Image mirrored successfully: ${IMAGE_PATH}\n"
 
