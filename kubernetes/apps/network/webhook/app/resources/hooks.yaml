@@ -1,5 +1,5 @@
 - id: gcr-push-event
-  execute-command: /config/script-gcr.sh
+  execute-command: /config/image-mirror.sh
   command-working-directory: /config
 
   pass-environment-to-command:
