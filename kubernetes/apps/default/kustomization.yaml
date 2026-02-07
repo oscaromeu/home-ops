@@ -12,7 +12,6 @@ resources:
   - ./docmost/ks.yaml
   - ./echo/ks.yaml
   - ./filebrowser/ks.yaml
-  - ./jellyfin/ks.yaml
   - ./kavita/ks.yaml
   - ./linkding/ks.yaml
   - ./memos/ks.yaml
