@@ -7,17 +7,13 @@
       source: payload
       name: action
 
-    - envname: REPO
-      source: payload
-      name: target.repository
-
     - envname: TAG
       source: payload
-      name: target.tag
+      name: tag
 
     - envname: DIGEST
       source: payload
-      name: target.digest
+      name: digest
 
   trigger-rule:
     and:
@@ -30,7 +26,7 @@
 
       - match:
           type: value
-          value: push
+          value: INSERT
           parameter:
             source: payload
             name: action

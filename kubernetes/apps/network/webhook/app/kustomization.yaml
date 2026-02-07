@@ -10,7 +10,7 @@ configMapGenerator:
   - name: webhook-configmap
     files:
       - hooks.yaml=./resources/hooks.yaml
-      - script-gcr.sh=./resources/script-gcr.sh
+      - image-mirror.sh=./resources/image-mirror.sh
 configurations:
   - ./resources/kustomizeconfig.yaml
 generatorOptions:
