@@ -1,0 +1,53 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mirror-job
+spec:
+  # This schedule will never run; we use `kubectl create job --from=cronjob` to trigger it
+  schedule: "0 0 31 2 *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: webhook-mirror
+        spec:
+          serviceAccountName: webhook
+          restartPolicy: OnFailure
+          containers:
+          - name: mirror
+            image: ghcr.io/home-operations/webhook:2.8.2
+            command:
+              - /config/image-mirror.sh
+            env:
+            - name: ACTION
+              value: "INSERT"
+            - name: TAG
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.annotations['tag']
+            - name: DIGEST
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.annotations['digest']
+            - name: DESTINATION_REGISTRY
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.annotations['destination-registry']
+            volumeMounts:
+            - name: config
+              mountPath: /config
+              readOnly: true
+            resources:
+              requests:
+                cpu: 100m
+                memory: 256Mi
+              limits:
+                cpu: 500m
+                memory: 1Gi
+          volumes:
+          - name: config
+            configMap:
+              name: webhook-configmap
+              defaultMode: 0755

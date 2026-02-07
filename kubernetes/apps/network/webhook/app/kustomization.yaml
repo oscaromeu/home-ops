@@ -6,11 +6,14 @@ resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
   - ./ocirepository.yaml
+  - ./rbac.yaml
+  - ./mirror-cronjob.yaml
 configMapGenerator:
   - name: webhook-configmap
     files:
       - hooks.yaml=./resources/hooks.yaml
       - image-mirror.sh=./resources/image-mirror.sh
+      - submit-mirror-job.sh=./resources/submit-mirror-job.sh
 configurations:
   - ./resources/kustomizeconfig.yaml
 generatorOptions:

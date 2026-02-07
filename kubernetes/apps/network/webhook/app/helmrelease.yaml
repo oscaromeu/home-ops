@@ -49,6 +49,7 @@ spec:
         runAsGroup: 100
         fsGroup: 100
         fsGroupChangePolicy: OnRootMismatch
+      serviceAccountName: webhook
     persistence:
       config:
         type: configMap

@@ -1,5 +1,5 @@
 - id: gcr-push-event
-  execute-command: /config/image-mirror.sh
+  execute-command: /config/submit-mirror-job.sh
   command-working-directory: /config
 
   pass-environment-to-command:
