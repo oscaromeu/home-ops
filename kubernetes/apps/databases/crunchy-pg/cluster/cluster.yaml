@@ -92,11 +92,6 @@ spec:
         - grafana
       password: *password
       options: 'CREATEDB CREATEROLE'
-    - name: vikunja
-      databases:
-        - vikunja
-      password: *password
-      options: 'SUPERUSER'
 
   backups:
     pgbackrest:
