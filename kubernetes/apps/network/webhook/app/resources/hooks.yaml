@@ -15,6 +15,10 @@
       source: payload
       name: digest
 
+    - envname: DESTINATION_REGISTRY
+      source: string
+      name: gcr.io
+
   trigger-rule:
     and:
       - match:
