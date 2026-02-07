@@ -52,7 +52,7 @@ spec:
     route:
       app:
         hostnames:
-          - "linkding.${SECRET_DOMAIN}"
+          - "link.${SECRET_DOMAIN}"
         parentRefs:
           - name: envoy-internal
             namespace: network
