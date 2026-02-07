@@ -17,7 +17,7 @@ spec:
         value: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/write
       - name: MY_HOSTNAME
         value: "ifconfig.me/all.json"
-  arguments: -o experimental-prometheus-rw -o json=/dev/stdout
+  arguments: -o experimental-prometheus-rw -o json=/dev/stdout --quiet
   script:
     configMap:
       name: test

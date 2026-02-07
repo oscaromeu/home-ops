@@ -1,0 +1,36 @@
+- id: gcr-push-event
+  execute-command: /config/script-gcr.sh
+  command-working-directory: /config
+
+  pass-environment-to-command:
+    - envname: ACTION
+      source: payload
+      name: action
+
+    - envname: REPO
+      source: payload
+      name: target.repository
+
+    - envname: TAG
+      source: payload
+      name: target.tag
+
+    - envname: DIGEST
+      source: payload
+      name: target.digest
+
+  trigger-rule:
+    and:
+      - match:
+          type: value
+          value: mysecretToken
+          parameter:
+            source: header
+            name: X-Static-Token
+
+      - match:
+          type: value
+          value: push
+          parameter:
+            source: payload
+            name: action
