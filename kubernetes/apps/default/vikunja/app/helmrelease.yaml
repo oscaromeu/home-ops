@@ -27,11 +27,8 @@ spec:
               - secretRef:
                   name: vikunja-service-jwt-secret
             env:
-              VIKUNJA_SERVICE_PUBLICURL: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+              VIKUNJA_SERVICE_PUBLICURL: &host "https://{{ .Release.Name }}.${SECRET_DOMAIN}"
               VIKUNJA_DATABASE_TYPE: postgres
-              #VIKUNJA_MAILER_HOST: smtp-relay.default.svc.cluster.local.
-              #VIKUNJA_MAILER_PORT: "2525"
-              #VIKUNJA_MAILER_FROMEMAIL: Vikunja <vikunja@${SECRET_DOMAIN}>
             resources:
               requests:
                 cpu: 5m
