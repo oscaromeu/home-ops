@@ -21,18 +21,18 @@ spec:
     openebs-crds:
       csi:
         volumeSnapshots:
-          enabled: true
-          keep: true
+          enabled: false
+          keep: false
     zfs-localpv:
       enabled: false
     lvm-localpv:
-      enabled: true
+      enabled: false
     mayastor:
       enabled: false
     engines:
       local:
         lvm:
-          enabled: true
+          enabled: false
         zfs:
           enabled: false
       replicated:
