@@ -52,9 +52,13 @@ spec:
           - backendRefs:
               - identifier: app
                 port: *port
-    volumeClaimTemplates:
-      - name: config
-        mountPath: /app/vikunja/files
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        storageClass: openebs-hostpath
+    persistence:
+      config:
+        existingClaim: *app
+        advancedMounts:
+          vikunja:
+            app:
+              - path: /db
+                subPath: db
+              - path: /app/vikunja/files
+                subPath: files
