@@ -45,5 +45,6 @@ spec:
                   value: /
       serviceMonitor:
         enabled: true
+        interval: 15s
     dashboards:
       enabled: true
