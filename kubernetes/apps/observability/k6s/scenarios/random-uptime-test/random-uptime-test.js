@@ -1,23 +1,20 @@
-import { Gauge } from 'k6/metrics';
+import { Gauge, Counter } from 'k6/metrics';
 
-const uptime_check = new Gauge('uptime_check');
-
-export const options = {
-  vus: 1,
-  iterations: 1,
-};
+const last_success = new Gauge('uptime_check_last_success_timestamp_seconds');
+const last_failure = new Gauge('uptime_check_last_failure_timestamp_seconds');
+const runs_total = new Counter('uptime_check_runs_total');
 
 export default function () {
-  let uptime = 0; // default = down
-
-  // Randomly decide to pass or fail (50% chance each)
+  const now = Math.floor(Date.now() / 1000);
   const shouldPass = Math.random() < 0.5;
 
-  console.log(`Random test: ${shouldPass ? 'PASS (1)' : 'FAIL (0)'}`);
+  runs_total.add(1, {
+    result: shouldPass ? 'success' : 'failure',
+  });
 
   if (shouldPass) {
-    uptime = 1;
+    last_success.add(now);
+  } else {
+    last_failure.add(now);
   }
-
-  uptime_check.add(uptime);
 }
