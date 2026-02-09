@@ -1,10 +1,9 @@
-import http from 'k6/http';
-import { check } from 'k6';
 import { Gauge } from 'k6/metrics';
 
 const uptime_check = new Gauge('uptime_check');
 
 export const options = {
+  vus: 1,
   iterations: 1,
 };
 
