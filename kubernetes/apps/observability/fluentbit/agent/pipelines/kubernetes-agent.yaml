@@ -44,7 +44,7 @@ pipeline:
       rename: k_labels_app.kubernetes.io/name app
       rename: k_labels_app app
       rename: k_labels_k8s-app app
-      rename: k_labels_k6-scenario app
+      rename: k_labels_job-name app
 
   outputs:
 
