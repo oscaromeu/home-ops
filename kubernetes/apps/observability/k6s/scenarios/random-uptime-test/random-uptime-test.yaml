@@ -1,0 +1,25 @@
+---
+apiVersion: k6.io/v1alpha1
+kind: TestRun
+metadata:
+  name: random-uptime-test
+  labels:
+    app: random-uptime-test
+spec:
+  parallelism: 1
+  runner:
+    image: grafana/k6:1.5.0-with-browser
+    resources:
+      requests:
+        cpu: "250m"
+      limits:
+        memory: "1Gi"
+    env:
+      - name: K6_PROMETHEUS_RW_SERVER_URL
+        value: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/write
+  arguments: -o experimental-prometheus-rw --out json --summary-mode disabled --log-format json --quiet
+  script:
+    configMap:
+      name: random-uptime-test
+      file: random-uptime-test.js
+

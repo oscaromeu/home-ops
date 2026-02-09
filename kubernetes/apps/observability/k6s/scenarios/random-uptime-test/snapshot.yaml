@@ -1,0 +1,30 @@
+# snapshotter.yml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: random-uptime-test-cron
+spec:
+  schedule: '*/1 * * * *'
+  concurrencyPolicy: Allow
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccount: k6-observability
+          containers:
+            - name: kubectl
+              image: bitnami/kubectl
+              imagePullPolicy: IfNotPresent
+              volumeMounts:
+                - name: k6-yaml
+                  mountPath: /tmp/
+              command:
+                - /bin/bash
+              args:
+                - -c
+                - 'kubectl delete -f /tmp/random-uptime-test.yaml; kubectl apply -f /tmp/random-uptime-test.yaml'
+          restartPolicy: OnFailure
+          volumes:
+            - name: k6-yaml
+              configMap:
+                name: random-uptime-test-config
