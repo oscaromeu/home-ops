@@ -5,6 +5,7 @@ metadata:
   name: random-uptime-test
   labels:
     app: random-uptime-test
+    k6-scenario: random-uptime-test
 spec:
   parallelism: 1
   runner:
