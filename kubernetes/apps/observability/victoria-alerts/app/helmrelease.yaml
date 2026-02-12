@@ -1,0 +1,42 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: victoria-alerts
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: victoria-alerts
+  values:
+    nameOverride: "victoria-alerts"
+    server:
+      replicaCount: 1
+      datasource:
+        url: "http://victoria-logs-server.observability.svc.cluster.local:9428"
+      remote:
+        write:
+          url: "http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090"
+        read:
+          url: "http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090"
+      notifier:
+        alertmanager:
+          url: "http://alertmanager-operated.observability.svc.cluster.local:9093"
+      securityContext:
+        enabled: true
+        capabilities:
+          drop:
+          - ALL
+        readOnlyRootFilesystem: true
+        runAsNonRoot: true
+        runAsUser: 1000
+      resources:
+        {}
+        # limits:
+        #   cpu: 100m
+        #   memory: 128Mi
+        # requests:
+        #   cpu: 100m
+        #   memory: 128Mi
+    serviceMonitor:
+      enabled: true
