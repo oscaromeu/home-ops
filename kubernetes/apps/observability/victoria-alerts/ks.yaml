@@ -15,4 +15,4 @@ metadata:
   name: victoria-alerts-rules
 spec:
   targetNamespace: observability
-  path: ./kubernetes/apps/observability/victoria-alerts-rules/app
+  path: ./kubernetes/apps/observability/victoria-alerts-rules/rules
