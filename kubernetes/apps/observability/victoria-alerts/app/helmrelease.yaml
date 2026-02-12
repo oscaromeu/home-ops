@@ -30,6 +30,7 @@ spec:
         readOnlyRootFilesystem: true
         runAsNonRoot: true
         runAsUser: 1000
+      configMap: "victoria-alerts-server-alert-rules-config"
       resources:
         {}
         # limits:

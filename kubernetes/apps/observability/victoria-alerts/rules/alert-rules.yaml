@@ -1,0 +1,11 @@
+groups:
+  - name: ServiceLog
+    type: vlogs
+    interval: 5m
+    rules:
+      - alert: HasErrorLog
+        expr: 'error | stats by (app, kubernetes_pod_name) count() as errorLog |filter errorLog:>0'
+        annotations:
+          description: 'Service {{$labels.app}} (pod {{ index $labels "kubernetes_pod_name" }}) generated {{$labels.errorLog}} error logs in the last 5 minutes'
+        labels:
+          severity: critical

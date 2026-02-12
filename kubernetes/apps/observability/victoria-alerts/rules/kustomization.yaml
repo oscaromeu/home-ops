@@ -1,0 +1,11 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+configMapGenerator:
+  - name: victoria-alerts-server-alert-rules-config
+    files:
+      - alert-rules.yaml=./alert-rules.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
