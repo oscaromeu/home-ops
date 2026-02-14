@@ -39,7 +39,7 @@ spec:
               ATUIN_TLS__CERT_PATH: ""
               ATUIN_TLS__PKEY_PATH: ""
             envFrom: *envFrom
-            args: ["server", "start"]
+            args: ["start"]
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
