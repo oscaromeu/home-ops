@@ -18,7 +18,7 @@ spec:
     env:
       - name: K6_PROMETHEUS_RW_SERVER_URL
         value: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/write
-  arguments: -o experimental-prometheus-rw --out json --summary-mode disabled --log-format json --quiet
+  arguments: -o experimental-prometheus-rw --quiet
   script:
     configMap:
       name: random-uptime-test
