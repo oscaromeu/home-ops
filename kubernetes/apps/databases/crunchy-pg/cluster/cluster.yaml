@@ -6,6 +6,9 @@ metadata:
   name: &name postgres-${postgres_cluster_version}
 spec:
   postgresVersion: 17
+  databaseInitSQL:
+    name: pg-init
+    key: init.sql
   metadata:
     labels:
       crunchy-userinit.ramblurr.github.com/enabled: "true"
@@ -92,7 +95,11 @@ spec:
         - grafana
       password: *password
       options: 'CREATEDB CREATEROLE'
-
+    - name: peertube
+      databases:
+        - peertube
+      password: *password
+      options: 'CREATEDB CREATEROLE'
   backups:
     pgbackrest:
       configuration: &backupConfig
