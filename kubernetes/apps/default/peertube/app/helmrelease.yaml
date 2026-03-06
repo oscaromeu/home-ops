@@ -24,7 +24,8 @@ spec:
         containers:
           app:
             image:
-              repository: chocobozzz/peertube:latest
+              repository: chocobozzz/peertube
+              tag: production-bookworm
             env:
               NODE_ENV: production
               PEERTUBE_WEBSERVER_HOSTNAME: "{{ .Release.Name }}.${SECRET_DOMAIN}"
