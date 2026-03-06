@@ -10,4 +10,7 @@ spec:
     - name: envoy-gateway
       namespace: network
   path: ./kubernetes/apps/default/peertube/app
+  postBuild:
+    substitute:
+      postgres_cluster_version: "v17-1"
   targetNamespace: default
