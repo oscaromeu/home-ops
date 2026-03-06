@@ -34,7 +34,6 @@ spec:
               PEERTUBE_TRUST_PROXY: '["loopback", "uniquelocal"]'
               PEERTUBE_SMTP_ACTIVE: "false"
               PEERTUBE_SIGNUP_ENABLED: "false"
-              NODE_CONFIG_DIR: /config
             envFrom: *envFrom
             probes:
               liveness: &probes
