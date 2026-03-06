@@ -29,6 +29,9 @@ spec:
             env:
               NODE_ENV: production
               PEERTUBE_WEBSERVER_HOSTNAME: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+              PEERTUBE_WEBSERVER_PORT: "443"
+              PEERTUBE_WEBSERVER_HTTPS: "true"
+              PEERTUBE_TRUST_PROXY: '["loopback", "uniquelocal"]'
               PEERTUBE_SMTP_ACTIVE: "false"
               PEERTUBE_SIGNUP_ENABLED: "false"
               NODE_CONFIG_DIR: /config
@@ -85,6 +88,10 @@ spec:
         existingClaim: peertube
         globalMounts:
           - path: /config
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
       videos:
         type: nfs
         server: ${NAS_SERVER_IP}
