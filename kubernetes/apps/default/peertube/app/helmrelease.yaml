@@ -87,10 +87,10 @@ spec:
           - path: /config
       videos:
         type: nfs
-        server: citadel.internal
+        server: ${NAS_SERVER_IP}
         path: ${NAS_SERVER_MEDIA_PATH}
         advancedMounts:
-          peertube:
+          metube:
             app:
               - path: /downloads
                 subPath: Library/Peertube
