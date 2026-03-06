@@ -90,7 +90,7 @@ spec:
         server: ${NAS_SERVER_IP}
         path: ${NAS_SERVER_MEDIA_PATH}
         advancedMounts:
-          metube:
+          peertube:
             app:
               - path: /downloads
                 subPath: Library/Peertube
