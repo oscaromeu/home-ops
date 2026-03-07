@@ -17,7 +17,7 @@ resources:
   - ./memos/ks.yaml
   - ./metube/ks.yaml
   - ./outline/ks.yaml
-  #- ./peertube/ks.yaml
+  - ./peertube/ks.yaml
   - ./pinchflat/ks.yaml
   - ./plex/ks.yaml
   - ./vikunja/ks.yaml
