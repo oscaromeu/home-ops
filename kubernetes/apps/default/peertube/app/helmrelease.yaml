@@ -34,6 +34,11 @@ spec:
               PEERTUBE_TRUST_PROXY: '["loopback", "uniquelocal"]'
               PEERTUBE_SMTP_ACTIVE: "false"
               PEERTUBE_SIGNUP_ENABLED: "false"
+              PEERTUBE_LIVE_ENABLED: "true"
+              PEERTUBE_LIVE_ALLOW_REPLAY: "true"
+              PEERTUBE_LIVE_LATENCY_SETTING_ENABLED: "true"
+              PEERTUBE_LIVE_RTMP_ENABLED: "true"
+              PEERTUBE_LIVE_RTMP_PORT: "1935"
             envFrom: *envFrom
             probes:
               liveness: &probes
