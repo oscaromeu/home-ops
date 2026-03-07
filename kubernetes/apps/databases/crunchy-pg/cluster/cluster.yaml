@@ -99,7 +99,7 @@ spec:
       databases:
         - peertube
       password: *password
-      options: 'CREATEDB CREATEROLE'
+      options: 'CREATEDB CREATEROLE SUPERUSER'
   backups:
     pgbackrest:
       configuration: &backupConfig
