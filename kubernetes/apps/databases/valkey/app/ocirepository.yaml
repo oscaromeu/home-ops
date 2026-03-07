@@ -10,4 +10,4 @@ spec:
     operation: copy
   ref:
     tag: 0.9.3
-  url: ghcr.io/valkey-io/valkey-helm/valkey
+  url: oci://ghcr.io/valkey-io/valkey-helm/valkey
