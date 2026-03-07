@@ -100,3 +100,5 @@ spec:
             app:
               - path: /downloads
                 subPath: Library/Peertube
+              - path: /data
+                subPath: Library/Peertube/data
