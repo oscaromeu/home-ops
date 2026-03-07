@@ -1,0 +1,62 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/common-4.4.0/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app valkey
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: valkey
+  values:
+    controllers:
+      valkey:
+        type: statefulset
+        containers:
+          app:
+            image:
+              repository: valkey/valkey
+              tag: 8.1.3
+            args:
+              - --save 60 1
+              - --loglevel warning
+            resources:
+              requests:
+                cpu: 10m
+                memory: 32Mi
+              limits:
+                memory: 256Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command: [sh, -c, valkey-cli ping | grep PONG]
+                  initialDelaySeconds: 5
+                  periodSeconds: 30
+                  timeoutSeconds: 3
+                  failureThreshold: 3
+              readiness: *probes
+        pod:
+          securityContext:
+            runAsUser: 999
+            runAsGroup: 999
+            runAsNonRoot: true
+            fsGroup: 999
+    service:
+      app:
+        controller: *app
+        type: ClusterIP
+        ports:
+          redis:
+            port: 6379
+    persistence:
+      data:
+        type: emptyDir
+        globalMounts:
+          - path: /data
