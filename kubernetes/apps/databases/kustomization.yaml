@@ -13,5 +13,5 @@ resources:
   #- ./kafka/ks.yaml
   - ./pgadmin/ks.yaml
   - ./redis/ks.yaml
-  - ./valkey/ks.yaml
+  #- ./valkey/ks.yaml
   #- ./redpanda/ks.yaml
