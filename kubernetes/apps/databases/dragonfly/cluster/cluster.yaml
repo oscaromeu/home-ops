@@ -18,6 +18,7 @@ spec:
     - --proactor_threads=2
     - --cluster_mode=emulated
     - --lock_on_hashtags
+    - --allow_undeclared_keys
   resources:
     requests:
       cpu: 50m
