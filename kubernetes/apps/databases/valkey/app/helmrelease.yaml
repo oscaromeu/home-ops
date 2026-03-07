@@ -16,7 +16,7 @@ spec:
           app:
             image:
               repository: valkey/valkey
-              tag: 8.1.3
+              tag: 8.1.6
             args:
               - --save
               - "60"
