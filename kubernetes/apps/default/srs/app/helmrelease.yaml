@@ -1,0 +1,103 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/common-4.4.0/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app srs
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: srs
+  values:
+    controllers:
+      srs:
+        containers:
+          app:
+            image:
+              repository: ossrs/srs
+              tag: "6"
+            env:
+              CANDIDATE: "10.69.1.122"
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /api/v1/versions
+                    port: &apiport 1985
+                  initialDelaySeconds: 10
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+            resources:
+              requests:
+                cpu: 50m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+    defaultPodOptions:
+      securityContext:
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: srs
+        ports:
+          http:
+            port: 8080
+          api:
+            port: *apiport
+          rtmp:
+            port: 1935
+            protocol: TCP
+          webrtc:
+            port: 8000
+            protocol: UDP
+    route:
+      app:
+        hostnames:
+          - "srs.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+    configMaps:
+      config:
+        data:
+          srs.conf: |
+            listen              1935;
+            max_connections     1000;
+            http_api {
+              enabled           on;
+              listen            1985;
+            }
+            http_server {
+              enabled           on;
+              listen            8080;
+              dir               ./objs/nginx/html;
+            }
+            rtc_server {
+              enabled           on;
+              listen            8000;
+              candidate         $CANDIDATE;
+            }
+            vhost __defaultVhost__ {
+              rtc {
+                enabled         on;
+                rtmp_to_rtc     on;
+                rtc_to_rtmp     off;
+              }
+              forward {
+                enabled         on;
+                destination     peertube.default.svc.cluster.local:1935;
+              }
+            }
+    persistence:
+      config:
+        type: configMap
+        name: srs-config
+        globalMounts:
+          - path: /usr/local/srs/conf/srs.conf
+            subPath: srs.conf

@@ -19,5 +19,6 @@ resources:
   - ./outline/ks.yaml
   - ./peertube/ks.yaml
   - ./pinchflat/ks.yaml
+  - ./srs/ks.yaml
   - ./plex/ks.yaml
   - ./vikunja/ks.yaml

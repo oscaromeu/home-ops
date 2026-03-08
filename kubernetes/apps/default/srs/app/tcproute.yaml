@@ -1,0 +1,14 @@
+---
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: TCPRoute
+metadata:
+  name: srs-rtmp
+spec:
+  parentRefs:
+    - name: envoy-internal
+      namespace: network
+      sectionName: rtmp
+  rules:
+    - backendRefs:
+        - name: srs
+          port: 1935

@@ -1,0 +1,14 @@
+---
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: UDPRoute
+metadata:
+  name: srs-webrtc
+spec:
+  parentRefs:
+    - name: envoy-internal
+      namespace: network
+      sectionName: webrtc
+  rules:
+    - backendRefs:
+        - name: srs
+          port: 8000

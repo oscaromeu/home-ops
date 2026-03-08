@@ -108,6 +108,15 @@ spec:
           from: All
         kinds:
           - kind: TCPRoute
+    - name: webrtc
+      protocol: UDP
+      port: 8000
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - group: gateway.networking.k8s.io
+            kind: UDPRoute
 ---
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: BackendTrafficPolicy
