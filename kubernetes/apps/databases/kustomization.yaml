@@ -8,10 +8,8 @@ components:
 
 resources:
   - ./namespace.yaml
+  - ./clickhouse/ks.yaml
   - ./crunchy-pg/ks.yaml
   - ./dragonfly/ks.yaml
-  #- ./kafka/ks.yaml
-  - ./pgadmin/ks.yaml
   - ./redis/ks.yaml
   - ./valkey/ks.yaml
-  #- ./redpanda/ks.yaml
