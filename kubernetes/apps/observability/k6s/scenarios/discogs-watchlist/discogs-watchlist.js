@@ -8,7 +8,7 @@ const discogs_lowest_price_usd = new Gauge('discogs_lowest_price_usd');
 
 const TOKEN = __ENV.DISCOGS_TOKEN || '';
 const releases = JSON.parse(__ENV.RELEASES_CONFIG || '[]');
-const CH_URL = __ENV.CLICKHOUSE_URL || 'http://clickhouse-clickhouse.databases.svc.cluster.local:8123';
+const CH_URL = __ENV.CLICKHOUSE_URL || 'http://clickhouse-clickhouse-headless.databases.svc.cluster.local:8123';
 const CH_USER = __ENV.CLICKHOUSE_USER || 'default';
 const CH_PASSWORD = __ENV.CLICKHOUSE_PASSWORD || '';
 
