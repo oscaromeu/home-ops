@@ -100,6 +100,12 @@ spec:
         certificateRefs:
           - kind: Secret
             name: ${SECRET_DOMAIN/./-}-production-tls
+    - name: rtmp
+      protocol: TCP
+      port: 1935
+      allowedRoutes:
+        kinds:
+          - kind: TCPRoute
 ---
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: BackendTrafficPolicy
@@ -169,3 +175,17 @@ spec:
           requestRedirect:
             scheme: https
             statusCode: 301
+---
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: TCPRoute
+metadata:
+  name: peertube-rtmp
+spec:
+  parentRefs:
+    - name: envoy-internal
+      namespace: network
+      sectionName: rtmp
+  rules:
+    - backendRefs:
+        - name: peertube
+          port: 1935
