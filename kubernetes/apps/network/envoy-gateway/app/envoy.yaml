@@ -104,6 +104,8 @@ spec:
       protocol: TCP
       port: 1935
       allowedRoutes:
+        namespaces:
+          from: All
         kinds:
           - kind: TCPRoute
       tcp:
