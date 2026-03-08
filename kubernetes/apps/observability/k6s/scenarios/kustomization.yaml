@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - ./test
   - ./random-uptime-test
+  #- ./discogs-watchlist

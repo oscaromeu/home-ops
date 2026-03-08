@@ -1,0 +1,19 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./discogs-watchlist.yaml
+  - ./snapshot.yaml
+  - ./secret.sops.yaml
+
+configMapGenerator:
+  - name: discogs-watchlist
+    files:
+      - discogs-watchlist.js=./discogs-watchlist.js
+  - name: discogs-watchlist-config
+    files:
+      - discogs-watchlist.yaml=./discogs-watchlist.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled

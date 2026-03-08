@@ -1,0 +1,25 @@
+---
+apiVersion: k6.io/v1alpha1
+kind: TestRun
+metadata:
+  name: discogs-watchlist
+spec:
+  parallelism: 1
+  runner:
+    image: grafana/k6:1.6.1-with-browser
+    resources:
+      requests:
+        cpu: "100m"
+      limits:
+        memory: "256Mi"
+    env:
+      - name: K6_PROMETHEUS_RW_SERVER_URL
+        value: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/write
+    envFrom:
+      - secretRef:
+          name: discogs-watchlist-secret
+  arguments: -o experimental-prometheus-rw --quiet --summary-mode disabled
+  script:
+    configMap:
+      name: discogs-watchlist
+      file: discogs-watchlist.js

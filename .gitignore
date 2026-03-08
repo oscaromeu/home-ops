@@ -48,3 +48,7 @@ Brewfile.lock.json
 
 # Wiki
 wiki
+
+# personal
+
+.env
