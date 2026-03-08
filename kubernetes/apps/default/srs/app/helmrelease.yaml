@@ -99,5 +99,5 @@ spec:
         type: configMap
         name: srs
         globalMounts:
-          - path: /usr/local/srs/conf/srs.conf
+          - path: /usr/local/srs/conf/docker.conf
             subPath: srs.conf
