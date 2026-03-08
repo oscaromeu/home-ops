@@ -1,4 +1,29 @@
 groups:
+  - name: Discogs
+    type: vlogs
+    interval: 15m
+    rules:
+      - alert: DiscogsLastCopy
+        expr: 'k_labels_k6_cr:"discogs-watchlist" "Marketplace stats" | unpack_logfmt | unpack_json from msg | filter num_for_sale:=1 | stats by (title, release_id) count() as cnt | filter cnt:>0'
+        annotations:
+          summary: "Last copy: {{ $labels.title }}"
+          description: "{{ $labels.title }} (release {{ $labels.release_id }}) has only 1 copy left for sale on Discogs."
+        labels:
+          severity: critical
+      - alert: DiscogsForSaleZorica
+        expr: 'k_labels_k6_cr:"discogs-watchlist" "Marketplace stats" Zorica | unpack_logfmt | unpack_json from msg | filter num_for_sale:>0 | stats by (title, release_id) count() as cnt | filter cnt:>0'
+        annotations:
+          summary: "Record for sale: Zorica"
+          description: "{{ $labels.title }} (release {{ $labels.release_id }}) is available for sale on Discogs."
+        labels:
+          severity: critical
+      - alert: DiscogsForSaleHero
+        expr: 'k_labels_k6_cr:"discogs-watchlist" "Marketplace stats" "Hero" | unpack_logfmt | unpack_json from msg | filter num_for_sale:>0 | stats by (title, release_id) count() as cnt | filter cnt:>0'
+        annotations:
+          summary: "Record for sale: Hero"
+          description: "{{ $labels.title }} (release {{ $labels.release_id }}) is available for sale on Discogs."
+        labels:
+          severity: critical
   - name: ServiceLog
     type: vlogs
     interval: 5m
