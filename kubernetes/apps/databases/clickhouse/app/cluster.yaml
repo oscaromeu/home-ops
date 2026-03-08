@@ -6,6 +6,7 @@ metadata:
 spec:
   replicas: 1
   dataVolumeClaimSpec:
+    storageClassName: openebs-hostpath
     accessModes:
       - ReadWriteOnce
     resources:
@@ -19,6 +20,7 @@ metadata:
 spec:
   replicas: 1
   dataVolumeClaimSpec:
+    storageClassName: openebs-hostpath
     accessModes:
       - ReadWriteOnce
     resources:
