@@ -10,5 +10,4 @@ resources:
   - ./namespace.yaml
   - ./clickhouse/ks.yaml
   - ./crunchy-pg/ks.yaml
-  - ./redis/ks.yaml
   - ./valkey/ks.yaml
