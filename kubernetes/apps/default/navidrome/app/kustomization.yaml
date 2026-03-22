@@ -5,4 +5,5 @@ namespace: default
 resources:
   - ./secret.sops.yaml
   - ./pvc.yaml
+  - ./ocirepository.yaml
   - ./helmrelease.yaml
