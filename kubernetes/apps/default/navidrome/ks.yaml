@@ -7,5 +7,7 @@ spec:
   dependsOn:
     - name: envoy-gateway
       namespace: network
+    - name: external-secrets
+      namespace: external-secrets
   path: ./kubernetes/apps/default/navidrome/app
   targetNamespace: default

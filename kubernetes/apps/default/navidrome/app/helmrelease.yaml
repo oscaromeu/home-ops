@@ -8,15 +8,6 @@ spec:
   chartRef:
     kind: OCIRepository
     name: navidrome
-  valuesFrom:
-    - targetPath: controllers.navidrome.containers.app.env.ND_LASTFM_APIKEY
-      kind: Secret
-      name: navidrome-external-ingregrations
-      valuesKey: LASTFM_APIKEY
-    - targetPath: controllers.navidrome.containers.app.env.ND_LASTFM_SECRET
-      kind: Secret
-      name: navidrome-external-ingregrations
-      valuesKey: LASTFM_SECRET
   values:
     controllers:
       navidrome:
@@ -25,6 +16,9 @@ spec:
             image:
               repository: ghcr.io/navidrome/navidrome
               tag: 0.58.5
+            envFrom:
+              - secretRef:
+                  name: navidrome
             env:
               TZ: "${TIMEZONE}"
               ND_DATAFOLDER: /config
