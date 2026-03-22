@@ -11,7 +11,7 @@ resources:
   - ./atuin/ks.yaml
   - ./docmost/ks.yaml
   - ./echo/ks.yaml
-  #- ./feishin/ks.yaml
+  - ./feishin/ks.yaml
   - ./filebrowser/ks.yaml
   - ./kavita/ks.yaml
   - ./linkding/ks.yaml
