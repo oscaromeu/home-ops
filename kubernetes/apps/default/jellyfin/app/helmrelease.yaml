@@ -88,6 +88,10 @@ spec:
         type: emptyDir
       transcode:
         type: emptyDir
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
       media:
         type: nfs
         server: ${NAS_SERVER_IP}
