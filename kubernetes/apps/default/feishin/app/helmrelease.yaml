@@ -1,0 +1,55 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: feishin
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: feishin
+  values:
+    controllers:
+      feishin:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/jeffvli/feishin
+              tag: 1.9.0
+            env:
+              TZ: "${TIMEZONE}"
+              SERVER_NAME: Navidrome
+              SERVER_TYPE: navidrome
+              SERVER_URL: "https://navidrome.${SECRET_DOMAIN}"
+              SERVER_LOCK: "true"
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: {drop: ["ALL"]}
+            resources:
+              requests:
+                cpu: 10m
+                memory: 256Mi
+              limits:
+                memory: 1Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+    service:
+      app:
+        ports:
+          http:
+            port: &port 9180
+    route:
+      app:
+        annotations:
+        hostnames:
+          - "feishin.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
