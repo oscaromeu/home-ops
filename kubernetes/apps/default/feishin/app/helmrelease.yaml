@@ -22,7 +22,7 @@ spec:
               TZ: "${TIMEZONE}"
               SERVER_NAME: Navidrome
               SERVER_TYPE: navidrome
-              SERVER_URL: "https://navidrome.${SECRET_DOMAIN}"
+              SERVER_URL: "http://navidrome.default.svc.cluster.local:8080"
               SERVER_LOCK: "true"
             securityContext:
               allowPrivilegeEscalation: false
@@ -42,7 +42,7 @@ spec:
       app:
         annotations:
         hostnames:
-          - "feishin.${SECRET_DOMAIN}"
+          - "music.${SECRET_DOMAIN}"
         parentRefs:
           - name: envoy-internal
             namespace: network
