@@ -48,13 +48,6 @@ spec:
                 memory: 250Mi
               limits:
                 memory: 750Mi
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        fsGroupChangePolicy: OnRootMismatch
     service:
       app:
         controller: navidrome
@@ -78,6 +71,10 @@ spec:
         existingClaim: navidrome-config
         globalMounts:
           - path: /config
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
       music:
         type: nfs
         server: ${NAS_SERVER_IP}
