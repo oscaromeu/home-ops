@@ -10,16 +10,6 @@ spec:
   values:
     controllers:
       jellyfin:
-        pod:
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1000
-            fsGroupChangePolicy: OnRootMismatch
-            supplementalGroups:
-              - 44
-              - 65537
         containers:
           app:
             image:
@@ -61,6 +51,16 @@ spec:
                 memory: 1Gi
               limits:
                 memory: 8Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups:
+          - 44
+          - 65537
     service:
       app:
         controller: jellyfin

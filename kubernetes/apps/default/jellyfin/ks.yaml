@@ -4,5 +4,8 @@ kind: Kustomization
 metadata:
   name: &app jellyfin
 spec:
+  dependsOn:
+    - name: envoy-gateway
+      namespace: network
   targetNamespace: default
   path: ./kubernetes/apps/default/jellyfin/app
