@@ -1,0 +1,23 @@
+
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app: navidrome
+    app.kubernetes.io/name: navidrome
+    app.kubernetes.io/version: 0.49.3
+    app.kubernetes.io/instance: navidrome
+  name: navidrome
+  namespace: default
+spec:
+  endpoints:
+  - interval: 1m
+    path: /metrics
+    port: http
+    scheme: http
+    scrapeTimeout: 10s
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: navidrome
+      app.kubernetes.io/name: navidrome
+      app.kubernetes.io/service: navidrome
