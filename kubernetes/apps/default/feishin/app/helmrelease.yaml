@@ -20,10 +20,6 @@ spec:
               tag: 1.9.0
             env:
               TZ: "${TIMEZONE}"
-              SERVER_NAME: Navidrome
-              SERVER_TYPE: navidrome
-              SERVER_URL: "http://navidrome.default.svc.cluster.local:8080"
-              SERVER_LOCK: "true"
             securityContext:
               allowPrivilegeEscalation: false
               capabilities: {drop: ["ALL"]}
