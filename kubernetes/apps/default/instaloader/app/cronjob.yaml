@@ -26,11 +26,19 @@ spec:
                 - /bin/sh
                 - -c
                 - |
-                  set -ex
                   pip install instaloader --quiet --no-cache-dir --target=/tmp/pkgs
-                  ls /config/
-                  cat /config/profiles
-                  PYTHONPATH=/tmp/pkgs python -m instaloader --version
+                  while IFS= read -r profile || [ -n "$profile" ]; do
+                    [ -z "$profile" ] && continue
+                    echo "Downloading: $profile"
+                    PYTHONPATH=/tmp/pkgs python -m instaloader \
+                      --no-pictures \
+                      --no-metadata-json \
+                      --no-captions \
+                      --no-compress-json \
+                      --reels \
+                      --dirname-pattern=/downloads/{profile} \
+                      "$profile"
+                  done < /config/profiles
               resources:
                 requests:
                   cpu: 50m
