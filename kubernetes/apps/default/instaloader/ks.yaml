@@ -1,0 +1,8 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: instaloader
+spec:
+  path: ./kubernetes/apps/default/instaloader/app
+  targetNamespace: default

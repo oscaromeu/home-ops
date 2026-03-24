@@ -1,0 +1,61 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: instaloader
+spec:
+  schedule: "0 3 * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            supplementalGroups:
+              - 65537
+          containers:
+            - name: instaloader
+              image: python:3.12-slim
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  pip install instaloader --quiet --no-cache-dir &&
+                  while IFS= read -r profile; do
+                    [ -z "$profile" ] && continue
+                    echo "Downloading: $profile"
+                    instaloader \
+                      --no-pictures \
+                      --no-metadata-json \
+                      --no-captions \
+                      --no-compress-json \
+                      --reels \
+                      --dirname-pattern=/downloads/{profile} \
+                      "$profile"
+                  done < /config/profiles
+              resources:
+                requests:
+                  cpu: 50m
+                  memory: 128Mi
+                limits:
+                  memory: 512Mi
+              volumeMounts:
+                - name: downloads
+                  mountPath: /downloads
+                  subPath: Library/Instagram
+                - name: config
+                  mountPath: /config
+          volumes:
+            - name: downloads
+              nfs:
+                server: ${NAS_SERVER_IP}
+                path: ${NAS_SERVER_MEDIA_PATH}
+            - name: config
+              secret:
+                secretName: instaloader-secret
