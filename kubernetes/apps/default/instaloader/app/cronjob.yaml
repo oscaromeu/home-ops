@@ -30,11 +30,10 @@ spec:
                 - -c
                 - |
                   pip install instaloader --quiet --no-cache-dir --user &&
-                  export PATH=$PATH:/tmp/.local/bin &&
                   while IFS= read -r profile; do
                     [ -z "$profile" ] && continue
                     echo "Downloading: $profile"
-                    instaloader \
+                    python -m instaloader \
                       --no-pictures \
                       --no-metadata-json \
                       --no-captions \
