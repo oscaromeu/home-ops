@@ -19,7 +19,7 @@ spec:
           app:
             image:
               repository: public.ecr.aws/docker/library/redis
-              tag: 8.6.1
+              tag: 8.6.2
               pullPolicy: IfNotPresent
             resources:
               requests:
