@@ -1,0 +1,47 @@
+---
+version: '3'
+
+vars:
+  UTILS_RESOURCES_DIR: '{{.ROOT_DIR}}/.taskfiles/utils/resources'
+
+tasks:
+
+  video2mp3:
+    desc: Convert video files to MP3
+    summary: |
+      Convert video files to MP3 using ffmpeg.
+      Supported formats: mov, mp4, mkv, avi, webm, flv, wmv.
+
+      Variables:
+        DIR: Directory to process (default: current directory)
+        QUALITY: VBR quality 0-9, 0 = best (default: 0)
+        OVERWRITE: Overwrite existing files (default: false)
+        RECURSIVE: Include subdirectories (default: false)
+    cmd: bash {{.UTILS_RESOURCES_DIR}}/video2mp3.sh
+    env:
+      DIR: '{{.DIR | default "."}}'
+      QUALITY: '{{.QUALITY | default "0"}}'
+      OVERWRITE: '{{.OVERWRITE | default "false"}}'
+      RECURSIVE: '{{.RECURSIVE | default "false"}}'
+    preconditions:
+      - which ffmpeg
+
+  video2mp4:
+    desc: Convert video files to MP4
+    summary: |
+      Convert video files to MP4 (H.264 + AAC) using ffmpeg.
+      Supported formats: mov, mkv, avi, webm, flv, wmv, ts, m4v.
+
+      Variables:
+        DIR: Directory to process (default: current directory)
+        QUALITY: CRF value 0-51, lower = better (default: 23)
+        OVERWRITE: Overwrite existing files (default: false)
+        RECURSIVE: Include subdirectories (default: false)
+    cmd: bash {{.UTILS_RESOURCES_DIR}}/video2mp4.sh
+    env:
+      DIR: '{{.DIR | default "."}}'
+      QUALITY: '{{.QUALITY | default "23"}}'
+      OVERWRITE: '{{.OVERWRITE | default "false"}}'
+      RECURSIVE: '{{.RECURSIVE | default "false"}}'
+    preconditions:
+      - which ffmpeg
