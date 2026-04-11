@@ -26,6 +26,29 @@ tasks:
     preconditions:
       - which ffmpeg
 
+  peertube-upload:
+    desc: Upload a video to PeerTube
+    summary: |
+      Upload a video to a PeerTube instance using the API.
+      Requires PT_USER and PT_PASS environment variables.
+
+      Variables:
+        FILE: Path to the video file (required)
+        NAME: Video title (required)
+        INSTANCE: PeerTube instance URL (default: https://peertube.oscaromeu.io)
+        CHANNEL_ID: Channel ID to upload to (default: 7)
+        PRIVACY: 1 = public, 2 = unlisted, 3 = private (default: 1)
+    cmd: bash {{.UTILS_RESOURCES_DIR}}/peertube-upload.sh "{{.FILE}}" "{{.NAME}}"
+    env:
+      INSTANCE: '{{.INSTANCE | default "https://peertube.oscaromeu.io"}}'
+      CHANNEL_ID: '{{.CHANNEL_ID | default "7"}}'
+      PRIVACY: '{{.PRIVACY | default "1"}}'
+    preconditions:
+      - which curl
+      - which jq
+      - test -n "$PT_USER"
+      - test -n "$PT_PASS"
+
   video2mp4:
     desc: Convert video files to MP4
     summary: |
