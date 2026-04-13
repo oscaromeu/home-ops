@@ -55,7 +55,9 @@ datasources:
         access: proxy
         url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
         isDefault: true
+        editable: true
         jsonData:
+          httpMethod: POST
           exemplarTraceIdDestinations:
             - datasourceUid: victoria-traces
               name: TraceID
@@ -64,6 +66,7 @@ datasources:
         type: jaeger
         access: proxy
         url: http://victoria-traces-server.observability.svc.cluster.local:10428/select/jaeger
+        editable: true
         jsonData:
           tracesToLogs:
             datasourceUid: victoria-logs
@@ -75,6 +78,7 @@ datasources:
         name: VictoriaLogs
         type: victoriametrics-logs-datasource
         access: proxy
+        editable: true
         url: http://victoria-logs-server.observability.svc.cluster.local:9428
       #- name: Pyroscope
       #  type: pyroscope
