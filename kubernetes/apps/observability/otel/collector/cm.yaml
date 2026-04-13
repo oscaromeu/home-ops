@@ -49,10 +49,8 @@ data:
             action: delete
 
     exporters:
-      otlp/2:
-          endpoint: "tempo-distributor.observability.svc.cluster.local:4317"
-          tls:
-            insecure: true
+      otlphttp/victoriatraces:
+          endpoint: "http://victoria-traces-server.observability.svc.cluster.local:10428/insert/opentelemetry"
     service:
       telemetry:
         metrics:
@@ -67,4 +65,4 @@ data:
             - attributes/sample-out-http-request
             - probabilistic_sampler
             - batch
-          exporters: [otlp/2]
+          exporters: [otlphttp/victoriatraces]

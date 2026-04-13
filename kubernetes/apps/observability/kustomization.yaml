@@ -13,6 +13,7 @@ resources:
   - ./grafana/ks.yaml
   - ./k6s/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
+  - ./otel/ks.yaml
   - ./victoria-alerts/ks.yaml
   - ./victoria-logs/ks.yaml
   - ./victoria-traces/ks.yaml
