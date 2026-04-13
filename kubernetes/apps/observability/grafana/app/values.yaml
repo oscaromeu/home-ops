@@ -51,22 +51,11 @@ datasources:
         access: proxy
         url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
         isDefault: true
-        jsonData:
-          exemplarTraceIdDestinations:
-            - datasourceUid: victoria-traces
-              name: TraceID
       - uid: victoria-traces
         name: VictoriaTraces
         type: jaeger
         access: proxy
         url: http://victoria-traces-server.observability.svc.cluster.local:10428/select/jaeger
-        jsonData:
-          tracesToLogs:
-            datasourceUid: victoria-logs
-            filterByTraceID: true
-            filterBySpanID: false
-            tags:
-              - service.name
       - uid: victoria-logs
         name: VictoriaLogs
         type: victoriametrics-logs-datasource
