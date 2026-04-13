@@ -1,0 +1,34 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: victoria-traces
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: victoria-traces
+  values:
+    fullnameOverride: victoria-traces
+    server:
+      replicaCount: 1
+      persistentVolume:
+        enabled: true
+        storageClassName: openebs-hostpath
+        size: 10Gi
+      retentionPeriod: 7d
+      extraArgs:
+        envflag.enable: true
+        envflag.prefix: VM_
+        loggerFormat: json
+        http.shutdownDelay: 15s
+      route:
+        enabled: true
+        hostnames:
+          - victoria-traces.${SECRET_DOMAIN}
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+      serviceMonitor:
+        enabled: true
+        interval: 15s
