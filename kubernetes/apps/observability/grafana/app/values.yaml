@@ -44,6 +44,8 @@ grafana.ini:
 datasources:
   datasources.yaml:
     apiVersion: 1
+    deleteDatasources:
+      - { name: VictoriaLogs, orgId: 1 }
     datasources:
       - uid: prometheus
         name: Prometheus
@@ -56,7 +58,6 @@ datasources:
         type: jaeger
         access: proxy
         url: http://victoria-traces-server.observability.svc.cluster.local:10428/select/jaeger
-      # VictoriaLogs datasource configured via UI (plugin needs background install before provisioning)
       #- uid: victoria-logs
       #  name: VictoriaLogs
       #  type: victoriametrics-logs-datasource
