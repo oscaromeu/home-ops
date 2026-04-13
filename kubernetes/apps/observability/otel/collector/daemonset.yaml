@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: otel-collector-daemonset
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   selector:
     matchLabels:
