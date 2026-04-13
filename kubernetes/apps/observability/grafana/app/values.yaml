@@ -45,6 +45,8 @@ datasources:
   datasources.yaml:
     apiVersion: 1
     deleteDatasources:
+      - { name: Prometheus, orgId: 1 }
+      - { name: VictoriaTraces, orgId: 1 }
       - { name: VictoriaLogs, orgId: 1 }
     datasources:
       - uid: prometheus
