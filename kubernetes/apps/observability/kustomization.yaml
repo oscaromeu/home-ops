@@ -8,6 +8,7 @@ components:
 
 resources:
   - ./namespace.yaml
+  - ./fastapi/ks.yaml
   - ./fluentbit/ks.yaml
   - ./grafana/ks.yaml
   - ./k6s/ks.yaml
