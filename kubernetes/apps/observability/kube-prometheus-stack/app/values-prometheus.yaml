@@ -18,6 +18,8 @@ prometheus:
     probeSelectorNilUsesHelmValues: false
     scrapeConfigSelectorNilUsesHelmValues: false
     enableAdminAPI: true
+    enableFeatures:
+      - exemplar-storage
     walCompression: true
     enableRemoteWriteReceiver: true
     retention: 14d
