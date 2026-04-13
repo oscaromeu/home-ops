@@ -56,11 +56,12 @@ datasources:
         type: jaeger
         access: proxy
         url: http://victoria-traces-server.observability.svc.cluster.local:10428/select/jaeger
-      - uid: victoria-logs
-        name: VictoriaLogs
-        type: victoriametrics-logs-datasource
-        access: proxy
-        url: http://victoria-logs-server.observability.svc.cluster.local:9428
+      # VictoriaLogs datasource configured via UI (plugin needs background install before provisioning)
+      #- uid: victoria-logs
+      #  name: VictoriaLogs
+      #  type: victoriametrics-logs-datasource
+      #  access: proxy
+      #  url: http://victoria-logs-server.observability.svc.cluster.local:9428
       #- name: Pyroscope
       #  type: pyroscope
       #  url: http://pyroscope-querier.observability.svc.cluster.local:4040
