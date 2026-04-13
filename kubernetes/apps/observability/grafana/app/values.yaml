@@ -13,6 +13,7 @@ image:
   tag: 12.4.0-19426561773
   pullPolicy: IfNotPresent
 env:
+  GF_INSTALL_PLUGINS: victoriametrics-logs-datasource
   GF_EXPLORE_ENABLED: true
   GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"
   GF_FEATURE_TOGGLES_ENABLE: flameGraph
@@ -103,4 +104,3 @@ plugins:
   - pyroscope-panel
   - flant-statusmap-panel
   - marcusolsson-csv-datasource
-  - victoriametrics-logs-datasource
