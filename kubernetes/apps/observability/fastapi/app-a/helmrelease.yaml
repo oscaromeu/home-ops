@@ -20,7 +20,7 @@ spec:
               TARGET_ONE_HOST: app-b
               TARGET_TWO_HOST: app-c
               APP_NAME: app-a
-              OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector.observability.svc.cluster.local:4317
+              OTLP_GRPC_ENDPOINT: http://otel-collector.observability.svc.cluster.local:4317
               OTEL_RESOURCE_ATTRIBUTES: service.name=app-a
               OTEL_METRICS_EXPORTER: none
     service:
