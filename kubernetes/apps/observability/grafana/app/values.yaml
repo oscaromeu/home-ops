@@ -45,55 +45,33 @@ datasources:
   datasources.yaml:
     apiVersion: 1
     datasources:
-      - name: Prometheus
+      - uid: prometheus
+        name: Prometheus
         type: prometheus
         access: proxy
         url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
         isDefault: true
-      - name: VictoriaTraces
+        jsonData:
+          exemplarTraceIdDestinations:
+            - datasourceUid: victoria-traces
+              name: TraceID
+      - uid: victoria-traces
+        name: VictoriaTraces
         type: jaeger
         access: proxy
         url: http://victoria-traces-server.observability.svc.cluster.local:10428/select/jaeger
-      #- name: Loki
-      #  type: loki
-      #  access: proxy
-      #  url: http://loki-gateway.observability.svc.cluster.local:80
-      #  jsonData:
-      #    maxLines: 250
-      #    derivedFields:
-      #      - datasourceUid: Tempo
-      #        matcherRegex: (?:trace_id)=(\w+)
-      #        name: TraceID
-      #        # url will be interpreted as query for the datasource
-      #        # Use $$ (double-dollar sign) when your configuration needs a literal dollar sign.
-      #        url: '$${__value.raw}'
-      #        # optional for URL Label to set a custom display label for the link.
-      #        urlDisplayLabel: 'View Trace'
-      #- name: Tempo
-      #  type: tempo
-      #  typeName: Tempo
-      #  access: proxy
-      #  url: http://tempo-gateway.observability.svc.cluster.local:80
-      #  password: ''
-      #  user: ''
-      #  database: ''
-      #  basicAuth: false
-      #  isDefault: false
-      #  jsonData:
-      #    httpMethod: GET
-      #    serviceMap:
-      #      datasourceUid: 'Prometheus'
-      #  nodeGraph:
-      #     enabled: true
-      #  tracesToLogs:
-      #     datasourceUid: loki
-      #     filterBySpanID: false
-      #     filterByTraceID: true
-      #     mapTagNamesEnabled: false
-      #     tags:
-      #        - service_name
-      #  readOnly: false
-      #  editable: true
+        jsonData:
+          tracesToLogs:
+            datasourceUid: victoria-logs
+            filterByTraceID: true
+            filterBySpanID: false
+            tags:
+              - service.name
+      - uid: victoria-logs
+        name: VictoriaLogs
+        type: victoriametrics-logs-datasource
+        access: proxy
+        url: http://victoria-logs-server.observability.svc.cluster.local:9428
       #- name: Pyroscope
       #  type: pyroscope
       #  url: http://pyroscope-querier.observability.svc.cluster.local:4040
@@ -125,4 +103,4 @@ plugins:
   - pyroscope-panel
   - flant-statusmap-panel
   - marcusolsson-csv-datasource
-  - redis-datasource
+  - victoriametrics-logs-datasource
