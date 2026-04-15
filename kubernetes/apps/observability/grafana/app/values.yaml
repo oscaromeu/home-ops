@@ -72,14 +72,20 @@ datasources:
             datasourceUid: victoria-logs
             filterByTraceID: true
             filterBySpanID: false
-            tags:
-              - service.name
+            customQuery: true
+            query: "\"$${__trace.traceId}\""
       - uid: victoria-logs
         name: VictoriaLogs
         type: victoriametrics-logs-datasource
         access: proxy
         editable: true
         url: http://victoria-logs-server.observability.svc.cluster.local:9428
+        jsonData:
+          derivedFields:
+            - datasourceUid: victoria-traces
+              matcherRegex: "trace_id=(\\w+)"
+              name: TraceID
+              url: "$${__value.raw}"
       #- name: Pyroscope
       #  type: pyroscope
       #  url: http://pyroscope-querier.observability.svc.cluster.local:4040
