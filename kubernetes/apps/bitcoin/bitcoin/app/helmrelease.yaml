@@ -67,7 +67,7 @@ spec:
                     path: /metrics
                     port: &metricsPort 9332
                   periodSeconds: 30
-                  timeoutSeconds: 5
+                  timeoutSeconds: 60
                   failureThreshold: 3
               readiness: *exporterProbe
             resources:
