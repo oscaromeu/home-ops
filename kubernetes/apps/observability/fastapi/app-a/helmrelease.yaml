@@ -15,7 +15,7 @@ spec:
           app:
             image:
               repository: ghcr.io/oscaromeu/fastapi-observability/app
-              tag: latest@sha256:f6d03f95b57753d9eac9c94baeffad50c20fb89e31bf2a2d340dfa525ceaf660
+              tag: latest@sha256:d797e9ef2cca686789c55d3d8f0b84669c589615ed0ff57c4812b7565ef22af0
             env:
               TARGET_ONE_HOST: app-b
               TARGET_TWO_HOST: app-c
