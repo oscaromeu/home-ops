@@ -18,6 +18,13 @@ spec:
       ports:
         - protocol: TCP
           port: 9332
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: network
+      ports:
+        - protocol: TCP
+          port: 18332
   egress:
     - to:
         - namespaceSelector:

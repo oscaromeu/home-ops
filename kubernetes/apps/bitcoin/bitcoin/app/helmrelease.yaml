@@ -28,10 +28,9 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               capabilities: { drop: ["ALL"] }
-            # No probes on bitcoind: rpcbind=127.0.0.1 means kubelet TCP probes
-            # against the pod IP never connect. The exporter probe on /metrics
-            # acts as an indirect health check — if it passes, bitcoind's RPC
-            # is reachable.
+            # Probes on bitcoind are disabled — the exporter's /metrics probe
+            # already validates that RPC is reachable. Adding bitcoind-level
+            # TCP probes on 18332 would be redundant.
             probes:
               liveness: { enabled: false }
               readiness: { enabled: false }
@@ -86,12 +85,25 @@ spec:
         ports:
           metrics:
             port: *metricsPort
+          rpc:
+            port: 18332
     serviceMonitor:
       app:
         serviceName: app
         endpoints:
           - port: metrics
             interval: 30s
+    route:
+      app:
+        hostnames: ["bitcoin.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: 18332
     persistence:
       config:
         type: secret
