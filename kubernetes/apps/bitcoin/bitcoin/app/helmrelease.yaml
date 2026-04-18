@@ -24,25 +24,14 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               capabilities: { drop: ["ALL"] }
+            # No probes on bitcoind: rpcbind=127.0.0.1 means kubelet TCP probes
+            # against the pod IP never connect. The exporter probe on /metrics
+            # acts as an indirect health check — if it passes, bitcoind's RPC
+            # is reachable.
             probes:
-              liveness: &bitcoindProbe
-                enabled: true
-                custom: true
-                spec:
-                  tcpSocket:
-                    port: &rpcPort 18332
-                  periodSeconds: 30
-                  timeoutSeconds: 5
-                  failureThreshold: 3
-              readiness: *bitcoindProbe
-              startup:
-                enabled: true
-                custom: true
-                spec:
-                  tcpSocket:
-                    port: *rpcPort
-                  periodSeconds: 10
-                  failureThreshold: 30
+              liveness: { enabled: false }
+              readiness: { enabled: false }
+              startup: { enabled: false }
             resources:
               requests:
                 cpu: 250m
