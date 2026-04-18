@@ -37,7 +37,7 @@ spec:
                 cpu: 250m
                 memory: 512Mi
               limits:
-                memory: 2Gi
+                memory: 5Gi
           exporter:
             image:
               repository: jvstein/bitcoin-prometheus-exporter
