@@ -18,6 +18,8 @@ spec:
     controllers:
       bitcoin:
         strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
         containers:
           bitcoind:
             image:
