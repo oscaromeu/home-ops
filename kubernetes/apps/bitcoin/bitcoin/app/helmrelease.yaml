@@ -1,0 +1,117 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: bitcoin
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: bitcoin
+  # NOTE: openebs-hostpath binds PVs to a specific node. If this pod reschedules
+  # to a different node it will be stuck Pending. Pin with nodeSelector /
+  # nodeAffinity if availability matters more than losing the chainstate.
+  values:
+    controllers:
+      bitcoin:
+        strategy: Recreate
+        containers:
+          bitcoind:
+            image:
+              repository: ghcr.io/oscaromeu/bitcoind
+              tag: 27.0@sha256:276fa8a099eb1886bd5274ccc8fe5e69a2a4a04b84411e5028c67c3591fd6eec
+            command: ["bitcoind"]
+            args: ["-conf=/config/bitcoin.conf", "-datadir=/data"]
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities: { drop: ["ALL"] }
+            probes:
+              liveness: &bitcoindProbe
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: &rpcPort 18332
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness: *bitcoindProbe
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: *rpcPort
+                  periodSeconds: 10
+                  failureThreshold: 30
+            resources:
+              requests:
+                cpu: 250m
+                memory: 512Mi
+              limits:
+                memory: 2Gi
+          exporter:
+            image:
+              repository: jvstein/bitcoin-prometheus-exporter
+              tag: v0.10.0
+            env:
+              BITCOIN_RPC_HOST: localhost
+              BITCOIN_RPC_PORT: "18332"
+              BITCOIN_RPC_USER:
+                valueFrom:
+                  secretKeyRef:
+                    name: bitcoin-secret
+                    key: RPC_USER
+              BITCOIN_RPC_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: bitcoin-secret
+                    key: RPC_PASSWORD
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities: { drop: ["ALL"] }
+            probes:
+              liveness: &exporterProbe
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /metrics
+                    port: &metricsPort 9332
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 3
+              readiness: *exporterProbe
+            resources:
+              requests:
+                cpu: 10m
+                memory: 32Mi
+              limits:
+                memory: 128Mi
+    service:
+      app:
+        controller: bitcoin
+        ports:
+          metrics:
+            port: *metricsPort
+    serviceMonitor:
+      app:
+        serviceName: app
+        endpoints:
+          - port: metrics
+            interval: 30s
+    persistence:
+      config:
+        type: secret
+        name: bitcoin-secret
+        advancedMounts:
+          bitcoin:
+            bitcoind:
+              - path: /config/bitcoin.conf
+                subPath: bitcoin.conf
+                readOnly: true
+      data:
+        existingClaim: bitcoin-data
+        advancedMounts:
+          bitcoin:
+            bitcoind:
+              - path: /data
