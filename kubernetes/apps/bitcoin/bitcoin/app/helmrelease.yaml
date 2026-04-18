@@ -11,6 +11,10 @@ spec:
   # to a different node it will be stuck Pending. Pin with nodeSelector /
   # nodeAffinity if availability matters more than losing the chainstate.
   values:
+    defaultPodOptions:
+      securityContext:
+        fsGroup: 65534
+        fsGroupChangePolicy: OnRootMismatch
     controllers:
       bitcoin:
         strategy: Recreate
@@ -18,7 +22,7 @@ spec:
           bitcoind:
             image:
               repository: ghcr.io/oscaromeu/bitcoind
-              tag: 27.0@sha256:276fa8a099eb1886bd5274ccc8fe5e69a2a4a04b84411e5028c67c3591fd6eec
+              tag: 27.0@sha256:561cbc394ad3527fb00c5071bc17eb8d0b74a7bd14a0797e1362be524cdee5d4
             command: ["bitcoind"]
             args: ["-conf=/config/bitcoin.conf", "-datadir=/data"]
             securityContext:
