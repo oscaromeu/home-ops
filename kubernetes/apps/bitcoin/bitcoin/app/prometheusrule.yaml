@@ -1,0 +1,41 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: bitcoin
+  labels:
+    prometheus: k8s
+    role: alert-rules
+spec:
+  groups:
+    - name: bitcoin
+      rules:
+        - alert: BitcoinDown
+          annotations:
+            summary: bitcoind RPC is unreachable from the exporter
+            description: The bitcoin-prometheus-exporter cannot reach bitcoind RPC for >5m. Check the pod logs and `bitcoind` process inside the container.
+          expr: bitcoin_up == 0
+          for: 5m
+          labels:
+            severity: critical
+
+        - alert: BitcoinFewPeers
+          annotations:
+            summary: bitcoind has fewer than 3 peers
+            description: bitcoind has only {{ $value }} peers for >15m. Outbound P2P may be blocked — check NetworkPolicy egress and firewall for port 18333.
+          expr: bitcoin_peers < 3
+          for: 15m
+          labels:
+            severity: warning
+
+        - alert: BitcoinChainStalled
+          annotations:
+            summary: Block height has not advanced for 1h
+            description: bitcoind has not accepted new blocks in the last hour while still downloading headers. The node may be stuck during IBD or disconnected from the network.
+          expr: |
+            (bitcoin_headers - bitcoin_blocks) > 5
+            and
+            increase(bitcoin_blocks[1h]) == 0
+          for: 10m
+          labels:
+            severity: warning

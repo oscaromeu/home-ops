@@ -29,6 +29,7 @@ spec:
             args: ["-conf=/config/bitcoin.conf", "-datadir=/data"]
             securityContext:
               allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
             # Probes on bitcoind are disabled — the exporter's /metrics probe
             # already validates that RPC is reachable. Adding bitcoind-level
@@ -62,6 +63,7 @@ spec:
                     key: RPC_PASSWORD
             securityContext:
               allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
               capabilities: { drop: ["ALL"] }
             probes:
               liveness: &exporterProbe
@@ -122,3 +124,13 @@ spec:
           bitcoin:
             bitcoind:
               - path: /data
+      # With readOnlyRootFilesystem: true, bitcoind still needs a writable
+      # /tmp for temporary compaction files. An in-memory emptyDir is plenty.
+      tmp:
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 128Mi
+        advancedMounts:
+          bitcoin:
+            bitcoind:
+              - path: /tmp
