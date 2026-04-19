@@ -92,25 +92,13 @@ spec:
         ports:
           metrics:
             port: *metricsPort
-          rpc:
-            port: 18332
     serviceMonitor:
       app:
         serviceName: app
         endpoints:
           - port: metrics
             interval: 30s
-    #route:
-    #  app:
-    #    hostnames: ["bitcoin.${SECRET_DOMAIN}"]
-    #    parentRefs:
-    #      - name: envoy-internal
-    #        namespace: network
-    #        sectionName: https
-    #    rules:
-    #      - backendRefs:
-    #          - identifier: app
-    #            port: 18332
+
     persistence:
       config:
         type: secret
