@@ -55,12 +55,12 @@ spec:
                 valueFrom:
                   secretKeyRef:
                     name: bitcoin-secret
-                    key: RPC_USER
+                    key: MONITORING_RPC_USER
               BITCOIN_RPC_PASSWORD:
                 valueFrom:
                   secretKeyRef:
                     name: bitcoin-secret
-                    key: RPC_PASSWORD
+                    key: MONITORING_RPC_PASSWORD
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
