@@ -27,7 +27,7 @@ spec:
           bitcoind:
             image:
               repository: ghcr.io/oscaromeu/bitcoind
-              tag: 27.0@sha256:561cbc394ad3527fb00c5071bc17eb8d0b74a7bd14a0797e1362be524cdee5d4
+              tag: 27.0@sha256:9bc6030a6a115489071e9ed88f40b5f49e2bf6da8eb969cc277f5f5c960fe0d4
             command: ["bitcoind"]
             args: ["-conf=/config/bitcoin.conf", "-datadir=/data"]
             securityContext:
