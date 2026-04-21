@@ -1,0 +1,14 @@
+---
+alerting:
+  pushover:
+    application-token: ${PUSHOVER_TOKEN}
+    default-alert:
+      description: health-check failed
+      failure-threshold: 3
+      minimum-reminder-interval: 1h
+      send-on-resolved: true
+      success-threshold: 2
+    priority: 1
+    resolved-priority: 0
+    title: Gatus
+    user-key: ${PUSHOVER_USER_KEY}

@@ -1,0 +1,45 @@
+---
+connectivity:
+  checker:
+    interval: 1m
+    target: 1.1.1.1:53
+
+endpoints:
+  - alerts:
+      - type: pushover
+    conditions:
+      - "[CONNECTED] == true"
+    group: connectivity
+    interval: 1m
+    name: Cloudflare
+    url: icmp://1.1.1.1
+
+  - alerts:
+      - type: pushover
+    conditions:
+      - "[CONNECTED] == true"
+    group: connectivity
+    interval: 1m
+    name: Google
+    url: icmp://8.8.8.8
+
+metrics: true
+
+storage:
+  caching: true
+  path: ${GATUS_CONFIG_PATH}/gatus.db
+  type: sqlite
+
+ui:
+  buttons:
+    - name: Github
+      link: https://github.com/oscaromeu
+    - name: Homelab
+      link: https://github.com/oscaromeu/home-ops
+  default-sort-by: group
+  header: Status
+  link: https://github.com/oscaromeu
+  title: Status | Gatus
+
+web:
+  port: ${GATUS_WEB_PORT}
