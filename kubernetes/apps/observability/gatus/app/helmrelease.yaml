@@ -14,7 +14,7 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         initContainers:
-          gatus-sidecar:
+          gatus-sidecar-external:
             image:
               repository: ghcr.io/home-operations/gatus-sidecar
               tag: 0.0.13
@@ -22,6 +22,22 @@ spec:
               - --auto-httproute
               - --enable-httproute
               - --gateway-name=envoy-external
+              - --output=/config/gatus-sidecar-external.yaml
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 32Mi
+            restartPolicy: Always
+          gatus-sidecar-internal:
+            image:
+              repository: ghcr.io/home-operations/gatus-sidecar
+              tag: 0.0.13
+            args:
+              - --auto-httproute
+              - --enable-httproute
+              - --gateway-name=envoy-internal
+              - --output=/config/gatus-sidecar-internal.yaml
             resources:
               requests:
                 cpu: 10m
