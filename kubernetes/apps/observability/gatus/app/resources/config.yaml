@@ -28,7 +28,7 @@ endpoints:
         description: "See https://status.cloud.google.com/ for details"
     conditions:
       - 'any([BODY].#(end==null).affected_products.#.title) != "Google Cloud Storage"'
-    group: external
+    group: providers
     interval: 5m
     name: GCP · Cloud Storage
     ui:
@@ -41,7 +41,7 @@ endpoints:
         description: "See https://status.cloud.google.com/ for details"
     conditions:
       - 'any([BODY].#(end==null).affected_products.#.title) != "Google Cloud SQL"'
-    group: external
+    group: providers
     interval: 5m
     name: GCP · Cloud SQL
     ui:
@@ -54,7 +54,7 @@ endpoints:
         description: "See https://status.cloud.google.com/ for details"
     conditions:
       - 'any([BODY].#(end==null).affected_products.#.title) != "Google Kubernetes Engine"'
-    group: external
+    group: providers
     interval: 5m
     name: GCP · GKE
     ui:
@@ -71,13 +71,65 @@ endpoints:
       - 'any([BODY].#(end==null).affected_products.#.title) != "Google Cloud DNS"'
       - 'any([BODY].#(end==null).affected_products.#.title) != "Hybrid Connectivity"'
       - 'any([BODY].#(end==null).affected_products.#.title) != "Private Service Connect"'
-    group: external
+    group: providers
     interval: 5m
     name: GCP · Networking
     ui:
       hide-hostname: true
       hide-url: true
     url: *gcp_incidents
+
+  - alerts:
+      - type: pushover
+        description: "See https://status.claude.com/ for details"
+    conditions:
+      - '[BODY].status.indicator == "none"'
+    group: providers
+    interval: 5m
+    name: Claude
+    ui:
+      hide-hostname: true
+      hide-url: true
+    url: https://status.claude.com/api/v2/status.json
+
+  - alerts:
+      - type: pushover
+        description: "See https://www.cloudflarestatus.com/ for details"
+    conditions:
+      - '[BODY].status.indicator == "none"'
+    group: providers
+    interval: 5m
+    name: Cloudflare
+    ui:
+      hide-hostname: true
+      hide-url: true
+    url: https://www.cloudflarestatus.com/api/v2/status.json
+
+  - alerts:
+      - type: pushover
+        description: "See https://status.tailscale.com/ for details"
+    conditions:
+      - '[BODY].status.indicator == "none"'
+    group: providers
+    interval: 5m
+    name: Tailscale
+    ui:
+      hide-hostname: true
+      hide-url: true
+    url: https://status.tailscale.com/api/v2/status.json
+
+  - alerts:
+      - type: pushover
+        description: "See https://www.githubstatus.com/ for details"
+    conditions:
+      - '[BODY].status.indicator == "none"'
+    group: providers
+    interval: 5m
+    name: GitHub
+    ui:
+      hide-hostname: true
+      hide-url: true
+    url: https://www.githubstatus.com/api/v2/status.json
 
 metrics: true
 
