@@ -9,7 +9,7 @@ spec:
       rules:
         - alert: GatusEndpointDown
           expr: |-
-            gatus_results_endpoint_success{group="envoy-external"} == 0
+            gatus_results_endpoint_success{group="external"} == 0
           for: 5m
           annotations:
             summary: >-
@@ -19,7 +19,7 @@ spec:
 
         - alert: GatusInternalEndpointDown
           expr: |-
-            gatus_results_endpoint_success{group="envoy-internal"} == 0
+            gatus_results_endpoint_success{group="internal"} == 0
           for: 5m
           annotations:
             summary: >-

@@ -23,6 +23,62 @@ endpoints:
     name: Google
     url: icmp://8.8.8.8
 
+  - alerts:
+      - type: pushover
+        description: "See https://status.cloud.google.com/ for details"
+    conditions:
+      - 'any([BODY].#(end==null).affected_products.#.title) != "Google Cloud Storage"'
+    group: external
+    interval: 5m
+    name: GCP · Cloud Storage
+    ui:
+      hide-hostname: true
+      hide-url: true
+    url: &gcp_incidents https://status.cloud.google.com/incidents.json
+
+  - alerts:
+      - type: pushover
+        description: "See https://status.cloud.google.com/ for details"
+    conditions:
+      - 'any([BODY].#(end==null).affected_products.#.title) != "Google Cloud SQL"'
+    group: external
+    interval: 5m
+    name: GCP · Cloud SQL
+    ui:
+      hide-hostname: true
+      hide-url: true
+    url: *gcp_incidents
+
+  - alerts:
+      - type: pushover
+        description: "See https://status.cloud.google.com/ for details"
+    conditions:
+      - 'any([BODY].#(end==null).affected_products.#.title) != "Google Kubernetes Engine"'
+    group: external
+    interval: 5m
+    name: GCP · GKE
+    ui:
+      hide-hostname: true
+      hide-url: true
+    url: *gcp_incidents
+
+  - alerts:
+      - type: pushover
+        description: "See https://status.cloud.google.com/ for details"
+    conditions:
+      - 'any([BODY].#(end==null).affected_products.#.title) != "Virtual Private Cloud (VPC)"'
+      - 'any([BODY].#(end==null).affected_products.#.title) != "Cloud Load Balancing"'
+      - 'any([BODY].#(end==null).affected_products.#.title) != "Google Cloud DNS"'
+      - 'any([BODY].#(end==null).affected_products.#.title) != "Hybrid Connectivity"'
+      - 'any([BODY].#(end==null).affected_products.#.title) != "Private Service Connect"'
+    group: external
+    interval: 5m
+    name: GCP · Networking
+    ui:
+      hide-hostname: true
+      hide-url: true
+    url: *gcp_incidents
+
 metrics: true
 
 storage:
