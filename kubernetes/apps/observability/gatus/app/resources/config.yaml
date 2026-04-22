@@ -144,6 +144,16 @@ ui:
       link: https://github.com/oscaromeu
     - name: Homelab
       link: https://github.com/oscaromeu/home-ops
+    - name: GCP
+      link: https://status.cloud.google.com/
+    - name: Claude
+      link: https://status.claude.com/
+    - name: Cloudflare
+      link: https://www.cloudflarestatus.com/
+    - name: Tailscale
+      link: https://status.tailscale.com/
+    - name: GitHub Status
+      link: https://www.githubstatus.com/
   default-sort-by: group
   header: Status
   link: https://github.com/oscaromeu
