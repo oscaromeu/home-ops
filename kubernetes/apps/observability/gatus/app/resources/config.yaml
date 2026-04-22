@@ -83,7 +83,7 @@ endpoints:
       - type: pushover
         description: "See https://status.claude.com/ for details"
     conditions:
-      - '[BODY].status.indicator == "none"'
+      - "[BODY].status.indicator == none"
     group: providers
     interval: 5m
     name: Claude
@@ -96,7 +96,7 @@ endpoints:
       - type: pushover
         description: "See https://www.cloudflarestatus.com/ for details"
     conditions:
-      - '[BODY].status.indicator == "none"'
+      - "[BODY].status.indicator == none"
     group: providers
     interval: 5m
     name: Cloudflare
@@ -109,7 +109,7 @@ endpoints:
       - type: pushover
         description: "See https://status.tailscale.com/ for details"
     conditions:
-      - '[BODY].status.indicator == "none"'
+      - "[BODY].status.indicator == none"
     group: providers
     interval: 5m
     name: Tailscale
@@ -122,7 +122,7 @@ endpoints:
       - type: pushover
         description: "See https://www.githubstatus.com/ for details"
     conditions:
-      - '[BODY].status.indicator == "none"'
+      - "[BODY].status.indicator == none"
     group: providers
     interval: 5m
     name: GitHub
