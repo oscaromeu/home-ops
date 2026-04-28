@@ -1,3 +1,4 @@
+---
 extraInitContainers:
   - name: 01-init-db
     image: ghcr.io/home-operations/postgres-init:18
@@ -85,10 +86,7 @@ datasources:
             - datasourceUid: victoria-traces
               matcherRegex: "trace_id=(\\w+)"
               name: TraceID
-              url: "$${__value.raw}"
-      #- name: Pyroscope
-      #  type: pyroscope
-      #  url: http://pyroscope-querier.observability.svc.cluster.local:4040
+              url: "$$$${__value.raw}"
 sidecar:
   dashboards:
     enabled: false
