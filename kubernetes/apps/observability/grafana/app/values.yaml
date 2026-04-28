@@ -69,8 +69,10 @@ datasources:
         url: http://victoria-traces-server.observability.svc.cluster.local:10428/select/jaeger
         editable: true
         jsonData:
-          tracesToLogs:
+          tracesToLogsV2:
             datasourceUid: victoria-logs
+            spanStartTimeShift: "-1h"
+            spanEndTimeShift: "1h"
             filterByTraceID: true
             filterBySpanID: false
             customQuery: true
@@ -84,7 +86,7 @@ datasources:
         jsonData:
           derivedFields:
             - datasourceUid: victoria-traces
-              matcherRegex: "(\\w+)"
+              matcherRegex: "trace_id=(\\w+)"
               name: TraceID
               url: "$$$${__value.raw}"
 sidecar:
