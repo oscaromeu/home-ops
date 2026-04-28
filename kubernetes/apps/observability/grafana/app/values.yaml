@@ -74,7 +74,7 @@ datasources:
             filterByTraceID: true
             filterBySpanID: false
             customQuery: true
-            query: "\"$${__trace.traceId}\""
+            query: "\"$${__trace.traceId}\"
       - uid: victoria-logs
         name: VictoriaLogs
         type: victoriametrics-logs-datasource
@@ -84,7 +84,7 @@ datasources:
         jsonData:
           derivedFields:
             - datasourceUid: victoria-traces
-              matcherRegex: "trace_id=(\\w+)"
+              matcherRegex: "(\\w+)"
               name: TraceID
               url: "$$$${__value.raw}"
 sidecar:
