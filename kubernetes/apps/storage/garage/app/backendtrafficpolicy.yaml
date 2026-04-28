@@ -1,0 +1,15 @@
+---
+# Disable Envoy compression for the Garage S3 endpoint.
+# The cluster-wide BackendTrafficPolicy enables Brotli/Gzip compression on every
+# Gateway, which causes Envoy to mutate the Accept-Encoding header and breaks
+# AWS SigV4 verification on the Garage backend.
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: BackendTrafficPolicy
+metadata:
+  name: garage-no-compression
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: garage
+  compression: []
