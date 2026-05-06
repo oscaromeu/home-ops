@@ -4,7 +4,6 @@ kind: Kustomization
 namespace: bitcoin
 resources:
   - ./externalsecret.yaml
-  - ./pvc.yaml
   - ./ocirepository.yaml
   - ./helmrelease.yaml
   - ./networkpolicy.yaml

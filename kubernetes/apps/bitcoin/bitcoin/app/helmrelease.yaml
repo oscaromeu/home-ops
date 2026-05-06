@@ -18,6 +18,16 @@ spec:
         runAsGroup: 65534
         fsGroup: 65534
         fsGroupChangePolicy: OnRootMismatch
+      # Force replicas onto different nodes. With openebs-hostpath each PVC
+      # is bound to a node, so two replicas on the same host would mean two
+      # copies of the chainstate on the same disk — fake redundancy.
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: bitcoin
+              topologyKey: kubernetes.io/hostname
     controllers:
       bitcoin:
         strategy: RollingUpdate
@@ -111,8 +121,13 @@ spec:
               - path: /config/bitcoin.conf
                 subPath: bitcoin.conf
                 readOnly: true
+      # One PVC per replica, generated as volumeClaimTemplates by the
+      # StatefulSet so each pod gets its own openebs-hostpath volume bound
+      # to whatever node it first lands on. Avoids RWO sharing conflicts.
       data:
-        existingClaim: bitcoin-data
+        accessMode: ReadWriteOnce
+        size: 2Gi
+        storageClass: openebs-hostpath
         advancedMounts:
           bitcoin:
             bitcoind:
