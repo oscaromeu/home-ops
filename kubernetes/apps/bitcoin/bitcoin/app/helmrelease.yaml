@@ -35,6 +35,20 @@ spec:
         replicas: 2
         annotations:
           reloader.stakater.com/auto: "true"
+        statefulset:
+          # One PVC per replica via the StatefulSet's own volumeClaimTemplates
+          # (PVCs named data-bitcoin-0, data-bitcoin-1). Declaring this under
+          # `persistence` instead generates a single standalone PVC that all
+          # replicas share — RWO conflict, second pod stays Pending.
+          volumeClaimTemplates:
+            - name: data
+              accessMode: ReadWriteOnce
+              size: 2Gi
+              storageClass: openebs-hostpath
+              advancedMounts:
+                bitcoin:
+                  bitcoind:
+                    - path: /data
         containers:
           bitcoind:
             image:
@@ -121,17 +135,6 @@ spec:
               - path: /config/bitcoin.conf
                 subPath: bitcoin.conf
                 readOnly: true
-      # One PVC per replica, generated as volumeClaimTemplates by the
-      # StatefulSet so each pod gets its own openebs-hostpath volume bound
-      # to whatever node it first lands on. Avoids RWO sharing conflicts.
-      data:
-        accessMode: ReadWriteOnce
-        size: 2Gi
-        storageClass: openebs-hostpath
-        advancedMounts:
-          bitcoin:
-            bitcoind:
-              - path: /data
       # With readOnlyRootFilesystem: true, bitcoind still needs a writable
       # /tmp for temporary compaction files. An in-memory emptyDir is plenty.
       tmp:
