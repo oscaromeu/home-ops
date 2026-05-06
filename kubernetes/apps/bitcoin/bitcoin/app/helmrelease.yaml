@@ -20,7 +20,9 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
     controllers:
       bitcoin:
-        strategy: Recreate
+        strategy: RollingUpdate
+        type: statefulset
+        replicas: 2
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
