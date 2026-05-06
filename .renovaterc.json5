@@ -36,6 +36,20 @@
       overrideDepName: "{{packageName}}",
     },
     {
+      description: "Pin all docker / helm (incl. Flux OCIRepository) deps by digest",
+      matchDatasources: ["docker", "helm"],
+      pinDigests: true,
+    },
+    {
+      description: "Group the initial digest-pinning sweep into a single PR and allow it to run on any day (the global schedule is weekend-only).",
+      matchDatasources: ["docker", "helm"],
+      matchUpdateTypes: ["pinDigest"],
+      groupName: "pin all digests",
+      commitMessageTopic: "{{{groupName}}}",
+      schedule: ["at any time"],
+      automerge: false,
+    },
+    {
       description: "Flux Operator Group",
       groupName: "flux-operator",
       matchDatasources: ["docker"],
