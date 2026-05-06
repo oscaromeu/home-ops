@@ -46,9 +46,8 @@ spec:
               size: 2Gi
               storageClass: openebs-hostpath
               advancedMounts:
-                bitcoin:
-                  bitcoind:
-                    - path: /data
+                bitcoind:
+                  - path: /data
         containers:
           bitcoind:
             image:
