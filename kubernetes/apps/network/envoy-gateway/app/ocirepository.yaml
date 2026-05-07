@@ -10,5 +10,4 @@ spec:
     operation: copy
   ref:
     tag: v1.7.2
-    digest: sha256:02cfb2d2e9a31386f850a1ef3ab2a7a18a489eb2140a35c700c73b9b72b231f8
   url: oci://mirror.gcr.io/envoyproxy/gateway-helm
