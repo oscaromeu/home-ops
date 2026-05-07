@@ -36,13 +36,15 @@
       overrideDepName: "{{packageName}}",
     },
     {
-      description: "Pin all docker / helm (incl. Flux OCIRepository) deps by digest",
+      description: "Pin all docker / helm (incl. Flux OCIRepository) deps by digest. Restricted to kubernetes/** so the helmfile bootstrap templates (templates/**) are excluded — Renovate's helmfile manager fails to write back digests on .yaml.j2 files and aborts the whole grouped branch.",
       matchDatasources: ["docker", "helm"],
+      matchFileNames: ["kubernetes/**"],
       pinDigests: true,
     },
     {
       description: "Group the initial digest-pinning sweep into a single PR and allow it to run on any day (the global schedule is weekend-only).",
       matchDatasources: ["docker", "helm"],
+      matchFileNames: ["kubernetes/**"],
       matchUpdateTypes: ["pinDigest"],
       groupName: "pin all digests",
       commitMessageTopic: "{{{groupName}}}",
