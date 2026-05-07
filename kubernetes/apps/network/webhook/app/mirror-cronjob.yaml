@@ -17,7 +17,7 @@ spec:
           restartPolicy: OnFailure
           containers:
           - name: mirror
-            image: ghcr.io/home-operations/webhook:2.8.3
+            image: ghcr.io/home-operations/webhook:2.8.3@sha256:b5a6defe3462a7bba13342bb878b20504f3699644a442039dad21285edca0082
             command:
               - /config/image-mirror.sh
             env:
