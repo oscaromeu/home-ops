@@ -1,7 +1,7 @@
 ---
 extraInitContainers:
   - name: 01-init-db
-    image: ghcr.io/home-operations/postgres-init:18
+    image: ghcr.io/home-operations/postgres-init:18@sha256:6fa1f331cddd2eb0b6afa7b8d3685c864127a81ab01c3d9400bc3ff5263a51cf
     envFrom:
       - secretRef:
           name: postgres-${postgres_cluster_version}-pguser-grafana
@@ -11,7 +11,7 @@ replicas: 2
 image:
   registry: docker.io
   repository: grafana/grafana-dev
-  tag: 12.4.0-19426561773
+  tag: 12.4.0-19426561773@sha256:e6b9dd5dbdb3e3bc493e8350e254645fef4382e849ca37979dde0d8222611015
   pullPolicy: IfNotPresent
 env:
   GF_EXPLORE_ENABLED: true

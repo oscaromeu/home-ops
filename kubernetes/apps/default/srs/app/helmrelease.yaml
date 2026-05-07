@@ -15,7 +15,7 @@ spec:
           app:
             image:
               repository: ossrs/srs
-              tag: "6"
+              tag: "6@sha256:4e293846ad2448ff1a0157aa2c694e7c451fff5046c93b5bc6da0fa0384ef998"
             env:
               CANDIDATE: "10.69.1.122"
             probes:

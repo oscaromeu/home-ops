@@ -25,7 +25,7 @@ spec:
           app:
             image:
               repository: chocobozzz/peertube
-              tag: production-bookworm
+              tag: production-bookworm@sha256:011b0ec43d921bd60a3aa01fc7995e42cf15275925f16bee6f17a6c896ca5060
             env:
               NODE_ENV: production
               PEERTUBE_WEBSERVER_HOSTNAME: "{{ .Release.Name }}.${SECRET_DOMAIN}"
