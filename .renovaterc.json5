@@ -42,9 +42,9 @@
       pinDigests: true,
     },
     {
-      description: "Disable digest pinning for Flux OCIRepository. Renovate writes the digest back into the `tag` field as `vX.Y.Z@sha256:...` (Docker-image syntax), but Flux OCIRepository uses a separate `digest:` field — `tag: v1.20.2@sha256:...` is rejected by helm/source-controller as an improper version constraint. Until the upstream Flux manager learns the correct writeback, OCIRepository charts stay tag-only.",
+      description: "Disable digest pinning for Flux OCIRepository files. Renovate writes the digest back into the `tag` field as `vX.Y.Z@sha256:...` (Docker-image syntax), but Flux OCIRepository uses a separate `digest:` field — `tag: v1.20.2@sha256:...` is rejected by helm/source-controller as an improper version constraint. Match by file path (`**/ocirepository.yaml`) — the flux manager does not set `depType: OCIRepository` on these deps, so `matchDepTypes` would silently no-op.",
       matchManagers: ["flux"],
-      matchDepTypes: ["OCIRepository"],
+      matchFileNames: ["**/ocirepository.yaml"],
       pinDigests: false,
     },
     {
