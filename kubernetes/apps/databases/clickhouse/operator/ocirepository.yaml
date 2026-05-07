@@ -10,4 +10,5 @@ spec:
     operation: copy
   ref:
     tag: 0.0.4
+    digest: sha256:4ddc5e7aee10b6a96ea15f6f2e79f1dc0800ad59e514fe982241dc724825a388
   url: oci://ghcr.io/clickhouse/clickhouse-operator-helm

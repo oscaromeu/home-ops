@@ -11,4 +11,5 @@ spec:
     operation: copy
   ref:
     tag: 0.39.0
+    digest: sha256:5bd8a5447011538b1c1813324b14ebfc0c823a3cf31b45c59056d46a3ff5deb8
   url: oci://ghcr.io/victoriametrics/helm-charts/victoria-metrics-alert

@@ -10,4 +10,5 @@ spec:
     operation: copy
   ref:
     tag: 0.7.0
+    digest: sha256:1d56ff606ad14fd1255732019d60540f0982c60cf7afb9f66573e6e513f6bbcc
   url: oci://ghcr.io/spegel-org/helm-charts/spegel

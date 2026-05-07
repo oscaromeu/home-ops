@@ -11,4 +11,5 @@ spec:
     operation: copy
   ref:
     tag: 0.55.0
+    digest: sha256:6e3b10c28c20b724dd2646c500c7647de60918d37b5f335fed274d9a93b59ab1
   url: oci://ghcr.io/home-operations/charts-mirror/fluent-bit

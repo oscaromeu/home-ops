@@ -36,10 +36,16 @@
       overrideDepName: "{{packageName}}",
     },
     {
-      description: "Pin all docker / helm (incl. Flux OCIRepository) deps by digest. Restricted to kubernetes/** so the helmfile bootstrap templates (templates/**) are excluded — Renovate's helmfile manager fails to write back digests on .yaml.j2 files and aborts the whole grouped branch.",
+      description: "Pin all docker / helm deps by digest. Restricted to kubernetes/** so the helmfile bootstrap templates (templates/**) are excluded — Renovate's helmfile manager fails to write back digests on .yaml.j2 files and aborts the whole grouped branch.",
       matchDatasources: ["docker", "helm"],
       matchFileNames: ["kubernetes/**"],
       pinDigests: true,
+    },
+    {
+      description: "Disable digest pinning for Flux OCIRepository. Renovate writes the digest back into the `tag` field as `vX.Y.Z@sha256:...` (Docker-image syntax), but Flux OCIRepository uses a separate `digest:` field — `tag: v1.20.2@sha256:...` is rejected by helm/source-controller as an improper version constraint. Until the upstream Flux manager learns the correct writeback, OCIRepository charts stay tag-only.",
+      matchManagers: ["flux"],
+      matchDepTypes: ["OCIRepository"],
+      pinDigests: false,
     },
     {
       description: "Group the initial digest-pinning sweep into a single PR and allow it to run on any day (the global schedule is weekend-only).",
