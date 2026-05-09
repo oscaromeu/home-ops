@@ -1,0 +1,90 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+#
+# v0 / hack: 1 Deployment por streamer. El worker corre dentro de un wrapper
+# while-true que reintenta cada 30s si streamlink sale (offline o stream end).
+# Se borrará cuando el operator de HO-38 esté listo.
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: twitch-radios
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: twitch-radios
+  values:
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        seccompProfile:
+          type: RuntimeDefault
+
+    controllers:
+      radio-1:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app: &workerContainer
+            image:
+              repository: ghcr.io/oscaromeu/twitch-radio-worker
+              tag: rolling
+            command: ["/usr/bin/catatonit", "--", "/bin/bash", "-c"]
+            args:
+              - |
+                set -uo pipefail
+                export ICECAST_MOUNT="/${CHANNEL}.mp3"
+                while true; do
+                  echo "[wrapper] starting pipeline for ${CHANNEL}"
+                  /entrypoint.sh || echo "[wrapper] pipeline exited rc=$? — sleeping 30s"
+                  sleep 30
+                done
+            env:
+              CHANNEL:
+                valueFrom:
+                  secretKeyRef:
+                    name: twitch-djs
+                    key: radio_1
+              ICECAST_URL: http://icecast.default.svc.cluster.local:8000
+              QUALITY: audio_only
+              ENCODE_MODE: copy
+              ICECAST_PASS:
+                valueFrom:
+                  secretKeyRef:
+                    name: icecast-secrets
+                    key: ICECAST_SOURCE_PASSWORD
+            securityContext: &workerSecurityContext
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop: [ALL]
+            resources: &workerResources
+              requests:
+                cpu: 50m
+                memory: 64Mi
+              limits:
+                cpu: 500m
+                memory: 256Mi
+
+      radio-2:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            <<: *workerContainer
+            env:
+              CHANNEL:
+                valueFrom:
+                  secretKeyRef:
+                    name: twitch-djs
+                    key: radio_2
+              ICECAST_URL: http://icecast.default.svc.cluster.local:8000
+              QUALITY: audio_only
+              ENCODE_MODE: copy
+              ICECAST_PASS:
+                valueFrom:
+                  secretKeyRef:
+                    name: icecast-secrets
+                    key: ICECAST_SOURCE_PASSWORD
+            securityContext: *workerSecurityContext
+            resources: *workerResources
