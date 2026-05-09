@@ -28,7 +28,7 @@ spec:
               ICECAST_MAX_CLIENTS: "100"
               ICECAST_MAX_SOURCES: "20"
               ICECAST_LOG_LEVEL: "3"
-              ICECAST_BURST_SIZE: "65535"
+              ICECAST_BURST_SIZE: "524288"   # ~13s buffer at 320k MP3 — survives network blips
             probes:
               liveness:
                 enabled: true
