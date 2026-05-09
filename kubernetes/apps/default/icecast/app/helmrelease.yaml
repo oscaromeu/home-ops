@@ -1,0 +1,83 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: icecast
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: icecast
+  values:
+    controllers:
+      icecast:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/oscaromeu/icecast
+              tag: 2.4.4@sha256:3f642032e0bf4c9fbe614aa007524c32d2c82bcba4655761c36fcd82c9f9483b
+            envFrom:
+              - secretRef:
+                  name: icecast-secrets
+            env:
+              TZ: "${TIMEZONE}"
+              ICECAST_HOSTNAME: icecast.default.svc.cluster.local
+              ICECAST_LOCATION: home-ops
+              ICECAST_MAX_CLIENTS: "100"
+              ICECAST_MAX_SOURCES: "20"
+              ICECAST_LOG_LEVEL: "3"
+              ICECAST_BURST_SIZE: "65535"
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop: [ALL]
+            resources:
+              requests:
+                cpu: 50m
+                memory: 64Mi
+              limits:
+                memory: 256Mi
+        pod:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65534
+            runAsGroup: 65534
+            fsGroup: 65534
+            fsGroupChangePolicy: OnRootMismatch
+            seccompProfile:
+              type: RuntimeDefault
+    persistence:
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
+      log:
+        type: emptyDir
+        globalMounts:
+          - path: /var/log/icecast
+    service:
+      app:
+        controller: icecast
+        ports:
+          http:
+            port: &port 8000
+    route:
+      app:
+        hostnames:
+          - "icecast.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
