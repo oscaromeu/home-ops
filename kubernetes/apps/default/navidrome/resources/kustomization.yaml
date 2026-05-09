@@ -4,3 +4,11 @@ kind: Kustomization
 resources:
   - ./radios-configmap.yaml
   - ./sync-radios-cronjob.yaml
+
+configMapGenerator:
+  - name: navidrome-scripts
+    files:
+      - sync-radios.py=scripts/sync-radios.py
+
+generatorOptions:
+  disableNameSuffixHash: true
