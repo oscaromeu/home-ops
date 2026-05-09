@@ -160,3 +160,16 @@ spec:
                   secretKeyRef:
                     name: twitch-djs
                     key: radio_8
+
+      radio-9:
+        <<: *radioController
+        containers:
+          app:
+            <<: *radioContainer
+            env:
+              <<: *env2
+              CHANNEL:
+                valueFrom:
+                  secretKeyRef:
+                    name: twitch-djs
+                    key: radio_9
