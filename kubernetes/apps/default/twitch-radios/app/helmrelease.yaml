@@ -34,10 +34,10 @@ spec:
             args:
               - |
                 set -uo pipefail
-                export ICECAST_MOUNT="/${CHANNEL}.mp3"
+                export ICECAST_MOUNT="/$${CHANNEL}.mp3"
                 while true; do
-                  echo "[wrapper] starting pipeline for ${CHANNEL}"
-                  /entrypoint.sh || echo "[wrapper] pipeline exited rc=$? — sleeping 30s"
+                  echo "[wrapper] starting pipeline for $${CHANNEL}"
+                  /entrypoint.sh || echo "[wrapper] pipeline exited rc=$$? — sleeping 30s"
                   sleep 30
                 done
             env:
