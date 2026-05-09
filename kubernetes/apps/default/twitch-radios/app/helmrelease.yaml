@@ -44,7 +44,8 @@ spec:
             env:
               ICECAST_URL: &icecastUrl http://icecast.default.svc.cluster.local:8000
               QUALITY: &quality audio_only
-              ENCODE_MODE: &encodeMode copy
+              ENCODE_MODE: &encodeMode mp3
+              BITRATE: &bitrate "320k"
               ICECAST_PASS: &icecastPass
                 valueFrom:
                   secretKeyRef:
@@ -76,6 +77,7 @@ spec:
               ICECAST_URL: *icecastUrl
               QUALITY: *quality
               ENCODE_MODE: *encodeMode
+              BITRATE: *bitrate
               ICECAST_PASS: *icecastPass
               CHANNEL:
                 valueFrom:
