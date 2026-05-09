@@ -17,7 +17,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: sync
-              image: docker.io/alpine:3.23
+              image: docker.io/alpine:3.22@sha256:310c62b5e7ca5b08167e4384c68db0fd2905dd9c7493756d356e893909057601
               command: ["/bin/sh", "-c"]
               args:
                 - |
@@ -40,7 +40,7 @@ spec:
                   RESP=$$(curl -fsSL "$$ND_BASE/getInternetRadioStations?$$COMMON_QS") || {
                     echo "[sync] FAILED to call getInternetRadioStations"; exit 1; }
 
-                  # Map "name" -> "id" para lookup rápido
+                  # Map "name" -> "id" for quick lookup
                   EXISTING=$$(echo "$$RESP" \
                     | grep -oE '"id":"[^"]*","name":"[^"]*"' \
                     | sed -E 's/"id":"([^"]+)","name":"([^"]+)"/\1|\2/')
