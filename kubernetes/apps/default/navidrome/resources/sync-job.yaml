@@ -1,0 +1,124 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: twitch-radios-sync
+  namespace: default
+spec:
+  ttlSecondsAfterFinished: 3600
+  backoffLimit: 2
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: sync
+          image: ghcr.io/oscaromeu/twitch-radio-worker:rolling
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              set -uo pipefail
+
+              ND_BASE="http://navidrome.default.svc.cluster.local:8080/rest"
+              ND_USER="admin"
+              ND_PASS="$$ND_INITIALADMINPASSWORD"
+              SALT=$$(head -c 16 /dev/urandom | od -An -tx1 | tr -d ' \n')
+              TOKEN=$$(printf '%s%s' "$$ND_PASS" "$$SALT" | md5sum | awk '{print $$1}')
+              COMMON_QS="u=$$ND_USER&t=$$TOKEN&s=$$SALT&v=1.16.1&c=twitch-radios-sync&f=json"
+
+              # IMPORTANTE: usamos el endpoint PÚBLICO de Icecast (resoluble
+              # por clientes Subsonic externos como Symphonium en el móvil).
+              # El cluster-internal "icecast.default.svc..." solo funciona
+              # para pods del cluster.
+              ICECAST_BASE="https://icecast.oscaromeu.io"
+
+              echo "[sync] fetching existing internet radios from Navidrome..."
+              RESP=$$(curl -fsSL "$$ND_BASE/getInternetRadioStations?$$COMMON_QS") || {
+                echo "[sync] FAILED to call getInternetRadioStations"
+                exit 1
+              }
+
+              # Parseo de "id" + "name" pareados (asumimos que vienen contiguos
+              # por entrada). Genera líneas formato "id|name".
+              EXISTING_PAIRS=$$(echo "$$RESP" \
+                | grep -oE '"id":"[^"]*","name":"[^"]*"' \
+                | sed -E 's/"id":"([^"]+)","name":"([^"]+)"/\1|\2/')
+
+              echo "[sync] existing entries:"
+              echo "$$EXISTING_PAIRS" | sed 's/^/  - /'
+
+              created=0; updated=0; skipped=0
+
+              # Helper: dado un name, devuelve el id si existe, vacío si no
+              find_id() {
+                local target="$$1"
+                echo "$$EXISTING_PAIRS" | awk -F'|' -v t="$$target" '$$2 == t {print $$1; exit}'
+              }
+
+              for i in $$(seq 1 20); do
+                key="radio_$$i"
+                name="$${!key:-}"   # bash indirect expansion + default empty (silent if radio_N not set)
+                if [ -z "$$name" ]; then
+                  continue
+                fi
+                STREAM_URL="$$ICECAST_BASE/$${name}.mp3"
+                existing_id=$$(find_id "$$name")
+
+                if [ -n "$$existing_id" ]; then
+                  echo "[sync] updating: $$name (id=$$existing_id) -> $$STREAM_URL"
+                  resp=$$(curl -fsSL --get \
+                    --data-urlencode "u=$$ND_USER" \
+                    --data-urlencode "t=$$TOKEN" \
+                    --data-urlencode "s=$$SALT" \
+                    --data-urlencode "v=1.16.1" \
+                    --data-urlencode "c=twitch-radios-sync" \
+                    --data-urlencode "f=json" \
+                    --data-urlencode "id=$$existing_id" \
+                    --data-urlencode "name=$$name" \
+                    --data-urlencode "streamUrl=$$STREAM_URL" \
+                    "$$ND_BASE/updateInternetRadioStation") || resp='{"subsonic-response":{"status":"failed"}}'
+                  status=$$(echo "$$resp" | grep -oE '"status":"[^"]*"' | head -1 | sed 's/"status":"//; s/"$//')
+                  if [ "$$status" = "ok" ]; then
+                    echo "[sync] -> updated"
+                    updated=$$((updated + 1))
+                  else
+                    echo "[sync] -> FAILED: $$resp"
+                  fi
+                else
+                  echo "[sync] creating: $$name -> $$STREAM_URL"
+                  resp=$$(curl -fsSL --get \
+                    --data-urlencode "u=$$ND_USER" \
+                    --data-urlencode "t=$$TOKEN" \
+                    --data-urlencode "s=$$SALT" \
+                    --data-urlencode "v=1.16.1" \
+                    --data-urlencode "c=twitch-radios-sync" \
+                    --data-urlencode "f=json" \
+                    --data-urlencode "name=$$name" \
+                    --data-urlencode "streamUrl=$$STREAM_URL" \
+                    "$$ND_BASE/createInternetRadioStation") || resp='{"subsonic-response":{"status":"failed"}}'
+                  status=$$(echo "$$resp" | grep -oE '"status":"[^"]*"' | head -1 | sed 's/"status":"//; s/"$//')
+                  if [ "$$status" = "ok" ]; then
+                    echo "[sync] -> created"
+                    created=$$((created + 1))
+                  else
+                    echo "[sync] -> FAILED: $$resp"
+                  fi
+                fi
+              done
+
+              echo "[sync] done. created=$$created updated=$$updated skipped=$$skipped"
+          envFrom:
+            - secretRef:
+                name: twitch-djs
+            - secretRef:
+                name: navidrome
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: [ALL]
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              memory: 128Mi

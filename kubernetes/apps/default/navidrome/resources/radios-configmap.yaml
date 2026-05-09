@@ -1,0 +1,70 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: navidrome-radios
+data:
+  radios.yaml: |
+    - name: 181.FM Old School Hip-Hop & RnB
+      url: http://listen.181fm.com/181-oldschool_128k.mp3
+      homepage: http://www.181.fm/
+
+    - name: BBC Radio 1Xtra
+      url: http://as-hls-ww-live.akamaized.net/pool_92079267/live/ww/bbc_1xtra/bbc_1xtra.isml/bbc_1xtra-audio=128000.norewind.m3u8
+      homepage: https://www.bbc.co.uk/1xtra
+
+    - name: BBC Radio 4
+      url: http://as-hls-ww-live.akamaized.net/pool_55057080/live/ww/bbc_radio_fourfm/bbc_radio_fourfm.isml/bbc_radio_fourfm-audio=128000.norewind.m3u8
+      homepage: https://www.bbc.co.uk/radio4
+
+    - name: BBC World Service
+      url: http://stream.live.vc.bbcmedia.co.uk/bbc_world_service
+      homepage: https://www.bbc.co.uk/sounds/play/live:bbc_world_service
+
+    - name: Catalunya Informació
+      url: https://shoutcast.ccma.cat/ccma/catalunyainformacioHD.mp3
+      homepage: https://www.catradio.cat/catinfo
+
+    - name: Catalunya Música
+      url: https://shoutcast.ccma.cat/ccma/catalunyamusicaHD.mp3
+      homepage: https://www.ccma.cat/catradio/catalunya-musica/
+
+    - name: Funk the Planet
+      url: https://streaming.live365.com/a01484
+      homepage: https://funkthepla.net/
+
+    - name: Funky Radio
+      url: https://funkyradio.streamingmedia.it/play.mp3
+      homepage: https://funky.radio/
+
+    - name: Jazz Radio
+      url: http://jazzradio.ice.infomaniak.ch/jazzradio-high.mp3
+      homepage: https://www.jazzradio.fr/
+
+    - name: KRFC
+      url: https://ice24.securenetsystems.net/KRFCFM
+      homepage: https://www.krfcfm.org/
+
+    - name: NPO Radio 2 Soul & Jazz
+      url: http://icecast.omroep.nl/radio6-bb-mp3
+      homepage: https://www.nposoulenjazz.nl/
+
+    - name: Oldschool Hip-Hop (laut.fm)
+      url: http://stream.laut.fm/oldschool-hiphop
+      homepage: https://laut.fm/oldschool-hiphop
+
+    - name: RAC1
+      url: https://playerservices.streamtheworld.com/api/livestream-redirect/RAC_1.mp3
+      homepage: https://www.rac1.cat/
+
+    - name: Radio Meuh
+      url: http://radiomeuh.ice.infomaniak.ch/radiomeuh-128.mp3
+      homepage: http://www.radiomeuh.com/
+
+    - name: Street Sounds Radio
+      url: https://streaming.broadcastradio.com:10525/streetsd
+      homepage: https://www.streetsoundsradio.com/
+
+    - name: The Disco Paradise
+      url: https://broadcast.miami/proxy/thediscoparadise?mp=/stream/
+      homepage: https://www.thediscoparadise.com/
