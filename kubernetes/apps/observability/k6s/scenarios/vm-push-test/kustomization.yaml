@@ -1,0 +1,18 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./vm-push-test.yaml
+  - ./snapshot.yaml
+
+configMapGenerator:
+  - name: vm-push-test
+    files:
+      - vm-push-test.js=./vm-push-test.js
+  - name: vm-push-test-config
+    files:
+      - vm-push-test.yaml=./vm-push-test.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled

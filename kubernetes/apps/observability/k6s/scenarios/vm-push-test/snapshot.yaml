@@ -1,0 +1,32 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: vm-push-test-cron
+spec:
+  # Cambia el schedule para reproducir el caso "sparse" (ej. */10 * * * *)
+  # y comparar el comportamiento con/sin -search.maxStalenessInterval.
+  schedule: '*/1 * * * *'
+  concurrencyPolicy: Allow
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccount: k6-observability
+          containers:
+            - name: kubectl
+              image: bitnami/kubectl@sha256:3220dcc839f55be732a29548043a1ddf635a0dd6c8781b0f2a0bcdc19029c7d3
+              imagePullPolicy: IfNotPresent
+              volumeMounts:
+                - name: k6-yaml
+                  mountPath: /tmp/
+              command:
+                - /bin/bash
+              args:
+                - -c
+                - 'kubectl delete -f /tmp/vm-push-test.yaml; kubectl apply -f /tmp/vm-push-test.yaml'
+          restartPolicy: OnFailure
+          volumes:
+            - name: k6-yaml
+              configMap:
+                name: vm-push-test-config
