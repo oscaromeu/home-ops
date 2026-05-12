@@ -4,9 +4,7 @@ kind: CronJob
 metadata:
   name: vm-push-test-cron
 spec:
-  # Intervalo > 5min (default staleness de VM) para que se vean los huecos en
-  # queries instantáneas a pelo. Envolver con last_over_time(...[15m]) los rellena.
-  schedule: '*/10 * * * *'
+  schedule: '*/5 * * * *'
   concurrencyPolicy: Allow
   jobTemplate:
     spec:

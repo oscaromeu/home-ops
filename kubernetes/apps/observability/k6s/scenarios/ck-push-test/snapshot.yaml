@@ -4,8 +4,7 @@ kind: CronJob
 metadata:
   name: ck-push-test-cron
 spec:
-  # Mismo intervalo que vm-push-test / prom-push-test para comparación.
-  schedule: '*/10 * * * *'
+  schedule: '*/5 * * * *'
   concurrencyPolicy: Allow
   jobTemplate:
     spec:

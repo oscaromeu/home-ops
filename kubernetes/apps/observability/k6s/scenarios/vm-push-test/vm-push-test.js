@@ -1,20 +1,21 @@
 import http from 'k6/http';
 import { sleep } from 'k6';
-import { Gauge, Trend } from 'k6/metrics';
+import { Counter, Trend } from 'k6/metrics';
 
 // Gemelo de prom-push-test / ck-push-test, mismo trabajo simulado y mismas
 // fields capturadas. Pushea a VictoriaMetrics via remote_write (k6 native).
 //
-// Queries para dashboards y alertas. k6 añade el prefijo `k6_` a las métricas:
-//   last_over_time(k6_cronjob_last_success{job="vm-push-test"}[15m])
-//   time() - last_over_time(k6_cronjob_last_run_timestamp_seconds{job="vm-push-test"}[1h]) > 1200
-//   last_over_time(k6_cronjob_last_duration_seconds{job="vm-push-test"}[15m])
-// Regla: el rango [X] debe ser >= 1.5x el intervalo del cron.
+// Importante: k6 Counter no acumula entre runs (cada TestRun es proceso fresco
+// pusheando v=1). rate()/increase() devolverán 0. Usar count_over_time/sum_over_time.
+//
+// Queries:
+//   count_over_time(k6_cronjob_runs_total{job="vm-push-test"}[1h])
+//   count_over_time(k6_cronjob_runs_total{job="vm-push-test",result="failure"}[1h])
+//   k6_cronjob_duration_seconds_p95{job="vm-push-test"}
+//   k6_cronjob_duration_seconds_avg{job="vm-push-test"}
 
-const last_success = new Gauge('cronjob_last_success');
-const last_run_ts = new Gauge('cronjob_last_run_timestamp_seconds');
-const last_duration = new Gauge('cronjob_last_duration_seconds');
-const runs_total = new Trend('cronjob_runs_total', true);
+const runs_total = new Counter('cronjob_runs_total');
+const duration = new Trend('cronjob_duration_seconds');
 
 export const options = {
   vus: 1,
@@ -43,17 +44,13 @@ export default function () {
 
   sleep(1);
 
-  const end = Date.now();
-  const duration_s = (end - start) / 1000;
-  const now_s = Math.floor(end / 1000);
+  const duration_s = (Date.now() - start) / 1000;
   const result = success === 1 ? 'success' : 'failure';
 
-  last_success.add(success, { job });
-  last_run_ts.add(now_s, { job });
-  last_duration.add(duration_s, { job });
   runs_total.add(1, { job, result });
+  duration.add(duration_s, { job, result });
 
   console.log(
-    `[${job}] result=${result} duration=${duration_s.toFixed(2)}s ts=${now_s} err=${errorMsg ?? ''}`,
+    `[${job}] result=${result} duration=${duration_s.toFixed(2)}s err=${errorMsg ?? ''}`,
   );
 }
