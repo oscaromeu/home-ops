@@ -14,7 +14,7 @@ spec:
       restartPolicy: OnFailure
       containers:
         - name: migrate
-          image: curlimages/curl:8.10.1
+          image: curlimages/curl:8.10.1@sha256:d9b4541e214bcd85196d6e92e2753ac6d0ea699f0af5741f8c6cccbfcf00ef4b
           env:
             - name: CH_URL
               value: http://clickhouse-clickhouse-headless.databases.svc.cluster.local:8123
