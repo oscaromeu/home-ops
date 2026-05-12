@@ -10,8 +10,8 @@ admin:
 replicas: 2
 image:
   registry: docker.io
-  repository: grafana/grafana-dev
-  tag: 12.4.0-19426561773@sha256:e6b9dd5dbdb3e3bc493e8350e254645fef4382e849ca37979dde0d8222611015
+  repository: grafana/grafana
+  tag: 13.1.0-25644485979@sha256:3a3434e81d6394ce16568016984e730a4c847ab0bee638691d11c8d5e160a2b0
   pullPolicy: IfNotPresent
 env:
   GF_EXPLORE_ENABLED: true
