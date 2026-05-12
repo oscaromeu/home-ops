@@ -1,0 +1,47 @@
+---
+# Crea la base de datos y tabla `observability.cronjob_runs` en ClickHouse.
+# Job idempotente (IF NOT EXISTS), corre una vez al desplegar el scenario.
+# Para re-ejecutar: kubectl delete job -n observability ck-push-test-migration
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ck-push-test-migration
+spec:
+  ttlSecondsAfterFinished: 3600
+  backoffLimit: 5
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: migrate
+          image: curlimages/curl:8.10.1
+          env:
+            - name: CH_URL
+              value: http://clickhouse-clickhouse-headless.databases.svc.cluster.local:8123
+          command: ['/bin/sh', '-c']
+          args:
+            - |
+              set -e
+              echo "Waiting for ClickHouse to be ready at $CH_URL..."
+              until curl -fsS "$CH_URL/ping" >/dev/null 2>&1; do
+                sleep 5
+              done
+              echo "ClickHouse is ready, applying schema..."
+
+              curl -fsS "$CH_URL/" --data-binary \
+                "CREATE DATABASE IF NOT EXISTS observability"
+
+              curl -fsS "$CH_URL/" --data-binary "
+                CREATE TABLE IF NOT EXISTS observability.cronjob_runs (
+                  ts             DateTime64(3) DEFAULT now64(),
+                  job            LowCardinality(String),
+                  result         Enum8('success' = 1, 'failure' = 0),
+                  duration_s     Float32,
+                  items          UInt32,
+                  error_message  Nullable(String)
+                )
+                ENGINE = MergeTree
+                ORDER BY (job, ts)
+                TTL toDateTime(ts) + INTERVAL 30 DAY
+              "
+              echo "Schema applied."

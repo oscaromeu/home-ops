@@ -1,0 +1,28 @@
+---
+apiVersion: k6.io/v1alpha1
+kind: TestRun
+metadata:
+  name: ck-push-test
+  labels:
+    app: ck-push-test
+    k6-scenario: ck-push-test
+spec:
+  parallelism: 1
+  runner:
+    image: grafana/k6:1.7.1-with-browser@sha256:be705b9a01364034907f4dbf8a6d6b8f0cd959051f08b1ce3383744abe7d1a00
+    resources:
+      requests:
+        cpu: "100m"
+      limits:
+        memory: "256Mi"
+    env:
+      - name: CLICKHOUSE_URL
+        value: http://clickhouse-clickhouse-headless.databases.svc.cluster.local:8123
+      - name: CLICKHOUSE_USER
+        value: default
+  # Push directo a ClickHouse desde el JS via HTTP INSERT, sin remote_write.
+  arguments: --quiet
+  script:
+    configMap:
+      name: ck-push-test
+      file: ck-push-test.js

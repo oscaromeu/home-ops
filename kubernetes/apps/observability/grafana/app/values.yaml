@@ -64,8 +64,10 @@ datasources:
     apiVersion: 1
     deleteDatasources:
       - { name: Prometheus, orgId: 1 }
+      - { name: VictoriaMetrics, orgId: 1 }
       - { name: VictoriaTraces, orgId: 1 }
       - { name: VictoriaLogs, orgId: 1 }
+      - { name: ClickHouse, orgId: 1 }
     datasources:
       - uid: prometheus
         name: Prometheus
@@ -79,6 +81,25 @@ datasources:
           exemplarTraceIdDestinations:
             - datasourceUid: victoria-traces
               name: TraceID
+      - uid: victoria-metrics
+        name: VictoriaMetrics
+        type: victoriametrics-metrics-datasource
+        access: proxy
+        url: http://victoria-metrics-server.observability.svc.cluster.local:8428
+        editable: true
+        jsonData:
+          httpMethod: POST
+      - uid: clickhouse
+        name: ClickHouse
+        type: grafana-clickhouse-datasource
+        access: proxy
+        editable: true
+        jsonData:
+          protocol: http
+          host: clickhouse-clickhouse-headless.databases.svc.cluster.local
+          port: 8123
+          username: default
+          defaultDatabase: observability
       - uid: victoria-traces
         name: VictoriaTraces
         type: jaeger
@@ -127,6 +148,8 @@ testFramework:
   enabled: false
 plugins:
   - victoriametrics-logs-datasource
+  - victoriametrics-metrics-datasource
+  - grafana-clickhouse-datasource
   - digrich-bubblechart-panel
   - grafana-clock-panel
   - redis-datasource

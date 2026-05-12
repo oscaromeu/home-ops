@@ -2,14 +2,13 @@ import http from 'k6/http';
 import { sleep } from 'k6';
 import { Gauge, Trend } from 'k6/metrics';
 
-// Gemelo de prom-push-test / ck-push-test, mismo trabajo simulado y mismas
-// fields capturadas. Pushea a VictoriaMetrics via remote_write (k6 native).
+// Gemelo de vm-push-test / ck-push-test, mismo trabajo simulado y mismas
+// fields capturadas. Pushea a kube-prometheus-stack via remote_write (k6 native).
 //
-// Queries para dashboards y alertas. k6 añade el prefijo `k6_` a las métricas:
-//   last_over_time(k6_cronjob_last_success{job="vm-push-test"}[15m])
-//   time() - last_over_time(k6_cronjob_last_run_timestamp_seconds{job="vm-push-test"}[1h]) > 1200
-//   last_over_time(k6_cronjob_last_duration_seconds{job="vm-push-test"}[15m])
-// Regla: el rango [X] debe ser >= 1.5x el intervalo del cron.
+// Queries equivalentes (cambiando el datasource en Grafana a Prometheus):
+//   k6_cronjob_last_success{job="prom-push-test"}
+//   last_over_time(k6_cronjob_last_success{job="prom-push-test"}[15m])
+//   time() - last_over_time(k6_cronjob_last_run_timestamp_seconds{job="prom-push-test"}[1h]) > 1200
 
 const last_success = new Gauge('cronjob_last_success');
 const last_run_ts = new Gauge('cronjob_last_run_timestamp_seconds');
@@ -22,7 +21,7 @@ export const options = {
 };
 
 export default function () {
-  const job = 'vm-push-test';
+  const job = 'prom-push-test';
   const start = Date.now();
 
   let success = 1;

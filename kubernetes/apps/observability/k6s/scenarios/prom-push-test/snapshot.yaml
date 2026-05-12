@@ -2,10 +2,9 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: vm-push-test-cron
+  name: prom-push-test-cron
 spec:
-  # Intervalo > 5min (default staleness de VM) para que se vean los huecos en
-  # queries instantáneas a pelo. Envolver con last_over_time(...[15m]) los rellena.
+  # Mismo intervalo que vm-push-test para comparación lado a lado.
   schedule: '*/10 * * * *'
   concurrencyPolicy: Allow
   jobTemplate:
@@ -24,9 +23,9 @@ spec:
                 - /bin/bash
               args:
                 - -c
-                - 'kubectl delete -f /tmp/vm-push-test.yaml; kubectl apply -f /tmp/vm-push-test.yaml'
+                - 'kubectl delete -f /tmp/prom-push-test.yaml; kubectl apply -f /tmp/prom-push-test.yaml'
           restartPolicy: OnFailure
           volumes:
             - name: k6-yaml
               configMap:
-                name: vm-push-test-config
+                name: prom-push-test-config
