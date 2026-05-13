@@ -24,6 +24,7 @@ resources:
   - ./outline/ks.yaml
   - ./peertube/ks.yaml
   - ./pinchflat/ks.yaml
+  - ./podinfo/ks.yaml
   - ./srs/ks.yaml
   - ./twitch-radios/ks.yaml
   - ./vikunja/ks.yaml
