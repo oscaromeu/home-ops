@@ -1,0 +1,15 @@
+# Copy to bot-keys.sops.yaml, fill the private key(s), then encrypt:
+#   sops -e -i bot-keys.sops.yaml
+#
+# The `.sops.yaml` rule at the repo root encrypts every `terraform/.*\.sops\.yaml`
+# with your age key automatically.
+#
+# Naming: the SOPS key for each bot is `<bot_name_with_underscores>_private_key`.
+# E.g. for bot `bot-oscaromeu` the key is `bot_oscaromeu_private_key`.
+# For bot `bot` (matches the existing BOT_APP_PRIVATE_KEY workflow secret) the
+# key is `bot_private_key`.
+
+bot_private_key: |
+  -----BEGIN RSA PRIVATE KEY-----
+  ....
+  -----END RSA PRIVATE KEY-----

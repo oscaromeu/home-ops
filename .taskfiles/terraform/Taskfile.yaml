@@ -1,0 +1,99 @@
+---
+version: '3'
+
+vars:
+  TF_ROOT: '{{.ROOT_DIR}}/terraform'
+  MODULE: '{{.MODULE | default "authentik"}}'
+  TF_DIR: '{{.TF_ROOT}}/{{.MODULE}}'
+  SOPS_FILE: '{{.TF_DIR}}/secrets.sops.yaml'
+  LOCAL_ENV_FILE: '{{.TF_DIR}}/secrets.local.env'
+  # Shared snippet: load secrets as env vars.
+  # If a plaintext secrets.local.env exists (gitignored), use that — handy when
+  # the SOPS age key isn't available locally. Otherwise decrypt with SOPS.
+  # `set -a` auto-exports every var defined until `set +a`.
+  LOAD_SECRETS: |
+    set -a
+    if [ -f {{.LOCAL_ENV_FILE}} ]; then
+      source {{.LOCAL_ENV_FILE}}
+    else
+      eval "$(sops -d --output-type dotenv {{.SOPS_FILE}})"
+    fi
+    set +a
+
+tasks:
+
+  init:
+    desc: terraform init for the given MODULE (default authentik)
+    dir: '{{.TF_DIR}}'
+    cmds:
+      - |
+        {{.LOAD_SECRETS}}
+        terraform init {{.CLI_ARGS}}
+    preconditions:
+      - test -d {{.TF_DIR}}
+      - test -f {{.SOPS_FILE}} || test -f {{.LOCAL_ENV_FILE}}
+      - which terraform
+
+  plan:
+    desc: terraform plan for the given MODULE (default authentik)
+    dir: '{{.TF_DIR}}'
+    cmds:
+      - |
+        {{.LOAD_SECRETS}}
+        terraform plan {{.CLI_ARGS}}
+    preconditions:
+      - test -d {{.TF_DIR}}
+      - test -f {{.SOPS_FILE}} || test -f {{.LOCAL_ENV_FILE}}
+      - which terraform
+
+  apply:
+    desc: terraform apply for the given MODULE (default authentik)
+    dir: '{{.TF_DIR}}'
+    cmds:
+      - |
+        {{.LOAD_SECRETS}}
+        terraform apply {{.CLI_ARGS}}
+    preconditions:
+      - test -d {{.TF_DIR}}
+      - test -f {{.SOPS_FILE}} || test -f {{.LOCAL_ENV_FILE}}
+      - which terraform
+
+  destroy:
+    desc: terraform destroy for the given MODULE (default authentik)
+    dir: '{{.TF_DIR}}'
+    cmds:
+      - |
+        {{.LOAD_SECRETS}}
+        terraform destroy {{.CLI_ARGS}}
+    preconditions:
+      - test -d {{.TF_DIR}}
+      - test -f {{.SOPS_FILE}} || test -f {{.LOCAL_ENV_FILE}}
+      - which terraform
+
+  output:
+    desc: terraform output for the given MODULE (default authentik)
+    dir: '{{.TF_DIR}}'
+    cmds:
+      - |
+        {{.LOAD_SECRETS}}
+        terraform output {{.CLI_ARGS}}
+    preconditions:
+      - test -d {{.TF_DIR}}
+      - test -f {{.SOPS_FILE}} || test -f {{.LOCAL_ENV_FILE}}
+      - which terraform
+
+  encrypt-secrets:
+    desc: Encrypt secrets.sops.yaml in place for the given MODULE
+    dir: '{{.TF_DIR}}'
+    cmd: sops -e -i secrets.sops.yaml
+    preconditions:
+      - test -f {{.SOPS_FILE}}
+      - which sops
+
+  edit-secrets:
+    desc: Open encrypted secrets.sops.yaml in $EDITOR via sops
+    dir: '{{.TF_DIR}}'
+    cmd: sops secrets.sops.yaml
+    preconditions:
+      - test -f {{.SOPS_FILE}}
+      - which sops

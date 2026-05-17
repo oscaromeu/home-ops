@@ -1,0 +1,5 @@
+.terraform/
+*.tfplan
+secrets.local.env
+bot-keys.local.yaml
+terraform.tfvars

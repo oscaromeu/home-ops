@@ -1,0 +1,25 @@
+# Copy to terraform.tfvars (gitignored) and fill in real values.
+# Find:
+#   - app_id        → https://github.com/settings/apps/<your-app>
+#   - installation_id → https://github.com/settings/installations → click app, ID is in URL
+#   - bot.name      → lowercase, used to derive the secret prefix on each repo and the
+#                     SOPS key in bot-keys.sops.yaml. E.g. `bot-oscaromeu`
+#                     → BOT_OSCAROMEU_APP_ID + BOT_OSCAROMEU_APP_PRIVATE_KEY,
+#                     reads `bot_oscaromeu_private_key` from bot-keys.sops.yaml.
+#
+# To match the renovate.yaml workflow already committed in fastapi-observability
+# (which references `BOT_APP_ID` and `BOT_APP_PRIVATE_KEY`), name the bot just
+# `bot` so the prefix becomes `BOT`. If you'd rather rename, also update the
+# workflow secret refs.
+
+bots = [
+  {
+    name            = "bot"
+    app_id          = "REPLACE_WITH_APP_ID"
+    installation_id = 0
+    repos = [
+      "home-ops",
+      "fastapi-observability",
+    ]
+  },
+]
