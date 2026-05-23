@@ -22,7 +22,8 @@ spec:
   containerTemplate:
     image:
       repository: docker.io/clickhouse/clickhouse-server
-      tag: sha256:1f7cd090d5c4e2b8bfe0ea5d8ae6125937e1d932c6371b4d25fbd6088829dc9c
+      tag: 26.3
+      hash: sha256:1f7cd090d5c4e2b8bfe0ea5d8ae6125937e1d932c6371b4d25fbd6088829dc9c
     imagePullPolicy: IfNotPresent
     resources:
       limits:
