@@ -38,9 +38,6 @@ grafana.ini:
     max_idle_connections: 500
   security:
     allow_embedding: true
-  feature_toggles:
-    provisioning: true
-    kubernetesDashboards: true
   "auth.generic_oauth":
     enabled: true
     name: Authentik
@@ -49,14 +46,15 @@ grafana.ini:
     auto_login: false
     client_id: grafana
     # client_secret comes from grafana-oidc-secret (env var GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET)
-    scopes: openid profile email groups
+    scopes: openid profile email groups grafana_identity
     auth_url: https://auth.${SECRET_DOMAIN}/application/o/authorize/
     token_url: https://auth.${SECRET_DOMAIN}/application/o/token/
     api_url: https://auth.${SECRET_DOMAIN}/application/o/userinfo/
     use_pkce: true
+    login_attribute_path: preferred_username
+    email_attribute_path: email
     # Map Authentik org-wide groups → Grafana roles.
-    #role_attribute_path: contains(groups[*], 'admins') && 'GrafanaAdmin' || 'Viewer'
-    role_attribute_path: 'Viewer'
+    role_attribute_path: contains(groups[*], 'admins') && 'GrafanaAdmin' || 'Viewer'
     allow_assign_grafana_admin: true
 datasources:
   datasources.yaml:
