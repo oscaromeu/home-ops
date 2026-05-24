@@ -17,8 +17,6 @@ env:
   GF_EXPLORE_ENABLED: true
   GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"
   GF_FEATURE_TOGGLES_ENABLE: flameGraph
-  GF_AUTH_ANONYMOUS_ENABLED: true
-  GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
   GF_DIAGNOSTICS_PROFILING_ENABLED: true
   GF_DIAGNOSTICS_PROFILING_ADDR: 0.0.0.0
   GF_DIAGNOSTICS_PROFILING_PORT: 6060
@@ -33,7 +31,7 @@ grafana.ini:
     check_for_updates: false
     check_for_plugin_updates: false
   auth.anonymous:
-    enabled: true
+    enabled: false
     org_name: "Main Org."
     org_role: "Viewer"
   dataproxy:
