@@ -1,7 +1,7 @@
-variable "authentik_url" {
-  description = "Authentik instance URL"
+variable "domain" {
+  description = "Base domain (set via TF_VAR_domain). All app URLs are derived from this."
   type        = string
-  default     = "https://auth.oscaromeu.io"
+  sensitive   = true
 }
 
 variable "authentik_token" {
@@ -10,8 +10,14 @@ variable "authentik_token" {
   sensitive   = true
 }
 
-variable "grafana_url" {
-  description = "Public URL of the Grafana instance"
+variable "outline_client_id" {
+  description = "Existing OAuth client_id for Outline (preserved on import to avoid breaking the app)"
   type        = string
-  default     = "https://grafana.oscaromeu.io"
+  sensitive   = true
+}
+
+locals {
+  authentik_url = "https://auth.${var.domain}"
+  grafana_url   = "https://grafana.${var.domain}"
+  outline_url   = "https://docs.${var.domain}"
 }
