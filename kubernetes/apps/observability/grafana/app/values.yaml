@@ -57,7 +57,8 @@ grafana.ini:
     api_url: https://auth.${SECRET_DOMAIN}/application/o/userinfo/
     use_pkce: true
     # Map Authentik org-wide groups → Grafana roles.
-    role_attribute_path: contains(groups[*], 'admins') && 'GrafanaAdmin' || 'Viewer'
+    #role_attribute_path: contains(groups[*], 'admins') && 'GrafanaAdmin' || 'Viewer'
+    role_attribute_path: 'Viewer'
     allow_assign_grafana_admin: true
 datasources:
   datasources.yaml:
