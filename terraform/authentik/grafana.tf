@@ -45,7 +45,7 @@ resource "authentik_property_mapping_provider_scope" "grafana_groups" {
 
 resource "authentik_property_mapping_provider_scope" "grafana_identity" {
   name       = "Grafana identity"
-  scope_name = "profile"
+  scope_name = "grafana_identity"
 
   expression = <<-EOT
     return {
