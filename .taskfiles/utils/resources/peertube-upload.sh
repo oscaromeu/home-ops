@@ -4,11 +4,16 @@
 # Configuration
 # ==============================
 
-INSTANCE="${INSTANCE:-https://peertube.oscaromeu.io}"
+INSTANCE="${INSTANCE:-${PT_INSTANCE:-}}"
 CHANNEL_ID="${CHANNEL_ID:-7}"
 USERNAME="${PT_USER}"
 PASSWORD="${PT_PASS}"
 PRIVACY="${PRIVACY:-1}"            # 1 = public, 2 = unlisted, 3 = private
+
+if [[ -z "$INSTANCE" ]]; then
+    echo "Error: INSTANCE not set. Pass it explicitly or set PT_INSTANCE in your env."
+    exit 1
+fi
 
 VIDEO_FILE="$1"
 VIDEO_NAME="$2"

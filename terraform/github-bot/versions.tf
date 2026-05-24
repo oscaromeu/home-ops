@@ -17,9 +17,9 @@ terraform {
     key    = "github-bot/terraform.tfstate"
     region = "us-east-1"
 
-    endpoints = {
-      s3 = "https://s3.oscaromeu.io"
-    }
+    # `endpoints` is provided at init time via backend.tfvars (gitignored)
+    # so the S3 host is not committed to a public repo:
+    #   terraform init -backend-config=backend.tfvars
 
     skip_credentials_validation = true
     skip_metadata_api_check     = true

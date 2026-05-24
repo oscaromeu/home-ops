@@ -3,3 +3,4 @@
 secrets.local.env
 bot-keys.local.yaml
 terraform.tfvars
+backend.tfvars

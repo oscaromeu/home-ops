@@ -29,7 +29,7 @@ spec:
               # from external Subsonic clients like Symphonium on mobile).
               # The cluster-internal "icecast.default.svc..." only works
               # for pods inside the cluster, not for end-user devices.
-              ICECAST_BASE="https://icecast.oscaromeu.io"
+              ICECAST_BASE="https://icecast.${SECRET_DOMAIN}"
 
               echo "[sync] fetching existing internet radios from Navidrome..."
               RESP=$$(curl -fsSL "$$ND_BASE/getInternetRadioStations?$$COMMON_QS") || {
