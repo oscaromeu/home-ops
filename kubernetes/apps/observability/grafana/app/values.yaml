@@ -17,7 +17,6 @@ env:
   GF_EXPLORE_ENABLED: true
   GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"
   GF_FEATURE_TOGGLES_ENABLE: flameGraph
-  GF_LOG_FILTERS: "oauth.generic_oauth:debug,user.sync:debug,authn.service:debug,user:debug"
   GF_DIAGNOSTICS_PROFILING_ENABLED: true
   GF_DIAGNOSTICS_PROFILING_ADDR: 0.0.0.0
   GF_DIAGNOSTICS_PROFILING_PORT: 6060
