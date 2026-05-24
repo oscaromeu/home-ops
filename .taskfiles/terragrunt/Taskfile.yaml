@@ -1,0 +1,106 @@
+---
+version: '3'
+
+# Run from inside any leaf directory (where its terragrunt.hcl lives).
+# Example:
+#   cd terraform/authentik/apps/grafana
+#   task terragrunt:plan
+#   task terragrunt:apply
+
+vars:
+  TG_STACK_DIR: '{{.ROOT_DIR}}/terraform/authentik'
+  TG_SOPS_FILE: '{{.ROOT_DIR}}/terraform/authentik/secrets.sops.yaml'
+  TG_LOAD_SECRETS: |
+    set -a
+    eval "$(sops -d --output-type dotenv {{.TG_SOPS_FILE}})"
+    set +a
+
+tasks:
+
+  init:
+    desc: terragrunt init (run from inside a leaf)
+    dir: '{{.USER_WORKING_DIR}}'
+    cmds:
+      - |
+        {{.TG_LOAD_SECRETS}}
+        terragrunt init {{.CLI_ARGS}}
+    preconditions:
+      - test -f {{.USER_WORKING_DIR}}/terragrunt.hcl
+      - test -f {{.TG_SOPS_FILE}}
+      - which terragrunt
+
+  init-upgrade:
+    desc: terragrunt init -upgrade (run from inside a leaf)
+    dir: '{{.USER_WORKING_DIR}}'
+    cmds:
+      - |
+        {{.TG_LOAD_SECRETS}}
+        terragrunt init -upgrade {{.CLI_ARGS}}
+    preconditions:
+      - test -f {{.USER_WORKING_DIR}}/terragrunt.hcl
+      - test -f {{.TG_SOPS_FILE}}
+      - which terragrunt
+
+  plan:
+    desc: terragrunt plan (run from inside a leaf)
+    dir: '{{.USER_WORKING_DIR}}'
+    cmds:
+      - |
+        {{.TG_LOAD_SECRETS}}
+        terragrunt plan {{.CLI_ARGS}}
+    preconditions:
+      - test -f {{.USER_WORKING_DIR}}/terragrunt.hcl
+      - test -f {{.TG_SOPS_FILE}}
+      - which terragrunt
+
+  apply:
+    desc: terragrunt apply (run from inside a leaf)
+    dir: '{{.USER_WORKING_DIR}}'
+    cmds:
+      - |
+        {{.TG_LOAD_SECRETS}}
+        terragrunt apply {{.CLI_ARGS}}
+    preconditions:
+      - test -f {{.USER_WORKING_DIR}}/terragrunt.hcl
+      - test -f {{.TG_SOPS_FILE}}
+      - which terragrunt
+
+  destroy:
+    desc: terragrunt destroy (run from inside a leaf)
+    dir: '{{.USER_WORKING_DIR}}'
+    cmds:
+      - |
+        {{.TG_LOAD_SECRETS}}
+        terragrunt destroy {{.CLI_ARGS}}
+    preconditions:
+      - test -f {{.USER_WORKING_DIR}}/terragrunt.hcl
+      - test -f {{.TG_SOPS_FILE}}
+      - which terragrunt
+
+  output:
+    desc: terragrunt output (run from inside a leaf)
+    dir: '{{.USER_WORKING_DIR}}'
+    cmds:
+      - |
+        {{.TG_LOAD_SECRETS}}
+        terragrunt output {{.CLI_ARGS}}
+    preconditions:
+      - test -f {{.USER_WORKING_DIR}}/terragrunt.hcl
+      - test -f {{.TG_SOPS_FILE}}
+      - which terragrunt
+
+  encrypt-secrets:
+    desc: Encrypt secrets.sops.yaml in place
+    dir: '{{.TG_STACK_DIR}}'
+    cmd: sops -e -i secrets.sops.yaml
+    preconditions:
+      - test -f {{.TG_SOPS_FILE}}
+      - which sops
+
+  edit-secrets:
+    desc: Open encrypted secrets.sops.yaml in $EDITOR via sops
+    dir: '{{.TG_STACK_DIR}}'
+    cmd: sops secrets.sops.yaml
+    preconditions:
+      - test -f {{.TG_SOPS_FILE}}
+      - which sops

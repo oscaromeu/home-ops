@@ -38,6 +38,16 @@ variable "extra_property_mappings" {
   default     = []
 }
 
+variable "custom_scope_mappings" {
+  description = "Custom OAuth scope mappings to create and bind to this provider"
+  type = list(object({
+    name       = string
+    scope_name = string
+    expression = string
+  }))
+  default = []
+}
+
 variable "description" {
   description = "Optional metadata description shown in the launcher"
   type        = string

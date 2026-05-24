@@ -24,6 +24,7 @@ includes:
   template: .taskfiles/template
   utils: .taskfiles/utils
   terraform: .taskfiles/terraform
+  terragrunt: .taskfiles/terragrunt
 
 tasks:
 

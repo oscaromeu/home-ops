@@ -22,10 +22,24 @@ data "authentik_certificate_key_pair" "default" {
   name = "authentik Self-signed Certificate"
 }
 
+resource "authentik_property_mapping_provider_scope" "custom" {
+  for_each = { for m in var.custom_scope_mappings : m.name => m }
+
+  name       = each.value.name
+  scope_name = each.value.scope_name
+  expression = each.value.expression
+}
+
 resource "authentik_provider_oauth2" "this" {
   name        = var.name
   client_id   = coalesce(var.client_id, var.slug)
   client_type = "confidential"
+
+  lifecycle {
+    # Authentik auto-populates logout_uri server-side based on the
+    # application slug; managing it from TF causes an apply loop.
+    ignore_changes = [logout_uri]
+  }
 
   authorization_flow = data.authentik_flow.authorization.id
   invalidation_flow  = data.authentik_flow.invalidation.id
@@ -44,6 +58,7 @@ resource "authentik_provider_oauth2" "this" {
       data.authentik_property_mapping_provider_scope.email.id,
       data.authentik_property_mapping_provider_scope.profile.id,
     ],
+    [for k, v in authentik_property_mapping_provider_scope.custom : v.id],
     var.extra_property_mappings,
   )
 }
