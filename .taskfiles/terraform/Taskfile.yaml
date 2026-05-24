@@ -34,6 +34,18 @@ tasks:
       - test -f {{.SOPS_FILE}} || test -f {{.LOCAL_ENV_FILE}}
       - which terraform
 
+  init-upgrade:
+    desc: terraform init for the given MODULE (default authentik)
+    dir: '{{.TF_DIR}}'
+    cmds:
+      - |
+        {{.LOAD_SECRETS}}
+        terraform init -upgrade {{.CLI_ARGS}}
+    preconditions:
+      - test -d {{.TF_DIR}}
+      - test -f {{.SOPS_FILE}} || test -f {{.LOCAL_ENV_FILE}}
+      - which terraform
+
   plan:
     desc: terraform plan for the given MODULE (default authentik)
     dir: '{{.TF_DIR}}'
