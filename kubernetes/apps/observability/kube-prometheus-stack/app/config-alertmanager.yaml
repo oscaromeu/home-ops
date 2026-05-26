@@ -14,6 +14,8 @@ spec:
           - name: alertname
             value: InfoInhibitor
             matchType: =
+      - receiver: vl-archive
+        continue: true
       - receiver: pushover
         matchers:
           - name: severity
@@ -41,6 +43,10 @@ spec:
 
   receivers:
     - name: blackhole
+    - name: vl-archive
+      webhookConfigs:
+        - url: http://alertmanager-webhook-logger.observability.svc.cluster.local:6725/
+          sendResolved: true
     - name: pushover
       pushoverConfigs:
         - html: true
