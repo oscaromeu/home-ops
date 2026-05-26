@@ -1,0 +1,52 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app alertmanager-webhook-logger
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: *app
+  values:
+    controllers:
+      alertmanager-webhook-logger:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/oscaromeu/alertmanager-webhook-logger
+              tag: 1.0@sha256:bf2103699e65ce9156f26dc1268232649cd81aa12c7bf6fec7b01eff98b4cfdf
+            args:
+              - -address=:6725
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /healthz
+                    port: &port 6725
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                  failureThreshold: 3
+              readiness: *probes
+            resources:
+              requests:
+                cpu: 5m
+                memory: 16Mi
+              limits:
+                memory: 64Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+    service:
+      app:
+        ports:
+          http:
+            port: *port
