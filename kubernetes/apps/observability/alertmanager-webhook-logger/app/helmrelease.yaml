@@ -19,13 +19,13 @@ spec:
               tag: "1.0"
             args:
               - -address=:6725
-              - -json=true
             probes:
               liveness: &probes
                 enabled: true
                 custom: true
                 spec:
-                  tcpSocket:
+                  httpGet:
+                    path: /healthz
                     port: &port 6725
                   initialDelaySeconds: 5
                   periodSeconds: 10
