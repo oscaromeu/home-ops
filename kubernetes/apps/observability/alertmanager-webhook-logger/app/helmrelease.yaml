@@ -14,9 +14,8 @@ spec:
         containers:
           app:
             image:
-              # TODO: pin @sha256:... once first CI build publishes
               repository: ghcr.io/oscaromeu/alertmanager-webhook-logger
-              tag: "1.0"
+              tag: 1.0@sha256:bf2103699e65ce9156f26dc1268232649cd81aa12c7bf6fec7b01eff98b4cfdf
             args:
               - -address=:6725
             probes:
