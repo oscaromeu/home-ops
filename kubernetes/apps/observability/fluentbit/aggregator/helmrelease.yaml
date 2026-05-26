@@ -9,6 +9,8 @@ spec:
     kind: OCIRepository
     name: fluent-bit
   values:
+    annotations:
+      reloader.stakater.com/auto: "true"
     existingConfigMap: fluentbit
     image:
       repository: cr.fluentbit.io/fluent/fluent-bit
