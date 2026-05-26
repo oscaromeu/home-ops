@@ -4,7 +4,7 @@ groups:
     interval: 1m
     rules:
       - alert: HomeIPChanged
-        expr: 'k_labels_k6_cr:"ip-logger" "event":"ip_change" | unpack_json | stats by (expected, actual) count() as cnt | filter cnt:>0'
+        expr: 'k_labels_k6_cr:"ip-logger" ip_change | unpack_logfmt | unpack_json from msg | filter event:"ip_change" | stats by (expected, actual) count() as cnt | filter cnt:>0'
         annotations:
           summary: "Home IP changed: {{ $labels.expected }} → {{ $labels.actual }}"
           description: "Detected {{ $labels.cnt }} IP mismatches in the last hour. Expected {{ $labels.expected }}, observed {{ $labels.actual }}. If legitimate, update the EXPECTED_IP value in kubernetes/apps/observability/k6s/scenarios/ip-logger/secret.sops.yaml and re-encrypt with sops."
