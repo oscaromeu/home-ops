@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: test-cron
+  name: ip-logger-cron
 spec:
   schedule: '*/1 * * * *'
   concurrencyPolicy: Allow
@@ -23,9 +23,9 @@ spec:
                 - /bin/bash
               args:
                 - -c
-                - 'kubectl delete -f /tmp/test.yaml; kubectl apply -f /tmp/test.yaml'
+                - 'kubectl delete -f /tmp/ip-logger.yaml --ignore-not-found; kubectl apply -f /tmp/ip-logger.yaml'
           restartPolicy: OnFailure
           volumes:
             - name: k6-yaml
               configMap:
-                name: test-config
+                name: ip-logger-config

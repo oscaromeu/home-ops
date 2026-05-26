@@ -2,16 +2,16 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./test.yaml
+  - ./ip-logger.yaml
   - ./snapshot.yaml
-
+  - ./secret.sops.yaml
 configMapGenerator:
-  - name: test
+  - name: ip-logger
     files:
-      - test.js=./test.js
-  - name: test-config
+      - ip-logger.js=./ip-logger.js
+  - name: ip-logger-config
     files:
-      - test.yaml=./test.yaml
+      - ip-logger.yaml=./ip-logger.yaml
 generatorOptions:
   disableNameSuffixHash: true
   annotations:

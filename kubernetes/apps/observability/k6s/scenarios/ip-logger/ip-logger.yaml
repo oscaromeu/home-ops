@@ -2,7 +2,7 @@
 apiVersion: k6.io/v1alpha1
 kind: TestRun
 metadata:
-  name: test
+  name: ip-logger
 spec:
   parallelism: 1
   runner:
@@ -15,11 +15,11 @@ spec:
     env:
       - name: K6_PROMETHEUS_RW_SERVER_URL
         value: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/write
-      - name: MY_HOSTNAME
-        value: "ifconfig.me/all.json"
+    envFrom:
+      - secretRef:
+          name: ip-logger-secret
   arguments: -o experimental-prometheus-rw --quiet
   script:
     configMap:
-      name: test
-      file: test.js
-
+      name: ip-logger
+      file: ip-logger.js
