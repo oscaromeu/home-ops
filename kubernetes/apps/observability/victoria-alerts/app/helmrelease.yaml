@@ -11,6 +11,8 @@ spec:
   values:
     nameOverride: "victoria-alerts"
     server:
+      annotations:
+        reloader.stakater.com/auto: "true"
       replicaCount: 1
       datasource:
         url: "http://victoria-logs-server.observability.svc.cluster.local:9428"

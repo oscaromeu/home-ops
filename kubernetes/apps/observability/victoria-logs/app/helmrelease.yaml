@@ -11,6 +11,8 @@ spec:
   values:
     fullnameOverride: victoria-logs
     server:
+      annotations:
+        reloader.stakater.com/auto: "true"
       replicaCount: 1
       persistentVolume:
         enabled: true
