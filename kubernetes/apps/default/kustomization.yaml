@@ -8,6 +8,7 @@ components:
 
 resources:
   - ./namespace.yaml
+  - ./actual/ks.yaml
   - ./atuin/ks.yaml
   - ./docmost/ks.yaml
   - ./echo/ks.yaml
