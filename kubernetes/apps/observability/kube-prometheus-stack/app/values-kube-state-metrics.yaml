@@ -2,9 +2,12 @@ kube-state-metrics:
   enabled: true
   fullnameOverride: kube-state-metrics
   metricLabelsAllowlist:
-    - pods=[*]
-    - deployments=[*]
-    - persistentvolumeclaims=[*]
+    - pods=[app.kubernetes.io/name,app.kubernetes.io/instance]
+    - deployments=[app.kubernetes.io/name,app.kubernetes.io/instance]
+    - statefulsets=[app.kubernetes.io/name,app.kubernetes.io/instance]
+    - cronjobs=[app.kubernetes.io/name,app.kubernetes.io/instance]
+    - namespaces=[kubernetes.io/metadata.name]
+    - persistentvolumeclaims=[excluded_from_alerts]
   prometheus:
     monitor:
       enabled: true
