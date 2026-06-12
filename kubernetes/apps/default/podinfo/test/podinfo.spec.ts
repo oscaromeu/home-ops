@@ -45,3 +45,14 @@ test('podinfo: API endpoints are healthy', async ({ request }) => {
     log('version reported', { version: body.version })
   })
 })
+
+// Chaos test — exercises the FAIL/red path in the dashboards. Fails randomly
+// (~50% of runs). Remove this test once you've seen the red cells, or gate it
+// behind an env if you want to keep it.
+test('podinfo: chaos — randomly fails ~50%', async () => {
+  await test.step('step 1: roll the dice', async () => {
+    const roll = Math.random()
+    log('step 1: roll the dice', { roll: Number(roll.toFixed(3)) })
+    expect(roll, `roll ${roll.toFixed(3)} must be < 0.5 (chaos)`).toBeLessThan(0.5)
+  })
+})
