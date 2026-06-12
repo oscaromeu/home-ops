@@ -23,7 +23,7 @@ spec:
           restartPolicy: Never
           initContainers:
             - name: load-tests
-              image: ghcr.io/oscaromeu/playwright-runner:1.57.0@sha256:3ee4f3715b0f44682e69dde9b2448531353eb33462635c5d009a531e445cd4fa
+              image: ghcr.io/oscaromeu/playwright-runner:rolling@sha256:df5e4e739ac540036d47dadd3c261f9436bdcdceaab69e383d5529ace1f260cd
               command: ["sh", "-c", "cp -rL /cm/* /tests/ && ls -la /tests"]
               volumeMounts:
                 - name: cm
@@ -32,7 +32,7 @@ spec:
                   mountPath: /tests
           containers:
             - name: playwright
-              image: ghcr.io/oscaromeu/playwright-runner:1.57.0@sha256:3ee4f3715b0f44682e69dde9b2448531353eb33462635c5d009a531e445cd4fa
+              image: ghcr.io/oscaromeu/playwright-runner:rolling@sha256:df5e4e739ac540036d47dadd3c261f9436bdcdceaab69e383d5529ace1f260cd
               imagePullPolicy: IfNotPresent
               env:
                 - name: PW_BASE_URL
@@ -43,6 +43,17 @@ spec:
                 # kept here so the current pinned digest works too.
                 - name: NODE_PATH
                   value: /app/node_modules
+                # ClickHouse reporter (runs + steps). User `default`, no password (PoC).
+                - name: PROBE_NAME
+                  value: podinfo
+                - name: PROBE_ENV
+                  value: homelab
+                - name: CLICKHOUSE_URL
+                  value: http://clickhouse-clickhouse-headless.databases.svc.cluster.local:8123
+                - name: CLICKHOUSE_DATABASE
+                  value: e2e
+                - name: CLICKHOUSE_USER
+                  value: default
               volumeMounts:
                 - name: tests
                   mountPath: /tests
