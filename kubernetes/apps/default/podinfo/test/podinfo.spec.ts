@@ -46,13 +46,19 @@ test('podinfo: API endpoints are healthy', async ({ request }) => {
   })
 })
 
-// Chaos test — exercises the FAIL/red path in the dashboards. Fails randomly
-// (~50% of runs). Remove this test once you've seen the red cells, or gate it
-// behind an env if you want to keep it.
-test('podinfo: chaos — randomly fails ~50%', async () => {
-  await test.step('step 1: roll the dice', async () => {
-    const roll = Math.random()
-    log('step 1: roll the dice', { roll: Number(roll.toFixed(3)) })
-    expect(roll, `roll ${roll.toFixed(3)} must be < 0.5 (chaos)`).toBeLessThan(0.5)
+// Chaos test — exercises the FAIL/red path. Step 1 always passes, step 2 fails
+// randomly (~50%), so a single run shows green + red steps and validates the
+// per-step status panel. Remove this test once you've seen it.
+test('podinfo: chaos — a step fails randomly ~50%', async () => {
+  const willFail = Math.random() < 0.5
+  log('chaos roll', { will_fail: willFail })
+
+  await test.step('step 1: warm up (always ok)', async () => {
+    expect(1 + 1).toBe(2)
+  })
+
+  await test.step('step 2: random assertion', async () => {
+    log('step 2: random assertion', { will_fail: willFail })
+    expect(willFail, 'chaos: this step fails ~50% of runs').toBe(false)
   })
 })
