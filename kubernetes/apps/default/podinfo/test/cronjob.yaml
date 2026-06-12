@@ -1,0 +1,45 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: podinfo-test
+  labels:
+    app.kubernetes.io/name: podinfo-test
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      activeDeadlineSeconds: 300
+      ttlSecondsAfterFinished: 3600
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: podinfo-test
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: playwright
+              # Built from oscaromeu/containers (apps/playwright-runner), pinned by
+              # digest (Renovate tracks tag+digest). Bump via PR when rebuilt.
+              image: ghcr.io/oscaromeu/playwright-runner:1.57.0@sha256:3ee4f3715b0f44682e69dde9b2448531353eb33462635c5d009a531e445cd4fa
+              imagePullPolicy: IfNotPresent
+              env:
+                - name: PW_BASE_URL
+                  value: https://podinfo.${SECRET_DOMAIN}
+              volumeMounts:
+                - name: tests
+                  mountPath: /tests
+              resources:
+                requests:
+                  cpu: 250m
+                  memory: 1Gi
+                limits:
+                  memory: 2Gi
+          volumes:
+            - name: tests
+              configMap:
+                name: podinfo-test
