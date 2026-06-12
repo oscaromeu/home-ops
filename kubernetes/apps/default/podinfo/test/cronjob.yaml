@@ -21,15 +21,28 @@ spec:
             app.kubernetes.io/name: podinfo-test
         spec:
           restartPolicy: Never
+          initContainers:
+            - name: load-tests
+              image: ghcr.io/oscaromeu/playwright-runner:1.57.0@sha256:3ee4f3715b0f44682e69dde9b2448531353eb33462635c5d009a531e445cd4fa
+              command: ["sh", "-c", "cp -rL /cm/* /tests/ && ls -la /tests"]
+              volumeMounts:
+                - name: cm
+                  mountPath: /cm
+                - name: tests
+                  mountPath: /tests
           containers:
             - name: playwright
-              # Built from oscaromeu/containers (apps/playwright-runner), pinned by
-              # digest (Renovate tracks tag+digest). Bump via PR when rebuilt.
               image: ghcr.io/oscaromeu/playwright-runner:1.57.0@sha256:3ee4f3715b0f44682e69dde9b2448531353eb33462635c5d009a531e445cd4fa
               imagePullPolicy: IfNotPresent
               env:
                 - name: PW_BASE_URL
                   value: https://podinfo.${SECRET_DOMAIN}
+                # Specs are mounted in /tests (outside /app), so Node can't find
+                # @playwright/test in /app/node_modules by walking up. NODE_PATH
+                # makes it resolvable. Baked into the image from the next build;
+                # kept here so the current pinned digest works too.
+                - name: NODE_PATH
+                  value: /app/node_modules
               volumeMounts:
                 - name: tests
                   mountPath: /tests
@@ -40,6 +53,8 @@ spec:
                 limits:
                   memory: 2Gi
           volumes:
-            - name: tests
+            - name: cm
               configMap:
                 name: podinfo-test
+            - name: tests
+              emptyDir: {}
