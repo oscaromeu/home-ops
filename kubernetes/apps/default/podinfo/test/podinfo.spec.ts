@@ -29,16 +29,20 @@ test('podinfo: web UI is served', async ({ page }) => {
   })
 })
 
-test('podinfo: API endpoints are healthy', async ({ request }) => {
+// Uses context.request (not the standalone `request` fixture) so these API
+// calls flow through the browser context that records the HAR — they then land
+// in e2e.net_timing with a dns/tcp/tls/server/transfer breakdown instead of
+// showing 0 ms. A standalone APIRequestContext is not HAR-recorded.
+test('podinfo: API endpoints are healthy', async ({ context }) => {
   await test.step('step 1: GET /healthz returns 200', async () => {
     log('step 1: GET /healthz returns 200')
-    const res = await request.get('/healthz', { timeout: TIMEOUTS.action })
+    const res = await context.request.get('/healthz', { timeout: TIMEOUTS.action })
     expect(res.status()).toBe(200)
   })
 
   await test.step('step 2: GET /api/info reports a version', async () => {
     log('step 2: GET /api/info reports a version')
-    const res = await request.get('/api/info', { timeout: TIMEOUTS.action })
+    const res = await context.request.get('/api/info', { timeout: TIMEOUTS.action })
     expect(res.ok(), '/api/info should return a 2xx status').toBeTruthy()
     const body = await res.json()
     expect(body.version, 'response should carry a version field').toBeTruthy()
