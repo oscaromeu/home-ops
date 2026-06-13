@@ -9,6 +9,7 @@ components:
 resources:
   - ./namespace.yaml
   - ./alertmanager-webhook-logger/ks.yaml
+  - ./ch-ui/ks.yaml
   - ./fastapi/ks.yaml
   - ./fluentbit/ks.yaml
   - ./gatus/ks.yaml

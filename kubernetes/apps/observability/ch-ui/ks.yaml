@@ -1,0 +1,8 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app ch-ui
+spec:
+  targetNamespace: observability
+  path: ./kubernetes/apps/observability/ch-ui/app

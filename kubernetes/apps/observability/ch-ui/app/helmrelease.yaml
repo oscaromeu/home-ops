@@ -1,0 +1,58 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: ch-ui
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: ch-ui
+  values:
+    controllers:
+      ch-ui:
+        strategy: RollingUpdate
+        containers:
+          app:
+            image:
+              # TODO: pin a version/digest (Renovate). Using latest for the PoC.
+              repository: ghcr.io/caioricciuti/ch-ui
+              tag: latest
+            env:
+              # CH-UI's backend connects to ClickHouse server-side, so we point it
+              # at the in-cluster service — no need to expose CH or deal with CORS.
+              # Credentials are entered in the UI at login (default / empty password).
+              CLICKHOUSE_URL: http://clickhouse-clickhouse-headless.databases.svc.cluster.local:8123
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+            resources:
+              requests:
+                cpu: 25m
+              limits:
+                memory: 512Mi
+    service:
+      app:
+        ports:
+          http:
+            port: 3488
+    persistence:
+      data:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        storageClass: openebs-hostpath
+        globalMounts:
+          - path: /app/data
+    route:
+      app:
+        hostnames: ["ch-ui.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: 3488
