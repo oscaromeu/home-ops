@@ -13,7 +13,7 @@ spec:
           serviceAccount: k6-observability
           containers:
             - name: kubectl
-              image: bitnami/kubectl@sha256:d7e2de67927af4b644c0631e114024e32062ffde7af8e6af1be532eda91656b0
+              image: bitnami/kubectl@sha256:323998cf83a2332f6761706df910870a3fa24dd8d4b999db977aa322de553399
               tag: sha256-f79ebae1ff869758d46262ecb417e3526805669a2c61623e74ff6e4cf1d82bca
               imagePullPolicy: IfNotPresent
               volumeMounts:
