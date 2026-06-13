@@ -9,6 +9,7 @@ configMapGenerator:
   - name: podinfo-test
     files:
       - podinfo.spec.ts=./podinfo.spec.ts
+      - net-timing.ts=./net-timing.ts
 generatorOptions:
   disableNameSuffixHash: true
   annotations:

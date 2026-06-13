@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { expect, test } from './net-timing'
 
 // Per-step JSON line, same shape as the runner's reporter (and the Flanks
 // helpers/login `log`). When the shared @probe/playwright module lands, this is
