@@ -14,13 +14,9 @@ spec:
         containers:
           app:
             image:
-              # TODO: pin a version/digest (Renovate). Using latest for the PoC.
               repository: ghcr.io/caioricciuti/ch-ui
-              tag: latest
+              tag: v2.4.0@sha256:c2179620799578154d99599c5f3f95f6891dd70c58c8d52ef11b11861ccf086d
             env:
-              # CH-UI's backend connects to ClickHouse server-side, so we point it
-              # at the in-cluster service — no need to expose CH or deal with CORS.
-              # Credentials are entered in the UI at login (default / empty password).
               CLICKHOUSE_URL: http://clickhouse-clickhouse-headless.databases.svc.cluster.local:8123
             probes:
               liveness:
