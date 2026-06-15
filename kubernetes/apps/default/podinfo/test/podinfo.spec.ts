@@ -1,4 +1,4 @@
-import { expect, test } from './net-timing'
+import { expect, test } from '@probe/playwright'
 
 // Per-step JSON line, same shape as the runner's reporter (and the Flanks
 // helpers/login `log`). When the shared @probe/playwright module lands, this is
@@ -50,19 +50,28 @@ test('podinfo: API endpoints are healthy', async ({ context }) => {
   })
 })
 
-// Chaos test — exercises the FAIL/red path. Step 1 always passes, step 2 fails
-// randomly (~50%), so a single run shows green + red steps and validates the
-// per-step status panel. Remove this test once you've seen it.
-test('podinfo: chaos — a step fails randomly ~50%', async () => {
-  const willFail = Math.random() < 0.5
-  log('chaos roll', { will_fail: willFail })
+// Chaos generator — exercises the full dashboard palette so every color/tier is
+// validated: ~15% fail (red), ~40% slow-but-pass (HIGH/CRITICAL/FATAL runtime
+// tiers = yellow/orange/dark-red + SLA bands), rest fast pass (green). Remove
+// this test for a real probe.
+test('podinfo: chaos — pass / slow / fail', async ({ page }) => {
+  const roll = Math.random()
+  const willFail = roll < 0.15
+  const slowMs = !willFail && roll < 0.55 ? 1500 + Math.floor(Math.random() * 8000) : 0
+  log('chaos roll', { roll: Number(roll.toFixed(2)), will_fail: willFail, slow_ms: slowMs })
 
   await test.step('step 1: warm up (always ok)', async () => {
     expect(1 + 1).toBe(2)
   })
 
-  await test.step('step 2: random assertion', async () => {
-    log('step 2: random assertion', { will_fail: willFail })
-    expect(willFail, 'chaos: this step fails ~50% of runs').toBe(false)
+  await test.step('step 2: variable latency', async () => {
+    log('step 2: variable latency', { slow_ms: slowMs })
+    if (slowMs) await page.waitForTimeout(slowMs)
+    expect(true).toBe(true)
+  })
+
+  await test.step('step 3: random assertion', async () => {
+    log('step 3: random assertion', { will_fail: willFail })
+    expect(willFail, 'chaos: this step fails ~15% of runs').toBe(false)
   })
 })
