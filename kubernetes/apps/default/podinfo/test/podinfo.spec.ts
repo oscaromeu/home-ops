@@ -60,8 +60,12 @@ test('podinfo: chaos — pass / slow / fail', async ({ page }) => {
   const slowMs = !willFail && roll < 0.55 ? 1500 + Math.floor(Math.random() * 8000) : 0
   log('chaos roll', { roll: Number(roll.toFixed(2)), will_fail: willFail, slow_ms: slowMs })
 
-  await test.step('step 1: warm up (always ok)', async () => {
-    expect(1 + 1).toBe(2)
+  await test.step('step 1: load the page', async () => {
+    // Navigate to the real page so the on-failure screenshot + video show actual
+    // content instead of a blank about:blank tab.
+    log('step 1: load the page', { url: process.env.PW_BASE_URL ?? '' })
+    await page.goto('/', { waitUntil: 'load', timeout: TIMEOUTS.navigation })
+    await expect(page.locator('body')).toBeVisible({ timeout: TIMEOUTS.heading })
   })
 
   await test.step('step 2: variable latency', async () => {
