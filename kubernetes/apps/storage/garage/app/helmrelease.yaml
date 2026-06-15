@@ -49,6 +49,8 @@ spec:
             port: &port 3900
           api:
             port: 3903
+          web:
+            port: 3902
 
     route:
       app:
@@ -61,6 +63,16 @@ spec:
           - backendRefs:
               - identifier: app
                 port: *port
+      web:
+        hostnames: ["synthetics.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: 3902
 
     configMaps:
       config:
@@ -86,6 +98,14 @@ spec:
 
             [admin]
             api_bind_addr = "[::]:3903"
+
+            # Static website serving for the synthetics e2e-artifact bucket.
+            # Anonymous read; bucket matched by its global alias == the Host
+            # (synthetics.${SECRET_DOMAIN}). No root_domain — it would collide
+            # with app hosts like podinfo.${SECRET_DOMAIN}.
+            [s3_web]
+            bind_addr = "[::]:3902"
+            index = "index.html"
     persistence:
       config:
         enabled: true

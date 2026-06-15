@@ -51,7 +51,7 @@ spec:
                 # Artifact upload to object storage (Garage). PROBE_REPORT_URL is
                 # derived in the entrypoint from base + probe + run timestamp.
                 - name: PROBE_ARTIFACT_BASE
-                  value: https://garage.${SECRET_DOMAIN}
+                  value: https://synthetics.${SECRET_DOMAIN}
                 - name: S3_ENDPOINT
                   value: garage.storage.svc.cluster.local:3900
                 - name: S3_BUCKET
