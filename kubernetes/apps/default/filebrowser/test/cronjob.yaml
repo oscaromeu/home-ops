@@ -2,9 +2,9 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: podinfo-test
+  name: filebrowser-test
   labels:
-    app.kubernetes.io/name: podinfo-test
+    app.kubernetes.io/name: filebrowser-test
 spec:
   schedule: "*/5 * * * *"
   concurrencyPolicy: Forbid
@@ -18,7 +18,7 @@ spec:
       template:
         metadata:
           labels:
-            app.kubernetes.io/name: podinfo-test
+            app.kubernetes.io/name: filebrowser-test
         spec:
           restartPolicy: Never
           initContainers:
@@ -34,38 +34,13 @@ spec:
             - name: playwright
               image: ghcr.io/oscaromeu/playwright-runner:rolling@sha256:0f899bf7305466e1178ae684f67379b7c72f630b435f4e2b209d3026ab6fbfb7
               imagePullPolicy: IfNotPresent
-              # Run the probe, then upload the HTML report (video+trace embedded
-              # on failure) to Garage under synthetics/<probe>/<timestamp>/report.
-              command: ["/app/run-and-upload.sh"]
               env:
                 - name: PW_BASE_URL
-                  value: https://podinfo.${SECRET_DOMAIN}
+                  value: https://fb.${SECRET_DOMAIN}
                 - name: PROBE_NAME
-                  value: podinfo
+                  value: filebrowser
                 - name: PROBE_ENV
                   value: homelab
-                - name: PW_VIDEO
-                  value: retain-on-failure
-                - name: PW_TRACE
-                  value: retain-on-failure
-                # Artifact upload to object storage (Garage). PROBE_REPORT_URL is
-                # derived in the entrypoint from base + probe + run timestamp.
-                - name: PROBE_ARTIFACT_BASE
-                  value: https://garage.${SECRET_DOMAIN}
-                - name: S3_ENDPOINT
-                  value: garage.storage.svc.cluster.local:3900
-                - name: S3_BUCKET
-                  value: synthetics
-                - name: S3_ACCESS_KEY
-                  valueFrom:
-                    secretKeyRef:
-                      name: e2e-s3-credentials
-                      key: access-key
-                - name: S3_SECRET_KEY
-                  valueFrom:
-                    secretKeyRef:
-                      name: e2e-s3-credentials
-                      key: secret-key
                 - name: CLICKHOUSE_URL
                   value: http://clickhouse-clickhouse-headless.databases.svc.cluster.local:8123
                 - name: CLICKHOUSE_DATABASE
@@ -84,6 +59,6 @@ spec:
           volumes:
             - name: cm
               configMap:
-                name: podinfo-test
+                name: filebrowser-test
             - name: tests
               emptyDir: {}
