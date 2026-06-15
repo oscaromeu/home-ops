@@ -100,11 +100,12 @@ spec:
             api_bind_addr = "[::]:3903"
 
             # Static website serving for the synthetics e2e-artifact bucket.
-            # Anonymous read; bucket matched by its global alias == the Host
-            # (synthetics.${SECRET_DOMAIN}). No root_domain — it would collide
-            # with app hosts like podinfo.${SECRET_DOMAIN}.
+            # Anonymous read. root_domain is REQUIRED by Garage, so it's set to an
+            # unused .web. subdomain that never matches a real app host; our
+            # synthetics.${SECRET_DOMAIN} host matches via the bucket global alias.
             [s3_web]
             bind_addr = "[::]:3902"
+            root_domain = ".web.${SECRET_DOMAIN}"
             index = "index.html"
     persistence:
       config:
