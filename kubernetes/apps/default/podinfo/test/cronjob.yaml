@@ -44,6 +44,15 @@ spec:
                   value: podinfo
                 - name: PROBE_ENV
                   value: homelab
+                # Per-probe thresholds → e2e.probe_config (reporter upserts them).
+                - name: PROBE_SLO_TARGET
+                  value: "99"
+                - name: PROBE_HIGH_MS
+                  value: "2000"
+                - name: PROBE_CRITICAL_MS
+                  value: "4000"
+                - name: PROBE_FATAL_MS
+                  value: "8000"
                 - name: PW_VIDEO
                   value: retain-on-failure
                 - name: PW_TRACE

@@ -41,6 +41,16 @@ spec:
                   value: echo
                 - name: PROBE_ENV
                   value: homelab
+                # Per-probe thresholds → e2e.probe_config (echo is a fast JSON API,
+                # so the SLA tiers are tighter than the page-load probes').
+                - name: PROBE_SLO_TARGET
+                  value: "99.9"
+                - name: PROBE_HIGH_MS
+                  value: "500"
+                - name: PROBE_CRITICAL_MS
+                  value: "1000"
+                - name: PROBE_FATAL_MS
+                  value: "2000"
                 - name: CLICKHOUSE_URL
                   value: http://clickhouse-clickhouse-headless.databases.svc.cluster.local:8123
                 - name: CLICKHOUSE_DATABASE
