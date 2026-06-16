@@ -16,6 +16,9 @@ spec:
     # probe_success{job="podinfo",env="homelab"} work downstream.
     serviceMonitor:
       enabled: true
+      # The chart defaults the ServiceMonitor namespace to "monitoring" (which
+      # doesn't exist here) — pin it to where Prometheus lives.
+      namespace: observability
       honorLabels: true
 
     # Pushgateway is a stateless bridge; pushers re-push on the next run.
