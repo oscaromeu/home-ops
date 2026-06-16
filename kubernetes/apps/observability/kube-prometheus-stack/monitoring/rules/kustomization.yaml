@@ -9,5 +9,6 @@ resources:
   - kubernetes-monitoring.yaml
   - node-exporter.yaml
   - prometheus.yaml
+  - turing-pi-thermal.yaml
   #- thanos-query.yaml
   #- thanos-store.yaml
