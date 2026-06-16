@@ -1,0 +1,43 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: pushgateway
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: pushgateway
+  values:
+    fullnameOverride: pushgateway
+
+    # honorLabels keeps the pushed job/env/run_id labels instead of letting the
+    # scrape overwrite them — mandatory for a Pushgateway, and what makes
+    # probe_success{job="podinfo",env="homelab"} work downstream.
+    serviceMonitor:
+      enabled: true
+      honorLabels: true
+
+    # Pushgateway is a stateless bridge; pushers re-push on the next run.
+    persistentVolume:
+      enabled: false
+
+    # Chart maps .securityContext → pod and .containerSecurityContext → container.
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 65534
+      runAsGroup: 65534
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+          - ALL
+      seccompProfile:
+        type: RuntimeDefault
+
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        memory: 64Mi

@@ -10,6 +10,7 @@ resources:
   - ./namespace.yaml
   - ./alertmanager-webhook-logger/ks.yaml
   - ./ch-ui/ks.yaml
+  - ./exporters/pushgateway/ks.yaml
   - ./fastapi/ks.yaml
   - ./fluentbit/ks.yaml
   - ./gatus/ks.yaml
