@@ -9,6 +9,7 @@ spec:
     name: pushgateway
   values:
     fullnameOverride: pushgateway
+    namespaceOverride: observability
 
     # honorLabels keeps the pushed job/env/run_id labels instead of letting the
     # scrape overwrite them — mandatory for a Pushgateway, and what makes
