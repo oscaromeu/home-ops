@@ -1,0 +1,36 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: turing-pi-thermal-rules
+  labels:
+    prometheus: k8s
+    role: alert-rules
+spec:
+  groups:
+    - name: turing-pi-thermal
+      rules:
+        - alert: TuringPiSoCTemperatureHigh
+          annotations:
+            summary: Turing Pi SoC temperature high (early warning)
+            description: >-
+              SoC package temperature on {{ $labels.kubernetes_node }} is
+              {{ printf "%.1f" $value }}°C (≥80 °C) for 10m. The RK3588 starts
+              thermal throttling at ~85 °C — check node load and airflow/ambient
+              temperature before it throttles.
+          expr: node_thermal_zone_temp{type="package-thermal"} >= 80
+          for: 10m
+          labels:
+            severity: warning
+        - alert: TuringPiSoCTemperatureHigh
+          annotations:
+            summary: Turing Pi SoC throttling (≥85 °C)
+            description: >-
+              SoC package temperature on {{ $labels.kubernetes_node }} is
+              {{ printf "%.1f" $value }}°C for 5m — at or above the RK3588
+              ~85 °C throttling point. The CPU clock is being capped to protect
+              the chip; sustained operation here means reduced performance.
+          expr: node_thermal_zone_temp{type="package-thermal"} >= 85
+          for: 5m
+          labels:
+            severity: critical
