@@ -23,7 +23,7 @@ spec:
           restartPolicy: Never
           initContainers:
             - name: load-tests
-              image: ghcr.io/oscaromeu/playwright-runner:1.57.0@sha256:bd04fbccbdb0be44f86b7ea9f1fae69fe0bb84050ea7cf0122a03c5a4cbce879
+              image: ghcr.io/oscaromeu/playwright-runner:1.57.0@sha256:fd630448b282cc174a6dd300ae0d63a48bdffb6bd00c0a02b505685de17a4fcd
               command: ["sh", "-c", "cp -rL /cm/* /tests/ && ls -la /tests"]
               volumeMounts:
                 - name: cm
@@ -32,7 +32,7 @@ spec:
                   mountPath: /tests
           containers:
             - name: playwright
-              image: ghcr.io/oscaromeu/playwright-runner:1.57.0@sha256:bd04fbccbdb0be44f86b7ea9f1fae69fe0bb84050ea7cf0122a03c5a4cbce879
+              image: ghcr.io/oscaromeu/playwright-runner:1.57.0@sha256:fd630448b282cc174a6dd300ae0d63a48bdffb6bd00c0a02b505685de17a4fcd
               imagePullPolicy: IfNotPresent
               env:
                 - name: PW_BASE_URL
