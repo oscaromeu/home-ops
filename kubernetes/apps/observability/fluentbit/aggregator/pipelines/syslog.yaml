@@ -1,0 +1,27 @@
+pipeline:
+  inputs:
+    # Receives syslog from external senders (routers, switches, hosts).
+    # To make this reachable you must expose port 5140 via a Service
+    # (LoadBalancer with an IP from your pool) — see pipelines/kustomization.yaml.
+    - name: syslog
+      tag: syslog
+      mode: tcp
+      listen: 0.0.0.0
+      port: 5140
+      parser: syslog-rfc5424
+
+  filters:
+    - name: modify
+      match: syslog
+      add: stream syslog
+
+  outputs:
+    - name: http
+      match: syslog
+      host: victoria-logs-server.observability.svc.cluster.local
+      port: 9428
+      uri: /insert/jsonline?_stream_fields=stream,host,ident&_msg_field=message&_time_field=time
+      format: json_lines
+      json_date_format: iso8601
+      compress: gzip
+      log_response_payload: false

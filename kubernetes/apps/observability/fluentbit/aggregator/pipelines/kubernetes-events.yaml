@@ -1,0 +1,43 @@
+pipeline:
+  inputs:
+    # Watches the Kubernetes events API (equivalent to `kubectl get events -A -w`).
+    # Cluster-scoped: relies on rbac.eventsAccess in the HelmRelease.
+    - name: kubernetes_events
+      tag: k8s_events
+      kube_url: https://kubernetes.default.svc
+      # checkpoint so a restart does not re-ingest the whole backlog
+      db: /var/log/fluentbit/storage/k8s-events.db
+      interval_sec: 5
+
+  filters:
+    # Flatten the Event object so namespace/object land as top-level fields
+    - name: nest
+      match: k8s_events
+      operation: lift
+      nested_under: metadata
+      add_prefix: meta_
+
+    - name: nest
+      match: k8s_events
+      operation: lift
+      nested_under: involvedObject
+      add_prefix: obj_
+
+    # Normalize to the same schema used by the container-log stream
+    - name: modify
+      match: k8s_events
+      rename: meta_namespace k_namespace_name
+      rename: obj_kind k_object_kind
+      rename: obj_name k_object_name
+      add: stream k8s_events
+
+  outputs:
+    - name: http
+      match: k8s_events
+      host: victoria-logs-server.observability.svc.cluster.local
+      port: 9428
+      uri: /insert/jsonline?_stream_fields=stream,k_namespace_name,type,reason&_msg_field=message&_time_field=lastTimestamp
+      format: json_lines
+      json_date_format: iso8601
+      compress: gzip
+      log_response_payload: false

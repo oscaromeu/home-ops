@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: fluent-bit-agent
+  name: fluent-bit-forwarder
 spec:
   chartRef:
     kind: OCIRepository
@@ -28,12 +28,12 @@ spec:
         configMap:
           defaultMode: 420
           name: parsers
-      - name: pipelines-agent
+      - name: pipelines-forwarder
         configMap:
           defaultMode: 420
-          name: pipelines-agent
+          name: pipelines-forwarder
     extraVolumeMounts:
       - name: parsers
         mountPath: /fluent-bit/etc/conf/parsers.d/
-      - name: pipelines-agent
+      - name: pipelines-forwarder
         mountPath: /fluent-bit/etc/conf/pipelines.d/
