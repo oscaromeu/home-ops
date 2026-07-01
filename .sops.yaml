@@ -7,6 +7,9 @@ creation_rules:
     encrypted_regex: "^(data|stringData)$"
     mac_only_encrypted: true
     age: "age1ptththqpxnx0zuzmq0peq9x30vqgdedjsdlsuzxr5gfc36mnwqlsylrpr8"
+  - path_regex: terraform/.*\.sops\.ya?ml
+    mac_only_encrypted: true
+    age: "age1ptththqpxnx0zuzmq0peq9x30vqgdedjsdlsuzxr5gfc36mnwqlsylrpr8"
 stores:
   yaml:
     indent: 2

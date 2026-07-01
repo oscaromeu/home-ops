@@ -1,0 +1,9 @@
+.terraform/
+.terragrunt-cache/
+*.tfplan
+*.sops.yaml.decrypted
+vaults/*.sops.yaml.decrypted
+.decrypted~*
+vaults/.decrypted~*
+backend_gen.tf
+provider_gen.tf

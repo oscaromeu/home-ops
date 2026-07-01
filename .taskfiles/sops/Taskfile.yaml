@@ -1,0 +1,40 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+vars:
+  SOPS_CONFIG_FILE: "{{.ROOT_DIR}}/.sops.yaml"
+  BOOTSTRAP_DIR: "{{.ROOT_DIR}}/bootstrap"
+  KUBERNETES_DIR: "{{.ROOT_DIR}}/kubernetes"
+  TERRAFORM_DIR: "{{.ROOT_DIR}}/terraform"
+  TALOS_DIR: "{{.ROOT_DIR}}/talos"
+
+tasks:
+
+  encrypt:
+    desc: Encrypt all SOPS files that are not already encrypted
+    cmds:
+      - for: { var: file }
+        task: .encrypt-file
+        vars:
+          file: "{{.ITEM}}"
+    vars:
+      file:
+        sh: |
+          for dir in "{{.BOOTSTRAP_DIR}}" "{{.KUBERNETES_DIR}}" "{{.TERRAFORM_DIR}}" "{{.TALOS_DIR}}"; do
+            if [ -d "$dir" ]; then
+              find "$dir" -type f -name "*.sops.*" \
+                ! -name ".decrypted~*" \
+                ! -name "*.example" \
+                -exec grep -L "ENC\[AES256_GCM" {} \;
+            fi
+          done
+
+  .encrypt-file:
+    internal: true
+    cmd: sops --encrypt --in-place {{.file}}
+    requires:
+      vars: ["file"]
+    preconditions:
+      - { msg: "Missing Sops config file", sh: "test -f {{.SOPS_CONFIG_FILE}}" }
+      - { msg: "Missing age key file", sh: "test -f $SOPS_AGE_KEY_FILE" }

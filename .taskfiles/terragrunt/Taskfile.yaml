@@ -8,11 +8,29 @@ version: '3'
 #   task terragrunt:apply
 
 vars:
-  TG_STACK_DIR: '{{.ROOT_DIR}}/terraform/authentik'
-  TG_SOPS_FILE: '{{.ROOT_DIR}}/terraform/authentik/secrets.sops.yaml'
+  # Discover the stack root for the dir you invoked `task` from: walk up until
+  # we hit the secrets.sops.yaml that belongs to that stack. Handles both
+  # nested leaves (terraform/authentik/apps/grafana -> terraform/authentik) and
+  # stacks whose leaf IS the root (terraform/onepassword).
+  TG_STACK_DIR:
+    sh: |
+      dir="{{.USER_WORKING_DIR}}"
+      while [ "$dir" != "/" ]; do
+        [ -f "$dir/secrets.sops.yaml" ] && { echo "$dir"; exit 0; }
+        dir=$(dirname "$dir")
+      done
+      echo "{{.ROOT_DIR}}/terraform/authentik"
+  TG_SOPS_FILE: '{{.TG_STACK_DIR}}/secrets.sops.yaml'
   TG_LOAD_SECRETS: |
     set -a
     eval "$(sops -d --output-type dotenv {{.TG_SOPS_FILE}})"
+    # Non-secret S3 backend config. AWS SDK Go v2 defaults to validating
+    # response checksums, which adds a signed `Accept-Encoding: identity`
+    # header that S3-compatible backends (MinIO/Garage/…) reject with
+    # "signed header `accept-encoding` is not present". Force lowercase values
+    # the SDK accepts, overriding any (mis-cased) copy from the sops file.
+    AWS_REQUEST_CHECKSUM_CALCULATION=when_required
+    AWS_RESPONSE_CHECKSUM_VALIDATION=when_required
     set +a
 
 tasks:

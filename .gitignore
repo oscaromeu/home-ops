@@ -53,3 +53,4 @@ wiki
 
 .env
 local
+work.sops.yaml

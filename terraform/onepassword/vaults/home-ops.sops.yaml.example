@@ -1,0 +1,40 @@
+# Copy to home-ops.sops.yaml, fill in, then encrypt:
+#   sops -e -i home-ops.sops.yaml
+#
+# One file per 1Password vault. The whole file is encrypted, so it holds both
+# metadata (category, url, tags...) AND secret values (username, password, ...).
+# Adding a secret = add one block under `items:`. Nothing else to touch.
+#
+# `vault:` must match the vault's display name in 1Password verbatim — the
+# Service Account needs Read & Write on it. The vault must already exist;
+# create it from the 1Password web UI before running `terragrunt apply`.
+
+vault: "Home Ops"
+
+items:
+  Garage S3 backend:
+    category: login
+    tags: [infrastructure, terraform]
+    url: https://s3.example.com
+    username: REPLACE_ME
+    password: REPLACE_ME
+    fields:
+      region: us-east-1
+      bucket: home-ops-tfstate
+
+  GitHub PAT (terraform):
+    category: password
+    tags: [github]
+    url: https://github.com/settings/tokens
+    password: ghp_REPLACE_ME
+
+  bot-oscaromeu app private key:
+    category: secure_note
+    tags: [github, github-app]
+    note: |
+      -----BEGIN RSA PRIVATE KEY-----
+      ...
+      -----END RSA PRIVATE KEY-----
+    fields:
+      app_id: REPLACE_WITH_APP_ID
+      installation_id: REPLACE_WITH_INSTALL_ID
