@@ -6,7 +6,7 @@ metadata:
 spec:
   parallelism: 1
   runner:
-    image: grafana/k6:2.0.0-with-browser@sha256:880501ca99b97a0e519c7ed6a038d7ce031b4181cf4843066aa97d33936294ad
+    image: grafana/k6:2.1.0-with-browser@sha256:40612240f5e37819faedb12b1df4e2cfbd7b0894475ff3c8b8f8f05239b7aff6
     resources:
       requests:
         cpu: "250m"
