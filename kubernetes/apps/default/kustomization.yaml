@@ -10,6 +10,7 @@ resources:
   - ./namespace.yaml
   - ./actual/ks.yaml
   - ./atuin/ks.yaml
+  - ./copyparty/ks.yaml
   - ./docmost/ks.yaml
   - ./echo/ks.yaml
   - ./feishin/ks.yaml
