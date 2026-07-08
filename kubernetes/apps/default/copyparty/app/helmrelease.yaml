@@ -56,22 +56,36 @@ spec:
         data:
           copyparty.conf: |
             [global]
-              hist: /hist
+              e2dsa
+              e2ts
+              grid
+              hist: /state/hist
+              shr: /share
+              shr-db: /state/shares.db
+              shr-adm: oscar
 
             [/media]
               /w/media
               accs:
-                rw: *
+                r: *
+                A: oscar
     persistence:
       config:
         type: configMap
         name: copyparty
         globalMounts:
-          - path: /cfg
-      hist:
-        type: emptyDir
+          - path: /cfg/copyparty.conf
+            subPath: copyparty.conf
+      accounts:
+        type: secret
+        name: copyparty-secret
         globalMounts:
-          - path: /hist
+          - path: /cfg/accounts.conf
+            subPath: accounts.conf
+      state:
+        existingClaim: copyparty
+        globalMounts:
+          - path: /state
       media:
         type: nfs
         server: ${NAS_SERVER_IP}
