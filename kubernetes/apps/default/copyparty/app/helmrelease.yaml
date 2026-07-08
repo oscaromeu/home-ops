@@ -63,6 +63,7 @@ spec:
               shr: /share
               shr-db: /state/shares.db
               shr-adm: oscar
+              xff-src: 10.42.0.0/16
 
             [/media]
               /w/media
