@@ -25,5 +25,6 @@ resources:
   - ./pinchflat/ks.yaml
   - ./podinfo/ks.yaml
   - ./srs/ks.yaml
+  - ./syncthing/ks.yaml
   - ./twitch-radios/ks.yaml
   - ./vikunja/ks.yaml
