@@ -8,7 +8,6 @@ components:
 
 resources:
   - ./namespace.yaml
-  - ./actual/ks.yaml
   - ./atuin/ks.yaml
   - ./copyparty/ks.yaml
   - ./docmost/ks.yaml
@@ -20,11 +19,9 @@ resources:
   - ./jellyfin/ks.yaml
   - ./kavita/ks.yaml
   - ./linkding/ks.yaml
-  - ./memos/ks.yaml
   - ./metube/ks.yaml
   - ./navidrome/ks.yaml
   - ./outline/ks.yaml
-  - ./peertube/ks.yaml
   - ./pinchflat/ks.yaml
   - ./podinfo/ks.yaml
   - ./srs/ks.yaml
