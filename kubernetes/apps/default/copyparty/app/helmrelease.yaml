@@ -13,8 +13,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/9001/copyparty-ac
-              tag: 1.20.17@sha256:8906f3a4dbf745664634aea5d8a3fc2e5cc5a3d0d5edcf0a991dda613068d2aa
+              repository: ghcr.io/9001/copyparty-dj
+              tag: 1.20.17@sha256:36a897d21e57242232615211ad3c6aaecd6c7d6eccd1a432be1ad2b00c82a413
             env:
               TZ: ${TIMEZONE}
               PRTY_NO_TLS: 1
@@ -23,7 +23,7 @@ spec:
                 cpu: 10m
                 memory: 64Mi
               limits:
-                memory: 256Mi
+                memory: 512Mi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -65,6 +65,8 @@ spec:
               shr-db: /state/shares.db
               shr-adm: oscar
               xff-src: 10.42.0.0/16
+              mtp: .bpm=f,t30,/mtag/audio-bpm.py
+              mtp: key=f,t190,/mtag/audio-key.py
 
             [/media]
               /w/media
