@@ -57,7 +57,8 @@ spec:
           copyparty.conf: |
             [global]
               e2dsa
-              e2ts
+              # TODO: revert to e2ts once the one-shot tag-db rebuild completes
+              e2tsr
               grid
               hist: /state/hist
               shr: /share
