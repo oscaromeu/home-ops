@@ -20,10 +20,10 @@ spec:
               PRTY_NO_TLS: 1
             resources:
               requests:
-                cpu: 10m
-                memory: 64Mi
+                cpu: 100m
+                memory: 512Mi
               limits:
-                memory: 2Gi
+                memory: 4Gi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
