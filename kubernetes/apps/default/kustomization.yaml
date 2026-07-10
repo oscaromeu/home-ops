@@ -15,7 +15,6 @@ resources:
   - ./feishin/ks.yaml
   - ./filebrowser/ks.yaml
   - ./icecast/ks.yaml
-  - ./instaloader/ks.yaml
   - ./jellyfin/ks.yaml
   - ./kavita/ks.yaml
   - ./linkding/ks.yaml
