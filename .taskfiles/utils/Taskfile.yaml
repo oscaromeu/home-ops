@@ -6,68 +6,63 @@ vars:
 
 tasks:
 
-  video2mp3:
-    desc: Convert video files to MP3
+  video2audio:
+    desc: Extract audio from video files preserving quality
     summary: |
-      Convert video files to MP3 using ffmpeg.
-      Supported formats: mov, mp4, mkv, avi, webm, flv, wmv.
+      Extract the audio track from video files using ffmpeg.
+      By default (FORMAT=auto) the stream is copied without re-encoding
+      into its native container (aac/alac -> m4a, mp3 -> mp3, opus ->
+      opus, vorbis -> ogg, flac -> flac, pcm -> wav, ac3/eac3 -> ac3/
+      eac3); unknown codecs fall back to MP3 VBR. FORMAT=mp3 forces MP3
+      output (still stream-copied when the source is already MP3).
 
       Variables:
         DIR: Directory to process (default: current directory)
-        QUALITY: VBR quality 0-9, 0 = best (default: 0)
+        FORMAT: auto | mp3 (default: auto)
+        QUALITY: MP3 VBR quality 0-9, 0 = best (default: 0)
         OVERWRITE: Overwrite existing files (default: false)
         RECURSIVE: Include subdirectories (default: false)
-    cmd: bash {{.UTILS_RESOURCES_DIR}}/video2mp3.sh
+        EXTENSIONS: Space-separated input extensions
+          (default: "mov mp4 mkv m4v ts avi flv wmv webm")
+    cmd: bash {{.UTILS_RESOURCES_DIR}}/video2audio.sh
     env:
       DIR: '{{.DIR | default "."}}'
+      FORMAT: '{{.FORMAT | default "auto"}}'
       QUALITY: '{{.QUALITY | default "0"}}'
       OVERWRITE: '{{.OVERWRITE | default "false"}}'
       RECURSIVE: '{{.RECURSIVE | default "false"}}'
+      EXTENSIONS: '{{.EXTENSIONS | default "mov mp4 mkv m4v ts avi flv wmv webm"}}'
     preconditions:
       - which ffmpeg
+      - which ffprobe
 
-  peertube-upload:
-    desc: Upload a video to PeerTube
+  remux2mp4:
+    desc: Convert video files to MP4 preserving quality
     summary: |
-      Upload a video to a PeerTube instance using the API.
-      Requires PT_USER, PT_PASS and PT_INSTANCE environment variables
-      (set via mise / shell — kept out of this taskfile to avoid leaking
-      the domain in the public repo).
-
-      Variables:
-        FILE: Path to the video file (required)
-        NAME: Video title (required)
-        INSTANCE: PeerTube instance URL (defaults to $PT_INSTANCE)
-        CHANNEL_ID: Channel ID to upload to (default: 7)
-        PRIVACY: 1 = public, 2 = unlisted, 3 = private (default: 1)
-    cmd: bash {{.UTILS_RESOURCES_DIR}}/peertube-upload.sh "{{.FILE}}" "{{.NAME}}"
-    env:
-      INSTANCE: '{{.INSTANCE | default "$PT_INSTANCE"}}'
-      CHANNEL_ID: '{{.CHANNEL_ID | default "7"}}'
-      PRIVACY: '{{.PRIVACY | default "1"}}'
-    preconditions:
-      - which curl
-      - which jq
-      - test -n "$PT_USER"
-      - test -n "$PT_PASS"
-      - test -n "$PT_INSTANCE"
-
-  video2mp4:
-    desc: Convert video files to MP4
-    summary: |
-      Convert video files to MP4 (H.264 + AAC) using ffmpeg.
-      Supported formats: mov, mkv, avi, webm, flv, wmv, ts, m4v.
+      Convert video files to .mp4 using ffmpeg, preserving quality.
+      By default (MODE=auto) it tries a lossless remux (stream copy, no
+      re-encoding), then copying video + transcoding audio to AAC, and
+      only re-encodes fully (H.264, low CRF) when the codecs are not
+      mp4-compatible. Note: with auto/copy the original codec is kept,
+      so e.g. a VP9 webm remuxes losslessly but won't play in QuickTime;
+      use MODE=encode when player compatibility matters more than quality.
 
       Variables:
         DIR: Directory to process (default: current directory)
-        QUALITY: CRF value 0-51, lower = better (default: 23)
+        MODE: auto | copy | encode (default: auto)
+        QUALITY: CRF for the encode fallback, lower = better (default: 18)
         OVERWRITE: Overwrite existing files (default: false)
         RECURSIVE: Include subdirectories (default: false)
-    cmd: bash {{.UTILS_RESOURCES_DIR}}/video2mp4.sh
+        EXTENSIONS: Space-separated input extensions
+          (default: "mov mkv m4v ts avi flv wmv webm")
+    cmd: bash {{.UTILS_RESOURCES_DIR}}/remux2mp4.sh
     env:
       DIR: '{{.DIR | default "."}}'
-      QUALITY: '{{.QUALITY | default "23"}}'
+      MODE: '{{.MODE | default "auto"}}'
+      QUALITY: '{{.QUALITY | default "18"}}'
       OVERWRITE: '{{.OVERWRITE | default "false"}}'
       RECURSIVE: '{{.RECURSIVE | default "false"}}'
+      EXTENSIONS: '{{.EXTENSIONS | default "mov mkv m4v ts avi flv wmv webm"}}'
     preconditions:
       - which ffmpeg
+      - which ffprobe
