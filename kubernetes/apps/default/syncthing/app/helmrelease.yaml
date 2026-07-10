@@ -47,6 +47,9 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups:
+          - 44
+          - 65537
         seccompProfile: { type: RuntimeDefault }
     service:
       app:
@@ -82,8 +85,18 @@ spec:
                 port: *port
     persistence:
       data:
-        type: nfs
-        server: ${NAS_SERVER_IP}
-        path: ${NAS_SERVER_MEDIA_PATH}/Library
+        existingClaim: syncthing
         globalMounts:
           - path: /var/syncthing
+      practice:
+        type: nfs
+        server: ${NAS_SERVER_IP}
+        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Videos/Practice
+        globalMounts:
+          - path: /var/syncthing/Practice
+      music:
+        type: nfs
+        server: ${NAS_SERVER_IP}
+        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Music
+        globalMounts:
+          - path: /var/syncthing/Music
