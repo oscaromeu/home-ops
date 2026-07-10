@@ -41,13 +41,13 @@ native_ext () {
 extract_copy () {
     local movflags=()
     [[ "$3" == "m4a" ]] && movflags=(-movflags +faststart)
-    ffmpeg -hide_banner -loglevel error -y -i "$1" \
+    ffmpeg -nostdin -hide_banner -loglevel error -y -i "$1" \
         -vn -c:a copy "${movflags[@]}" \
         "$2"
 }
 
 encode_mp3 () {
-    ffmpeg -hide_banner -loglevel error -y -i "$1" \
+    ffmpeg -nostdin -hide_banner -loglevel error -y -i "$1" \
         -vn -c:a libmp3lame -q:a "$QUALITY" \
         "$2"
 }

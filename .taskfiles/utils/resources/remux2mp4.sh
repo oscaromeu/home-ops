@@ -25,19 +25,19 @@ if [[ "$MODE" != "auto" && "$MODE" != "copy" && "$MODE" != "encode" ]]; then
 fi
 
 remux () {
-    ffmpeg -hide_banner -loglevel error -y -i "$1" \
+    ffmpeg -nostdin -hide_banner -loglevel error -y -i "$1" \
         -c copy "${TAG_ARGS[@]}" -movflags +faststart \
         "$2"
 }
 
 remux_video_only () {
-    ffmpeg -hide_banner -loglevel error -y -i "$1" \
+    ffmpeg -nostdin -hide_banner -loglevel error -y -i "$1" \
         -c:v copy "${TAG_ARGS[@]}" -c:a aac -b:a 256k -movflags +faststart \
         "$2"
 }
 
 encode () {
-    ffmpeg -hide_banner -loglevel error -y -i "$1" \
+    ffmpeg -nostdin -hide_banner -loglevel error -y -i "$1" \
         -c:v libx264 -crf "$QUALITY" -preset slow \
         -c:a aac -b:a 256k -movflags +faststart \
         "$2"
