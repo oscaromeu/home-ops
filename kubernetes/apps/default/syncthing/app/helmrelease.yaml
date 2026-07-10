@@ -82,6 +82,8 @@ spec:
                 port: *port
     persistence:
       data:
-        existingClaim: syncthing
+        type: nfs
+        server: ${NAS_SERVER_IP}
+        path: ${NAS_SERVER_MEDIA_PATH}/Library
         globalMounts:
           - path: /var/syncthing
