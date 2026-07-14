@@ -22,7 +22,7 @@ spec:
               - secretRef:
                   name: icecast-secrets
             env:
-              TZ: "${TIMEZONE}"
+              TZ: "${TZ}"
               ICECAST_HOSTNAME: icecast.default.svc.cluster.local
               ICECAST_LOCATION: home-ops
               ICECAST_MAX_CLIENTS: "100"

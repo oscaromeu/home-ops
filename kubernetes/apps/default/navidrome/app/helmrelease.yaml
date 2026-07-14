@@ -20,7 +20,7 @@ spec:
               - secretRef:
                   name: navidrome
             env:
-              TZ: "${TIMEZONE}"
+              TZ: "${TZ}"
               ND_DATAFOLDER: /config
               ND_MUSICFOLDER: /music
               ND_ENABLEGRAVATAR: "true"

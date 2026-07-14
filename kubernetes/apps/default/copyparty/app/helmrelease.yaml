@@ -16,7 +16,7 @@ spec:
               repository: ghcr.io/9001/copyparty-dj
               tag: 1.20.18@sha256:44077a93fd8de10f4e268d0351e150ee684e5eb41837ea69de7d74fce4955983
             env:
-              TZ: ${TIMEZONE}
+              TZ: ${TZ}
               PRTY_NO_TLS: 1
             resources:
               requests:

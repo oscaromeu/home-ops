@@ -19,7 +19,7 @@ spec:
               repository: ghcr.io/jeffvli/feishin
               tag: 1.14.0@sha256:519e7170510e085d7d00e1ec65286fd126b26ef5a94b2a82aa08db232307a544
             env:
-              TZ: "${TIMEZONE}"
+              TZ: "${TZ}"
             securityContext:
               allowPrivilegeEscalation: false
               capabilities: {drop: ["ALL"]}

@@ -20,7 +20,7 @@ spec:
               FB_LOG: stdout
               FB_NOAUTH: true
               FB_ROOT: /data
-              TZ: ${TIMEZONE}
+              TZ: ${TZ}
             resources:
               requests:
                 cpu: 15m
