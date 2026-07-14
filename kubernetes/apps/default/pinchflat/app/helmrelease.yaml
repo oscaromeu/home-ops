@@ -18,7 +18,7 @@ spec:
           app:
             image:
               repository: ghcr.io/oscaromeu/pinchflat
-              tag: 2025.6.6@:sha256-72f6c68dd209211eed067e665507d9dffcb6ea77879dbc8a011e2656d32e52ed
+              tag: 2025.6.6@sha256-72f6c68dd209211eed067e665507d9dffcb6ea77879dbc8a011e2656d32e52ed
             env:
               TZ: Europe/Madrid
               TZ_DATA_DIR: /tmp/elixir_tz_data
