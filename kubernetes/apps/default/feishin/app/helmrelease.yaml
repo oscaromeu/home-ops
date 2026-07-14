@@ -17,7 +17,7 @@ spec:
           app:
             image:
               repository: ghcr.io/jeffvli/feishin
-              tag: 1.13.0@sha256:c805072c12e441edbf7863eccee5bd62b9026f59b7c094a3dd74ed1a9b08056e
+              tag: 1.14.0@sha256:519e7170510e085d7d00e1ec65286fd126b26ef5a94b2a82aa08db232307a544
             env:
               TZ: "${TIMEZONE}"
             securityContext:
