@@ -22,7 +22,7 @@ spec:
             env:
               TZ: "${TZ}"
               ND_DATAFOLDER: /config
-              ND_MUSICFOLDER: /music
+              ND_MUSICFOLDER: /collection
               ND_ENABLEGRAVATAR: "true"
               ND_LOGLEVEL: info
               ND_DEFAULTTHEME: Spotify-ish
