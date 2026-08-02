@@ -94,9 +94,15 @@ spec:
         path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Videos/Practice
         globalMounts:
           - path: /var/syncthing/Practice
-      music:
+      collection:
         type: nfs
         server: ${NAS_SERVER_IP}
-        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Music
+        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Music/Collection
         globalMounts:
-          - path: /var/syncthing/Music
+          - path: /var/syncthing/music/collection
+      mixtapes:
+        type: nfs
+        server: ${NAS_SERVER_IP}
+        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Music/Mixtapes
+        globalMounts:
+          - path: /var/syncthing/music/mixtapes

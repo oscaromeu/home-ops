@@ -78,10 +78,17 @@ spec:
         type: emptyDir
         globalMounts:
           - path: /config/cache
-      music:
+      collection:
         type: nfs
         server: ${NAS_SERVER_IP}
-        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Music
+        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Music/Collection
         globalMounts:
           - path: /music
+            readOnly: true
+      mixtapes:
+        type: nfs
+        server: ${NAS_SERVER_IP}
+        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Music/Mixtapes
+        globalMounts:
+          - path: /mixtapes
             readOnly: true
