@@ -83,7 +83,7 @@ spec:
         server: ${NAS_SERVER_IP}
         path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Music/Collection
         globalMounts:
-          - path: /music
+          - path: /collection
             readOnly: true
       mixtapes:
         type: nfs
