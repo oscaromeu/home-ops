@@ -10,5 +10,5 @@ resources:
   - ./namespace.yaml
   - ./clickhouse/ks.yaml
   - ./crunchy-pg/ks.yaml
-  - ./dragonfly/ks.yaml
+#  - ./dragonfly/ks.yaml
   - ./valkey/ks.yaml
