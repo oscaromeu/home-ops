@@ -1,0 +1,38 @@
+---
+# spec.labels includes app.kubernetes.io/name on purpose: operator v1.6.1
+# rejects operator-managed label keys, and hitting that is part of the
+# upgrade rehearsal.
+apiVersion: dragonflydb.io/v1alpha1
+kind: Dragonfly
+metadata:
+  name: dragonfly
+spec:
+  labels:
+    app.kubernetes.io/cluster: talos-home
+    app.kubernetes.io/environment: home
+    app.kubernetes.io/name: dragonfly
+  args:
+    - --maxmemory=$(MAX_MEMORY)Mi
+    - --proactor_threads=2
+    - --cluster_mode=emulated
+  env:
+    - name: MAX_MEMORY
+      valueFrom:
+        resourceFieldRef:
+          divisor: 1Mi
+          resource: limits.memory
+  image: ghcr.io/dragonflydb/dragonfly:v1.22.0
+  replicas: 2
+  resources:
+    limits:
+      memory: 512Mi
+    requests:
+      cpu: 100m
+  snapshot:
+    cron: '0 */12 * * *'
+    persistentVolumeClaimSpec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
