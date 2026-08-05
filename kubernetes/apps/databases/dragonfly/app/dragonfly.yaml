@@ -10,7 +10,7 @@ spec:
   labels:
     app.kubernetes.io/cluster: talos-home
     app.kubernetes.io/environment: home
-    app.kubernetes.io/name: dragonfly
+  networkPolicyEnabled: false
   args:
     - --maxmemory=$(MAX_MEMORY)Mi
     - --proactor_threads=2
@@ -21,7 +21,7 @@ spec:
         resourceFieldRef:
           divisor: 1Mi
           resource: limits.memory
-  image: ghcr.io/dragonflydb/dragonfly:v1.22.0
+  image: ghcr.io/dragonflydb/dragonfly:v1.39.0
   replicas: 2
   resources:
     limits:
