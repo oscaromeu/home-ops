@@ -10,7 +10,7 @@ spec:
   labels:
     app.kubernetes.io/cluster: talos-home
     app.kubernetes.io/environment: home
-  networkPolicyEnabled: false
+    app.kubernetes.io/name: dragonfly
   args:
     - --maxmemory=$(MAX_MEMORY)Mi
     - --proactor_threads=2
