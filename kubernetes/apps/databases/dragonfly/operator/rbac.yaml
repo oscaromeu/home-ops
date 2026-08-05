@@ -1,12 +1,4 @@
 ---
-# ClusterRole matching what operator v1.1.x needs: intentionally missing
-# configmaps, networkpolicies, poddisruptionbudgets and pods/status so the
-# v1.6.1 upgrade rehearsal surfaces the RBAC changes it requires.
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: dragonfly-operator
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -19,7 +11,16 @@ rules:
     resources: ["events"]
     verbs: ["create", "patch"]
   - apiGroups: [""]
-    resources: ["pods", "services"]
+    resources: ["configmaps", "pods", "services"]
+    verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
+  - apiGroups: [""]
+    resources: ["pods/status"]
+    verbs: ["get", "patch", "update"]
+  - apiGroups: ["networking.k8s.io"]
+    resources: ["networkpolicies"]
+    verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
+  - apiGroups: ["policy"]
+    resources: ["poddisruptionbudgets"]
     verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
   - apiGroups: ["apps"]
     resources: ["statefulsets"]
