@@ -1,5 +1,5 @@
 ---
-# ClusterRole matching what operator v1.3.1 needs: intentionally missing
+# ClusterRole matching what operator v1.1.x needs: intentionally missing
 # configmaps, networkpolicies, poddisruptionbudgets and pods/status so the
 # v1.6.1 upgrade rehearsal surfaces the RBAC changes it requires.
 apiVersion: v1
