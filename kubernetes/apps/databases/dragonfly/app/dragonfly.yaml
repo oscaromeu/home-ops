@@ -15,8 +15,6 @@ spec:
     - --maxmemory=$(MAX_MEMORY)Mi
     - --proactor_threads=2
     - --cluster_mode=emulated
-    # psync buffers are bounded by entry count, not memory, and can grow until
-    # OOM on the master (dragonflydb/dragonfly#5432) — keep the backlog minimal
     - --shard_repl_backlog_len=1
   env:
     - name: MAX_MEMORY
