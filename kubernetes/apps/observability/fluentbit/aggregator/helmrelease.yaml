@@ -28,6 +28,12 @@ spec:
     serviceMonitor:
       enabled: true
     logLevel: warn
+    # Alertmanager webhook receiver (pipelines/alertmanager.yaml)
+    extraPorts:
+      - name: alertmanager
+        port: 8888
+        containerPort: 8888
+        protocol: TCP
     extraVolumes:
       - name: parsers
         configMap:
