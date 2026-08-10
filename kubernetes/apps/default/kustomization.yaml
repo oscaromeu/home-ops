@@ -12,6 +12,7 @@ resources:
   - ./copyparty/ks.yaml
   - ./docmost/ks.yaml
   - ./echo/ks.yaml
+  - ./excalidraw/ks.yaml
   - ./feishin/ks.yaml
   - ./filebrowser/ks.yaml
   - ./icecast/ks.yaml

@@ -1,0 +1,45 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: excalidraw
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: excalidraw
+  values:
+    controllers:
+      excalidraw:
+        strategy: RollingUpdate
+        containers:
+          app:
+            image:
+              repository: docker.io/excalidraw/excalidraw
+              tag: latest@sha256:f7ee194addd607bf831d2af0f0a34463dd4225e426cf35199ef0b12a803398e9
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+            resources:
+              requests:
+                cpu: 5m
+                memory: 10Mi
+              limits:
+                memory: 50Mi
+    service:
+      app:
+        ports:
+          http:
+            port: &port 80
+    route:
+      app:
+        hostnames: ["draw.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
