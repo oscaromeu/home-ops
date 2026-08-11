@@ -9,5 +9,6 @@ components:
 resources:
   - ./namespace.yaml
   - ./clickhouse/ks.yaml
+  - ./clickhouse-lab/ks.yaml
   - ./crunchy-pg/ks.yaml
   - ./valkey/ks.yaml

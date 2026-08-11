@@ -1,0 +1,12 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: clickhouse-lab
+spec:
+  # Reuses the operator deployed by ./clickhouse/operator — it watches every
+  # namespace, so a second copy would only fight over the same CRs.
+  dependsOn:
+    - name: clickhouse-operator
+  targetNamespace: databases
+  path: ./kubernetes/apps/databases/clickhouse-lab/app
