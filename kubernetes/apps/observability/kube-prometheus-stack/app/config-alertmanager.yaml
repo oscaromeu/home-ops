@@ -16,6 +16,8 @@ spec:
             matchType: =
       - receiver: vl-archive
         continue: true
+      - receiver: ch-archive
+        continue: true
       - receiver: pushover
         matchers:
           - name: severity
@@ -46,6 +48,11 @@ spec:
     - name: vl-archive
       webhookConfigs:
         - url: http://alertmanager-webhook-logger.observability.svc.cluster.local:6725/
+          sendResolved: true
+    # Long-term alert history in ClickHouse (observability.alert_events).
+    - name: ch-archive
+      webhookConfigs:
+        - url: http://fluent-bit-aggregator.observability.svc.cluster.local:8888/
           sendResolved: true
     - name: pushover
       pushoverConfigs:

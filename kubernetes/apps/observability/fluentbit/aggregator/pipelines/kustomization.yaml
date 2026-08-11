@@ -7,6 +7,7 @@ configMapGenerator:
   - name: pipelines-aggregator
     files:
       - kubernetes-events.yaml=./kubernetes-events.yaml
+      - alertmanager.yaml=./alertmanager.yaml
       #- syslog.yaml=./syslog.yaml
       #- kafka.yaml=./kafka.yaml
 generatorOptions:

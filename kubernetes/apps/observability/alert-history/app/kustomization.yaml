@@ -1,0 +1,17 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ./job.yaml
+
+configMapGenerator:
+  - name: alert-history-schema
+    files:
+      - schema.sql=./schema.sql
+
+# Hash suffix is intentional here (unlike the fluentbit pipelines): it is what
+# makes a schema.sql edit produce a new Job spec for Flux to force-recreate.
+generatorOptions:
+  disableNameSuffixHash: false

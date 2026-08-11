@@ -1,0 +1,49 @@
+---
+# Applies the alert-history schema to ClickHouse. Every statement is
+# IF NOT EXISTS, so re-running is a no-op.
+#
+# The Job name is fixed and Job specs are immutable, so the parent Flux
+# Kustomization sets `force: true` — editing schema.sql rolls the ConfigMap
+# hash, Flux recreates the Job, and the new DDL is applied.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: alert-history-schema
+spec:
+  backoffLimit: 6
+  ttlSecondsAfterFinished: 3600
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: schema
+          image: docker.io/clickhouse/clickhouse-server:26.3
+          command:
+            - clickhouse-client
+            - --host=clickhouse-clickhouse-headless.databases.svc.cluster.local
+            - --port=9000
+            - --user=default
+            - --multiquery
+            - --queries-file=/schema/schema.sql
+          volumeMounts:
+            - name: schema
+              mountPath: /schema
+              readOnly: true
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: ["ALL"] }
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 101
+        runAsGroup: 101
+      volumes:
+        - name: schema
+          configMap:
+            name: alert-history-schema

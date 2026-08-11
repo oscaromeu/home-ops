@@ -1,0 +1,27 @@
+pipeline:
+  inputs:
+    # Receives Alertmanager webhook notifications. Reachable in-cluster as
+    # http://fluent-bit-aggregator.observability.svc.cluster.local:8888/
+    # (port exposed via extraPorts in the aggregator HelmRelease).
+    - name: http
+      tag: alertmanager
+      listen: 0.0.0.0
+      port: 8888
+      # One webhook body = one record. The alerts[] fan-out happens in
+      # ClickHouse (alert_events_mv), not here.
+      successful_response_code: 200
+
+  outputs:
+    # ClickHouse HTTP interface. JSONAsString stores the whole webhook body in
+    # observability.alerts_raw.payload; received_at comes from the column
+    # DEFAULT. A materialized view explodes alerts[] into alert_events.
+    - name: http
+      match: alertmanager
+      host: clickhouse-clickhouse-headless.databases.svc.cluster.local
+      port: 8123
+      uri: /?query=INSERT+INTO+observability.alerts_raw+(payload)+FORMAT+JSONAsString
+      format: json_lines
+      json_date_format: iso8601
+      # No gzip: payloads are a few KB and ClickHouse needs the body verbatim.
+      log_response_payload: true
+      retry_limit: 5
