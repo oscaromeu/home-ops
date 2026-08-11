@@ -23,7 +23,7 @@ spec:
           restartPolicy: Never
           initContainers:
             - name: load-tests
-              image: ghcr.io/oscaromeu/playwright-runner:1.57.0@sha256:9ef2844f45f9326c8405efaf31268603bf8e789739fb5d407a32a5223cb66942
+              image: ghcr.io/oscaromeu/playwright-runner:1.57.0@sha256:d7a5206dadd7f5e89c45d87641023f7e9f45dbf697c3c3d2dfd4eecca57e95af
               command: ["sh", "-c", "cp -rL /cm/* /tests/ && ls -la /tests"]
               volumeMounts:
                 - name: cm
@@ -32,7 +32,7 @@ spec:
                   mountPath: /tests
           containers:
             - name: playwright
-              image: ghcr.io/oscaromeu/playwright-runner:1.57.0@sha256:9ef2844f45f9326c8405efaf31268603bf8e789739fb5d407a32a5223cb66942
+              image: ghcr.io/oscaromeu/playwright-runner:1.57.0@sha256:d7a5206dadd7f5e89c45d87641023f7e9f45dbf697c3c3d2dfd4eecca57e95af
               imagePullPolicy: IfNotPresent
               # Run the probe, then upload the HTML report (video+trace embedded
               # on failure) to Garage under synthetics/<probe>/<timestamp>/report.
