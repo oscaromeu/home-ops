@@ -9,5 +9,5 @@ spec:
   path: ./kubernetes/apps/observability/alert-history/app
   dependsOn:
     - name: clickhouse-cluster
-  # Job specs are immutable; force lets a schema.sql change recreate the Job.
+      namespace: databases
   force: true
