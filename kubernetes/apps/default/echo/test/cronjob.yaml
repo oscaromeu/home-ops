@@ -6,6 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: echo-test
 spec:
+  suspend: true
   schedule: "*/5 * * * *"
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 3
