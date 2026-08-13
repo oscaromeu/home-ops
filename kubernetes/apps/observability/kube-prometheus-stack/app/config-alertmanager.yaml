@@ -14,8 +14,6 @@ spec:
           - name: alertname
             value: InfoInhibitor
             matchType: =
-      - receiver: vl-archive
-        continue: true
       - receiver: ch-archive
         continue: true
       - receiver: pushover
@@ -23,12 +21,11 @@ spec:
           - name: severity
             value: critical
             matchType: =
+    # "..." disables grouping: one notification per alert.
     groupBy:
-      - alertname
-      - cluster
-      - job
+      - "..."
     groupInterval: 5m
-    groupWait: 1m
+    groupWait: 30s
 
   inhibitRules:
     - equal:
@@ -45,10 +42,6 @@ spec:
 
   receivers:
     - name: blackhole
-    - name: vl-archive
-      webhookConfigs:
-        - url: http://alertmanager-webhook-logger.observability.svc.cluster.local:6725/
-          sendResolved: true
     # Long-term alert history in ClickHouse (observability.alert_events).
     - name: ch-archive
       webhookConfigs:
@@ -81,8 +74,7 @@ spec:
           sendResolved: true
           sound: gamelan
           title: >-
-            [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .CommonLabels.alertname }}
-          ttl: 86400s
+            [{{ .Status | toUpper }}] {{ .CommonLabels.alertname }}
           token:
             name: alertmanager-secret
             key: ALERTMANAGER_PUSHOVER_TOKEN
