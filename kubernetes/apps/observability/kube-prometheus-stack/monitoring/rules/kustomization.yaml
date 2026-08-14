@@ -4,6 +4,7 @@ namespace: observability
 resources:
   #- alertmanager.yaml
   - apiserver.yaml
+  - e2e-probes.yaml
   - kube-prometheus.yaml
   - kube-state-metrics.yaml
   - kubernetes-monitoring.yaml

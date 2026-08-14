@@ -1,0 +1,21 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    prometheus: k8s
+    role: alert-rules
+  name: e2e-probes-rules
+spec:
+  groups:
+    - name: e2e-probes.rules
+      rules:
+        - alert: E2EProbeFailed
+          annotations:
+            summary: E2E probe {{ $labels.job }} is failing.
+            description: >-
+              Probe {{ $labels.job }} ({{ $labels.env }}) reported
+              probe_success == 0 on its last run.
+          expr: probe_success == 0
+          labels:
+            severity: warning

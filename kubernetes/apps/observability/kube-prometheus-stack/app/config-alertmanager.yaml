@@ -14,6 +14,12 @@ spec:
           - name: alertname
             value: InfoInhibitor
             matchType: =
+      - receiver: allquiet
+        continue: true
+        matchers:
+          - name: alertname
+            value: E2EProbe.*
+            matchType: =~
       - receiver: ch-archive
         continue: true
       - receiver: pushover
@@ -42,6 +48,13 @@ spec:
 
   receivers:
     - name: blackhole
+    # PoC CORE-1841: opens incidents in the AllQuiet sandbox team.
+    - name: allquiet
+      webhookConfigs:
+        - urlSecret:
+            name: alertmanager-secret
+            key: ALLQUIET_WEBHOOK_URL
+          sendResolved: true
     # Long-term alert history in ClickHouse (observability.alert_events).
     - name: ch-archive
       webhookConfigs:
