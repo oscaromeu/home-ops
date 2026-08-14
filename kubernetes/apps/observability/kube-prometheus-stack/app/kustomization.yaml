@@ -7,6 +7,7 @@ resources:
   - ./ocirepository.yaml
   - ./externalsecret.yaml
   - ./helmrelease.yaml
+  - ./prometheusrule-e2e.yaml
 
   #- ./secret.sops.yaml
 
