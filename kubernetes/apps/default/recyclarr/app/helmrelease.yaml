@@ -1,0 +1,84 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/common-4.4.0/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: recyclarr
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: recyclarr
+  values:
+    controllers:
+      recyclarr:
+        type: cronjob
+        cronjob:
+          schedule: 0 5 * * *
+          successfulJobsHistory: 1
+          failedJobsHistory: 1
+          concurrencyPolicy: Forbid
+        containers:
+          app:
+            image:
+              repository: ghcr.io/recyclarr/recyclarr
+              tag: 8.7.1@sha256:73303ba5ee647b6492fee917d3a781c6e59b6cab08f9dfce9482a950846f564f
+            args:
+              - sync
+            env:
+              TZ: ${TZ}
+            envFrom:
+              - secretRef:
+                  name: recyclarr
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+    configMaps:
+      config:
+        data:
+          recyclarr.yml: |
+            sonarr:
+              series:
+                base_url: http://sonarr.default.svc.cluster.local:8989
+                api_key: !env_var SONARR_API_KEY
+                include:
+                  - template: sonarr-quality-definition-series
+                  - template: sonarr-v4-quality-profile-web-1080p
+                  - template: sonarr-v4-custom-formats-web-1080p
+            radarr:
+              movies:
+                base_url: http://radarr.default.svc.cluster.local:7878
+                api_key: !env_var RADARR_API_KEY
+                include:
+                  - template: radarr-quality-definition-movie
+                  - template: radarr-quality-profile-hd-bluray-web
+                  - template: radarr-custom-formats-hd-bluray-web
+    persistence:
+      config:
+        type: emptyDir
+        globalMounts:
+          - path: /config
+      config-file:
+        type: configMap
+        name: recyclarr
+        globalMounts:
+          - path: /config/recyclarr.yml
+            subPath: recyclarr.yml
+            readOnly: true
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp
