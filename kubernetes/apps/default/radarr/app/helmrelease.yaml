@@ -19,6 +19,8 @@ spec:
             env:
               TZ: ${TZ}
               RADARR__SERVER__PORT: &port 7878
+              RADARR__AUTH__METHOD: External
+              RADARR__AUTH__REQUIRED: DisabledForLocalAddresses
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true

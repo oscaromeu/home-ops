@@ -19,6 +19,8 @@ spec:
             env:
               TZ: ${TZ}
               PROWLARR__SERVER__PORT: &port 9696
+              PROWLARR__AUTH__METHOD: External
+              PROWLARR__AUTH__REQUIRED: DisabledForLocalAddresses
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true

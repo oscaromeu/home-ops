@@ -19,6 +19,8 @@ spec:
             env:
               TZ: ${TZ}
               SONARR__SERVER__PORT: &port 8989
+              SONARR__AUTH__METHOD: External
+              SONARR__AUTH__REQUIRED: DisabledForLocalAddresses
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
