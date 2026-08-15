@@ -72,8 +72,6 @@ spec:
     persistence:
       config:
         existingClaim: "{{ .Release.Name }}-config"
-      # Un único mount de Library: descargas e importación comparten
-      # filesystem y las importaciones son hardlinks instantáneos (TRaSH)
       library:
         type: nfs
         server: ${NAS_SERVER_IP}

@@ -58,8 +58,6 @@ spec:
     persistence:
       config:
         existingClaim: "{{ .Release.Name }}-config"
-      # Mismo path /library que sonarr/radarr: bazarr lee las rutas de sus
-      # bases de datos y deben coincidir
       library:
         type: nfs
         server: ${NAS_SERVER_IP}
