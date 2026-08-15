@@ -1,10 +1,5 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
-#
-# v0 / hack: 1 Deployment por streamer. El worker corre dentro de un wrapper
-# while-true que reintenta cada 30s si streamlink sale (offline o stream end).
-# Se borrará cuando el operator de HO-38 esté listo.
-
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -45,7 +40,7 @@ spec:
               ICECAST_URL: &icecastUrl http://icecast.default.svc.cluster.local:8000
               QUALITY: &quality audio_only
               ENCODE_MODE: &encodeMode copy
-              BITRATE: &bitrate "320k"  # ignorado mientras ENCODE_MODE=copy; valor sane para cuando se cambie
+              BITRATE: &bitrate "320k"
               ICECAST_PASS: &icecastPass
                 valueFrom:
                   secretKeyRef:
