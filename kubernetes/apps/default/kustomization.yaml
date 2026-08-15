@@ -17,6 +17,7 @@ resources:
   - ./excalidraw/ks.yaml
   - ./feishin/ks.yaml
   - ./filebrowser/ks.yaml
+  - ./flaresolverr/ks.yaml
   - ./icecast/ks.yaml
   - ./jellyfin/ks.yaml
   - ./jellyseerr/ks.yaml

@@ -1,0 +1,34 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/common-4.4.0/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: flaresolverr
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: flaresolverr
+  values:
+    controllers:
+      flaresolverr:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/flaresolverr/flaresolverr
+              tag: v3.5.0@sha256:139dfee1c6f89249c8d665d1333a42e8ec74ec0a86bc6bb1c8461e10d3a66a47
+            env:
+              TZ: ${TZ}
+              LOG_LEVEL: info
+              PORT: &port 8191
+            resources:
+              requests:
+                cpu: 50m
+                memory: 256Mi
+              limits:
+                memory: 1Gi
+    service:
+      app:
+        controller: flaresolverr
+        ports:
+          http:
+            port: *port
