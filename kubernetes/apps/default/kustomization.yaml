@@ -9,6 +9,7 @@ components:
 resources:
   - ./namespace.yaml
   - ./atuin/ks.yaml
+  - ./bazarr/ks.yaml
   - ./canary/ks.yaml
   - ./copyparty/ks.yaml
   - ./docmost/ks.yaml
@@ -18,6 +19,7 @@ resources:
   - ./filebrowser/ks.yaml
   - ./icecast/ks.yaml
   - ./jellyfin/ks.yaml
+  - ./jellyseerr/ks.yaml
   - ./kavita/ks.yaml
   - ./linkding/ks.yaml
   - ./metube/ks.yaml
@@ -25,6 +27,10 @@ resources:
   - ./outline/ks.yaml
   - ./pinchflat/ks.yaml
   - ./podinfo/ks.yaml
+  - ./prowlarr/ks.yaml
+  - ./qbittorrent/ks.yaml
+  - ./radarr/ks.yaml
+  - ./sonarr/ks.yaml
   - ./srs/ks.yaml
   - ./syncthing/ks.yaml
   - ./twitch-radios/ks.yaml

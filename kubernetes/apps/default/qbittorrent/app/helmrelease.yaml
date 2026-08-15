@@ -1,0 +1,76 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/common-4.4.0/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: qbittorrent
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: qbittorrent
+  values:
+    controllers:
+      qbittorrent:
+        containers:
+          # Cuando haya VPN: añadir aquí un container gluetun (sidecar) con
+          # las credenciales WireGuard en un secret SOPS, y qBittorrent
+          # saldrá por el túnel al compartir network namespace del pod.
+          app:
+            image:
+              repository: ghcr.io/home-operations/qbittorrent
+              tag: 5.2.3@sha256:4fcf15b7f265c2c8d7bc2a7e13240a07e0593c326f3cf3b5b9bb69eec5b79299
+            env:
+              TZ: ${TZ}
+              QBT_WEBUI_PORT: &port 8080
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 100m
+                memory: 512Mi
+              limits:
+                memory: 4Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups:
+          - 44
+          - 65537
+    service:
+      app:
+        controller: qbittorrent
+        ports:
+          http:
+            port: *port
+    route:
+      app:
+        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+    persistence:
+      config:
+        existingClaim: "{{ .Release.Name }}-config"
+      # Descarga en Library/Downloads/torrents; sonarr/radarr importan por
+      # hardlink hacia Library/Media (mismo mount, ver sus helmrelease)
+      library:
+        type: nfs
+        server: ${NAS_SERVER_IP}
+        path: ${NAS_SERVER_MEDIA_PATH}/Library
+        globalMounts:
+          - path: /library
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp

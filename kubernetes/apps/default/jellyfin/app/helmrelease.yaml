@@ -99,3 +99,18 @@ spec:
         globalMounts:
           - path: /videos
             readOnly: true
+      # Bibliotecas gestionadas por radarr/sonarr (stack *arr)
+      movies:
+        type: nfs
+        server: ${NAS_SERVER_IP}
+        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Movies
+        globalMounts:
+          - path: /movies
+            readOnly: true
+      series:
+        type: nfs
+        server: ${NAS_SERVER_IP}
+        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Series
+        globalMounts:
+          - path: /series
+            readOnly: true
