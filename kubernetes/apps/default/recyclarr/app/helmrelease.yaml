@@ -63,9 +63,14 @@ spec:
                 custom_format_groups:
                   add:
                     - trash_id: 158188097a58d7687dee647e04af0da3 # Golden Rule HD
+                      exclude:
+                        - 47435ece6b99a0b477caf360e79ba0bb # x265 (HD)
                     - trash_id: 74aff4168620ed49dcc67e92b2c2a5b4 # Language Profiles
                     - trash_id: 85fae4a2294965b75710ef2989c850eb # Streaming Services HD/UHD boost
                     - trash_id: 59c3af66780d08332fdc64e68297098f # Unwanted Formats
+                      exclude:
+                        - 9c11cd3f07101cdba90a2d81cf0e56b4 # LQ
+                        - e2315f990da2e2cbfc9fa5b7a6fcfe48 # LQ (Release Title)
             radarr:
               movies:
                 base_url: http://radarr.default.svc.cluster.local:7878
@@ -80,7 +85,12 @@ spec:
                 custom_format_groups:
                   add:
                     - trash_id: f8bf8eab4617f12dfdbd16303d8da245 # Golden Rule HD
+                      exclude:
+                        - dc98083864ea246d05a42df0d05f81cc # x265 (HD)
                     - trash_id: a3ac6af01d78e4f21fcb75f601ac96df # Unwanted Formats
+                      exclude:
+                        - 90a6f9a284dff5103f6346090e6280c8 # LQ
+                        - e204b80c87be9497a8a6eaff48f72905 # LQ (Release Title)
     persistence:
       config:
         type: emptyDir
