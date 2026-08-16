@@ -1,0 +1,100 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/common-4.4.0/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: tdarr
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: tdarr
+  values:
+    controllers:
+      tdarr:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/haveagitgat/tdarr
+              tag: 2.86.01@sha256:45742f00e51a58553844c8b13d97e7ae9b2ee9a056bd8e5993d9a8282a45a23f
+            env:
+              TZ: ${TZ}
+              PUID: 1000
+              PGID: 1000
+              UMASK_SET: "002"
+              serverIP: 0.0.0.0
+              serverPort: &serverPort 8266
+              webUIPort: &webPort 8265
+              internalNode: "false"
+              inContainer: "true"
+              ffmpegVersion: "6"
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: *webPort
+                  initialDelaySeconds: 30
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  failureThreshold: 5
+              readiness: *probes
+            resources:
+              requests:
+                cpu: 50m
+                memory: 512Mi
+              limits:
+                memory: 2Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups:
+          - 44
+          - 65537
+    service:
+      app:
+        controller: tdarr
+        type: LoadBalancer
+        annotations:
+          io.cilium/lb-ipam-ips: 10.69.1.127
+        ports:
+          http:
+            port: *webPort
+          server:
+            port: *serverPort
+    route:
+      app:
+        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *webPort
+    persistence:
+      server:
+        existingClaim: tdarr-config
+        globalMounts:
+          - path: /app/server
+            subPath: server
+          - path: /app/configs
+            subPath: configs
+          - path: /app/logs
+            subPath: logs
+      library:
+        type: nfs
+        server: ${NAS_SERVER_IP}
+        path: ${NAS_SERVER_MEDIA_PATH}/Library
+        globalMounts:
+          - path: /library
+      transcode:
+        type: emptyDir
+        globalMounts:
+          - path: /temp
