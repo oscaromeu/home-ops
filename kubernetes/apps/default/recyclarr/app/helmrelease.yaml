@@ -54,8 +54,6 @@ spec:
               series:
                 base_url: http://sonarr.default.svc.cluster.local:8989
                 api_key: !env_var SONARR_API_KEY
-                quality_definition:
-                  type: series
                 quality_profiles:
                   - trash_id: 72dae194fc92bf828f32cde7744e51a1 # WEB-1080p
                     reset_unmatched_scores:
@@ -75,9 +73,6 @@ spec:
               movies:
                 base_url: http://radarr.default.svc.cluster.local:7878
                 api_key: !env_var RADARR_API_KEY
-                quality_definition:
-                  type: movie
-                  preferred_ratio: 0.3
                 quality_profiles:
                   - trash_id: d1d67249d3890e49bc12e275d989a7e9 # HD Bluray + WEB
                     reset_unmatched_scores:
