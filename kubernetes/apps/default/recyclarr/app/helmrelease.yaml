@@ -54,8 +54,18 @@ spec:
               series:
                 base_url: http://sonarr.default.svc.cluster.local:8989
                 api_key: !env_var SONARR_API_KEY
-                include:
-                  - template: web-1080p
+                quality_definition:
+                  type: series
+                quality_profiles:
+                  - trash_id: 72dae194fc92bf828f32cde7744e51a1 # WEB-1080p
+                    reset_unmatched_scores:
+                      enabled: true
+                custom_format_groups:
+                  add:
+                    - trash_id: 158188097a58d7687dee647e04af0da3 # Golden Rule HD
+                    - trash_id: 74aff4168620ed49dcc67e92b2c2a5b4 # Language Profiles
+                    - trash_id: 85fae4a2294965b75710ef2989c850eb # Streaming Services HD/UHD boost
+                    - trash_id: 59c3af66780d08332fdc64e68297098f # Unwanted Formats
             radarr:
               movies:
                 base_url: http://radarr.default.svc.cluster.local:7878
@@ -63,8 +73,14 @@ spec:
                 quality_definition:
                   type: movie
                   preferred_ratio: 0.3
-                include:
-                  - template: hd-bluray-web
+                quality_profiles:
+                  - trash_id: d1d67249d3890e49bc12e275d989a7e9 # HD Bluray + WEB
+                    reset_unmatched_scores:
+                      enabled: true
+                custom_format_groups:
+                  add:
+                    - trash_id: f8bf8eab4617f12dfdbd16303d8da245 # Golden Rule HD
+                    - trash_id: a3ac6af01d78e4f21fcb75f601ac96df # Unwanted Formats
     persistence:
       config:
         type: emptyDir
