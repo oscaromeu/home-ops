@@ -62,6 +62,9 @@ spec:
               movies:
                 base_url: http://radarr.default.svc.cluster.local:7878
                 api_key: !env_var RADARR_API_KEY
+                quality_definition:
+                  type: movie
+                  preferred_ratio: 0.3
                 include:
                   - template: radarr-quality-definition-movie
                   - template: radarr-quality-profile-hd-bluray-web
