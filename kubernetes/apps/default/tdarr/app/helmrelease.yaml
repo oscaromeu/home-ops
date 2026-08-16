@@ -88,12 +88,18 @@ spec:
             subPath: configs
           - path: /app/logs
             subPath: logs
-      library:
+      movies:
         type: nfs
         server: ${NAS_SERVER_IP}
-        path: ${NAS_SERVER_MEDIA_PATH}/Library
+        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Movies
         globalMounts:
-          - path: /library
+          - path: /library/movies
+      series:
+        type: nfs
+        server: ${NAS_SERVER_IP}
+        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Series
+        globalMounts:
+          - path: /library/series
       transcode:
         type: emptyDir
         globalMounts:
