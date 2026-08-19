@@ -1,0 +1,29 @@
+---
+# Public server certificate of the UniFi controller (10.69.1.1), self-signed.
+# Not a secret — used only to validate the backend TLS connection.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: unifi-ca
+data:
+  ca.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIDNTCCAh2gAwIBAgIJGjpZ4DZf37LNMA0GCSqGSIb3DQEBCwUAMBYxFDASBgNV
+    BAMTC3VuaWZpLmxvY2FsMB4XDTI2MDQyMzIyMDAwMFoXDTI4MDcyNjIyMDAwMFow
+    FjEUMBIGA1UEAxMLdW5pZmkubG9jYWwwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAw
+    ggEKAoIBAQC8zL8u0dxF1NpyRpL/3gZ+93a0BgMGmCEqU8NBK8o+zfjJc7kSDQ8k
+    6PPv4FCTmoeT3Rj5KFJhwRC5ko94jjo/4tGLxBOy89JzwwXooXhCRKG6feJBxbA3
+    U+L7z+FKQAk23uC0SP+abd/yng2zQHBrU1CEr2Q/2nuiN7LRHKYfKxgM/SjBa1ig
+    eIRyWl24HGJCSNd5UEfycr0B0fvoVP5TEAGEaMd7FmJfANg0wnG7mAXvT1wfx/vS
+    fkfiV4ZCJvJmf7MSBY1dSTI3tROS+O54IXt7SKYc4heDSO4022q2j0wU0qH3yYiE
+    x0WVDHCNU9TvnqJye3i9Rdkqtl9XBtLvAgMBAAGjgYUwgYIwCwYDVR0PBAQDAgL0
+    MDEGA1UdJQQqMCgGCCsGAQUFBwMBBggrBgEFBQcDAgYIKwYBBQUHAwMGCCsGAQUF
+    BwMIMEAGA1UdEQQ5MDeCC3VuaWZpLmxvY2Fsgglsb2NhbGhvc3SCBVs6OjFdhwR/
+    AAABhxD+gAAAAAAAAAAAAAAAAAABMA0GCSqGSIb3DQEBCwUAA4IBAQCIKBfFgm0H
+    0FNTHq15a4yz0JyZwJyeK6JbpJck4zB4h0aXzx2WnSJmQSufdnA3oVAkRm/GdjpD
+    xS8tYdXaiF/wG9fXbY5pcGfEaoDJyqeHtYoLrxnfbCdmu5mYoWGgzkuQOXKghMYw
+    R+rOFPKo2NikicgflvmHdIsSyJADA9i7l5cigWbi8D7i3Dm2eoF1m+FalVH0Wr+g
+    Pk7FlMSt4oGjl3klE1xh5kcJSyo/OVeEHpajAWcYzobvi14CTg/QW0UsowYTkRJv
+    M/kF9xSsiI6kzE5y94h1fxaLRAOcPoaoa1SfWcHnEvFAp9xAxREpHPhMYTUcW52v
+    upnX9ucFAF/r
+    -----END CERTIFICATE-----
