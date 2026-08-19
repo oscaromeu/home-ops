@@ -11,3 +11,4 @@ resources:
   - ./flux-instance/ks.yaml
   - ./flux-operator/ks.yaml
   - ./podinfo-github-auth/ks.yaml
+  - ./podinfo-gitlab-auth/ks.yaml
