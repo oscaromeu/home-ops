@@ -1,0 +1,24 @@
+---
+# External service: proxies to the UniFi controller running outside the cluster.
+# Restored from git history (removed in 95fe482c5 during the Talos migration).
+apiVersion: v1
+kind: Service
+metadata:
+  name: unifi
+spec:
+  ports:
+    - name: https
+      port: 443
+      protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: unifi
+subsets:
+  - addresses:
+      - ip: 10.69.1.1
+    ports:
+      - name: https
+        port: 443
+        protocol: TCP
