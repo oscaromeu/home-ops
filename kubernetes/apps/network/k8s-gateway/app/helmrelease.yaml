@@ -18,3 +18,24 @@ spec:
         lbipam.cilium.io/ips: "10.69.1.120"
       externalTrafficPolicy: Cluster
     watchedResources: ["HTTPRoute", "Service"]
+    # Names this zone does not serve fall through instead of answering NXDOMAIN,
+    # so public records of the domain resolve from inside the LAN too.
+    fallthrough:
+      enabled: true
+    # The chart default forwards to /etc/resolv.conf, which reaches the LAN
+    # resolver, and that delegates this zone straight back here. Going to a
+    # public resolver is what keeps the fallthrough from looping.
+    extraZonePlugins:
+      - name: log
+      - name: errors
+      - name: health
+        configBlock: |-
+          lameduck 5s
+      - name: ready
+      - name: prometheus
+        parameters: 0.0.0.0:9153
+      - name: forward
+        parameters: . 1.1.1.1 1.0.0.1
+      - name: loop
+      - name: reload
+      - name: loadbalance
