@@ -1,0 +1,13 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: zot
+spec:
+  dependsOn:
+    - name: onepassword
+      namespace: external-secrets
+    - name: envoy-gateway
+      namespace: network
+  path: ./kubernetes/apps/default/zot/app
+  targetNamespace: default

@@ -1,0 +1,175 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app zot
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: zot
+  values:
+    controllers:
+      zot:
+        replicas: 1
+        strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/project-zot/zot
+              tag: v2.1.20
+            probes:
+              # After a restart zot rescans the whole store before serving;
+              # give it room instead of letting the kubelet kill it.
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /v2/
+                    port: 5000
+                  failureThreshold: 60
+                  periodSeconds: 5
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+            resources:
+              requests:
+                cpu: 25m
+                memory: 256Mi
+              limits:
+                memory: 1Gi
+
+    service:
+      app:
+        ports:
+          http:
+            port: &port 5000
+
+    serviceMonitor:
+      app:
+        endpoints:
+          - port: http
+
+    route:
+      app:
+        hostnames: ["zot.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+
+    configMaps:
+      config:
+        data:
+          config.json: |
+            {
+              "storage": {
+                "rootDirectory": "/var/lib/registry",
+                "dedupe": true,
+                "gc": true,
+                "gcDelay": "1h",
+                "gcInterval": "24h",
+                "retention": {
+                  "dryRun": false,
+                  "delay": "24h",
+                  "policies": [
+                    {
+                      "repositories": ["**"],
+                      "deleteReferrers": true,
+                      "deleteUntagged": true,
+                      "keepTags": [
+                        {
+                          "mostRecentlyPushedCount": 3,
+                          "mostRecentlyPulledCount": 3,
+                          "pulledWithin": "168h",
+                          "pushedWithin": "168h"
+                        },
+                        {
+                          "mostRecentlyPushedCount": 5,
+                          "mostRecentlyPulledCount": 5
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "http": {
+                "address": "0.0.0.0",
+                "port": "5000",
+                "auth": {
+                  "htpasswd": { "path": "/etc/zot/htpasswd" },
+                  "failDelay": 1
+                },
+                "accessControl": {
+                  "repositories": {
+                    "**": { "anonymousPolicy": ["read"], "defaultPolicy": [] }
+                  },
+                  "adminPolicy": {
+                    "users": ["oscar"],
+                    "actions": ["read", "create", "update", "delete"]
+                  }
+                }
+              },
+              "log": { "level": "info" },
+              "extensions": {
+                "ui": { "enable": true },
+                "search": { "enable": true },
+                "scrub": { "enable": true, "interval": "24h" },
+                "metrics": { "enable": true, "prometheus": { "path": "/metrics" } },
+                "sync": {
+                  "enable": true,
+                  "registries": [
+                    {
+                      "urls": ["https://index.docker.io"],
+                      "content": [{ "prefix": "**", "destination": "/docker.io" }],
+                      "onDemand": true,
+                      "tlsVerify": true
+                    },
+                    {
+                      "urls": ["https://ghcr.io"],
+                      "content": [{ "prefix": "**", "destination": "/ghcr.io" }],
+                      "onDemand": true,
+                      "tlsVerify": true
+                    },
+                    {
+                      "urls": ["https://quay.io"],
+                      "content": [{ "prefix": "**", "destination": "/quay.io" }],
+                      "onDemand": true,
+                      "tlsVerify": true
+                    },
+                    {
+                      "urls": ["https://registry.k8s.io"],
+                      "content": [{ "prefix": "**", "destination": "/registry.k8s.io" }],
+                      "onDemand": true,
+                      "tlsVerify": true
+                    }
+                  ]
+                }
+              }
+            }
+
+    persistence:
+      config:
+        type: configMap
+        name: *app
+        globalMounts:
+          - path: /etc/zot/config.json
+            subPath: config.json
+      auth:
+        type: secret
+        name: zot-secret
+        globalMounts:
+          - path: /etc/zot/htpasswd
+            subPath: htpasswd
+      data:
+        existingClaim: *app
+        globalMounts:
+          - path: /var/lib/registry

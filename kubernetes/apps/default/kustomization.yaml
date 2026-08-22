@@ -39,3 +39,4 @@ resources:
   - ./twitch-radios/ks.yaml
   - ./unifi/ks.yaml
   - ./vikunja/ks.yaml
+  - ./zot/ks.yaml
