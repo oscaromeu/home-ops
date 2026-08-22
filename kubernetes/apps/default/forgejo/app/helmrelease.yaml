@@ -1,0 +1,123 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: forgejo
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: forgejo
+  values:
+    strategy:
+      type: Recreate
+
+    image:
+      rootless: true
+
+    service:
+      ssh:
+        port: 22
+
+    httpRoute:
+      enabled: true
+      hostnames: ["git.${SECRET_DOMAIN}"]
+      parentRefs:
+        - name: envoy-internal
+          namespace: network
+          sectionName: https
+
+    tcpRoute:
+      enabled: true
+      parentRefs:
+        - name: envoy-internal
+          namespace: network
+          sectionName: ssh
+
+    persistence:
+      enabled: true
+      create: false
+      claimName: forgejo
+
+    resources:
+      requests:
+        cpu: 50m
+        memory: 512Mi
+      limits:
+        memory: 2Gi
+
+    gitea:
+      admin:
+        existingSecret: forgejo-admin-secret
+        email: oscaromeu@gmail.com
+
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+
+      additionalConfigFromEnvs:
+        - name: GITEA__DATABASE__HOST
+          valueFrom:
+            secretKeyRef:
+              name: forgejo-db-secret
+              key: host
+        - name: GITEA__DATABASE__NAME
+          valueFrom:
+            secretKeyRef:
+              name: forgejo-db-secret
+              key: dbname
+        - name: GITEA__DATABASE__USER
+          valueFrom:
+            secretKeyRef:
+              name: forgejo-db-secret
+              key: user
+        - name: GITEA__DATABASE__PASSWD
+          valueFrom:
+            secretKeyRef:
+              name: forgejo-db-secret
+              key: password
+        - name: GITEA__SECURITY__SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: forgejo-secret-key
+              key: SECRET_KEY
+        - name: GITEA__SECURITY__INTERNAL_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: forgejo-internal-token
+              key: INTERNAL_TOKEN
+
+      config:
+        database:
+          DB_TYPE: postgres
+          SSL_MODE: disable
+        server:
+          DOMAIN: git.${SECRET_DOMAIN}
+          ROOT_URL: https://git.${SECRET_DOMAIN}
+          SSH_DOMAIN: git.${SECRET_DOMAIN}
+          SSH_PORT: 22
+          START_SSH_SERVER: true
+        cache:
+          ADAPTER: redis
+          HOST: &valkey redis://valkey.databases.svc.cluster.local:6379/3
+        queue:
+          TYPE: redis
+          CONN_STR: *valkey
+        session:
+          PROVIDER: redis
+          PROVIDER_CONFIG: *valkey
+        service:
+          DISABLE_REGISTRATION: true
+        security:
+          REVERSE_PROXY_TRUSTED_PROXIES: 10.42.0.0/16
+
+    # Bundled HA dependencies, replaced by crunchy-pg and valkey.
+    valkey-cluster:
+      enabled: false
+    redis-cluster:
+      enabled: false
+    postgresql:
+      enabled: false
+    postgresql-ha:
+      enabled: false

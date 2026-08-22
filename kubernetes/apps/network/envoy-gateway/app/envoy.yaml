@@ -112,6 +112,14 @@ spec:
           from: All
         kinds:
           - kind: TCPRoute
+    - name: ssh
+      protocol: TCP
+      port: 22
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: TCPRoute
     - name: webrtc
       protocol: UDP
       port: 8000
