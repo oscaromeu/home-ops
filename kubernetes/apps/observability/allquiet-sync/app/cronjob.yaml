@@ -16,7 +16,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: allquiet-sync
-              image: ghcr.io/oscaromeu/allquiet-sync:rolling
+              image: ghcr.io/oscaromeu/allquiet-sync:rolling@sha256:7da7f547f0752db9ab9d056ba182925c4b371dc914dfde60a911b84a79b421fd
               args:
                 - --team-ids=536aa038-50e6-463b-aee6-389023206a9d
                 - --env=homelab
