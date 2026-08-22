@@ -37,10 +37,12 @@ spec:
               fallthrough in-addr.arpa ip6.arpa
           - name: autopath
             parameters: "@kubernetes"
+          # One forward with two upstreams, not two forward blocks: the plugin
+          # health-checks and rotates between them, which is real failover.
+          # Repeating forward for the same zone is outside what it documents,
+          # so the second block was never a fallback.
           - name: forward
-            parameters: . 10.69.1.32
-          - name: forward
-            parameters: . /etc/resolv.conf
+            parameters: . 10.69.1.32 1.1.1.1
           - name: cache
             configBlock: |-
               prefetch 20
