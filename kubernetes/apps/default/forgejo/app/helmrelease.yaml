@@ -8,6 +8,23 @@ spec:
   chartRef:
     kind: OCIRepository
     name: forgejo
+  # The chart has no hook for extra init containers, and init-db must run
+  # before configure-gitea or the migration deadlocks on permissions.
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: Deployment
+              name: forgejo
+            patch: |
+              - op: add
+                path: /spec/template/spec/initContainers/0
+                value:
+                  name: init-db
+                  image: ghcr.io/home-operations/postgres-init:18.6@sha256:b6d3af974df781c673d37e49bdddfa14a6f5be28b18d2cb7713f0449bea4057b
+                  envFrom:
+                    - secretRef:
+                        name: forgejo-db-secret
   values:
     strategy:
       type: Recreate
