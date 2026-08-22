@@ -1,0 +1,176 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: arr-config
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: arr-config
+  values:
+    controllers:
+      arr-config:
+        type: cronjob
+        cronjob:
+          schedule: 30 5 * * *
+          successfulJobsHistory: 1
+          failedJobsHistory: 1
+          concurrencyPolicy: Forbid
+        containers:
+          app:
+            image:
+              repository: docker.io/library/python
+              tag: 3.13-alpine@sha256:540c7d91f98ff6880174c40e99067bf5941eb54d818a7a5e094d188b196a934d
+            command: ["python3", "/config/apply.py"]
+            env:
+              TZ: ${TZ}
+              RADARR_URL: http://radarr.default.svc.cluster.local:7878
+              SONARR_URL: http://sonarr.default.svc.cluster.local:8989
+            envFrom:
+              - secretRef:
+                  name: recyclarr
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 128Mi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+
+    configMaps:
+      config:
+        data:
+          apply.py: |
+            """Castellano custom format and quality profile for Radarr and Sonarr.
+
+            What TRaSH does not cover (no Spanish CFs in the guides) and recyclarr
+            cannot define (trash_ids only) lives here instead. Idempotent.
+            """
+
+            import json
+            import os
+            import urllib.request
+
+            CF_NAME = "Castellano"
+            PROFILE_NAME = "Castellano"
+            SCORE = 10000
+            QUALITIES = ["HDTV-1080p", "WEBRip-1080p", "WEBDL-1080p", "Bluray-1080p"]
+            CUTOFF = "Bluray-1080p"
+
+            # All three must hold: spanish audio named, and neither latino nor VOSE.
+            SPECIFICATIONS = [
+                {
+                    "name": "Castellano en el titulo",
+                    "implementation": "ReleaseTitleSpecification",
+                    "negate": False,
+                    "required": True,
+                    "fields": [{"name": "value", "value": "(?i)\\b(castellano|español|espanol|spanish|esp)\\b"}],
+                },
+                {
+                    "name": "Sin latino",
+                    "implementation": "ReleaseTitleSpecification",
+                    "negate": True,
+                    "required": True,
+                    "fields": [{"name": "value", "value": "(?i)\\b(latino|lat)\\b"}],
+                },
+                {
+                    "name": "Sin VOSE",
+                    "implementation": "ReleaseTitleSpecification",
+                    "negate": True,
+                    "required": True,
+                    "fields": [{"name": "value", "value": "(?i)\\bvose?\\b"}],
+                },
+            ]
+
+
+            def api(base, key, method, path, body=None):
+                data = json.dumps(body).encode() if body is not None else None
+                req = urllib.request.Request(
+                    f"{base}/api/v3/{path}",
+                    data=data,
+                    method=method,
+                    headers={"X-Api-Key": key, "Content-Type": "application/json"},
+                )
+                with urllib.request.urlopen(req, timeout=30) as resp:
+                    raw = resp.read()
+                return json.loads(raw) if raw else None
+
+
+            def ensure_custom_format(base, key):
+                payload = {
+                    "name": CF_NAME,
+                    "includeCustomFormatWhenRenaming": False,
+                    "specifications": SPECIFICATIONS,
+                }
+                cfs = api(base, key, "GET", "customformat")
+                existing = next((c for c in cfs if c["name"] == CF_NAME), None)
+                if existing:
+                    payload["id"] = existing["id"]
+                    api(base, key, "PUT", f"customformat/{existing['id']}", payload)
+                    return "updated"
+                api(base, key, "POST", "customformat", payload)
+                return "created"
+
+
+            def item_names(item):
+                if item.get("quality"):
+                    return [item["quality"]["name"]]
+                return [i["quality"]["name"] for i in item.get("items", [])]
+
+
+            def ensure_profile(base, key):
+                profiles = api(base, key, "GET", "qualityprofile")
+                existing = next((p for p in profiles if p["name"] == PROFILE_NAME), None)
+                if existing:
+                    existing["minFormatScore"] = SCORE
+                    existing["cutoffFormatScore"] = SCORE
+                    for fi in existing["formatItems"]:
+                        if fi["name"] == CF_NAME:
+                            fi["score"] = SCORE
+                    api(base, key, "PUT", f"qualityprofile/{existing['id']}", existing)
+                    return "updated"
+
+                profile = api(base, key, "GET", "qualityprofile/schema")
+                profile["name"] = PROFILE_NAME
+                profile["upgradeAllowed"] = True
+                profile["minFormatScore"] = SCORE
+                profile["cutoffFormatScore"] = SCORE
+                for item in profile["items"]:
+                    item["allowed"] = any(n in QUALITIES for n in item_names(item))
+                    for sub in item.get("items", []):
+                        sub["allowed"] = sub["quality"]["name"] in QUALITIES
+                    if CUTOFF in item_names(item):
+                        profile["cutoff"] = item["quality"]["id"] if item.get("quality") else item["id"]
+                for fi in profile["formatItems"]:
+                    if fi["name"] == CF_NAME:
+                        fi["score"] = SCORE
+                api(base, key, "POST", "qualityprofile", profile)
+                return "created"
+
+
+            def main():
+                for app in ("RADARR", "SONARR"):
+                    base = os.environ[f"{app}_URL"]
+                    key = os.environ[f"{app}_API_KEY"]
+                    print(f"{app.lower()}: custom format {ensure_custom_format(base, key)}", flush=True)
+                    print(f"{app.lower()}: quality profile {ensure_profile(base, key)}", flush=True)
+
+
+            main()
+
+    persistence:
+      config:
+        type: configMap
+        name: arr-config
+        globalMounts:
+          - path: /config/apply.py
+            subPath: apply.py

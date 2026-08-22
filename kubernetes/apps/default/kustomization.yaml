@@ -8,6 +8,7 @@ components:
 
 resources:
   - ./namespace.yaml
+  - ./arr-config/ks.yaml
   - ./atuin/ks.yaml
   - ./bazarr/ks.yaml
   - ./canary/ks.yaml
