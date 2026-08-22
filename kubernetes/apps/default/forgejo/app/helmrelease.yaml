@@ -25,6 +25,23 @@ spec:
                   envFrom:
                     - secretRef:
                         name: forgejo-db-secret
+              # postgres-init only GRANTs; on PG15+ the app must own its
+              # database (crunchy creates it owned by postgres) or the
+              # public schema rejects CREATE.
+              - op: add
+                path: /spec/template/spec/initContainers/1
+                value:
+                  name: init-db-owner
+                  image: ghcr.io/home-operations/postgres-init:18.6@sha256:b6d3af974df781c673d37e49bdddfa14a6f5be28b18d2cb7713f0449bea4057b
+                  command: ["/bin/sh", "-c"]
+                  args:
+                    - >-
+                      PGPASSWORD="$INIT_POSTGRES_SUPER_PASS"
+                      psql -h "$INIT_POSTGRES_HOST" -U postgres -d "$INIT_POSTGRES_DBNAME"
+                      -c "ALTER DATABASE $INIT_POSTGRES_DBNAME OWNER TO $INIT_POSTGRES_USER"
+                  envFrom:
+                    - secretRef:
+                        name: forgejo-db-secret
   values:
     strategy:
       type: Recreate
