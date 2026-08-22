@@ -143,6 +143,9 @@ spec:
           PROVIDER_CONFIG: *valkey
         service:
           DISABLE_REGISTRATION: true
+        i18n:
+          LANGS: en-US
+          NAMES: English
         security:
           REVERSE_PROXY_TRUSTED_PROXIES: 10.42.0.0/16
 
