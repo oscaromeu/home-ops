@@ -1,0 +1,34 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: forgejo-work-ops-config
+  namespace: develop
+spec:
+  dependsOn:
+    - name: forgejo-work-ops-secrets
+  interval: 5m
+  path: ./kubernetes/apps/develop/work-ops/config
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: forgejo-work-ops-auth
+    namespace: develop
+  targetNamespace: develop
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: forgejo-work-ops-secrets
+  namespace: develop
+spec:
+  interval: 5m
+  path: ./podinfo
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: forgejo-work-ops-auth
+    namespace: develop
+  targetNamespace: develop

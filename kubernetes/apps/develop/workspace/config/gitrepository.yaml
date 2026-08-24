@@ -3,12 +3,12 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
-  name: podinfo-github
+  name: forgejo-workspace
   namespace: flux-system
 spec:
   interval: 5m
   ref:
     branch: main
   secretRef:
-    name: podinfo-github-auth
-  url: ssh://git@github.com/oscaromeu/podinfo-github.git
+    name: forgejo-workspace-auth
+  url: ssh://git@git.oscaromeu.io/oscar/work-ops.git
