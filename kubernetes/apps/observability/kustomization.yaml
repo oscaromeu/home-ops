@@ -9,7 +9,6 @@ components:
 resources:
   - ./namespace.yaml
   - ./alert-history/ks.yaml
-  - ./allquiet-sync/ks.yaml
   - ./ch-ui/ks.yaml
   - ./exporters/pushgateway/ks.yaml
   - ./fastapi/ks.yaml
