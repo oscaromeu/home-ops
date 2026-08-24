@@ -27,7 +27,7 @@ spec:
               requests:
                 cpu: 10m
               limits:
-                memory: 32Mi
+                memory: 200Mi
             restartPolicy: Always
           gatus-sidecar-internal:
             image:
