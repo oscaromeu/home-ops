@@ -11,7 +11,6 @@ resources:
   - ./arr-config/ks.yaml
   - ./atuin/ks.yaml
   - ./bazarr/ks.yaml
-  - ./canary/ks.yaml
   - ./copyparty/ks.yaml
   - ./docmost/ks.yaml
   - ./echo/ks.yaml
