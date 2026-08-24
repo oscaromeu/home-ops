@@ -19,7 +19,7 @@ spec:
           app:
             image:
               repository: ghcr.io/project-zot/zot
-              tag: v2.1.20
+              tag: v2.1.20@sha256:542e25be4d32e7879c0cfad93492a93c81b1e059cbd2d30d485d4bd567318234
             probes:
               # After a restart zot rescans the whole store before serving;
               # give it room instead of letting the kubelet kill it.
