@@ -1,29 +1,4 @@
 ---
-connectivity:
-  checker:
-    interval: 1m
-    target: 1.1.1.1:53
-
-endpoints:
-  - alerts:
-      - type: pushover
-    conditions:
-      - "[CONNECTED] == true"
-    group: connectivity
-    interval: 1m
-    name: Cloudflare
-    url: icmp://1.1.1.1
-
-  - alerts:
-      - type: pushover
-    conditions:
-      - "[CONNECTED] == true"
-    group: connectivity
-    interval: 1m
-    name: Google
-    url: icmp://8.8.8.8
-
-
 metrics: true
 
 storage:
