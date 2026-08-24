@@ -11,4 +11,4 @@ spec:
     branch: main
   secretRef:
     name: forgejo-workspace-auth
-  url: ssh://git@git.oscaromeu.io/oscar/work-ops.git
+  url: ssh://git@git.oscaromeu.io/oscar/workspace.git

@@ -8,4 +8,4 @@ components:
 
 resources:
   - ./namespace.yaml
-  - ./work-ops/ks.yaml
+  - ./workspace/ks.yaml

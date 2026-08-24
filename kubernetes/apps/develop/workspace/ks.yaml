@@ -3,17 +3,17 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: forgejo-work-ops-config
+  name: forgejo-workspace-config
   namespace: develop
 spec:
   dependsOn:
-    - name: forgejo-work-ops-secrets
+    - name: forgejo-workspace-secrets
   interval: 5m
-  path: ./kubernetes/apps/develop/work-ops/config
+  path: ./kubernetes/apps/develop/workspace/config
   prune: true
   sourceRef:
     kind: GitRepository
-    name: forgejo-work-ops-auth
+    name: forgejo-workspace-auth
     namespace: develop
   targetNamespace: develop
 ---
@@ -21,7 +21,7 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: forgejo-work-ops-secrets
+  name: forgejo-workspace-secrets
   namespace: develop
 spec:
   interval: 5m
@@ -29,6 +29,6 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: forgejo-work-ops-auth
+    name: forgejo-workspace-auth
     namespace: develop
   targetNamespace: develop
