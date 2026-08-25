@@ -57,7 +57,6 @@ spec:
           copyparty.conf: |
             [global]
               e2dsa
-              e2ts
               grid
               hist: /state/hist
               shr: /share
@@ -65,14 +64,30 @@ spec:
               shr-adm: oscar
               xff-src: 10.42.0.0/16
               rproxy: -1
-              mtp: .bpm=f,t30,/mtag/audio-bpm.py
-              mtp: key=f,t190,/mtag/audio-key.py
 
             [/media]
               /w/media
               accs:
                 r: *
                 A: oscar
+
+            [/media/Media/Music]
+              /w/media/Media/Music
+              accs:
+                r: *
+                A: oscar
+              flags:
+                e2ts
+                mtp: .bpm=f,t30,/mtag/audio-bpm.py
+                mtp: key=f,t190,/mtag/audio-key.py
+
+            [/media/Media/Videos]
+              /w/media/Media/Videos
+              accs:
+                r: *
+                A: oscar
+              flags:
+                e2ts
     persistence:
       config:
         type: configMap
