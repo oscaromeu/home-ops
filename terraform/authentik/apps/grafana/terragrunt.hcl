@@ -19,6 +19,8 @@ inputs = {
   launch_url  = local.grafana_url
   description = "Observability dashboards"
 
+  access_groups = ["admins", "viewers"]
+
   redirect_uris = [
     {
       matching_mode = "strict"

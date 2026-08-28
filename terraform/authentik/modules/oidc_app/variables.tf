@@ -77,3 +77,9 @@ variable "sub_mode" {
   type        = string
   default     = "hashed_user_id"
 }
+
+variable "access_groups" {
+  description = "Authentik groups allowed to access this application; users outside them are denied at authorization"
+  type        = list(string)
+  default     = ["admins"]
+}

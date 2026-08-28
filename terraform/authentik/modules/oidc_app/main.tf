@@ -72,3 +72,16 @@ resource "authentik_application" "this" {
   meta_description = var.description
   open_in_new_tab  = var.open_in_new_tab
 }
+
+data "authentik_group" "access" {
+  for_each = toset(var.access_groups)
+  name     = each.value
+}
+
+resource "authentik_policy_binding" "access" {
+  for_each = data.authentik_group.access
+
+  target = authentik_application.this.uuid
+  group  = each.value.id
+  order  = index(var.access_groups, each.key)
+}
