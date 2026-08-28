@@ -30,9 +30,6 @@ grafana.ini:
   analytics:
     check_for_updates: false
     check_for_plugin_updates: false
-  auth:
-    # Re-links the existing user to the OAuth identity by email on login.
-    oauth_allow_insecure_email_lookup: true
   auth.anonymous:
     enabled: false
     org_name: "Main Org."
