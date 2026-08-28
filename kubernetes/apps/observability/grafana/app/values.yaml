@@ -30,6 +30,9 @@ grafana.ini:
   analytics:
     check_for_updates: false
     check_for_plugin_updates: false
+  auth:
+    # Re-links the existing user to the OAuth identity by email on login.
+    oauth_allow_insecure_email_lookup: true
   auth.anonymous:
     enabled: false
     org_name: "Main Org."
@@ -46,7 +49,7 @@ grafana.ini:
     auto_login: false
     client_id: grafana
     # client_secret comes from grafana-oidc-secret (env var GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET)
-    scopes: openid profile email groups grafana_identity
+    scopes: openid profile email
     auth_url: https://auth.${SECRET_DOMAIN}/application/o/authorize/
     token_url: https://auth.${SECRET_DOMAIN}/application/o/token/
     api_url: https://auth.${SECRET_DOMAIN}/application/o/userinfo/
@@ -55,6 +58,7 @@ grafana.ini:
     email_attribute_path: email
     # Map Authentik org-wide groups → Grafana roles.
     role_attribute_path: contains(groups[*], 'admins') && 'GrafanaAdmin' || 'Viewer'
+    role_attribute_strict: true
     allow_assign_grafana_admin: true
 datasources:
   datasources.yaml:

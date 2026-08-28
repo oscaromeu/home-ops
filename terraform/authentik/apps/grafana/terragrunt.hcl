@@ -15,6 +15,7 @@ locals {
 inputs = {
   name        = "Grafana"
   slug        = "grafana"
+  sub_mode    = "user_username" # preserves existing sub mapping for Grafana users
   launch_url  = local.grafana_url
   description = "Observability dashboards"
 
@@ -25,22 +26,5 @@ inputs = {
     }
   ]
 
-  custom_scope_mappings = [
-    {
-      name       = "Grafana groups"
-      scope_name = "groups"
-      expression = "return [group.name for group in user.groups.all()]"
-    },
-    {
-      name       = "Grafana identity"
-      scope_name = "grafana_identity"
-      expression = <<-EOT
-        return {
-          "email": user.email,
-          "preferred_username": user.username,
-          "name": user.name
-        }
-      EOT
-    }
-  ]
+  custom_scope_mappings = []
 }

@@ -6,6 +6,7 @@ provider "registry.terraform.io/goauthentik/authentik" {
   constraints = "~> 2026.0"
   hashes = [
     "h1:On3/Zzv3W72aGsJ4AhW/tnpi4hvq9cxwgf7tF6Tg+a4=",
+    "h1:pum2uBRNDUjPeP9aYszm+6GU+K7tZIpbbLrsN39l8iw=",
     "zh:00c44e8ee842e75de9cc4fd6193b10258d1dc840e5be4aaaf118ffc180dceee0",
     "zh:13057f08bce3b63613e1be3997dd454ff9568c569dd983987b1550280fbe3d01",
     "zh:410a1ff2ae4647cc0ab37894f81e4d474b588a0a7f005d05d55e8c3a40978dd2",
