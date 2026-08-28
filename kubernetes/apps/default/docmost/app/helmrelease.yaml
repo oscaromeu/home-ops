@@ -58,7 +58,7 @@ spec:
       app:
         hostnames: ["notes.${SECRET_DOMAIN}"]
         parentRefs:
-          - name: envoy-external
+          - name: envoy-internal
             namespace: network
             sectionName: https
         rules:

@@ -58,7 +58,7 @@ spec:
           annotations:
             external-dns.alpha.kubernetes.io/target: auth.${SECRET_DOMAIN}
           parentRefs:
-            - name: envoy-external
+            - name: envoy-internal
               namespace: network
               sectionName: https
     worker:

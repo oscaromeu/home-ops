@@ -45,7 +45,7 @@ spec:
       app:
         hostnames: ["read.${SECRET_DOMAIN}"]
         parentRefs:
-          - name: envoy-external
+          - name: envoy-internal
             namespace: network
     persistence:
       config:
