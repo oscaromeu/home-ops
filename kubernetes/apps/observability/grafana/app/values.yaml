@@ -25,7 +25,11 @@ env:
   GF_DATABASE_TYPE: postgres
 envFromSecrets:
   - name: postgres-${postgres_cluster_version}-pguser-grafana
-  - name: grafana-oidc-secret
+envValueFrom:
+  GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET:
+    secretKeyRef:
+      name: grafana-kanidm-oauth2-credentials
+      key: CLIENT_SECRET
 grafana.ini:
   analytics:
     check_for_updates: false
@@ -40,21 +44,23 @@ grafana.ini:
     allow_embedding: true
   "auth.generic_oauth":
     enabled: true
-    name: Authentik
+    name: kanidm
     icon: signin
     allow_sign_up: true
     auto_login: false
     client_id: grafana
     # client_secret comes from grafana-oidc-secret (env var GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET)
     scopes: openid profile email
-    auth_url: https://auth.${SECRET_DOMAIN}/application/o/authorize/
-    token_url: https://auth.${SECRET_DOMAIN}/application/o/token/
-    api_url: https://auth.${SECRET_DOMAIN}/application/o/userinfo/
+    auth_url: https://idm.${SECRET_DOMAIN}/ui/oauth2
+    token_url: https://idm.${SECRET_DOMAIN}/oauth2/token
+    api_url: https://idm.${SECRET_DOMAIN}/oauth2/openid/grafana/userinfo
     use_pkce: true
     login_attribute_path: preferred_username
     email_attribute_path: email
-    # Map Authentik org-wide groups → Grafana roles.
-    role_attribute_path: contains(groups[*], 'admins') && 'GrafanaAdmin' || 'Viewer'
+    # grafana_role is a claimMap on the Kanidm OAuth2 client, projecting
+    # membership in the "admins" group to a bare "admins" value — avoids
+    # depending on Kanidm's default groups-claim format (spn vs name).
+    role_attribute_path: contains(grafana_role[*], 'admins') && 'GrafanaAdmin' || 'Viewer'
     role_attribute_strict: true
     allow_assign_grafana_admin: true
 datasources:

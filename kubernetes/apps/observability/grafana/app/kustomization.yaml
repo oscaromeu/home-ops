@@ -5,6 +5,7 @@ namespace: observability
 resources:
   - ./helmrepo.yaml
   - ./externalsecrets.yaml
+  - ./kanidmoauth2client.yaml
   - ./helmrelease.yaml
 
 configMapGenerator:
