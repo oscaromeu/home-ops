@@ -7,3 +7,5 @@ spec:
   kanidmRef:
     name: kanidm
   kanidmName: zot_users
+  members:
+    - admin-account

@@ -1,0 +1,12 @@
+---
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmPersonAccount
+metadata:
+  name: admin-account
+spec:
+  kanidmRef:
+    name: kanidm
+  personAttributes:
+    displayname: ${KANIDM_ADMIN_DISPLAYNAME}
+    mail:
+      - ${KANIDM_ADMIN_MAIL}
