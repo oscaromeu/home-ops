@@ -1,0 +1,57 @@
+---
+apiVersion: kaniop.rs/v1beta1
+kind: Kanidm
+metadata:
+  name: kanidm
+spec:
+  domain: idm.${SECRET_DOMAIN}
+  origin: https://idm.${SECRET_DOMAIN}
+  replicaGroups:
+    - name: default
+      replicas: 1
+      primaryNode: true
+      resources:
+        requests:
+          cpu: 10m
+          memory: 128Mi
+        limits:
+          memory: 512Mi
+  image: kanidm/server:1.11.1
+  logLevel: info
+  oauth2ClientNamespaceSelector: {}
+  storage:
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 2Gi
+        storageClassName: openebs-hostpath
+  tlsSecretName: idm-${SECRET_DOMAIN/./-}-tls
+  securityContext:
+    fsGroup: 2000
+    fsGroupChangePolicy: OnRootMismatch
+    runAsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 2000
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+    - name: kanidm
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+  gateway:
+    parentRefs:
+      - name: envoy-internal
+        namespace: network
+        sectionName: https
+    hostnames:
+      - idm.${SECRET_DOMAIN}
+    backendTlsPolicy:
+      validation:
+        hostname: idm.${SECRET_DOMAIN}
+        wellKnownCaCertificates: System

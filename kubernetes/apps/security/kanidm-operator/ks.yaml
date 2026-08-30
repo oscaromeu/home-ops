@@ -1,0 +1,48 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: kanidm-operator
+spec:
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: kaniop
+      namespace: security
+  interval: 1h
+  path: "./kubernetes/apps/security/kanidm-operator/app"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  targetNamespace: security
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: kanidm-instance
+spec:
+  dependsOn:
+    - name: kanidm-operator
+      namespace: security
+  healthChecks:
+    - apiVersion: kaniop.rs/v1beta1
+      kind: Kanidm
+      name: kanidm
+      namespace: security
+  healthCheckExprs:
+    - apiVersion: kaniop.rs/v1beta1
+      kind: Kanidm
+      failed: status.conditions.exists(c, c.type == 'Available' && c.status == 'False')
+      current: status.conditions.exists(c, c.type == 'Available' && c.status == 'True')
+  interval: 1h
+  path: "./kubernetes/apps/security/kanidm-operator/instance"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  targetNamespace: security

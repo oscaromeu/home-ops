@@ -1,0 +1,29 @@
+---
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmOAuth2Client
+metadata:
+  name: zot
+spec:
+  kanidmRef:
+    name: kanidm
+  displayname: Zot
+  origin: https://zot.${SECRET_DOMAIN}/
+  redirectUrl:
+    - https://zot.${SECRET_DOMAIN}/zot/auth/callback/oidc
+  scopeMap:
+    - group: zot_users@idm.${SECRET_DOMAIN}
+      scopes:
+        - openid
+        - profile
+        - email
+        - groups
+  claimMap:
+    - name: zot_groups
+      valuesMap:
+        - group: zot_users@idm.${SECRET_DOMAIN}
+          values:
+            - zot_users
+      joinStrategy: array
+  strictRedirectUrl: true
+  allowInsecureClientDisablePkce: true
+  disableConsentPrompt: true
