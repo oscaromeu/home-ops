@@ -5,6 +5,5 @@ resources:
   - ./ocirepository.yaml
   - ./pvc.yaml
   - ./externalsecret.yaml
-  - ./kanidmgroup.yaml
   - ./kanidmoauth2client.yaml
   - ./helmrelease.yaml
