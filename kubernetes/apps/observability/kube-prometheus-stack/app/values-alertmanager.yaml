@@ -8,7 +8,7 @@ alertmanager:
         - name: envoy-internal
           namespace: network
   alertmanagerSpec:
-    replicas: 2
+    replicas: 1
     alertmanagerConfiguration:
       name: alertmanager
     storage:

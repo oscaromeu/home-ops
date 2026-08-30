@@ -8,7 +8,7 @@ prometheus:
         - name: envoy-internal
           namespace: network
   prometheusSpec:
-    replicas: 2
+    replicas: 1
     externalUrl: https://prometheus.${SECRET_DOMAIN}
     replicaExternalLabelName: __replica__
     scrapeInterval: 1m
@@ -39,6 +39,6 @@ prometheus:
             requests:
               storage: 20Gi
     additionalRulesForClusterRole:
-      - apiGroups: [ "" ]
-        resources: [ "services/k6-operator-controller-manager-metrics-service" ]
-        verbs: [ "get", "list", "watch" ]
+      - apiGroups: [""]
+        resources: ["services/k6-operator-controller-manager-metrics-service"]
+        verbs: ["get", "list", "watch"]
