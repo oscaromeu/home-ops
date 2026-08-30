@@ -79,14 +79,6 @@ datasources:
           exemplarTraceIdDestinations:
             - datasourceUid: victoria-traces
               name: TraceID
-      - uid: victoria-metrics
-        name: VictoriaMetrics
-        type: victoriametrics-metrics-datasource
-        access: proxy
-        url: http://victoria-metrics-server.observability.svc.cluster.local:8428
-        editable: true
-        jsonData:
-          httpMethod: POST
       - uid: clickhouse
         name: ClickHouse
         type: grafana-clickhouse-datasource
@@ -146,7 +138,6 @@ testFramework:
   enabled: false
 plugins:
   - victoriametrics-logs-datasource
-  - victoriametrics-metrics-datasource
   - grafana-clickhouse-datasource
   - digrich-bubblechart-panel
   - grafana-clock-panel
