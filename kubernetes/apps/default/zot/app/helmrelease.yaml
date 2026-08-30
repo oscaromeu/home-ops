@@ -115,6 +115,7 @@ spec:
               "http": {
                 "address": "0.0.0.0",
                 "port": "5000",
+                "externalurl": "https://zot.${SECRET_DOMAIN}",
                 "auth": {
                   "htpasswd": { "path": "/etc/zot/htpasswd" },
                   "failDelay": 1,
