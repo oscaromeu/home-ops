@@ -16,15 +16,15 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         initContainers:
-          render-config:
+          render-oidc-credentials:
             image:
               repository: docker.io/library/busybox
               tag: 1.37.0
             command: ["sh", "-c"]
             args:
               - >-
-                sed -e "s|##CLIENT_ID##|$CLIENT_ID|g" -e "s|##CLIENT_SECRET##|$CLIENT_SECRET|g"
-                /template/config.json > /config/config.json
+                printf '{"clientid":"%s","clientsecret":"%s"}' "$CLIENT_ID" "$CLIENT_SECRET"
+                > /oidc/oidc-credentials.json
             envFrom:
               - secretRef:
                   name: zot-kanidm-oauth2-credentials
@@ -78,7 +78,7 @@ spec:
                 port: *port
 
     configMaps:
-      config-template:
+      config:
         data:
           config.json: |
             {
@@ -122,8 +122,7 @@ spec:
                     "providers": {
                       "oidc": {
                         "issuer": "https://idm.${SECRET_DOMAIN}/oauth2/openid/zot",
-                        "clientid": "##CLIENT_ID##",
-                        "clientsecret": "##CLIENT_SECRET##",
+                        "credentialsfile": "/etc/zot/oidc-credentials.json",
                         "scopes": ["openid", "profile", "email", "groups"]
                       }
                     }
@@ -178,22 +177,21 @@ spec:
             }
 
     persistence:
-      config-template:
+      config:
         type: configMap
         name: *app
-        advancedMounts:
-          zot:
-            render-config:
-              - path: /template
-      rendered-config:
+        globalMounts:
+          - path: /etc/zot/config.json
+            subPath: config.json
+      oidc-credentials:
         type: emptyDir
         advancedMounts:
           zot:
-            render-config:
-              - path: /config
+            render-oidc-credentials:
+              - path: /oidc
             app:
-              - path: /etc/zot/config.json
-                subPath: config.json
+              - path: /etc/zot/oidc-credentials.json
+                subPath: oidc-credentials.json
       auth:
         type: secret
         name: zot-secret
