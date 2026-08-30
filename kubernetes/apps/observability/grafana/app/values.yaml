@@ -50,7 +50,7 @@ grafana.ini:
     auto_login: false
     client_id: grafana
     # client_secret comes from grafana-oidc-secret (env var GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET)
-    scopes: openid profile email
+    scopes: openid profile email groups
     auth_url: https://idm.${SECRET_DOMAIN}/ui/oauth2
     token_url: https://idm.${SECRET_DOMAIN}/oauth2/token
     api_url: https://idm.${SECRET_DOMAIN}/oauth2/openid/grafana/userinfo

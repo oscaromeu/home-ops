@@ -17,6 +17,7 @@ spec:
         - openid
         - profile
         - email
+        - groups
   claimMap:
     - name: grafana_role
       valuesMap:
