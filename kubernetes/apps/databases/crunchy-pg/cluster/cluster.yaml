@@ -75,11 +75,6 @@ spec:
         - authentik
       password: *password
       options: 'CREATEDB CREATEROLE'
-    - name: docmost
-      databases:
-        - docmost
-      password: *password
-      options: 'CREATEDB CREATEROLE'
     - name: linkding
       databases:
         - linkding

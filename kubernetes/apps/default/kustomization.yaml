@@ -12,7 +12,6 @@ resources:
   - ./atuin/ks.yaml
   - ./bazarr/ks.yaml
   - ./copyparty/ks.yaml
-  - ./docmost/ks.yaml
   - ./echo/ks.yaml
   - ./excalidraw/ks.yaml
   - ./feishin/ks.yaml
