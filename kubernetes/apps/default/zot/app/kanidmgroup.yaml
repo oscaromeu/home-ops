@@ -6,4 +6,5 @@ metadata:
 spec:
   kanidmRef:
     name: kanidm
+    namespace: security
   kanidmName: zot_users

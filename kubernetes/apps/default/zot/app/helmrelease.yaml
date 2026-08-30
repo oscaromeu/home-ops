@@ -15,14 +15,25 @@ spec:
         strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
+        initContainers:
+          render-config:
+            image:
+              repository: docker.io/library/busybox
+              tag: 1.37.0
+            command: ["sh", "-c"]
+            args:
+              - >-
+                sed -e "s|##CLIENT_ID##|$CLIENT_ID|g" -e "s|##CLIENT_SECRET##|$CLIENT_SECRET|g"
+                /template/config.json > /config/config.json
+            envFrom:
+              - secretRef:
+                  name: zot-kanidm-oauth2-credentials
         containers:
           app:
             image:
               repository: ghcr.io/project-zot/zot
               tag: v2.1.20@sha256:542e25be4d32e7879c0cfad93492a93c81b1e059cbd2d30d485d4bd567318234
             probes:
-              # After a restart zot rescans the whole store before serving;
-              # give it room instead of letting the kubelet kill it.
               startup:
                 enabled: true
                 custom: true
@@ -67,7 +78,7 @@ spec:
                 port: *port
 
     configMaps:
-      config:
+      config-template:
         data:
           config.json: |
             {
@@ -106,7 +117,17 @@ spec:
                 "port": "5000",
                 "auth": {
                   "htpasswd": { "path": "/etc/zot/htpasswd" },
-                  "failDelay": 1
+                  "failDelay": 1,
+                  "openid": {
+                    "providers": {
+                      "oidc": {
+                        "issuer": "https://idm.${SECRET_DOMAIN}/oauth2/openid/zot",
+                        "clientid": "##CLIENT_ID##",
+                        "clientsecret": "##CLIENT_SECRET##",
+                        "scopes": ["openid", "profile", "email", "groups"]
+                      }
+                    }
+                  }
                 },
                 "accessControl": {
                   "repositories": {
@@ -157,12 +178,22 @@ spec:
             }
 
     persistence:
-      config:
+      config-template:
         type: configMap
         name: *app
-        globalMounts:
-          - path: /etc/zot/config.json
-            subPath: config.json
+        advancedMounts:
+          zot:
+            render-config:
+              - path: /template
+      rendered-config:
+        type: emptyDir
+        advancedMounts:
+          zot:
+            render-config:
+              - path: /config
+            app:
+              - path: /etc/zot/config.json
+                subPath: config.json
       auth:
         type: secret
         name: zot-secret

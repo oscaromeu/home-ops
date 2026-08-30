@@ -6,6 +6,7 @@ metadata:
 spec:
   kanidmRef:
     name: kanidm
+    namespace: security
   displayname: Zot
   origin: https://zot.${SECRET_DOMAIN}/
   redirectUrl:

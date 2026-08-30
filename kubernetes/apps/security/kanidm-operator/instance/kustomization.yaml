@@ -5,5 +5,3 @@ kind: Kustomization
 resources:
   - ./certificate.yaml
   - ./kanidm.yaml
-  - ./group-zot-users.yaml
-  - ./oauth2-zot.yaml
