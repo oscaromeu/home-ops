@@ -8,6 +8,7 @@ resources:
   - kube-state-metrics.yaml
   - kubernetes-monitoring.yaml
   - node-exporter.yaml
+  - postgres-backup.yaml
   - prometheus.yaml
   - turing-pi-thermal.yaml
   #- thanos-query.yaml

@@ -1,0 +1,29 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: postgres-backup-rules
+  labels:
+    prometheus: k8s
+    role: alert-rules
+spec:
+  groups:
+    - name: postgres-backup
+      rules:
+        - alert: PostgresBackupStale
+          annotations:
+            summary: "{{ $labels.cronjob }} hasn't succeeded recently"
+            description: >-
+              {{ $labels.cronjob }} in {{ $labels.namespace }} last succeeded
+              {{ printf "%.1f" (div $value 3600) }}h ago. Check pgbackrest
+              info and job logs — a stale backup means the restore chain is
+              silently broken.
+          expr: |
+            time() - kube_cronjob_status_last_successful_time{namespace="databases", cronjob="postgres-v17-1-repo1-incr"} > 3 * 3600
+            or
+            time() - kube_cronjob_status_last_successful_time{namespace="databases", cronjob="postgres-v17-1-repo1-diff"} > 30 * 3600
+            or
+            time() - kube_cronjob_status_last_successful_time{namespace="databases", cronjob="postgres-v17-1-repo1-full"} > 8 * 24 * 3600
+          for: 5m
+          labels:
+            severity: critical
