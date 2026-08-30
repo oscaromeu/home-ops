@@ -55,11 +55,6 @@ spec:
       password: &password
         type: AlphaNumeric
     # Applications
-    - name: memo
-      databases:
-        - memo
-      password: *password
-      options: 'CREATEDB CREATEROLE'
     - name: vikunja
       databases:
         - vikunja
@@ -88,11 +83,6 @@ spec:
     - name: grafana
       databases:
         - grafana
-      password: *password
-      options: 'CREATEDB CREATEROLE'
-    - name: peertube
-      databases:
-        - peertube
       password: *password
       options: 'CREATEDB CREATEROLE'
     - name: forgejo

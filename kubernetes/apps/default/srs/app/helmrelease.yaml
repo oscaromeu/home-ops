@@ -93,10 +93,6 @@ spec:
                 rtmp_to_rtc     on;
                 rtc_to_rtmp     off;
               }
-              forward {
-                enabled         on;
-                destination     peertube.default.svc.cluster.local:1935;
-              }
             }
     persistence:
       config:
