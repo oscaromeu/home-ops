@@ -37,6 +37,12 @@ spec:
               fallthrough in-addr.arpa ip6.arpa
           - name: autopath
             parameters: "@kubernetes"
+          - name: template
+            parameters: ANY A ${SECRET_DOMAIN}
+            configBlock: |-
+              match "^.*\.${SECRET_DOMAIN}\.$"
+              answer "{{ .Name }} 60 IN A 10.69.1.122"
+              fallthrough
           - name: forward
             parameters: . 10.69.1.32 1.1.1.1
             configBlock: |-
