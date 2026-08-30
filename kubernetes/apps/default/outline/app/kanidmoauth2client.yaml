@@ -1,0 +1,22 @@
+---
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmOAuth2Client
+metadata:
+  name: outline
+spec:
+  kanidmRef:
+    name: kanidm
+    namespace: security
+  displayname: Outline
+  origin: https://docs.${SECRET_DOMAIN}/
+  redirectUrl:
+    - https://docs.${SECRET_DOMAIN}/auth/oidc.callback
+  scopeMap:
+    - group: outline_users@idm.${SECRET_DOMAIN}
+      scopes:
+        - openid
+        - profile
+        - email
+        - groups
+  strictRedirectUrl: true
+  disableConsentPrompt: true

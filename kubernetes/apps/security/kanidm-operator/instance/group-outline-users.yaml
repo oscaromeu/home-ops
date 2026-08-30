@@ -1,0 +1,11 @@
+---
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmGroup
+metadata:
+  name: outline-users
+spec:
+  kanidmRef:
+    name: kanidm
+  kanidmName: outline_users
+  members:
+    - admin-account

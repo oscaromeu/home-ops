@@ -7,3 +7,4 @@ resources:
   - ./kanidm.yaml
   - ./person-admin.yaml
   - ./group-zot-users.yaml
+  - ./group-outline-users.yaml

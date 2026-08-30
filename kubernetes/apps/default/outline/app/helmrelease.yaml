@@ -22,6 +22,17 @@ spec:
             envFrom:
               - secretRef:
                   name: outline-secret
+            env:
+              OIDC_CLIENT_ID:
+                valueFrom:
+                  secretKeyRef:
+                    name: outline-kanidm-oauth2-credentials
+                    key: CLIENT_ID
+              OIDC_CLIENT_SECRET:
+                valueFrom:
+                  secretKeyRef:
+                    name: outline-kanidm-oauth2-credentials
+                    key: CLIENT_SECRET
     service:
       app:
         ports:
