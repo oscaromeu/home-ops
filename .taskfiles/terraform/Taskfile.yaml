@@ -3,7 +3,7 @@ version: '3'
 
 vars:
   TF_ROOT: '{{.ROOT_DIR}}/terraform'
-  MODULE: '{{.MODULE | default "authentik"}}'
+  MODULE: '{{.MODULE | default "onepassword"}}'
   TF_DIR: '{{.TF_ROOT}}/{{.MODULE}}'
   SOPS_FILE: '{{.TF_DIR}}/secrets.sops.yaml'
   # Shared snippet: load secrets as env vars.
@@ -22,7 +22,7 @@ vars:
 tasks:
 
   init:
-    desc: terraform init for the given MODULE (default authentik)
+    desc: terraform init for the given MODULE (default onepassword)
     dir: '{{.TF_DIR}}'
     cmds:
       - |
@@ -33,7 +33,7 @@ tasks:
       - which terraform
 
   init-upgrade:
-    desc: terraform init for the given MODULE (default authentik)
+    desc: terraform init for the given MODULE (default onepassword)
     dir: '{{.TF_DIR}}'
     cmds:
       - |
@@ -44,7 +44,7 @@ tasks:
       - which terraform
 
   plan:
-    desc: terraform plan for the given MODULE (default authentik)
+    desc: terraform plan for the given MODULE (default onepassword)
     dir: '{{.TF_DIR}}'
     cmds:
       - |
@@ -55,7 +55,7 @@ tasks:
       - which terraform
 
   apply:
-    desc: terraform apply for the given MODULE (default authentik)
+    desc: terraform apply for the given MODULE (default onepassword)
     dir: '{{.TF_DIR}}'
     cmds:
       - |
@@ -66,7 +66,7 @@ tasks:
       - which terraform
 
   destroy:
-    desc: terraform destroy for the given MODULE (default authentik)
+    desc: terraform destroy for the given MODULE (default onepassword)
     dir: '{{.TF_DIR}}'
     cmds:
       - |
@@ -77,7 +77,7 @@ tasks:
       - which terraform
 
   output:
-    desc: terraform output for the given MODULE (default authentik)
+    desc: terraform output for the given MODULE (default onepassword)
     dir: '{{.TF_DIR}}'
     cmds:
       - |

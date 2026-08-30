@@ -3,15 +3,15 @@ version: '3'
 
 # Run from inside any leaf directory (where its terragrunt.hcl lives).
 # Example:
-#   cd terraform/authentik/apps/grafana
+#   cd terraform/onepassword
 #   task terragrunt:plan
 #   task terragrunt:apply
 
 vars:
   # Discover the stack root for the dir you invoked `task` from: walk up until
   # we hit the secrets.sops.yaml that belongs to that stack. Handles both
-  # nested leaves (terraform/authentik/apps/grafana -> terraform/authentik) and
-  # stacks whose leaf IS the root (terraform/onepassword).
+  # nested leaves (terraform/<stack>/apps/<leaf>) and stacks whose leaf IS
+  # the root (terraform/onepassword).
   TG_STACK_DIR:
     sh: |
       dir="{{.USER_WORKING_DIR}}"
@@ -19,7 +19,7 @@ vars:
         [ -f "$dir/secrets.sops.yaml" ] && { echo "$dir"; exit 0; }
         dir=$(dirname "$dir")
       done
-      echo "{{.ROOT_DIR}}/terraform/authentik"
+      echo "{{.ROOT_DIR}}/terraform/onepassword"
   TG_SOPS_FILE: '{{.TG_STACK_DIR}}/secrets.sops.yaml'
   TG_LOAD_SECRETS: |
     set -a

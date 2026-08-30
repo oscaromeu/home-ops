@@ -65,11 +65,6 @@ spec:
         - atuin
       password: *password
       options: 'CREATEDB CREATEROLE'
-    - name: authentik
-      databases:
-        - authentik
-      password: *password
-      options: 'CREATEDB CREATEROLE'
     - name: linkding
       databases:
         - linkding
