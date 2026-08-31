@@ -51,6 +51,11 @@ spec:
 
     route:
       app:
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: Linkding
+          gethomepage.dev/group: Tools
+          gethomepage.dev/icon: linkding.png
         hostnames:
           - "link.${SECRET_DOMAIN}"
         parentRefs:
