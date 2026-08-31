@@ -14,6 +14,9 @@ configMapGenerator:
       - widgets.yaml=config/widgets.yaml
       - services.yaml=config/services.yaml
       - bookmarks.yaml=config/bookmarks.yaml
+      - docker.yaml=config/docker.yaml
+      - custom.css=config/custom.css
+      - custom.js=config/custom.js
 
 generatorOptions:
   disableNameSuffixHash: true
