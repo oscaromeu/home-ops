@@ -99,22 +99,22 @@ spec:
           - path: /tmp
       media:
         type: nfs
-        server: ${NAS_SERVER_IP}
-        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Videos
+        server: ${REBOST_IP}
+        path: ${REBOST_MEDIA_PATH}/Library/Media/Videos
         globalMounts:
           - path: /videos
             readOnly: true
       movies:
         type: nfs
-        server: ${NAS_SERVER_IP}
-        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Movies
+        server: ${REBOST_IP}
+        path: ${REBOST_MEDIA_PATH}/Library/Media/Movies
         globalMounts:
           - path: /movies
             readOnly: true
       series:
         type: nfs
-        server: ${NAS_SERVER_IP}
-        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Series
+        server: ${REBOST_IP}
+        path: ${REBOST_MEDIA_PATH}/Library/Media/Series
         globalMounts:
           - path: /series
             readOnly: true

@@ -90,8 +90,8 @@ spec:
         existingClaim: "{{ .Release.Name }}-config"
       library:
         type: nfs
-        server: ${NAS_SERVER_IP}
-        path: ${NAS_SERVER_MEDIA_PATH}/Library
+        server: ${REBOST_IP}
+        path: ${REBOST_MEDIA_PATH}/Library
         globalMounts:
           - path: /library
       tmp:

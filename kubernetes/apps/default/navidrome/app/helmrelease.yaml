@@ -80,15 +80,15 @@ spec:
           - path: /config/cache
       collection:
         type: nfs
-        server: ${NAS_SERVER_IP}
-        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Music/Collection
+        server: ${REBOST_IP}
+        path: ${REBOST_MEDIA_PATH}/Library/Media/Music/Collection
         globalMounts:
           - path: /collection
             readOnly: true
       mixtapes:
         type: nfs
-        server: ${NAS_SERVER_IP}
-        path: ${NAS_SERVER_MEDIA_PATH}/Library/Media/Music/Mixtapes
+        server: ${REBOST_IP}
+        path: ${REBOST_MEDIA_PATH}/Library/Media/Music/Mixtapes
         globalMounts:
           - path: /mixtapes
             readOnly: true

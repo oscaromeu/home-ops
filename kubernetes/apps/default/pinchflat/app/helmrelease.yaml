@@ -84,8 +84,8 @@ spec:
         type: emptyDir
       output:
         type: nfs
-        server: ${NAS_SERVER_IP}
-        path: ${NAS_SERVER_MEDIA_PATH}
+        server: ${REBOST_IP}
+        path: ${REBOST_MEDIA_PATH}
         advancedMounts:
           pinchflat:
             app:
