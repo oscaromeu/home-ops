@@ -1,0 +1,24 @@
+---
+# External service: proxies to the forgejo running on rebost. Only the web UI
+# goes through the cluster; git-over-ssh stays direct to the machine.
+apiVersion: v1
+kind: Service
+metadata:
+  name: forgejo
+spec:
+  ports:
+    - name: http
+      port: 3000
+      protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: forgejo
+subsets:
+  - addresses:
+      - ip: ${REBOST_IP}
+    ports:
+      - name: http
+        port: 3000
+        protocol: TCP
