@@ -54,3 +54,4 @@ wiki
 .env
 local
 work.sops.yaml
+.terragrunt-cache/
