@@ -80,11 +80,6 @@ spec:
         - grafana
       password: *password
       options: 'CREATEDB CREATEROLE'
-    - name: forgejo
-      databases:
-        - forgejo
-      password: *password
-      options: 'CREATEDB CREATEROLE'
   backups:
     pgbackrest:
       configuration: &backupConfig

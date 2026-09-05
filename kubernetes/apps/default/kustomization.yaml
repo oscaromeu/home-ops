@@ -17,7 +17,6 @@ resources:
   - ./feishin/ks.yaml
   - ./filebrowser/ks.yaml
   - ./flaresolverr/ks.yaml
-  - ./forgejo/ks.yaml
   - ./homepage/ks.yaml
   - ./icecast/ks.yaml
   - ./jellyfin/ks.yaml
