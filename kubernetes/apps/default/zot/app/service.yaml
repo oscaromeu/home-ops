@@ -1,0 +1,24 @@
+---
+# External service: proxies to the zot running on rebost. The cluster's
+# containerd pulls straight from the IP; this is the human/TLS path.
+apiVersion: v1
+kind: Service
+metadata:
+  name: zot
+spec:
+  ports:
+    - name: http
+      port: 5000
+      protocol: TCP
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: zot
+subsets:
+  - addresses:
+      - ip: ${REBOST_IP}
+    ports:
+      - name: http
+        port: 5000
+        protocol: TCP

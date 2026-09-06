@@ -5,8 +5,6 @@ metadata:
   name: zot
 spec:
   dependsOn:
-    - name: onepassword
-      namespace: external-secrets
     - name: envoy-gateway
       namespace: network
   path: ./kubernetes/apps/default/zot/app
