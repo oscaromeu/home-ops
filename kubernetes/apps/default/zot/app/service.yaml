@@ -1,6 +1,4 @@
 ---
-# External service: proxies to the zot running on rebost. The cluster's
-# containerd pulls straight from the IP; this is the human/TLS path.
 apiVersion: v1
 kind: Service
 metadata:
