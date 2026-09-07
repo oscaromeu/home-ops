@@ -1,0 +1,57 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: openbao-restore
+spec:
+  suspend: true
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: download
+          image: rclone/rclone:1.75.1
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              set -e
+              latest="$(rclone lsf garage:openbao-snapshots/ --files-only | sort | tail -n1)"
+              rclone copyto "garage:openbao-snapshots/${latest}" /share/restore.snap
+          env:
+            - name: RCLONE_CONFIG_GARAGE_TYPE
+              value: s3
+            - name: RCLONE_CONFIG_GARAGE_PROVIDER
+              value: Other
+            - name: RCLONE_CONFIG_GARAGE_ENDPOINT
+              value: http://garage.storage.svc.cluster.local:3900
+            - name: RCLONE_CONFIG_GARAGE_REGION
+              value: us-east-1
+          envFrom:
+            - secretRef:
+                name: openbao-snapshot-s3
+          volumeMounts:
+            - name: share
+              mountPath: /share
+      containers:
+        - name: restore
+          image: quay.io/openbao/openbao:2.6.2
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              set -e
+              bao operator raft snapshot restore -force /share/restore.snap
+          env:
+            - name: BAO_ADDR
+              value: http://openbao-active.security.svc.cluster.local:8200
+            - name: BAO_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: openbao-restore-token
+                  key: token
+          volumeMounts:
+            - name: share
+              mountPath: /share
+      volumes:
+        - name: share
+          emptyDir: {}

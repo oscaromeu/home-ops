@@ -1,0 +1,66 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: openbao-snapshot
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: openbao-snapshot
+spec:
+  schedule: "0 3 * * *"
+  timeZone: "${TZ}"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      activeDeadlineSeconds: 900
+      template:
+        spec:
+          serviceAccountName: openbao-snapshot
+          restartPolicy: OnFailure
+          initContainers:
+            - name: snapshot
+              image: quay.io/openbao/openbao:2.6.2
+              command: ["/bin/sh", "-c"]
+              args:
+                - |
+                  set -e
+                  export BAO_TOKEN="$(bao write -field=token auth/kubernetes/login role=openbao-snapshot jwt=@/var/run/secrets/kubernetes.io/serviceaccount/token)"
+                  bao operator raft snapshot save "/share/openbao-$(date +%Y%m%d-%H%M%S).snap"
+              env:
+                - name: BAO_ADDR
+                  value: http://openbao-active.security.svc.cluster.local:8200
+              volumeMounts:
+                - name: share
+                  mountPath: /share
+          containers:
+            - name: upload
+              image: rclone/rclone:1.75.1
+              command: ["/bin/sh", "-c"]
+              args:
+                - |
+                  set -e
+                  rclone copy /share garage:openbao-snapshots/
+                  rclone delete garage:openbao-snapshots/ --min-age 30d
+              env:
+                - name: RCLONE_CONFIG_GARAGE_TYPE
+                  value: s3
+                - name: RCLONE_CONFIG_GARAGE_PROVIDER
+                  value: Other
+                - name: RCLONE_CONFIG_GARAGE_ENDPOINT
+                  value: http://garage.storage.svc.cluster.local:3900
+                - name: RCLONE_CONFIG_GARAGE_REGION
+                  value: us-east-1
+              envFrom:
+                - secretRef:
+                    name: openbao-snapshot-s3
+              volumeMounts:
+                - name: share
+                  mountPath: /share
+          volumes:
+            - name: share
+              emptyDir: {}
