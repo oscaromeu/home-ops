@@ -82,6 +82,7 @@ datasources:
         editable: true
         jsonData:
           httpMethod: POST
+          timeInterval: 1m
           exemplarTraceIdDestinations:
             - datasourceUid: victoria-traces
               name: TraceID
