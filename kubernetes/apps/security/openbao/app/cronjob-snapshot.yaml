@@ -24,7 +24,7 @@ spec:
           restartPolicy: OnFailure
           initContainers:
             - name: snapshot
-              image: quay.io/openbao/openbao:2.6.2
+              image: quay.io/openbao/openbao:2.6.2@sha256:11fd73a2102cda9c55d5d881a8c3210303146a7ec1e8ac76f526e175c6d24641
               command: ["/bin/sh", "-c"]
               args:
                 - |
@@ -39,7 +39,7 @@ spec:
                   mountPath: /share
           containers:
             - name: upload
-              image: rclone/rclone:1.75.1
+              image: rclone/rclone:1.75.1@sha256:45401ad7410db1d67ffdb58e19059ad20b0d8e0285a60e38bbec55cc1019c7a5
               command: ["/bin/sh", "-c"]
               args:
                 - |
