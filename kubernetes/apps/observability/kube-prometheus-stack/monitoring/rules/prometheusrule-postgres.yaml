@@ -175,7 +175,7 @@ spec:
             summary: >-
               {{ $labels.pg_cluster }} has a recent archive_command failure —
               WAL archiving to pgBackRest is broken.
-          expr: ccp_archive_command_status_seconds_since_last_fail > 300
+          expr: ccp_archive_command_status_seconds_since_last_fail{role="master"} > 300
           for: 1m
           labels:
             severity: critical
