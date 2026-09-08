@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - ./externalsecret.yaml
   - ./cluster.yaml
+  - ./podmonitor.yaml

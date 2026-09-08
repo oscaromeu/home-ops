@@ -1,0 +1,255 @@
+---
+# Adapted from pgMonitor v5.3.0 crunchy-alert-rules-pg.yml (containers flavor)
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    prometheus: k8s
+    role: alert-rules
+  name: crunchy-postgres-rules
+spec:
+  groups:
+    - name: crunchy-postgres.rules
+      rules:
+        - alert: ExporterDown
+          annotations:
+            summary: Crunchy postgres_exporter metrics are absent.
+            description: >-
+              No pg_up series is being scraped. The exporter sidecar or the
+              PodMonitor is broken — every other postgres alert is blind
+              while this fires.
+          expr: absent(pg_up)
+          for: 10m
+          labels:
+            severity: critical
+        - alert: PGExporterScrapeError
+          annotations:
+            summary: postgres_exporter on {{ $labels.pod }} has scrape errors.
+            description: >-
+              The exporter is up but some monitoring queries fail, so part of
+              the ccp_* metrics are missing or stale.
+          expr: pg_exporter_last_scrape_error > 0
+          for: 5m
+          labels:
+            severity: warning
+        - alert: PGIsUp
+          annotations:
+            summary: PostgreSQL on {{ $labels.pod }} is not accepting connections.
+          expr: pg_up < 1
+          for: 1m
+          labels:
+            severity: critical
+        - alert: PGNoPrimary
+          annotations:
+            summary: Cluster {{ $labels.pg_cluster }} has no primary instance.
+          expr: max by (pg_cluster) (ccp_is_in_recovery_status) < 2
+          for: 1m
+          labels:
+            severity: critical
+        - alert: PGClusterRoleChange
+          annotations:
+            summary: Cluster {{ $labels.pg_cluster }} had a switchover/failover.
+          expr: >-
+            count by (pg_cluster) (ccp_is_in_recovery_status !=
+            ignoring(instance, ip, pod, role) (ccp_is_in_recovery_status offset 5m)) >= 1
+          for: 1m
+          labels:
+            severity: warning
+        - alert: PGConnPerc
+          annotations:
+            summary: >-
+              {{ $labels.pg_cluster }} ({{ $labels.pod }}) is using
+              {{ $value | printf "%.0f" }}% of max_connections.
+          expr: 100 * (ccp_connection_stats_total / ccp_connection_stats_max_connections) > 75
+          for: 5m
+          labels:
+            severity: warning
+        - alert: PGConnPerc
+          annotations:
+            summary: >-
+              {{ $labels.pg_cluster }} ({{ $labels.pod }}) is using
+              {{ $value | printf "%.0f" }}% of max_connections.
+          expr: 100 * (ccp_connection_stats_total / ccp_connection_stats_max_connections) > 90
+          for: 5m
+          labels:
+            severity: critical
+        - alert: PGDiskSize
+          annotations:
+            summary: >-
+              {{ $labels.pod }} data disk ({{ $labels.mount_point }}) at
+              {{ $value | printf "%.0f" }}%.
+          expr: >-
+            100 * ((ccp_nodemx_data_disk_total_bytes - ccp_nodemx_data_disk_available_bytes)
+            / ccp_nodemx_data_disk_total_bytes) > 75
+          for: 5m
+          labels:
+            severity: warning
+        - alert: PGDiskSize
+          annotations:
+            summary: >-
+              {{ $labels.pod }} data disk ({{ $labels.mount_point }}) at
+              {{ $value | printf "%.0f" }}%.
+          expr: >-
+            100 * ((ccp_nodemx_data_disk_total_bytes - ccp_nodemx_data_disk_available_bytes)
+            / ccp_nodemx_data_disk_total_bytes) > 90
+          for: 5m
+          labels:
+            severity: critical
+        - alert: DiskFillPredict
+          annotations:
+            summary: >-
+              {{ $labels.pod }} data disk is predicted to fill within 24h at
+              the current growth rate.
+          expr: >-
+            predict_linear(ccp_nodemx_data_disk_available_bytes{mount_point!~"tmpfs"}[1h], 24 * 3600) < 0
+            and 100 * ((ccp_nodemx_data_disk_total_bytes - ccp_nodemx_data_disk_available_bytes)
+            / ccp_nodemx_data_disk_total_bytes) > 70
+          for: 5m
+          labels:
+            severity: warning
+        - alert: PGReplicationByteLag
+          annotations:
+            summary: >-
+              {{ $labels.pg_cluster }} has a replica lagging
+              {{ $value | humanize1024 }}B behind the primary.
+          expr: ccp_replication_lag_size_bytes > 50 * 1024 * 1024
+          for: 5m
+          labels:
+            severity: warning
+        - alert: PGReplicationByteLag
+          annotations:
+            summary: >-
+              {{ $labels.pg_cluster }} has a replica lagging
+              {{ $value | humanize1024 }}B behind the primary.
+          expr: ccp_replication_lag_size_bytes > 100 * 1024 * 1024
+          for: 5m
+          labels:
+            severity: critical
+        - alert: PGReplicationSlotsInactive
+          annotations:
+            summary: >-
+              {{ $labels.pg_cluster }} has an inactive replication slot
+              ({{ $labels.slot_name }}) — a replica is down or WAL is piling up.
+          expr: ccp_replication_slots_active == 0
+          for: 5m
+          labels:
+            severity: critical
+        - alert: PGXIDWraparound
+          annotations:
+            summary: >-
+              {{ $labels.pg_cluster }} is {{ $value | printf "%.0f" }}% towards
+              transaction ID wraparound.
+          expr: ccp_transaction_wraparound_percent_towards_wraparound > 50
+          for: 5m
+          labels:
+            severity: warning
+        - alert: PGXIDWraparound
+          annotations:
+            summary: >-
+              {{ $labels.pg_cluster }} is {{ $value | printf "%.0f" }}% towards
+              transaction ID wraparound.
+          expr: ccp_transaction_wraparound_percent_towards_wraparound > 75
+          for: 5m
+          labels:
+            severity: critical
+        - alert: PGEmergencyVacuum
+          annotations:
+            summary: >-
+              {{ $labels.pg_cluster }} is {{ $value | printf "%.0f" }}% beyond
+              autovacuum_freeze_max_age — autovacuum is not keeping up.
+          expr: ccp_transaction_wraparound_percent_towards_emergency_autovac > 110
+          for: 5m
+          labels:
+            severity: warning
+        - alert: PGEmergencyVacuum
+          annotations:
+            summary: >-
+              {{ $labels.pg_cluster }} is {{ $value | printf "%.0f" }}% beyond
+              autovacuum_freeze_max_age — autovacuum is not keeping up.
+          expr: ccp_transaction_wraparound_percent_towards_emergency_autovac > 125
+          for: 5m
+          labels:
+            severity: critical
+        - alert: PGArchiveCommandStatus
+          annotations:
+            summary: >-
+              {{ $labels.pg_cluster }} has a recent archive_command failure —
+              WAL archiving to pgBackRest is broken.
+          expr: ccp_archive_command_status_seconds_since_last_fail > 300
+          for: 1m
+          labels:
+            severity: critical
+        - alert: PGIdleTxn
+          annotations:
+            summary: >-
+              {{ $labels.pg_cluster }} has a session idle in transaction for
+              over 15 minutes.
+          expr: ccp_connection_stats_max_idle_in_txn_time > 900
+          for: 1m
+          labels:
+            severity: warning
+        - alert: PGQueryTime
+          annotations:
+            summary: >-
+              {{ $labels.pg_cluster }} has a query running for over 24 hours.
+          expr: ccp_connection_stats_max_query_time > 86400
+          for: 1m
+          labels:
+            severity: warning
+        - alert: PGSequenceExhaustion
+          annotations:
+            summary: >-
+              {{ $labels.pg_cluster }} has {{ $value }} sequence(s) over 75%
+              used. Check SELECT * FROM monitor.sequence_status() WHERE percent >= 75.
+          expr: ccp_sequence_exhaustion_count > 0
+          for: 5m
+          labels:
+            severity: warning
+        - alert: PGSettingsPendingRestart
+          annotations:
+            summary: >-
+              {{ $labels.pg_cluster }} has settings in pending_restart state.
+          expr: ccp_settings_pending_restart_count > 0
+          for: 5m
+          labels:
+            severity: warning
+    - name: crunchy-pgbackrest.rules
+      rules:
+        # Thresholds track the pgbackrest schedules on postgres-v17-1:
+        # incr hourly 2-23 (3h overnight gap), diff daily 01:00, full weekly Sun 01:00
+        - alert: PGBackRestLastCompletedIncr
+          annotations:
+            summary: >-
+              No pgBackRest incremental backup for {{ $labels.pg_cluster }} in
+              {{ $value | humanizeDuration }} — the restore chain is going stale.
+          expr: ccp_backrest_last_incr_backup_time_since_completion_seconds > 4 * 3600
+          for: 1m
+          labels:
+            severity: critical
+        - alert: PGBackRestLastCompletedDiff
+          annotations:
+            summary: >-
+              No pgBackRest differential backup for {{ $labels.pg_cluster }} in
+              {{ $value | humanizeDuration }}.
+          expr: ccp_backrest_last_diff_backup_time_since_completion_seconds > 30 * 3600
+          for: 1m
+          labels:
+            severity: critical
+        - alert: PGBackRestLastCompletedFull
+          annotations:
+            summary: >-
+              No pgBackRest full backup for {{ $labels.pg_cluster }} in
+              {{ $value | humanizeDuration }}.
+          expr: ccp_backrest_last_full_backup_time_since_completion_seconds > 8 * 24 * 3600
+          for: 1m
+          labels:
+            severity: critical
+        - alert: PGBackRestAbsentFull
+          annotations:
+            summary: >-
+              pgBackRest backup metrics are absent — pgbackrest info is failing
+              on the target, backup state is unknown.
+          expr: absent(ccp_backrest_last_full_backup_time_since_completion_seconds)
+          for: 10m
+          labels:
+            severity: critical

@@ -1,0 +1,25 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: crunchy-postgres-exporter
+spec:
+  namespaceSelector:
+    matchNames:
+      - databases
+  selector:
+    matchLabels:
+      postgres-operator.crunchydata.com/crunchy-postgres-exporter: "true"
+  podMetricsEndpoints:
+    - port: exporter
+      relabelings:
+        # pgMonitor dashboards and rules key off pg_cluster/deployment/role
+        - sourceLabels:
+            - __meta_kubernetes_namespace
+            - __meta_kubernetes_pod_label_postgres_operator_crunchydata_com_cluster
+          separator: ":"
+          targetLabel: pg_cluster
+        - sourceLabels: [__meta_kubernetes_pod_label_postgres_operator_crunchydata_com_instance]
+          targetLabel: deployment
+        - sourceLabels: [__meta_kubernetes_pod_label_postgres_operator_crunchydata_com_role]
+          targetLabel: role

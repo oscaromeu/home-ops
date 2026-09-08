@@ -8,6 +8,7 @@ resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
   - ./prometheusrule-e2e.yaml
+  - ./prometheusrule-postgres.yaml
 
   #- ./secret.sops.yaml
 
