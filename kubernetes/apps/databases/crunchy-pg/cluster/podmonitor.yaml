@@ -13,13 +13,16 @@ spec:
   podMetricsEndpoints:
     - port: exporter
       relabelings:
-        # pgMonitor dashboards and rules key off pg_cluster/deployment/role
         - sourceLabels:
             - __meta_kubernetes_namespace
             - __meta_kubernetes_pod_label_postgres_operator_crunchydata_com_cluster
           separator: ":"
           targetLabel: pg_cluster
-        - sourceLabels: [__meta_kubernetes_pod_label_postgres_operator_crunchydata_com_instance]
+        - sourceLabels:
+            [
+              __meta_kubernetes_pod_label_postgres_operator_crunchydata_com_instance,
+            ]
           targetLabel: deployment
-        - sourceLabels: [__meta_kubernetes_pod_label_postgres_operator_crunchydata_com_role]
+        - sourceLabels:
+            [__meta_kubernetes_pod_label_postgres_operator_crunchydata_com_role]
           targetLabel: role
