@@ -17,8 +17,11 @@ spec:
       - receiver: allquiet
         continue: true
         matchers:
-          - name: alertname
-            value: E2EProbe.*
+          - name: alertgroup
+            value: Discogs
+            matchType: "!="
+          - name: severity
+            value: info|warning|critical
             matchType: =~
       - receiver: ch-archive
         continue: true
