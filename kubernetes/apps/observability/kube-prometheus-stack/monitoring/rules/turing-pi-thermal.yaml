@@ -12,7 +12,6 @@ spec:
       rules:
         - alert: TuringPiSoCTemperatureHigh
           annotations:
-            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: Turing Pi SoC temperature high (early warning)
             description: >-
               SoC package temperature on {{ $labels.kubernetes_node }} is
@@ -25,7 +24,6 @@ spec:
             severity: warning
         - alert: TuringPiSoCTemperatureHigh
           annotations:
-            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: Turing Pi SoC throttling (≥85 °C)
             description: >-
               SoC package temperature on {{ $labels.kubernetes_node }} is

@@ -210,7 +210,6 @@ spec:
         severity: critical
         sloth_severity: page
       annotations:
-        alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
         runbook: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubeapierrorshigh
         summary: '{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn
           rate is over expected.'
@@ -234,7 +233,6 @@ spec:
         severity: warning
         sloth_severity: ticket
       annotations:
-        alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
         runbook: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubeapierrorshigh
         summary: '{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn
           rate is over expected.'
@@ -477,7 +475,6 @@ spec:
         severity: critical
         sloth_severity: page
       annotations:
-        alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
         runbook: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubeapilatencyhigh
         summary: '{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn
           rate is over expected.'
@@ -501,7 +498,6 @@ spec:
         severity: warning
         sloth_severity: ticket
       annotations:
-        alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
         runbook: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubeapilatencyhigh
         summary: '{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn
           rate is over expected.'
