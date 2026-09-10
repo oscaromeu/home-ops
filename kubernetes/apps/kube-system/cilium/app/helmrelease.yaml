@@ -34,12 +34,12 @@ spec:
       enabled: true
       metrics:
         enabled:
-          - dns
-          - drop
-          - flow
-          - icmp
+          - "dns:query;labelsContext=source_namespace,destination_namespace;sourceContext=workload-name|pod|reserved-identity;destinationContext=workload-name|pod|dns|reserved-identity"
+          - "drop:labelsContext=source_namespace,destination_namespace;sourceContext=workload-name|pod|reserved-identity;destinationContext=workload-name|pod|dns|reserved-identity"
+          - "flow:labelsContext=source_namespace,destination_namespace;sourceContext=workload-name|pod|reserved-identity;destinationContext=workload-name|pod|dns|reserved-identity"
+          - "icmp:labelsContext=source_namespace,destination_namespace;sourceContext=workload-name|pod|reserved-identity;destinationContext=workload-name|pod|dns|reserved-identity"
+          - "tcp:labelsContext=source_namespace,destination_namespace;sourceContext=workload-name|pod|reserved-identity;destinationContext=workload-name|pod|dns|reserved-identity"
           - port-distribution
-          - tcp
           - "httpV2:exemplars=true;labelsContext=source_ip,source_namespace,source_workload,destination_ip,destination_namespace,destination_workload,traffic_direction"
         serviceMonitor:
           enabled: true
@@ -79,6 +79,8 @@ spec:
       rollOutPods: true
     prometheus:
       enabled: true
+      metrics:
+        - "+cilium_bpf_syscall_duration_seconds"
       serviceMonitor:
         enabled: true
         trustCRDsExist: true
