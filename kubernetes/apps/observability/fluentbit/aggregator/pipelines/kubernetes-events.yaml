@@ -7,6 +7,8 @@ pipeline:
       kube_url: https://kubernetes.default.svc
       # checkpoint so a restart does not re-ingest the whole backlog
       db: /var/log/fluentbit/storage/k8s-events.db
+      db.sync: normal
+      storage.type: filesystem
       interval_sec: 5
 
   filters:
@@ -31,13 +33,28 @@ pipeline:
       rename: obj_name k_object_name
       add: stream k8s_events
 
+    - name: record_modifier
+      match: k8s_events
+      remove_key:
+        - meta_managedFields
+        - meta_resourceVersion
+        - meta_uid
+        - meta_creationTimestamp
+        - meta_selfLink
+        - obj_uid
+        - obj_resourceVersion
+        - obj_apiVersion
+        - apiVersion
+        - kind
+
   outputs:
     - name: http
       match: k8s_events
       host: victoria-logs-server.observability.svc.cluster.local
       port: 9428
-      uri: /insert/jsonline?_stream_fields=stream,k_namespace_name,type,reason&_msg_field=message&_time_field=lastTimestamp
+      uri: /insert/jsonline?_stream_fields=stream,k_namespace_name,type,reason&_msg_field=message&_time_field=date
       format: json_lines
       json_date_format: iso8601
       compress: gzip
       log_response_payload: false
+      storage.total_limit_size: 256M

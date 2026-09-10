@@ -28,6 +28,14 @@ spec:
     serviceMonitor:
       enabled: true
     logLevel: warn
+    updateStrategy:
+      type: Recreate
+    resources:
+      requests:
+        cpu: 25m
+        memory: 96Mi
+      limits:
+        memory: 384Mi
     # Alertmanager webhook receiver (pipelines/alertmanager.yaml)
     extraPorts:
       - name: alertmanager
@@ -35,6 +43,9 @@ spec:
         containerPort: 8888
         protocol: TCP
     extraVolumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: fluent-bit-aggregator-storage
       - name: parsers
         configMap:
           defaultMode: 420
@@ -50,6 +61,8 @@ spec:
       #    secretName: topic-cluster-apps-logs-certs
       #    defaultMode: 420
     extraVolumeMounts:
+      - name: storage
+        mountPath: /var/log/fluentbit/storage
       - name: parsers
         mountPath: /fluent-bit/etc/conf/parsers.d/
       - name: pipelines-aggregator
