@@ -40,7 +40,7 @@ spec:
           - "icmp:labelsContext=source_namespace,destination_namespace;sourceContext=workload-name|pod|reserved-identity;destinationContext=workload-name|pod|dns|reserved-identity"
           - "tcp:labelsContext=source_namespace,destination_namespace;sourceContext=workload-name|pod|reserved-identity;destinationContext=workload-name|pod|dns|reserved-identity"
           - port-distribution
-          - "httpV2:exemplars=true;labelsContext=source_ip,source_namespace,source_workload,destination_ip,destination_namespace,destination_workload,traffic_direction"
+          - "httpV2:labelsContext=source_ip,source_namespace,source_workload,destination_ip,destination_namespace,destination_workload,traffic_direction"
         serviceMonitor:
           enabled: true
           trustCRDsExist: true
