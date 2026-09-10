@@ -49,3 +49,7 @@ spec:
     crds:
       enabled: true
     cleanPrometheusOperatorObjectNames: true
+    defaultRules:
+      additionalRuleGroupAnnotations:
+        kubernetesResources:
+          alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
