@@ -7,6 +7,7 @@ pipeline:
       tag: alertmanager
       listen: 0.0.0.0
       port: 8888
+      storage.type: filesystem
       # One webhook body = one record. The alerts[] fan-out happens in
       # ClickHouse (alert_events_mv), not here.
       successful_response_code: 200
@@ -25,3 +26,4 @@ pipeline:
       # No gzip: payloads are a few KB and ClickHouse needs the body verbatim.
       log_response_payload: true
       retry_limit: 5
+      storage.total_limit_size: 64M

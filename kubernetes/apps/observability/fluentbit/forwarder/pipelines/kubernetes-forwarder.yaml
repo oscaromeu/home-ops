@@ -3,7 +3,7 @@ pipeline:
     - name: tail
       alias: kubernetes
       path: /var/log/containers/*.log
-      parser: containerd
+      multiline.parser: cri
       tag: kubernetes.*
       skip_empty_lines: true
       skip_long_lines: false
@@ -13,6 +13,9 @@ pipeline:
       buffer_chunk_size: 128kb
       buffer_max_size: 256kb
       truncate_long_lines: true
+      db: /var/log/fluentbit/tail.db
+      db.sync: normal
+      storage.type: filesystem
 
   filters:
     - name: kubernetes
@@ -45,6 +48,12 @@ pipeline:
       rename: k_labels_app app
       rename: k_labels_k8s-app app
 
+    - name: record_modifier
+      match: '*'
+      remove_key:
+        - time
+        - _p
+
   outputs:
 
     - name: http
@@ -56,6 +65,7 @@ pipeline:
       json_date_format: iso8601
       compress: gzip
       log_response_payload: false
+      storage.total_limit_size: 1G
 
     #- name: kafka
     #  match: '*'
