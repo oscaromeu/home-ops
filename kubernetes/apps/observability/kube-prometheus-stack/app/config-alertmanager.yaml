@@ -6,7 +6,7 @@ metadata:
   name: alertmanager
 spec:
   route:
-    receiver: pushover
+    receiver: blackhole
     repeatInterval: 12h
     routes:
       - receiver: blackhole
@@ -22,6 +22,12 @@ spec:
             matchType: =~
       - receiver: ch-archive
         continue: true
+        repeatInterval: 365d
+      - receiver: pushover-discogs
+        matchers:
+          - name: alertgroup
+            value: Discogs
+            matchType: =
       - receiver: pushover
         matchers:
           - name: severity
@@ -60,6 +66,27 @@ spec:
       webhookConfigs:
         - url: http://fluent-bit-aggregator.observability.svc.cluster.local:8888/
           sendResolved: true
+    - name: pushover-discogs
+      pushoverConfigs:
+        - html: true
+          message: |-
+            {{- range .Alerts }}
+              {{ .Annotations.description }}
+            {{- end }}
+          priority: |-
+            {{ if eq .Status "firing" }}1{{ else }}0{{ end }}
+          sendResolved: true
+          sound: cashregister
+          title: >-
+            [{{ .Status | toUpper }}] Discogs: {{ .CommonLabels.title }}
+          token:
+            name: alertmanager-secret
+            key: ALERTMANAGER_PUSHOVER_TOKEN
+          userKey:
+            name: alertmanager-secret
+            key: PUSHOVER_USER_KEY
+          url: https://www.discogs.com/release/{{ .CommonLabels.release_id }}
+          urlTitle: Open on Discogs
     - name: pushover
       pushoverConfigs:
         - html: true
@@ -94,4 +121,5 @@ spec:
           userKey:
             name: alertmanager-secret
             key: PUSHOVER_USER_KEY
+          url: https://alertmanager.${SECRET_DOMAIN}
           urlTitle: View in Alertmanager

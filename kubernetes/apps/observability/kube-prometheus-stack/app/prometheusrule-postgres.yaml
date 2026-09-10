@@ -125,15 +125,6 @@ spec:
           for: 5m
           labels:
             severity: critical
-        - alert: PGReplicationSlotsInactive
-          annotations:
-            summary: >-
-              {{ $labels.pg_cluster }} has an inactive replication slot
-              ({{ $labels.slot_name }}) — a replica is down or WAL is piling up.
-          expr: ccp_replication_slots_active == 0
-          for: 5m
-          labels:
-            severity: critical
         - alert: PGXIDWraparound
           annotations:
             summary: >-
@@ -222,7 +213,7 @@ spec:
             summary: >-
               No pgBackRest incremental backup for {{ $labels.pg_cluster }} in
               {{ $value | humanizeDuration }} — the restore chain is going stale.
-          expr: ccp_backrest_last_incr_backup_time_since_completion_seconds > 4 * 3600
+          expr: ccp_backrest_last_incr_backup_time_since_completion_seconds{role="master"} > 4 * 3600
           for: 1m
           labels:
             severity: critical
@@ -231,7 +222,7 @@ spec:
             summary: >-
               No pgBackRest differential backup for {{ $labels.pg_cluster }} in
               {{ $value | humanizeDuration }}.
-          expr: ccp_backrest_last_diff_backup_time_since_completion_seconds > 30 * 3600
+          expr: ccp_backrest_last_diff_backup_time_since_completion_seconds{role="master"} > 30 * 3600
           for: 1m
           labels:
             severity: critical
@@ -240,7 +231,7 @@ spec:
             summary: >-
               No pgBackRest full backup for {{ $labels.pg_cluster }} in
               {{ $value | humanizeDuration }}.
-          expr: ccp_backrest_last_full_backup_time_since_completion_seconds > 8 * 24 * 3600
+          expr: ccp_backrest_last_full_backup_time_since_completion_seconds{role="master"} > 8 * 24 * 3600
           for: 1m
           labels:
             severity: critical
@@ -249,7 +240,7 @@ spec:
             summary: >-
               pgBackRest backup metrics are absent — pgbackrest info is failing
               on the target, backup state is unknown.
-          expr: absent(ccp_backrest_last_full_backup_time_since_completion_seconds)
+          expr: absent(ccp_backrest_last_full_backup_time_since_completion_seconds{role="master"})
           for: 10m
           labels:
             severity: critical
