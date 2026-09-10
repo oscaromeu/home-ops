@@ -26,6 +26,7 @@ prometheus:
     retentionSize: 15GB
     externalLabels:
       cluster: apps
+      env: homelab
     resources:
       requests:
         cpu: 100m
