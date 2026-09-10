@@ -17,7 +17,6 @@ spec:
           labels:
             severity: warning
           annotations:
-            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: Thanos Store is returning Internal/Unavailable errors
             description: Long Term Storage Prometheus queries are failing
         - alert: ThanosStoreBucketOperationsFailed
@@ -26,7 +25,6 @@ spec:
           labels:
             severity: warning
           annotations:
-            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: Thanos Store is failing to do bucket operations
             description: Long Term Storage Prometheus queries are failing
         - alert: ThanosStoreIsNotRunning
@@ -35,6 +33,5 @@ spec:
           labels:
             severity: warning
           annotations:
-            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: Thanos Store is not running
             description: Long term storage queries will not work

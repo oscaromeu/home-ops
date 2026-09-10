@@ -27,6 +27,27 @@ prometheus:
     externalLabels:
       cluster: apps
       env: homelab
+    additionalAlertRelabelConfigs:
+      - source_labels: [alertname, cluster, env]
+        separator: ' · '
+        regex: '(.+) · (.+) · (.+)'
+        replacement: '$1 — $2/$3'
+        target_label: alert_title
+      - source_labels: [alertname, job, namespace, cluster, env]
+        separator: ' · '
+        regex: '(.+) · (.+) · (.+) · (.+) · (.+)'
+        replacement: '$1 — $2 · $3 · $4/$5'
+        target_label: alert_title
+      - source_labels: [alertname, pod, namespace, cluster, env]
+        separator: ' · '
+        regex: '(.+) · (.+) · (.+) · (.+) · (.+)'
+        replacement: '$1 — $2 · $3 · $4/$5'
+        target_label: alert_title
+      - source_labels: [alertname, container, namespace, cluster, env]
+        separator: ' · '
+        regex: '(.+) · (.+) · (.+) · (.+) · (.+)'
+        replacement: '$1 — $2 · $3 · $4/$5'
+        target_label: alert_title
     resources:
       requests:
         cpu: 100m

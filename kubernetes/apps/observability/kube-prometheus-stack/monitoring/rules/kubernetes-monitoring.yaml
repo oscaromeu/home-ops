@@ -12,7 +12,6 @@ spec:
       rules:
         - alert: KubeJobCompletion
           annotations:
-            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             description: Job {{ $labels.namespace }}/{{ $labels.job_name }} is taking more than 12 hours to complete.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubejobcompletion
             summary: Job did not complete in time
@@ -25,7 +24,6 @@ spec:
       rules:
         - alert: AggregatedAPIErrors
           annotations:
-            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             description: An aggregated API {{ $labels.name }}/{{ $labels.namespace }} has reported errors. It has appeared unavailable {{ $value | humanize }} times averaged over the past 10m.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/aggregatedapierrors
             summary: An aggregated API has reported errors.
@@ -35,7 +33,6 @@ spec:
             severity: warning
         - alert: AggregatedAPIDown
           annotations:
-            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             description: An aggregated API {{ $labels.name }}/{{ $labels.namespace }} has been only {{ $value | humanize }}% available over the last 10m.
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/aggregatedapidown
             summary: An aggregated API is down.

@@ -12,7 +12,6 @@ spec:
       rules:
         - alert: E2EProbeFailed
           annotations:
-            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: E2E probe {{ $labels.job }} is failing.
             description: >-
               Probe {{ $labels.job }} ({{ $labels.env }}) reported

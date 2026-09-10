@@ -12,7 +12,6 @@ spec:
       rules:
         - alert: DeadMansSwitch
           annotations:
-            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             description: |
               This is an alert meant to ensure that the entire alerting pipeline is functional.
               This alert is always firing, therefore it should always be firing in Alertmanager
