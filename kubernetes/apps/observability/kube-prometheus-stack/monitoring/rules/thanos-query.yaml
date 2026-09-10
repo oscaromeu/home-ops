@@ -18,6 +18,7 @@ spec:
           labels:
             severity: warning
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: Thanos Query is not running
         - alert: ThanosQueryGrpcErrorRate
           expr: rate(grpc_server_handled_total{grpc_code=~"Unknown|ResourceExhausted|Internal|Unavailable",job="thanos-query-http"}[5m]) > 0
@@ -25,5 +26,6 @@ spec:
           labels:
             severity: warning
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: Thanos Query is returning Internal/Unavailable errors
             description: Grafana is not showing metrics

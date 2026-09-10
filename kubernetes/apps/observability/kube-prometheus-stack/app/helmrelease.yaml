@@ -51,5 +51,21 @@ spec:
     cleanPrometheusOperatorObjectNames: true
     defaultRules:
       additionalRuleGroupAnnotations:
-        kubernetesResources:
-          alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
+        alertmanager: &alert_title
+          alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
+        configReloaders: *alert_title
+        etcd: *alert_title
+        general: *alert_title
+        kubeApiserverSlos: *alert_title
+        kubeControllerManager: *alert_title
+        kubeProxy: *alert_title
+        kubeSchedulerAlerting: *alert_title
+        kubeStateMetrics: *alert_title
+        kubernetesApps: *alert_title
+        kubernetesResources: *alert_title
+        kubernetesStorage: *alert_title
+        kubernetesSystem: *alert_title
+        network: *alert_title
+        nodeExporterAlerting: *alert_title
+        prometheus: *alert_title
+        prometheusOperator: *alert_title
