@@ -13,6 +13,7 @@ spec:
       rules:
         - alert: ExporterDown
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: Crunchy postgres_exporter metrics are absent.
             description: >-
               No pg_up series is being scraped. The exporter sidecar or the
@@ -24,6 +25,7 @@ spec:
             severity: critical
         - alert: PGExporterScrapeError
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: postgres_exporter on {{ $labels.pod }} has scrape errors.
             description: >-
               The exporter is up but some monitoring queries fail, so part of
@@ -34,6 +36,7 @@ spec:
             severity: warning
         - alert: PGIsUp
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: PostgreSQL on {{ $labels.pod }} is not accepting connections.
           expr: pg_up < 1
           for: 1m
@@ -41,6 +44,7 @@ spec:
             severity: critical
         - alert: PGNoPrimary
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: Cluster {{ $labels.pg_cluster }} has no primary instance.
           expr: max by (pg_cluster) (ccp_is_in_recovery_status) < 2
           for: 1m
@@ -48,6 +52,7 @@ spec:
             severity: critical
         - alert: PGClusterRoleChange
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: Cluster {{ $labels.pg_cluster }} had a switchover/failover.
           expr: >-
             count by (pg_cluster) (ccp_is_in_recovery_status !=
@@ -57,6 +62,7 @@ spec:
             severity: warning
         - alert: PGConnPerc
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               {{ $labels.pg_cluster }} ({{ $labels.pod }}) is using
               {{ $value | printf "%.0f" }}% of max_connections.
@@ -66,6 +72,7 @@ spec:
             severity: warning
         - alert: PGConnPerc
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               {{ $labels.pg_cluster }} ({{ $labels.pod }}) is using
               {{ $value | printf "%.0f" }}% of max_connections.
@@ -75,6 +82,7 @@ spec:
             severity: critical
         - alert: PGDiskSize
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               {{ $labels.pod }} data disk ({{ $labels.mount_point }}) at
               {{ $value | printf "%.0f" }}%.
@@ -86,6 +94,7 @@ spec:
             severity: warning
         - alert: PGDiskSize
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               {{ $labels.pod }} data disk ({{ $labels.mount_point }}) at
               {{ $value | printf "%.0f" }}%.
@@ -97,6 +106,7 @@ spec:
             severity: critical
         - alert: DiskFillPredict
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               {{ $labels.pod }} data disk is predicted to fill within 24h at
               the current growth rate.
@@ -109,6 +119,7 @@ spec:
             severity: warning
         - alert: PGReplicationByteLag
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               {{ $labels.pg_cluster }} has a replica lagging
               {{ $value | humanize1024 }}B behind the primary.
@@ -118,6 +129,7 @@ spec:
             severity: warning
         - alert: PGReplicationByteLag
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               {{ $labels.pg_cluster }} has a replica lagging
               {{ $value | humanize1024 }}B behind the primary.
@@ -127,6 +139,7 @@ spec:
             severity: critical
         - alert: PGXIDWraparound
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               {{ $labels.pg_cluster }} is {{ $value | printf "%.0f" }}% towards
               transaction ID wraparound.
@@ -136,6 +149,7 @@ spec:
             severity: warning
         - alert: PGXIDWraparound
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               {{ $labels.pg_cluster }} is {{ $value | printf "%.0f" }}% towards
               transaction ID wraparound.
@@ -145,6 +159,7 @@ spec:
             severity: critical
         - alert: PGEmergencyVacuum
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               {{ $labels.pg_cluster }} is {{ $value | printf "%.0f" }}% beyond
               autovacuum_freeze_max_age — autovacuum is not keeping up.
@@ -154,6 +169,7 @@ spec:
             severity: warning
         - alert: PGEmergencyVacuum
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               {{ $labels.pg_cluster }} is {{ $value | printf "%.0f" }}% beyond
               autovacuum_freeze_max_age — autovacuum is not keeping up.
@@ -163,6 +179,7 @@ spec:
             severity: critical
         - alert: PGArchiveCommandStatus
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               {{ $labels.pg_cluster }} has a recent archive_command failure —
               WAL archiving to pgBackRest is broken.
@@ -172,6 +189,7 @@ spec:
             severity: critical
         - alert: PGIdleTxn
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               {{ $labels.pg_cluster }} has a session idle in transaction for
               over 15 minutes.
@@ -181,6 +199,7 @@ spec:
             severity: warning
         - alert: PGQueryTime
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               {{ $labels.pg_cluster }} has a query running for over 24 hours.
           expr: ccp_connection_stats_max_query_time > 86400
@@ -189,6 +208,7 @@ spec:
             severity: warning
         - alert: PGSequenceExhaustion
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               {{ $labels.pg_cluster }} has {{ $value }} sequence(s) over 75%
               used. Check SELECT * FROM monitor.sequence_status() WHERE percent >= 75.
@@ -198,6 +218,7 @@ spec:
             severity: warning
         - alert: PGSettingsPendingRestart
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               {{ $labels.pg_cluster }} has settings in pending_restart state.
           expr: ccp_settings_pending_restart_count > 0
@@ -210,6 +231,7 @@ spec:
         # incr hourly 2-23 (3h overnight gap), diff daily 01:00, full weekly Sun 01:00
         - alert: PGBackRestLastCompletedIncr
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               No pgBackRest incremental backup for {{ $labels.pg_cluster }} in
               {{ $value | humanizeDuration }} — the restore chain is going stale.
@@ -219,6 +241,7 @@ spec:
             severity: critical
         - alert: PGBackRestLastCompletedDiff
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               No pgBackRest differential backup for {{ $labels.pg_cluster }} in
               {{ $value | humanizeDuration }}.
@@ -228,6 +251,7 @@ spec:
             severity: critical
         - alert: PGBackRestLastCompletedFull
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               No pgBackRest full backup for {{ $labels.pg_cluster }} in
               {{ $value | humanizeDuration }}.
@@ -237,6 +261,7 @@ spec:
             severity: critical
         - alert: PGBackRestAbsentFull
           annotations:
+            alert_title: '{{ $labels.alertname }} — {{ or $labels.container $labels.pod $labels.node $labels.instance $labels.job $labels.service "cluster" }} · {{ or $labels.namespace "-" }} · {{ $labels.cluster }}/{{ $labels.env }}'
             summary: >-
               pgBackRest backup metrics are absent — pgbackrest info is failing
               on the target, backup state is unknown.
