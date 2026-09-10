@@ -33,21 +33,59 @@ prometheus:
         regex: '(.+) · (.+) · (.+)'
         replacement: '$1 — $2/$3'
         target_label: alert_title
+      - source_labels: [node]
+        regex: '(.+)'
+        target_label: __resource
+      - source_labels: [instance]
+        regex: '(.+)'
+        target_label: __resource
+      - source_labels: [pod]
+        regex: '(.+)'
+        target_label: __resource
+      - source_labels: [container]
+        regex: '(.+)'
+        target_label: __resource
+      - source_labels: [resourcequota]
+        regex: '(.+)'
+        target_label: __resource
+      - source_labels: [persistentvolumeclaim]
+        regex: '(.+)'
+        target_label: __resource
+      - source_labels: [horizontalpodautoscaler]
+        regex: '(.+)'
+        target_label: __resource
+      - source_labels: [daemonset]
+        regex: '(.+)'
+        target_label: __resource
+      - source_labels: [statefulset]
+        regex: '(.+)'
+        target_label: __resource
+      - source_labels: [deployment]
+        regex: '(.+)'
+        target_label: __resource
+      - source_labels: [job_name]
+        regex: '(.+)'
+        target_label: __resource
+      - source_labels: [cronjob]
+        regex: '(.+)'
+        target_label: __resource
+      - source_labels: [alertname, __resource, cluster, env]
+        separator: ' · '
+        regex: '(.+) · (.+) · (.+) · (.+)'
+        replacement: '$1 — $2 · $3/$4'
+        target_label: alert_title
+      - source_labels: [alertname, __resource, namespace, cluster, env]
+        separator: ' · '
+        regex: '(.+) · (.+) · (.+) · (.+) · (.+)'
+        replacement: '$1 — $2 · $3 · $4/$5'
+        target_label: alert_title
       - source_labels: [alertname, job, namespace, cluster, env]
         separator: ' · '
-        regex: '(.+) · (.+) · (.+) · (.+) · (.+)'
-        replacement: '$1 — $2 · $3 · $4/$5'
+        regex: 'TargetDown · (.+) · (.+) · (.+) · (.+)'
+        replacement: 'TargetDown — $1 · $2 · $3/$4'
         target_label: alert_title
-      - source_labels: [alertname, pod, namespace, cluster, env]
-        separator: ' · '
-        regex: '(.+) · (.+) · (.+) · (.+) · (.+)'
-        replacement: '$1 — $2 · $3 · $4/$5'
-        target_label: alert_title
-      - source_labels: [alertname, container, namespace, cluster, env]
-        separator: ' · '
-        regex: '(.+) · (.+) · (.+) · (.+) · (.+)'
-        replacement: '$1 — $2 · $3 · $4/$5'
-        target_label: alert_title
+      - regex: __resource
+        action: labeldrop
     resources:
       requests:
         cpu: 100m
