@@ -19,9 +19,9 @@ spec:
             image:
               repository: ghcr.io/home-operations/postgres-init
               tag: 18.6@sha256:b6d3af974df781c673d37e49bdddfa14a6f5be28b18d2cb7713f0449bea4057b
-            envFrom: &envFrom
+            envFrom:
               - secretRef:
-                  name: postgres-${postgres_cluster_version}-pguser-atuin
+                  name: atuin-postgres-credentials
         containers:
           app:
             image:
@@ -38,7 +38,11 @@ spec:
               ATUIN_TLS__ENABLE: false
               ATUIN_TLS__CERT_PATH: ""
               ATUIN_TLS__PKEY_PATH: ""
-            envFrom: *envFrom
+              ATUIN_DB_URI:
+                valueFrom:
+                  secretKeyRef:
+                    name: atuin-postgres-credentials
+                    key: uri
             args: ["start"]
             securityContext:
               allowPrivilegeEscalation: false

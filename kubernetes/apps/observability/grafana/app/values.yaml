@@ -4,7 +4,7 @@ extraInitContainers:
     image: ghcr.io/home-operations/postgres-init:18@sha256:b6d3af974df781c673d37e49bdddfa14a6f5be28b18d2cb7713f0449bea4057b
     envFrom:
       - secretRef:
-          name: postgres-${postgres_cluster_version}-pguser-grafana
+          name: grafana-postgres-credentials
 admin:
   existingSecret: grafana-admin-secret
 replicas: 2
@@ -23,9 +23,23 @@ env:
   # Database
   GF_DATABASE_SSL_MODE: disable
   GF_DATABASE_TYPE: postgres
-envFromSecrets:
-  - name: postgres-${postgres_cluster_version}-pguser-grafana
 envValueFrom:
+  GF_DATABASE_NAME:
+    secretKeyRef:
+      name: grafana-postgres-credentials
+      key: dbname
+  GF_DATABASE_HOST:
+    secretKeyRef:
+      name: grafana-postgres-credentials
+      key: host
+  GF_DATABASE_PASSWORD:
+    secretKeyRef:
+      name: grafana-postgres-credentials
+      key: password
+  GF_DATABASE_USER:
+    secretKeyRef:
+      name: grafana-postgres-credentials
+      key: user
   GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET:
     secretKeyRef:
       name: grafana-kanidm-oauth2-credentials
