@@ -92,6 +92,11 @@ spec:
         - test
       password: *password
       options: 'CREATEDB CREATEROLE'
+    - name: test2
+      databases:
+        - test2
+      password: *password
+      options: 'CREATEDB CREATEROLE'
   backups:
     pgbackrest:
       configuration: &backupConfig
