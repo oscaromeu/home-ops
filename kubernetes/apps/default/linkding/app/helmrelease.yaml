@@ -18,11 +18,33 @@ spec:
             image:
               repository: ghcr.io/sissbruecker/linkding
               tag: 1.46.2@sha256:0c0a9a04c7ebd644293c37f98710872fe7cdff0ea1ff7fd9be4d235e4c4678d2
-            envFrom: &envFrom
-              - secretRef:
-                  name: postgres-${postgres_cluster_version}-pguser-linkding
             env:
               LD_DB_ENGINE: "postgres"
+              LD_DB_DATABASE:
+                valueFrom:
+                  secretKeyRef:
+                    name: linkding-postgres-credentials
+                    key: dbname
+              LD_DB_HOST:
+                valueFrom:
+                  secretKeyRef:
+                    name: linkding-postgres-credentials
+                    key: host
+              LD_DB_PORT:
+                valueFrom:
+                  secretKeyRef:
+                    name: linkding-postgres-credentials
+                    key: port
+              LD_DB_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: linkding-postgres-credentials
+                    key: password
+              LD_DB_USER:
+                valueFrom:
+                  secretKeyRef:
+                    name: linkding-postgres-credentials
+                    key: user
             probes:
               liveness: &probes
                 enabled: true

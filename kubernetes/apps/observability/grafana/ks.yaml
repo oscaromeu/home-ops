@@ -9,7 +9,7 @@ spec:
       postgres_cluster_version: "v17-1"
   dependsOn:
     - name: kube-prometheus-stack
-    - name: crunchy-postgres-cluster-clusterexternalsecrets
+    - name: crunchy-postgres-bootstrap
       namespace: databases
   targetNamespace: observability
   path: ./kubernetes/apps/observability/grafana/app
