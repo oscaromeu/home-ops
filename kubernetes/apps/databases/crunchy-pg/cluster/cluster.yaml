@@ -85,6 +85,13 @@ spec:
         - kguardian
       password: *password
       options: 'CREATEDB CREATEROLE'
+    # Disposable - validates the ResourceSet-templated GRANT job before
+    # rolling the pattern out to real apps. Safe to drop once validated.
+    - name: test
+      databases:
+        - test
+      password: *password
+      options: 'CREATEDB CREATEROLE'
   backups:
     pgbackrest:
       configuration: &backupConfig
