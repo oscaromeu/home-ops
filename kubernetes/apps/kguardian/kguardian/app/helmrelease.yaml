@@ -29,14 +29,14 @@ spec:
         limits:
           memory: 512Mi
     database:
-      persistence:
-        storageClassName: openebs-hostpath
-        size: 5Gi
-      resources:
-        requests:
-          cpu: 100m
-          memory: 256Mi
-        limits:
-          memory: 512Mi
+      enabled: false
+      user: kguardian
+      databaseName: kguardian
+      existingSecret: kguardian-postgres-credentials
+      passwordSecretKey: password
+      external:
+        host: postgres-${postgres_cluster_version}-primary.databases.svc
+        port: 5432
+        sslMode: prefer
     telemetry:
       enabled: false

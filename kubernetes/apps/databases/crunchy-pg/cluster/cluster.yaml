@@ -80,6 +80,11 @@ spec:
         - grafana
       password: *password
       options: 'CREATEDB CREATEROLE'
+    - name: kguardian
+      databases:
+        - kguardian
+      password: *password
+      options: 'CREATEDB CREATEROLE'
   backups:
     pgbackrest:
       configuration: &backupConfig

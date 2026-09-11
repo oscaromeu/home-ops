@@ -5,6 +5,9 @@ kind: Kustomization
 metadata:
   name: kguardian
 spec:
+  dependsOn:
+    - name: crunchy-postgres-cluster-clusterexternalsecrets
+      namespace: databases
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
@@ -12,6 +15,9 @@ spec:
       namespace: kguardian
   interval: 1h
   path: "./kubernetes/apps/kguardian/kguardian/app"
+  postBuild:
+    substitute:
+      postgres_cluster_version: "v17-1"
   prune: true
   sourceRef:
     kind: GitRepository
