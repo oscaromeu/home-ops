@@ -9,7 +9,10 @@ spec:
       namespace: external-secrets
     - name: envoy-gateway
       namespace: network
-    #- name: authelia
-    #  namespace: kube-system
+    - name: crunchy-postgres-bootstrap
+      namespace: databases
+  postBuild:
+    substitute:
+      postgres_cluster_version: "v17-1"
   path: ./kubernetes/apps/default/outline/app
   targetNamespace: default

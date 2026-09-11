@@ -8,6 +8,8 @@ spec:
   inputs:
     - app: kguardian
       database: kguardian
+    - app: outline
+      database: outline
     - app: atuin
       database: atuin
     - app: grafana
