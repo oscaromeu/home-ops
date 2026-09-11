@@ -21,14 +21,59 @@ spec:
               tag: 2.6.0@sha256:417ada6f94e81f0267aa2f007d0a811fc82d38dd2aa58351e3ea520ca01c2ea5
             envFrom:
               - secretRef:
-                  name: vikunja-secret
-              - secretRef:
-                  name: vikunja-secret-postgres-superpass
-              - secretRef:
                   name: vikunja-service-jwt-secret
             env:
               VIKUNJA_SERVICE_PUBLICURL: &host "https://{{ .Release.Name }}.${SECRET_DOMAIN}"
               VIKUNJA_DATABASE_TYPE: postgres
+              VIKUNJA_DATABASE_HOST:
+                valueFrom:
+                  secretKeyRef:
+                    name: vikunja-postgres-credentials
+                    key: host
+              VIKUNJA_DATABASE_DATABASE:
+                valueFrom:
+                  secretKeyRef:
+                    name: vikunja-postgres-credentials
+                    key: dbname
+              VIKUNJA_DATABASE_USER:
+                valueFrom:
+                  secretKeyRef:
+                    name: vikunja-postgres-credentials
+                    key: user
+              VIKUNJA_DATABASE_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: vikunja-postgres-credentials
+                    key: password
+              INIT_POSTGRES_DBNAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: vikunja-postgres-credentials
+                    key: INIT_POSTGRES_DBNAME
+              INIT_POSTGRES_HOST:
+                valueFrom:
+                  secretKeyRef:
+                    name: vikunja-postgres-credentials
+                    key: INIT_POSTGRES_HOST
+              INIT_POSTGRES_USER:
+                valueFrom:
+                  secretKeyRef:
+                    name: vikunja-postgres-credentials
+                    key: INIT_POSTGRES_USER
+              INIT_POSTGRES_PASS:
+                valueFrom:
+                  secretKeyRef:
+                    name: vikunja-postgres-credentials
+                    key: INIT_POSTGRES_PASS
+              INIT_POSTGRES_SUPER_PASS:
+                valueFrom:
+                  secretKeyRef:
+                    name: vikunja-postgres-credentials
+                    key: INIT_POSTGRES_SUPER_PASS
+              "config.yml": |
+                auth:
+                  local:
+                    enabled: false
             resources:
               requests:
                 cpu: 5m

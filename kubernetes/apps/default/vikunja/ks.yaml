@@ -9,7 +9,7 @@ spec:
       namespace: external-secrets
     - name: envoy-gateway
       namespace: network
-    - name: crunchy-postgres-cluster-clusterexternalsecrets
+    - name: crunchy-postgres-bootstrap
       namespace: databases
   path: ./kubernetes/apps/default/vikunja/config
   targetNamespace: default
