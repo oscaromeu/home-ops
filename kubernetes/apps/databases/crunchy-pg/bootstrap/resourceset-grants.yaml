@@ -18,7 +18,7 @@ spec:
         namespace: databases
       spec:
         backoffLimit: 3
-        ttlSecondsAfterFinished: 300
+        # No ttlSecondsAfterFinished: the flux-operator docs explicitly warn
         template:
           spec:
             restartPolicy: Never
