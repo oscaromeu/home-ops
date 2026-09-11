@@ -6,10 +6,6 @@ metadata:
   name: postgres-schema-grants
 spec:
   inputs:
-    - app: test
-      database: test
-    - app: test2
-      database: test2
     - app: kguardian
       database: kguardian
     - app: atuin
