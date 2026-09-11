@@ -6,7 +6,7 @@ metadata:
   name: kguardian
 spec:
   dependsOn:
-    - name: crunchy-postgres-cluster-clusterexternalsecrets
+    - name: crunchy-postgres-bootstrap
       namespace: databases
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2

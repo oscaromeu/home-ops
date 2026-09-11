@@ -10,6 +10,8 @@ spec:
       database: test
     - app: test2
       database: test2
+    - app: kguardian
+      database: kguardian
   resources:
     - apiVersion: batch/v1
       kind: Job
