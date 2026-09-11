@@ -1,0 +1,56 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: falco
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: falco
+  interval: 30m
+  values:
+    driver:
+      kind: modern_ebpf
+    collectors:
+      docker:
+        enabled: false
+      crio:
+        enabled: false
+      containerd:
+        enabled: true
+      kubernetes:
+        enabled: true
+    resources:
+      requests:
+        cpu: 100m
+        memory: 512Mi
+      limits:
+        memory: 1Gi
+    falco:
+      json_output: true
+      grpc:
+        enabled: true
+      grpc_output:
+        enabled: true
+      metrics:
+        enabled: true
+        interval: 15m
+    falcosidekick:
+      enabled: true
+      replicaCount: 1
+      resources:
+        requests:
+          cpu: 10m
+          memory: 64Mi
+        limits:
+          memory: 256Mi
+      webui:
+        enabled: true
+        replicaCount: 1
+      config:
+        alertmanager:
+          hostport: http://kube-prometheus-stack-alertmanager.observability.svc.cluster.local:9093
+      prometheus:
+        serviceMonitor:
+          enabled: true
