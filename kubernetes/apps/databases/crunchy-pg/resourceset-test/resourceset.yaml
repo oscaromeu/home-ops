@@ -5,13 +5,11 @@ kind: ResourceSet
 metadata:
   name: postgres-schema-grants
 spec:
-  # EXPERIMENTAL - validates the ResourceSet templating mechanism and a
-  # Job-based `GRANT ON SCHEMA public` before rolling this pattern out to
-  # real apps. Only "test" here on purpose; see docs in
-  # kguardian-postgres-public-schema.md for why this exists.
   inputs:
     - app: test
       database: test
+    - app: test2
+      database: test2
   resources:
     - apiVersion: batch/v1
       kind: Job
