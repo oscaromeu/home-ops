@@ -12,6 +12,14 @@ spec:
       database: test2
     - app: kguardian
       database: kguardian
+    - app: atuin
+      database: atuin
+    - app: grafana
+      database: grafana
+    - app: linkding
+      database: linkding
+    - app: vikunja
+      database: vikunja
   resources:
     - apiVersion: batch/v1
       kind: Job

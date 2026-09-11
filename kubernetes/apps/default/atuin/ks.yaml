@@ -7,7 +7,7 @@ spec:
   dependsOn:
     - name: envoy-gateway
       namespace: network
-    - name: crunchy-postgres-cluster-clusterexternalsecrets
+    - name: crunchy-postgres-bootstrap
       namespace: databases
   path: ./kubernetes/apps/default/atuin/app
   postBuild:
