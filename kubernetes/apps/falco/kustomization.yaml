@@ -8,4 +8,4 @@ components:
 
 resources:
   - ./namespace.yaml
-  - ./falco/ks.yaml
+#  - ./falco/ks.yaml
