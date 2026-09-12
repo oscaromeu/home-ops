@@ -9,4 +9,4 @@ components:
 resources:
   - ./namespace.yaml
   - ./kanidm-operator/ks.yaml
-  - ./openbao/ks.yaml
+  #- ./openbao/ks.yaml
