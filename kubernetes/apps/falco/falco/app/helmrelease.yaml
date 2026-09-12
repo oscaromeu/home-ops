@@ -30,7 +30,7 @@ spec:
     falco:
       json_output: true
       metrics:
-        enabled: true
+        enabled: false
         interval: 15m
     falcosidekick:
       enabled: true
