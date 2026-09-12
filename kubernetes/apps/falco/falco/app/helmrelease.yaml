@@ -29,10 +29,6 @@ spec:
         memory: 1Gi
     falco:
       json_output: true
-      grpc:
-        enabled: true
-      grpc_output:
-        enabled: true
       metrics:
         enabled: true
         interval: 15m
