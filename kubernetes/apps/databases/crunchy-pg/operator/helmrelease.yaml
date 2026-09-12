@@ -16,9 +16,9 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
-  dependsOn:
-    - name: openebs
-      namespace: openebs-system
+  #  dependsOn:
+  #    - name: openebs
+  #      namespace: openebs-system
   values:
     install:
       clusterLabels:
