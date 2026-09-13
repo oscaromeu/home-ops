@@ -1,0 +1,12 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: glance
+spec:
+  dependsOn:
+    - name: envoy-gateway
+      namespace: network
+  path: ./kubernetes/apps/default/glance/app
+  targetNamespace: default
