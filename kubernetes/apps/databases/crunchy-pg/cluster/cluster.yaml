@@ -85,6 +85,11 @@ spec:
         - kguardian
       password: *password
       options: 'CREATEDB CREATEROLE'
+    - name: memos
+      databases:
+        - memos
+      password: *password
+      options: 'CREATEDB CREATEROLE'
   backups:
     pgbackrest:
       configuration: &backupConfig

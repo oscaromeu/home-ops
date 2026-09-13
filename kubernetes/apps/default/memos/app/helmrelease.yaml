@@ -1,0 +1,124 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app memos
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: memos
+  values:
+    controllers:
+      memos:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        # https://usememos.com/docs/configuration/deployment-configuration
+        initContainers:
+          init-oidc-config:
+            image:
+              repository: docker.io/library/busybox
+              tag: 1.37.0@sha256:9db7b59979c38555a39def84a31fb98b5296952f9e3afd4f6f11f05b07adfab0
+            command: ["sh", "-c"]
+            args:
+              - |
+                cat <<JSON > /etc/secrets/memos-idp-memos.json
+                {
+                  "uid": "memos",
+                  "name": "Kanidm",
+                  "type": "OAUTH2",
+                  "config": {
+                    "oauth2Config": {
+                      "clientId": "$CLIENT_ID",
+                      "clientSecret": "$CLIENT_SECRET",
+                      "authUrl": "https://idm.${SECRET_DOMAIN}/ui/oauth2",
+                      "tokenUrl": "https://idm.${SECRET_DOMAIN}/oauth2/token",
+                      "userInfoUrl": "https://idm.${SECRET_DOMAIN}/oauth2/openid/memos/userinfo",
+                      "scopes": ["openid", "profile", "email"],
+                      "fieldMapping": {
+                        "identifier": "preferred_username",
+                        "displayName": "name",
+                        "email": "email"
+                      }
+                    }
+                  }
+                }
+                JSON
+            envFrom:
+              - secretRef:
+                  name: memos-kanidm-oauth2-credentials
+        containers:
+          app:
+            image:
+              repository: docker.io/neosmemo/memos
+              tag: 0.30.0@sha256:71a5b4738d1bed96e92112004054f0888e92791b64eb78afd79077c96e6f9327
+            env:
+              MEMOS_DRIVER: postgres
+              MEMOS_PORT: &port "5230"
+              MEMOS_INSTANCE_URL: "https://memos.${SECRET_DOMAIN}"
+              MEMOS_DSN:
+                valueFrom:
+                  secretKeyRef:
+                    name: memos-postgres-credentials
+                    key: uri
+              INIT_POSTGRES_DBNAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: memos-postgres-credentials
+                    key: INIT_POSTGRES_DBNAME
+              INIT_POSTGRES_HOST:
+                valueFrom:
+                  secretKeyRef:
+                    name: memos-postgres-credentials
+                    key: INIT_POSTGRES_HOST
+              INIT_POSTGRES_USER:
+                valueFrom:
+                  secretKeyRef:
+                    name: memos-postgres-credentials
+                    key: INIT_POSTGRES_USER
+              INIT_POSTGRES_PASS:
+                valueFrom:
+                  secretKeyRef:
+                    name: memos-postgres-credentials
+                    key: INIT_POSTGRES_PASS
+              INIT_POSTGRES_SUPER_PASS:
+                valueFrom:
+                  secretKeyRef:
+                    name: memos-postgres-credentials
+                    key: INIT_POSTGRES_SUPER_PASS
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 256Mi
+    service:
+      app:
+        ports:
+          http:
+            port: *port
+    route:
+      app:
+        hostnames: ["memos.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+    persistence:
+      data:
+        existingClaim: memos
+        globalMounts:
+          - path: /var/opt/memos
+      idp-config:
+        type: emptyDir
+        advancedMounts:
+          memos:
+            init-oidc-config:
+              - path: /etc/secrets
+            app:
+              - path: /etc/secrets
+                readOnly: true

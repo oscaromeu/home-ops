@@ -1,0 +1,11 @@
+---
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmGroup
+metadata:
+  name: memos-users
+spec:
+  kanidmRef:
+    name: kanidm
+  kanidmName: memos_users
+  members:
+    - admin-account

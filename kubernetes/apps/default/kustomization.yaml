@@ -24,6 +24,7 @@ resources:
   - ./jellyseerr/ks.yaml
   - ./kavita/ks.yaml
   - ./linkding/ks.yaml
+  - ./memos/ks.yaml
   - ./metube/ks.yaml
   - ./navidrome/ks.yaml
   - ./outline/ks.yaml

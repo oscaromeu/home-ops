@@ -8,4 +8,5 @@ resources:
   - ./person-admin.yaml
   - ./group-zot-users.yaml
   - ./group-outline-users.yaml
+  - ./group-memos-users.yaml
   - ./group-admins.yaml

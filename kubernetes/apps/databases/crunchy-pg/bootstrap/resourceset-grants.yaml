@@ -18,6 +18,8 @@ spec:
       database: linkding
     - app: vikunja
       database: vikunja
+    - app: memos
+      database: memos
   resources:
     - apiVersion: batch/v1
       kind: Job
