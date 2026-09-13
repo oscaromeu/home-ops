@@ -18,209 +18,244 @@ pages:
       - size: small
         widgets:
           - type: calendar
+          - type: weather
+            location: Barberà del Vallès, Spain
+            units: metric
+            hour-format: 24h
       - size: full
         widgets:
-          - type: monitor
-            title: Media
-            cache: 1m
-            sites:
-              - title: Jellyfin
-                url: https://jellyfin.${SECRET_DOMAIN}
-                check-url: http://jellyfin.default.svc.cluster.local:8096
-                icon: di:jellyfin
-              - title: Jellyseerr
-                url: https://jellyseerr.${SECRET_DOMAIN}
-                check-url: http://jellyseerr.default.svc.cluster.local:5055
-                icon: di:jellyseerr
-              - title: Navidrome
-                url: https://navidrome.${SECRET_DOMAIN}
-                check-url: http://navidrome.default.svc.cluster.local:8080
-                icon: di:navidrome
-              - title: Feishin
-                url: https://music.${SECRET_DOMAIN}
-                check-url: http://feishin.default.svc.cluster.local:9180
-                icon: mdi:music-note
-              - title: Kavita
-                url: https://read.${SECRET_DOMAIN}
-                check-url: http://kavita.default.svc.cluster.local:5000
-                icon: di:kavita
-              - title: Icecast
-                url: https://icecast.${SECRET_DOMAIN}
-                check-url: http://icecast.default.svc.cluster.local:8000
-                icon: mdi:radio
-              - title: SRS
-                url: https://srs.${SECRET_DOMAIN}
-                check-url: http://srs.default.svc.cluster.local:8080
-                icon: mdi:video-wireless
-          - type: monitor
-            title: Downloads
-            cache: 1m
-            sites:
-              - title: qBittorrent
-                url: https://qbittorrent.${SECRET_DOMAIN}
-                check-url: http://qbittorrent.default.svc.cluster.local:8080
-                icon: di:qbittorrent
-              - title: Prowlarr
-                url: https://prowlarr.${SECRET_DOMAIN}
-                check-url: http://prowlarr.default.svc.cluster.local:9696
-                icon: di:prowlarr
-              - title: Radarr
-                url: https://radarr.${SECRET_DOMAIN}
-                check-url: http://radarr.default.svc.cluster.local:7878
-                icon: di:radarr
-              - title: Sonarr
-                url: https://sonarr.${SECRET_DOMAIN}
-                check-url: http://sonarr.default.svc.cluster.local:8989
-                icon: di:sonarr
-              - title: Bazarr
-                url: https://bazarr.${SECRET_DOMAIN}
-                check-url: http://bazarr.default.svc.cluster.local:6767
-                icon: di:bazarr
-              - title: Pinchflat
-                url: https://pinchflat.${SECRET_DOMAIN}
-                check-url: http://pinchflat.default.svc.cluster.local:80
-                icon: mdi:youtube
-              - title: MeTube
-                url: https://metube.${SECRET_DOMAIN}
-                check-url: http://metube.default.svc.cluster.local:8081
-                icon: mdi:youtube
-          - type: monitor
-            title: Productivity
-            cache: 1m
-            sites:
-              - title: Vikunja
-                url: https://vikunja.${SECRET_DOMAIN}
-                check-url: http://vikunja.default.svc.cluster.local:3456
-                icon: di:vikunja
-              - title: Memos
-                url: https://memos.${SECRET_DOMAIN}
-                check-url: http://memos.default.svc.cluster.local:5230
-                icon: mdi:notebook-outline
-              - title: Outline
-                url: https://docs.${SECRET_DOMAIN}
-                check-url: http://outline.default.svc.cluster.local:8080
-                icon: di:outline
-              - title: Linkding
-                url: https://link.${SECRET_DOMAIN}
-                check-url: http://linkding.default.svc.cluster.local:9090
-                icon: di:linkding
-              - title: Atuin
-                url: https://sh.${SECRET_DOMAIN}
-                check-url: http://atuin.default.svc.cluster.local:80
-                icon: di:atuin
-              - title: Forgejo
-                url: https://git.${SECRET_DOMAIN}
-                check-url: http://forgejo.default.svc.cluster.local:3000
-                icon: di:forgejo
-              - title: Excalidraw
-                url: https://draw.${SECRET_DOMAIN}
-                check-url: http://excalidraw.default.svc.cluster.local:80
-                icon: mdi:draw-pen
-              - title: Filebrowser
-                url: https://fb.${SECRET_DOMAIN}
-                check-url: http://filebrowser.default.svc.cluster.local:80
-                icon: mdi:folder-multiple
-              - title: Copyparty
-                url: https://copyparty.${SECRET_DOMAIN}
-                check-url: http://copyparty.default.svc.cluster.local:3923
-                icon: mdi:folder-network
-              - title: Syncthing
-                url: https://sync.${SECRET_DOMAIN}
-                check-url: http://syncthing-app.default.svc.cluster.local:8384
-                icon: di:syncthing
-          - type: monitor
-            title: Storage
-            cache: 1m
-            sites:
-              - title: Zot
-                url: https://zot.${SECRET_DOMAIN}
-                check-url: http://zot.default.svc.cluster.local:5000
-                icon: mdi:package-variant-closed
-              - title: Garage S3
-                url: https://s3.${SECRET_DOMAIN}
-                check-url: http://garage.storage.svc.cluster.local:3900
-                icon: mdi:garage
-              - title: Garage Web
-                url: https://synthetics.${SECRET_DOMAIN}
-                check-url: http://garage.storage.svc.cluster.local:3902
-                icon: mdi:garage
-              - title: Garage WebUI
-                url: https://garage.${SECRET_DOMAIN}
-                check-url: http://garage-webui.storage.svc.cluster.local:3909
-                icon: mdi:garage
-          - type: monitor
-            title: Observability
-            cache: 1m
-            sites:
-              - title: Grafana
-                url: https://grafana.${SECRET_DOMAIN}
-                check-url: http://grafana.observability.svc.cluster.local:80
-                icon: di:grafana
-              - title: Alertmanager
-                url: https://alertmanager.${SECRET_DOMAIN}
-                check-url: http://kube-prometheus-stack-alertmanager.observability.svc.cluster.local:9093
-                icon: di:alertmanager
-              - title: Prometheus
-                url: https://prometheus.${SECRET_DOMAIN}
-                check-url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
-                icon: di:prometheus
-              - title: VictoriaLogs
-                url: https://victoria-logs.${SECRET_DOMAIN}
-                check-url: http://victoria-logs-server.observability.svc.cluster.local:9428
-                icon: mdi:database-search
-              - title: VictoriaTraces
-                url: https://victoria-traces.${SECRET_DOMAIN}
-                check-url: http://victoria-traces-server.observability.svc.cluster.local:10428
-                icon: mdi:chart-timeline-variant
-              - title: ClickHouse UI
-                url: https://ch-ui.${SECRET_DOMAIN}
-                check-url: http://ch-ui.observability.svc.cluster.local:3488
-                icon: di:clickhouse
-              - title: Hubble
-                url: https://hubble.${SECRET_DOMAIN}
-                check-url: http://hubble-ui.kube-system.svc.cluster.local:80
-                icon: di:cilium
-          - type: monitor
-            title: Platform
-            cache: 1m
-            sites:
-              - title: Kanidm
-                url: https://idm.${SECRET_DOMAIN}
-                check-url: https://kanidm.security.svc.cluster.local:8443
-                icon: mdi:key-chain
-              - title: Flux Operator
-                url: https://flux.${SECRET_DOMAIN}
-                check-url: http://flux-operator.flux-system.svc.cluster.local:9080
-                icon: di:flux
-              - title: Flux Webhook
-                url: https://flux-webhook.${SECRET_DOMAIN}
-                check-url: http://webhook-receiver.flux-system.svc.cluster.local:80
-                icon: di:flux
-              - title: kGuardian
-                url: https://kguardian.${SECRET_DOMAIN}
-                check-url: http://kguardian-frontend.kguardian.svc.cluster.local:5173
-                icon: mdi:shield-check
-              - title: UniFi
-                url: https://unifi.${SECRET_DOMAIN}
-                check-url: https://unifi.default.svc.cluster.local:443
-                icon: di:unifi
-          - type: monitor
-            title: Dev / Test
-            cache: 1m
-            sites:
-              - title: Podinfo
-                url: https://podinfo.${SECRET_DOMAIN}
-                check-url: http://podinfo.default.svc.cluster.local:9898
-                icon: mdi:information-outline
-              - title: Echo
-                url: https://echo.${SECRET_DOMAIN}
-                check-url: http://echo.default.svc.cluster.local:80
-                icon: mdi:chat-processing-outline
-              - title: Podinfo Foo
-                url: https://foo.${SECRET_DOMAIN}
-                check-url: http://foo-podinfo.develop.svc.cluster.local:9898
-                icon: mdi:information-outline
-              - title: Podinfo Bar
-                url: https://bar.${SECRET_DOMAIN}
-                check-url: http://bar-podinfo.develop.svc.cluster.local:9898
-                icon: mdi:information-outline
+          - type: group
+            widgets:
+              - type: monitor
+                title: Media
+                cache: 1m
+                style: compact
+                sites:
+                  - title: Jellyfin
+                    url: https://jellyfin.${SECRET_DOMAIN}
+                    check-url: http://jellyfin.default.svc.cluster.local:8096
+                    icon: di:jellyfin
+                  - title: Jellyseerr
+                    url: https://jellyseerr.${SECRET_DOMAIN}
+                    check-url: http://jellyseerr.default.svc.cluster.local:5055
+                    icon: di:jellyseerr
+                  - title: Navidrome
+                    url: https://navidrome.${SECRET_DOMAIN}
+                    check-url: http://navidrome.default.svc.cluster.local:8080
+                    icon: di:navidrome
+                  - title: Feishin
+                    url: https://music.${SECRET_DOMAIN}
+                    check-url: http://feishin.default.svc.cluster.local:9180
+                    icon: mdi:music-note
+                  - title: Kavita
+                    url: https://read.${SECRET_DOMAIN}
+                    check-url: http://kavita.default.svc.cluster.local:5000
+                    icon: di:kavita
+                  - title: Icecast
+                    url: https://icecast.${SECRET_DOMAIN}
+                    check-url: http://icecast.default.svc.cluster.local:8000
+                    icon: mdi:radio
+                  - title: SRS
+                    url: https://srs.${SECRET_DOMAIN}
+                    check-url: http://srs.default.svc.cluster.local:8080
+                    icon: mdi:video-wireless
+              - type: monitor
+                title: Downloads
+                cache: 1m
+                style: compact
+                sites:
+                  - title: qBittorrent
+                    url: https://qbittorrent.${SECRET_DOMAIN}
+                    check-url: http://qbittorrent.default.svc.cluster.local:8080
+                    icon: di:qbittorrent
+                  - title: Prowlarr
+                    url: https://prowlarr.${SECRET_DOMAIN}
+                    check-url: http://prowlarr.default.svc.cluster.local:9696
+                    icon: di:prowlarr
+                  - title: Radarr
+                    url: https://radarr.${SECRET_DOMAIN}
+                    check-url: http://radarr.default.svc.cluster.local:7878
+                    icon: di:radarr
+                  - title: Sonarr
+                    url: https://sonarr.${SECRET_DOMAIN}
+                    check-url: http://sonarr.default.svc.cluster.local:8989
+                    icon: di:sonarr
+                  - title: Bazarr
+                    url: https://bazarr.${SECRET_DOMAIN}
+                    check-url: http://bazarr.default.svc.cluster.local:6767
+                    icon: di:bazarr
+                  - title: Pinchflat
+                    url: https://pinchflat.${SECRET_DOMAIN}
+                    check-url: http://pinchflat.default.svc.cluster.local:80
+                    icon: mdi:youtube
+                  - title: MeTube
+                    url: https://metube.${SECRET_DOMAIN}
+                    check-url: http://metube.default.svc.cluster.local:8081
+                    icon: mdi:youtube
+              - type: monitor
+                title: Productivity
+                cache: 1m
+                style: compact
+                sites:
+                  - title: Vikunja
+                    url: https://vikunja.${SECRET_DOMAIN}
+                    check-url: http://vikunja.default.svc.cluster.local:3456
+                    icon: di:vikunja
+                  - title: Memos
+                    url: https://memos.${SECRET_DOMAIN}
+                    check-url: http://memos.default.svc.cluster.local:5230
+                    icon: mdi:notebook-outline
+                  - title: Outline
+                    url: https://docs.${SECRET_DOMAIN}
+                    check-url: http://outline.default.svc.cluster.local:8080
+                    icon: di:outline
+                  - title: Linkding
+                    url: https://link.${SECRET_DOMAIN}
+                    check-url: http://linkding.default.svc.cluster.local:9090
+                    icon: di:linkding
+                  - title: Atuin
+                    url: https://sh.${SECRET_DOMAIN}
+                    check-url: http://atuin.default.svc.cluster.local:80
+                    icon: di:atuin
+                  - title: Forgejo
+                    url: https://git.${SECRET_DOMAIN}
+                    check-url: http://forgejo.default.svc.cluster.local:3000
+                    icon: di:forgejo
+                  - title: Excalidraw
+                    url: https://draw.${SECRET_DOMAIN}
+                    check-url: http://excalidraw.default.svc.cluster.local:80
+                    icon: mdi:draw-pen
+                  - title: Filebrowser
+                    url: https://fb.${SECRET_DOMAIN}
+                    check-url: http://filebrowser.default.svc.cluster.local:80
+                    icon: mdi:folder-multiple
+                  - title: Copyparty
+                    url: https://copyparty.${SECRET_DOMAIN}
+                    check-url: http://copyparty.default.svc.cluster.local:3923
+                    icon: mdi:folder-network
+                  - title: Syncthing
+                    url: https://sync.${SECRET_DOMAIN}
+                    check-url: http://syncthing-app.default.svc.cluster.local:8384
+                    icon: di:syncthing
+              - type: monitor
+                title: Storage
+                cache: 1m
+                style: compact
+                sites:
+                  - title: Zot
+                    url: https://zot.${SECRET_DOMAIN}
+                    check-url: http://zot.default.svc.cluster.local:5000
+                    icon: mdi:package-variant-closed
+                  - title: Garage S3
+                    url: https://s3.${SECRET_DOMAIN}
+                    check-url: http://garage.storage.svc.cluster.local:3900
+                    icon: mdi:garage
+                  - title: Garage Web
+                    url: https://synthetics.${SECRET_DOMAIN}
+                    check-url: http://garage.storage.svc.cluster.local:3902
+                    icon: mdi:garage
+                  - title: Garage WebUI
+                    url: https://garage.${SECRET_DOMAIN}
+                    check-url: http://garage-webui.storage.svc.cluster.local:3909
+                    icon: mdi:garage
+              - type: monitor
+                title: Observability
+                cache: 1m
+                style: compact
+                sites:
+                  - title: Grafana
+                    url: https://grafana.${SECRET_DOMAIN}
+                    check-url: http://grafana.observability.svc.cluster.local:80
+                    icon: di:grafana
+                  - title: Alertmanager
+                    url: https://alertmanager.${SECRET_DOMAIN}
+                    check-url: http://kube-prometheus-stack-alertmanager.observability.svc.cluster.local:9093
+                    icon: di:alertmanager
+                  - title: Prometheus
+                    url: https://prometheus.${SECRET_DOMAIN}
+                    check-url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
+                    icon: di:prometheus
+                  - title: VictoriaLogs
+                    url: https://victoria-logs.${SECRET_DOMAIN}
+                    check-url: http://victoria-logs-server.observability.svc.cluster.local:9428
+                    icon: mdi:database-search
+                  - title: VictoriaTraces
+                    url: https://victoria-traces.${SECRET_DOMAIN}
+                    check-url: http://victoria-traces-server.observability.svc.cluster.local:10428
+                    icon: mdi:chart-timeline-variant
+                  - title: ClickHouse UI
+                    url: https://ch-ui.${SECRET_DOMAIN}
+                    check-url: http://ch-ui.observability.svc.cluster.local:3488
+                    icon: di:clickhouse
+                  - title: Hubble
+                    url: https://hubble.${SECRET_DOMAIN}
+                    check-url: http://hubble-ui.kube-system.svc.cluster.local:80
+                    icon: di:cilium
+              - type: monitor
+                title: Platform
+                cache: 1m
+                style: compact
+                sites:
+                  - title: Kanidm
+                    url: https://idm.${SECRET_DOMAIN}
+                    check-url: https://kanidm.security.svc.cluster.local:8443
+                    icon: mdi:key-chain
+                  - title: Flux Operator
+                    url: https://flux.${SECRET_DOMAIN}
+                    check-url: http://flux-operator.flux-system.svc.cluster.local:9080
+                    icon: di:flux
+                  - title: Flux Webhook
+                    url: https://flux-webhook.${SECRET_DOMAIN}
+                    check-url: http://webhook-receiver.flux-system.svc.cluster.local:80
+                    icon: di:flux
+                  - title: kGuardian
+                    url: https://kguardian.${SECRET_DOMAIN}
+                    check-url: http://kguardian-frontend.kguardian.svc.cluster.local:5173
+                    icon: mdi:shield-check
+                  - title: UniFi
+                    url: https://unifi.${SECRET_DOMAIN}
+                    check-url: https://unifi.default.svc.cluster.local:443
+                    icon: di:unifi
+              - type: monitor
+                title: Dev / Test
+                cache: 1m
+                style: compact
+                sites:
+                  - title: Podinfo
+                    url: https://podinfo.${SECRET_DOMAIN}
+                    check-url: http://podinfo.default.svc.cluster.local:9898
+                    icon: mdi:information-outline
+                  - title: Echo
+                    url: https://echo.${SECRET_DOMAIN}
+                    check-url: http://echo.default.svc.cluster.local:80
+                    icon: mdi:chat-processing-outline
+                  - title: Podinfo Foo
+                    url: https://foo.${SECRET_DOMAIN}
+                    check-url: http://foo-podinfo.develop.svc.cluster.local:9898
+                    icon: mdi:information-outline
+                  - title: Podinfo Bar
+                    url: https://bar.${SECRET_DOMAIN}
+                    check-url: http://bar-podinfo.develop.svc.cluster.local:9898
+                    icon: mdi:information-outline
+      - size: small
+        widgets:
+          - type: hacker-news
+            limit: 10
+            collapse-after: 5
+          - type: rss
+            title: RSS
+            feeds:
+              - url: https://www.vilaweb.cat/feed/
+                title: VilaWeb
+              - url: https://waxpoetics.com/blogs/news.atom
+                title: Wax Poetics News
+              - url: https://waxpoetics.com/blogs/articles.atom
+                title: Wax Poetics Articles
+              - url: https://feeds.bbci.co.uk/news/science_and_environment/rss.xml
+                title: BBC Science
+              - url: https://www.theguardian.com/world/rss
+                title: The Guardian
+              - url: https://jacobin.com/feed
+                title: Jacobin
+              - url: https://theintercept.com/feed/
+                title: The Intercept
