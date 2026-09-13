@@ -26,6 +26,13 @@ spec:
       metadata:
         name: postgres-grant-<< inputs.app >>
         namespace: databases
+        annotations:
+          # Kubernetes injects batch.kubernetes.io/controller-uid and
+          # job-name into spec.template.metadata.labels on creation, which
+          # then permanently diffs against this template and trips the
+          # "field is immutable" error on every later reconcile. Force tells
+          # the controller to delete+recreate on that conflict instead.
+          fluxcd.controlplane.io/force: enabled
       spec:
         backoffLimit: 3
         # No ttlSecondsAfterFinished: the flux-operator docs explicitly warn
