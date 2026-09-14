@@ -26,7 +26,8 @@ spec:
             image: &radioImage
               repository: ghcr.io/oscaromeu/twitch-radio-worker
               tag: rolling@sha256:274240b23274cb9c58f015d7aa144eff4d6251596309da5ec60d2db578b5187b
-            command: &radioCommand ["/usr/bin/catatonit", "--", "/bin/bash", "-c"]
+            command:
+              &radioCommand ["/usr/bin/catatonit", "--", "/bin/bash", "-c"]
             args: &radioArgs
               - |
                 set -uo pipefail
@@ -60,7 +61,6 @@ spec:
                 cpu: 50m
                 memory: 64Mi
               limits:
-                cpu: 500m
                 memory: 256Mi
 
       radio-2:
