@@ -1,0 +1,72 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: neuvector
+spec:
+  chart:
+    spec:
+      chart: core
+      version: '2.11.1'
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: neuvector
+  interval: 30m
+  values:
+    # Talos CRI socket; mounted into the enforcer as /run/runtime.sock
+    runtimePath: /run/containerd/containerd.sock
+
+    controller:
+      replicas: 1
+      strategy:
+        type: Recreate
+        rollingUpdate: null
+      pvc:
+        enabled: true
+        accessModes:
+          - ReadWriteOnce
+        storageClass: openebs-hostpath
+        capacity: 1Gi
+      resources:
+        requests:
+          cpu: 100m
+          memory: 512Mi
+        limits:
+          memory: 2Gi
+
+    enforcer:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          memory: 1Gi
+
+    manager:
+      env:
+        ssl: false
+      resources:
+        requests:
+          cpu: 50m
+          memory: 256Mi
+        limits:
+          memory: 512Mi
+
+    cve:
+      updater:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            memory: 256Mi
+      scanner:
+        replicas: 1
+        resources:
+          requests:
+            cpu: 100m
+            memory: 512Mi
+          limits:
+            memory: 2Gi
