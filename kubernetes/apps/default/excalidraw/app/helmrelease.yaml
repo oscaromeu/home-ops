@@ -17,21 +17,39 @@ spec:
               repository: docker.io/excalidraw/excalidraw
               tag: latest@sha256:f7ee194addd607bf831d2af0f0a34463dd4225e426cf35199ef0b12a803398e9
             probes:
-              liveness:
+              liveness: &probes
                 enabled: true
-              readiness:
-                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /
+                    port: &port 8080
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 5m
                 memory: 10Mi
               limits:
                 memory: 50Mi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 101
+        runAsGroup: 101
+        seccompProfile: { type: RuntimeDefault }
     service:
       app:
         ports:
           http:
-            port: &port 80
+            port: *port
     route:
       app:
         hostnames: ["draw.${SECRET_DOMAIN}"]
@@ -43,3 +61,28 @@ spec:
           - backendRefs:
               - identifier: app
                 port: *port
+    configMaps:
+      config:
+        data:
+          default.conf: |
+            server {
+              listen 8080;
+              location / {
+                root /usr/share/nginx/html;
+                index index.html;
+              }
+            }
+    persistence:
+      config:
+        type: configMap
+        name: excalidraw
+        globalMounts:
+          - path: /etc/nginx/conf.d/default.conf
+            subPath: default.conf
+      cache:
+        type: emptyDir
+        globalMounts:
+          - path: /var/cache/nginx
+            subPath: cache
+          - path: /var/run
+            subPath: run
