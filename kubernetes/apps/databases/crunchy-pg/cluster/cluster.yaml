@@ -90,6 +90,11 @@ spec:
         - memos
       password: *password
       options: 'CREATEDB CREATEROLE'
+    - name: vaultwarden
+      databases:
+        - vaultwarden
+      password: *password
+      options: 'CREATEDB CREATEROLE'
   backups:
     pgbackrest:
       configuration: &backupConfig

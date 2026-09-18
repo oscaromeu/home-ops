@@ -1,0 +1,108 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: vaultwarden
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: vaultwarden
+  values:
+    controllers:
+      vaultwarden:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: 18.6@sha256:b6d3af974df781c673d37e49bdddfa14a6f5be28b18d2cb7713f0449bea4057b
+            envFrom:
+              - secretRef:
+                  name: vaultwarden-postgres-credentials
+          init-db-owner:
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: 18.6@sha256:b6d3af974df781c673d37e49bdddfa14a6f5be28b18d2cb7713f0449bea4057b
+            command: ["bash", "-c"]
+            args:
+              - PGPASSWORD="$INIT_POSTGRES_SUPER_PASS" psql -h "$INIT_POSTGRES_HOST" -U postgres -d postgres -c "ALTER DATABASE \"$INIT_POSTGRES_DBNAME\" OWNER TO \"$INIT_POSTGRES_USER\""
+            envFrom:
+              - secretRef:
+                  name: vaultwarden-postgres-credentials
+        containers:
+          app:
+            image:
+              repository: docker.io/vaultwarden/server
+              tag: 1.37.3@sha256:1587c45feaa479f1f5e8af3b00eded36bff77bcf1880cf8dbf0541706dd470e0
+            env:
+              DOMAIN: https://vault.${SECRET_DOMAIN}
+              DATA_FOLDER: /data
+              ROCKET_ADDRESS: 0.0.0.0
+              ROCKET_PORT: &port 8080
+              SIGNUPS_ALLOWED: "true"
+              SHOW_PASSWORD_HINT: "false"
+              SSO_ENABLED: "true"
+              SSO_ONLY: "false"
+              SSO_AUTHORITY: https://idm.${SECRET_DOMAIN}/oauth2/openid/vaultwarden
+              SSO_CLIENT_ID: vaultwarden
+              SSO_SCOPES: openid profile email
+              SSO_PKCE: "true"
+              SSO_CLIENT_SECRET:
+                valueFrom:
+                  secretKeyRef:
+                    name: vaultwarden-kanidm-oauth2-credentials
+                    key: CLIENT_SECRET
+              DATABASE_URL:
+                valueFrom:
+                  secretKeyRef:
+                    name: vaultwarden-postgres-credentials
+                    key: uri
+              ADMIN_TOKEN:
+                valueFrom:
+                  secretKeyRef:
+                    name: vaultwarden-secret
+                    key: ADMIN_TOKEN
+              SMTP_HOST: smtp-relay.network.svc.cluster.local
+              SMTP_PORT: "25"
+              SMTP_SECURITY: "off"
+              SMTP_FROM: vaultwarden@${SECRET_DOMAIN}
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 256Mi
+        pod:
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            runAsNonRoot: true
+            fsGroup: 568
+            fsGroupChangePolicy: OnRootMismatch
+    service:
+      app:
+        ports:
+          http:
+            port: *port
+    route:
+      app:
+        hostnames: ["vault.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+    persistence:
+      data:
+        existingClaim: vaultwarden
+        globalMounts:
+          - path: /data

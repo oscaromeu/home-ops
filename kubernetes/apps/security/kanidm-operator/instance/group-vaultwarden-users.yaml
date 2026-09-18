@@ -1,0 +1,11 @@
+---
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmGroup
+metadata:
+  name: vaultwarden-users
+spec:
+  kanidmRef:
+    name: kanidm
+  kanidmName: vaultwarden_users
+  members:
+    - admin-account

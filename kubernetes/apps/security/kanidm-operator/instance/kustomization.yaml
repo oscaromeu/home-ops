@@ -9,4 +9,5 @@ resources:
   - ./group-zot-users.yaml
   - ./group-outline-users.yaml
   - ./group-memos-users.yaml
+  - ./group-vaultwarden-users.yaml
   - ./group-admins.yaml
