@@ -35,7 +35,6 @@ resources:
   - ./radarr/ks.yaml
   - ./recyclarr/ks.yaml
   - ./sonarr/ks.yaml
-  - ./srs/ks.yaml
   - ./syncthing/ks.yaml
   - ./twitch-radios/ks.yaml
   - ./unifi/ks.yaml

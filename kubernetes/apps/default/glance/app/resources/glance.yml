@@ -55,10 +55,6 @@ pages:
                     url: https://icecast.${SECRET_DOMAIN}
                     check-url: http://icecast.default.svc.cluster.local:8000
                     icon: mdi:radio
-                  - title: SRS
-                    url: https://srs.${SECRET_DOMAIN}
-                    check-url: http://srs.default.svc.cluster.local:8080
-                    icon: mdi:video-wireless
               - type: monitor
                 title: Downloads
                 cache: 1m
