@@ -39,6 +39,5 @@ resources:
   - ./syncthing/ks.yaml
   - ./twitch-radios/ks.yaml
   - ./unifi/ks.yaml
-  - ./vaultwarden/ks.yaml
   - ./vikunja/ks.yaml
   - ./zot/ks.yaml
