@@ -30,7 +30,7 @@ resources:
   - ./navidrome/ks.yaml
   - ./outline/ks.yaml
   - ./pinchflat/ks.yaml
-  - ./podgrab/ks.yaml
+  - ./podfetch/ks.yaml
   - ./podinfo/ks.yaml
   - ./prowlarr/ks.yaml
   - ./qbittorrent/ks.yaml
