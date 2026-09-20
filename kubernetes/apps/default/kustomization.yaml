@@ -19,6 +19,7 @@ resources:
   - ./flaresolverr/ks.yaml
   - ./forgejo/ks.yaml
   - ./glance/ks.yaml
+  - ./gonic/ks.yaml
   - ./icecast/ks.yaml
   - ./jellyfin/ks.yaml
   - ./jellyseerr/ks.yaml
@@ -29,6 +30,7 @@ resources:
   - ./navidrome/ks.yaml
   - ./outline/ks.yaml
   - ./pinchflat/ks.yaml
+  - ./podgrab/ks.yaml
   - ./podinfo/ks.yaml
   - ./prowlarr/ks.yaml
   - ./qbittorrent/ks.yaml

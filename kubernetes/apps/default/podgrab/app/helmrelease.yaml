@@ -1,0 +1,82 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app podgrab
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: *app
+  values:
+    controllers:
+      podgrab:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/akhilrex/podgrab
+              tag: 1.0.0@sha256:bce133f3f5111381f63d9341313fa7ce7e16209068e8a06e6db2c4ed33972b87
+            env:
+              TZ: "${TZ}"
+              PORT: &port 8080
+              CONFIG: /config
+              DATA: /assets
+              CHECK_FREQUENCY: 240
+              GIN_MODE: release
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 512Mi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups:
+          - 44
+          - 65537
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: podgrab
+        ports:
+          http:
+            port: *port
+    route:
+      app:
+        hostnames:
+          - "podgrab.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+    persistence:
+      config:
+        existingClaim: podgrab-config
+        globalMounts:
+          - path: /config
+      tmp:
+        type: emptyDir
+      assets:
+        type: nfs
+        server: ${REBOST_IP}
+        path: ${REBOST_MEDIA_PATH}/Library/Media/Podcasts
+        globalMounts:
+          - path: /assets
