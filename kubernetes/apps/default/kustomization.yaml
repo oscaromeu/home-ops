@@ -19,7 +19,6 @@ resources:
   - ./flaresolverr/ks.yaml
   - ./forgejo/ks.yaml
   - ./glance/ks.yaml
-  - ./gonic/ks.yaml
   - ./icecast/ks.yaml
   - ./jellyfin/ks.yaml
   - ./jellyseerr/ks.yaml
