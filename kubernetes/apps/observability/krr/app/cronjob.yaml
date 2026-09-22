@@ -27,9 +27,6 @@ spec:
                 - --prometheus-url=http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
                 - --formatter=json
                 - --fileoutput=/share/krr.json
-                # Prometheus retains 14d, which is exactly krr's default window.
-                # Asking for the full window means the oldest containers fall off
-                # the edge and come back as "not enough data".
                 - --history_duration=168
                 - --resource=Deployment
                 - --resource=StatefulSet
