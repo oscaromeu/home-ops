@@ -15,18 +15,14 @@ spec:
     - app: ch-ui
     - app: fluentbit
       path: ./kubernetes/apps/observability/fluentbit
-      dependsOn:
-      - name: victoria-logs
     - app: grafana
       dependsOn:
-      - name: kube-prometheus-stack
       - name: crunchy-postgres-bootstrap
+      - name: onepassword
       substitute:
         postgres_cluster_version: v17-1
     - app: k6s-operator
       path: ./kubernetes/apps/observability/k6s/app
-      dependsOn:
-      - name: kube-prometheus-stack
     - app: k6s-scenarios
       path: ./kubernetes/apps/observability/k6s/scenarios
       dependsOn:
@@ -36,11 +32,9 @@ spec:
       - name: clickhouse-cluster
     - app: kube-prometheus-stack
       dependsOn:
-      - name: external-secrets
+      - name: onepassword
     - app: pushgateway
       path: ./kubernetes/apps/observability/exporters/pushgateway/app
-      dependsOn:
-      - name: kube-prometheus-stack
     - app: victoria-alerts
     - app: victoria-logs
     - app: victoria-traces

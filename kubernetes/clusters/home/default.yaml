@@ -26,7 +26,7 @@ spec:
     - app: glance
     - app: icecast
       dependsOn:
-      - name: external-secrets
+      - name: onepassword
     - app: jellyfin
     - app: jellyseerr
     - app: kavita
@@ -37,12 +37,11 @@ spec:
         postgres_cluster_version: v17-1
     - app: memos
       dependsOn:
-      - name: onepassword
       - name: crunchy-postgres-bootstrap
     - app: metube
     - app: navidrome
       dependsOn:
-      - name: external-secrets
+      - name: onepassword
     - app: navidrome-resources
       path: ./kubernetes/apps/default/navidrome/resources
       dependsOn:
@@ -61,18 +60,21 @@ spec:
     - app: radarr
     - app: recyclarr
       dependsOn:
-      - name: external-secrets
+      - name: onepassword
     - app: sonarr
     - app: syncthing
     - app: twitch-radios
       dependsOn:
       - name: icecast
-      - name: external-secrets
+      - name: onepassword
     - app: unifi
     - app: vikunja
+      dependsOn:
+      - name: onepassword
+      - name: crunchy-postgres-bootstrap
     - app: vikunja-config
       path: ./kubernetes/apps/default/vikunja/config
       dependsOn:
-      - name: external-secrets
+      - name: onepassword
       - name: crunchy-postgres-bootstrap
     - app: zot
