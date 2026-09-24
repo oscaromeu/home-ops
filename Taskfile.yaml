@@ -21,7 +21,6 @@ env:
 includes:
   bootstrap: .taskfiles/bootstrap
   talos: .taskfiles/talos
-  template: .taskfiles/template
   utils: .taskfiles/utils
   terraform: .taskfiles/terraform
   terragrunt: .taskfiles/terragrunt

@@ -36,7 +36,7 @@
       overrideDepName: "{{packageName}}",
     },
     {
-      description: "Pin all docker / helm deps by digest. Restricted to kubernetes/** so the helmfile bootstrap templates (templates/**) are excluded — Renovate's helmfile manager fails to write back digests on .yaml.j2 files and aborts the whole grouped branch.",
+      description: "Pin all docker / helm deps by digest, restricted to kubernetes/**.",
       matchDatasources: ["docker", "helm"],
       matchFileNames: ["kubernetes/**"],
       pinDigests: true,
