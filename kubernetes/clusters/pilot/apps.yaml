@@ -1,9 +1,0 @@
----
-apiVersion: fluxcd.controlplane.io/v1
-kind: ResourceSet
-metadata:
-  name: apps-pilot
-  namespace: flux-system
-spec:
-  inputs:
-    - app: echo
