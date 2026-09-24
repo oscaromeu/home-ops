@@ -1,0 +1,111 @@
+---
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: apps-default
+  namespace: flux-system
+spec:
+  inputs:
+  - app: arr-config
+    dependsOn:
+    - name: recyclarr
+  - app: atuin
+    dependsOn:
+    - name: envoy-gateway
+    - name: crunchy-postgres-bootstrap
+    substitute:
+      postgres_cluster_version: v17-1
+  - app: bazarr
+    dependsOn:
+    - name: envoy-gateway
+  - app: copyparty
+    dependsOn:
+    - name: envoy-gateway
+  - app: echo
+  - app: excalidraw
+  - app: feishin
+    dependsOn:
+    - name: envoy-gateway
+  - app: filebrowser
+    dependsOn:
+    - name: envoy-gateway
+  - app: flaresolverr
+  - app: forgejo
+  - app: glance
+    dependsOn:
+    - name: envoy-gateway
+  - app: icecast
+    dependsOn:
+    - name: external-secrets
+  - app: jellyfin
+    dependsOn:
+    - name: envoy-gateway
+  - app: jellyseerr
+    dependsOn:
+    - name: envoy-gateway
+  - app: kavita
+  - app: linkding
+    dependsOn:
+    - name: envoy-gateway
+    - name: crunchy-postgres-bootstrap
+    substitute:
+      postgres_cluster_version: v17-1
+  - app: memos
+    dependsOn:
+    - name: onepassword
+    - name: envoy-gateway
+    - name: crunchy-postgres-bootstrap
+  - app: metube
+  - app: navidrome
+    dependsOn:
+    - name: envoy-gateway
+    - name: external-secrets
+  - app: navidrome-resources
+    path: ./kubernetes/apps/default/navidrome/resources
+    dependsOn:
+    - name: navidrome
+  - app: outline
+    dependsOn:
+    - name: onepassword
+    - name: envoy-gateway
+    - name: crunchy-postgres-bootstrap
+    substitute:
+      postgres_cluster_version: v17-1
+  - app: pinchflat
+  - app: podfetch
+    dependsOn:
+    - name: envoy-gateway
+  - app: podinfo
+  - app: prowlarr
+    dependsOn:
+    - name: envoy-gateway
+  - app: qbittorrent
+    dependsOn:
+    - name: envoy-gateway
+  - app: radarr
+    dependsOn:
+    - name: envoy-gateway
+  - app: recyclarr
+    dependsOn:
+    - name: external-secrets
+  - app: sonarr
+    dependsOn:
+    - name: envoy-gateway
+  - app: syncthing
+    dependsOn:
+    - name: envoy-gateway
+  - app: twitch-radios
+    dependsOn:
+    - name: icecast
+    - name: external-secrets
+  - app: unifi
+  - app: vikunja
+  - app: vikunja-config
+    path: ./kubernetes/apps/default/vikunja/config
+    dependsOn:
+    - name: external-secrets
+    - name: envoy-gateway
+    - name: crunchy-postgres-bootstrap
+  - app: zot
+    dependsOn:
+    - name: envoy-gateway

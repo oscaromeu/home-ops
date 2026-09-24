@@ -21,6 +21,7 @@ env:
 includes:
   ansible: .taskfiles/ansible
   bootstrap: .taskfiles/bootstrap
+  rs: .taskfiles/rs
   talos: .taskfiles/talos
   utils: .taskfiles/utils
   terraform: .taskfiles/terraform

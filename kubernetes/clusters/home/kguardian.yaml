@@ -1,0 +1,19 @@
+---
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: apps-kguardian
+  namespace: flux-system
+spec:
+  inputs:
+  - app: kguardian
+    namespace: kguardian
+    dependsOn:
+    - name: crunchy-postgres-bootstrap
+    substitute:
+      postgres_cluster_version: v17-1
+    healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: kguardian
+      namespace: kguardian

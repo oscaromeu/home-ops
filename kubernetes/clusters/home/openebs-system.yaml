@@ -1,0 +1,10 @@
+---
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: apps-openebs-system
+  namespace: flux-system
+spec:
+  inputs:
+  - app: openebs
+    namespace: openebs-system

@@ -1,0 +1,17 @@
+---
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: apps-network
+  namespace: flux-system
+spec:
+  inputs:
+  - app: cloudflare-dns
+    namespace: network
+    wait: true
+  - app: cloudflare-tunnel
+    namespace: network
+  - app: envoy-gateway
+    namespace: network
+  - app: k8s-gateway
+    namespace: network

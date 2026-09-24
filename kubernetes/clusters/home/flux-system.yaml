@@ -1,0 +1,15 @@
+---
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: apps-flux-system
+  namespace: flux-system
+spec:
+  inputs:
+  - app: flux-instance
+    namespace: flux-system
+    dependsOn:
+    - name: flux-operator
+  - app: flux-operator
+    namespace: flux-system
+    wait: true

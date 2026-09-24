@@ -1,0 +1,13 @@
+---
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: apps-storage
+  namespace: flux-system
+spec:
+  inputs:
+  - app: garage
+    namespace: storage
+  - app: garage-webui
+    namespace: storage
+    path: ./kubernetes/apps/storage/garage/webui
