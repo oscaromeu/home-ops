@@ -42,7 +42,6 @@ spec:
   - app: kube-prometheus-stack
     namespace: observability
     dependsOn:
-    - name: envoy-gateway
     - name: external-secrets
   - app: pushgateway
     namespace: observability
