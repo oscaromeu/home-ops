@@ -1,0 +1,2 @@
+# cluster-workspace sincroniza un repo privado cuyo secret solo existe en el cluster
+ks-workspace.yaml

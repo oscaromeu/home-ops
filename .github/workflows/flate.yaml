@@ -1,5 +1,5 @@
 ---
-name: "Flux Local"
+name: "Flate"
 
 on:
   pull_request:
@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   pre-job:
-    name: Flux Local Pre-Job
+    name: Flate Pre-Job
     runs-on: ubuntu-latest
     outputs:
       any_changed: ${{ steps.changed-files.outputs.any_changed }}
@@ -26,7 +26,7 @@ jobs:
           files: kubernetes/**
 
   test:
-    name: Flux Local Test
+    name: Flate Test
     needs: pre-job
     runs-on: ubuntu-latest
     if: ${{ needs.pre-job.outputs.any_changed == 'true' }}
@@ -34,23 +34,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Run flux-local test
-        uses: docker://ghcr.io/allenporter/flux-local:v8.1.0
+      - name: Setup flate
+        uses: home-operations/flate/action@631b76b69c4e58c6f4d1cb01e23616fa61aebafa # v0.6.5
         with:
-          args: test --enable-helm --all-namespaces --path /github/workspace/kubernetes/clusters/home/flux -v
+          cache: "true"
+
+      - name: Run flate test
+        run: flate test all --path kubernetes/clusters/home/flux --allow-missing-secrets
 
   diff:
-    name: Flux Local Diff
+    name: Flate Diff
     needs: pre-job
     runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: write
-    strategy:
-      matrix:
-        resources: ["helmrelease", "kustomization"]
-      max-parallel: 4
-      fail-fast: false
     if: ${{ needs.pre-job.outputs.any_changed == 'true' }}
     steps:
       - name: Checkout Pull Request Branch
@@ -64,33 +62,32 @@ jobs:
           ref: "${{ github.event.repository.default_branch }}"
           path: default
 
-      - name: Run flux-local diff
-        uses: docker://ghcr.io/allenporter/flux-local:v8.1.0
+      - name: Setup flate
+        uses: home-operations/flate/action@631b76b69c4e58c6f4d1cb01e23616fa61aebafa # v0.6.5
         with:
-          args: >-
-            diff ${{ matrix.resources }}
-            --unified 6
-            --path /github/workspace/pull/kubernetes/clusters/home/flux
-            --path-orig /github/workspace/default/kubernetes/clusters/home/flux
-            --strip-attrs "helm.sh/chart,checksum/config,app.kubernetes.io/version,chart"
-            --limit-bytes 10000
-            --all-namespaces
-            --sources "flux-system"
-            --output-file diff.patch
+          cache: "true"
+
+      - name: Run flate diff
+        run: >-
+          flate diff all
+          --path pull/kubernetes/clusters/home/flux
+          --path-orig default/kubernetes/clusters/home/flux
+          --allow-missing-secrets
+          -o github > diff.md
 
       - name: Generate Diff
         id: diff
         run: |
-          cat diff.patch;
+          cat diff.md
           {
               echo 'diff<<EOF'
-              cat diff.patch
+              cat diff.md
               echo EOF
-          } >> "$GITHUB_OUTPUT";
+          } >> "$GITHUB_OUTPUT"
           {
               echo "### Diff"
               echo '```diff'
-              cat diff.patch
+              cat diff.md
               echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
@@ -99,15 +96,15 @@ jobs:
         continue-on-error: true
         uses: mshick/add-pr-comment@ec328af66588ab8f77cdeb2c264f14aba45bbf59 # v3.12
         with:
-          message-id: "${{ github.event.pull_request.number }}/kubernetes/${{ matrix.resources }}"
+          message-id: "${{ github.event.pull_request.number }}/kubernetes/flate"
           message-failure: Diff was not successful
           message: |
             ```diff
             ${{ steps.diff.outputs.diff }}
             ```
 
-  flux-local-status:
-    name: Flux Local Success
+  flate-status:
+    name: Flate Success
     needs: ["test", "diff"]
     runs-on: ubuntu-latest
     if: ${{ always() }}
