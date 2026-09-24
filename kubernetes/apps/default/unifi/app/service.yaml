@@ -17,7 +17,7 @@ metadata:
   name: unifi
 subsets:
   - addresses:
-      - ip: 10.69.1.1
+      - ip: ${UNIFI_IP}
     ports:
       - name: https
         port: 443

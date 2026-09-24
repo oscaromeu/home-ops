@@ -6,7 +6,7 @@ metadata:
 spec:
   allowFirstLastIPs: "No"
   blocks:
-    - cidr: "10.69.1.0/24"
+    - cidr: "${LB_POOL_CIDR}"
 ---
 apiVersion: cilium.io/v2alpha1
 kind: CiliumL2AnnouncementPolicy
