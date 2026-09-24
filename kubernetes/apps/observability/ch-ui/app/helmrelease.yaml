@@ -38,7 +38,7 @@ spec:
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         size: 1Gi
-        storageClass: openebs-hostpath
+        storageClass: ${STORAGE_CLASS}
         globalMounts:
           - path: /app/data
     route:

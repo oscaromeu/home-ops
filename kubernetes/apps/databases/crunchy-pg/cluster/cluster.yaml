@@ -31,7 +31,7 @@ spec:
           app.kubernetes.io/name: crunchy-postgres-${postgres_cluster_version}
       replicas: &replica 3
       dataVolumeClaimSpec:
-        storageClassName: openebs-hostpath
+        storageClassName: ${STORAGE_CLASS}
         accessModes:
           - ReadWriteOnce
         resources:

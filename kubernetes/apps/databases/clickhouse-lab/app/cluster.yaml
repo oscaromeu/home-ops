@@ -6,7 +6,7 @@ metadata:
 spec:
   replicas: 1
   dataVolumeClaimSpec:
-    storageClassName: openebs-hostpath
+    storageClassName: ${STORAGE_CLASS}
     accessModes:
       - ReadWriteOnce
     resources:
@@ -32,7 +32,7 @@ spec:
         cpu: 250m
         memory: 256Mi
   dataVolumeClaimSpec:
-    storageClassName: openebs-hostpath
+    storageClassName: ${STORAGE_CLASS}
     accessModes:
       - ReadWriteOnce
     resources:

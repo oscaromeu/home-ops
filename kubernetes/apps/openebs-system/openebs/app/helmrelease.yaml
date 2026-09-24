@@ -15,7 +15,7 @@ spec:
     localpv-provisioner:
       hostpathClass:
         enabled: true
-        name: openebs-hostpath
+        name: ${STORAGE_CLASS}
         isDefaultClass: false
         reclaimPolicy: Retain
         basePath: /var/openebs/local

@@ -16,7 +16,7 @@ spec:
       replicaCount: 1
       persistentVolume:
         enabled: true
-        storageClassName: openebs-hostpath
+        storageClassName: ${STORAGE_CLASS}
         size: 20Gi
       retentionPeriod: 14d
       extraArgs:
