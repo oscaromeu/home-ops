@@ -5,7 +5,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: openebs-hostpath
+  storageClassName: ${STORAGE_CLASS}
   resources:
     requests:
       storage: 5Gi

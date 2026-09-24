@@ -94,7 +94,7 @@ prometheus:
     storageSpec:
       volumeClaimTemplate:
         spec:
-          storageClassName: openebs-hostpath
+          storageClassName: ${STORAGE_CLASS}
           resources:
             requests:
               storage: 20Gi

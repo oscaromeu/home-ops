@@ -10,4 +10,4 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: openebs-hostpath
+  storageClassName: ${STORAGE_CLASS}

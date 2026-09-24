@@ -28,7 +28,7 @@ spec:
       dataStorage:
         enabled: true
         size: 5Gi
-        storageClass: openebs-hostpath
+        storageClass: ${STORAGE_CLASS}
       extraSecretEnvironmentVars:
         - envName: BAO_UNSEAL_KEY
           secretName: openbao-unseal

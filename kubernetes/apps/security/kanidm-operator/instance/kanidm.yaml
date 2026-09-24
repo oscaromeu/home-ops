@@ -27,7 +27,7 @@ spec:
         resources:
           requests:
             storage: 2Gi
-        storageClassName: openebs-hostpath
+        storageClassName: ${STORAGE_CLASS}
   tlsSecretName: idm-${SECRET_DOMAIN/./-}-tls
   securityContext:
     fsGroup: 2000
