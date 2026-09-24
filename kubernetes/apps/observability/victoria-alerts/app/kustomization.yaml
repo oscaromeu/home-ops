@@ -5,3 +5,11 @@ kind: Kustomization
 resources:
   - ./helmrelease.yaml
   - ./ocirepository.yaml
+
+configMapGenerator:
+  - name: victoria-alerts-server-alert-rules-config
+    files:
+      - alert-rules.yaml=./alert-rules.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
