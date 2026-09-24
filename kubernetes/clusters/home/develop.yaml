@@ -9,8 +9,3 @@ spec:
   - app: forgejo-workspace-config
     namespace: develop
     path: ./kubernetes/apps/develop/workspace/config
-    dependsOn:
-    - name: forgejo-workspace-secrets
-  - app: forgejo-workspace-secrets
-    namespace: develop
-    path: ./kubernetes/apps/develop/workspace/secrets

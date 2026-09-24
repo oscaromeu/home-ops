@@ -10,7 +10,6 @@ resources:
   - ./prometheusrule-e2e.yaml
   - ./prometheusrule-postgres.yaml
 
-  #- ./secret.sops.yaml
 
 configMapGenerator:
   - name: alertmanager-config
