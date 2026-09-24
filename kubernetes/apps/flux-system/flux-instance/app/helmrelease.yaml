@@ -23,7 +23,7 @@ spec:
         kind: GitRepository
         url: "https://github.com/oscaromeu/home-ops.git"
         ref: "refs/heads/main"
-        path: kubernetes/flux/cluster
+        path: kubernetes/clusters/home/flux
       commonMetadata:
         labels:
           app.kubernetes.io/name: flux

@@ -1,8 +1,0 @@
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: coredns
-spec:
-  path: ./kubernetes/apps/kube-system/coredns/app
-  targetNamespace: kube-system
