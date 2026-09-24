@@ -6,13 +6,10 @@ metadata:
   namespace: flux-system
 spec:
   inputs:
-  - app: cilium
-    namespace: kube-system
-  - app: coredns
-    namespace: kube-system
-  - app: metrics-server
-    namespace: kube-system
-  - app: reloader
-    namespace: kube-system
-  - app: spegel
-    namespace: kube-system
+  - namespace: kube-system
+    apps:
+    - app: cilium
+    - app: coredns
+    - app: metrics-server
+    - app: reloader
+    - app: spegel

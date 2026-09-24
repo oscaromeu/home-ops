@@ -6,54 +6,49 @@ metadata:
   namespace: flux-system
 spec:
   inputs:
-  - app: clickhouse-cluster
-    namespace: databases
-    path: ./kubernetes/apps/databases/clickhouse/app
-    dependsOn:
-    - name: clickhouse-operator
-  - app: clickhouse-lab
-    namespace: databases
-    dependsOn:
-    - name: clickhouse-operator
-  - app: clickhouse-operator
-    namespace: databases
-    path: ./kubernetes/apps/databases/clickhouse/operator
-  - app: crunchy-postgres-bootstrap
-    namespace: databases
-    path: ./kubernetes/apps/databases/crunchy-pg/bootstrap
-    dependsOn:
-    - name: external-secrets
-    - name: crunchy-postgres-cluster
-    substitute:
-      postgres_cluster_version: v17-1
-    healthCheckExprs:
-    - apiVersion: external-secrets.io/v1alpha1
-      kind: PushSecret
-      failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'False')
-      current: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'True')
-    - apiVersion: external-secrets.io/v1
-      kind: ClusterExternalSecret
-      failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'False')
-      current: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'True')
-    commonMetadata:
-      labels:
-        app.kubernetes.io/name: crunchy-postgres-bootstrap
-  - app: crunchy-postgres-cluster
-    namespace: databases
-    path: ./kubernetes/apps/databases/crunchy-pg/cluster
-    dependsOn:
-    - name: crunchy-postgres-operator
-    - name: openebs
-    substitute:
-      postgres_cluster_version: v17-1
-    commonMetadata:
-      labels:
-        app.kubernetes.io/name: crunchy-postgres-cluster
-  - app: crunchy-postgres-operator
-    namespace: databases
-    path: ./kubernetes/apps/databases/crunchy-pg/operator
-    commonMetadata:
-      labels:
-        app.kubernetes.io/name: crunchy-postgres-operator
-  - app: valkey
-    namespace: databases
+  - namespace: databases
+    apps:
+    - app: clickhouse-cluster
+      path: ./kubernetes/apps/databases/clickhouse/app
+      dependsOn:
+      - name: clickhouse-operator
+    - app: clickhouse-lab
+      dependsOn:
+      - name: clickhouse-operator
+    - app: clickhouse-operator
+      path: ./kubernetes/apps/databases/clickhouse/operator
+    - app: crunchy-postgres-bootstrap
+      path: ./kubernetes/apps/databases/crunchy-pg/bootstrap
+      dependsOn:
+      - name: external-secrets
+      - name: crunchy-postgres-cluster
+      substitute:
+        postgres_cluster_version: v17-1
+      healthCheckExprs:
+      - apiVersion: external-secrets.io/v1alpha1
+        kind: PushSecret
+        failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'False')
+        current: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'True')
+      - apiVersion: external-secrets.io/v1
+        kind: ClusterExternalSecret
+        failed: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'False')
+        current: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'True')
+      commonMetadata:
+        labels:
+          app.kubernetes.io/name: crunchy-postgres-bootstrap
+    - app: crunchy-postgres-cluster
+      path: ./kubernetes/apps/databases/crunchy-pg/cluster
+      dependsOn:
+      - name: crunchy-postgres-operator
+      - name: openebs
+      substitute:
+        postgres_cluster_version: v17-1
+      commonMetadata:
+        labels:
+          app.kubernetes.io/name: crunchy-postgres-cluster
+    - app: crunchy-postgres-operator
+      path: ./kubernetes/apps/databases/crunchy-pg/operator
+      commonMetadata:
+        labels:
+          app.kubernetes.io/name: crunchy-postgres-operator
+    - app: valkey
