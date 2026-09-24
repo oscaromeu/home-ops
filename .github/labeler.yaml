@@ -37,7 +37,3 @@ area/taskfile:
       - any-glob-to-any-file:
           - .taskfiles/**/*
           - Taskfile.yaml
-area/templates:
-  - changed-files:
-      - any-glob-to-any-file:
-          - templates/**/*
