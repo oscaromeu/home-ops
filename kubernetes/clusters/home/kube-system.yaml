@@ -1,0 +1,18 @@
+---
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: apps-kube-system
+  namespace: flux-system
+spec:
+  inputs:
+  - app: cilium
+    namespace: kube-system
+  - app: coredns
+    namespace: kube-system
+  - app: metrics-server
+    namespace: kube-system
+  - app: reloader
+    namespace: kube-system
+  - app: spegel
+    namespace: kube-system

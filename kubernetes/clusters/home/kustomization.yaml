@@ -1,0 +1,33 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+components:
+  - ../../components/resourceset-template
+resources:
+  - ../../apps/cert-manager/namespace.yaml
+  - ../../apps/databases/namespace.yaml
+  - ../../apps/default/namespace.yaml
+  - ../../apps/develop/namespace.yaml
+  - ../../apps/external-secrets/namespace.yaml
+  - ../../apps/flux-system/namespace.yaml
+  - ../../apps/kguardian/namespace.yaml
+  - ../../apps/kube-system/namespace.yaml
+  - ../../apps/network/namespace.yaml
+  - ../../apps/observability/namespace.yaml
+  - ../../apps/openebs-system/namespace.yaml
+  - ../../apps/security/namespace.yaml
+  - ../../apps/storage/namespace.yaml
+  - ./cluster-secrets.sops.yaml
+  - ./cert-manager.yaml
+  - ./databases.yaml
+  - ./default.yaml
+  - ./develop.yaml
+  - ./external-secrets.yaml
+  - ./flux-system.yaml
+  - ./kguardian.yaml
+  - ./kube-system.yaml
+  - ./network.yaml
+  - ./observability.yaml
+  - ./openebs-system.yaml
+  - ./security.yaml
+  - ./storage.yaml

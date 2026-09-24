@@ -1,0 +1,13 @@
+---
+version: '3'
+
+tasks:
+
+  render:
+    desc: 'Materialize a cluster from the RS scheme (task rs:render cluster=home)'
+    cmd: '{{.ROOT_DIR}}/.venv/bin/python3 {{.SCRIPTS_DIR}}/render-resourcesets.py {{.KUBERNETES_DIR}}/clusters/{{.cluster}}'
+    vars:
+      cluster: '{{.cluster | default "home"}}'
+    preconditions:
+      - which kustomize
+      - which flux-operator
