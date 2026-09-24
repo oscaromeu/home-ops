@@ -20,7 +20,7 @@ spec:
     - app: crunchy-postgres-bootstrap
       path: ./kubernetes/apps/databases/crunchy-pg/bootstrap
       dependsOn:
-      - name: external-secrets
+      - name: onepassword
       - name: crunchy-postgres-cluster
       substitute:
         postgres_cluster_version: v17-1

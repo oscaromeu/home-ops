@@ -9,5 +9,7 @@ spec:
   - namespace: storage
     apps:
     - app: garage
+      dependsOn:
+      - name: onepassword
     - app: garage-webui
       path: ./kubernetes/apps/storage/garage/webui
