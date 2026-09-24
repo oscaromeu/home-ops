@@ -50,9 +50,6 @@ spec:
     - name: kube-prometheus-stack
   - app: victoria-alerts
     namespace: observability
-  - app: victoria-alerts-rules
-    namespace: observability
-    path: ./kubernetes/apps/observability/victoria-alerts/rules
   - app: victoria-logs
     namespace: observability
   - app: victoria-traces
