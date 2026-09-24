@@ -24,7 +24,6 @@ includes:
   rs: .taskfiles/rs
   talos: .taskfiles/talos
   utils: .taskfiles/utils
-  terraform: .taskfiles/terraform
   terragrunt: .taskfiles/terragrunt
 
 tasks:

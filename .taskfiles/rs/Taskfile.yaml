@@ -5,7 +5,7 @@ tasks:
 
   test:
     desc: 'Validate a cluster offline with flate (task rs:test cluster=home)'
-    cmd: 'flate test all --path {{.KUBERNETES_DIR}}/clusters/{{.cluster}}/flux --allow-missing-secrets'
+    cmd: 'flate test all --path {{.KUBERNETES_DIR}}/clusters/{{.cluster}}/entrypoint --allow-missing-secrets'
     vars:
       cluster: '{{.cluster | default "home"}}'
     preconditions:
@@ -13,7 +13,7 @@ tasks:
 
   render:
     desc: 'Render everything a cluster applies (task rs:render cluster=home)'
-    cmd: 'flate build all --path {{.KUBERNETES_DIR}}/clusters/{{.cluster}}/flux --allow-missing-secrets'
+    cmd: 'flate build all --path {{.KUBERNETES_DIR}}/clusters/{{.cluster}}/entrypoint --allow-missing-secrets'
     vars:
       cluster: '{{.cluster | default "home"}}'
     preconditions:

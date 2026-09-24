@@ -41,7 +41,7 @@ jobs:
           base: ""
 
       - name: Run flate test
-        run: flate test all --path kubernetes/clusters/home/flux --allow-missing-secrets
+        run: flate test all --path kubernetes/clusters/home/entrypoint --allow-missing-secrets
 
   diff:
     name: Flate Diff
@@ -72,8 +72,8 @@ jobs:
       - name: Run flate diff
         run: >-
           flate diff all
-          --path pull/kubernetes/clusters/home/flux
-          --path-orig default/kubernetes/clusters/home/flux
+          --path pull/kubernetes/clusters/home/entrypoint
+          --path-orig default/kubernetes/clusters/home/entrypoint
           --allow-missing-secrets
           -o github > diff.md
 
