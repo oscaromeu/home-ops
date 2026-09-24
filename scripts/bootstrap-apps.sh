@@ -5,6 +5,7 @@ source "$(dirname "${0}")/lib/common.sh"
 
 export LOG_LEVEL="debug"
 export ROOT_DIR="$(git rev-parse --show-toplevel)"
+export CLUSTER="${CLUSTER:-home}"
 
 # Talos requires the nodes to be 'Ready=False' before applying resources
 function wait_for_nodes() {
@@ -60,7 +61,7 @@ function apply_sops_secrets() {
     local -r secrets=(
         "${ROOT_DIR}/bootstrap/github-deploy-key.sops.yaml"
         "${ROOT_DIR}/bootstrap/sops-age.sops.yaml"
-        "${ROOT_DIR}/kubernetes/clusters/home/secrets/cluster-secrets.sops.yaml"
+        "${ROOT_DIR}/kubernetes/clusters/${CLUSTER}/secrets/cluster-secrets.sops.yaml"
     )
 
     for secret in "${secrets[@]}"; do
@@ -127,6 +128,30 @@ function sync_helm_releases() {
     log info "Helm releases synced successfully"
 }
 
+# FluxInstance applied after the flux-operator install (its CRD must exist)
+function apply_flux_instance() {
+    log debug "Applying FluxInstance"
+
+    local -r manifest="${ROOT_DIR}/kubernetes/clusters/${CLUSTER}/entrypoint/fluxinstance.yaml"
+
+    if [[ ! -f "${manifest}" ]]; then
+        log fatal "File does not exist" "file" "${manifest}"
+    fi
+
+    if kubectl diff --filename "${manifest}" &>/dev/null; then
+        log info "FluxInstance is up-to-date"
+        return
+    fi
+
+    # Same field manager Flux uses, so kustomize-controller can take it over
+    if ! kubectl apply --server-side --force-conflicts \
+        --field-manager=kustomize-controller --filename "${manifest}" &>/dev/null; then
+        log fatal "Failed to apply FluxInstance" "file" "${manifest}"
+    fi
+
+    log info "FluxInstance applied successfully"
+}
+
 function main() {
     check_env KUBECONFIG TALOSCONFIG
     check_cli helmfile kubectl kustomize sops talhelper yq
@@ -137,6 +162,7 @@ function main() {
     apply_sops_secrets
     apply_crds
     sync_helm_releases
+    apply_flux_instance
 
     log info "Congrats! The cluster is bootstrapped and Flux is syncing the Git repository"
 }

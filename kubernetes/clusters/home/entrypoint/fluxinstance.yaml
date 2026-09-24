@@ -1,0 +1,126 @@
+---
+apiVersion: fluxcd.controlplane.io/v1
+kind: FluxInstance
+metadata:
+  name: flux
+  namespace: flux-system
+spec:
+  cluster:
+    domain: cluster.local
+    multitenant: false
+    networkPolicy: false
+    tenantDefaultServiceAccount: default
+    type: kubernetes
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: flux
+  components:
+  - source-controller
+  - kustomize-controller
+  - helm-controller
+  - notification-controller
+  distribution:
+    artifact: oci://ghcr.io/controlplaneio-fluxcd/flux-operator-manifests:v0.60.0
+    registry: ghcr.io/fluxcd
+    version: 2.x
+  kustomize:
+    patches:
+    - patch: |
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --concurrent=10
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --requeue-dependency=5s
+      target:
+        kind: Deployment
+        name: (kustomize-controller|helm-controller|source-controller)
+    - patch: |
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: all
+        spec:
+          template:
+            spec:
+              containers:
+                - name: manager
+                  resources:
+                    limits:
+                      memory: 1Gi
+      target:
+        kind: Deployment
+        name: (kustomize-controller|helm-controller|source-controller)
+    - patch: |
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --concurrent=20
+        - op: replace
+          path: /spec/template/spec/volumes/0
+          value:
+            name: temp
+            emptyDir:
+              medium: Memory
+      target:
+        kind: Deployment
+        name: kustomize-controller
+    - patch: |
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --helm-cache-max-size=10
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --helm-cache-ttl=60m
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --helm-cache-purge-interval=5m
+      target:
+        kind: Deployment
+        name: source-controller
+    - patch: |
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --feature-gates=OOMWatch=true
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --oom-watch-memory-threshold=95
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --oom-watch-interval=500ms
+      target:
+        kind: Deployment
+        name: helm-controller
+    - patch: |
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --feature-gates=DisableChartDigestTracking=true
+      target:
+        kind: Deployment
+        name: helm-controller
+    - patch: |
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --sops-age-secret=sops-age
+      target:
+        kind: Deployment
+        name: kustomize-controller
+    - patch: |-
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --watch-configs-label-selector=owner!=helm
+      target:
+        kind: Deployment
+        name: (helm-controller|kustomize-controller)
+    - patch: |-
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
+          value: --feature-gates=CancelHealthCheckOnNewRevision=true
+      target:
+        kind: Deployment
+        name: kustomize-controller
+  sync:
+    interval: 1m
+    kind: GitRepository
+    path: kubernetes/clusters/home/entrypoint
+    ref: refs/heads/main
+    url: https://github.com/oscaromeu/home-ops.git
