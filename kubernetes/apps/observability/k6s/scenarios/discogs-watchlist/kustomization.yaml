@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - ./discogs-watchlist.yaml
   - ./snapshot.yaml
-  - ./secret.sops.yaml
 
 configMapGenerator:
   - name: discogs-watchlist

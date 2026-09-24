@@ -17,7 +17,7 @@ resources:
   - ../../apps/openebs-system/namespace.yaml
   - ../../apps/security/namespace.yaml
   - ../../apps/storage/namespace.yaml
-  - ./secrets/cluster-secrets.sops.yaml
+  - ./secrets
   - ./cert-manager.yaml
   - ./databases.yaml
   - ./default.yaml
