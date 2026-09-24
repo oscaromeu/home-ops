@@ -5,11 +5,13 @@ metadata:
   name: not-used
 spec:
   resourcesTemplate: |
+    <<- $ns := dig "namespace" "default" (inputs) >>
+    <<- range $app := inputs.apps >>
     ---
     apiVersion: kustomize.toolkit.fluxcd.io/v1
     kind: Kustomization
     metadata:
-      name: << inputs.app >>
+      name: << $app.app >>
       namespace: flux-system
     spec:
       interval: 1h
@@ -19,37 +21,37 @@ spec:
         kind: GitRepository
         name: flux-system
         namespace: flux-system
-      path: << dig "path" (printf "./kubernetes/apps/%s/%s/app" (dig "namespace" "default" inputs) inputs.app) inputs >>
-      targetNamespace: << dig "targetNamespace" (dig "namespace" "default" inputs) inputs >>
+      path: << dig "path" (printf "./kubernetes/apps/%s/%s/app" $ns $app.app) $app >>
+      targetNamespace: << dig "targetNamespace" $ns $app >>
       decryption:
         provider: sops
-      <<- if hasKey inputs "dependsOn" >>
-      dependsOn: << toYaml inputs.dependsOn | nindent 8 >>
+      <<- if hasKey $app "dependsOn" >>
+      dependsOn: << toYaml $app.dependsOn | nindent 8 >>
       <<- end >>
-      <<- if hasKey inputs "healthChecks" >>
-      healthChecks: << toYaml inputs.healthChecks | nindent 8 >>
+      <<- if hasKey $app "healthChecks" >>
+      healthChecks: << toYaml $app.healthChecks | nindent 8 >>
       <<- end >>
-      <<- if hasKey inputs "healthCheckExprs" >>
-      healthCheckExprs: << toYaml inputs.healthCheckExprs | nindent 8 >>
+      <<- if hasKey $app "healthCheckExprs" >>
+      healthCheckExprs: << toYaml $app.healthCheckExprs | nindent 8 >>
       <<- end >>
-      <<- if hasKey inputs "commonMetadata" >>
-      commonMetadata: << toYaml inputs.commonMetadata | nindent 8 >>
+      <<- if hasKey $app "commonMetadata" >>
+      commonMetadata: << toYaml $app.commonMetadata | nindent 8 >>
       <<- end >>
-      <<- if hasKey inputs "wait" >>
-      wait: << inputs.wait >>
+      <<- if hasKey $app "wait" >>
+      wait: << $app.wait >>
       <<- end >>
-      <<- if hasKey inputs "force" >>
-      force: << inputs.force >>
+      <<- if hasKey $app "force" >>
+      force: << $app.force >>
       <<- end >>
       postBuild:
         substituteFrom:
           - kind: Secret
             name: cluster-secrets
-        <<- if hasKey inputs "substitute" >>
-        substitute: << toYaml inputs.substitute | nindent 10 >>
+        <<- if hasKey $app "substitute" >>
+        substitute: << toYaml $app.substitute | nindent 10 >>
         <<- end >>
       patches:
-        <<- if hasKey inputs "patches" >><< toYaml inputs.patches | nindent 8 >><< end >>
+        <<- if hasKey $app "patches" >><< toYaml $app.patches | nindent 8 >><< end >>
         - patch: |-
             apiVersion: helm.toolkit.fluxcd.io/v2
             kind: HelmRelease
@@ -75,3 +77,4 @@ spec:
           target:
             group: helm.toolkit.fluxcd.io
             kind: HelmRelease
+    <<- end >>

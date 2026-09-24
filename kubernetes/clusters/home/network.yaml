@@ -6,12 +6,10 @@ metadata:
   namespace: flux-system
 spec:
   inputs:
-  - app: cloudflare-dns
-    namespace: network
-    wait: true
-  - app: cloudflare-tunnel
-    namespace: network
-  - app: envoy-gateway
-    namespace: network
-  - app: k8s-gateway
-    namespace: network
+  - namespace: network
+    apps:
+    - app: cloudflare-dns
+      wait: true
+    - app: cloudflare-tunnel
+    - app: envoy-gateway
+    - app: k8s-gateway

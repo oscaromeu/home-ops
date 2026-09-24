@@ -6,14 +6,15 @@ metadata:
   namespace: flux-system
 spec:
   inputs:
-  - app: kguardian
-    namespace: kguardian
-    dependsOn:
-    - name: crunchy-postgres-bootstrap
-    substitute:
-      postgres_cluster_version: v17-1
-    healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      name: kguardian
-      namespace: kguardian
+  - namespace: kguardian
+    apps:
+    - app: kguardian
+      dependsOn:
+      - name: crunchy-postgres-bootstrap
+      substitute:
+        postgres_cluster_version: v17-1
+      healthChecks:
+      - apiVersion: helm.toolkit.fluxcd.io/v2
+        kind: HelmRelease
+        name: kguardian
+        namespace: kguardian

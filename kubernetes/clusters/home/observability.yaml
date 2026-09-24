@@ -6,51 +6,41 @@ metadata:
   namespace: flux-system
 spec:
   inputs:
-  - app: alert-history
-    namespace: observability
-    dependsOn:
-    - name: clickhouse-cluster
-    force: true
-  - app: ch-ui
-    namespace: observability
-  - app: fluentbit
-    namespace: observability
-    path: ./kubernetes/apps/observability/fluentbit
-    dependsOn:
-    - name: victoria-logs
-  - app: grafana
-    namespace: observability
-    dependsOn:
-    - name: kube-prometheus-stack
-    - name: crunchy-postgres-bootstrap
-    substitute:
-      postgres_cluster_version: v17-1
-  - app: k6s-operator
-    namespace: observability
-    path: ./kubernetes/apps/observability/k6s/app
-    dependsOn:
-    - name: kube-prometheus-stack
-  - app: k6s-scenarios
-    namespace: observability
-    path: ./kubernetes/apps/observability/k6s/scenarios
-    dependsOn:
-    - name: k6s-operator
-  - app: krr
-    namespace: observability
-    dependsOn:
-    - name: clickhouse-cluster
-  - app: kube-prometheus-stack
-    namespace: observability
-    dependsOn:
-    - name: external-secrets
-  - app: pushgateway
-    namespace: observability
-    path: ./kubernetes/apps/observability/exporters/pushgateway/app
-    dependsOn:
-    - name: kube-prometheus-stack
-  - app: victoria-alerts
-    namespace: observability
-  - app: victoria-logs
-    namespace: observability
-  - app: victoria-traces
-    namespace: observability
+  - namespace: observability
+    apps:
+    - app: alert-history
+      dependsOn:
+      - name: clickhouse-cluster
+      force: true
+    - app: ch-ui
+    - app: fluentbit
+      path: ./kubernetes/apps/observability/fluentbit
+      dependsOn:
+      - name: victoria-logs
+    - app: grafana
+      dependsOn:
+      - name: kube-prometheus-stack
+      - name: crunchy-postgres-bootstrap
+      substitute:
+        postgres_cluster_version: v17-1
+    - app: k6s-operator
+      path: ./kubernetes/apps/observability/k6s/app
+      dependsOn:
+      - name: kube-prometheus-stack
+    - app: k6s-scenarios
+      path: ./kubernetes/apps/observability/k6s/scenarios
+      dependsOn:
+      - name: k6s-operator
+    - app: krr
+      dependsOn:
+      - name: clickhouse-cluster
+    - app: kube-prometheus-stack
+      dependsOn:
+      - name: external-secrets
+    - app: pushgateway
+      path: ./kubernetes/apps/observability/exporters/pushgateway/app
+      dependsOn:
+      - name: kube-prometheus-stack
+    - app: victoria-alerts
+    - app: victoria-logs
+    - app: victoria-traces

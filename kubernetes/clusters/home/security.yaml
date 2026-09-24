@@ -6,25 +6,25 @@ metadata:
   namespace: flux-system
 spec:
   inputs:
-  - app: kanidm-instance
-    namespace: security
-    path: ./kubernetes/apps/security/kanidm-operator/instance
-    dependsOn:
-    - name: kanidm-operator
-    healthChecks:
-    - apiVersion: kaniop.rs/v1beta1
-      kind: Kanidm
-      name: kanidm
-      namespace: security
-    healthCheckExprs:
-    - apiVersion: kaniop.rs/v1beta1
-      kind: Kanidm
-      failed: status.conditions.exists(c, c.type == 'Available' && c.status == 'False')
-      current: status.conditions.exists(c, c.type == 'Available' && c.status == 'True')
-  - app: kanidm-operator
-    namespace: security
-    healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      name: kaniop
-      namespace: security
+  - namespace: security
+    apps:
+    - app: kanidm-instance
+      path: ./kubernetes/apps/security/kanidm-operator/instance
+      dependsOn:
+      - name: kanidm-operator
+      healthChecks:
+      - apiVersion: kaniop.rs/v1beta1
+        kind: Kanidm
+        name: kanidm
+        namespace: security
+      healthCheckExprs:
+      - apiVersion: kaniop.rs/v1beta1
+        kind: Kanidm
+        failed: status.conditions.exists(c, c.type == 'Available' && c.status == 'False')
+        current: status.conditions.exists(c, c.type == 'Available' && c.status == 'True')
+    - app: kanidm-operator
+      healthChecks:
+      - apiVersion: helm.toolkit.fluxcd.io/v2
+        kind: HelmRelease
+        name: kaniop
+        namespace: security

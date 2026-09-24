@@ -6,6 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   inputs:
-  - app: forgejo-workspace-config
-    namespace: develop
-    path: ./kubernetes/apps/develop/workspace/config
+  - namespace: develop
+    apps:
+    - app: forgejo-workspace-config
+      path: ./kubernetes/apps/develop/workspace/config

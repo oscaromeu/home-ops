@@ -6,10 +6,10 @@ metadata:
   namespace: flux-system
 spec:
   inputs:
-  - app: flux-instance
-    namespace: flux-system
-    dependsOn:
-    - name: flux-operator
-  - app: flux-operator
-    namespace: flux-system
-    wait: true
+  - namespace: flux-system
+    apps:
+    - app: flux-instance
+      dependsOn:
+      - name: flux-operator
+    - app: flux-operator
+      wait: true
