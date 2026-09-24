@@ -4,6 +4,7 @@ Thumbs.db
 
 # k8s / Kubernetes
 kubeconfig
+kubeconfig-*
 talosconfig
 
 # Secrets

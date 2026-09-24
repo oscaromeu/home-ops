@@ -1,0 +1,89 @@
+---
+- name: Cluster Installation
+  hosts: kubernetes
+  become: true
+  gather_facts: true
+  any_errors_fatal: true
+  tasks:
+    - name: Check for downgrades
+      ansible.builtin.include_tasks: tasks/version-check.yaml
+
+    - name: Ensure that the /etc/rancher/k3s directory exists
+      ansible.builtin.file:
+        path: /etc/rancher/k3s
+        mode: '755'
+        state: directory
+
+    - name: Install k3s configuration
+      ansible.builtin.template:
+        src: templates/config.yaml.j2
+        dest: /etc/rancher/k3s/config.yaml
+        mode: '644'
+      register: k3s_config
+
+    - name: Ensure that the /opt/cni directory exists
+      ansible.builtin.file:
+        path: /opt/cni
+        mode: '755'
+        state: directory
+
+    - name: Ensure that the /opt/cni/bin is a link to /var/lib/rancher/k3s/data/current/bin
+      ansible.builtin.file:
+        src: /var/lib/rancher/k3s/data/current/bin
+        dest: /opt/cni/bin
+        follow: false
+        force: true
+        state: link
+
+    - name: Ensure that the /etc/cni directory exists
+      ansible.builtin.file:
+        path: /etc/cni
+        mode: '755'
+        state: directory
+
+    - name: Ensure that the /var/lib/rancher/k3s/agent/etc/cni/net.d directory exists
+      ansible.builtin.file:
+        path: /var/lib/rancher/k3s/agent/etc/cni/net.d
+        mode: '755'
+        state: directory
+
+    - name: Ensure that the /etc/cni/net.d is a link to /var/lib/rancher/k3s/agent/etc/cni/net.d
+      ansible.builtin.file:
+        src: /var/lib/rancher/k3s/agent/etc/cni/net.d
+        dest: /etc/cni/net.d
+        force: true
+        state: link
+
+    - name: Ensure that the server manifests directory exists
+      ansible.builtin.file:
+        path: /var/lib/rancher/k3s/server/manifests
+        mode: '755'
+        state: directory
+
+    - name: Install Cilium bootstrap manifest
+      ansible.builtin.template:
+        src: templates/cilium-helmchart.yaml.j2
+        dest: /var/lib/rancher/k3s/server/manifests/custom-cilium-helmchart.yaml
+        mode: '644'
+
+    - name: Install k3s
+      when: current_k3s_version != k3s_release_version
+      ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -s - server
+      environment:
+        INSTALL_K3S_VERSION: "{{ k3s_release_version }}"
+      changed_when: true
+
+    - name: Restart k3s to pick up configuration changes
+      when:
+        - current_k3s_version == k3s_release_version
+        - k3s_config.changed
+      ansible.builtin.systemd:
+        name: k3s
+        state: restarted
+
+    - name: Wait for the node to be ready
+      ansible.builtin.command: kubectl --kubeconfig /etc/rancher/k3s/k3s.yaml wait --for=condition=Ready node --all --timeout=600s
+      changed_when: false
+
+    - name: Kubeconfig
+      ansible.builtin.include_tasks: tasks/kubeconfig.yaml

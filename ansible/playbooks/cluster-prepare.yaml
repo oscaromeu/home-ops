@@ -1,0 +1,28 @@
+---
+# rebost sirve la NAS en producción: nada de hostname, /etc/hosts ni reboots aquí
+- name: Prepare System
+  hosts: kubernetes
+  become: true
+  gather_facts: true
+  any_errors_fatal: true
+  tasks:
+    - name: Install packages
+      ansible.builtin.apt:
+        name: apt-transport-https,ca-certificates,conntrack,curl,gnupg,iptables,
+          iputils-ping,libseccomp2,net-tools,nfs-common,open-iscsi,psmisc,socat,util-linux
+        install_recommends: false
+        update_cache: true
+
+    - name: Configure kubernetes sysctls
+      ansible.builtin.copy:
+        content: |
+          fs.inotify.max_user_watches = 524288
+          fs.inotify.max_user_instances = 512
+        dest: /etc/sysctl.d/99-kubernetes.conf
+        mode: '644'
+      register: sysctls
+
+    - name: Reload sysctls
+      when: sysctls.changed
+      ansible.builtin.command: sysctl --system
+      changed_when: true

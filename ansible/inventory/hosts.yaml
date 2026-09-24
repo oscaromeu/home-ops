@@ -1,0 +1,6 @@
+---
+kubernetes:
+  hosts:
+    rebost:
+      ansible_host: 10.69.1.32
+      ansible_user: oscar

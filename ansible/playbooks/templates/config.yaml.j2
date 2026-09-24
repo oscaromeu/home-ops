@@ -1,0 +1,21 @@
+cluster-cidr: {{ cluster_cidr }}
+service-cidr: {{ service_cidr }}
+node-ip: {{ ansible_host }}
+tls-san:
+  - {{ ansible_host }}
+  - {{ inventory_hostname }}
+flannel-backend: none
+disable-network-policy: true
+disable-kube-proxy: true
+disable-cloud-controller: true
+disable:
+  - local-storage
+  - metrics-server
+  - servicelb
+  - traefik
+secrets-encryption: true
+write-kubeconfig-mode: "0644"
+kube-controller-manager-arg:
+  - bind-address=0.0.0.0
+kube-scheduler-arg:
+  - bind-address=0.0.0.0

@@ -19,6 +19,7 @@ env:
   TALOSCONFIG: '{{.TALOSCONFIG}}'
 
 includes:
+  ansible: .taskfiles/ansible
   bootstrap: .taskfiles/bootstrap
   talos: .taskfiles/talos
   utils: .taskfiles/utils

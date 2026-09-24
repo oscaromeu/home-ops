@@ -1,0 +1,38 @@
+---
+version: '3'
+
+vars:
+  ANSIBLE_DIR: '{{.ROOT_DIR}}/ansible'
+  ANSIBLE_INVENTORY_FILE: '{{.ANSIBLE_DIR}}/inventory/hosts.yaml'
+  ANSIBLE_PIP_REQUIREMENTS_FILE: '{{.ANSIBLE_DIR}}/requirements.txt'
+  VENV_DIR: '{{.ROOT_DIR}}/.venv'
+
+env:
+  ANSIBLE_LOCALHOST_WARNING: 'False'
+  ANSIBLE_INVENTORY_UNPARSED_WARNING: 'False'
+
+tasks:
+
+  deps:
+    desc: Install Ansible into the project venv
+    cmd: '{{.VENV_DIR}}/bin/python3 -m pip install --upgrade --requirement {{.ANSIBLE_PIP_REQUIREMENTS_FILE}}'
+    sources: ['{{.ANSIBLE_PIP_REQUIREMENTS_FILE}}']
+    generates: ['{{.VENV_DIR}}/bin/ansible-playbook']
+    preconditions:
+      - test -f {{.ANSIBLE_PIP_REQUIREMENTS_FILE}}
+
+  run:
+    desc: 'Run an Ansible playbook (task ansible:run playbook=cluster-installation)'
+    prompt: Run Ansible playbook '{{.playbook}}'... continue?
+    deps: [deps]
+    cmd: '{{.VENV_DIR}}/bin/ansible-playbook --inventory {{.ANSIBLE_INVENTORY_FILE}} {{.ANSIBLE_DIR}}/playbooks/{{.playbook}}.yaml {{.CLI_ARGS}}'
+    requires:
+      vars: [playbook]
+    preconditions:
+      - test -f {{.ANSIBLE_INVENTORY_FILE}}
+
+  lint:
+    desc: Lint the Ansible playbooks
+    deps: [deps]
+    dir: '{{.ANSIBLE_DIR}}'
+    cmd: '{{.VENV_DIR}}/bin/ansible-lint playbooks/'

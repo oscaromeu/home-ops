@@ -1,0 +1,35 @@
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: cilium
+  namespace: kube-system
+spec:
+  chart: oci://ghcr.io/home-operations/charts-mirror/cilium
+  version: {{ cilium_version }}
+  targetNamespace: kube-system
+  bootstrap: true
+  valuesContent: |-
+    cluster:
+      name: {{ cluster_name }}
+      id: {{ cluster_id }}
+    ipam:
+      mode: kubernetes
+    routingMode: native
+    autoDirectNodeRoutes: true
+    ipv4NativeRoutingCIDR: {{ cluster_cidr }}
+    endpointRoutes:
+      enabled: true
+    kubeProxyReplacement: true
+    k8sServiceHost: 127.0.0.1
+    k8sServicePort: 6444
+    cni:
+      exclusive: false
+    bgpControlPlane:
+      enabled: true
+    l2announcements:
+      enabled: true
+    operator:
+      replicas: 1
+    hubble:
+      enabled: false
