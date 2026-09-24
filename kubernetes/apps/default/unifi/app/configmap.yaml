@@ -1,5 +1,5 @@
 ---
-# Public server certificate of the UniFi controller (10.69.1.1), self-signed.
+# Public server certificate of the UniFi controller, self-signed.
 # Not a secret — used only to validate the backend TLS connection.
 apiVersion: v1
 kind: ConfigMap

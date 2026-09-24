@@ -57,9 +57,9 @@ spec:
         rollOutPods: true
     ipam:
       mode: kubernetes
-    ipv4NativeRoutingCIDR: "10.42.0.0/16"
+    ipv4NativeRoutingCIDR: "${CLUSTER_POD_CIDR}"
     k8sServiceHost: 127.0.0.1
-    k8sServicePort: 7445
+    k8sServicePort: ${CLUSTER_API_PORT}
     kubeProxyReplacement: true
     kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
     l2announcements:
