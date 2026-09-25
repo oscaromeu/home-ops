@@ -1,7 +1,7 @@
 [env]
 _.python.venv = { path = "{{config_root}}/.venv", create = true }
 KUBECONFIG = "{{config_root}}/kubeconfig"
-SOPS_AGE_KEY_FILE = "{{config_root}}/age.key"
+SOPS_AGE_KEY_FILE = "{{env.HOME}}/.config/sops/age/home-ops.key"
 TALOSCONFIG = "{{config_root}}/talos/home/clusterconfig/talosconfig"
 
 [tools]
