@@ -2,14 +2,14 @@
 creation_rules:
   - path_regex: talos/.*\.sops\.ya?ml
     mac_only_encrypted: true
-    age: "age1ptththqpxnx0zuzmq0peq9x30vqgdedjsdlsuzxr5gfc36mnwqlsylrpr8,age1c77wyzgh3jwz3w8mkxeqr9gzp68nzdaynkan2020d74tgps5lv0qxcq9l8"
+    age: "age1c77wyzgh3jwz3w8mkxeqr9gzp68nzdaynkan2020d74tgps5lv0qxcq9l8"
   - path_regex: (bootstrap|kubernetes)/.*\.sops\.ya?ml
     encrypted_regex: "^(data|stringData)$"
     mac_only_encrypted: true
-    age: "age1ptththqpxnx0zuzmq0peq9x30vqgdedjsdlsuzxr5gfc36mnwqlsylrpr8,age1c77wyzgh3jwz3w8mkxeqr9gzp68nzdaynkan2020d74tgps5lv0qxcq9l8"
+    age: "age1c77wyzgh3jwz3w8mkxeqr9gzp68nzdaynkan2020d74tgps5lv0qxcq9l8"
   - path_regex: terraform/.*\.sops\.ya?ml
     mac_only_encrypted: true
-    age: "age1ptththqpxnx0zuzmq0peq9x30vqgdedjsdlsuzxr5gfc36mnwqlsylrpr8,age1c77wyzgh3jwz3w8mkxeqr9gzp68nzdaynkan2020d74tgps5lv0qxcq9l8"
+    age: "age1c77wyzgh3jwz3w8mkxeqr9gzp68nzdaynkan2020d74tgps5lv0qxcq9l8"
 stores:
   yaml:
     indent: 2
