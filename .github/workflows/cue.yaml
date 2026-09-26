@@ -1,0 +1,30 @@
+---
+name: "CUE"
+
+on:
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "kubernetes/clusters/**"
+      - "kubernetes/components/**"
+      - ".taskfiles/rs/**"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  vet:
+    name: Vet Inputs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup mise
+        uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
+        with:
+          install_args: aqua:cue-lang/cue aqua:go-task/task
+
+      - name: Vet cluster inputs
+        run: task rs:vet

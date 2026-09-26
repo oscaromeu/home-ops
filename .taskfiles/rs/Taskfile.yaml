@@ -3,6 +3,14 @@ version: '3'
 
 tasks:
 
+  vet:
+    desc: 'Check a cluster inputs against the schema (task rs:vet cluster=home)'
+    cmd: 'cue vet -d "#ResourceSet" {{.KUBERNETES_DIR}}/components/resourceset/schema.cue $(find {{.KUBERNETES_DIR}}/clusters/{{.cluster}} -maxdepth 1 -name "*.yaml" ! -name "kustomization.yaml")'
+    vars:
+      cluster: '{{.cluster | default "home"}}'
+    preconditions:
+      - which cue
+
   test:
     desc: 'Validate a cluster offline with flate (task rs:test cluster=home)'
     cmd: 'flate test all --path {{.KUBERNETES_DIR}}/clusters/{{.cluster}}/entrypoint --allow-missing-secrets'
