@@ -12,29 +12,38 @@ spec:
       dependsOn:
       - name: clickhouse-cluster
       force: true
+
     - app: ch-ui
+
     - app: fluentbit
       path: ./kubernetes/apps/observability/fluentbit
+
     - app: grafana
       dependsOn:
       - name: crunchy-postgres-bootstrap
       - name: onepassword
       substitute:
         postgres_cluster_version: v17-1
+
     - app: k6s-operator
       path: ./kubernetes/apps/observability/k6s
+
     - app: k6s-scenarios
       path: ./kubernetes/apps/observability/k6s/scenarios
       dependsOn:
       - name: k6s-operator
+
     - app: krr
       dependsOn:
       - name: clickhouse-cluster
+
     - app: kube-prometheus-stack
       dependsOn:
       - name: onepassword
+
     - app: pushgateway
       path: ./kubernetes/apps/observability/exporters/pushgateway
+
     - app: victoria-alerts
     - app: victoria-logs
     - app: victoria-traces

@@ -11,11 +11,13 @@ spec:
     - app: arr-config
       dependsOn:
       - name: recyclarr
+
     - app: atuin
       dependsOn:
       - name: crunchy-postgres-bootstrap
       substitute:
         postgres_cluster_version: v17-1
+
     - app: bazarr
     - app: copyparty
     - app: echo
@@ -25,57 +27,73 @@ spec:
     - app: flaresolverr
     - app: forgejo
     - app: glance
+
     - app: icecast
       dependsOn:
       - name: onepassword
+
     - app: jellyfin
     - app: jellyseerr
     - app: kavita
+
     - app: linkding
       dependsOn:
       - name: crunchy-postgres-bootstrap
       substitute:
         postgres_cluster_version: v17-1
+
     - app: memos
       dependsOn:
       - name: crunchy-postgres-bootstrap
+
     - app: metube
+
     - app: navidrome
       dependsOn:
       - name: onepassword
+
     - app: navidrome-resources
       path: ./kubernetes/apps/default/navidrome/resources
       dependsOn:
       - name: navidrome
+
     - app: outline
       dependsOn:
       - name: onepassword
       - name: crunchy-postgres-bootstrap
       substitute:
         postgres_cluster_version: v17-1
+
     - app: pinchflat
     - app: podfetch
     - app: podinfo
     - app: prowlarr
     - app: qbittorrent
     - app: radarr
+
     - app: recyclarr
       dependsOn:
       - name: onepassword
+
     - app: sonarr
     - app: syncthing
+
     - app: twitch-radios
       dependsOn:
       - name: icecast
       - name: onepassword
+
     - app: unifi
+
     - app: vikunja
       dependsOn:
       - name: onepassword
       - name: crunchy-postgres-bootstrap
+
     - app: vikunja-config
       path: ./kubernetes/apps/default/vikunja/config
       dependsOn:
       - name: onepassword
       - name: crunchy-postgres-bootstrap
+
     - app: zot

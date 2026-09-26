@@ -12,11 +12,14 @@ spec:
       path: ./kubernetes/apps/databases/clickhouse
       dependsOn:
       - name: clickhouse-operator
+
     - app: clickhouse-lab
       dependsOn:
       - name: clickhouse-operator
+
     - app: clickhouse-operator
       path: ./kubernetes/apps/databases/clickhouse/operator
+
     - app: crunchy-postgres-bootstrap
       path: ./kubernetes/apps/databases/crunchy-pg/bootstrap
       dependsOn:
@@ -36,6 +39,7 @@ spec:
       commonMetadata:
         labels:
           app.kubernetes.io/name: crunchy-postgres-bootstrap
+
     - app: crunchy-postgres-cluster
       path: ./kubernetes/apps/databases/crunchy-pg/cluster
       dependsOn:
@@ -46,9 +50,11 @@ spec:
       commonMetadata:
         labels:
           app.kubernetes.io/name: crunchy-postgres-cluster
+
     - app: crunchy-postgres-operator
       path: ./kubernetes/apps/databases/crunchy-pg/operator
       commonMetadata:
         labels:
           app.kubernetes.io/name: crunchy-postgres-operator
+
     - app: valkey

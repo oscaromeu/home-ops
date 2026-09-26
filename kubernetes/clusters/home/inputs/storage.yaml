@@ -11,5 +11,6 @@ spec:
     - app: garage
       dependsOn:
       - name: onepassword
+
     - app: garage-webui
       path: ./kubernetes/apps/storage/garage/webui

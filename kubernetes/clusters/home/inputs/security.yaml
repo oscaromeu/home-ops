@@ -22,6 +22,7 @@ spec:
         kind: Kanidm
         failed: status.conditions.exists(c, c.type == 'Available' && c.status == 'False')
         current: status.conditions.exists(c, c.type == 'Available' && c.status == 'True')
+
     - app: kanidm-operator
       healthChecks:
       - apiVersion: helm.toolkit.fluxcd.io/v2

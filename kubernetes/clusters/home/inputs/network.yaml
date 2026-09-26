@@ -10,6 +10,7 @@ spec:
     apps:
     - app: cloudflare-dns
       wait: true
+
     - app: cloudflare-tunnel
     - app: envoy-gateway
     - app: k8s-gateway
