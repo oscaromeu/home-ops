@@ -4,19 +4,6 @@ kind: Kustomization
 components:
   - ../../components/resourceset
 resources:
-  - ../../apps/cert-manager/namespace.yaml
-  - ../../apps/databases/namespace.yaml
-  - ../../apps/default/namespace.yaml
-  - ../../apps/develop/namespace.yaml
-  - ../../apps/external-secrets/namespace.yaml
-  - ../../apps/flux-system/namespace.yaml
-  - ../../apps/kguardian/namespace.yaml
-  - ../../apps/kube-system/namespace.yaml
-  - ../../apps/network/namespace.yaml
-  - ../../apps/observability/namespace.yaml
-  - ../../apps/openebs-system/namespace.yaml
-  - ../../apps/security/namespace.yaml
-  - ../../apps/storage/namespace.yaml
   - ../../sources
   - ./secrets
   - ./cert-manager.yaml
