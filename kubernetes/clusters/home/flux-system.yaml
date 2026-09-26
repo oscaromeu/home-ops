@@ -8,8 +8,8 @@ spec:
   inputs:
   - namespace: flux-system
     apps:
-    - app: flux-instance
-      dependsOn:
-      - name: flux-operator
     - app: flux-operator
       wait: true
+    - app: flux-webhook
+      dependsOn:
+      - name: flux-operator
