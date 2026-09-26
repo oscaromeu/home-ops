@@ -5,17 +5,5 @@ components:
   - ../../components/resourceset
 resources:
   - ../../sources
+  - ./inputs
   - ./secrets
-  - ./cert-manager.yaml
-  - ./databases.yaml
-  - ./default.yaml
-  - ./develop.yaml
-  - ./external-secrets.yaml
-  - ./flux-system.yaml
-  - ./kguardian.yaml
-  - ./kube-system.yaml
-  - ./network.yaml
-  - ./observability.yaml
-  - ./openebs-system.yaml
-  - ./security.yaml
-  - ./storage.yaml

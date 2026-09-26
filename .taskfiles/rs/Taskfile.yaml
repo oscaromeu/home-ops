@@ -5,7 +5,7 @@ tasks:
 
   vet:
     desc: 'Check a cluster inputs against the schema (task rs:vet cluster=home)'
-    cmd: 'cue vet -d "#ResourceSet" {{.KUBERNETES_DIR}}/components/resourceset/schema.cue $(find {{.KUBERNETES_DIR}}/clusters/{{.cluster}} -maxdepth 1 -name "*.yaml" ! -name "kustomization.yaml")'
+    cmd: 'cue vet -d "#ResourceSet" {{.KUBERNETES_DIR}}/components/resourceset/schema.cue $(find {{.KUBERNETES_DIR}}/clusters/{{.cluster}}/inputs -maxdepth 1 -name "*.yaml" ! -name "kustomization.yaml")'
     vars:
       cluster: '{{.cluster | default "home"}}'
     preconditions:
