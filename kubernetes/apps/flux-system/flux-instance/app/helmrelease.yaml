@@ -4,6 +4,7 @@ kind: HelmRelease
 metadata:
   name: flux-instance
 spec:
+  suspend: true
   chartRef:
     kind: OCIRepository
     name: flux-instance
