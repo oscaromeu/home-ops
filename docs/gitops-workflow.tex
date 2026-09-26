@@ -43,35 +43,21 @@
 \draw[flow] (c) -- node[lbl, above] {creates} (e);
 \draw[dep]  (c) -- node[lbl, right] {depends on} (g);
 
-% The one thing a reader cannot guess: everything right of this line is
-% created at reconcile time and is written down nowhere.
-\coordinate (cstack) at ($(c.north east)+(2.2mm,2.2mm)$);
+% Corner of the stack, so the region below contains it.
+\coordinate (cstack) at ($(c.north east)+(4.4mm,9mm)$);
 
 % Stacked cards: one app is drawn, but a ResourceSet generates one of these per
 % app. Drawn as copies of the real node rectangle, so they cannot drift in size.
 % The namespace deliberately has no stack - there is exactly one of those.
 \begin{scope}[on background layer]
-  \foreach \d in {1.1mm, 2.2mm} {
+  \foreach \k in {2,1} {
     \draw[fill=green!20, draw=green!55!black, line width=0.9pt, rounded corners=3pt]
-      ($(c.south west)+(\d,\d)$) rectangle ($(c.north east)+(\d,\d)$);
+      ($(c.south west)+(\k*2.2mm,\k*4.5mm)$) rectangle ($(c.north east)+(\k*2.2mm,\k*4.5mm)$);
     \draw[fill=orange!25, draw=orange!75!black, line width=0.9pt, rounded corners=3pt]
-      ($(e.south west)+(\d,\d)$) rectangle ($(e.north east)+(\d,\d)$);
+      ($(e.south west)+(\k*2.2mm,\k*4.5mm)$) rectangle ($(e.north east)+(\k*2.2mm,\k*4.5mm)$);
   }
 \end{scope}
 
-\begin{scope}[on background layer]
-  \coordinate (mid) at ($(b.east)!0.5!(c.west)$);
-  \draw[ink, dotted, line width=1pt] ($(mid)+(0,3.3)$) -- ($(mid)+(0,-5.2)$);
-  % Column headers: each half is named above the content it describes, and the
-  % divider runs the full height. A second dashed box would collide with the
-  % region already inside the right-hand side.
-  \coordinate (axis) at (0,3.6);
-  % |<->|<->| across the full width: a bar at each end and one at the split.
-  \draw[ink, |<->|, line width=0.7pt] (a.west |- axis) -- (mid |- axis);
-  \draw[ink, |<->|, line width=0.7pt] (mid |- axis) -- (e.east |- axis);
-  \node[note, above=1mm] at ($(a.west |- axis)!0.5!(mid |- axis)$) {written in git};
-  \node[note, above=1mm] at ($(mid |- axis)!0.5!(e.east |- axis)$) {created at reconcile time};
-\end{scope}
 
 % The region is what mermaid cannot draw: it marks where one ResourceSet's
 % output ends. onepassword sits outside it because another one generates it.
