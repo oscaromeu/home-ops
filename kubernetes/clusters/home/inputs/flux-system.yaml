@@ -10,6 +10,7 @@ spec:
     apps:
     - app: flux-operator
       wait: true
+
     - app: flux-webhook
       dependsOn:
       - name: flux-operator
