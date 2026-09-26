@@ -25,6 +25,9 @@ spec:
       targetNamespace: << dig "targetNamespace" $ns $app >>
       decryption:
         provider: sops
+      <<- if hasKey $app "components" >>
+      components: << toYaml $app.components | nindent 8 >>
+      <<- end >>
       <<- if hasKey $app "dependsOn" >>
       dependsOn: << toYaml $app.dependsOn | nindent 8 >>
       <<- end >>
