@@ -9,7 +9,7 @@ spec:
   - namespace: databases
     apps:
     - app: clickhouse-cluster
-      path: ./kubernetes/apps/databases/clickhouse/app
+      path: ./kubernetes/apps/databases/clickhouse
       dependsOn:
       - name: clickhouse-operator
     - app: clickhouse-lab
