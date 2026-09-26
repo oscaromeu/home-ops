@@ -22,7 +22,7 @@ spec:
       substitute:
         postgres_cluster_version: v17-1
     - app: k6s-operator
-      path: ./kubernetes/apps/observability/k6s/app
+      path: ./kubernetes/apps/observability/k6s
     - app: k6s-scenarios
       path: ./kubernetes/apps/observability/k6s/scenarios
       dependsOn:
@@ -34,7 +34,7 @@ spec:
       dependsOn:
       - name: onepassword
     - app: pushgateway
-      path: ./kubernetes/apps/observability/exporters/pushgateway/app
+      path: ./kubernetes/apps/observability/exporters/pushgateway
     - app: victoria-alerts
     - app: victoria-logs
     - app: victoria-traces

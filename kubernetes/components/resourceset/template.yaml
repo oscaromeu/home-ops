@@ -21,7 +21,7 @@ spec:
         kind: GitRepository
         name: flux-system
         namespace: flux-system
-      path: << dig "path" (printf "./kubernetes/apps/%s/%s/app" $ns $app.app) $app >>
+      path: << dig "path" (printf "./kubernetes/apps/%s/%s" $ns $app.app) $app >>
       targetNamespace: << dig "targetNamespace" $ns $app >>
       decryption:
         provider: sops
