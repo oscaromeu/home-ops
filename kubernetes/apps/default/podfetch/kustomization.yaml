@@ -4,5 +4,4 @@ kind: Kustomization
 namespace: default
 resources:
   - ./pvc.yaml
-  - ./ocirepository.yaml
   - ./helmrelease.yaml

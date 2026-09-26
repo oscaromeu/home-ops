@@ -5,5 +5,4 @@ namespace: default
 resources:
   - ./externalsecret.yaml
   - ./pvc.yaml
-  - ./ocirepository.yaml
   - ./helmrelease.yaml

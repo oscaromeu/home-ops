@@ -5,4 +5,3 @@ namespace: default
 resources:
   - ./pvc.yaml
   - ./helmrelease.yaml
-  - ./ocirepository.yaml

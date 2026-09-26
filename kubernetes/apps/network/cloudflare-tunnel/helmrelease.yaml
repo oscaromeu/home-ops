@@ -6,7 +6,8 @@ metadata:
 spec:
   chartRef:
     kind: OCIRepository
-    name: cloudflare-tunnel
+    name: app-template
+    namespace: flux-system
   values:
     controllers:
       cloudflare-tunnel:

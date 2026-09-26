@@ -6,7 +6,8 @@ metadata:
 spec:
   chartRef:
     kind: OCIRepository
-    name: ch-ui
+    name: app-template
+    namespace: flux-system
   values:
     controllers:
       ch-ui:

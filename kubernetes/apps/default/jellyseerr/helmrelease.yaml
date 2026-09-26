@@ -7,7 +7,8 @@ metadata:
 spec:
   chartRef:
     kind: OCIRepository
-    name: jellyseerr
+    name: app-template
+    namespace: flux-system
   values:
     controllers:
       jellyseerr:
