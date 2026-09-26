@@ -6,7 +6,8 @@ metadata:
   namespace: flux-system
 spec:
   inputs:
-  - apps:
+  - namespace: default
+    apps:
     - app: arr-config
       dependsOn:
       - name: recyclarr
