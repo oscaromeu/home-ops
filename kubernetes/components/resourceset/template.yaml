@@ -6,6 +6,16 @@ metadata:
 spec:
   resourcesTemplate: |
     <<- $ns := dig "namespace" "default" (inputs) >>
+    ---
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: << $ns >>
+      annotations:
+        # flux-operator garbage collects against its own annotation, not the kustomize one.
+        # TODO: investigate whether both are still needed.
+        fluxcd.controlplane.io/prune: disabled
+        kustomize.toolkit.fluxcd.io/prune: disabled
     <<- range $app := inputs.apps >>
     ---
     apiVersion: kustomize.toolkit.fluxcd.io/v1
