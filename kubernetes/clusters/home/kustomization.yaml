@@ -6,4 +6,4 @@ components:
 resources:
   - ../../sources
   - ./inputs
-  - ./secrets
+  - ./config/secrets

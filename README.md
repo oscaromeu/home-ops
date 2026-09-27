@@ -16,7 +16,8 @@ This mono repository houses the infrastructure for my homelab. I try to adhere t
   └─📁 home
     ├─📁 entrypoint  # The FluxInstance and the root Kustomization
     ├─📁 inputs      # What this cluster runs, one file per namespace
-    └─📁 secrets     # SOPS, only what is needed before the secret store is up
+    └─📁 config      # The values this cluster supplies to the catalogue
+      └─📁 secrets   # SOPS, only what is needed before the secret store is up
 📁 talos           # Talos machine configs and per-node overrides
 📁 terraform       # Providers that live outside the cluster
 ```
@@ -26,7 +27,7 @@ This mono repository houses the infrastructure for my homelab. I try to adhere t
 A cluster declares what it runs in `clusters/<name>/inputs`, one file per namespace. [flux-operator](https://github.com/controlplaneio-fluxcd/flux-operator) turns each of those into a Flux `Kustomization` per app, all from the same template, and `apps/` stays a catalogue that knows nothing about which cluster consumes it.
 
 1. The `FluxInstance` syncs `clusters/home/entrypoint`, where the root Flux `Kustomization` lives.
-2. That applies the rest of `clusters/home` — the shared sources, the SOPS secrets and the ResourceSets.
+2. That applies the rest of `clusters/home` — the shared sources, the SOPS secrets under `config/` and the ResourceSets.
 3. A Kustomize component patches the same template into every one of them.
 4. flux-operator expands each `ResourceSet` into its `Namespace` and a Flux `Kustomization` per app.
 5. Each of those applies `apps/<namespace>/<app>`, waiting on whatever its `dependsOn` names.
