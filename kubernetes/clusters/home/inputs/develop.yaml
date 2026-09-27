@@ -7,6 +7,4 @@ metadata:
 spec:
   inputs:
   - namespace: develop
-    apps:
-    - app: forgejo-workspace-config
-      path: ./kubernetes/apps/develop/workspace/config
+    apps: []

@@ -19,5 +19,5 @@ spec:
   sourceRef:
     kind: GitRepository
     name: forgejo-workspace
-    namespace: develop
+    namespace: flux-system
   wait: false

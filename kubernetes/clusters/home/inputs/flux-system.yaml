@@ -14,3 +14,6 @@ spec:
     - app: flux-webhook
       dependsOn:
       - name: flux-operator
+
+    - app: forgejo-workspace-config
+      path: ./kubernetes/apps/develop/workspace/config
