@@ -5,3 +5,4 @@ resources:
   - ./kanidmoauth2client.yaml
   - ./pvc.yaml
   - ./helmrelease.yaml
+  - ./ocirepository.yaml
