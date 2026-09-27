@@ -52,7 +52,7 @@ spec:
                 capabilities: { drop: ["ALL"] }
           containers:
             - name: ingest
-              image: docker.io/clickhouse/clickhouse-server:26.8@sha256:363a6901e1bf5b404a7d0b4e959a78afff8e31aa3d26a348aaa930b62c9ffab5
+              image: docker.io/clickhouse/clickhouse-server:26.8@sha256:d3cdda9b2137852b20b96b1262b043dbedbe78c2b2c7063a3da60781a29e3463
               command: ["/bin/bash", "-c"]
               args:
                 - |
