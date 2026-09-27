@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - ./pvc.yaml
   - ./helmrelease.yaml
+  - ./ocirepository.yaml

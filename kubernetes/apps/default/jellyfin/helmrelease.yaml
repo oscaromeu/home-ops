@@ -6,8 +6,7 @@ metadata:
 spec:
   chartRef:
     kind: OCIRepository
-    name: app-template
-    namespace: flux-system
+    name: jellyfin
   values:
     controllers:
       jellyfin:

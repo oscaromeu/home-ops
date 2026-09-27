@@ -11,7 +11,6 @@ This mono repository houses the infrastructure for my homelab. I try to adhere t
 📁 kubernetes      # Everything Flux reconciles
 ├─📁 apps          # The catalogue, grouped by namespace
 ├─📁 components    # Reusable Kustomize components
-├─📁 sources       # Where the charts come from, shared by every cluster
 └─📁 clusters      # One directory per cluster
   └─📁 home
     ├─📁 entrypoint  # The FluxInstance and the root Kustomization
