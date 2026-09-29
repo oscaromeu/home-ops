@@ -14,15 +14,6 @@ spec:
           - name: alertname
             value: InfoInhibitor
             matchType: =
-      - receiver: allquiet
-        continue: true
-        matchers:
-          - name: alertgroup
-            value: Discogs
-            matchType: "!="
-          - name: severity
-            value: info|warning|critical
-            matchType: =~
       - receiver: ch-archive
         continue: true
         repeatInterval: 365d
@@ -57,13 +48,6 @@ spec:
 
   receivers:
     - name: blackhole
-    # PoC CORE-1841: opens incidents in the AllQuiet sandbox team.
-    - name: allquiet
-      webhookConfigs:
-        - urlSecret:
-            name: alertmanager-secret
-            key: ALLQUIET_WEBHOOK_URL
-          sendResolved: true
     # Long-term alert history in ClickHouse (observability.alert_events).
     - name: ch-archive
       webhookConfigs:
