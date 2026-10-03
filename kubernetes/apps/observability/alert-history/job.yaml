@@ -17,7 +17,7 @@ spec:
       restartPolicy: OnFailure
       containers:
         - name: schema
-          image: docker.io/clickhouse/clickhouse-server:26.9@sha256:317c280a2334651a54b3e07201c2de4c09588b8e66e64f719cee26d0f434ca81
+          image: docker.io/clickhouse/clickhouse-server:26.9@sha256:230b973a00b5bac5b8925bd2898fae95a039aa6f25063fa8c507ffe9e2c7d770
           command:
             - clickhouse-client
             - --host=clickhouse-clickhouse-headless.databases.svc.cluster.local
