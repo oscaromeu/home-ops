@@ -1,0 +1,19 @@
+version: '3'
+
+tasks:
+
+  test:
+    desc: 'Validate a cluster offline with flate (task flate:test cluster=home)'
+    cmd: 'flate test all --path {{.KUBERNETES_DIR}}/clusters/{{.cluster}}/entrypoint --allow-missing-secrets'
+    vars:
+      cluster: '{{.cluster | default "home"}}'
+    preconditions:
+      - which flate
+
+  render:
+    desc: 'Render everything a cluster applies (task flate:render cluster=home)'
+    cmd: 'flate build all --path {{.KUBERNETES_DIR}}/clusters/{{.cluster}}/entrypoint --allow-missing-secrets'
+    vars:
+      cluster: '{{.cluster | default "home"}}'
+    preconditions:
+      - which flate
