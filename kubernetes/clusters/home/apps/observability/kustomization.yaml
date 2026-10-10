@@ -1,0 +1,16 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./alert-history/ks.yaml
+  - ./ch-ui/ks.yaml
+  - ./fluentbit/ks.yaml
+  - ./grafana/ks.yaml
+  - ./k6s-operator/ks.yaml
+  - ./k6s-scenarios/ks.yaml
+  - ./krr/ks.yaml
+  - ./kube-prometheus-stack/ks.yaml
+  - ./pushgateway/ks.yaml
+  - ./victoria-alerts/ks.yaml
+  - ./victoria-logs/ks.yaml
+  - ./victoria-traces/ks.yaml

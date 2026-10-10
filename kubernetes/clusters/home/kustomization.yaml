@@ -1,8 +1,56 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-components:
-  - ../../components/resourceset
 resources:
-  - ./inputs
+  - ./apps
+  - ./config/namespaces
   - ./config/secrets
+patches:
+  - target:
+      group: kustomize.toolkit.fluxcd.io
+      kind: Kustomization
+    patch: |-
+      apiVersion: kustomize.toolkit.fluxcd.io/v1
+      kind: Kustomization
+      metadata:
+        name: _
+      spec:
+        interval: 1h
+        prune: true
+        deletionPolicy: WaitForTermination
+        sourceRef:
+          kind: GitRepository
+          name: flux-system
+          namespace: flux-system
+        decryption:
+          provider: sops
+        postBuild:
+          substituteFrom:
+            - kind: Secret
+              name: cluster-secrets
+        patches:
+          - patch: |-
+              apiVersion: helm.toolkit.fluxcd.io/v2
+              kind: HelmRelease
+              metadata:
+                name: _
+              spec:
+                interval: 1h
+                install:
+                  crds: CreateReplace
+                  strategy:
+                    name: RetryOnFailure
+                rollback:
+                  cleanupOnFail: true
+                  recreate: true
+                upgrade:
+                  cleanupOnFail: true
+                  crds: CreateReplace
+                  strategy:
+                    name: RemediateOnFailure
+                  remediation:
+                    remediateLastFailure: true
+                    retries: 2
+            target:
+              group: helm.toolkit.fluxcd.io
+              kind: HelmRelease
