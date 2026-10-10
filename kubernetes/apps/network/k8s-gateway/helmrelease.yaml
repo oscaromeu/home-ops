@@ -8,29 +8,34 @@ spec:
     kind: OCIRepository
     name: k8s-gateway
   values:
-    fullnameOverride: k8s-gateway
-    domain: "${SECRET_DOMAIN}"
-    ttl: 1
+    serviceType: LoadBalancer
     service:
-      type: LoadBalancer
-      port: 53
       annotations:
         lbipam.cilium.io/ips: "${K8S_GATEWAY_LB}"
       externalTrafficPolicy: Cluster
-    watchedResources: ["HTTPRoute", "Service"]
-    fallthrough:
-      enabled: true
-    extraZonePlugins:
-      - name: log
-      - name: errors
-      - name: health
-        configBlock: |-
-          lameduck 5s
-      - name: ready
-      - name: prometheus
-        parameters: 0.0.0.0:9153
-      - name: forward
-        parameters: . 1.1.1.1 1.0.0.1
-      - name: loop
-      - name: reload
-      - name: loadbalance
+    servers:
+      - zones:
+          - zone: .
+        port: 1053
+        servicePort: 53
+        plugins:
+          - name: log
+          - name: errors
+          - name: health
+            configBlock: |-
+              lameduck 5s
+          - name: ready
+          - name: k8s_gateway
+            parameters: "${SECRET_DOMAIN}"
+            configBlock: |-
+              apex k8s-gateway.network
+              ttl 1
+              resources HTTPRoute Service
+              fallthrough
+          - name: prometheus
+            parameters: 0.0.0.0:9153
+          - name: forward
+            parameters: . 1.1.1.1 1.0.0.1
+          - name: loop
+          - name: reload
+          - name: loadbalance
