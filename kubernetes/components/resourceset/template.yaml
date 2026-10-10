@@ -23,6 +23,9 @@ spec:
     metadata:
       name: << $app.app >>
       namespace: flux-system
+      annotations:
+        # survive the ResourceSet deletion so plain ks.yaml files can adopt them
+        fluxcd.controlplane.io/prune: disabled
     spec:
       interval: 1h
       prune: true
