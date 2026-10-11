@@ -16,8 +16,7 @@ spec:
     servers:
       - zones:
           - zone: .
-        port: 1053
-        servicePort: 53
+        port: 53
         plugins:
           - name: log
           - name: errors
