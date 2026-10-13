@@ -1,0 +1,11 @@
+---
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmGroup
+metadata:
+  name: navidrome-users
+spec:
+  kanidmRef:
+    name: kanidm
+  kanidmName: navidrome_users
+  members:
+    - admin-account
