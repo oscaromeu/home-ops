@@ -21,6 +21,9 @@
       ansible.builtin.pause:
         seconds: 5
   tasks:
+    - name: Populate service facts
+      ansible.builtin.service_facts:
+
     - name: Uninstall k3s
       ansible.builtin.command:
         cmd: /usr/local/bin/k3s-uninstall.sh
@@ -37,6 +40,13 @@
         table: "{{ item }}"
         flush: true
       loop: ["filter", "nat", "mangle", "raw"]
+
+    # The flush wipes docker's chains and pihole serves the LAN DNS from here
+    - name: Restart docker to rebuild its iptables chains
+      when: "'docker.service' in ansible_facts.services"
+      ansible.builtin.systemd:
+        name: docker
+        state: restarted
 
     - name: Flush ip6tables
       ansible.builtin.iptables:
