@@ -19,7 +19,9 @@ tasks:
       - which talhelper talosctl sops
 
   apps:
-    desc: Bootstrap apps into the Talos cluster
+    desc: Bootstrap apps into a cluster (task bootstrap:apps CLUSTER=tools)
+    env:
+      CLUSTER: '{{.CLUSTER | default "home"}}'
     cmd: bash {{.SCRIPTS_DIR}}/bootstrap-apps.sh
     preconditions:
       - msg: Unsupported bash version, run `brew install bash` to upgrade

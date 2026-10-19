@@ -7,18 +7,24 @@ export LOG_LEVEL="debug"
 export ROOT_DIR="$(git rev-parse --show-toplevel)"
 export CLUSTER="${CLUSTER:-home}"
 
+case "${CLUSTER}" in
+    home) KUBE_CONTEXT="admin@kubernetes" ;;
+    tools) KUBE_CONTEXT="tools" ;;
+    *) log fatal "Unknown cluster" "cluster" "${CLUSTER}" ;;
+esac
+
 # Talos requires the nodes to be 'Ready=False' before applying resources
 function wait_for_nodes() {
     log debug "Waiting for nodes to be available"
 
     # Skip waiting if all nodes are 'Ready=True'
-    if kubectl wait nodes --for=condition=Ready=True --all --timeout=10s &>/dev/null; then
+    if kubectl --context "${KUBE_CONTEXT}" wait nodes --for=condition=Ready=True --all --timeout=10s &>/dev/null; then
         log info "Nodes are available and ready, skipping wait for nodes"
         return
     fi
 
     # Wait for all nodes to be 'Ready=False'
-    until kubectl wait nodes --for=condition=Ready=False --all --timeout=10s &>/dev/null; do
+    until kubectl --context "${KUBE_CONTEXT}" wait nodes --for=condition=Ready=False --all --timeout=10s &>/dev/null; do
         log info "Nodes are not available, waiting for nodes to be available. Retrying in 10 seconds..."
         sleep 10
     done
@@ -28,7 +34,7 @@ function wait_for_nodes() {
 function apply_namespaces() {
     log debug "Applying namespaces"
 
-    local -r apps_dir="${ROOT_DIR}/kubernetes/apps"
+    local -r apps_dir="${ROOT_DIR}/kubernetes/clusters/${CLUSTER}/apps"
 
     if [[ ! -d "${apps_dir}" ]]; then
         log error "Directory does not exist" "directory=${apps_dir}"
@@ -38,14 +44,14 @@ function apply_namespaces() {
         namespace=$(basename "${app}")
 
         # Check if the namespace resources are up-to-date
-        if kubectl get namespace "${namespace}" &>/dev/null; then
+        if kubectl --context "${KUBE_CONTEXT}" get namespace "${namespace}" &>/dev/null; then
             log info "Namespace resource is up-to-date" "resource=${namespace}"
             continue
         fi
 
         # Apply the namespace resources
-        if kubectl create namespace "${namespace}" --dry-run=client --output=yaml \
-            | kubectl apply --server-side --filename - &>/dev/null;
+        if kubectl --context "${KUBE_CONTEXT}" create namespace "${namespace}" --dry-run=client --output=yaml \
+            | kubectl --context "${KUBE_CONTEXT}" apply --server-side --filename - &>/dev/null;
         then
             log info "Namespace resource applied" "resource=${namespace}"
         else
@@ -71,18 +77,31 @@ function apply_sops_secrets() {
         fi
 
         # Check if the secret resources are up-to-date
-        if sops exec-file "${secret}" "kubectl --namespace flux-system diff --filename {}" &>/dev/null; then
+        if sops exec-file "${secret}" "kubectl --context ${KUBE_CONTEXT} --namespace flux-system diff --filename {}" &>/dev/null; then
             log info "Secret resource is up-to-date" "resource=$(basename "${secret}" ".sops.yaml")"
             continue
         fi
 
         # Apply secret resources
-        if sops exec-file "${secret}" "kubectl --namespace flux-system apply --server-side --filename {}" &>/dev/null; then
+        if sops exec-file "${secret}" "kubectl --context ${KUBE_CONTEXT} --namespace flux-system apply --server-side --filename {}" &>/dev/null; then
             log info "Secret resource applied successfully" "resource=$(basename "${secret}" ".sops.yaml")"
         else
             log error "Failed to apply secret resource" "resource=$(basename "${secret}" ".sops.yaml")"
         fi
     done
+}
+
+# The HelmRelease values carry Flux substitution vars; helmfile expands them from the environment
+function export_cluster_secrets() {
+    local -r secret="${ROOT_DIR}/kubernetes/clusters/${CLUSTER}/config/secrets/cluster-secrets.sops.yaml"
+
+    if ! sops --decrypt "${secret}" &>/dev/null; then
+        log fatal "Failed to decrypt cluster secrets" "file" "${secret}"
+    fi
+
+    while IFS=$'\t' read -r key value; do
+        export "${key}=${value}"
+    done < <(sops --decrypt "${secret}" | yq '.stringData | to_entries[] | [.key, .value] | @tsv')
 }
 
 # CRDs to be applied before the helmfile charts are installed
@@ -99,12 +118,12 @@ function apply_crds() {
         log fatal "Failed to render CRDs from Helmfile" "file" "${helmfile_file}"
     fi
 
-    if echo "${crds}" | kubectl diff --filename - &>/dev/null; then
+    if echo "${crds}" | kubectl --context "${KUBE_CONTEXT}" diff --filename - &>/dev/null; then
         log info "CRDs are up-to-date"
         return
     fi
 
-    if ! echo "${crds}" | kubectl apply --server-side --filename - &>/dev/null; then
+    if ! echo "${crds}" | kubectl --context "${KUBE_CONTEXT}" apply --server-side --filename - &>/dev/null; then
         log fatal "Failed to apply crds from Helmfile" "file" "${helmfile_file}"
     fi
 
@@ -115,13 +134,13 @@ function apply_crds() {
 function sync_helm_releases() {
     log debug "Syncing Helm releases"
 
-    local -r helmfile_file="${ROOT_DIR}/bootstrap/helmfile.d/01-apps.yaml"
+    local -r helmfile_file="${ROOT_DIR}/bootstrap/helmfile.d/01-apps.yaml.gotmpl"
 
     if [[ ! -f "${helmfile_file}" ]]; then
         log error "File does not exist" "file=${helmfile_file}"
     fi
 
-    if ! helmfile --file "${helmfile_file}" sync --hide-notes; then
+    if ! helmfile --file "${helmfile_file}" --environment "${CLUSTER}" --kube-context "${KUBE_CONTEXT}" sync --hide-notes; then
         log error "Failed to sync Helm releases"
     fi
 
@@ -138,13 +157,13 @@ function apply_flux_instance() {
         log fatal "File does not exist" "file" "${manifest}"
     fi
 
-    if kubectl diff --filename "${manifest}" &>/dev/null; then
+    if kubectl --context "${KUBE_CONTEXT}" diff --filename "${manifest}" &>/dev/null; then
         log info "FluxInstance is up-to-date"
         return
     fi
 
     # Same field manager Flux uses, so kustomize-controller can take it over
-    if ! kubectl apply --server-side --force-conflicts \
+    if ! kubectl --context "${KUBE_CONTEXT}" apply --server-side --force-conflicts \
         --field-manager=kustomize-controller --filename "${manifest}" &>/dev/null; then
         log fatal "Failed to apply FluxInstance" "file" "${manifest}"
     fi
@@ -153,12 +172,13 @@ function apply_flux_instance() {
 }
 
 function main() {
-    check_env KUBECONFIG TALOSCONFIG
-    check_cli helmfile kubectl kustomize sops talhelper yq
+    check_env KUBECONFIG
+    check_cli helmfile kubectl kustomize sops yq
 
     # Apply resources and Helm releases
     wait_for_nodes
     apply_namespaces
+    export_cluster_secrets
     apply_sops_secrets
     apply_crds
     sync_helm_releases
