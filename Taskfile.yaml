@@ -14,7 +14,7 @@ vars:
   TALOSCONFIG: '{{.ROOT_DIR}}/talos/{{.CLUSTER | default "home"}}/clusterconfig/talosconfig'
 
 env:
-  KUBECONFIG: '{{.ROOT_DIR}}/kubeconfig'
+  KUBECONFIG: '{{env "HOME"}}/.kube/config'
   SOPS_AGE_KEY_FILE: '{{env "HOME"}}/.config/sops/age/home-ops.key'
   TALOSCONFIG: '{{.TALOSCONFIG}}'
 
