@@ -54,18 +54,6 @@
         force: true
         state: link
 
-    - name: Ensure that the server manifests directory exists
-      ansible.builtin.file:
-        path: /var/lib/rancher/k3s/server/manifests
-        mode: '755'
-        state: directory
-
-    - name: Install Cilium bootstrap manifest
-      ansible.builtin.template:
-        src: templates/cilium-helmchart.yaml.j2
-        dest: /var/lib/rancher/k3s/server/manifests/custom-cilium-helmchart.yaml
-        mode: '644'
-
     - name: Install k3s
       when: current_k3s_version != k3s_release_version
       ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -s - server
@@ -81,8 +69,13 @@
         name: k3s
         state: restarted
 
-    - name: Wait for the node to be ready
-      ansible.builtin.command: kubectl --kubeconfig /etc/rancher/k3s/k3s.yaml wait --for=condition=Ready node --all --timeout=600s
+    # Without a CNI the node never reports Ready; the bootstrap script installs Cilium later
+    - name: Wait for the node to register
+      ansible.builtin.command: kubectl --kubeconfig /etc/rancher/k3s/k3s.yaml get nodes --no-headers
+      register: nodes
+      until: nodes.stdout_lines | length > 0
+      retries: 60
+      delay: 10
       changed_when: false
 
     - name: Kubeconfig
