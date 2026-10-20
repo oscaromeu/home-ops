@@ -1,5 +1,11 @@
 ---
 
+environments:
+  home: {}
+  tools: {}
+
+---
+
 helmDefaults:
   cleanupOnFail: true
   wait: true
@@ -19,19 +25,21 @@ releases:
     values: ['./templates/values.yaml.gotmpl']
     needs: ['kube-system/cilium']
 
+{{ if eq .Environment.Name "home" }}
   - name: spegel
     namespace: kube-system
     chart: oci://ghcr.io/spegel-org/helm-charts/spegel
     version: 0.7.4
     values: ['./templates/values.yaml.gotmpl']
     needs: ['kube-system/coredns']
+{{ end }}
 
   - name: cert-manager
     namespace: cert-manager
     chart: oci://quay.io/jetstack/charts/cert-manager
     version: v1.21.2
     values: ['./templates/values.yaml.gotmpl']
-    needs: ['kube-system/spegel']
+    needs: ['kube-system/coredns']
 
   - name: flux-operator
     namespace: flux-system
@@ -39,4 +47,3 @@ releases:
     version: 0.61.0
     values: ['./templates/values.yaml.gotmpl']
     needs: ['cert-manager/cert-manager']
-
