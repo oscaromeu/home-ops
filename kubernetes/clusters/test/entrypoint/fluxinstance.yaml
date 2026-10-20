@@ -35,6 +35,6 @@ spec:
   sync:
     interval: 1m
     kind: GitRepository
-    path: kubernetes/clusters/tools/entrypoint
+    path: kubernetes/clusters/test/entrypoint
     ref: refs/heads/main
     url: https://github.com/oscaromeu/home-ops.git

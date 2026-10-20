@@ -19,7 +19,7 @@ tasks:
       - which talhelper talosctl sops
 
   apps:
-    desc: Bootstrap apps into a cluster (task bootstrap:apps CLUSTER=tools)
+    desc: Bootstrap apps into a cluster (task bootstrap:apps CLUSTER=test)
     env:
       CLUSTER: '{{.CLUSTER | default "home"}}'
     cmd: bash {{.SCRIPTS_DIR}}/bootstrap-apps.sh

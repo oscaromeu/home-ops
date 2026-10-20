@@ -9,7 +9,7 @@ spec:
     provider: sops
   deletionPolicy: WaitForTermination
   interval: 1h
-  path: ./kubernetes/clusters/tools
+  path: ./kubernetes/clusters/test
   prune: true
   sourceRef:
     kind: GitRepository
