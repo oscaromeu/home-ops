@@ -17,6 +17,8 @@ releases:
     namespace: network
     chart: oci://ghcr.io/home-operations/charts-mirror/external-dns
     version: 1.23.0
+    # helm 4 validates the chart schema even for CRD extraction; policy may not be null
+    values: [{policy: sync}]
 
   - name: envoy-gateway
     namespace: network
