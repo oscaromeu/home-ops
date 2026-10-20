@@ -9,7 +9,7 @@ export CLUSTER="${CLUSTER:-home}"
 
 case "${CLUSTER}" in
     home) KUBE_CONTEXT="admin@kubernetes" ;;
-    tools) KUBE_CONTEXT="tools" ;;
+    test) KUBE_CONTEXT="test" ;;
     *) log fatal "Unknown cluster" "cluster" "${CLUSTER}" ;;
 esac
 
