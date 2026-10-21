@@ -87,24 +87,12 @@ datasources:
       - { name: VictoriaLogs, orgId: 1 }
       - { name: ClickHouse, orgId: 1 }
     datasources:
-      - uid: prometheus
-        name: Prometheus
-        type: prometheus
-        access: proxy
-        url: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
-        isDefault: true
-        editable: true
-        jsonData:
-          httpMethod: POST
-          timeInterval: 1m
-          exemplarTraceIdDestinations:
-            - datasourceUid: victoria-traces
-              name: TraceID
       - uid: victoria-metrics
         name: VictoriaMetrics
         type: prometheus
         access: proxy
         url: http://vmsingle-victoria-metrics.observability.svc.cluster.local:8428
+        isDefault: true
         editable: true
         jsonData:
           httpMethod: POST

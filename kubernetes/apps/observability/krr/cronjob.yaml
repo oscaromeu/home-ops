@@ -24,7 +24,7 @@ spec:
               args:
                 - --quiet
                 - --logtostderr
-                - --prometheus-url=http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090
+                - --prometheus-url=http://vmsingle-victoria-metrics.observability.svc.cluster.local:8428
                 - --formatter=json
                 - --fileoutput=/share/krr.json
                 - --history_duration=168

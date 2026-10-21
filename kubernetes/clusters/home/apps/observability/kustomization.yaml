@@ -9,7 +9,6 @@ resources:
   - ./k6s-operator/ks.yaml
   - ./k6s-scenarios/ks.yaml
   - ./krr/ks.yaml
-  - ./kube-prometheus-stack/ks.yaml
   - ./pushgateway/ks.yaml
   - ./otel-collectors/ks.yaml
   - ./otel-operator/ks.yaml

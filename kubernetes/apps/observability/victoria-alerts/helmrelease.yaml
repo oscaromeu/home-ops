@@ -18,12 +18,12 @@ spec:
         url: "http://victoria-logs-server.observability.svc.cluster.local:9428"
       remote:
         write:
-          url: "http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090"
+          url: "http://vmsingle-victoria-metrics.observability.svc.cluster.local:8428"
         read:
-          url: "http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090"
+          url: "http://vmsingle-victoria-metrics.observability.svc.cluster.local:8428"
       notifier:
         alertmanager:
-          url: "http://alertmanager-operated.observability.svc.cluster.local:9093"
+          url: "http://vmalertmanager-victoria-metrics.observability.svc.cluster.local:9093"
       securityContext:
         enabled: true
         capabilities:

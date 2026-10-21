@@ -14,7 +14,7 @@ spec:
         memory: "256Mi"
     env:
       - name: K6_PROMETHEUS_RW_SERVER_URL
-        value: http://kube-prometheus-stack-prometheus.observability.svc.cluster.local:9090/api/v1/write
+        value: http://vmsingle-victoria-metrics.observability.svc.cluster.local:8428/api/v1/write
     envFrom:
       - secretRef:
           name: discogs-watchlist-secret
