@@ -8,6 +8,10 @@ spec:
   chartRef:
     kind: OCIRepository
     name: victoria-metrics
+  valuesFrom:
+    - kind: ConfigMap
+      name: kube-state-metrics-config
+      valuesKey: values-kube-state-metrics.yaml
   values:
     fullnameOverride: victoria-metrics
     vmsingle:

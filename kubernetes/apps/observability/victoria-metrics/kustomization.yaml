@@ -9,3 +9,11 @@ resources:
   - ./ocirepository.yaml
   - ./prometheusrule-e2e.yaml
   - ./prometheusrule-postgres.yaml
+configMapGenerator:
+  - name: kube-state-metrics-config
+    files:
+      - values-kube-state-metrics.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+configurations:
+  - kustomizeconfig.yaml
