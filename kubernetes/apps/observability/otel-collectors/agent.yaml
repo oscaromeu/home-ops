@@ -39,12 +39,12 @@ spec:
       resource/cluster-insert:
         attributes:
           - key: cluster
-            value: home
+            value: ${CLUSTER_NAME}
             action: insert
       resource/cluster:
         attributes:
           - key: cluster
-            value: home
+            value: ${CLUSTER_NAME}
             action: upsert
       k8sattributes:
         extract:
