@@ -1,0 +1,23 @@
+{
+  "definitions": {
+    "io.fluxcd.toolkit.kustomize.v1.Kustomization": {
+      "type": "object",
+      "properties": {
+        "spec": {
+          "type": "object",
+          "properties": {
+            "patches": {
+              "type": "array",
+              "items": {"type": "object"},
+              "x-kubernetes-patch-merge-key": "patch",
+              "x-kubernetes-patch-strategy": "merge"
+            }
+          }
+        }
+      },
+      "x-kubernetes-group-version-kind": [
+        {"group": "kustomize.toolkit.fluxcd.io", "kind": "Kustomization", "version": "v1"}
+      ]
+    }
+  }
+}
