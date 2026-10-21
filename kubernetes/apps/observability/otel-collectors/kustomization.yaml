@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
   - ./agent.yaml
   - ./gateway.yaml
+  - ./httproute.yaml
   - ./rbac.yaml
   - ./scraper.yaml

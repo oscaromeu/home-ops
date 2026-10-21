@@ -1,0 +1,118 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/opentelemetry.io/opentelemetrycollector_v1beta1.json
+apiVersion: opentelemetry.io/v1beta1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel-scraper
+spec:
+  mode: statefulset
+  replicas: 1
+  resources:
+    requests:
+      cpu: 50m
+      memory: 192Mi
+    limits:
+      memory: 512Mi
+  targetAllocator:
+    enabled: true
+    serviceAccount: otel-scraper-targetallocator
+    prometheusCR:
+      enabled: true
+      serviceMonitorSelector: {}
+      podMonitorSelector: {}
+  config:
+    receivers:
+      prometheus:
+        config:
+          global:
+            scrape_interval: 1m
+          # k3s runs the control plane in-process: scheduler/cm ride the node
+          # address on their own ports, etcd does not exist (kine)
+          scrape_configs:
+            - job_name: kubelet
+              scheme: https
+              kubernetes_sd_configs: [{role: node}]
+              authorization:
+                credentials_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              tls_config:
+                insecure_skip_verify: true
+              honor_labels: true
+              relabel_configs:
+                - source_labels: [__meta_kubernetes_node_name]
+                  target_label: node
+                - target_label: metrics_path
+                  replacement: /metrics
+            - job_name: kubelet-cadvisor
+              scheme: https
+              metrics_path: /metrics/cadvisor
+              kubernetes_sd_configs: [{role: node}]
+              authorization:
+                credentials_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              tls_config:
+                insecure_skip_verify: true
+              honor_labels: true
+              relabel_configs:
+                - source_labels: [__meta_kubernetes_node_name]
+                  target_label: node
+                - target_label: metrics_path
+                  replacement: /metrics/cadvisor
+                - target_label: job
+                  replacement: kubelet
+            - job_name: apiserver
+              scheme: https
+              kubernetes_sd_configs:
+                - role: endpoints
+                  namespaces:
+                    names: [default]
+              authorization:
+                credentials_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              tls_config:
+                insecure_skip_verify: true
+              relabel_configs:
+                - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+                  regex: kubernetes;https
+                  action: keep
+            - job_name: kube-scheduler
+              scheme: https
+              kubernetes_sd_configs: [{role: node}]
+              authorization:
+                credentials_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              tls_config:
+                insecure_skip_verify: true
+              relabel_configs:
+                - source_labels: [__address__]
+                  regex: (.+):10250
+                  target_label: __address__
+                  replacement: $$1:10259
+            - job_name: kube-controller-manager
+              scheme: https
+              kubernetes_sd_configs: [{role: node}]
+              authorization:
+                credentials_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              tls_config:
+                insecure_skip_verify: true
+              relabel_configs:
+                - source_labels: [__address__]
+                  regex: (.+):10250
+                  target_label: __address__
+                  replacement: $$1:10257
+    processors:
+      attributes/cluster:
+        actions:
+          - key: cluster
+            value: ${CLUSTER_NAME}
+            action: upsert
+      memory_limiter:
+        check_interval: 5s
+        limit_percentage: 80
+        spike_limit_percentage: 25
+      batch: {}
+    exporters:
+      otlphttp:
+        endpoint: https://otel.${SECRET_DOMAIN}
+    service:
+      pipelines:
+        metrics:
+          receivers: [prometheus]
+          processors: [memory_limiter, attributes/cluster, batch]
+          exporters: [otlphttp]
