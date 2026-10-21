@@ -42,10 +42,21 @@ spec:
       enabled: false
     defaultRules:
       enabled: true
+    # The chart wires these for vmagent (off); the TA reads ServiceMonitors
     kube-state-metrics:
       enabled: true
+      fullnameOverride: kube-state-metrics
+      prometheus:
+        monitor:
+          enabled: true
+          honorLabels: true
     prometheus-node-exporter:
       enabled: true
+      fullnameOverride: node-exporter
+      prometheus:
+        monitor:
+          enabled: true
+          jobLabel: node-exporter
     kubelet:
       enabled: false
     kubeApiServer:
