@@ -22,6 +22,12 @@ spec:
       readOnly: true
   config:
     receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
       filelog:
         include: [/var/log/pods/*/*/*.log]
         exclude: [/var/log/pods/observability_otel-agent*/*/*.log]
@@ -30,6 +36,11 @@ spec:
         operators:
           - type: container
     processors:
+      resource/cluster-insert:
+        attributes:
+          - key: cluster
+            value: ${CLUSTER_NAME}
+            action: insert
       resource/cluster:
         attributes:
           - key: cluster
@@ -59,4 +70,16 @@ spec:
         logs:
           receivers: [filelog]
           processors: [memory_limiter, k8sattributes, resource/cluster, batch]
+          exporters: [otlphttp]
+        logs/otlp:
+          receivers: [otlp]
+          processors: [memory_limiter, resource/cluster-insert, batch]
+          exporters: [otlphttp]
+        metrics:
+          receivers: [otlp]
+          processors: [memory_limiter, resource/cluster-insert, batch]
+          exporters: [otlphttp]
+        traces:
+          receivers: [otlp]
+          processors: [memory_limiter, resource/cluster-insert, batch]
           exporters: [otlphttp]
