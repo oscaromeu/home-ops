@@ -26,8 +26,7 @@ spec:
         config:
           global:
             scrape_interval: 1m
-          # Control-plane jobs kube-prometheus-stack used to own; the TA only
-          # feeds ServiceMonitors/PodMonitors, these have none.
+          # kubelet has no Service anyone maintains; role node tracks the nodes itself
           scrape_configs:
             - job_name: kubelet
               scheme: https
@@ -58,66 +57,6 @@ spec:
                   replacement: /metrics/cadvisor
                 - target_label: job
                   replacement: kubelet
-            - job_name: apiserver
-              scheme: https
-              kubernetes_sd_configs:
-                - role: endpoints
-                  namespaces:
-                    names: [default]
-              authorization:
-                credentials_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-              tls_config:
-                insecure_skip_verify: true
-              relabel_configs:
-                - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
-                  regex: kubernetes;https
-                  action: keep
-            - job_name: kube-scheduler
-              scheme: https
-              kubernetes_sd_configs:
-                - role: pod
-                  namespaces:
-                    names: [kube-system]
-              authorization:
-                credentials_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-              tls_config:
-                insecure_skip_verify: true
-              relabel_configs:
-                - source_labels: [__meta_kubernetes_pod_label_component]
-                  regex: kube-scheduler
-                  action: keep
-                - source_labels: [__meta_kubernetes_pod_ip]
-                  target_label: __address__
-                  replacement: $$1:10259
-            - job_name: kube-controller-manager
-              scheme: https
-              kubernetes_sd_configs:
-                - role: pod
-                  namespaces:
-                    names: [kube-system]
-              authorization:
-                credentials_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-              tls_config:
-                insecure_skip_verify: true
-              relabel_configs:
-                - source_labels: [__meta_kubernetes_pod_label_component]
-                  regex: kube-controller-manager
-                  action: keep
-                - source_labels: [__meta_kubernetes_pod_ip]
-                  target_label: __address__
-                  replacement: $$1:10257
-            - job_name: kube-etcd
-              kubernetes_sd_configs:
-                - role: pod
-                  namespaces:
-                    names: [kube-system]
-              relabel_configs:
-                - source_labels: [__meta_kubernetes_pod_label_component]
-                  regex: kube-apiserver
-                  action: keep
-                - source_labels: [__meta_kubernetes_pod_ip]
-                  target_label: __address__
-                  replacement: $$1:2381
     processors:
       attributes/cluster:
         actions:
@@ -130,11 +69,13 @@ spec:
         spike_limit_percentage: 25
       batch: {}
     exporters:
-      prometheusremotewrite:
-        endpoint: http://vmsingle-victoria-metrics.observability.svc.cluster.local:8428/api/v1/write
+      otlp:
+        endpoint: otel-gateway-collector.observability.svc.cluster.local:4317
+        tls:
+          insecure: true
     service:
       pipelines:
         metrics:
           receivers: [prometheus]
           processors: [memory_limiter, attributes/cluster, batch]
-          exporters: [prometheusremotewrite]
+          exporters: [otlp]
