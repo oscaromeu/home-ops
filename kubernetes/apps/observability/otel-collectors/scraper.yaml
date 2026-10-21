@@ -1,0 +1,43 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/opentelemetry.io/opentelemetrycollector_v1beta1.json
+apiVersion: opentelemetry.io/v1beta1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel-scraper
+spec:
+  mode: statefulset
+  replicas: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      memory: 768Mi
+  targetAllocator:
+    enabled: true
+    serviceAccount: otel-scraper-targetallocator
+    prometheusCR:
+      enabled: true
+      serviceMonitorSelector: {}
+      podMonitorSelector: {}
+  config:
+    receivers:
+      prometheus:
+        config:
+          global:
+            scrape_interval: 1m
+    processors:
+      memory_limiter:
+        check_interval: 5s
+        limit_percentage: 80
+        spike_limit_percentage: 25
+      batch: {}
+    exporters:
+      prometheusremotewrite:
+        endpoint: http://vmsingle-victoria-metrics.observability.svc.cluster.local:8428/api/v1/write
+    service:
+      pipelines:
+        metrics:
+          receivers: [prometheus]
+          processors: [memory_limiter, batch]
+          exporters: [prometheusremotewrite]

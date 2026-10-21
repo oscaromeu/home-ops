@@ -1,0 +1,50 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/opentelemetry.io/opentelemetrycollector_v1beta1.json
+apiVersion: opentelemetry.io/v1beta1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel-gateway
+spec:
+  mode: deployment
+  replicas: 1
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      memory: 512Mi
+  config:
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+    processors:
+      memory_limiter:
+        check_interval: 5s
+        limit_percentage: 80
+        spike_limit_percentage: 25
+      batch: {}
+    exporters:
+      prometheusremotewrite:
+        endpoint: http://vmsingle-victoria-metrics.observability.svc.cluster.local:8428/api/v1/write
+      otlphttp/victoria-logs:
+        logs_endpoint: http://victoria-logs-server.observability.svc.cluster.local:9428/insert/opentelemetry/v1/logs
+      otlphttp/victoria-traces:
+        traces_endpoint: http://victoria-traces-server.observability.svc.cluster.local:10428/insert/opentelemetry/v1/traces
+    service:
+      pipelines:
+        metrics:
+          receivers: [otlp]
+          processors: [memory_limiter, batch]
+          exporters: [prometheusremotewrite]
+        logs:
+          receivers: [otlp]
+          processors: [memory_limiter, batch]
+          exporters: [otlphttp/victoria-logs]
+        traces:
+          receivers: [otlp]
+          processors: [memory_limiter, batch]
+          exporters: [otlphttp/victoria-traces]
