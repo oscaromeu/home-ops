@@ -1,0 +1,53 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: victoria-metrics
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: victoria-metrics
+  values:
+    fullnameOverride: victoria-metrics
+    vmsingle:
+      enabled: true
+      spec:
+        retentionPeriod: 14d
+        storage:
+          storageClassName: ${STORAGE_CLASS}
+          resources:
+            requests:
+              storage: 20Gi
+    # OTel collector does the scraping; vmalert waits until metrics flow (PR2)
+    vmagent:
+      enabled: false
+    vmalert:
+      enabled: false
+    alertmanager:
+      enabled: false
+    grafana:
+      enabled: false
+    defaultDashboards:
+      enabled: false
+    defaultRules:
+      enabled: true
+    # kube-prometheus-stack still runs these during the transition
+    kube-state-metrics:
+      enabled: false
+    prometheus-node-exporter:
+      enabled: false
+    kubelet:
+      enabled: false
+    kubeApiServer:
+      enabled: false
+    kubeControllerManager:
+      enabled: false
+    kubeScheduler:
+      enabled: false
+    kubeEtcd:
+      enabled: false
+    kubeProxy:
+      enabled: false
+    coreDns:
+      enabled: false
