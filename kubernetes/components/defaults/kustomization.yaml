@@ -1,0 +1,12 @@
+---
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+# Teach kustomize to merge spec.patches on Flux Kustomizations instead of
+# replacing it, so a ks can carry its own patches and still get these defaults
+openapi:
+  path: fluxks-openapi.json
+patches:
+  - target:
+      group: kustomize.toolkit.fluxcd.io
+      kind: Kustomization
+    path: ks-defaults.yaml
