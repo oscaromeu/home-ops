@@ -30,6 +30,11 @@ spec:
         operators:
           - type: container
     processors:
+      resource/cluster:
+        attributes:
+          - key: cluster
+            value: home
+            action: upsert
       k8sattributes:
         extract:
           metadata:
@@ -55,5 +60,5 @@ spec:
       pipelines:
         logs:
           receivers: [filelog]
-          processors: [memory_limiter, k8sattributes, batch]
+          processors: [memory_limiter, k8sattributes, resource/cluster, batch]
           exporters: [otlp]

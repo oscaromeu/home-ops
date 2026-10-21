@@ -119,6 +119,11 @@ spec:
                   target_label: __address__
                   replacement: $$1:2381
     processors:
+      attributes/cluster:
+        actions:
+          - key: cluster
+            value: home
+            action: upsert
       memory_limiter:
         check_interval: 5s
         limit_percentage: 80
@@ -131,5 +136,5 @@ spec:
       pipelines:
         metrics:
           receivers: [prometheus]
-          processors: [memory_limiter, batch]
+          processors: [memory_limiter, attributes/cluster, batch]
           exporters: [prometheusremotewrite]

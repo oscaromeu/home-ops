@@ -5,3 +5,4 @@ resources:
   - ./cert-manager
   - ./flux-system
   - ./kube-system
+  - ./observability
