@@ -46,7 +46,7 @@ spec:
         replicaCount: 1
       config:
         alertmanager:
-          hostport: http://kube-prometheus-stack-alertmanager.observability.svc.cluster.local:9093
+          hostport: http://vmalertmanager-victoria-metrics.observability.svc.cluster.local:9093
       prometheus:
         serviceMonitor:
           enabled: true

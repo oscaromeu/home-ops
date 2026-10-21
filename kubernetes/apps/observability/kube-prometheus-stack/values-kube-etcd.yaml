@@ -1,4 +1,0 @@
-kubeEtcd:
-  service:
-    selector:
-      component: kube-apiserver # etcd runs on control plane nodes

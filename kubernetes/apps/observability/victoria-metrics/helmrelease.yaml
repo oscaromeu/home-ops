@@ -19,24 +19,33 @@ spec:
           resources:
             requests:
               storage: 20Gi
-    # OTel collector does the scraping; vmalert waits until metrics flow (PR2)
+    # OTel collector does the scraping
     vmagent:
       enabled: false
     vmalert:
-      enabled: false
+      enabled: true
     alertmanager:
-      enabled: false
+      enabled: true
+      spec:
+        # The converted AlertmanagerConfig is the whole routing tree, not per-namespace
+        disableNamespaceMatcher: true
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: ${STORAGE_CLASS}
+              resources:
+                requests:
+                  storage: 1Gi
     grafana:
       enabled: false
     defaultDashboards:
       enabled: false
     defaultRules:
       enabled: true
-    # kube-prometheus-stack still runs these during the transition
     kube-state-metrics:
-      enabled: false
+      enabled: true
     prometheus-node-exporter:
-      enabled: false
+      enabled: true
     kubelet:
       enabled: false
     kubeApiServer:

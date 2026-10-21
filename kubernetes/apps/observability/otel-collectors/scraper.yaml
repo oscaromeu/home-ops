@@ -26,6 +26,98 @@ spec:
         config:
           global:
             scrape_interval: 1m
+          # Control-plane jobs kube-prometheus-stack used to own; the TA only
+          # feeds ServiceMonitors/PodMonitors, these have none.
+          scrape_configs:
+            - job_name: kubelet
+              scheme: https
+              kubernetes_sd_configs: [{role: node}]
+              authorization:
+                credentials_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              tls_config:
+                insecure_skip_verify: true
+              honor_labels: true
+              relabel_configs:
+                - source_labels: [__meta_kubernetes_node_name]
+                  target_label: node
+                - target_label: metrics_path
+                  replacement: /metrics
+            - job_name: kubelet-cadvisor
+              scheme: https
+              metrics_path: /metrics/cadvisor
+              kubernetes_sd_configs: [{role: node}]
+              authorization:
+                credentials_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              tls_config:
+                insecure_skip_verify: true
+              honor_labels: true
+              relabel_configs:
+                - source_labels: [__meta_kubernetes_node_name]
+                  target_label: node
+                - target_label: metrics_path
+                  replacement: /metrics/cadvisor
+                - target_label: job
+                  replacement: kubelet
+            - job_name: apiserver
+              scheme: https
+              kubernetes_sd_configs:
+                - role: endpoints
+                  namespaces:
+                    names: [default]
+              authorization:
+                credentials_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              tls_config:
+                insecure_skip_verify: true
+              relabel_configs:
+                - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+                  regex: kubernetes;https
+                  action: keep
+            - job_name: kube-scheduler
+              scheme: https
+              kubernetes_sd_configs:
+                - role: pod
+                  namespaces:
+                    names: [kube-system]
+              authorization:
+                credentials_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              tls_config:
+                insecure_skip_verify: true
+              relabel_configs:
+                - source_labels: [__meta_kubernetes_pod_label_component]
+                  regex: kube-scheduler
+                  action: keep
+                - source_labels: [__meta_kubernetes_pod_ip]
+                  target_label: __address__
+                  replacement: $$1:10259
+            - job_name: kube-controller-manager
+              scheme: https
+              kubernetes_sd_configs:
+                - role: pod
+                  namespaces:
+                    names: [kube-system]
+              authorization:
+                credentials_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              tls_config:
+                insecure_skip_verify: true
+              relabel_configs:
+                - source_labels: [__meta_kubernetes_pod_label_component]
+                  regex: kube-controller-manager
+                  action: keep
+                - source_labels: [__meta_kubernetes_pod_ip]
+                  target_label: __address__
+                  replacement: $$1:10257
+            - job_name: kube-etcd
+              kubernetes_sd_configs:
+                - role: pod
+                  namespaces:
+                    names: [kube-system]
+              relabel_configs:
+                - source_labels: [__meta_kubernetes_pod_label_component]
+                  regex: kube-apiserver
+                  action: keep
+                - source_labels: [__meta_kubernetes_pod_ip]
+                  target_label: __address__
+                  replacement: $$1:2381
     processors:
       memory_limiter:
         check_interval: 5s
