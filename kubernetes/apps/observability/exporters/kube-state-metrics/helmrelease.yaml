@@ -8,6 +8,10 @@ spec:
   chartRef:
     kind: OCIRepository
     name: kube-state-metrics
+  valuesFrom:
+    - kind: ConfigMap
+      name: kube-state-metrics-config
+      valuesKey: values.yaml
   values:
     fullnameOverride: kube-state-metrics
     prometheus:

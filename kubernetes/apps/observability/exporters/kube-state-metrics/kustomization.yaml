@@ -4,3 +4,11 @@ kind: Kustomization
 resources:
   - ./helmrelease.yaml
   - ./ocirepository.yaml
+configMapGenerator:
+  - name: kube-state-metrics-config
+    files:
+      - values.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+configurations:
+  - kustomizeconfig.yaml
