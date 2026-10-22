@@ -1,0 +1,47 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-scheduler
+  labels:
+    k8s-app: kube-scheduler
+spec:
+  clusterIP: None
+  selector:
+    component: kube-scheduler
+  ports:
+    - name: https-metrics
+      port: 10259
+      targetPort: 10259
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-controller-manager
+  labels:
+    k8s-app: kube-controller-manager
+spec:
+  clusterIP: None
+  selector:
+    component: kube-controller-manager
+  ports:
+    - name: https-metrics
+      port: 10257
+      targetPort: 10257
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-etcd
+  labels:
+    k8s-app: kube-etcd
+spec:
+  clusterIP: None
+  # etcd runs on the control plane nodes, outside kubernetes; the apiserver
+  # pods share their host network, so their IPs reach the host's :2381
+  selector:
+    component: kube-apiserver
+  ports:
+    - name: http-metrics
+      port: 2381
+      targetPort: 2381
