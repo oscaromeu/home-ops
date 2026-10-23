@@ -45,4 +45,4 @@ spec:
   rules:
     - backendRefs:
         - name: vmalert-victoria-metrics
-          port: 8880
+          port: 8080
