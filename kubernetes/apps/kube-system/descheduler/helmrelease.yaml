@@ -1,0 +1,14 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: descheduler
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: descheduler
+  values:
+    schedule: "*/30 * * * *"
+    cmdOptions:
+      v: 3
+      dry-run: true

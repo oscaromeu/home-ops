@@ -5,6 +5,7 @@ resources:
   - ./cilium/ks.yaml
   - ./control-plane-metrics/ks.yaml
   - ./coredns/ks.yaml
+  - ./descheduler/ks.yaml
   - ./metrics-server/ks.yaml
   - ./reloader/ks.yaml
   - ./spegel/ks.yaml
