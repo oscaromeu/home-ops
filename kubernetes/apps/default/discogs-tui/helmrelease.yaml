@@ -1,0 +1,83 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: discogs-tui
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: discogs-tui
+  values:
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+
+    controllers:
+      discogs-tui:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: docker.io/oscaromeu/discogs-tui
+              tag: 0.1.0-rc.1
+            args: ["-db", "/data/discogs.db"]
+            env:
+              DISCOGS_TOKEN:
+                valueFrom:
+                  secretKeyRef:
+                    name: discogs-tui-secrets
+                    key: DISCOGS_TOKEN
+              OTEL_SERVICE_NAME: discogs-tui
+              OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-agent-collector.observability.svc.cluster.local:4317
+              OTEL_EXPORTER_OTLP_INSECURE: "true"
+            probes:
+              liveness: &probe
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /healthz
+                    port: &port 8080
+                  initialDelaySeconds: 5
+                  periodSeconds: 30
+              readiness: *probe
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities:
+                drop: [ALL]
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 256Mi
+    service:
+      app:
+        ports:
+          http:
+            port: *port
+    route:
+      app:
+        hostnames: ["discogs.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
+        rules:
+          - backendRefs:
+              - identifier: app
+                port: *port
+    persistence:
+      data:
+        existingClaim: discogs-tui
+        globalMounts:
+          - path: /data
