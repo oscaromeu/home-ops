@@ -1,0 +1,35 @@
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: navidrome
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: navidrome
+  oidc:
+    provider:
+      issuer: &issuer https://idm.${SECRET_DOMAIN}/oauth2/openid/navidrome
+    clientID: navidrome
+    clientSecret:
+      name: navidrome-kanidm-oauth2-credentials
+    scopes:
+      - openid
+      - profile
+      - email
+    redirectURL: https://navidrome.${SECRET_DOMAIN}/oauth2/callback
+    logoutPath: /oauth2/sign_out
+    # the jwt filter runs after oauth2, so it sees the id token this forwards
+    forwardIDToken:
+      header: Authorization
+    passThroughAuthHeader: true
+  jwt:
+    providers:
+      - name: kanidm
+        issuer: *issuer
+        remoteJWKS:
+          uri: https://idm.${SECRET_DOMAIN}/oauth2/openid/navidrome/public_key.jwk
+        claimToHeaders:
+          - claim: preferred_username
+            header: Remote-User

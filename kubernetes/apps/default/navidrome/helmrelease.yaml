@@ -28,8 +28,9 @@ spec:
               ND_DEFAULTTHEME: Spotify-ish
               ND_PORT: &port 8080
               ND_PROMETHEUS_ENABLED: "true"
-              ND_REVERSEPROXYUSERHEADER: "Remote-User"
-              ND_REVERSEPROXYWHITELIST: "0.0.0.0/0"
+              ND_EXTAUTH_USERHEADER: &userHeader Remote-User
+              ND_EXTAUTH_TRUSTEDSOURCES: "${CLUSTER_POD_CIDR}"
+              ND_EXTAUTH_LOGOUTURL: "https://navidrome.${SECRET_DOMAIN}/oauth2/sign_out"
               ND_SCANSCHEDULE: "@every 5m"
               ND_SESSIONTIMEOUT: 24h
             probes:
@@ -55,14 +56,33 @@ spec:
             port: *port
     route:
       app:
-        hostnames:
-          - "navidrome.${SECRET_DOMAIN}"
-        parentRefs:
+        forceRename: navidrome
+        hostnames: &hostnames ["navidrome.${SECRET_DOMAIN}"]
+        parentRefs: &parentRefs
           - name: envoy-internal
             namespace: network
             sectionName: https
         rules:
           - backendRefs:
+              - identifier: app
+                port: *port
+      subsonic:
+        forceRename: navidrome-subsonic
+        hostnames: *hostnames
+        parentRefs: *parentRefs
+        rules:
+          - matches:
+              - path:
+                  type: PathPrefix
+                  value: /rest
+              - path:
+                  type: PathPrefix
+                  value: /share
+            filters:
+              - type: RequestHeaderModifier
+                requestHeaderModifier:
+                  remove: [*userHeader]
+            backendRefs:
               - identifier: app
                 port: *port
     persistence:

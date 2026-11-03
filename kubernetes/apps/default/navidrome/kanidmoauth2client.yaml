@@ -1,0 +1,26 @@
+---
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmOAuth2Client
+metadata:
+  name: navidrome
+spec:
+  kanidmRef:
+    name: kanidm
+    namespace: security
+  displayname: Navidrome
+  origin: https://navidrome.${SECRET_DOMAIN}/
+  redirectUrl:
+    - https://navidrome.${SECRET_DOMAIN}/oauth2/callback
+  scopeMap:
+    - group: navidrome_users@idm.${SECRET_DOMAIN}
+      scopes:
+        - openid
+        - profile
+        - email
+  # envoy gateway reads the client secret from the key `client-secret`
+  secretKeyAliases:
+    clientSecret:
+      - client-secret
+  preferShortUsername: true
+  strictRedirectUrl: true
+  disableConsentPrompt: true
