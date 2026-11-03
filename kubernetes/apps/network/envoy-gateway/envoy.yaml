@@ -158,6 +158,11 @@ spec:
     initialConnectionWindowSize: 8Mi
     onInvalidMessage: TerminateStream
   http3: {}
+  # navidrome trusts Remote-User from the pod CIDR; strip it before any filter sets it
+  headers:
+    earlyRequestHeaders:
+      remove:
+        - Remote-User
   targetSelectors:
     - group: gateway.networking.k8s.io
       kind: Gateway
