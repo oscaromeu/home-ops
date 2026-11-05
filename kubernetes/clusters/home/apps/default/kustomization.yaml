@@ -6,6 +6,7 @@ resources:
   - ./atuin/ks.yaml
   - ./bazarr/ks.yaml
   - ./copyparty/ks.yaml
+  - ./discogs-tui/ks.yaml
   - ./echo/ks.yaml
   - ./excalidraw/ks.yaml
   - ./feishin/ks.yaml
