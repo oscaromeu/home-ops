@@ -9,6 +9,7 @@ resources:
   - ./ocirepository.yaml
   - ./prometheusrule-e2e.yaml
   - ./prometheusrule-postgres.yaml
+  - ./vmsingle-lt.yaml
 configMapGenerator:
   - name: kube-state-metrics-config
     files:

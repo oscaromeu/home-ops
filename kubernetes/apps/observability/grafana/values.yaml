@@ -100,6 +100,15 @@ datasources:
           exemplarTraceIdDestinations:
             - datasourceUid: victoria-traces
               name: TraceID
+      - uid: victoria-metrics-lt
+        name: VictoriaMetricsLT
+        type: prometheus
+        access: proxy
+        url: http://vmsingle-victoria-metrics-lt.observability.svc.cluster.local:8428
+        editable: true
+        jsonData:
+          httpMethod: POST
+          timeInterval: 1m
       - uid: clickhouse
         name: ClickHouse
         type: grafana-clickhouse-datasource

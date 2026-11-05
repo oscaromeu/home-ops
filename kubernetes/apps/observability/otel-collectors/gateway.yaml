@@ -27,9 +27,16 @@ spec:
         limit_percentage: 80
         spike_limit_percentage: 25
       batch: {}
+      filter/lt:
+        error_mode: ignore
+        metrics:
+          metric:
+            - not(IsMatch(name, "^discogs_tui_"))
     exporters:
       prometheusremotewrite:
         endpoint: http://vmsingle-victoria-metrics.observability.svc.cluster.local:8428/api/v1/write
+      prometheusremotewrite/lt:
+        endpoint: http://vmsingle-victoria-metrics-lt.observability.svc.cluster.local:8428/api/v1/write
       otlphttp/victoria-logs:
         logs_endpoint: http://victoria-logs-server.observability.svc.cluster.local:9428/insert/opentelemetry/v1/logs
       otlphttp/victoria-traces:
@@ -40,6 +47,10 @@ spec:
           receivers: [otlp]
           processors: [memory_limiter, batch]
           exporters: [prometheusremotewrite]
+        metrics/lt:
+          receivers: [otlp]
+          processors: [memory_limiter, filter/lt, batch]
+          exporters: [prometheusremotewrite/lt]
         logs:
           receivers: [otlp]
           processors: [memory_limiter, batch]
