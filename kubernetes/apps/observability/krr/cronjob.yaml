@@ -19,7 +19,7 @@ spec:
           restartPolicy: OnFailure
           initContainers:
             - name: scan
-              image: docker.io/robustadev/krr:v1.31.1@sha256:835bf3b6fec4d8f27d96d236a36542bd87bfcb4f12f3537f8dce7f886916ed9c
+              image: docker.io/robustadev/krr:v1.31.3@sha256:d2de97052ea5050b54fa03d4aea015425794f568e72244c90f235fa7dc7b7db8
               command: ["python", "krr.py", "simple"]
               args:
                 - --quiet
