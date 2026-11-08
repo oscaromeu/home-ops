@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Scan the container images a change introduces, and fail on fixable CRITICALs.
+# Scan the container images a change introduces, and fail on any CRITICAL.
 #
 # Images are taken from the difference between the rendered cluster at each ref,
 # not from the diff of the files: an image reference is split across `repository`
@@ -82,7 +82,7 @@ while read -r image; do
   ver="${image#*:}"; ver="${ver%%@*}"
   [[ "$ver" == "$image" ]] && ver="—"
 
-  trivy image --quiet --format json --severity "$SEVERITY" --ignore-unfixed \
+  trivy image --quiet --format json --severity "$SEVERITY" \
     --platform "$PLATFORM" "$image" > "$TMP/report.json" 2>"$TMP/err" || true
 
   if [[ ! -s "$TMP/report.json" ]]; then
@@ -100,7 +100,7 @@ while read -r image; do
     echo "  clean: $image"
   else
     printf '| `%s` | %s | **%s** | ❌ |\n' "$name" "$ver" "$n" >> "$TMP/rows"
-    { echo "<details><summary><code>$name</code> — $n fixable $SEVERITY</summary>"; echo
+    { echo "<details><summary><code>$name</code> — $n $SEVERITY</summary>"; echo
       echo "| CVE | Package | Installed | Fixed in |"
       echo "|---|---|---|---|"
       jq -r '[.Results[]?.Vulnerabilities[]?]
@@ -109,23 +109,23 @@ while read -r image; do
              "$TMP/report.json"
       echo; echo "</details>"; echo; } >> "$TMP/details"
     rc=1
-    echo "  $n fixable $SEVERITY: $image"
+    echo "  $n $SEVERITY: $image"
   fi
 done < "$TMP/new.txt"
 
 {
   if [[ "$rc" -eq 0 ]]; then
-    echo "All $count new $plural clean — no fixable $SEVERITY findings on \`$PLATFORM\`."
+    echo "All $count new $plural clean — no $SEVERITY findings on \`$PLATFORM\`."
   else
-    echo "Fixable $SEVERITY findings in new images. This blocks the merge."
+    echo "$SEVERITY findings in new images. This blocks the merge."
   fi
   echo
-  echo "| Image | Version | Fixable $SEVERITY | |"
+  echo "| Image | Version | $SEVERITY | |"
   echo "|---|---|---:|:-:|"
   cat "$TMP/rows"
   echo
   [[ -s "$TMP/details" ]] && cat "$TMP/details"
-  echo "<sub>Scanned by digest on \`$PLATFORM\`, unfixed vulnerabilities excluded.</sub>"
+  echo "<sub>Scanned by digest on \`$PLATFORM\`. Unfixed vulnerabilities count too: there were none when this was measured, and a finding with no patch still has to be a decision, not a silent pass.</sub>"
 } >> "$TMP/md"
 
 cat "$TMP/md" > "$SUMMARY"
