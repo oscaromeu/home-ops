@@ -28,3 +28,6 @@ spec:
             - path:
                 type: PathPrefix
                 value: /
+    image:
+      tag: 6.17.0@sha256:fa2f27c1a8561097e5144bfc0853eba6054d743b68b03de4cad4675616ddefb0
+      repository: ghcr.io/stefanprodan/podinfo

@@ -16,3 +16,13 @@ spec:
       enabled: false
     webhook:
       replicaCount: 2
+      image:
+        tag: v2.14.0@sha256:10608eb53e636e744903d5f3657a4d9c44e28d9d9c181b73e07bc7dd2e6884dc
+        repository: ghcr.io/external-secrets/external-secrets
+    image:
+      tag: v2.14.0@sha256:10608eb53e636e744903d5f3657a4d9c44e28d9d9c181b73e07bc7dd2e6884dc
+      repository: ghcr.io/external-secrets/external-secrets
+    certController:
+      image:
+        tag: v2.14.0@sha256:10608eb53e636e744903d5f3657a4d9c44e28d9d9c181b73e07bc7dd2e6884dc
+        repository: ghcr.io/external-secrets/external-secrets
