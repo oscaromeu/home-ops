@@ -82,7 +82,7 @@ while read -r image; do
   ver="${image#*:}"; ver="${ver%%@*}"
   [[ "$ver" == "$image" ]] && ver="—"
 
-  trivy image --quiet --format json --severity "$SEVERITY" \
+  trivy image --quiet --image-src remote --format json --severity "$SEVERITY" \
     --platform "$PLATFORM" "$image" > "$TMP/report.json" 2>"$TMP/err" || true
 
   if [[ ! -s "$TMP/report.json" ]]; then
