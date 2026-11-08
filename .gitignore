@@ -61,3 +61,4 @@ wiki
 local
 work.sops.yaml
 .terragrunt-cache/
+scan-report.md
