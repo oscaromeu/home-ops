@@ -10,5 +10,6 @@ spec:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
   ref:
+    # renovate: datasource=docker depName=ghcr.io/bjw-s-labs/helm/app-template
     tag: 5.2.1
   url: oci://${CHART_REGISTRY:=ghcr.io}/bjw-s-labs/helm/app-template
