@@ -39,3 +39,6 @@ spec:
           - name: loop
           - name: reload
           - name: loadbalance
+    image:
+      tag: 1.9.2@sha256:80930fdbf98f28d4d5009cc4da8ddedbaa8afc9a6b753419e54d4cd30cea7308
+      repository: codeberg.org/k8s-gateway/k8s_gateway

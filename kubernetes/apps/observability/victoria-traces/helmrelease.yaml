@@ -32,3 +32,6 @@ spec:
       serviceMonitor:
         enabled: true
         interval: 15s
+      image:
+        tag: v0.12.1@sha256:609abddf298c9642496045296f30a3968b5a4b79b678373e2e7ef29c844f5578
+        repository: victoriametrics/victoria-traces

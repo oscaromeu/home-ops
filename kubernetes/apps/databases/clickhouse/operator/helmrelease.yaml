@@ -16,19 +16,18 @@ spec:
           memory: 64Mi
         limits:
           memory: 128Mi
-
+      image:
+        tag: v0.0.8@sha256:80ff894a42fbc34fc40016776a5ba340b126b2ff408011a0af375d18c0dc8e44
+        repository: ghcr.io/clickhouse/clickhouse-operator
     crd:
       enable: true
       keep: true
-
     certManager:
       enable: true
       install: false
-
     metrics:
       enable: true
       port: 8080
-
     webhook:
       enable: true
       port: 9443

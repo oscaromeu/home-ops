@@ -19,6 +19,10 @@ spec:
         isDefaultClass: false
         reclaimPolicy: Retain
         basePath: /var/openebs/local
+      localpv:
+        image:
+          tag: 4.4.0@sha256:a9f0aa574700379fd56f7597be4493fab1bd2423e8a5eaca4eeafd377763e9df
+          repository: openebs/provisioner-localpv
     openebs-crds:
       csi:
         volumeSnapshots:

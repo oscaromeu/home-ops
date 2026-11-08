@@ -21,6 +21,13 @@ spec:
           memory: 128Mi
         limits:
           memory: 256Mi
+      image:
+        tag: v1.17.2@sha256:fd46983aa7854868d53efd73ff974f2b139f5174cd885ad44df08071f34a5b76
+        repository: ghcr.io/kguardian-dev/kguardian/controller
+      initContainer:
+        image:
+          tag: 1.38.0@sha256:a46257e06c82ad85242d0d38077d0a52d9896389ca60a1a59d3463db586e5fa4
+          repository: busybox
     broker:
       resources:
         requests:
@@ -28,6 +35,13 @@ spec:
           memory: 128Mi
         limits:
           memory: 512Mi
+      image:
+        tag: v1.20.1@sha256:abc3d2a6c9de26909f42eae5b2de7c2ecb3e7795d76867eb0c0d030779b400a3
+        repository: ghcr.io/kguardian-dev/kguardian/broker
+      initContainer:
+        image:
+          tag: 1.38.0@sha256:a46257e06c82ad85242d0d38077d0a52d9896389ca60a1a59d3463db586e5fa4
+          repository: busybox
     database:
       enabled: false
       user: kguardian
@@ -40,3 +54,11 @@ spec:
         sslMode: prefer
     telemetry:
       enabled: false
+    evaluator:
+      image:
+        tag: v0.5.2@sha256:6bc7bd40c281722958a340d508c6eb7c17a601c6dcbfb4dc65f1722ede886e3a
+        repository: ghcr.io/kguardian-dev/kguardian/evaluator
+    frontend:
+      image:
+        tag: v1.21.1@sha256:9b1b93399627485b62939bc06b351b4177f1e6d4d02ea25f0699f50b6fd210ef
+        repository: ghcr.io/kguardian-dev/kguardian/frontend

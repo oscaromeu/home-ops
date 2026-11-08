@@ -188,12 +188,13 @@
     },
     {
       customType: "regex",
-      description: "Process annotated Flux OCIRepository charts whose url is templated, which the flux manager skips with `contains-variable`. Must capture the sibling `digest:` field too. Uses `chart=` rather than `datasource=`/`depName=` so the general annotated-dependency manager cannot also match these lines and extract the dep a second time without its digest.",
+      description: "Process annotated deps that keep `tag:` and `digest:` in sibling fields, which neither the flux nor the helm-values extraction handles. Uses `chart=`/`image=` rather than `datasource=`/`depName=` so the general annotated-dependency manager cannot also match these lines and extract the dep a second time without its digest.",
       managerFilePatterns: [
         "/(^|/)ocirepository\\.ya?ml$/",
+        "/(^|/)helmrelease\\.ya?ml$/",
       ],
       matchStrings: [
-        "chart=(?<depName>\\S+)\\n\\s*tag:\\s*(?<currentValue>\\S+)\\n\\s*digest:\\s*(?<currentDigest>\\S+)",
+        "(?:chart|image)=(?<depName>\\S+)\\n\\s*tag:\\s*(?<currentValue>\\S+)\\n\\s*digest:\\s*(?<currentDigest>\\S+)",
       ],
       datasourceTemplate: "docker",
     },

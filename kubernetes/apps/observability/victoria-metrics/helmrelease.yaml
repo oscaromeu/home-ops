@@ -54,6 +54,9 @@ spec:
         monitor:
           enabled: true
           honorLabels: true
+      image:
+        tag: v2.20.0@sha256:42cfe3723a5f058171c627537fb57a3ea0f26e4380fa18555a95cb1a1b4cfc5b
+        repository: kube-state-metrics/kube-state-metrics
     prometheus-node-exporter:
       enabled: true
       fullnameOverride: node-exporter
@@ -61,6 +64,10 @@ spec:
         monitor:
           enabled: true
           jobLabel: node-exporter
+      image:
+        # renovate: image=quay.io/prometheus/node-exporter
+        tag: v1.12.1
+        digest: sha256:1b4e4438faca4dd7e001dd445d161a4a2091b0fededa84093b3a8dfeae1f1be0
     kubelet:
       enabled: false
     kubeApiServer:
@@ -75,3 +82,16 @@ spec:
       enabled: false
     coreDns:
       enabled: false
+    victoria-metrics-operator:
+      image:
+        tag: v0.75.2@sha256:237fac68b608c7ed7bc4c47ad25ebcb1cbe973c9a789661d2b6cfaa83093f87a
+        repository: victoriametrics/operator
+      crds:
+        cleanup:
+          image:
+            tag: v1.37.0@sha256:5ed410ebac5dc976cc717098994dcdb29bbbd38f6bd65f582311f5be4ba719cf
+            repository: registry.k8s.io/kubectl
+    syncJob:
+      image:
+        tag: v0.0.17@sha256:b6f233532a85cda65e645264d24f995e5ee97f88b60610643f01f170516f444b
+        repository: ghcr.io/victoriametrics/sync-job

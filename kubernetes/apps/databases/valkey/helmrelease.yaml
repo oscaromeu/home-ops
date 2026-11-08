@@ -15,7 +15,6 @@ spec:
       runAsGroup: 1000
       seccompProfile:
         type: RuntimeDefault
-
     securityContext:
       allowPrivilegeEscalation: false
       capabilities:
@@ -24,13 +23,10 @@ spec:
       readOnlyRootFilesystem: true
       runAsNonRoot: true
       runAsUser: 1000
-
     resources: {}
     initResources: {}
-
     deploymentStrategy: RollingUpdate
     valkeyLogLevel: "notice"
-
     metrics:
       enabled: true
       serviceMonitor:
@@ -38,3 +34,10 @@ spec:
         interval: 30s
       prometheusRule:
         enabled: false
+      exporter:
+        image:
+          tag: v1.79.0@sha256:67e175f144212fe5796b3134dae1f3db33782b57dc53f7c6f5d938f8f70d9754
+          repository: oliver006/redis_exporter
+    image:
+      tag: 9.1.3@sha256:3add1a336a920ea54770a001ab6feb3da5fceea96a40373a3a2cd469b815f0b7
+      repository: valkey/valkey
