@@ -11,4 +11,5 @@ spec:
     operation: copy
   ref:
     tag: 1.29.2
+    digest: sha256:3ef0cc312d4dc809d343e05156ec15ffad66e70d769bba2d9f59beb1d6c6e97e
   url: oci://ghcr.io/kguardian-dev/charts/kguardian

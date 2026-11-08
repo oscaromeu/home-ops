@@ -11,4 +11,5 @@ spec:
     operation: copy
   ref:
     tag: 6.0.3
+    digest: sha256:0d27d9923c7393a77e1d0b9e31344d30873b1ca2c513f0f93d62764801eec7a2
   url: oci://registry.developers.crunchydata.com/crunchydata/pgo

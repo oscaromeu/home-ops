@@ -11,4 +11,5 @@ spec:
     operation: copy
   ref:
     tag: 0.30.6
+    digest: sha256:7176d4f0f4809a996f29479cc6abe80accb6a82a37baddc9df510144725ead59
   url: oci://ghcr.io/openbao/charts/openbao

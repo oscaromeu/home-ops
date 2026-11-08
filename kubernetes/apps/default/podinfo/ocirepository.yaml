@@ -10,4 +10,5 @@ spec:
     operation: copy
   ref:
     tag: 6.17.0
+    digest: sha256:258d0da545724b4eea8de5d5e724cd9a75aab3de79a87ba8d82ec402745cea58
   url: oci://ghcr.io/stefanprodan/charts/podinfo
