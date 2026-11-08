@@ -97,16 +97,31 @@ while IFS=$'\t' read -r repo old new; do
   syft scan --platform "$PLATFORM" -q -o json "$new" 2>/dev/null \
     | jq -r '.artifacts[] | "\(.name)@\(.version)"' | sort -u > "$TMP/pkg.new" || true
 
-  crane export --platform "$PLATFORM" "$old" - 2>/dev/null | tar -tf - 2>/dev/null | sort -u > "$TMP/f.old" || true
-  crane export --platform "$PLATFORM" "$new" - 2>/dev/null | tar -tf - 2>/dev/null | sort -u > "$TMP/f.new" || true
+  # An export that fails must not read as "no files changed": that is a silent
+  # false negative in the one check meant to catch what a scanner cannot.
+  files_ok=1
+  for side in old new; do
+    ref=$([[ "$side" == old ]] && echo "$old" || echo "$new")
+    if ! crane export --platform "$PLATFORM" "$ref" - 2>"$TMP/crane.err" \
+         | tar -tf - 2>/dev/null | sort -u > "$TMP/f.$side"; then
+      files_ok=0
+    fi
+    [[ -s "$TMP/f.$side" ]] || files_ok=0
+  done
 
   pkg_add=$(comm -13 "$TMP/pkg.old" "$TMP/pkg.new" | wc -l)
   pkg_del=$(comm -23 "$TMP/pkg.old" "$TMP/pkg.new" | wc -l)
-  f_add=$(comm -13 "$TMP/f.old" "$TMP/f.new" | wc -l)
-  f_del=$(comm -23 "$TMP/f.old" "$TMP/f.new" | wc -l)
+  if [[ "$files_ok" -eq 1 ]]; then
+    f_add=$(comm -13 "$TMP/f.old" "$TMP/f.new" | wc -l)
+    f_del=$(comm -23 "$TMP/f.old" "$TMP/f.new" | wc -l)
+  else
+    f_add="n/a"; f_del="n/a"
+  fi
 
   # A file with no package behind it is what an SBOM cannot show and a backdoor needs.
-  comm -13 "$TMP/f.old" "$TMP/f.new" | grep -E '^(usr/local/bin|usr/bin|bin|sbin|usr/sbin)/' > "$TMP/f.exec" || true
+  : > "$TMP/f.exec"
+  [[ "$files_ok" -eq 1 ]] && comm -13 "$TMP/f.old" "$TMP/f.new" \
+    | grep -E '^(usr/local/bin|usr/bin|bin|sbin|usr/sbin)/' > "$TMP/f.exec" || true
   n_exec=$(grep -c . "$TMP/f.exec" || true)
 
   {
@@ -121,6 +136,10 @@ while IFS=$'\t' read -r repo old new; do
     echo "| Packages | $pkg_add | $pkg_del |"
     echo "| Files | $f_add | $f_del |"
     echo
+    if [[ "$files_ok" -eq 0 ]]; then
+      echo "File comparison unavailable — \`crane export\` failed, so a new binary would not show here."
+      echo
+    fi
     if [[ "$n_exec" -gt 0 ]]; then
       echo "**$n_exec new executable path(s)** — these carry no package metadata, so no SBOM shows them:"
       echo
