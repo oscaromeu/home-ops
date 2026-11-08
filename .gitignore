@@ -61,5 +61,4 @@ wiki
 local
 work.sops.yaml
 .terragrunt-cache/
-scan-report.md
-evidence-report.md
+image-gate-report.md
