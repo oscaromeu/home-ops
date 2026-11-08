@@ -62,9 +62,30 @@ jobs:
           restore-keys: trivy-db-
 
       - name: Scan New Images
+        id: scan
+        continue-on-error: true
         env:
           TRIVY_CACHE_DIR: .trivy-cache
+          SUMMARY: scan-report.md
         run: |
-          SUMMARY="$GITHUB_STEP_SUMMARY" ./scripts/scan-new-images.sh \
+          ./scripts/scan-new-images.sh \
             "${{ github.event.pull_request.base.sha }}" \
             "${{ github.event.pull_request.head.sha }}"
+
+      - name: Job Summary
+        if: always() && hashFiles('scan-report.md') != ''
+        run: cat scan-report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Add Comment
+        if: always() && hashFiles('scan-report.md') != ''
+        continue-on-error: true
+        uses: mshick/add-pr-comment@ec328af66588ab8f77cdeb2c264f14aba45bbf59 # v3.12
+        with:
+          message-id: "${{ github.event.pull_request.number }}/kubernetes/image-scan"
+          message-failure: Image scan was not successful
+          message-path: scan-report.md
+
+      # continue-on-error above keeps the comment posting, so the verdict is restored here.
+      - name: Verdict
+        if: steps.scan.outcome == 'failure'
+        run: exit 1
