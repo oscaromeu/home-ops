@@ -80,6 +80,19 @@ jobs:
             "${{ github.event.pull_request.base.sha }}" \
             "${{ github.event.pull_request.head.sha }}"
 
+      # Informational: a legitimate base bump moves dozens of packages, so this
+      # never decides the verdict. It is what a reviewer reads when trivy is green.
+      - name: Diff Image Contents
+        if: always() && hashFiles('scan-report.md') != ''
+        continue-on-error: true
+        env:
+          SUMMARY: evidence-report.md
+        run: |
+          ./scripts/diff-new-images.sh \
+            "${{ github.event.pull_request.base.sha }}" \
+            "${{ github.event.pull_request.head.sha }}"
+          cat evidence-report.md >> scan-report.md
+
       - name: Job Summary
         if: always() && hashFiles('scan-report.md') != ''
         run: cat scan-report.md >> "$GITHUB_STEP_SUMMARY"
