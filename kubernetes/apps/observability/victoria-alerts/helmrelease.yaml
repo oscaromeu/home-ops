@@ -28,18 +28,21 @@ spec:
         enabled: true
         capabilities:
           drop:
-          - ALL
+            - ALL
         readOnlyRootFilesystem: true
         runAsNonRoot: true
         runAsUser: 1000
       configMap: "victoria-alerts-server-alert-rules-config"
-      resources:
-        {}
-        # limits:
-        #   cpu: 100m
-        #   memory: 128Mi
-        # requests:
-        #   cpu: 100m
-        #   memory: 128Mi
+      resources: {}
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+
+      image:
+        tag: v1.155.0@sha256:3256cba5ddaca5974eae6141105cec4ce37871f1c213f0a5c267ec0111bc68e1
+        repository: victoriametrics/vmalert
     serviceMonitor:
       enabled: true

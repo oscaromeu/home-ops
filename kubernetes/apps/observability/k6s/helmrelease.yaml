@@ -34,3 +34,6 @@ spec:
         requests:
           cpu: 100m
           memory: 50Mi
+      image:
+        tag: controller-v1.2.0@sha256:4e08d89dee3419f68ed6c4716ab8843d6602d64675e298d05e62acbb40bd9645
+        repository: grafana/k6-operator

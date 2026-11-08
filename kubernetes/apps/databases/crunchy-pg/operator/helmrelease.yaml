@@ -23,3 +23,5 @@ spec:
     install:
       clusterLabels:
         app.kubernetes.io/name: pgo
+    controllerImages:
+      cluster: registry.developers.crunchydata.com/crunchydata/postgres-operator:ubi9-6.0.3-0@sha256:95a28ae077f0905b0516d73a33d22a86a44b2e817cc4f102ed9ec7c4bf9cd83b

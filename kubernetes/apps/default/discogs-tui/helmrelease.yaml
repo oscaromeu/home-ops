@@ -27,7 +27,7 @@ spec:
           app:
             image:
               repository: docker.io/oscaromeu/discogs-tui
-              tag: 0.1.0-rc.2
+              tag: 0.1.0-rc.2@sha256:f1ff592e07698fb752fdb3174b687aabfc2a7bd955231d659980e756b4532495
             args: ["-db", "/data/discogs.db"]
             env:
               DISCOGS_TOKEN:
