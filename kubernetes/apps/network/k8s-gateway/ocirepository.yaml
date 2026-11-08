@@ -10,4 +10,5 @@ spec:
     operation: copy
   ref:
     tag: 4.0.1
+    digest: sha256:98df27ca64a00845e8ea05b3b8d36cae6533a4cd7d13b18c871be2b33e7810fd
   url: oci://codeberg.org/k8s-gateway/charts/k8s-gateway

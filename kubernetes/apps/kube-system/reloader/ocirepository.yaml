@@ -10,4 +10,5 @@ spec:
     operation: copy
   ref:
     tag: 2.2.19
+    digest: sha256:dfa9fd167fc7ea3a2542de23f8d23c961d79407929f38c985d5cecfa74316142
   url: oci://ghcr.io/stakater/charts/reloader

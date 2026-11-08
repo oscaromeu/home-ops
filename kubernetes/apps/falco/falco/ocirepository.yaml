@@ -11,4 +11,5 @@ spec:
     operation: copy
   ref:
     tag: 9.2.2
+    digest: sha256:08cd4fd501f12b33c8220886a595bb0cc6a6b5bf9713b5fad9e3381148409d6f
   url: oci://ghcr.io/falcosecurity/charts/falco
