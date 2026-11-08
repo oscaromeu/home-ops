@@ -17,3 +17,27 @@ tasks:
       cluster: '{{.cluster | default "home"}}'
     preconditions:
       - which flate
+
+  digests:
+    desc: 'Check every rendered image and chart is pinned by digest (task flate:digests cluster=home)'
+    cmds:
+      - |
+        render=$(mktemp)
+        trap 'rm -f "$render"' EXIT
+        # a chart that fails to template renders no images, so a silent failure would read as clean
+        flate test all --path {{.KUBERNETES_DIR}}/clusters/{{.cluster}}/entrypoint --allow-missing-secrets >/dev/null
+        flate build all --path {{.KUBERNETES_DIR}}/clusters/{{.cluster}}/entrypoint --allow-missing-secrets > "$render"
+        images=$(grep -ohE '^[[:space:]]*image:[[:space:]]+[a-z0-9][^[:space:]]*' "$render" \
+          | sed 's/.*image:[[:space:]]*//' | sort -u | grep -v @sha256 || true)
+        charts=$(yq -N 'select(.kind == "OCIRepository" and (.spec.ref | has("digest") | not))
+          | .metadata.namespace + "/" + .metadata.name' "$render")
+        rc=0
+        if [ -n "$images" ]; then printf 'images without digest:\n%s\n\n' "$images"; rc=1; fi
+        if [ -n "$charts" ]; then printf 'charts without digest:\n%s\n\n' "$charts"; rc=1; fi
+        if [ "$rc" -eq 0 ]; then echo 'everything pinned by digest'; fi
+        exit "$rc"
+    vars:
+      cluster: '{{.cluster | default "home"}}'
+    preconditions:
+      - which flate
+      - which yq
