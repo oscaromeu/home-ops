@@ -12,6 +12,7 @@
   dependencyDashboard: true,
   dependencyDashboardTitle: "Renovate Dashboard :robot:",
   schedule: ["every weekend"],
+  rebaseWhen: "behind-base-branch",
   ignorePaths: ["**/*.sops.*"],
   flux: {
     managerFilePatterns: ["/(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$/"],
