@@ -125,7 +125,6 @@ done < "$TMP/new.txt"
   cat "$TMP/rows"
   echo
   [[ -s "$TMP/details" ]] && cat "$TMP/details"
-  echo "<sub>Scanned by digest on \`$PLATFORM\`. Unfixed vulnerabilities count too: there were none when this was measured, and a finding with no patch still has to be a decision, not a silent pass.</sub>"
 } >> "$TMP/md"
 
 cat "$TMP/md" > "$SUMMARY"
