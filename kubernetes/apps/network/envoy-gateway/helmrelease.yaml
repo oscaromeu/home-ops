@@ -12,7 +12,7 @@ spec:
       imageRegistry: mirror.gcr.io
       images:
         envoyGateway:
-          image: mirror.gcr.io/envoyproxy/gateway:v1.9.3@sha256:192fc9bdadb6d2462e8cf7bd702ce3dd9648f3310c6038787448a1f509b7cd9f
+          image: mirror.gcr.io/envoyproxy/gateway:v1.10.0@sha256:c2243d43518bed91d3ed8c2db849a4b7a14ac9b96eb019f2ab104bb1ca8572b1
         ratelimit:
           image: mirror.gcr.io/envoyproxy/ratelimit:5ae0682e@sha256:b95206e32b1a5f824fb06062fbb85bbdfb7f5de54135e92afe8462f22c979681
     config:
