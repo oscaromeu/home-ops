@@ -21,7 +21,7 @@ spec:
         basePath: /var/openebs/local
       localpv:
         image:
-          tag: 4.4.0@sha256:a9f0aa574700379fd56f7597be4493fab1bd2423e8a5eaca4eeafd377763e9df
+          tag: 4.6.0@sha256:99f5116f5cb83fb9d046ef5ff5b8ea98da90e7da5250d7b101bd650662238a0a
           repository: openebs/provisioner-localpv
     openebs-crds:
       csi:
