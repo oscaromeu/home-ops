@@ -18,5 +18,5 @@ spec:
   values:
     sidecar:
       image:
-        tag: 2.5.0@sha256:a6b3f707f883108376514489a94d6629109a327b2978e1d826cd104c4ca436df
+        tag: 2.14.3@sha256:52d311dcedd587421a236c4d6c621f05614c40a51386e955e0699dca97ec0880
         repository: kiwigrid/k8s-sidecar
