@@ -89,7 +89,7 @@ spec:
       crds:
         cleanup:
           image:
-            tag: v1.37.0@sha256:5ed410ebac5dc976cc717098994dcdb29bbbd38f6bd65f582311f5be4ba719cf
+            tag: v1.37.2@sha256:fe049faa65ae483ac200009a949a68fa4c9985daea12c9cb1195c9c7965301fc
             repository: registry.k8s.io/kubectl
     syncJob:
       image:
