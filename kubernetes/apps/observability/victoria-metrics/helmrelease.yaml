@@ -93,5 +93,5 @@ spec:
             repository: registry.k8s.io/kubectl
     syncJob:
       image:
-        tag: v0.0.17@sha256:b6f233532a85cda65e645264d24f995e5ee97f88b60610643f01f170516f444b
+        tag: v0.0.18@sha256:1fdd38d82e100429b138d8500425773d6d319a35a53478a66ee20dff392e6117
         repository: ghcr.io/victoriametrics/sync-job
