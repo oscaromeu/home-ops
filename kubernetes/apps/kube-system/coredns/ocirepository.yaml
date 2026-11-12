@@ -10,5 +10,5 @@ spec:
     operation: copy
   url: oci://ghcr.io/coredns/charts/coredns
   ref:
-    tag: 1.49.0
-    digest: sha256:ad5d2d955b6db51211cbbab03cdb4fc228859a034594341db803a6e193efc7ae
+    tag: 1.50.5
+    digest: sha256:53d32062b46d0043cb34f31c2bdd7936bf2e1d60e88b2e58754d413e5f7fb834
