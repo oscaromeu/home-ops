@@ -17,7 +17,7 @@ resources:
   - ./icecast/ks.yaml
   - ./jellyfin/ks.yaml
   - ./jellyseerr/ks.yaml
-  - ./kavita/ks.yaml
+  #  - ./kavita/ks.yaml
   - ./linkding/ks.yaml
   - ./memos/ks.yaml
   - ./metube/ks.yaml
