@@ -53,10 +53,45 @@ spec:
             - k8s.pod.name
             - k8s.container.name
             - k8s.node.name
+        labels:
+          - tag_name: pod.label.app-name
+            key: app.kubernetes.io/name
+            from: pod
+          - tag_name: pod.label.app
+            key: app
+            from: pod
+          - tag_name: pod.label.k8s-app
+            key: k8s-app
+            from: pod
+          - tag_name: pod.label.name
+            key: name
+            from: pod
+          - tag_name: pod.label.application
+            key: application
+            from: pod
         pod_association:
           - sources:
               - from: resource_attribute
                 name: k8s.pod.uid
+      transform/log-fields:
+        error_mode: ignore
+        log_statements:
+          - context: resource
+            statements:
+              - set(attributes["app"], attributes["pod.label.app-name"])
+              - set(attributes["app"], attributes["pod.label.app"]) where attributes["app"] == nil
+              - set(attributes["app"], attributes["pod.label.k8s-app"]) where attributes["app"] == nil
+              - set(attributes["app"], attributes["pod.label.name"]) where attributes["app"] == nil
+              - set(attributes["app"], attributes["pod.label.application"]) where attributes["app"] == nil
+              - set(attributes["k_namespace_name"], attributes["k8s.namespace.name"])
+              - set(attributes["k_pod_name"], attributes["k8s.pod.name"])
+              - set(attributes["k_container_name"], attributes["k8s.container.name"])
+              - set(attributes["k_node_name"], attributes["k8s.node.name"])
+              - delete_matching_keys(attributes, "^(k8s\\.|pod\\.label\\.)")
+          - context: log
+            statements:
+              - set(attributes["stream"], attributes["log.iostream"])
+              - delete_key(attributes, "log.iostream")
       memory_limiter:
         check_interval: 5s
         limit_percentage: 80
@@ -71,7 +106,7 @@ spec:
       pipelines:
         logs:
           receivers: [filelog]
-          processors: [memory_limiter, k8sattributes, resource/cluster, batch]
+          processors: [memory_limiter, k8sattributes, resource/cluster, transform/log-fields, batch]
           exporters: [otlp]
         logs/otlp:
           receivers: [otlp]
