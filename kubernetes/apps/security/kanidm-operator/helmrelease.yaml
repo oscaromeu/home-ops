@@ -11,5 +11,5 @@ spec:
   interval: 30m
   values:
     image:
-      tag: 0.22.0@sha256:3881fb1ba201dfe4ec3120cafe3f0c29bec323153ec2d3999921c34a29cc7599
+      tag: 0.22.1@sha256:5d95c55f33b2d94a4a38e07e995592480991f37de80e4a41f9303ffc1f8731f3
       repository: ghcr.io/pando85/kaniop
