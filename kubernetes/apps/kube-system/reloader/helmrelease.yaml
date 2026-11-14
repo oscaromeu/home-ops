@@ -15,5 +15,5 @@ spec:
         enabled: true
         namespace: "{{ .Release.Namespace }}"
     image:
-      tag: v1.4.23@sha256:82c80a15fdba22f738642553159f9fb37baf9e4d1edfeb798e8c48d87767f410
+      tag: v1.4.24@sha256:3ab43d3eb96c59798644bf826b0444a846c0197d22ab4b6c101c4da3e1d6ef23
       repository: ghcr.io/stakater/reloader
