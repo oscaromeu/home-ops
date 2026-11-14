@@ -15,7 +15,7 @@ spec:
           app:
             image:
               repository: ghcr.io/samtv12345/podfetch
-              tag: v5.2.3@sha256:3ffa30033295c3de7644bc15b40106b5fe3bfa1281c6b990224f18b9ddbcf94d
+              tag: v5.2.3@sha256:12a04da8ebcbfdba4865b2e48b726e1f91dd165cf4dd2447a485e1f1d0d5131f
             env:
               TZ: "${TZ}"
               PORT: &port 8000
