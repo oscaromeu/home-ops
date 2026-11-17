@@ -9,6 +9,6 @@ spec:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
   ref:
-    tag: 0.12.1
-    digest: sha256:b230e4a64fdeb9a3b554052d17026caae9c99427b3f5b50fc88bfd80b235176a
+    tag: 1.0.0
+    digest: sha256:22dcc76637fdfb67c9cfbc9fd01776a84db59831eee0f7c2447a314a7adbc555
   url: oci://ghcr.io/valkey-io/valkey-helm/valkey
