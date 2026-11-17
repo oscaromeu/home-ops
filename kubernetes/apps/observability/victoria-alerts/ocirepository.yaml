@@ -10,6 +10,6 @@ spec:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
   ref:
-    tag: 0.52.1
-    digest: sha256:cbfafa182d3e050e6d8d0a7cc84b02bc9182c1582a7f6f1be9ffcd0e39c61477
+    tag: 0.53.0
+    digest: sha256:9e9d590c4501bdfb202fc05d86d2cfe347c360d18c2d5959a3d491b9a8baa223
   url: oci://ghcr.io/victoriametrics/helm-charts/victoria-metrics-alert
