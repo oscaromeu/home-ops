@@ -19,7 +19,7 @@ spec:
     existingConfigMap: fluentbit
     image:
       repository: cr.fluentbit.io/fluent/fluent-bit
-      tag: 5.1.5-debug@sha256:d389119b3e8a4477e11967773c58e7606c87d70b568fbeaf9ac10a0bb6b980c5
+      tag: 5.2.0-debug@sha256:8243a1f5a60b7ad3a02aab51a3ef377de0999aaf1eb8d17a60f308040d849f16
     args:
       - --workdir=/fluent-bit/etc
       - --config=/fluent-bit/etc/conf/fluentbit.yaml
