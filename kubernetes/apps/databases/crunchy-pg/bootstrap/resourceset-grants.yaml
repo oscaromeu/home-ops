@@ -36,7 +36,7 @@ spec:
             restartPolicy: Never
             containers:
               - name: grant
-                image: postgres:18-alpine@sha256:9ba53c7d41ea093baf5c1ba635ba5434c4f979880527d49bb7d9237d3193085b
+                image: postgres:18-alpine@sha256:ff64c9e3bdf8e2120107d3559de8db314e8305f7e38c5105903c6295876738ff
                 env:
                   - name: PGHOST
                     valueFrom:
