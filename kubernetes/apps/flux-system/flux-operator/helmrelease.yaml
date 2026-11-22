@@ -11,5 +11,5 @@ spec:
     serviceMonitor:
       create: true
     image:
-      tag: v0.62.1@sha256:1d09a3f96524d0895fb11e8072d84a3dd029cecdec0f869efa371be6b001469c
+      tag: v0.63.1@sha256:460cc140dba2958261b05466acca40dfbee3addd1a6c33b885c1cd4e4e5d0489
       repository: ghcr.io/controlplaneio-fluxcd/flux-operator
