@@ -15,7 +15,7 @@ spec:
           app:
             image:
               repository: ghcr.io/caioricciuti/ch-ui
-              tag: v2.33.0@sha256:693fdc5781cb8286bd8dee4d1845eb0bce3b995f11ae90b852a954ebee3a3aa6
+              tag: v2.33.1@sha256:669a92700a775081fd0ab4c0828d626bbb566d731add0acddbde4cfd9274fa4b
             env:
               CLICKHOUSE_URL: http://clickhouse-clickhouse-headless.databases.svc.cluster.local:8123
             probes:
