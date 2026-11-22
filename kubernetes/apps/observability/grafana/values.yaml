@@ -1,7 +1,7 @@
 ---
 extraInitContainers:
   - name: 01-init-db
-    image: ghcr.io/home-operations/postgres-init:18@sha256:87627baaddb0cabed4ebe033e75038e5c7b6b081c18e86514c99067179a90719
+    image: ghcr.io/home-operations/postgres-init:19@sha256:b49e2f1f373d932ab41614633ac89fa506e5d21bb13cc18d9c96ca026e51f502
     envFrom:
       - secretRef:
           name: grafana-postgres-credentials
