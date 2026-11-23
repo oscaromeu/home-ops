@@ -42,7 +42,7 @@ spec:
       #   memory: 128Mi
 
       image:
-        tag: v1.155.0@sha256:3256cba5ddaca5974eae6141105cec4ce37871f1c213f0a5c267ec0111bc68e1
+        tag: v1.157.0@sha256:c550cfc345a1f3e130a3c78b3f5a910122448c66b3008d9a29eaa0559e9a23dd
         repository: victoriametrics/vmalert
     serviceMonitor:
       enabled: true
