@@ -51,7 +51,7 @@ spec:
           app:
             image:
               repository: docker.io/neosmemo/memos
-              tag: 26.11.0@sha256:087e7dc6b76b31fcd1107a5767398b2a310ced209adb791efd8760c745dc8034
+              tag: 26.11.2@sha256:3c7bd779510403350465ecabb7e6fbc0887206f9d55b8decf51a205613fa5616
             env:
               MEMOS_DRIVER: postgres
               MEMOS_PORT: "5230"
