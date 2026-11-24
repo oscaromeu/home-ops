@@ -4,4 +4,3 @@ kind: Kustomization
 resources:
   - ./flux-operator/ks.yaml
   - ./flux-webhook/ks.yaml
-  - ./forgejo-workspace-config/ks.yaml
