@@ -76,9 +76,7 @@ jobs:
           TRIVY_CACHE_DIR: .trivy-cache
           SUMMARY: image-gate-report.md
         run: |
-          ./scripts/image-gate.sh \
-            "${{ github.event.pull_request.base.sha }}" \
-            "${{ github.event.pull_request.head.sha }}"
+          ./scripts/image-gate.sh "$(git rev-parse HEAD^1)" "$(git rev-parse HEAD)"
 
       - name: Job Summary
         if: always() && hashFiles('image-gate-report.md') != ''

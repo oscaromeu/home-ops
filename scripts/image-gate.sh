@@ -44,15 +44,32 @@ trap cleanup EXIT
 export FLATE_SUPPLY="$TMP/supply.yaml"
 
 render() {
-  flate build all --path "$1/$ENTRYPOINT" \
+  local out err="$TMP/$(basename "$1").err"
+  if ! out="$(flate build all --path "$1/$ENTRYPOINT" 2>"$err")"; then
+    grep -E '✗' "$err" | head -20 >&2 || cat "$err" >&2
+    if [[ "$SUMMARY" != "/dev/stdout" ]]; then
+      {
+        echo "### Image scan did not run"
+        echo
+        echo "Rendering the cluster at \`$2\` failed, so there were no images to compare."
+        echo
+        echo '```'
+        grep -E '✗' "$err" | head -20 || tail -20 "$err"
+        echo '```'
+      } > "$SUMMARY"
+    fi
+    echo "error: flate build failed at $2" >&2
+    exit 1
+  fi
+  printf '%s\n' "$out" \
     | grep -ohE '^[[:space:]]*image:[[:space:]]+[a-z0-9][^[:space:]]*' \
     | sed 's/.*image:[[:space:]]*//' | sort -u
 }
 
 git worktree add --detach --quiet "$TMP/base" "$base"
 git worktree add --detach --quiet "$TMP/head" "$head"
-render "$TMP/base" > "$TMP/base.txt"
-render "$TMP/head" > "$TMP/head.txt"
+render "$TMP/base" "$base" > "$TMP/base.txt"
+render "$TMP/head" "$head" > "$TMP/head.txt"
 
 # Pair by digest, not by reference: a retag moves the tag and not the bytes.
 python3 - "$TMP/base.txt" "$TMP/head.txt" > "$TMP/pairs.tsv" <<'PY'
