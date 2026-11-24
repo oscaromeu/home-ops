@@ -41,7 +41,7 @@ jobs:
           base: ""
 
       - name: Run flate test
-        run: flate test all --path kubernetes/clusters/home/entrypoint --allow-missing-secrets
+        run: flate test all --path kubernetes/clusters/home/entrypoint
 
   diff:
     name: Flate Diff
@@ -74,7 +74,6 @@ jobs:
           flate diff all
           --path pull/kubernetes/clusters/home/entrypoint
           --path-orig default/kubernetes/clusters/home/entrypoint
-          --allow-missing-secrets
           -o github > diff.md
 
       - name: Generate Diff
