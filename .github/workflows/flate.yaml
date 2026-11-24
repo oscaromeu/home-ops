@@ -34,13 +34,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
+      - name: Setup mise
+        uses: jdx/mise-action@90f833d396d0cc3674b631d2d225e306476c303a # v5.2.10
+        with:
+          install_args: "aqua:cue-lang/cue"
+          cache: true
+
       - name: Setup flate
         uses: home-operations/flate/action@4e07f351352d235a335e5a1f0a088eab7ec40997 # v0.8.0
         with:
           cache: "true"
           base: ""
 
+      - name: Generate flate supply
+        run: ./scripts/flate-supply.sh > supply.yaml
+
       - name: Run flate test
+        env:
+          FLATE_SUPPLY: supply.yaml
+          FLATE_STRICT_SUBSTITUTIONS: "true"
         run: flate test all --path kubernetes/clusters/home/entrypoint
 
   diff:
@@ -63,13 +75,25 @@ jobs:
           ref: "${{ github.event.repository.default_branch }}"
           path: default
 
+      - name: Setup mise
+        uses: jdx/mise-action@90f833d396d0cc3674b631d2d225e306476c303a # v5.2.10
+        with:
+          working_directory: pull
+          install_args: "aqua:cue-lang/cue"
+          cache: true
+
       - name: Setup flate
         uses: home-operations/flate/action@4e07f351352d235a335e5a1f0a088eab7ec40997 # v0.8.0
         with:
           cache: "true"
           base: ""
 
+      - name: Generate flate supply
+        run: ./pull/scripts/flate-supply.sh > supply.yaml
+
       - name: Run flate diff
+        env:
+          FLATE_SUPPLY: supply.yaml
         run: >-
           flate diff all
           --path pull/kubernetes/clusters/home/entrypoint
