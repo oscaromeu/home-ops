@@ -29,6 +29,9 @@ jobs:
     name: Flate Test
     needs: pre-job
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     if: ${{ needs.pre-job.outputs.any_changed == 'true' }}
     steps:
       - name: Checkout
@@ -50,10 +53,45 @@ jobs:
         run: ./scripts/flate-supply.sh > supply.yaml
 
       - name: Run flate test
+        id: test
+        continue-on-error: true
+        shell: bash
         env:
           FLATE_SUPPLY: supply.yaml
           FLATE_STRICT_SUBSTITUTIONS: "true"
-        run: flate test all --path kubernetes/clusters/home/entrypoint
+        run: flate test all --path kubernetes/clusters/home/entrypoint 2>&1 | tee test.log
+
+      - name: Generate Report
+        if: steps.test.outcome == 'failure'
+        shell: bash
+        run: |
+          detail=$(grep -vE "'oneOf' failed|missing propert|value must be|: validation failed" test.log \
+            | awk '/✗/{p=1; delete seen; print; next}
+                   p && /^[[:space:]]{5,}/{if (!seen[$0]++) print; next}
+                   {p=0}' | head -80)
+          {
+            echo "### Flate test failed"
+            echo
+            echo "These resources do not render against this branch."
+            echo
+            echo '```'
+            if [[ -n "$detail" ]]; then printf '%s\n' "$detail"; else tail -20 test.log; fi
+            echo '```'
+          } > test-report.md
+          cat test-report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Add Comment
+        if: steps.test.outcome == 'failure'
+        continue-on-error: true
+        uses: mshick/add-pr-comment@ec328af66588ab8f77cdeb2c264f14aba45bbf59 # v3.12
+        with:
+          message-id: "${{ github.event.pull_request.number }}/kubernetes/flate-test"
+          message-failure: Flate test was not successful
+          message-path: test-report.md
+
+      - name: Verdict
+        if: steps.test.outcome == 'failure'
+        run: exit 1
 
   diff:
     name: Flate Diff
