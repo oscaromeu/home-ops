@@ -21,7 +21,7 @@ ENTRYPOINT="kubernetes/clusters/home/entrypoint"
 [[ $# -eq 2 ]] || { echo "usage: $0 <base-ref> <head-ref>" >&2; exit 2; }
 base="$1"; head="$2"
 
-for bin in flate trivy syft crane jq git; do
+for bin in flate trivy syft crane jq git cue; do
   command -v "$bin" >/dev/null || { echo "error: $bin not found" >&2; exit 2; }
 done
 
@@ -40,8 +40,11 @@ cleanup() {
 }
 trap cleanup EXIT
 
+"$ROOT/scripts/flate-supply.sh" > "$TMP/supply.yaml"
+export FLATE_SUPPLY="$TMP/supply.yaml"
+
 render() {
-  flate build all --path "$1/$ENTRYPOINT" --allow-missing-secrets \
+  flate build all --path "$1/$ENTRYPOINT" \
     | grep -ohE '^[[:space:]]*image:[[:space:]]+[a-z0-9][^[:space:]]*' \
     | sed 's/.*image:[[:space:]]*//' | sort -u
 }
