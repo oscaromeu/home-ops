@@ -66,8 +66,8 @@ spec:
           jobLabel: node-exporter
       image:
         # renovate: image=quay.io/prometheus/node-exporter
-        tag: v1.12.1
-        digest: sha256:1b4e4438faca4dd7e001dd445d161a4a2091b0fededa84093b3a8dfeae1f1be0
+        tag: v1.13.1
+        digest: sha256:011e2d12c5bff759b90804bda642664775d7b4b127bf5148539bb82d3f590bb7
     kubelet:
       enabled: false
     kubeApiServer:
