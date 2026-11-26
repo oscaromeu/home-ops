@@ -16,7 +16,7 @@ spec:
           memory: 128Mi
         limits:
           memory: 512Mi
-  image: kanidm/server:1.12.0@sha256:71b6ff5a9c9c32b632894d8acef5a2afc77941b35a0aa95dcee959fe688d5ce9
+  image: kanidm/server:1.12.2@sha256:555618fc71aa5cbbacf0041136f8a5430615ee215d677386594726abcc18dbf0
   logLevel: info
   oauth2ClientNamespaceSelector: {}
   storage:
