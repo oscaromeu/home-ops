@@ -14,7 +14,7 @@ spec:
           app:
             image:
               repository: ghcr.io/9001/copyparty-dj
-              tag: 1.20.26@sha256:557f9213f9063b1a9d0295de88c02ed3b6823c0564a31c24c543b395390881fa
+              tag: 1.20.28@sha256:f42f119ddba4f5c73e344798561f6d746e33398c6c75707a89a81d9740e40545
             env:
               TZ: ${TZ}
               PRTY_NO_TLS: 1
